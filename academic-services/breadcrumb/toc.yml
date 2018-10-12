@@ -1,3 +1,9 @@
-- name: Docs
-  tocHref: /
-  topicHref: /
+- name: Microsoft Academic
+  tocHref: /academic-services
+  topicHref: /academic-services
+- name: Microsoft Academic Graph
+  tocHref: /academic-services/graph
+  topicHref: /academic-services/graph
+- name: Microsoft Academic Knowledge Exploration Service
+  tocHref: /academic-services/knowledge-exploration-service
+  topicHref: /academic-services/knowledge-exploration-service

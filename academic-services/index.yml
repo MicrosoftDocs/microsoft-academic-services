@@ -1,0 +1,28 @@
+### YamlMime:YamlDocument
+documentType: LandingData
+title: Microsoft Academic Services Documentation
+metadata:
+  document_id: 1d98d531-28c7-635f-d41b-8da3ae02971c
+  title: Microsoft Academic Services Documentation
+  meta.description: Learn everything you need to know about Microsoft Academic Services, including the Microsoft Academic Graph (MAG) and Microsoft Academic Knowledge Exploration Service (MAKES)
+  services: microsoft-academic-services
+  author: darrine
+  manager: kuansanw
+  ms.service: microsoft-academic-services
+  ms.tgt_pltfrm: na
+  ms.devlang: na
+  ms.topic: landing-page
+  ms.date: 09/20/2018
+  ms.author: darrine
+abstract:
+  description: Microsoft Academic Services is a collection of different projects that allow interaction with the data and technology behind Microsoft Academic. 
+sections:
+- title: Microsoft Academic Services
+  items: 
+  - type: paragraph
+    text: 'Explore different projects for interacting with Microsoft Academic:'
+  - type: list
+    style: unordered
+    items:
+    - html: <a href="microsoft-academic-graph">Microsoft Academic Graph (MAG)</a>
+    - html: <a href="microsoft-academic-knowledge-exploration-service">Microsoft Academic Knowledge Exploration Service (MAKES)</a>

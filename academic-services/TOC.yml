@@ -1,2 +1,37 @@
-- name: Index
+- name: Microsoft Academic Services
   href: index.md
+- name: Overview
+  expanded: true
+  items:
+  - name: What is Microsoft Academic?
+    href: overview/microsoft-academic.md
+  - name: What are the Microsoft Academic Services?
+    href: overview/microsoft-academic-services.md
+    items:
+    - name: Microsoft Academic Graph (MAG)
+      href: microsoft-academic-graph/
+    - name: Microsoft Academic Knowledge Exploration Service (MAKES)
+      href: microsoft-academic-knowledge-exploration-service/
+- name: Quickstarts
+  expanded: true
+  items:
+  - name: Sign up for MAG distribution preview
+    href: microsoft-academic-graph/get-started/setup-distribution-preview-azure-blob-storage
+  - name: Sign up for MAKES distribution preview
+    href: microsoft-academic-knowledge-exploration-service/get-started/sign-up-distribution-preview
+- name: Reference
+  items:
+  - name: Azure CLI
+    href: /cli/azure/vm
+  - name: Azure PowerShell
+    href: /powershell/azureps-cmdlets-docs
+  - name: KES REST API Reference
+    href: /azure/cognitive-services/KES/webapi
+- name: Resources
+  items:
+  - name: FAQ
+    href: resources/faq.md
+  - name: Pricing
+    href: resources/pricing.md
+  - name: Regional availability
+    href: resources/regional-availability.md

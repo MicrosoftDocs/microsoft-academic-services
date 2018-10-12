@@ -1,0 +1,42 @@
+### YamlMime:YamlDocument
+documentType: LandingData
+title: Microsoft Academic Knowledge Exporation Service (MAKES) Documentation
+metadata:
+  title: Microsoft Academic Knowledge Exporation Service (MAKES) Documentation - Overview, Api reference, How-to guides, Tutorials
+  meta.description: Learn everything you need to know about Microsoft Academic Knowledge Exporation Service (MAKES), including technology overviews, API references, how-to guides, tutorials and more.
+  ms.tgt_pltfrm: na
+  ms.devlang: na
+  ms.topic: landing-page
+  ms.date: 09/20/2018
+abstract:
+  description: Microsoft Academic Knowledge Exploration Service offers a fast and effective way to add interactive academic search and refinement to applications. Learn all about MAKES, including how to sign up, deploy, manage and use MAKES engines.
+sections:
+- title: Technology Overview
+  items: 
+  - type: paragraph
+    text: 'Learn about the different technologies that MAKES is composed of:'
+  - type: list
+    style: unordered
+    items:
+    - html: <a href="overview/knowledge-exploration-service">Knowledge Exploration Service (KES)</a>
+    - html: <a href="overview/makes">Microsoft Academic + Knowledge Exploration Service (MAKES)</a>
+- title: How-To Guides
+  items:
+  - type: paragraph
+    text: Learn how to deploy, manage, and use MAKES.
+  - type: list
+    style: ordered
+    items:
+    - html: <a href="get-started/sign-up-distribution-preview">Receive MAKES engine builds w/distribution preview</a>
+    - html: <a href="how-to/deploy-makes-amp">Deploy MAKES engine</a>
+    - html: <a href="how-to/troubleshoot-makes">Troubleshoot MAKES deployment</a>
+- title: Reference
+  items:
+  - type: list
+    style: cards
+    className: cardsD
+    items:
+    - title: Command-Line
+      html: <p><a href="/powershell/azureps-cmdlets-docs">Azure PowerShell</a></p><p><a href="/cli/azure/vm">Azure CLI</a></p>
+    - title: REST
+      html: <p><a href="/azure/cognitive-services/KES/webapi">KES REST API Reference</a></p>

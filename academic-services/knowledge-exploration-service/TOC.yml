@@ -1,0 +1,52 @@
+- name: Microsoft Academic Knowledge Exploration Service Documentation
+  href: index.yml
+- name: Overview
+  expanded: true
+  items:
+  - name: Knowledge Exploration Service (KES)
+    href: overview/knowledge-exploration-service.md
+  - name: Microsoft Academic + Knowledge Exploration Service (MAKES)
+    href: overview/makes.md
+- name: Get started
+  expanded: true
+  items:
+  - name: Sign up for distribution preview
+    href: get-started/sign-up-distribution-preview
+- name: How to
+  expanded: true
+  items:
+  - name: Deploy MAKES engine
+    expanded: true
+    items:
+    - name: Using Azure Management Portal
+      href: how-to/deploy-makes-amp.md
+- name: Reference
+  items:
+  - name: MAKES engines
+    items:
+      - name: Entity engine
+        href: reference/engines/entity-engine.md
+      - name: Semantic Interpretation engine
+        href: reference/engines/semantic-interpretation-engine.md
+  - name: MAKES API interface
+    items:
+      - name: Calculate histogram
+        href: reference/makes-api/histogram.md
+      - name: Evaluate
+        href: reference/makes-api/evaluate.md
+      - name: Interpret
+        href: reference/makes-api/interpret.md
+  - name: Azure CLI
+    href: /cli/azure/vm
+  - name: Azure PowerShell
+    href: /powershell/azureps-cmdlets-docs
+  - name: KES reference
+    href: /azure/cognitive-services/KES/
+- name: Resources
+  items:
+  - name: FAQ
+    href: resources/faq.md
+  - name: Pricing
+    href: resources/pricing.md
+  - name: Stack Overflow
+    href: http://stackoverflow.com/questions/tagged/microsoft-academic-knowledge-exploration-service

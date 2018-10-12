@@ -1,0 +1,26 @@
+### YamlMime:YamlDocument
+documentType: LandingData
+title: Microsoft Academic Graph (MAG) Documentation
+metadata:
+  document_id: 1d98d530-28c7-635f-d41b-8da3ae02972c
+  title: Microsoft Academic Graph (MAG) Documentation - Overview, Data schema, How-to guides, Tutorials
+  meta.description: Learn everything you need to know about Microsoft Academic Graph (MAG), including technology overviews, data schemas, how-to guides, tutorials and more.
+  ms.tgt_pltfrm: na
+  ms.devlang: na
+  ms.topic: landing-page
+  ms.date: 09/20/2018
+abstract:
+  description: The Microsoft Academic Graph is a heterogeneous graph containing scientific publication records, citation relationships between those publications, as well as authors, institutions, journals, conferences, and fields of study. Learn all about MAG, including how to signing up to receive it, how-to guides and tutorials.
+sections:
+- title: Getting started with MAG
+  items:
+  - type: list
+    style: unordered
+    items:
+    - html: <a href="get-started/setup-distribution-preview-azure-blob-storage">Sign up for MAG distribution preview</a>
+- title: Technology Overview
+  items: 
+  - type: list
+    style: unordered
+    items:
+    - html: <a href="reference/data-schema">MAG Data Schema</a>

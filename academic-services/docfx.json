@@ -37,7 +37,12 @@
     "globalMetadata": {
       "breadcrumb_path": "/academic-services/breadcrumb/toc.json",
       "extendBreadcrumb": true,
-      "feedback_system": "None"
+      "feedback_system": "None",
+      "author": "darrine",
+      "manager": "kuansanw",
+      "services": "microsoft-academic-services",
+      "ms.service": "microsoft-academic-services",
+      "ms.author": "darrine"
     },
     "fileMetadata": {},
     "template": [],
