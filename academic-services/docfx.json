@@ -37,7 +37,7 @@
     "globalMetadata": {
       "breadcrumb_path": "/academic-services/breadcrumb/toc.json",
       "titleSuffix": "Microsoft Academic Services",
-      "uhfHeaderId": "MSDocsHeader-MSDocs",
+      "uhfHeaderId": "MSDocsHeader",
       "extendBreadcrumb": true,
       "feedback_system": "None",
       "author": "darrine",
