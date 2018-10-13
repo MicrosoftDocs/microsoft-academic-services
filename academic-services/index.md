@@ -21,7 +21,7 @@ ms.topic: hub-page
                                             <div class="card">
                                                 <div class="cardImageOuter">
                                                     <div class="cardImage bgdAccent1"> 
-                                                        <img src="media/mag.svg" alt="Microsoft Academic Graph" />
+                                                        <img src="/academic-services/media/mag.svg" alt="Microsoft Academic Graph" />
                                                     </div>
                                                 </div>
                                                 <div class="cardText">
@@ -40,7 +40,7 @@ ms.topic: hub-page
                                             <div class="card">
                                                 <div class="cardImageOuter">
                                                     <div class="cardImage bgdAccent1"> 
-                                                        <img src="media/makes.svg" alt="Microsoft Academic Knowledge Exploration Service" />
+                                                        <img src="/academic-services/media/makes.svg" alt="Microsoft Academic Knowledge Exploration Service" />
                                                     </div>
                                                 </div>
                                                 <div class="cardText">
