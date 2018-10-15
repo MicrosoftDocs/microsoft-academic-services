@@ -4,10 +4,9 @@ description: Microsoft Academic Services provide Azure based solutions for inter
 layout: HubPage
 ms.topic: hub-page
 ---
-# Microsoft Academic Services Documentation
-
 <div id="main" class="v2">
     <div class="container">
+        <h1>Microsoft Academic Services Documentation</h1>
         <ul class="pivots">
             <li>
                 <a href="#home"></a>
@@ -26,8 +25,8 @@ ms.topic: hub-page
                                                     </div>
                                                 </div>
                                                 <div class="cardText">
-                                                    <h3>Microsoft Academic Graph</h3>
-                                                    <p>Learn all about MAG, including how to signing up to receive it, how-to guides and tutorials.</p>
+                                                    <h3>Microsoft Academic Graph (MAG)</h3>
+                                                    <p>Learn all about MAG, including how to receive it, schema references and analytic samples.</p>
                                                 </div>
                                             </div>
                                         </div>
@@ -45,8 +44,8 @@ ms.topic: hub-page
                                                     </div>
                                                 </div>
                                                 <div class="cardText">
-                                                    <h3>Microsoft Academic Knowledge Exploration Service</h3>
-                                                    <p>Learn all about MAKES, including how to sign up, deploy, manage and use MAKES engines.</p>
+                                                    <h3>Microsoft Academic Knowledge Exploration Service (MAKES)</h3>
+                                                    <p>Learn all about MAKES, including how to access, deploy, manage and use MAKES engines.</p>
                                                 </div>
                                             </div>
                                         </div>
