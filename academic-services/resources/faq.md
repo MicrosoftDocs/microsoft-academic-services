@@ -4,5 +4,5 @@ description: Microsoft Academic Services provide Azure based solutions for inter
 ---
 # Frequently Asked Questions
 
-* [Microsoft Academic Graph FAQ](../microsoft-academic-graph/resources/faq.md)
-* [Microsoft Academic Knowledge Exploration Service FAQ](../microsoft-academic-knowledge-exploration-service/resources/faq.md)
+* Microsoft Academic Graph FAQ
+* Microsoft Academic Knowledge Exploration Service FAQ
