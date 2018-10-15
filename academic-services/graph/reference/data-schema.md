@@ -20,197 +20,197 @@ When using Microsoft Academic data (MAG, MAKES, etc.) in a product or service, o
 
 ## Affiliations.txt
 
-Description | Type
---- | ---
-Affiliation ID | long
-Rank | uint
-Normalized name | string
-Display name | string
-Grid ID | string
-Official page | string
-Wiki page | string
-Paper count | long
-Citation count | long
-Created date | DateTime
+Column # | Description | Type
+--- | --- | ---
+1 | Affiliation ID | long
+2 | Rank | uint
+3 | Normalized name | string
+4 | Display name | string
+5 | Grid ID | string
+6 | Official page | string
+7 | Wiki page | string
+8 | Paper count | long
+9 | Citation count | long
+10 | Created date | DateTime
 
 ## Authors.txt
 
-Description | Type
---- | ---
-Author ID | long
-Rank | uint
-Normalized name | string
-Display name | string
-Last known affiliation ID | long?
-Paper count | long
-Citation count | long
-Created date | DateTime
+Column # | Description | Type
+--- | --- | ---
+1 | Author ID | long
+2 | Rank | uint
+3 | Normalized name | string
+4 | Display name | string
+5 | Last known affiliation ID | long?
+6 | Paper count | long
+7 | Citation count | long
+8 | Created date | DateTime
 
 ## ConferenceInstances.txt
 
-Description | Type
---- | ---
-Conference instance ID | long
-Normalized name | string
-Display name | string
-Conference series ID | long
-Location | string
-Official URL | string
-Start date | DateTime?
-End date | DateTime?
-Abstract registration date | DateTime?
-Submission deadline date | DateTime?
-Notification due date | DateTime?
-Final version due date | DateTime?
-Paper count | long
-Citation count | long
-Created date | DateTime
+Column # | Description | Type
+--- | --- | ---
+1 | Conference instance ID | long
+2 | Normalized name | string
+3 | Display name | string
+4 | Conference series ID | long
+5 | Location | string
+6 | Official URL | string
+7 | Start date | DateTime?
+8 | End date | DateTime?
+9 | Abstract registration date | DateTime?
+10 | Submission deadline date | DateTime?
+11 | Notification due date | DateTime?
+12 | Final version due date | DateTime?
+13 | Paper count | long
+14 | Citation count | long
+15 | Created date | DateTime
 
 ## ConferenceSeries.txt
 
-Description | Type
---- | ---
-Conference series ID | long
-Rank | uint
-Normalized name | string
-Display name | string
-Paper count | long
-Citation count | long
-Created date | DateTime
+Column # | Description | Type
+--- | --- | ---
+1 | Conference series ID | long
+2 | Rank | uint
+3 | Normalized name | string
+4 | Display name | string
+5 | Paper count | long
+6 | Citation count | long
+7 | Created date | DateTime
 
 ## FieldsOfStudy.txt
 
-Description | Type
---- | ---
-Field of study ID | long
-Rank | uint
-Normalized name | string
-Display name | string
-Main type | string
-Level | Int
-Paper count | long
-Citation count | long
-Created date | DateTime
+Column # | Description | Type
+--- | --- | ---
+1 | Field of study ID | long
+2 | Rank | uint
+3 | Normalized name | string
+4 | Display name | string
+5 | Main type | string
+6 | Level | Int
+7 | Paper count | long
+8 | Citation count | long
+9 | Created date | DateTime
 
 ## FieldsOfStudyChildren.txt
 
-Description | Type
---- | ---
-Field of study ID | long
-Child field of study ID | long
+Column # | Description | Type
+--- | --- | ---
+1 | Field of study ID | long
+2 | Child field of study ID | long
 
 ## RelatedFieldOfStudy.txt
 
-Description | Type
---- | ---
-Field of study ID 1 | long
-Display name 1 | string
-Type 1 | string
-Field of study ID 2 | long
-Display name 2 | string
-Type 2 | string
-Rank | float
+Column # | Description | Type
+--- | --- | ---
+1 | Field of study ID 1 | long
+2 | Display name 1 | string
+3 | Type 1 | string
+4 | Field of study ID 2 | long
+5 | Display name 2 | string
+6 | Type 2 | string
+7 | Rank | float
 
 ## Journals.txt
 
-Description | Type
---- | ---
-Journal ID | long
-Rank | uint
-Normalized name | string
-Display name | string
-ISSN | string
-Publisher | string
-Web page | string
-Paper count | long
-Citation count | long
-Created date | DateTime
+Column # | Description | Type
+--- | --- | ---
+1 | Journal ID | long
+2 | Rank | uint
+3 | Normalized name | string
+4 | Display name | string
+5 | ISSN | string
+6 | Publisher | string
+7 | Web page | string
+8 | Paper count | long
+9 | Citation count | long
+10 | Created date | DateTime
 
 ## Papers.txt
 
-Description | Type
---- | ---
-Paper ID | long
-Rank | uint
-DOI | string
-Doc type | string
-Paper title | string
-Original title | string
-Book title | string
-Year | int
-Date | DateTime?
-Publisher | string
-Journal ID | long?
-Conference series ID | long?
-Conference instance ID | long?
-Volume | string
-Issue | string
-First page | string
-Last page | string
-Reference count | long
-Citation count | long
-Estimated citation count | long
-Created date | DateTime
+Column # | Description | Type
+--- | --- | ---
+1 | Paper ID | long
+2 | Rank | uint
+3 | DOI | string
+4 | Doc type | string
+5 | Paper title | string
+6 | Original title | string
+7 | Book title | string
+8 | Year | int
+9 | Date | DateTime?
+10 | Publisher | string
+11 | Journal ID | long?
+12 | Conference series ID | long?
+13 | Conference instance ID | long?
+14 | Volume | string
+15 | Issue | string
+16 | First page | string
+17 | Last page | string
+18 | Reference count | long
+19 | Citation count | long
+20 | Estimated citation count | long
+21 | Created date | DateTime
 
 ## PaperAbstractInvertedIndex.txt
 
-Description | Type
---- | ---
-Paper ID | long
-Indexed abstract | string
+Column # | Description | Type
+--- | --- | ---
+1 | Paper ID | long
+2 | Indexed abstract | string
 
 ## PaperAuthorAffiliations.txt
 
-Description | Type
---- | ---
-Paper ID | long
-Author ID | long
-Affiliation ID | long?
-Author sequence number | uint
-Original Affiliation | string
+Column # | Description | Type
+--- | --- | ---
+1 | Paper ID | long
+2 | Author ID | long
+3 | Affiliation ID | long?
+4 | Author sequence number | uint
+5 | Original Affiliation | string
 
 ## PaperCitationContexts.txt
 
-Description | Type
---- | ---
-Paper ID | long
-Paper reference ID | long
-Citation context | string
+Column # | Description | Type
+--- | --- | ---
+1 | Paper ID | long
+2 | Paper reference ID | long
+3 | Citation context | string
 
 ## PaperFieldsOfStudy.txt
 
-Description | Type
---- | ---
-Paper ID | long
-Field of study ID | long
-Score | float
+Column # | Description | Type
+--- | --- | ---
+1 | Paper ID | long
+2 | Field of study ID | long
+3 | Score | float
 
 ## PaperLanguages.txt
 
-Description | Type
---- | ---
-Paper ID | long
-Language code | string
+Column # | Description | Type
+--- | --- | ---
+1 | Paper ID | long
+2 | Language code | string
 
 ## PaperRecommendations.txt
 
-Description | Type
---- | ---
-Paper ID | long
-Recommended paper ID | long
-Score | float
+Column # | Description | Type
+--- | --- | ---
+1 | Paper ID | long
+2 | Recommended paper ID | long
+3 | Score | float
 
 ## PaperReferences.txt
 
-Description | Type
---- | ---
-Paper ID | long
-Paper reference ID | long
+Column # | Description | Type
+--- | --- | ---
+1 | Paper ID | long
+2 | Paper reference ID | long
 
 ## PaperUrls.txt
 
-Description | Type
---- | ---
-Paper ID | long
-Source type | int?
-Source URL | string
+Column # | Description | Type
+--- | --- | ---
+1 | Paper ID | long
+2 | Source type | int?
+3 | Source URL | string
