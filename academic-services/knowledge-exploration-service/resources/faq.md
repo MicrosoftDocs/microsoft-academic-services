@@ -1,8 +1,10 @@
 ---
-title: Frequently Asked Questions
+title: Frequently Asked Questions about Microsoft Academic Knowledge Exploration Service
 description: Answers to the most frequently asked questions about Microsoft Academic Knowledge Exploration Service
 ---
-# Frequently Asked Questions
+# Frequently Asked Questions about Microsoft Academic Knowledge Exploration Service
+
+Answers to the most frequently asked questions about Microsoft Academic Knowledge Exploration Service
 
 ## How frequently are new engines released
 

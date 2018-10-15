@@ -1,8 +1,10 @@
 ---
-title: Microsoft Academic Services
-description: Microsoft Academic Services provide Azure based solutions for interacting with the Microsoft Academic Graph, a comprehensive, heterogeneous graph of the worlds scientific publications
+title: Microsoft Academic Knowledge Exploration Service Entity engine
+description: The Microsoft Academic Knowledge Exploration Service entity engine enables query evaluation (evaluate) and histogram calculation (calchistogram) for academic entities in the Microsoft Academic Graph
 ---
-# Entity engine schema
+# Microsoft Academic Knowledge Exploration Service entity engine
+
+The Microsoft Academic Knowledge Exploration Service entity engine enables query evaluation (evaluate) and histogram calculation (calchistogram) for academic entities in the Microsoft Academic Graph.
 
 ## Open Data License: [ODC-BY](https://opendatacommons.org/licenses/by/1.0/)
 
@@ -149,3 +151,19 @@ J.JId | Journal ID | Int64 | Equals
 J.JN | Normalized journal name | String | Equals
 
 ## SRGS grammar
+
+Speech Recognition Grammar Specification (SRGS) is a [W3C recommended standard](https://www.w3.org/TR/speech-grammar/) for defining the syntax for grammar representation.
+
+> Because the entity engine is not designed for interpreting natural language academic queries, its grammar is essentially a placeholder that only enables simple entity lookup by ID. To interpret natural language academic queries, please use the [semantic interpretation engine](semantic-interpretation-engine.md).
+
+``` XML
+<?xml version="1.0" encoding="utf-8"?>
+<grammar root="GetEntities">
+  <import schema="schema.json" name="entity"/>
+  <rule id="GetEntities">
+    <tag>query = All();</tag>
+    <attrref uri="entity#Id" name="q"/>
+    <tag>out = Resolve(q);</tag>
+  </rule>
+</grammar>
+```

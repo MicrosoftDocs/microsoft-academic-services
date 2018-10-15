@@ -1,8 +1,8 @@
 ---
-title: Microsoft Academic Services
-description: Microsoft Academic Services provide Azure based solutions for interacting with the Microsoft Academic Graph, a comprehensive, heterogeneous graph of the worlds scientific publications
+title: About Knowledge Exploration Service
+description: Knowledge Exploration Service offers a fast and effective way to add interactive search and refinement to applications
 ---
-# Overview of Knowledge Exploration Service (KES)
+# About Knowledge Exploration Service
 
 Knowledge Exploration Service (KES) offers a fast and effective way to add interactive search and refinement to applications. With KES, you can build a compressed index from structured data, author a grammar that interprets natural language queries, and provide interactive query formulation with auto-completion suggestions.
 

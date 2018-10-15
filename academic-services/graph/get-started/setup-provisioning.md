@@ -1,10 +1,10 @@
 ---
 title: Get Microsoft Academic Graph on Azure storage
-description: Step-by-step instructions for setting up one-time or automatic provisioning of the Microsoft Academic Graph to an Azure blob storage account
+description: Step-by-step instructions for setting up one-time or automatic provisioning of Microsoft Academic Graph to an Azure blob storage account
 ---
 # Get started with Microsoft Academic Graph on Azure storage
 
-Details step-by-step instructions for setting up one-time or automatic provisioning of the Microsoft Academic Graph to an Azure blob storage account.
+Details step-by-step instructions for setting up one-time or automatic provisioning of Microsoft Academic Graph to an Azure blob storage account.
 
 ## Open Data License: [ODC-BY](https://opendatacommons.org/licenses/by/1.0/)
 

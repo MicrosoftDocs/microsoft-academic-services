@@ -1,8 +1,10 @@
 ---
-title: Microsoft Academic Services
-description: Microsoft Academic Services provide Azure based solutions for interacting with the Microsoft Academic Graph, a comprehensive, heterogeneous graph of the worlds scientific publications
+title: Deploy Microsoft Academic Knowledge Exploration Service engine using Azure Management Portal
+description: Step-by-step guide for deploying Microsoft Academic Knowledge Exploration Service engines using the Azure Management Portal
 ---
-# Deploy MAKES engine using Azure Management Portal
+# Deploy Microsoft Academic Knowledge Exploration Service engine using Azure Management Portal
+
+Details step-by-step guide for deploying Microsoft Academic Knowledge Exploration Service engines using the Azure Management Portal.
 
 ## Configure engine build
 

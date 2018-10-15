@@ -1,8 +1,10 @@
 ---
-title: Microsoft Academic Services
-description: Microsoft Academic Services provide Azure based solutions for interacting with the Microsoft Academic Graph, a comprehensive, heterogeneous graph of the worlds scientific publications
+title: Microsoft Academic Knowledge Exploration Service pricing
+description: Provides Azure cost estimator links to model the cost of using Microsoft Academic Knowledge Exploration Service
 ---
-# Pricing
+# Microsoft Academic Knowledge Exploration Service pricing
+
+Provides Azure cost estimator links to model the cost of using Microsoft Academic Knowledge Exploration Service
 
 Engine | Storage* | Cloud service instance* | Cost estimate
 --- | --- | --- | ---

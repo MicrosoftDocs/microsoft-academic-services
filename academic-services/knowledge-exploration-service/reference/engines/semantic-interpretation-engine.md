@@ -1,8 +1,10 @@
 ---
-title: Microsoft Academic Services
-description: Microsoft Academic Services provide Azure based solutions for interacting with the Microsoft Academic Graph, a comprehensive, heterogeneous graph of the worlds scientific publications
+title: Microsoft Academic Knowledge Exploration Service semantic interpretation engine
+description: The Microsoft Academic Knowledge Exploration Service semantic interpretation engine enables natural language query interpretation and completions for entities in the Microsoft Academic Graph
 ---
-# Semantic Interpretation engine
+# Microsoft Academic Knowledge Exploration Service semantic interpretation engine
+
+The Microsoft Academic Knowledge Exploration Service semantic interpretation engine enables natural language query interpretation and completions for entities in the Microsoft Academic Graph. It generates query expressions which can be evaluated using the [entity engine's](entity-engine.md) evaluate API method.
 
 ## Open Data License: [ODC-BY](https://opendatacommons.org/licenses/by/1.0/)
 
@@ -50,7 +52,9 @@ F.FN | Normalized field of study name | String | Equals, StartsWith
 J | Journal composite | Composite | N/A
 J.JN | Normalized journal name | String | Equals, StartsWith
 
-## SRGS grammar
+## Speech Recognition Grammar Specification (SRGS) grammar
+
+Speech Recognition Grammar Specification (SRGS) is a [W3C recommended standard](https://www.w3.org/TR/speech-grammar/) for defining the syntax for grammar representation.
 
 ``` XML
 <grammar root="GetPapers">
