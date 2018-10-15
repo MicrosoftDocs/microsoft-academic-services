@@ -1,6 +1,7 @@
 ---
 title: Deploy Microsoft Academic Knowledge Exploration Service engine using Azure Management Portal
 description: Step-by-step guide for deploying Microsoft Academic Knowledge Exploration Service engines using the Azure Management Portal
+ms.topic: tutorial
 ---
 # Deploy Microsoft Academic Knowledge Exploration Service engine using Azure Management Portal
 

@@ -1,6 +1,7 @@
 ---
 title: Microsoft Academic Graph pricing
 description: Provides Azure cost estimator links to model the cost of using Microsoft Academic Graph
+ms.topic: reference
 ---
 # Microsoft Academic Graph pricing
 

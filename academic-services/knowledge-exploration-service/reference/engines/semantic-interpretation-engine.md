@@ -1,6 +1,7 @@
 ---
 title: Microsoft Academic Knowledge Exploration Service semantic interpretation engine
 description: The Microsoft Academic Knowledge Exploration Service semantic interpretation engine enables natural language query interpretation and completions for entities in the Microsoft Academic Graph
+ms.topic: reference
 ---
 # Microsoft Academic Knowledge Exploration Service semantic interpretation engine
 

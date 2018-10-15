@@ -1,6 +1,7 @@
 ---
 title: Frequently Asked Questions about Microsoft Academic Graph
 description: Answers some of the most frequently asked questions about the Microsoft Academic Graph
+ms.topic: reference
 ---
 # Frequently Asked Questions about Microsoft Academic Graph
 
