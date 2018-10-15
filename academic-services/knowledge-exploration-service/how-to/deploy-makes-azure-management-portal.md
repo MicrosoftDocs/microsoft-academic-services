@@ -1,7 +1,8 @@
 ---
-title: Deploy Microsoft Academic Knowledge Exploration Service engine using Azure Management Portal
+title: Deploy Microsoft Academic Knowledge Exploration Service engine
 description: Step-by-step guide for deploying Microsoft Academic Knowledge Exploration Service engines using the Azure Management Portal
 ms.topic: tutorial
+ms.date: 10/15/2018
 ---
 # Deploy Microsoft Academic Knowledge Exploration Service engine using Azure Management Portal
 
@@ -108,11 +109,11 @@ Before deploying a new MAKES engine build it must first be configured to use the
 
 9. Verify that the new MA-KES engine instance is working
 
-    To verify the entity engine is working, navigate to http://your-entity-engine-cloud-service.cloudapp.net/evaluate?expr=And(Composite(AA.AuN=='darrin%20eide'),Ti=='an%20overview%20of%20microsoft%20academic%20service%20mas%20and%20applications')&attributes=Id,Ti&count=1 and verify “an overview of microsoft academic service mas and applications” is returned
+    To verify the entity engine is working, navigate to https://your-entity-engine-cloud-service.cloudapp.net/evaluate?expr=And(Composite(AA.AuN=='darrin%20eide'),Ti=='an%20overview%20of%20microsoft%20academic%20service%20mas%20and%20applications')&attributes=Id,Ti&count=1 and verify “an overview of microsoft academic service mas and applications” is returned
 
     ![Figure27.png](Figure27.png)
 
-    To verify the semantic interpretation engine is working, navigate to http://your-semantic-interpretation-engine-cloud-service.cloudapp.net/interpret?query=darrin%20eide%20an%20overview%20of&complete=1&count=1 and verify that the top interpretation contains the expression “And(Composite(AA.AuN=='darrin eide'),Ti=='an overview of microsoft academic service mas and applications')”
+    To verify the semantic interpretation engine is working, navigate to https://your-semantic-interpretation-engine-cloud-service.cloudapp.net/interpret?query=darrin%20eide%20an%20overview%20of&complete=1&count=1 and verify that the top interpretation contains the expression “And(Composite(AA.AuN=='darrin eide'),Ti=='an overview of microsoft academic service mas and applications')”
 
     ![Figure28.png](Figure28.png)
 
@@ -180,8 +181,8 @@ Before deploying a new MAKES engine build it must first be configured to use the
 
 8. Verify that the new MA-KES engine instance is working
 
-    To verify the entity engine is working, navigate to http://your-entity-engine-cloud-service.cloudapp.net/evaluate?expr=And(Composite(AA.AuN=='darrin%20eide'),Ti=='an%20overview%20of%20microsoft%20academic%20service%20mas%20and%20applications')&attributes=Id,Ti&count=1 and verify “an overview of microsoft academic service mas and applications” is returned
+    To verify the entity engine is working, navigate to https://your-entity-engine-cloud-service.cloudapp.net/evaluate?expr=And(Composite(AA.AuN=='darrin%20eide'),Ti=='an%20overview%20of%20microsoft%20academic%20service%20mas%20and%20applications')&attributes=Id,Ti&count=1 and verify “an overview of microsoft academic service mas and applications” is returned
 
     ![Figure27.png](Figure27.png)
 
-    To verify the semantic interpretation engine is working, navigate to http://your-semantic-interpretation-engine-cloud-service.cloudapp.net/interpret?query=darrin%20eide%20an%20overview%20of&complete=1&count=1 and verify that the top interpretation contains the expression “And(Composite(AA.AuN=='darrin eide'),Ti=='an overview of microsoft academic service mas and applications')”
+    To verify the semantic interpretation engine is working, navigate to https://your-semantic-interpretation-engine-cloud-service.cloudapp.net/interpret?query=darrin%20eide%20an%20overview%20of&complete=1&count=1 and verify that the top interpretation contains the expression “And(Composite(AA.AuN=='darrin eide'),Ti=='an overview of microsoft academic service mas and applications')”

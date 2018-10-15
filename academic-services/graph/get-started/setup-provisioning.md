@@ -2,6 +2,7 @@
 title: Get Microsoft Academic Graph on Azure storage
 description: Step-by-step instructions for setting up one-time or automatic provisioning of Microsoft Academic Graph to an Azure blob storage account
 ms.topic: get-started-article
+ms.date: 10/15/2018
 ---
 # Get started with Microsoft Academic Graph on Azure storage
 
@@ -28,11 +29,11 @@ Please create a new Azure subscription for the distribution previews. If your or
 
 1. Home > Create a resource > Storage > Storage account
 
-    ![Figure01.png](Figure01.png)
+    ![create-storage-account-select.png](create-storage-account-select.png "Create new storage account resource")
 
 1. Specify "mag" for the resource group, “magas<org_name>” for the account name, "Storage (general purpose v1)" for account kind, “LRS” for replication, and “standard” for performance, then click the "review + create" button
 
-    ![Figure02.png](Figure02.png)
+    ![create-storage-account-details.png](create-storage-account-details.png "Enter details for new storage account resource")
 
     > You don’t need to use your organization name after the "magas", however the account name must be unique among all Azure Storage Accounts
 
@@ -40,15 +41,15 @@ Please create a new Azure subscription for the distribution previews. If your or
 
 1. Verify that the information you entered is correct and click the "create" button
 
-    ![Figure04.png](Figure04.png)
+    ![create-storage-account-submit.png](create-storage-account-submit.png "Submit new storage account resource for creation")
 
 1. Once notified that the storage account has been created, click “go to resource”
 
-    ![Figure05.png](Figure05.png)
+    ![create-storage-account-go-to-resource.png](create-storage-account-go-to-resource.png "Navigate to the new storage account resource")
 
 1. Go to “access keys” and take note of the “storage account name” and the “primary key”
 
-    ![Figure06.png](Figure06.png)
+    ![create-storage-account-access-keys.png](create-storage-account-access-keys.png "Save new storage account resource name and access keys for later")
 
 ## Sign up for MAG provisioning
 

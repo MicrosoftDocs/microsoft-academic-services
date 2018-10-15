@@ -2,6 +2,7 @@
 title: About Knowledge Exploration Service
 description: Knowledge Exploration Service offers a fast and effective way to add interactive search and refinement to applications
 ms.topic: overview
+ms.date: 10/15/2018
 ---
 # About Knowledge Exploration Service
 

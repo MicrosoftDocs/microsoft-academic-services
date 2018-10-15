@@ -1,7 +1,8 @@
 ---
-title: Frequently Asked Questions about Microsoft Academic Knowledge Exploration Service
+title: Frequently Asked Questions - Microsoft Academic Knowledge Exploration Service
 description: Answers to the most frequently asked questions about Microsoft Academic Knowledge Exploration Service
 ms.topic: reference
+ms.date: 10/15/2018
 ---
 # Frequently Asked Questions about Microsoft Academic Knowledge Exploration Service
 
