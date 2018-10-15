@@ -3,16 +3,20 @@
 - name: Overview
   expanded: true
   items:
-  - name: What is the Microsoft Academic Graph (MAG)?
+  - name: What is Microsoft Academic Graph
     href: https://aka.ms/academicgraph
 - name: Get started
   expanded: true
   items:
-  - name: Receive MAG on Azure Blob Storage
-    href: get-started/setup-distribution-preview-azure-blob-storage.md
+  - name: Get Microsoft Academic Graph on Azure Storage
+    href: get-started/setup-provisioning.md
+  - name: Configure Azure Data Lake Analytics
+    href: get-started/setup-azure-data-lake-analytics.md
 - name: Samples
+  expanded: true
   items:
   - name: Analytics & visualization
+    expanded: true
     items:
     - name: Getting started
       href: https://github.com/Azure-Samples/academic-knowledge-analytics-visualization#getting-started
@@ -43,9 +47,10 @@
 - name: Reference
   expanded: true
   items:
-  - name: MAG data schema
+  - name: Entity data schema
     href: reference/data-schema
 - name: Resources
+  expanded: true
   items:
   - name: FAQ
     href: resources/faq.md

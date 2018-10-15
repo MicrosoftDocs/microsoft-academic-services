@@ -1,8 +1,10 @@
 ---
-title: Microsoft Academic Services
-description: Microsoft Academic Services provide Azure based solutions for interacting with the Microsoft Academic Graph, a comprehensive, heterogeneous graph of the worlds scientific publications
+title: Microsoft Academic Graph data schema
+description: Documents the complete, most recent Microsoft Academic Graph entity data schema, including the name and type of each attribute
 ---
-# Microsoft Academic Graph Data Schema
+# Microsoft Academic Graph data schema
+
+Documents the complete, most recent Microsoft Academic Graph entity data schema, including the name and type of each attribute.
 
 ## Open Data License: [ODC-BY](https://opendatacommons.org/licenses/by/1.0/)
 

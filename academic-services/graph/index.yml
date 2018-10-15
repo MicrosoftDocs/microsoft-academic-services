@@ -1,26 +1,56 @@
 ### YamlMime:YamlDocument
 documentType: LandingData
-title: Microsoft Academic Graph (MAG) Documentation
+title: Microsoft Academic Graph documentation
 metadata:
-  document_id: 1d98d530-28c7-635f-d41b-8da3ae02972c
-  title: Microsoft Academic Graph (MAG) Documentation - Overview, Data schema, How-to guides, Tutorials
-  meta.description: Learn everything you need to know about Microsoft Academic Graph (MAG), including technology overviews, data schemas, how-to guides, tutorials and more.
-  ms.tgt_pltfrm: na
-  ms.devlang: na
+  title: Microsoft Academic Graph documentation
+  description: Learn about Microsoft Academic Graph, including getting started guides, data schema reference, sample analytics
+  meta.description: Learn about Microsoft Academic Graph, including getting started guides, data schema reference, sample analytics
   ms.topic: landing-page
-  ms.date: 09/20/2018
+  ms.date: 10/15/2018
 abstract:
-  description: The Microsoft Academic Graph is a heterogeneous graph containing scientific publication records, citation relationships between those publications, as well as authors, institutions, journals, conferences, and fields of study. Learn all about MAG, including how to signing up to receive it, how-to guides and tutorials.
+  description: Learn about Microsoft Academic Graph, including getting started guide, data schema reference, sample analytics.
 sections:
-- title: Getting started with MAG
+- title: Get started
   items:
   - type: list
     style: unordered
     items:
-    - html: <a href="get-started/setup-distribution-preview-azure-blob-storage">Sign up for MAG distribution preview</a>
-- title: Technology Overview
+    - html: <a href="get-started/setup-provisioning">Get Microsoft Academic Graph on Azure blob storage</a>
+    - html: <a href="get-started/setup-azure-data-lake-analytics">Use Microsoft Academic Graph on Azure Data Lake Analytics</a>
+- title: Technology overview
   items: 
   - type: list
     style: unordered
     items:
-    - html: <a href="reference/data-schema">MAG Data Schema</a>
+    - html: <a href="reference/data-schema">Microsoft Academic Graph entity data schema</a>
+- title: Step-by-step:: Learn how to use Microsoft Academic Graph with Azure Data Lake Analytics
+  items:
+  - type: list
+    style: ordered
+    items:
+    - name: Getting started
+      href: https://github.com/Azure-Samples/academic-knowledge-analytics-visualization#getting-started
+    - name: Field of Study Top Authors
+      href: https://github.com/Azure-Samples/academic-knowledge-analytics-visualization/tree/master/src/AcademicAnalytics/01.%20Field%20of%20Study%20Top%20Authors
+    - name: Field of Study Entity Counts
+      href: https://github.com/Azure-Samples/academic-knowledge-analytics-visualization/tree/master/src/AcademicAnalytics/11.%20Field%20of%20Study%20Entity%20Counts
+    - name: Field of Study Top Entities
+      href: https://github.com/Azure-Samples/academic-knowledge-analytics-visualization/tree/master/src/AcademicAnalytics/13.%20Field%20of%20Study%20Top%20Entities
+    - name: Conference Top Authors By Static Rank
+      href: https://github.com/Azure-Samples/academic-knowledge-analytics-visualization/tree/master/src/AcademicAnalytics/02.%20Conference%20Top%20Authors%20By%20Static%20Rank
+    - name: Conference Paper Statistics
+      href: https://github.com/Azure-Samples/academic-knowledge-analytics-visualization/tree/master/src/AcademicAnalytics/03.%20Conference%20Papers%20Basic%20Statistics
+    - name: Conference Top Papers
+      href: https://github.com/Azure-Samples/academic-knowledge-analytics-visualization/tree/master/src/AcademicAnalytics/04.%20Conference%20Top%20Papers
+    - name: Conference Top Authors
+      href: https://github.com/Azure-Samples/academic-knowledge-analytics-visualization/tree/master/src/AcademicAnalytics/05.%20Conference%20Top%20Authors
+    - name: Conference Top Institutions
+      href: https://github.com/Azure-Samples/academic-knowledge-analytics-visualization/tree/master/src/AcademicAnalytics/06.%20Conference%20Top%20Institutions
+    - name: Conference Memory of References
+      href: https://github.com/Azure-Samples/academic-knowledge-analytics-visualization/tree/master/src/AcademicAnalytics/07.%20Conference%20Memory%20of%20References
+    - name: Conference Top Referenced Venues
+      href: https://github.com/Azure-Samples/academic-knowledge-analytics-visualization/tree/master/src/AcademicAnalytics/08.%20Conference%20Top%20Referenced%20Venues
+    - name: Conference Top Citing Venues
+      href: https://github.com/Azure-Samples/academic-knowledge-analytics-visualization/tree/master/src/AcademicAnalytics/09.%20Conference%20Top%20Citing%20Venues
+    - name: Organization Insight
+      href: https://github.com/Azure-Samples/academic-knowledge-analytics-visualization/tree/master/src/AcademicAnalytics/12.%20Organization%20Insight
