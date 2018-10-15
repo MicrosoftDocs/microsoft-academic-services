@@ -11,7 +11,7 @@
   expanded: true
   items:
   - name: Get Microsoft Academic Knowledge Exploration Service
-    href: get-started/setup-provisioning
+    href: get-started/setup-provisioning.md
 - name: How to
   expanded: true
   items:

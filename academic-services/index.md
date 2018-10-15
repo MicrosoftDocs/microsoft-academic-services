@@ -17,7 +17,7 @@ ms.topic: hub-page
                             <a href="#home-all"></a>
                             <ul id="home-all" class="cardsC">
                                 <li>
-                                    <a href="graph/">
+                                    <a href="graph">
                                         <div class="cardSize">
                                             <div class="cardPadding">
                                                 <div class="card">
@@ -36,7 +36,7 @@ ms.topic: hub-page
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="knowledge-exploration-service/">
+                                    <a href="knowledge-exploration-service">
                                         <div class="cardSize">
                                             <div class="cardPadding">
                                                 <div class="card">

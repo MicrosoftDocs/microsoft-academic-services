@@ -48,7 +48,7 @@
   expanded: true
   items:
   - name: Entity data schema
-    href: reference/data-schema
+    href: reference/data-schema.md
 - name: Resources
   expanded: true
   items:
