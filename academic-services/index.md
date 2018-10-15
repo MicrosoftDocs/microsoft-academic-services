@@ -7,6 +7,7 @@ ms.topic: hub-page
 <div id="main" class="v2">
     <div class="container">
         <h1>Microsoft Academic Services Documentation</h1>
+        <p>Explore how to use Azure to interact with the Microsoft Academic Graph, a comprehensive, heterogeneous graph of the worlds scientific publications.</p>
         <ul class="pivots">
             <li>
                 <a href="#home"></a>
@@ -26,7 +27,7 @@ ms.topic: hub-page
                                                 </div>
                                                 <div class="cardText">
                                                     <h3>Microsoft Academic Graph (MAG)</h3>
-                                                    <p>Learn all about MAG, including how to receive it, schema references and analytic samples.</p>
+                                                    <p>Learn all about MAG, including how to receive it, schema documentation and sample analytics.</p>
                                                 </div>
                                             </div>
                                         </div>
@@ -45,7 +46,7 @@ ms.topic: hub-page
                                                 </div>
                                                 <div class="cardText">
                                                     <h3>Microsoft Academic Knowledge Exploration Service (MAKES)</h3>
-                                                    <p>Learn all about MAKES, including how to access, deploy, manage and use MAKES engines.</p>
+                                                    <p>Learn all about MAKES, including how to access, deploy, manage and use MAKES engines, and documentation on the available versions.</p>
                                                 </div>
                                             </div>
                                         </div>
