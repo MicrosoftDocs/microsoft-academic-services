@@ -4,9 +4,10 @@ description: Microsoft Academic Services provide Azure based solutions for inter
 layout: HubPage
 ms.topic: hub-page
 ---
+# Microsoft Academic Services Documentation
+
 <div id="main" class="v2">
     <div class="container">
-        <h1>Microsoft Academic Services Documentation</h1>
         <ul class="pivots">
             <li>
                 <a href="#home"></a>
