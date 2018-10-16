@@ -1,5 +1,5 @@
 ---
-title: Deploy Microsoft Academic Knowledge Exploration Service engine
+title: Deploy MAKES engine
 description: Step-by-step guide for deploying Microsoft Academic Knowledge Exploration Service engines using the Azure Management Portal
 ms.topic: tutorial
 ms.date: 10/15/2018

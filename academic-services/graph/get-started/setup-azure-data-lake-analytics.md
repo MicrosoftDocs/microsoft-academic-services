@@ -1,5 +1,5 @@
 ---
-title: Use Microsoft Academic Graph on Azure Data Lake Analytics
+title: Use MAG on Azure Data Lake Analytics
 description: Step-by-step instructions for setting up Microsoft Academic Graph to be used with Azure Data Lake Analytics
 ms.topic: get-started-article
 ms.date: 10/15/2018

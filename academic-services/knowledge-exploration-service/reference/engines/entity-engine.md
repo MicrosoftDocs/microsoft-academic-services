@@ -1,5 +1,5 @@
 ---
-title: Microsoft Academic Knowledge Exploration Service Entity engine
+title: MAKES entity engine
 description: The Microsoft Academic Knowledge Exploration Service entity engine enables query evaluation (evaluate) and histogram calculation (calchistogram) for academic entities in the Microsoft Academic Graph
 ms.topic: reference
 ms.date: 10/15/2018

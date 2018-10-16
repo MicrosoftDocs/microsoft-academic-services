@@ -1,5 +1,5 @@
 ---
-title: Frequently Asked Questions - Microsoft Academic Graph
+title: Frequently Asked Questions - MAG
 description: Answers some of the most frequently asked questions about the Microsoft Academic Graph
 ms.topic: reference
 ms.date: 10/15/2018

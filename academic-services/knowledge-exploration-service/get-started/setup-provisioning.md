@@ -1,5 +1,5 @@
 ---
-title: Get Microsoft Academic Knowledge Exploration Service
+title: Get MAKES
 description: Step-by-step instructions for setting up one-time or automatic provisioning of Microsoft Academic Knowledge Exploration Service engines to an Azure blob storage account
 ms.topic: get-started-article
 ms.date: 10/15/2018

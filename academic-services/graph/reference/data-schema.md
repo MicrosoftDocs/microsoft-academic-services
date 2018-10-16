@@ -1,5 +1,5 @@
 ---
-title: Microsoft Academic Graph data schema
+title: MAG entity data schema
 description: Documents the complete, most recent Microsoft Academic Graph entity data schema, including the name and type of each attribute
 ms.topic: reference
 ms.date: 10/15/2018
