@@ -42,7 +42,8 @@
       "manager": "kuansanw",
       "services": "microsoft-academic-services",
       "ms.service": "microsoft-academic-services",
-      "ms.author": "darrine"
+      "ms.author": "darrine",
+      "searchScope": ["Microsoft Academic Services"]
     },
     "fileMetadata": {},
     "template": [],
