@@ -17,4 +17,5 @@ Semantic Interpretation | 200gb | E32 v3 | [Pricing calculator](https://azure.co
 Both | 350gb | D3 v2, D4 v2 | [Pricing calculator](https://azure.com/e/9791e10a26114a90b2be2d7a96aa048d)
 Both | 350gb | 2 x E32 v3 | [Pricing calculator](https://azure.com/e/d7c28fa94a9e4472819df82a39ed0c68)
 
+> [!IMPORTANT]
 > \* Price estimates are based on cloud services instances being online at all times (1 month) and only the most recent version of the engine being retained in storage. Use the Azure estimator links above to model different use scenarios, e.g. use hour pricing to simulate only keeping instances online when needed.

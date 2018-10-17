@@ -12,6 +12,7 @@ Details step-by-step instructions for setting up one-time or automatic provision
 
 When using Microsoft Academic data (MAG, MAKES, etc.) in a product or service, or including data in a redistribution, please acknowledge Microsoft Academic using the URI https://aka.ms/msracad. For publications and reports, please cite the following article:
 
+> [!NOTE]
 > Arnab Sinha, Zhihong Shen, Yang Song, Hao Ma, Darrin Eide, Bo-June (Paul) Hsu, and Kuansan Wang. 2015. An Overview of Microsoft Academic Service (MA) and Applications. In Proceedings of the 24th International Conference on World Wide Web (WWW '15 Companion). ACM, New York, NY, USA, 243-246. DOI=http://dx.doi.org/10.1145/2740908.2742839
 
 ## Pre-requisites
@@ -35,8 +36,10 @@ Please create a new Azure subscription for the distribution previews. If your or
 
     ![Figure04.png](Figure04.png)
 
+    > [!IMPORTANT]
     > You don’t need to use your organization name after the “makesas”, however the account name must be unique among all Azure Storage Accounts
 
+    > [!NOTE]
     > Select whatever region is most appropriate for your existing Azure resources
 
 3. Once notified that the storage account has been created, click “go to resource”
@@ -58,7 +61,8 @@ Please create a new Azure subscription for the distribution previews. If your or
     - Azure storage account primary access key
     - Which MAKES engines you want to receive (semantic interpretation engine, entity engine, or both) 
 
-    > NOTE: MAKES is currently in a free preview period, so there are no charges associated with the provisioning or use of data/service itself. However Azure requires you to cover all costs associated with standard resource creation, usage, etc. For cost estimates associated with MAKES please see the [Pricing](../resources/pricing.md) page. <br/><br/>Most research institutions have an "Enterprise Account" with Microsoft including Azure subscription. The pricing for Enterprise Accounts differ from the individual account shown in Azure's price calculator. <br/><br/>If you have an Enterprise Account, please check with your individual institution's Information Technology/Computer Center resource on the process of setting up Azure to get MAKES. You might need to obtain a "Master Agreement #" and involve MLSP (Microsoft Licensed Solution Provider) for help.
+    > [!NOTE]
+    > MAKES is currently in a free preview period, so there are no charges associated with the provisioning or use of data/service itself. However Azure requires you to cover all costs associated with standard resource creation, usage, etc. For cost estimates associated with MAKES please see the [Pricing](../resources/pricing.md) page. <br/><br/>Most research institutions have an "Enterprise Account" with Microsoft including Azure subscription. The pricing for Enterprise Accounts differ from the individual account shown in Azure's price calculator. <br/><br/>If you have an Enterprise Account, please check with your individual institution's Information Technology/Computer Center resource on the process of setting up Azure to get MAKES. You might need to obtain a "Master Agreement #" and involve MLSP (Microsoft Licensed Solution Provider) for help.
 
 ## Engine release process
 

@@ -37,8 +37,10 @@ Before deploying a new MAKES engine build it must first be configured to use the
     ![Figure12.png](Figure12.png)
     ![Figure12.png](Figure12-b.png)
 
+    > [!IMPORTANT]
     > Make sure to do this for **each MAKES engine you want to deploy**, i.e. if you want to deploy both the semantic-interpretation-engine and the entity-engine you will need to modify each engines configuration file separately
 
+    > [!IMPORTANT]
     > This only needs to be done **ONCE** for each new MAKES engine build version
 
 ## Deploy MAKES engine to new cloud service
@@ -69,6 +71,7 @@ Before deploying a new MAKES engine build it must first be configured to use the
 
     ![Figure18.png](Figure18.png)
 
+    > [!IMPORTANT]
     > The name part after “package-“ corresponds to different types of pre-configured cloud service instances [detailed here](https://azure.microsoft.com/en-us/pricing/details/cloud-services/). **PLEASE NOTE THAT COSTS ASSOCIATED WITH DIFFERENT INSTANCE TYPES CAN VARY DRAMATICALLY.** See the “cloud service deployment options” section in the appendix for cost/benefit details of the different pre-configured cloud instance types.
 
 5. Select the MAKES engine configuration
@@ -141,6 +144,7 @@ Before deploying a new MAKES engine build it must first be configured to use the
 
     ![Figure18.png](Figure18.png)
 
+    > [!IMPORTANT]
     > The name part after “package-“ corresponds to different types of pre-configured cloud service instances [detailed here](https://azure.microsoft.com/en-us/pricing/details/cloud-services/). **PLEASE NOTE THAT COSTS ASSOCIATED WITH DIFFERENT INSTANCE TYPES CAN VARY DRAMATICALLY.** See the “cloud service deployment options” section in the appendix for cost/benefit details of the different pre-configured cloud instance types.
 
 4. Select the MAKES engine configuration

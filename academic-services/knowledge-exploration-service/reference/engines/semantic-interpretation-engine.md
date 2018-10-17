@@ -12,6 +12,7 @@ The Microsoft Academic Knowledge Exploration Service semantic interpretation eng
 
 When using Microsoft Academic data (MAG, MAKES, etc.) in a product or service, or including data in a redistribution, please acknowledge Microsoft Academic using the URI https://aka.ms/msracad. For publications and reports, please cite the following article:
 
+> [!NOTE]
 > Arnab Sinha, Zhihong Shen, Yang Song, Hao Ma, Darrin Eide, Bo-June (Paul) Hsu, and Kuansan Wang. 2015. An Overview of Microsoft Academic Service (MA) and Applications. In Proceedings of the 24th International Conference on World Wide Web (WWW '15 Companion). ACM, New York, NY, USA, 243-246. DOI=http://dx.doi.org/10.1145/2740908.2742839
 
 ## Overview
@@ -33,7 +34,8 @@ The engine also includes name synonyms (when available) and allows for prefix co
 
 ## Paper entity schema
 
-> Note that each engine (semantic interpretation, entity) indexes a different set of attributes for paper entities
+> [!IMPORTANT]
+> Each engine (semantic interpretation, entity) indexes a different set of attributes for paper entities
 
 Attribute | Description | Type | Operations
 --- | --- | --- | ---

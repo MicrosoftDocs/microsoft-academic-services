@@ -1,5 +1,5 @@
 ---
-title: Frequently Asked Questions - MAG
+title: FAQ about Microsoft Academic Graph
 description: Answers some of the most frequently asked questions about the Microsoft Academic Graph
 ms.topic: reference
 ms.date: 10/15/2018
@@ -36,6 +36,7 @@ Microsoft Academic Graph doesn't publish the raw author supplied keywords that a
 
 "Rank" values are a static rank associated with each entity in the Microsoft Academic Graph. The static rank  roughly reflects the log probability of an entity being "important" represented as an integer by multiplying it by -1000, i.e.:
 
+> [!NOTE]
 > Rank = -1000 * Ln( probability of an entity being important )
 
 An entities "importance" is calculated using its relationships with other entities in the graph, e.g. a paper entity recently published in Nature receiving a high number of citations is likely to have high importance, whereas a pre-print paper entity not associated with a conference/journal is likely to have a low importance.
