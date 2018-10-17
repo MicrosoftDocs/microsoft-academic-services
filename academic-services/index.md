@@ -19,7 +19,7 @@ hide_bc: true
                             <a href="#home-all"></a>
                             <ul id="home-all" class="cardsC">
                                 <li>
-                                    <a href="graph/index.yml">
+                                    <a href="graph/">
                                         <div class="cardSize">
                                             <div class="cardPadding">
                                                 <div class="card">
@@ -38,7 +38,7 @@ hide_bc: true
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="knowledge-exploration-service/index.yml">
+                                    <a href="knowledge-exploration-service/">
                                         <div class="cardSize">
                                             <div class="cardPadding">
                                                 <div class="card">
