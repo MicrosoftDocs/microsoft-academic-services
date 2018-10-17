@@ -28,10 +28,8 @@ sections:
 - title: Reference
   items:
   - type: list
-    style: cards
-    className: cardsD
+    style: unordered
     items:
-    - title: MAKES
-      html: <p><a href="reference-entity-engine">Entity engine</a></p><p><a href="reference-semantic-interpretation-engine">Semantic interpretation engine</a></p>
-    - title: REST
-      html: <p><a href="/azure/cognitive-services/KES/webapi">KES API methods</a></p>
+    - html: <a href="reference-entity-engine">Entity engine</a>
+    - html: <a href="reference-semantic-interpretation-engine">Semantic interpretation engine</a>
+    - html: <a href="/azure/cognitive-services/KES/webapi">KES API methods</a>
