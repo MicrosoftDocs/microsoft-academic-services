@@ -15,8 +15,7 @@ sections:
   - type: list
     style: unordered
     items:
-    - html: <a href="overview/knowledge-exploration-service">Knowledge Exploration Service (KES)</a>
-    - html: <a href="overview/microsoft-academic-knowledge-exploration-service">Microsoft Academic + Knowledge Exploration Service (MAKES)</a>
+    - html: <a href="introduction">About Microsoft Academic Knowledge Exploration Service (MAKES)</a>
 - title: How-To Guides
   items:
   - type: paragraph
@@ -24,8 +23,8 @@ sections:
   - type: list
     style: unordered
     items:
-    - html: <a href="get-started/setup-provisioning">Get Microsoft Academic Knowledge Exploration Service</a>
-    - html: <a href="how-to/deploy-makes-azure-management-portal">Deploy Microsoft Academic Knowledge Exploration Service engine using Azure Management Portal</a>
+    - html: <a href="get-started-setup-provisioning">Get Microsoft Academic Knowledge Exploration Service</a>
+    - html: <a href="how-to-deploy-makes-azure-management-portal">Deploy Microsoft Academic Knowledge Exploration Service engine using Azure Management Portal</a>
 - title: Reference
   items:
   - type: list
@@ -33,7 +32,7 @@ sections:
     className: cardsD
     items:
     - title: MAKES
-      html: <p><a href="reference/engines/entity-engine">Entity engine</a></p><p><a href="reference/engines/semantic-interpretation-engine">Semantic interpretation engine</a></p>
+      html: <p><a href="reference-entity-engine">Entity engine</a></p><p><a href="reference-semantic-interpretation-engine">Semantic interpretation engine</a></p>
     - title: Command-Line
       html: <p><a href="/powershell/azureps-cmdlets-docs">Azure PowerShell</a></p><p><a href="/cli/azure/vm">Azure CLI</a></p>
     - title: REST

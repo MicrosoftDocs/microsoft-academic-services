@@ -1,5 +1,5 @@
 ---
-title: Frequently Asked Questions - MAKES
+title: FAQ for Microsoft Academic Knowledge Exploration Service
 description: Answers to the most frequently asked questions about Microsoft Academic Knowledge Exploration Service
 ms.topic: reference
 ms.date: 10/15/2018

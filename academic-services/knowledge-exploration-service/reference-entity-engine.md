@@ -1,5 +1,5 @@
 ---
-title: MAKES entity engine
+title: Entity engine reference
 description: The Microsoft Academic Knowledge Exploration Service entity engine enables query evaluation (evaluate) and histogram calculation (calchistogram) for academic entities in the Microsoft Academic Graph
 ms.topic: reference
 ms.date: 10/15/2018
@@ -14,14 +14,6 @@ When using Microsoft Academic data (MAG, MAKES, etc.) in a product or service, o
 
 > [!NOTE]
 > Arnab Sinha, Zhihong Shen, Yang Song, Hao Ma, Darrin Eide, Bo-June (Paul) Hsu, and Kuansan Wang. 2015. An Overview of Microsoft Academic Service (MA) and Applications. In Proceedings of the 24th International Conference on World Wide Web (WWW '15 Companion). ACM, New York, NY, USA, 243-246. DOI=http://dx.doi.org/10.1145/2740908.2742839
-
-## Overview
-
-This engine is optimized for the lookup and retrieval of all types of academic entities using a wide range of their available attributes.
-
-Search results, filters and entity cards on [Microsoft Academic](https://academic.microsoft.com/) are partially generated with this engine using a combination of evaluate and histogram methods and semantic interpretations from the [Semantic Interpretation engine](semantic-interpretation-engine.md):
-
-   ![Figure02.png](Figure02.png)
 
 ## Affiliation entity schema
 
@@ -159,7 +151,7 @@ J.JN | Normalized journal name | String | Equals
 Speech Recognition Grammar Specification (SRGS) is a [W3C recommended standard](https://www.w3.org/TR/speech-grammar/) for defining the syntax for grammar representation.
 
 > [!IMPORTANT]
-> Because the entity engine is not designed for interpreting natural language academic queries, its grammar is essentially a placeholder that only enables simple entity lookup by ID. To interpret natural language academic queries, please use the [semantic interpretation engine](semantic-interpretation-engine.md).
+> Because the entity engine is not designed for interpreting natural language academic queries, its grammar is essentially a placeholder that only enables simple entity lookup by ID. To interpret natural language academic queries, please use the [semantic interpretation engine](reference-semantic-interpretation-engine.md).
 
 ``` XML
 <?xml version="1.0" encoding="utf-8"?>

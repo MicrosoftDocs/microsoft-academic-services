@@ -3,34 +3,32 @@
 - name: Overview
   expanded: true
   items:
-  - name: Knowledge Exploration Service
-    href: overview/knowledge-exploration-service.md
-  - name: Microsoft Academic + Knowledge Exploration Service
-    href: overview/microsoft-academic-knowledge-exploration-service.md
+  - name: About Microsoft Academic Knowledge Exploration Service
+    href: introduction.md
 - name: Get started
   expanded: true
   items:
-  - name: Get Microsoft Academic Knowledge Exploration Service
-    href: get-started/setup-provisioning.md
+  - name: Setup MAKES engine provisioning
+    href: get-started-setup-provisioning.md
 - name: How to
   expanded: true
   items:
-  - name: Deploy Microsoft Academic Knowledge Exploration Service engine
+  - name: Deploy MAKES engines
     expanded: true
     items:
     - name: Using Azure Management Portal
-      href: how-to/deploy-makes-azure-management-portal.md
+      href: how-to-deploy-makes-azure-management-portal.md
 - name: Reference
   expanded: true
   items:
-  - name: Microsoft Academic Knowledge Exploration Service engines
+  - name: MAKES engines
     expanded: true
     items:
       - name: Entity engine
         href: reference/engines/entity-engine.md
       - name: Semantic Interpretation engine
         href: reference/engines/semantic-interpretation-engine.md
-  - name: Microsoft Academic Knowledge Exploration Service API interface
+  - name: MAKES API interface
     href: /azure/cognitive-services/KES/webapi
   - name: Azure CLI
     href: /cli/azure/vm
@@ -42,8 +40,8 @@
   expanded: true
   items:
   - name: FAQ
-    href: resources/faq.md
+    href: resources-faq.md
   - name: Pricing
-    href: resources/pricing.md
+    href: resources-pricing.md
   - name: Stack Overflow
     href: http://stackoverflow.com/questions/tagged/microsoft-academic-knowledge-exploration-service

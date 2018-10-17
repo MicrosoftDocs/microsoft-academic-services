@@ -1,5 +1,5 @@
 ---
-title: Get MAKES
+title: Setup engine provisioning
 description: Step-by-step instructions for setting up one-time or automatic provisioning of Microsoft Academic Knowledge Exploration Service engines to an Azure blob storage account
 ms.topic: get-started-article
 ms.date: 10/15/2018
@@ -30,11 +30,11 @@ Please create a new Azure subscription for the distribution previews. If your or
 
 1. Home > Create a resource > Storage > Storage account
 
-    ![Figure03.png](Figure03.png)
+    ![Create new azure storage account](media/create-azure-storage-account.png "Create new azure storage account")
 
 2. Specify “makesas<org_name>” for the account name, “classic” for deployment model, “LRS” for replication, “standard” for performance and “makes” for the resource group
 
-    ![Figure04.png](Figure04.png)
+    ![Configure azure storage account details](media/create-azure-storage-account-configure.png "Configure azure storage account details")
 
     > [!IMPORTANT]
     > You don’t need to use your organization name after the “makesas”, however the account name must be unique among all Azure Storage Accounts
@@ -44,11 +44,11 @@ Please create a new Azure subscription for the distribution previews. If your or
 
 3. Once notified that the storage account has been created, click “go to resource”
 
-    ![Figure05.png](Figure05.png)
+    ![Go to new azure storage account](media/create-azure-storage-account-go-to.png "Go to new azure storage account")
 
 4. Go to “access keys” and take note of the “storage account name” and the “primary key”
 
-    ![Figure06.png](Figure06.png)
+    ![Copy new azure storage account details](media/create-azure-storage-account-copy-details.png "Copy new azure storage account details")
 
 5. To sign up for MAKES engine distribution preview, send the following details to <a href="mailto:academicapi@microsoft.com?subject=Access request to Microsoft Academic Knowledge Exploration Service (MAKES) distribution preview">academicapi@microsoft.com</a> with the subject "Access request to Microsoft Academic Knowledge Exploration Service (MAKES) distribution preview":
 
@@ -77,4 +77,4 @@ Each engine build has a unique name reflecting the date it was created, and is p
 
 Example:
 
-![Figure07.png](Figure07.png)
+![Engine release location in blob storage](media/engine-release-location.png "Engine release location in blob storage")

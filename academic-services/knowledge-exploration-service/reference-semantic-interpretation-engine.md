@@ -1,12 +1,12 @@
 ---
-title: MAKES semantic interpretation engine
+title: Semantic interpretation engine reference
 description: The Microsoft Academic Knowledge Exploration Service semantic interpretation engine enables natural language query interpretation and completions for entities in the Microsoft Academic Graph
 ms.topic: reference
 ms.date: 10/15/2018
 ---
 # Microsoft Academic Knowledge Exploration Service semantic interpretation engine
 
-The Microsoft Academic Knowledge Exploration Service semantic interpretation engine enables natural language query interpretation and completions for entities in the Microsoft Academic Graph. It generates query expressions which can be evaluated using the [entity engine's](entity-engine.md) evaluate API method.
+The Microsoft Academic Knowledge Exploration Service semantic interpretation engine enables natural language query interpretation and completions for entities in the Microsoft Academic Graph. It generates query expressions which can be evaluated using the [entity engine's](reference-entity-engine.md) evaluate API method.
 
 ## Open Data License: [ODC-BY](https://opendatacommons.org/licenses/by/1.0/)
 
@@ -14,23 +14,6 @@ When using Microsoft Academic data (MAG, MAKES, etc.) in a product or service, o
 
 > [!NOTE]
 > Arnab Sinha, Zhihong Shen, Yang Song, Hao Ma, Darrin Eide, Bo-June (Paul) Hsu, and Kuansan Wang. 2015. An Overview of Microsoft Academic Service (MA) and Applications. In Proceedings of the 24th International Conference on World Wide Web (WWW '15 Companion). ACM, New York, NY, USA, 243-246. DOI=http://dx.doi.org/10.1145/2740908.2742839
-
-## Overview
-
-This engine is optimized for interpreting and offering suggestions for academic-oriented natural language queries. It is used by the MA website to generate semantic completions (suggestions):
-
-   ![Figure01.png](Figure01.png)
-
-To enable this scenario the engine focuses on indexing the lexical attributes for each academic paper entity in the MAG, including:
-
-* Title
-* Individual title words
-* Publication year
-* Full names of each author and their affiliations if available
-* Venue information (journal/conference name)
-* Field of study names
-
-The engine also includes name synonyms (when available) and allows for prefix completions (i.e. suggestions). It notably **does not index entity IDs** and is generally used in tangent with the [Entity engine](entity-engine.md) for looking up the paper entities corresponding to an interpretation/suggestion.
 
 ## Paper entity schema
 
