@@ -65,7 +65,7 @@ Before deploying a new MAKES engine build it must first be configured to use the
 
     Enter the name of the Azure storage account you’re using for MAKES engine builds, click the result and then click the “makes” container
 
-    ![Find and select the storage account containing new engine](media/deploy-select-package-navigate.png "Find and select the storage account containing new engine")
+    ![Find and select the storage account containing new engine package](media/deploy-select-package-navigate.png "Find and select the storage account containing new engine package")
 
     Navigate to the MAKES engine build you want to deploy and click the package file (.cspkg) that corresponds to the type of cloud service type you want to host the engine on, then click “select”
 
@@ -82,7 +82,7 @@ Before deploying a new MAKES engine build it must first be configured to use the
 
     Enter the name of the Azure storage account you’re using for MAKES engine builds, click the result and then click the “makes” container
 
-    ![Find and select the storage account containing new engine](media/deploy-select-config-navigate.png "Find and select the storage account containing new engine")
+    ![Find and select the storage account containing new engine config](media/deploy-select-config-navigate.png "Find and select the storage account containing new engine config")
 
     Navigate to the MAKES engine build you want to deploy, click the configuration file (.cscfg) and then click “select”
 
@@ -118,7 +118,7 @@ Before deploying a new MAKES engine build it must first be configured to use the
 
     To verify the semantic interpretation engine is working, navigate to https://your-semantic-interpretation-engine-cloud-service.cloudapp.net/interpret?query=darrin%20eide%20an%20overview%20of&complete=1&count=1 and verify that the top interpretation contains the expression “And(Composite(AA.AuN=='darrin eide'),Ti=='an overview of microsoft academic service mas and applications')”
 
-    ![Verify new semantic interpretation engine is working by sending sample request](media/deploy-new-verify-semantic.png "Verify new semantic interpretation engine is working by sending sample request")
+    ![Verify new semantic interpretation engine is working](media/deploy-new-verify-semantic.png "Verify new semantic interpretation engine is working")
 
 ## Update existing MA-KES engine deployment with new build
 
@@ -138,7 +138,7 @@ Before deploying a new MAKES engine build it must first be configured to use the
 
     Enter the name of the Azure storage account you’re using for MAKES engine builds, click the result and then click the “makes” container
 
-    ![Find and select the strorage account containing engine](media/deploy-select-package-navigate.png "Find and select the strorage account containing engine")
+    ![Find and select the storage account containing engine package](media/deploy-select-package-navigate.png "Find and select the storage account containing engine package")
 
     Navigate to the MAKES engine build you want to deploy and click the package file (.cspkg) that corresponds to the type of cloud service type you want to host the engine on, then click “select”
 
@@ -155,7 +155,7 @@ Before deploying a new MAKES engine build it must first be configured to use the
 
     Enter the name of the Azure storage account you’re using for MAKES engine builds, click the result and then click the “makes” container
 
-    ![Find and select the storage account containing engine](media/deploy-select-config-navigate.png "Find and select the storage account containing engine")
+    ![Find and select the storage account containing engine config](media/deploy-select-config-navigate.png "Find and select the storage account containing engine config")
 
     Navigate to the MAKES engine build you want to deploy, click the configuration file (.cscfg) and then click “select”
 
@@ -191,4 +191,4 @@ Before deploying a new MAKES engine build it must first be configured to use the
 
     To verify the semantic interpretation engine is working, navigate to https://your-semantic-interpretation-engine-cloud-service.cloudapp.net/interpret?query=darrin%20eide%20an%20overview%20of&complete=1&count=1 and verify that the top interpretation contains the expression “And(Composite(AA.AuN=='darrin eide'),Ti=='an overview of microsoft academic service mas and applications')”
 
-    ![Verify semantic interpretation engine is working by sending sample request](media/deploy-new-verify-semantic.png "Verify semantic interpretation engine is working by sending sample request")
+    ![Verify semantic interpretation engine is working](media/deploy-new-verify-semantic.png "Verify semantic interpretation engine is working")

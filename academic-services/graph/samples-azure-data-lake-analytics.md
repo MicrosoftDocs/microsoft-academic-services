@@ -73,7 +73,7 @@ Illustrates how to perform analytics and visualization for Microsoft Academic Gr
 * Open up corresponding Power BI Template (.pbit) from file explorer (Visual studio doesn't recognize Power BI files)
 * Enter your ADL information and parameters corresponding to your scripts
 
-    ![Load sample Power BI template](media/configure-power-bi-client.png "Load sample Power BI template")
+    ![Load sample Power BI script template](media/configure-power-bi-client.png "Load sample Power BI script template")
 
 * Make sure the parameters cases are the same as your script and "click" to load
 
