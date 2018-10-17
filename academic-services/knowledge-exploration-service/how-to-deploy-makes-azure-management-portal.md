@@ -82,11 +82,11 @@ Before deploying a new MAKES engine build it must first be configured to use the
 
     Enter the name of the Azure storage account you’re using for MAKES engine builds, click the result and then click the “makes” container
 
-    ![Find and select the storage account containing engine](media/deploy-new-select-config-navigate.png "Find and select the storage account containing engine")
+    ![Find and select the storage account containing engine](media/deploy-select-config-navigate.png "Find and select the storage account containing engine")
 
     Navigate to the MAKES engine build you want to deploy, click the configuration file (.cscfg) and then click “select”
 
-    ![Select the MAKES engine build config](media/deploy-new-select-config-pick-engine.png "Select the MAKES engine build config")
+    ![Select the MAKES engine build config](media/deploy-select-config-pick-engine.png "Select the MAKES engine build config")
 
 6. Click "OK"
 
