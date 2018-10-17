@@ -25,9 +25,9 @@
     expanded: true
     items:
       - name: Entity engine
-        href: reference/engines/entity-engine.md
+        href: reference-entity-engine.md
       - name: Semantic Interpretation engine
-        href: reference/engines/semantic-interpretation-engine.md
+        href: reference-semantic-interpretation-engine.md
   - name: MAKES API interface
     href: /azure/cognitive-services/KES/webapi
   - name: Azure CLI
