@@ -2,7 +2,7 @@
 title: Setup engine provisioning
 description: Step-by-step instructions for setting up one-time or automatic provisioning of Microsoft Academic Knowledge Exploration Service engines to an Azure blob storage account
 ms.topic: get-started-article
-ms.date: 10/15/2018
+ms.date: 10/17/2018
 ---
 # Get started with Microsoft Academic Knowledge Exploration Service
 

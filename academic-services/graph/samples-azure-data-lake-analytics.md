@@ -6,6 +6,7 @@ platforms: dotnet
 author: alch
 ms.topic: tutorial
 ms.service: microsoft-academic-services
+ms.date: 10/17/2018
 ---
 # Analytics and visualization samples for Microsoft Academic Graph
 
@@ -35,44 +36,44 @@ Illustrates how to perform analytics and visualization for Microsoft Academic Gr
 * [Microsoft Power BI Desktop client](https://powerbi.microsoft.com/en-us/desktop/)
 * Visual Studio 2017 or Visual Studio 2015 with [Data Lake tools](https://www.microsoft.com/en-us/download/details.aspx?id=49504)
 
-### Quickstart
+### Quick-start
 
 1. Download or clone the [samples repository](https://github.com/Azure-Samples/academic-knowledge-analytics-visualization/)
 2. Open the solution /src/AcademicAnalytics.sln
 3. Take a look at the academic graph data schema and run CreateDatabase.usql from [common scripts](https://github.com/Azure-Samples/academic-knowledge-analytics-visualization/tree/master/src/AcademicAnalytics/00.%20Common%20Scripts)
-4. For each tutorial there should be: A USQL script(.usql), a Power BI report(.pbix), a Power BI template(.pbit) and a README explaining the tutorial. 
-5. Althought each tutorial is different, running the USQL script as is and filling out the Power BI template using the same USQL parameters should give you a Power BI report with visualizations that match the Power BI report example included in the tutorial. Since the Microsoft Academic graph is contently improving, different graph verions may give you slightly different results.
+4. For each tutorial there should be: A USQL script(.usql), a Power BI report (.pbix), a Power BI template (.pbit) and a README explaining the tutorial.
+5. Although each tutorial is different, running the USQL script as is and filling out the Power BI template using the same USQL parameters should give you a Power BI report with visualizations that match the Power BI report example included in the tutorial. Since the Microsoft Academic graph is contently improving, different graph versions may give you slightly different results.
 
-## Working with USQL scripts 
+## Working with USQL scripts
 
 * How to run USQL scripts
   * Make sure you have selected your Data Lake account
 
-    ![Select your Data Lake account in Visual Studio](media/select-data-lake-analytics-account.png)
+    ![Select your Data Lake account in Visual Studio](media/samples-select-data-lake-analytics-account.png "Select your Data Lake account in Visual Studio")
 
   * Build the script first to validate syntax
 
-    ![Build USQL script in Visual Studio](media/build-usql-script.png)
+    ![Build USQL script in Visual Studio](media/samples-build-usql-script.png "Build USQL script in Visual Studio")
 
   * Submit your script to your Data Lake account
 
-    ![Submit USQL script in Visual Studio](media/submit-usql-script.png)
+    ![Submit USQL script in Visual Studio](media/samples-submit-usql-script.png "Submit USQL script in Visual Studio")
 
 * How to view USQL results in Azure portal
 
-    ![Azure Data lake Analytics Data explorer](media/view-usql-script-results-1.png)
+    ![Navigate to the overview tab and click data explorer](media/samples-view-usql-script-results-1.png "Navigate to the overview tab and click data explorer")
 
-    ![Azure Data lake Analytics Data explorer](media/view-usql-script-results-2.png)
+    ![Navigate to the output directory specified in the USQL script](media/samples-view-usql-script-results-2.png "Navigate to the output directory specified in the USQL script")
 
 ## Using Power BI
 
 > [!IMPORTANT]
 > Make sure USQL script finished successfully
 
-* Open up corresponding Power BI Template(.pbit) from file explorer (Visual studio doesn't recognize Power BI files) 
-*  Enter your ADL information and parameters corrisponding to your scripts
+* Open up corresponding Power BI Template (.pbit) from file explorer (Visual studio doesn't recognize Power BI files)
+* Enter your ADL information and parameters corresponding to your scripts
 
-    ![Sample template load](media/configure-power-bi-client.png)
+    ![Load sample Power BI template](media/configure-power-bi-client.png "Load sample Power BI template")
 
 * Make sure the parameters cases are the same as your script and "click" to load
 
@@ -83,5 +84,5 @@ Illustrates how to perform analytics and visualization for Microsoft Academic Gr
 * [Get started with USQL](https://docs.microsoft.com/en-us/azure/data-lake-analytics/data-lake-analytics-u-sql-get-started)
 * [Deep Dive into Query Parameters and Power BI Templates](https://powerbi.microsoft.com/en-us/blog/deep-dive-into-query-parameters-and-power-bi-templates/)
 * [Manage Azure Data Lake Store resources by using Storage Explorer](https://docs.microsoft.com/en-us/azure/data-lake-store/data-lake-store-in-storage-explorer)
-* [Scalable Data Science with Azure Data Lake: An end-to-end Walkthrough](https://docs.microsoft.com/en-us/azure/machine-learning/team-data-science-process/data-lake-walkthrough)
+* [Scalable Data Science with Azure Data Lake: An end-to-end walk-through](https://docs.microsoft.com/en-us/azure/machine-learning/team-data-science-process/data-lake-walkthrough)
 * [Microsoft Academic Website](https://academic.microsoft.com/)

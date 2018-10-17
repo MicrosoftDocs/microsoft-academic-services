@@ -2,7 +2,7 @@
 title: About Microsoft Academic Knowledge Exploration Service
 description: Microsoft Academic Knowledge Exploration Service enables self-hosted interactive search of entities in the Microsoft Academic Graph
 ms.topic: overview
-ms.date: 10/15/2018
+ms.date: 10/17/2018
 ---
 # About Microsoft Academic Knowledge Exploration Service
 

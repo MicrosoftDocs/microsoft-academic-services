@@ -2,7 +2,7 @@
 title: FAQ about Microsoft Academic Graph
 description: Answers some of the most frequently asked questions about the Microsoft Academic Graph
 ms.topic: reference
-ms.date: 10/15/2018
+ms.date: 10/17/2018
 ---
 # Frequently Asked Questions about Microsoft Academic Graph
 

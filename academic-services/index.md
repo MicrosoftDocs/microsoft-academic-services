@@ -3,7 +3,7 @@ title: Microsoft Academic Services Documentation
 description: Microsoft Academic Services provide Azure based solutions for interacting with the Microsoft Academic Graph, a comprehensive, heterogeneous graph of the worlds scientific publications
 layout: HubPage
 ms.topic: hub-page
-ms.date: 10/15/2018
+ms.date: 10/17/2018
 ---
 <div id="main" class="v2">
     <div class="container">
@@ -24,7 +24,7 @@ ms.date: 10/15/2018
                                                 <div class="card">
                                                     <div class="cardImageOuter">
                                                         <div class="cardImage bgdAccent1"> 
-                                                            <img src="media/hub-tiles/mag400x140.png" alt="Microsoft Academic Graph" />
+                                                            <img src="media/microsoft-academic-graph-banner.png" alt="Learn about Microsoft Academic Graph" />
                                                         </div>
                                                     </div>
                                                     <div class="cardText">
@@ -43,7 +43,7 @@ ms.date: 10/15/2018
                                                 <div class="card">
                                                     <div class="cardImageOuter">
                                                         <div class="cardImage bgdAccent1"> 
-                                                            <img src="media/hub-tiles/makes400x140.png" alt="Microsoft Academic Knowledge Exploration Service" />
+                                                            <img src="media/microsoft-academic-knowledge-exploration-service-banner.png" alt="Learn about Microsoft Academic Knowledge Exploration Service" />
                                                         </div>
                                                     </div>
                                                     <div class="cardText">
