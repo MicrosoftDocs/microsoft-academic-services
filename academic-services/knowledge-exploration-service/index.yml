@@ -33,5 +33,7 @@ sections:
     items:
     - title: MAKES
       html: <p><a href="reference-entity-engine">Entity engine</a></p><p><a href="reference-semantic-interpretation-engine">Semantic interpretation engine</a></p>
+    - title: Command-Line
+      html: <p><a href="/powershell/azureps-cmdlets-docs">Azure PowerShell</a></p><p><a href="/cli/azure/vm">Azure CLI</a></p>
     - title: REST
       html: <p><a href="/azure/cognitive-services/KES/webapi">KES API methods</a></p>
