@@ -41,6 +41,7 @@
       "breadcrumb_path": "/academic-services/breadcrumb/toc.json",
       "titleSuffix": "Microsoft Academic Services",
       "layout": "Conceptual",
+      "uhfHeaderId": "MSDocsHeader-AcademicServices",
       "ms.locale": "en-us",
       "feedback_system": "None",
       "author": "darrine",
