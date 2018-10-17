@@ -35,7 +35,7 @@
     "overwrite": [],
     "externalReference": [],
     "globalMetadata": {
-      "breadcrumb_path": "/academic-services/breadcrumb/toc.json",
+      "breadcrumb_path": "/academic-services/breadcrumb/toc.yml",
       "titleSuffix": "Microsoft Academic Services",
       "feedback_system": "None",
       "author": "darrine",
