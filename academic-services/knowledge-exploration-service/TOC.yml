@@ -28,14 +28,8 @@
         href: reference-entity-engine.md
       - name: Semantic Interpretation engine
         href: reference-semantic-interpretation-engine.md
-  - name: MAKES API interface
+  - name: KES API methods
     href: /azure/cognitive-services/KES/webapi
-  - name: Azure CLI
-    href: /cli/azure/vm
-  - name: Azure PowerShell
-    href: /powershell/azureps-cmdlets-docs
-  - name: KES reference
-    href: /azure/cognitive-services/KES/
 - name: Resources
   expanded: true
   items:
