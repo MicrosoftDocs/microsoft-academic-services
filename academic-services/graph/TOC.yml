@@ -1,0 +1,33 @@
+- name: Microsoft Academic Graph Documentation
+  href: index.yml
+- name: Overview
+  expanded: true
+  items:
+  - name: What is Microsoft Academic Graph
+    href: https://aka.ms/academicgraph
+- name: Get started
+  expanded: true
+  items:
+  - name: Get Microsoft Academic Graph on Azure Storage
+    href: get-started-setup-provisioning.md
+  - name: Configure Azure Data Lake Analytics
+    href: get-started-setup-azure-data-lake-analytics.md
+- name: Samples
+  expanded: true
+  items:
+  - name: Azure Data Lake Analytics
+    href: samples-azure-data-lake-analytics.md
+- name: Reference
+  expanded: true
+  items:
+  - name: Entity data schema
+    href: reference-data-schema.md
+- name: Resources
+  expanded: true
+  items:
+  - name: FAQ
+    href: resources-faq.md
+  - name: Pricing
+    href: resources-pricing.md
+  - name: Stack Overflow
+    href: http://stackoverflow.com/questions/tagged/microsoft-academic-graph

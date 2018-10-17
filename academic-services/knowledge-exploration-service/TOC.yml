@@ -1,0 +1,41 @@
+- name: Microsoft Academic Knowledge Exploration Service Documentation
+  href: index.yml
+- name: Overview
+  expanded: true
+  items:
+  - name: About Microsoft Academic Knowledge Exploration Service
+    href: introduction.md
+- name: Get started
+  expanded: true
+  items:
+  - name: Setup MAKES engine provisioning
+    href: get-started-setup-provisioning.md
+- name: How to
+  expanded: true
+  items:
+  - name: Deploy MAKES engines
+    expanded: true
+    items:
+    - name: Using Azure Management Portal
+      href: how-to-deploy-makes-azure-management-portal.md
+- name: Reference
+  expanded: true
+  items:
+  - name: MAKES engines
+    expanded: true
+    items:
+      - name: Entity engine
+        href: reference-entity-engine.md
+      - name: Semantic Interpretation engine
+        href: reference-semantic-interpretation-engine.md
+  - name: KES API methods
+    href: /azure/cognitive-services/KES/webapi
+- name: Resources
+  expanded: true
+  items:
+  - name: FAQ
+    href: resources-faq.md
+  - name: Pricing
+    href: resources-pricing.md
+  - name: Stack Overflow
+    href: http://stackoverflow.com/questions/tagged/microsoft-academic-knowledge-exploration-service

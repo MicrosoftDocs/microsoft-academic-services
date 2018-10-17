@@ -1,0 +1,31 @@
+### YamlMime:YamlDocument
+documentType: LandingData
+title: Microsoft Academic Graph documentation
+metadata:
+  title: MAG documentation
+  description: Learn about Microsoft Academic Graph, including getting started guides, data schema reference, sample analytics
+  meta.description: Learn about Microsoft Academic Graph, including getting started guides, data schema reference, sample analytics
+  ms.topic: landing-page
+  ms.date: 10/17/2018
+abstract:
+  description: Learn about Microsoft Academic Graph, including getting started guide, data schema reference, sample analytics.
+sections:
+- title: Get started
+  items:
+  - type: list
+    style: unordered
+    items:
+    - html: <a href="get-started-setup-provisioning">Get Microsoft Academic Graph on Azure blob storage</a>
+    - html: <a href="get-started-setup-azure-data-lake-analytics">Use Microsoft Academic Graph on Azure Data Lake Analytics</a>
+- title: Technology overview
+  items: 
+  - type: list
+    style: unordered
+    items:
+    - html: <a href="reference-data-schema">Microsoft Academic Graph entity data schema</a>
+- title: Samples
+  items:
+  - type: list
+    style: unordered
+    items:
+    - html: <a href="samples-azure-data-lake-analytics.md">Learn how to use Microsoft Academic Graph with Azure Data Lake Analytics</a>

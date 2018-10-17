@@ -1,0 +1,10 @@
+- name: Microsoft Academic Services
+  tocHref: /academic-services/
+  topicHref: /academic-services/index
+  items:
+  - name: Microsoft Academic Graph
+    tocHref: /academic-services/graph/
+    topicHref: /academic-services/graph/index
+  - name: Microsoft Academic Knowledge Exploration Service
+    tocHref: /academic-services/knowledge-exploration-service/
+    topicHref: /academic-services/knowledge-exploration-service/index
