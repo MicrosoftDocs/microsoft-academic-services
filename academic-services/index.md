@@ -4,6 +4,7 @@ description: Microsoft Academic Services provide Azure based solutions for inter
 layout: HubPage
 ms.topic: hub-page
 ms.date: 10/17/2018
+hide_bc: true
 ---
 <div id="main" class="v2">
     <div class="container">
