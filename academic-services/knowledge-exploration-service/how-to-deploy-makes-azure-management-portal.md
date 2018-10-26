@@ -110,7 +110,7 @@ Before deploying a new MAKES engine build it must first be configured to use the
 
     ![Wait for new cloud service instance to show running](media/deploy-new-cloud-service-running.png "Wait for new cloud service instance to show running")
 
-9. Verify that the new MA-KES engine instance is working
+9. Verify that the new MAKES engine instance is working
 
     To verify the entity engine is working, navigate to https://your-entity-engine-cloud-service.cloudapp.net/evaluate?expr=And(Composite(AA.AuN=='darrin%20eide'),Ti=='an%20overview%20of%20microsoft%20academic%20service%20mas%20and%20applications')&attributes=Id,Ti&count=1 and verify “an overview of microsoft academic service mas and applications” is returned
 
@@ -120,7 +120,7 @@ Before deploying a new MAKES engine build it must first be configured to use the
 
     ![Verify new semantic interpretation engine is working](media/deploy-new-verify-semantic.png "Verify new semantic interpretation engine is working")
 
-## Update existing MA-KES engine deployment with new build
+## Update existing MAKES engine deployment with new build
 
 1. Click the “update” button on the “overview” section of the cloud service to be updated
 
@@ -130,7 +130,7 @@ Before deploying a new MAKES engine build it must first be configured to use the
 
     ![Enter configuration details for the deployment](media/deploy-update-configure.png "Enter configuration details for the deployment")
 
-3. Select MA-KES engine package
+3. Select MAKES engine package
 
     Click “Package (.cspkg, .zip)”
 
@@ -183,7 +183,7 @@ Before deploying a new MAKES engine build it must first be configured to use the
 
     ![Wait for cloud service instance to show running](media/deploy-new-cloud-service-running.png "Wait for cloud service instance to show running")
 
-8. Verify that the new MA-KES engine instance is working
+8. Verify that the new MAKES engine instance is working
 
     To verify the entity engine is working, navigate to https://your-entity-engine-cloud-service.cloudapp.net/evaluate?expr=And(Composite(AA.AuN=='darrin%20eide'),Ti=='an%20overview%20of%20microsoft%20academic%20service%20mas%20and%20applications')&attributes=Id,Ti&count=1 and verify “an overview of microsoft academic service mas and applications” is returned
 
