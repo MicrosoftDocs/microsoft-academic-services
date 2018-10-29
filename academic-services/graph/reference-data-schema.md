@@ -24,7 +24,7 @@ When using Microsoft Academic data (MAG, MAKES, etc.) in a product or service, o
 
 ## Affiliations.txt
 
-Column # | Description | Type | Note
+Column # | Name | Type | Note
 --- | --- | --- | ---
 1 | AffiliationId | long | PRIMARY KEY
 2 | Rank | uint |
@@ -39,7 +39,7 @@ Column # | Description | Type | Note
 
 ## Authors.txt
 
-Column # | Description | Type | Note
+Column # | Name | Type | Note
 --- | --- | --- | ---
 1 | AuthorId | long | PRIMARY KEY
 2 | Rank | uint |
@@ -52,7 +52,7 @@ Column # | Description | Type | Note
 
 ## ConferenceInstances.txt
 
-Column # | Description | Type | Note
+Column # | Name | Type | Note
 --- | --- | --- | ---
 1 | ConferenceInstanceId | long | PRIMARY KEY
 2 | NormalizedName | string |
@@ -72,7 +72,7 @@ Column # | Description | Type | Note
 
 ## ConferenceSeries.txt
 
-Column # | Description | Type | Note
+Column # | Name | Type | Note
 --- | --- | --- | ---
 1 | ConferenceInstanceId | long | PRIMARY KEY
 2 | Rank | uint |
@@ -84,7 +84,7 @@ Column # | Description | Type | Note
 
 ## FieldsOfStudy.txt
 
-Column # | Description | Type | Note
+Column # | Name | Type | Note
 --- | --- | --- | ---
 1 | FieldOfStudyId | long | PRIMARY KEY
 2 | Rank | uint |
@@ -98,14 +98,14 @@ Column # | Description | Type | Note
 
 ## FieldsOfStudyChildren.txt
 
-Column # | Description | Type | Note
+Column # | Name | Type | Note
 --- | --- | --- | ---
 1 | FieldOfStudyId | long | FOREIGN KEY REFERENCES FieldsOfStudy(FieldOfStudyId)
 2 | ChildFieldOfStudyId | long | FOREIGN KEY REFERENCES FieldsOfStudy(FieldOfStudyId)
 
 ## RelatedFieldOfStudy.txt
 
-Column # | Description | Type | Note
+Column # | Name | Type | Note
 --- | --- | --- | ---
 1 | FieldOfStudyId1 | long | FOREIGN KEY FieldOfStudyId1 REFERENCES FieldsOfStudy(FieldOfStudyId)
 2 | DisplayName 1 | string |
@@ -117,7 +117,7 @@ Column # | Description | Type | Note
 
 ## Journals.txt
 
-Column # | Description | Type | Note
+Column # | Name | Type | Note
 --- | --- | --- | ---
 1 | JournalId| long | PRIMARY KEY
 2 | Rank | uint |
@@ -132,7 +132,7 @@ Column # | Description | Type | Note
 
 ## Papers.txt
 
-Column # | Description | Type | Note
+Column # | Name | Type | Note
 --- | --- | --- | ---
 1 | PaperId | long | PRIMARY KEY
 2 | Rank | uint |
@@ -158,14 +158,14 @@ Column # | Description | Type | Note
 
 ## PaperAbstractInvertedIndex.txt
 
-Column # | Description | Type | Note
+Column # | Name | Type | Note
 --- | --- | --- | ---
 1 | PaperId | long | FOREIGN KEY REFERENCES Papers(PaperId)
 2 | IndexedAbstract | string | See https://docs.microsoft.com/en-us/academic-services/graph/resources-faq
 
 ## PaperAuthorAffiliations.txt
 
-Column # | Description | Type | Note
+Column # | Name | Type | Note
 --- | --- | --- | ---
 1 | PaperId | long | FOREIGN KEY REFERENCES Papers(PaperId)
 2 | AuthorId | long | FOREIGN KEY REFERENCES Authors(AuthorId)
@@ -178,7 +178,7 @@ Column # | Description | Type | Note
 
 ## PaperCitationContexts.txt
 
-Column # | Description | Type | Note
+Column # | Name | Type | Note
 --- | --- | --- | ---
 1 | PaperId | long | FOREIGN KEY REFERENCES Papers(PaperId)
 2 | PaperReferenceId | long | FOREIGN KEY REFERENCES Papers(PaperId)
@@ -186,7 +186,7 @@ Column # | Description | Type | Note
 
 ## PaperFieldsOfStudy.txt
 
-Column # | Description | Type | Note
+Column # | Name | Type | Note
 --- | --- | --- | ---
 1 | PaperId | long | FOREIGN KEY REFERENCES Papers(PaperId)
 2 | FieldOfStudyId | long | FOREIGN KEY REFERENCES FieldsOfStudy(FieldOfStudyId)
@@ -194,14 +194,14 @@ Column # | Description | Type | Note
 
 ## PaperLanguages.txt
 
-Column # | Description | Type | Note
+Column # | Name | Type | Note
 --- | --- | --- | ---
 1 | PaperId | long | FOREIGN KEY REFERENCES Papers(PaperId)
 2 | LanguageCode | string |
 
 ## PaperRecommendations.txt
 
-Column # | Description | Type | Note
+Column # | Name | Type | Note
 --- | --- | --- | ---
 1 | PaperId | long | FOREIGN KEY REFERENCES Papers(PaperId)
 2 | RecommendedPaperId | long | FOREIGN KEY REFERENCES Papers(PaperId)
@@ -209,14 +209,14 @@ Column # | Description | Type | Note
 
 ## PaperReferences.txt
 
-Column # | Description | Type | Note
+Column # | Name | Type | Note
 --- | --- | --- | ---
 1 | PaperId | long | FOREIGN KEY REFERENCES Papers(PaperId)
 2 | PaperReferenceId | long | FOREIGN KEY REFERENCES Papers(PaperId)
 
 ## PaperUrls.txt
 
-Column # | Description | Type | Note
+Column # | Name | Type | Note
 --- | --- | --- | ---
 1 | PaperId | long | FOREIGN KEY REFERENCES Papers(PaperId)
 2 | SourceType | int? |
