@@ -161,7 +161,7 @@ Column # | Name | Type | Note
 Column # | Name | Type | Note
 --- | --- | --- | ---
 1 | PaperId | long | FOREIGN KEY REFERENCES Papers(PaperId)
-2 | IndexedAbstract | string | See [Microsoft Academic Graph FAQ](https://docs.microsoft.com/en-us/academic-services/graph/resources-faq)
+2 | IndexedAbstract | string | See [Microsoft Academic Graph FAQ](resources-faq)
 
 ## PaperAuthorAffiliations.txt
 
