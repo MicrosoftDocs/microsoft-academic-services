@@ -107,7 +107,7 @@ Column # | Name | Type | Note
 
 Column # | Name | Type | Note
 --- | --- | --- | ---
-1 | FieldOfStudyId1 | long | FOREIGN KEY FieldOfStudyId1 REFERENCES FieldsOfStudy(FieldOfStudyId)
+1 | FieldOfStudyId1 | long | FOREIGN KEY REFERENCES FieldsOfStudy(FieldOfStudyId)
 2 | DisplayName 1 | string |
 3 | Type1 | string | disease, disease_cause, medical_treatment, symptom
 4 | FieldOfStudyId2 | long | FOREIGN KEY REFERENCES FieldsOfStudy(FieldOfStudyId)
@@ -144,9 +144,9 @@ Column # | Name | Type | Note
 8 | Year | int |
 9 | Date | DateTime? |
 10 | Publisher | string |
-11 | JournalId | long? | FOREIGN KEY JournalId REFERENCES Journals(JournalId)
-12 | ConferenceSeriesId | long? | FOREIGN KEY ConferenceSeriesId REFERENCES ConferenceSeries(ConferenceSeriesId)
-13 | ConferenceInstanceId | long? | FOREIGN KEY  REFERENCES ConferenceInstances(ConferenceInstanceId)
+11 | JournalId | long? | FOREIGN KEY REFERENCES Journals(JournalId)
+12 | ConferenceSeriesId | long? | FOREIGN KEY REFERENCES ConferenceSeries(ConferenceSeriesId)
+13 | ConferenceInstanceId | long? | FOREIGN KEY REFERENCES ConferenceInstances(ConferenceInstanceId)
 14 | Volume | string |
 15 | Issue | string |
 16 | FirstPage | string |
@@ -161,7 +161,7 @@ Column # | Name | Type | Note
 Column # | Name | Type | Note
 --- | --- | --- | ---
 1 | PaperId | long | FOREIGN KEY REFERENCES Papers(PaperId)
-2 | IndexedAbstract | string | See https://docs.microsoft.com/en-us/academic-services/graph/resources-faq
+2 | IndexedAbstract | string | See [Microsoft Academic Graph FAQ](resources-faq)
 
 ## PaperAuthorAffiliations.txt
 
