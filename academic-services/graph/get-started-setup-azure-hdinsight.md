@@ -1,14 +1,14 @@
 ---
-title: Microsoft Academic Graph on HDInsight
-description: Step-by-step instructions for setting up Microsoft Academic Graph to be used with Azure HDInsight
+title: Microsoft Academic Graph on HDInsight/Spark
+description: Step-by-step instructions for setting up Azure HDInsight/Spark to process Microsoft Academic Graph
 ms.topic: get-started-article
 ms.date: 11/08/2018
 ---
-# Get started using Microsoft Academic Graph on Azure HDInsight
+# Get started on Azure HDInsight/Spark to use Microsoft Academic Graph 
 
-Details step-by-step instructions for setting up Microsoft Academic Graph to be used with Azure HDInsight.
+Details step-by-step instructions for setting up Azure HDInsight/Spark to process Microsoft Academic Graph.
 
-## Create Azure HDInsight account
+## Create Azure HDInsight/Spark cluster
 
 1. Home > Create a resource > Analytics > HDInsight
 
