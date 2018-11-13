@@ -17,6 +17,7 @@ sections:
     items:
     - html: <a href="get-started-setup-provisioning">Get Microsoft Academic Graph on Azure blob storage</a>
     - html: <a href="get-started-setup-azure-data-lake-analytics">Use Microsoft Academic Graph on Azure Data Lake Analytics</a>
+    - html: <a href="get-started-setup-azure-hdinsight">Processing Microsoft Academic Graph using PySpark</a>
 - title: Technology overview
   items: 
   - type: list
