@@ -12,13 +12,13 @@ Illustrates how to perform analytics for Microsoft Academic Graph using PySpark 
 
 ## Sample projects
 
-* [Extract Affiliation ID for Affiliation-A](https://github.com/Azure-Samples/microsoft-academic-graph-pyspark-samples/blob/master/src/Lab1_ExtractAffiliation.py)
-* [Join all Conferences and Journals as Venues](https://github.com/Azure-Samples/microsoft-academic-graph-pyspark-samples/blob/master/src/Lab2_UnionVenues.py)
-* [Get all publications from Affiliation-A](https://github.com/Azure-Samples/microsoft-academic-graph-pyspark-samples/blob/master/src/Lab3_JoinPaperAuthorAffiliation.py)
-* [Get all author names from the publications from Affiliation-A and publications' details](https://github.com/Azure-Samples/microsoft-academic-graph-pyspark-samples/blob/master/src/Lab4_CreateTable_Extract.py)
-* [Get all Field-Of-Studies for Affiliation-A](https://github.com/Azure-Samples/microsoft-academic-graph-pyspark-samples/blob/master/src/Lab5_CreateTableByTvf.py)
-* [Get all collaborated affiliations of Affiliation-A using publications from Affiliation-A](https://github.com/Azure-Samples/microsoft-academic-graph-pyspark-samples/blob/master/src/Lab6_GetPartnerData.py)
-* [Get publication count and citation sum for each year](https://github.com/Azure-Samples/microsoft-academic-graph-pyspark-samples/blob/master/src/Lab7_GroupByYear.py)
+* [Extract Affiliation ID for an Affiliation](https://github.com/Azure-Samples/microsoft-academic-graph-pyspark-samples/blob/master/src/Lab1_ExtractAffiliation.py)
+* [Join Conferences and Journals as Venues](https://github.com/Azure-Samples/microsoft-academic-graph-pyspark-samples/blob/master/src/Lab2_UnionVenues.py)
+* [Get publications from an Affiliation](https://github.com/Azure-Samples/microsoft-academic-graph-pyspark-samples/blob/master/src/Lab3_JoinPaperAuthorAffiliation.py)
+* [Get authors from an Affiliation and the publication details](https://github.com/Azure-Samples/microsoft-academic-graph-pyspark-samples/blob/master/src/Lab4_CreateTable_Extract.py)
+* [Get all Field-Of-Studies for an Affiliation](https://github.com/Azure-Samples/microsoft-academic-graph-pyspark-samples/blob/master/src/Lab5_CreateTableByTvf.py)
+* [Get all collaborated affiliations of an Affiliation using its publications](https://github.com/Azure-Samples/microsoft-academic-graph-pyspark-samples/blob/master/src/Lab6_GetPartnerData.py)
+* [Get publication and citation counts by year](https://github.com/Azure-Samples/microsoft-academic-graph-pyspark-samples/blob/master/src/Lab7_GroupByYear.py)
 
 ## Getting started with sample projects
 
@@ -32,20 +32,20 @@ Illustrates how to perform analytics for Microsoft Academic Graph using PySpark 
 1. Download or clone the [samples repository](https://github.com/Azure-Samples/microsoft-academic-graph-pyspark-samples)
 4. For each tutorial there should be: A Python script(.py).
 
-## Working with PySpark scripts on Azure HDInsight
+## Working with PySpark scripts on Azure HDInsight/Spark
 
 * How to run PySpark scripts
-  * Login the HDInsight with ssh
+  * Login HDInsigth/Spark with ssh
 
-    ![Login the HDInsigth with ssh](media/samples-login-hdinsight.png "Login the HDInsigth with ssh")
+    ![Login HDInsigth/Spark with ssh](media/samples-login-hdinsight.png "Login HDInsigth/Spark with ssh")
 
-  * Make sure the script file is available on HDInsight already. Run the script with python command.
+  * Make sure the script file is available on HDInsight/Spark cluster. Run the script with python command.
 
-    ![Run Python script in terminal](media/samples-run-pyspark-script.png "Run Python script in terminal")
+    ![Run script in ssh terminal](media/samples-run-pyspark-script.png "Run script in ssh terminal")
 
-* How to view results in Azure data explorer
+* How to view results with Microsoft Azure Storage Explorer
 
-    ![View PySpark result with data explorer](media/samples-view-pyspark-script-results.png "View PySpark result with data explorer")
+    ![View result with Microsoft Azure Storage Explorer](media/samples-view-pyspark-script-results.png "View result with Microsoft Azure Storage Explorer")
 
 ## Resources
 
