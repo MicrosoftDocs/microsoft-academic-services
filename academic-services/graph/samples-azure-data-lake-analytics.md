@@ -29,7 +29,7 @@ Illustrates how to perform analytics and visualization for Microsoft Academic Gr
 
 ### Pre-requisites
 
-* [Getting Microsoft Academic Graph on Azure blob storage](get-started-setup-provisioning.md)
+* [Getting Microsoft Academic Graph on Azure Storage](get-started-setup-provisioning.md)
 * [Using MAG with U-SQL on Azure Data Lake Analytics](get-started-setup-azure-data-lake-analytics.md)
 * [Microsoft Power BI Desktop client](https://powerbi.microsoft.com/en-us/desktop/)
 * Visual Studio 2017 or Visual Studio 2015 with [Data Lake tools](https://www.microsoft.com/en-us/download/details.aspx?id=49504)
