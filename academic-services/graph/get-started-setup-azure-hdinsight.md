@@ -21,11 +21,11 @@ You could use PySpark to process Microsoft Academic Graph stored in Azure Storag
 
     ![Enter details for new Azure HDInsight account](media/create-hdinsight-account-details.png "Enter details for new Azure HDInsight account")
 
-1. Create an Azure Storage account and a default container as the default storage device for HDInsight/Spark cluster.
+1. Create an Azure Storage account and choose a default container as the primary storage for HDInsight/Spark cluster.
 
     ![Enter details for new storage for new Azure HDInsight account](media/create-hdinsight-storage-account-details.png "Enter details for new storage for new Azure HDInsight account")
 
-## Configure Azure HDInsight to use Microsoft Academic Graph
+## Running PySpark in HDInsight/Spark cluster
 
 There are two options to use Microsoft Academic Graph in Azure HDInsight.
 
