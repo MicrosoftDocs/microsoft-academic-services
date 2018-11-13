@@ -33,10 +33,6 @@ You could use PySpark to process Microsoft Academic Graph stored in Azure Storag
 
     ![Create cluster](media/create-spark-cluster-4.png "Create cluster")
 
-## Referencing MAG files in PySpark scripts
+## Referencing Microsoft Academic Graph files in PySpark scripts
 
-There are two options to use Microsoft Academic Graph in Azure HDInsight.
-
-1. Attach the Azure storage storing Microsoft Academic Graph to Azure HDInsight (see Step 2 above) and load the graph data with load path (e.g. `/mag/Affiliations.txt`).
-
-1. Without attaching the Azure storage storing Microsoft Academic Graph to Azure HDInsight, using the network file path to the Azure storage and pattern is `wasbs://<container-name>@<storage-name>.blob.core.windows.net/<path/to/file>` (e.g. `wasbs://mag-2018-11-09@microsoftacademicgraph.blob.core.windows.net/mag/Affiliations.txt`).
+The uri pattern for referencing Microsoft Academic Graph files is `wasbs://<container-name>@<storage-name>.blob.core.windows.net/<file-path>`. (e.g. `wasbs://mag-2018-11-09@mymagstorage.blob.core.windows.net/mag/Affiliations.txt`).
