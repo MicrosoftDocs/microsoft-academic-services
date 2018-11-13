@@ -1,14 +1,14 @@
 ---
-title: Analytics samples for Microsoft Academic Graph
+title: PySpark Analytics samples for Microsoft Academic Graph
 description: Illustrates how to perform analytics for Microsoft Academic Graph using HDInsight
 services: microsoft-academic-services
 ms.topic: tutorial
 ms.service: microsoft-academic-services
 ms.date: 11/08/2018
 ---
-# Analytics samples for Microsoft Academic Graph
+# PySpark analytics samples for Microsoft Academic Graph
 
-Illustrates how to perform analytics for Microsoft Academic Graph using HDInsight (PySpark).
+Illustrates how to perform analytics for Microsoft Academic Graph using PySpark on HDInsight/Spark cluster.
 
 ## Sample projects
 
@@ -24,7 +24,8 @@ Illustrates how to perform analytics for Microsoft Academic Graph using HDInsigh
 
 ### Pre-requisites
 
-* [Microsoft Academic Graph on Azure blob storage](get-started-setup-provisioning.md)
+* [Geting Microsoft Academic Graph on Azure storage](get-started-setup-provisioning.md)
+* [Using Microsoft Academic Graph with PySpark on Azure HDInsight/Spark](get-started-setup-azure-hdinsight.md)
 
 ### Quick-start
 
