@@ -1,10 +1,10 @@
 ---
-title: Processing Microsoft Academic Graph using PySpark
+title: Microsoft Academic Graph using PySpark
 description: Step-by-step instructions to process Microsoft Academic Graph using PySpark
 ms.topic: get-started-article
 ms.date: 11/08/2018
 ---
-# Processing Microsoft Academic Graph using PySpark 
+# Using Microsoft Academic Graph with PySpark on Azure HDInsight/Spark cluster
 
 You could use PySpark to process Microsoft Academic Graph stored in Azure Storage. Here are the step-by-step instructions.
 
