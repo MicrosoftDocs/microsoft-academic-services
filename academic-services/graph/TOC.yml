@@ -8,7 +8,7 @@
 - name: Get started
   expanded: true
   items:
-  - name: Get Microsoft Academic Graph on Azure Storage
+  - name: Getting Microsoft Academic Graph on Azure Storage
     href: get-started-setup-provisioning.md
   - name: Using MAG with U-SQL on Azure Data Lake Analytics
     href: get-started-setup-azure-data-lake-analytics.md
