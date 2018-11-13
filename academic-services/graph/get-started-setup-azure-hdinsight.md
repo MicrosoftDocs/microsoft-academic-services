@@ -1,27 +1,29 @@
 ---
-title: Microsoft Academic Graph on HDInsight/Spark
-description: Step-by-step instructions for setting up Azure HDInsight/Spark to process Microsoft Academic Graph
+title: Processing Microsoft Academic Graph using PySpark
+description: Step-by-step instructions to process Microsoft Academic Graph using PySpark
 ms.topic: get-started-article
 ms.date: 11/08/2018
 ---
-# Get started on Azure HDInsight/Spark to use Microsoft Academic Graph 
+# Processing Microsoft Academic Graph using PySpark 
 
-Details step-by-step instructions for setting up Azure HDInsight/Spark to process Microsoft Academic Graph.
+You could use PySpark to process Microsoft Academic Graph stored in Azure Storage. Here are the step-by-step instructions.
+
+1. Create Azure HDInsight/Spark cluster.
+1. Running PySpark in HDInsight/Spark cluster.
 
 ## Create Azure HDInsight/Spark cluster
 
-1. Home > Create a resource > Analytics > HDInsight
+1. Create an Azure HDInsight cluster. From Azure portal Home > Create a resource > Analytics > HDInsight
 
     ![Create new Azure HDInsight account](media/create-hdinsight-select.png "Create new Azure HDInsight account")
 
-1. Create new HDInsight and Azure storage accounts, following the flow indicated in figure below:
+1. Configure HDInsight/Spark cluster. Choose "Spark" as the cluster type.
 
     ![Enter details for new Azure HDInsight account](media/create-hdinsight-account-details.png "Enter details for new Azure HDInsight account")
 
-    ![Enter details for new storage for new Azure HDInsight account](media/create-hdinsight-storage-account-details.png "Enter details for new storage for new Azure HDInsight account")
+1. Create an Azure Storage account and a default container as the default storage device for HDInsight/Spark cluster.
 
-    > [!IMPORTANT]
-    > Both accounts require a globally unique name
+    ![Enter details for new storage for new Azure HDInsight account](media/create-hdinsight-storage-account-details.png "Enter details for new storage for new Azure HDInsight account")
 
 ## Configure Azure HDInsight to use Microsoft Academic Graph
 
