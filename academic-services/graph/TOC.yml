@@ -10,9 +10,9 @@
   items:
   - name: Get Microsoft Academic Graph on Azure Storage
     href: get-started-setup-provisioning.md
-  - name: Configure Azure Data Lake Analytics
+  - name: Processing Microsoft Academic Graph using U-SQL
     href: get-started-setup-azure-data-lake-analytics.md
-  - name: Configure Azure HDInsight
+  - name: Processing Microsoft Academic Graph using PySpark
     href: get-started-setup-azure-hdinsight.md
 - name: Samples
   expanded: true
