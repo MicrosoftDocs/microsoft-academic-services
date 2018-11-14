@@ -53,4 +53,4 @@ Illustrates how to perform analytics for Microsoft Academic Graph using PySpark 
 )
 * [Analyze Spark data using Power BI in HDInsight](https://docs.microsoft.com/en-us/azure/hdinsight/spark/apache-spark-overview
 )
-* [Apache Spark Documentation](http://spark.apache.org/docs/2.3.0/)
+* [Apache Spark Documentation](https://spark.apache.org/docs/2.3.0/)
