@@ -4,9 +4,9 @@ description: Step-by-step instructions for setting up Microsoft Academic Graph t
 ms.topic: get-started-article
 ms.date: 10/17/2018
 ---
-# Get started using Microsoft Academic Graph on Azure Data Lake Analytics
+# Using Microsoft Academic Graph with U-SQL on Azure Data Lake Analytics
 
-Details step-by-step instructions for setting up Microsoft Academic Graph to be used with Azure Data Lake Analytics.
+Details step-by-step instructions for setting up Microsoft Academic Graph to be used with U-SQL on Azure Data Lake Analytics.
 
 ## Create Azure Data Lake Analytics account
 

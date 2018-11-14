@@ -8,18 +8,18 @@
 - name: Get started
   expanded: true
   items:
-  - name: Get Microsoft Academic Graph on Azure Storage
+  - name: Getting Microsoft Academic Graph on Azure Storage
     href: get-started-setup-provisioning.md
-  - name: Configure Azure Data Lake Analytics
+  - name: Using MAG with U-SQL on Azure Data Lake Analytics
     href: get-started-setup-azure-data-lake-analytics.md
-  - name: Configure Azure HDInsight
+  - name: Using MAG with PySpark on Azure HDInsight/Spark
     href: get-started-setup-azure-hdinsight.md
 - name: Samples
   expanded: true
   items:
-  - name: Azure Data Lake Analytics
+  - name: U-SQL on Azure Data Lake Analytics
     href: samples-azure-data-lake-analytics.md
-  - name: Azure HDInsight
+  - name: PySpark on Azure HDInsight/Spark
     href: samples-azure-hdinsight.md
 - name: Reference
   expanded: true
