@@ -17,7 +17,7 @@
 - name: Samples
   expanded: true
   items:
-  - name: Analytics (U-SQL) and visualization (Power BI) samples
+  - name: Analytics and visualization samples using U-SQL and Power BI
     href: samples-azure-data-lake-analytics.md
   - name: PySpark on HDInsight/Spark samples
     href: samples-azure-hdinsight.md
