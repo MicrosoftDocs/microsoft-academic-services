@@ -23,15 +23,15 @@ You could use PySpark to process Microsoft Academic Graph stored in Azure Storag
 
 1. Configure primary storage. Create an Azure Storage account and choose a default container as the primary storage.
 
-    ![Configure primary storage](media/create-spark-cluster-2.png "Configure primary storage")
+    ![Configure HDInsight/Spark primary storage](media/create-spark-cluster-2.png "Configure HDInsight/Spark primary storage")
 
 1. Configure additional storage. Add Azure Storage account containing MAG as an additional storage account if it is not the same storage account in the previous step.
 
-    ![Configure additional storage](media/create-spark-cluster-3.png "Configure additional storage")
+    ![Configure HDInsight/Spark additional storage](media/create-spark-cluster-3.png "Configure HDInsight/Spark additional storage")
 
 1. Create HDInsight/Spark cluster. Optionally change cluster size before clicking the "Create" buttom.
 
-    ![Create cluster](media/create-spark-cluster-4.png "Create cluster")
+    ![Change cluster size and create cluster](media/create-spark-cluster-4.png "Change cluster size and create cluster")
 
 ## Referencing Microsoft Academic Graph files in PySpark scripts
 
