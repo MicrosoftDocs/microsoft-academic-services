@@ -19,7 +19,7 @@
   items:
   - name: Analytics and visualization samples
     href: samples-azure-data-lake-analytics.md
-  - name: PySpark samples
+  - name: PySpark analytics samples
     href: samples-azure-hdinsight.md
 - name: Reference
   expanded: true
