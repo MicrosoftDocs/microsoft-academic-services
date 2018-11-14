@@ -2,7 +2,7 @@
 title: Microsoft Academic Graph data schema
 description: Documents the complete, most recent Microsoft Academic Graph entity data schema, including the name and type of each attribute
 ms.topic: reference
-ms.date: 10/29/2018
+ms.date: 11/13/2018
 ---
 # Microsoft Academic Graph data schema
 
@@ -82,6 +82,13 @@ Column # | Name | Type | Note
 6 | CitationCount | long |
 7 | CreatedDate | DateTime |
 
+## FieldsOfStudyChildren.txt
+
+Column # | Name | Type | Note
+--- | --- | --- | ---
+1 | FieldOfStudyId | long | FOREIGN KEY REFERENCES FieldsOfStudy(FieldOfStudyId)
+2 | ChildFieldOfStudyId | long | FOREIGN KEY REFERENCES FieldsOfStudy(FieldOfStudyId)
+
 ## FieldsOfStudy.txt
 
 Column # | Name | Type | Note
@@ -95,25 +102,6 @@ Column # | Name | Type | Note
 7 | PaperCount | long |
 8 | CitationCount | long |
 9 | CreatedDate | DateTime |
-
-## FieldsOfStudyChildren.txt
-
-Column # | Name | Type | Note
---- | --- | --- | ---
-1 | FieldOfStudyId | long | FOREIGN KEY REFERENCES FieldsOfStudy(FieldOfStudyId)
-2 | ChildFieldOfStudyId | long | FOREIGN KEY REFERENCES FieldsOfStudy(FieldOfStudyId)
-
-## RelatedFieldOfStudy.txt
-
-Column # | Name | Type | Note
---- | --- | --- | ---
-1 | FieldOfStudyId1 | long | FOREIGN KEY REFERENCES FieldsOfStudy(FieldOfStudyId)
-2 | DisplayName 1 | string |
-3 | Type1 | string | disease, disease_cause, medical_treatment, symptom
-4 | FieldOfStudyId2 | long | FOREIGN KEY REFERENCES FieldsOfStudy(FieldOfStudyId)
-5 | DisplayMame 2 | string |
-6 | Type2 | string | disease, disease_cause, medical_treatment, symptom
-7 | Rank | float | Confidence range between 0 and 1. Bigger number representing higher confidence.
 
 ## Journals.txt
 
@@ -129,32 +117,6 @@ Column # | Name | Type | Note
 8 | PaperCount | long |
 9 | CitationCount | long |
 10 | CreatedDate | DateTime |
-
-## Papers.txt
-
-Column # | Name | Type | Note
---- | --- | --- | ---
-1 | PaperId | long | PRIMARY KEY
-2 | Rank | uint |
-3 | Doi | string |
-4 | DocType | string | Book, BookChapter, Conference, Journal, Patent, NULL : unknown
-5 | PaperTitle | string |
-6 | OriginalTitle | string |
-7 | BookTitle | string |
-8 | Year | int |
-9 | Date | DateTime? |
-10 | Publisher | string |
-11 | JournalId | long? | FOREIGN KEY REFERENCES Journals(JournalId)
-12 | ConferenceSeriesId | long? | FOREIGN KEY REFERENCES ConferenceSeries(ConferenceSeriesId)
-13 | ConferenceInstanceId | long? | FOREIGN KEY REFERENCES ConferenceInstances(ConferenceInstanceId)
-14 | Volume | string |
-15 | Issue | string |
-16 | FirstPage | string |
-17 | LastPage | string |
-18 | ReferenceCount | long |
-19 | CitationCount | long |
-20 | EstimatedCitationCount | long |
-21 | CreatedDate | DateTime |
 
 ## PaperAbstractInvertedIndex.txt
 
@@ -221,3 +183,42 @@ Column # | Name | Type | Note
 1 | PaperId | long | FOREIGN KEY REFERENCES Papers(PaperId)
 2 | SourceType | int? |
 3 | SourceUrl | string |
+
+## Papers.txt
+
+Column # | Name | Type | Note
+--- | --- | --- | ---
+1 | PaperId | long | PRIMARY KEY
+2 | Rank | uint |
+3 | Doi | string |
+4 | DocType | string | Book, BookChapter, Conference, Journal, Patent, NULL : unknown
+5 | PaperTitle | string |
+6 | OriginalTitle | string |
+7 | BookTitle | string |
+8 | Year | int |
+9 | Date | DateTime? |
+10 | Publisher | string |
+11 | JournalId | long? | FOREIGN KEY REFERENCES Journals(JournalId)
+12 | ConferenceSeriesId | long? | FOREIGN KEY REFERENCES ConferenceSeries(ConferenceSeriesId)
+13 | ConferenceInstanceId | long? | FOREIGN KEY REFERENCES ConferenceInstances(ConferenceInstanceId)
+14 | Volume | string |
+15 | Issue | string |
+16 | FirstPage | string |
+17 | LastPage | string |
+18 | ReferenceCount | long |
+19 | CitationCount | long |
+20 | EstimatedCitationCount | long |
+21 | OriginalVenue | string |
+22 | CreatedDate | DateTime |
+
+## RelatedFieldOfStudy.txt
+
+Column # | Name | Type | Note
+--- | --- | --- | ---
+1 | FieldOfStudyId1 | long | FOREIGN KEY REFERENCES FieldsOfStudy(FieldOfStudyId)
+2 | DisplayName 1 | string |
+3 | Type1 | string | disease, disease_cause, medical_treatment, symptom
+4 | FieldOfStudyId2 | long | FOREIGN KEY REFERENCES FieldsOfStudy(FieldOfStudyId)
+5 | DisplayMame 2 | string |
+6 | Type2 | string | disease, disease_cause, medical_treatment, symptom
+7 | Rank | float | Confidence range between 0 and 1. Bigger number representing higher confidence.

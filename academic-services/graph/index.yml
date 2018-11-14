@@ -6,7 +6,7 @@ metadata:
   description: Learn about Microsoft Academic Graph, including getting started guides, data schema reference, sample analytics
   meta.description: Learn about Microsoft Academic Graph, including getting started guides, data schema reference, sample analytics
   ms.topic: landing-page
-  ms.date: 10/17/2018
+  ms.date: 11/13/2018
 abstract:
   description: Learn about Microsoft Academic Graph, including getting started guide, data schema reference, sample analytics.
 sections:
@@ -15,8 +15,9 @@ sections:
   - type: list
     style: unordered
     items:
-    - html: <a href="get-started-setup-provisioning">Get Microsoft Academic Graph on Azure blob storage</a>
-    - html: <a href="get-started-setup-azure-data-lake-analytics">Use Microsoft Academic Graph on Azure Data Lake Analytics</a>
+    - html: <a href="get-started-setup-provisioning">Get Microsoft Academic Graph on Azure storage</a>
+    - html: <a href="get-started-setup-azure-data-lake-analytics">Use Microsoft Academic Graph with U-SQL on Azure Data Lake Analytics</a>
+    - html: <a href="get-started-setup-azure-hdinsight">Use Microsoft Academic Graph with PySpark on Azure HDInsight/Spark</a>
 - title: Technology overview
   items: 
   - type: list
@@ -28,4 +29,6 @@ sections:
   - type: list
     style: unordered
     items:
-    - html: <a href="samples-azure-data-lake-analytics.md">Learn how to use Microsoft Academic Graph with Azure Data Lake Analytics</a>
+    - html: <a href="samples-azure-data-lake-analytics.md">Learn how to use Microsoft Academic Graph with U-SQL on Azure Data Lake Analytics</a>
+    - html: <a href="samples-azure-hdinsight.md">Learn how to use Microsoft Academic Graph with PySpark on Azure HDInsight/Spark clusters</a>
+
