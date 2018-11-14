@@ -2,7 +2,7 @@
 title: Microsoft Academic Graph using PySpark
 description: Step-by-step instructions to process Microsoft Academic Graph using PySpark
 ms.topic: get-started-article
-ms.date: 11/08/2018
+ms.date: 11/13/2018
 ---
 # Use Microsoft Academic Graph with PySpark on Azure HDInsight/Spark cluster
 
