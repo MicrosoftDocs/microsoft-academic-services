@@ -41,7 +41,7 @@ Illustrates how to perform analytics for Microsoft Academic Graph using PySpark 
 
   * Make sure the script file is available on HDInsight/Spark cluster. Run the script with python command.
 
-    ![Run script in ssh terminal](media/samples-run-pyspark-script.png "Run script in ssh terminal")
+    ![Run PySpark script in ssh terminal](media/samples-run-pyspark-script.png "Run PySpark script in ssh terminal")
 
 * View results with Microsoft Azure Storage Explorer
 
