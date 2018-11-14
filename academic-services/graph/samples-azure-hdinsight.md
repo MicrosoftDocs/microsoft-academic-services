@@ -4,7 +4,7 @@ description: Illustrates how to perform analytics for Microsoft Academic Graph u
 services: microsoft-academic-services
 ms.topic: tutorial
 ms.service: microsoft-academic-services
-ms.date: 11/08/2018
+ms.date: 11/13/2018
 ---
 # PySpark analytics samples for Microsoft Academic Graph
 
