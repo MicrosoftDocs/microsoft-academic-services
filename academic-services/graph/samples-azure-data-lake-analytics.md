@@ -4,7 +4,7 @@ description: Illustrates how to perform analytics and visualization for Microsof
 services: microsoft-academic-services
 ms.topic: tutorial
 ms.service: microsoft-academic-services
-ms.date: 10/17/2018
+ms.date: 11/13/2018
 ---
 # Analytics and visualization samples for Microsoft Academic Graph
 
