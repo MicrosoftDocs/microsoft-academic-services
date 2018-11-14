@@ -49,8 +49,6 @@ Illustrates how to perform analytics for Microsoft Academic Graph using PySpark 
 
 ## Resources
 
-* [Apache Spark in Azure HDInsight](https://docs.microsoft.com/en-us/azure/hdinsight/spark/apache-spark-overview
-)
-* [Analyze Spark data using Power BI in HDInsight](https://docs.microsoft.com/en-us/azure/hdinsight/spark/apache-spark-overview
-)
+* [Apache Spark in Azure HDInsight](https://docs.microsoft.com/en-us/azure/hdinsight/spark/apache-spark-overview)
+* [Get started with Storage Explorer](https://docs.microsoft.com/en-us/azure/vs-azure-tools-storage-manage-with-storage-explorer)
 * [Apache Spark Documentation](https://spark.apache.org/docs/2.3.0/)
