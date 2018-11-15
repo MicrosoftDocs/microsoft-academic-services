@@ -16,8 +16,8 @@ sections:
     style: unordered
     items:
     - html: <a href="get-started-setup-provisioning">Get Microsoft Academic Graph on Azure storage</a>
-    - html: <a href="get-started-setup-azure-data-lake-analytics">Setup Azure Data Lake Analytics for Microsoft Academic Graph</a>
-    - html: <a href="get-started-setup-azure-hdinsight">Setup Azure HDInsight/Spark for Microsoft Academic Graph</a>
+    - html: <a href="get-started-setup-azure-data-lake-analytics">Set up Azure Data Lake Analytics for Microsoft Academic Graph</a>
+    - html: <a href="get-started-setup-azure-hdinsight">Set up Azure HDInsight/Spark for Microsoft Academic Graph</a>
 - title: Technology overview
   items: 
   - type: list
