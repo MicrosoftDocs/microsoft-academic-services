@@ -8,19 +8,19 @@ ms.date: 11/15/2018
 
 You could set up HDInsight/Spark cluster to run PySpark scripts on Microsoft Academic Graph. Here are the step-by-step instructions.
 
-## Create an Azure HDInsight resource
+## 1. Create an Azure HDInsight resource
 
 From Azure portal Home > Create a resource > Analytics > HDInsight
 
   ![Create new Azure HDInsight resource](media/create-hdinsight-select.png "Create new Azure HDInsight resource")
 
-## Configure HDInsight/Spark cluster
+## 1. Configure HDInsight/Spark cluster
 
 Choose "Spark" as the cluster type.
 
   ![Configure HDInsight/Spark cluster](media/create-spark-cluster-1.png "Configure HDInsight/Spark cluster")
 
-## Configure primary storage
+## 1. Configure primary storage
 
 Create an Azure Storage account and choose a default container as the primary storage.
 
