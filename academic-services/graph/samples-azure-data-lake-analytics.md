@@ -1,6 +1,6 @@
 ---
 title: Analytics samples for Microsoft Academic Graph
-description: Illustrates how to perform analytics and visualization for Microsoft Academic Graph using Data Lake Analytics (U-SQL) and Power BI
+description: Perform analytics and visualization for Microsoft Academic Graph using Data Lake Analytics (U-SQL) and Power BI
 services: microsoft-academic-services
 ms.topic: tutorial
 ms.service: microsoft-academic-services
