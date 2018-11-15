@@ -10,7 +10,7 @@ You could set up HDInsight/Spark cluster to run PySpark scripts on Microsoft Aca
 
 ## Create an Azure HDInsight resource
 
-# From Azure portal Home > Create a resource > Analytics > HDInsight
+### From Azure portal Home > Create a resource > Analytics > HDInsight
 
   ![Create new Azure HDInsight resource](media/create-hdinsight-select.png "Create new Azure HDInsight resource")
 
