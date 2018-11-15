@@ -1,10 +1,10 @@
 ---
 title: Analytics samples for Microsoft Academic Graph
-description: Illustrates how to perform analytics and visualization for Microsoft Academic Graph using Data Lake Analytics (U-SQL) and Power BI
+description: Perform analytics and visualization for Microsoft Academic Graph using Data Lake Analytics (U-SQL) and Power BI
 services: microsoft-academic-services
 ms.topic: tutorial
 ms.service: microsoft-academic-services
-ms.date: 11/13/2018
+ms.date: 11/15/2018
 ---
 # Analytics and visualization samples for Microsoft Academic Graph
 
@@ -30,7 +30,7 @@ Illustrates how to perform analytics and visualization for Microsoft Academic Gr
 ### Pre-requisites
 
 * [Get Microsoft Academic Graph on Azure Storage](get-started-setup-provisioning.md)
-* [Use Microsoft Academic Graph with U-SQL on Azure Data Lake Analytics](get-started-setup-azure-data-lake-analytics.md)
+* [Set up Azure Data Lake Analytics for Microsoft Academic Graph](get-started-setup-azure-data-lake-analytics.md)
 * [Microsoft Power BI Desktop client](https://powerbi.microsoft.com/en-us/desktop/)
 * Visual Studio 2017 or Visual Studio 2015 with [Data Lake tools](https://www.microsoft.com/en-us/download/details.aspx?id=49504)
 

@@ -1,37 +1,42 @@
 ---
-title: Microsoft Academic Graph using PySpark
-description: Step-by-step instructions to process Microsoft Academic Graph using PySpark
+title: Microsoft Academic Graph using HDInsight/Spark
+description: Set up Azure HDInsight/Spark cluster for Microsoft Academic Graph
 ms.topic: get-started-article
-ms.date: 11/13/2018
+ms.date: 11/15/2018
 ---
-# Use Microsoft Academic Graph with PySpark on Azure HDInsight/Spark cluster
+# Set up Azure HDInsight/Spark cluster for Microsoft Academic Graph
 
-You could use PySpark to process Microsoft Academic Graph stored in Azure Storage. Here are the step-by-step instructions.
+You could set up HDInsight/Spark cluster to run PySpark scripts on Microsoft Academic Graph. Here are the step-by-step instructions.
 
-1. Create Azure HDInsight/Spark cluster.
-1. Referencing MAG files in PySpark scripts.
+## Create Azure HDInsight resource
 
-## Create Azure HDInsight/Spark cluster
+From Azure portal Home > Create a resource > Analytics > HDInsight
 
-1. Create an Azure HDInsight cluster. From Azure portal Home > Create a resource > Analytics > HDInsight
+  ![Create new Azure HDInsight resource](media/create-hdinsight-select.png "Create new Azure HDInsight resource")
 
-    ![Create new Azure HDInsight resource](media/create-hdinsight-select.png "Create new Azure HDInsight resource")
+## Configure HDInsight/Spark cluster
 
-1. Configure HDInsight/Spark cluster. Choose "Spark" as the cluster type.
+Choose "Spark" as the cluster type.
 
-    ![Configure HDInsight/Spark cluster](media/create-spark-cluster-1.png "Configure HDInsight/Spark cluster")
+  ![Configure HDInsight/Spark cluster](media/create-spark-cluster-1.png "Configure HDInsight/Spark cluster")
 
-1. Configure primary storage. Create an Azure Storage account and choose a default container as the primary storage.
+## Configure primary storage
 
-    ![Configure HDInsight/Spark primary storage](media/create-spark-cluster-2.png "Configure HDInsight/Spark primary storage")
+Create an Azure Storage account and choose a default container as the primary storage.
 
-1. Configure additional storage. Add Azure Storage account containing MAG as an additional storage account if it is not the same storage account in the previous step.
+  ![Configure HDInsight/Spark primary storage](media/create-spark-cluster-2.png "Configure HDInsight/Spark primary storage")
 
-    ![Configure HDInsight/Spark additional storage](media/create-spark-cluster-3.png "Configure HDInsight/Spark additional storage")
+## Configure additional storage
 
-1. Create HDInsight/Spark cluster. Optionally change cluster size before clicking the "Create" buttom.
+Add Azure Storage account containing MAG as an additional storage account if it is not the same storage account in the previous step.
 
-    ![Change cluster size and create cluster](media/create-spark-cluster-4.png "Change cluster size and create cluster")
+  ![Configure HDInsight/Spark additional storage](media/create-spark-cluster-3.png "Configure HDInsight/Spark additional storage")
+
+## Create HDInsight/Spark cluster
+
+Optionally change cluster size before clicking the "Create" buttom.
+
+  ![Change cluster size and create cluster](media/create-spark-cluster-4.png "Change cluster size and create cluster")
 
 ## Referencing Microsoft Academic Graph files in PySpark scripts
 
