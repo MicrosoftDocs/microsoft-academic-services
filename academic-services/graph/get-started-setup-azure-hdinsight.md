@@ -8,7 +8,7 @@ ms.date: 11/15/2018
 
 You could set up HDInsight/Spark cluster to run PySpark scripts on Microsoft Academic Graph. Here are the step-by-step instructions.
 
-## Create an Azure HDInsight resource
+## Create Azure HDInsight resource
 
 From Azure portal Home > Create a resource > Analytics > HDInsight
 
