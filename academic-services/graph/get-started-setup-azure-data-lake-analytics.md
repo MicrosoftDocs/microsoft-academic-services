@@ -8,9 +8,6 @@ ms.date: 11/15/2018
 
 You could set up Azure Data Lake Analytics to run U-SQL scripts on Microsoft Academic Graph. Here are the step-by-step instructions.
 
-1. Create Azure Data Lake Analytics account.
-1. Configure Azure Data Lake Analytics to use Microsoft Academic Graph.
-
 ## Create Azure Data Lake Analytics account
 
 1. Home > Create a resource > Analytics > Data Lake Analytics
