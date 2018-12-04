@@ -17,7 +17,7 @@ When using Microsoft Academic data (MAG, MAKES, etc.) in a product or service, o
 
 ## Entity Relationship Diagram
 
- [![Entity Relationship Diagram](media/entity-relationship-diagram-thumbnail.png)](media/entity-relationship-diagram.pdf)
+ [![Entity Relationship Diagram](media/entity-relationship-diagram-thumbnail.png)](media/entity-relationship-diagram.png)
 
 ## Note on "rank"
 
