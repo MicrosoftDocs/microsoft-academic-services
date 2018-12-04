@@ -2,7 +2,7 @@
 title: Microsoft Academic Graph data schema
 description: Documents the complete, most recent Microsoft Academic Graph entity data schema, including the name and type of each attribute
 ms.topic: reference
-ms.date: 11/13/2018
+ms.date: 12/4/2018
 ---
 # Microsoft Academic Graph data schema
 
@@ -17,7 +17,7 @@ When using Microsoft Academic data (MAG, MAKES, etc.) in a product or service, o
 
 ## Entity Relationship Diagram
 
- [![Entity Relationship Diagram](media/mag-erd-thumbnail.png)](media/mag-erd.pdf)
+ [![Entity Relationship Diagram](media/entity-relationship-diagram-thumbnail.png)](media/entity-relationship-diagram.pdf)
 
 ## Note on "rank"
 
