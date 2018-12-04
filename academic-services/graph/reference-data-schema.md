@@ -176,6 +176,16 @@ Column # | Name | Type | Note
 1 | PaperId | long | FOREIGN KEY REFERENCES Papers(PaperId)
 2 | PaperReferenceId | long | FOREIGN KEY REFERENCES Papers(PaperId)
 
+## PaperResources.txt
+
+Column # | Name | Type | Note
+--- | --- | --- | ---
+1 | PaperId | long | FOREIGN KEY REFERENCES Papers(PaperId)
+2 | ResourceType | int |
+3 | ResourceUrl | string |
+4 | SourceUrl | string |
+5 | RelationshipType | int |
+
 ## PaperUrls.txt
 
 Column # | Name | Type | Note
