@@ -2,7 +2,7 @@
 title: FAQ about Microsoft Academic Graph
 description: Answers some of the most frequently asked questions about the Microsoft Academic Graph
 ms.topic: reference
-ms.date: 10/17/2018
+ms.date: 12/13/2018
 ---
 # Frequently Asked Questions about Microsoft Academic Graph
 
@@ -10,7 +10,7 @@ Answers some of the most frequently asked questions about the Microsoft Academic
 
 ## How much does Microsoft Academic Graph cost
 
-Microsoft Academic Graph is currently in free preview. Consumers incur costs only on their own Azure resource usage associated with graph (i.e. downloading, processing, analytics, etc.). See the [pricing](resources-pricing.md) page for Azure cost estimator links that pre-populate storage costs associated with storing the approximate size of the graph.
+Microsoft Academic Graph is currently in free preview. Consumers incur costs only on their own Azure resource usage associated with graph (i.e. storing, downloading, processing, analytics, etc.). See the [pricing](resources-pricing.md) page for Azure cost estimator links that pre-populate storage costs associated with storing the approximate size of the graph.
 
 It's important to note that old versions of MAG are not removed or modified in any way by the provisioning process, so if you have signed up for automatic provisioning you are responsible for removing older releases.
 
@@ -40,3 +40,7 @@ Microsoft Academic Graph doesn't publish the raw author supplied keywords that a
 > Rank = -1000 * Ln( probability of an entity being important )
 
 An entities "importance" is calculated using its relationships with other entities in the graph, e.g. a paper entity recently published in Nature receiving a high number of citations is likely to have high importance, whereas a pre-print paper entity not associated with a conference/journal is likely to have a low importance.
+
+## What is the cost to compute authors citation counts and h-index
+
+It is relatively easy and inexpensive to compute citation counts and h-index using [U-SQL](https://msdn.microsoft.com/en-us/azure/data-lake-analytics/u-sql/u-sql-language-reference) with [Azure Data Lake Analytic](https://azure.microsoft.com/en-us/services/data-lake-analytics/) for all authors in MAG, currently 250 million in total. The cost range from $1 (USD) with 1 AU running for 40 minutes to $2 with 16AU running for 5 minutes.
