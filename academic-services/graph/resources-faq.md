@@ -10,7 +10,7 @@ Answers some of the most frequently asked questions about the Microsoft Academic
 
 ## How much does Microsoft Academic Graph cost
 
-Microsoft Academic Graph is currently in free preview. Consumers incur costs only on their own Azure resource usage associated with graph (i.e. downloading, processing, analytics, etc.). See the [pricing](resources-pricing.md) page for Azure cost estimator links that pre-populate storage costs associated with storing the approximate size of the graph.
+Microsoft Academic Graph is currently in free preview. Consumers incur costs only on their own Azure resource usage associated with graph (i.e. storing, downloading, processing, analytics, etc.). See the [pricing](resources-pricing.md) page for Azure cost estimator links that pre-populate storage costs associated with storing the approximate size of the graph.
 
 It's important to note that old versions of MAG are not removed or modified in any way by the provisioning process, so if you have signed up for automatic provisioning you are responsible for removing older releases.
 
