@@ -43,4 +43,4 @@ An entities "importance" is calculated using its relationships with other entiti
 
 ## What is the cost to compute authors citation counts and h-index
 
-It is relatively easy and inexpensive to compute citation counts and h-index for all authors in MAG, currently 250 million in total. The cost range from $1 (USD) with 1 AU running for 40 minutes to $2 with 16AU running for 5 minutes.
+It is relatively easy and inexpensive to compute citation counts and h-index using [U-SQL](https://msdn.microsoft.com/en-us/azure/data-lake-analytics/u-sql/u-sql-language-reference) with [Azure Data Lake Analytic](https://azure.microsoft.com/en-us/services/data-lake-analytics/) for all authors in MAG, currently 250 million in total. The cost range from $1 (USD) with 1 AU running for 40 minutes to $2 with 16AU running for 5 minutes.
