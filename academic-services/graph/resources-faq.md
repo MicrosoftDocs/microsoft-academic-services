@@ -2,7 +2,7 @@
 title: FAQ about Microsoft Academic Graph
 description: Answers some of the most frequently asked questions about the Microsoft Academic Graph
 ms.topic: reference
-ms.date: 10/17/2018
+ms.date: 12/13/2018
 ---
 # Frequently Asked Questions about Microsoft Academic Graph
 
@@ -40,3 +40,7 @@ Microsoft Academic Graph doesn't publish the raw author supplied keywords that a
 > Rank = -1000 * Ln( probability of an entity being important )
 
 An entities "importance" is calculated using its relationships with other entities in the graph, e.g. a paper entity recently published in Nature receiving a high number of citations is likely to have high importance, whereas a pre-print paper entity not associated with a conference/journal is likely to have a low importance.
+
+## What is the cost to compute authors citation counts and h-index
+
+It is relatively easy and inexpensive to compute citation counts and h-index for all authors in MAG, currently 250 million in total. The cost range from $1 (USD) with 1 AU running for 40 minutes to $2 with 16AU running for 5 minutes.
