@@ -2,7 +2,7 @@
 title: Get Microsoft Academic Graph on Azure storage
 description: Step-by-step instructions for setting up one-time or automatic provisioning of Microsoft Academic Graph to an Azure blob storage account
 ms.topic: get-started-article
-ms.date: 11/13/2018
+ms.date: 2/4/2019
 ---
 # Get Microsoft Academic Graph on Azure storage
 
@@ -56,7 +56,7 @@ Please create a new Azure subscription for the distribution previews. If your or
 
 ## Sign up for MAG provisioning
 
-To sign up for MAG on AS distribution preview, send the following information to <a href="mailto:academicapi@microsoft.com?subject=Access request to Microsoft Academic Graph (MAG) on Azure Storage (AS) distribution preview">academicapi@microsoft.com</a> with the subject "Access request to Microsoft Academic Graph (MAG) on Azure Storage (AS) distribution preview":
+To sign up for MAG on AS distribution preview, send the following information using your school or company email account to <a href="mailto:academicapi@microsoft.com?subject=Access request to Microsoft Academic Graph (MAG) on Azure Storage (AS) distribution preview">academicapi@microsoft.com</a> with the subject "Access request to Microsoft Academic Graph (MAG) on Azure Storage (AS) distribution preview":
 
 - Are you affiliated with a company or university?
   - If company, please provide the company’s name, your department/group and your role
