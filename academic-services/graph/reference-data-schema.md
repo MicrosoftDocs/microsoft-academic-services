@@ -2,7 +2,7 @@
 title: Microsoft Academic Graph data schema
 description: Documents the complete, most recent Microsoft Academic Graph entity data schema, including the name and type of each attribute
 ms.topic: reference
-ms.date: 2/4/2019
+ms.date: 2/5/2019
 ---
 # Microsoft Academic Graph data schema
 
@@ -231,8 +231,8 @@ Column # | Name | Type | Note
 --- | --- | --- | ---
 1 | FieldOfStudyId1 | long | FOREIGN KEY REFERENCES FieldsOfStudy(FieldOfStudyId)
 2 | DisplayName 1 | string |
-3 | Type1 | string | disease, disease_cause, medical_treatment, symptom
+3 | Type1 | string | general, disease, disease_cause, medical_treatment, symptom
 4 | FieldOfStudyId2 | long | FOREIGN KEY REFERENCES FieldsOfStudy(FieldOfStudyId)
 5 | DisplayMame 2 | string |
-6 | Type2 | string | disease, disease_cause, medical_treatment, symptom
+6 | Type2 | string | general, disease, disease_cause, medical_treatment, symptom
 7 | Rank | float | Confidence range between 0 and 1. Bigger number representing higher confidence.
