@@ -2,7 +2,7 @@
 title: Microsoft Academic Graph data schema
 description: Documents the complete, most recent Microsoft Academic Graph entity data schema, including the name and type of each attribute
 ms.topic: reference
-ms.date: 2/5/2019
+ms.date: 2/6/2019
 ---
 # Microsoft Academic Graph data schema
 
