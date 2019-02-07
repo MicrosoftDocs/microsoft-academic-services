@@ -30,7 +30,8 @@ Illustrates how to perform analytics for Microsoft Academic Graph using PySpark 
 ### Quick-start
 
 1. Download or clone the [samples repository](https://github.com/Azure-Samples/microsoft-academic-graph-pyspark-samples)
-4. For each tutorial there should be: A Python script(.py).
+2. For each tutorial there should be: A Python script(.py).
+3. Copy `CreatePySparkFunctions.py` from samples directory in MAG text graph to the code execution directory.
 
 ## Working with PySpark scripts on Azure HDInsight/Spark
 
@@ -47,8 +48,26 @@ Illustrates how to perform analytics for Microsoft Academic Graph using PySpark 
 
     ![View result with Microsoft Azure Storage Explorer](media/samples-view-pyspark-script-results.png "View result with Microsoft Azure Storage Explorer")
 
+* Credentials to access Azure storage from Azure HDInsight/Spark.
+
+  Add following code to `$SPARK_HOME/conf/core-site.xml` (ensure you run as root).
+
+        <?xml version="1.0" encoding="UTF-8"?>
+        <?xml-stylesheet type="text/xsl" href="configuration.xsl"?>
+        <configuration>
+        <property>
+          <name>fs.AbstractFileSystem.wasb.Impl</name>
+          <value>org.apache.hadoop.fs.azure.Wasb</value>
+        </property>
+        <property>
+          <name>fs.azure.account.key.YOURSTORAGEACCOUNT.blob.core.windows.net</name>
+          <value>YOURSTORAGEACCOUNTKEY</value>
+        </property>
+        </configuration>
+
 ## Resources
 
 * [Apache Spark in Azure HDInsight](https://docs.microsoft.com/en-us/azure/hdinsight/spark/apache-spark-overview)
 * [Get started with Storage Explorer](https://docs.microsoft.com/en-us/azure/vs-azure-tools-storage-manage-with-storage-explorer)
 * [Apache Spark Documentation](https://spark.apache.org/docs/2.3.0/)
+* [Spark for Azure HDInsight](https://blogs.msdn.microsoft.com/uk_faculty_connection/2017/03/15/spark-for-azure-hdinsight/)
