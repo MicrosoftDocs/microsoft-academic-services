@@ -31,7 +31,7 @@ Illustrates how to perform analytics for Microsoft Academic Graph using PySpark 
 
 1. Download or clone the [samples repository](https://github.com/Azure-Samples/microsoft-academic-graph-pyspark-samples)
 2. For each tutorial there should be: A Python script(.py).
-3. Copy `CreatePySparkFunctions.py` from samples directory in MAG text graph to the code execution directory.
+3. Copy `CreatePySparkFunctions.py` from samples directory in MAG dataset to the code execution directory.
 
 ## Working with PySpark scripts on Azure HDInsight/Spark
 
