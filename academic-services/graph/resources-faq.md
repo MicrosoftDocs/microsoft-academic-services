@@ -8,9 +8,9 @@ ms.date: 3/6/2019
 
 Answers some of the most frequently asked questions about the Microsoft Academic Graph
 
-## Microsoft Academic Graph license terms
+## License terms
 
-Microsoft Academic Graph is under [ODC-BY](https://opendatacommons.org/licenses/by/1.0/)
+Microsoft Academic Graph is licensed under [ODC-BY](https://opendatacommons.org/licenses/by/1.0/)
 
 When using Microsoft Academic data (MAG, MAKES, etc.) in a product or service, or including data in a redistribution, please acknowledge Microsoft Academic using the URI https://aka.ms/msracad. For publications and reports, please cite the following article:
 
