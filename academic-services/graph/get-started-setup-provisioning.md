@@ -32,7 +32,7 @@ Please create a new Azure subscription for the distribution previews. If your or
 
     ![Create new storage account resource](media/create-storage-account-select.png "Create new storage account resource")
 
-1. Specify "mag" for the resource group, “magas<org_name>” for the account name, "StorageV2 (general purpose v2)" for account kind, “LRS” for replication, and “standard” for performance, then click the "review + create" button
+1. Specify "mag" for the resource group, “magas<org_name>” for the account name, “standard” for performance, "StorageV2 (general purpose v2)" for account kind, “LRS” for replication, and “cool” for access tier, then click the "review + create" button
 
     ![Enter details for new storage account resource](media/create-storage-account-details.png "Enter details for new storage account resource")
 
