@@ -32,7 +32,7 @@ Please create a new Azure subscription for the distribution previews. If your or
 
     ![Create new storage account resource](media/create-storage-account-select.png "Create new storage account resource")
 
-1.  Provide the following values to create an Azure Storage account. Then click "review + create" button.
+1.  Provide following values to create an Azure Storage account. Then click "Review + create" button.
 
     |Property  |Description  |
     |---------|---------|
