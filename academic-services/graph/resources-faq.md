@@ -8,7 +8,7 @@ ms.date: 3/6/2019
 
 Answers some of the most frequently asked questions about the Microsoft Academic Graph
 
-## License terms
+## License
 
 Microsoft Academic Graph is licensed under [ODC-BY](https://opendatacommons.org/licenses/by/1.0/)
 
