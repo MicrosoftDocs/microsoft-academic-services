@@ -32,11 +32,7 @@ Please create a new Azure subscription for the distribution previews. If your or
 
     ![Create new storage account resource](media/create-storage-account-select.png "Create new storage account resource")
 
-1. Specify storage account properties
-
-    ![Enter details for new storage account resource](media/create-storage-account-details.png "Enter details for new storage account resource")
-
-  Provide the following values to create an Azure Storage account. Then click "review + create" button.
+1.  Provide the following values to create an Azure Storage account. Then click "review + create" button.
 
     |Property  |Description  |
     |---------|---------|
@@ -48,6 +44,8 @@ Please create a new Azure subscription for the distribution previews. If your or
     |**Account kind**| StorageV2 (general purpose v2) |
     |**Replication** | LRS |
     |**Access tier** | Cool |
+
+    ![Enter details for new storage account resource](media/create-storage-account-details.png "Enter details for new storage account resource")
 
 1. Verify that the information you entered is correct and click the "create" button
 
