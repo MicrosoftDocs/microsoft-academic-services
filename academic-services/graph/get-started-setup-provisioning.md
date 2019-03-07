@@ -32,7 +32,19 @@ Please create a new Azure subscription for the distribution previews. If your or
 
     ![Create new storage account resource](media/create-storage-account-select.png "Create new storage account resource")
 
-1. Specify "mag" for the resource group, “magas<org_name>” for the account name, “standard” for performance, "StorageV2 (general purpose v2)" for account kind, “LRS” for replication, and “cool” for access tier, then click the "review + create" button
+1. provide the following values to create an Azure Storage account:
+
+    |Property  |Description  |
+    |---------|---------|
+    |**Subscription**     | From the drop-down, select your Azure subscription.        |
+    |**Resource group**     | Specify whether you want to create a new resource group or use an existing one. A resource group is a container that holds related resources for an Azure solution. For more information, see [Azure Resource Group overview](../azure-resource-manager/resource-group-overview.md). |
+    |**Storage account name**     | Provide a name for your Databricks workspace, e.g. **magas<org_name>**        |
+    |**Performance** | Standard |
+    |**Account kind**| StorageV2 (general purpose v2) |
+    |**Replication** | LRS |
+    |**Access tier** | Cool |
+    
+    Click the "review + create" button.
 
     ![Enter details for new storage account resource](media/create-storage-account-details.png "Enter details for new storage account resource")
 
