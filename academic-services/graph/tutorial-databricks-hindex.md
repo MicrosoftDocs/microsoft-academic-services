@@ -14,7 +14,7 @@ The steps in this tutorial use the SQL Data Warehouse connector for Azure Databr
 
 The following illustration shows the application flow:
 
-![Azure Databricks with Data Lake Store and SQL Data Warehouse](./media/databricks-extract-load-sql-data-warehouse/databricks-extract-transform-load-sql-datawarehouse.png "Azure Databricks with Data Lake Store and SQL Data Warehouse")
+![Azure Databricks with Data Lake Store and SQL Data Warehouse](./media/databricks/databricks-extract-transform-load-sql-datawarehouse.png "Azure Databricks with Data Lake Store and SQL Data Warehouse")
 
 This tutorial covers the following tasks:
 
@@ -79,7 +79,7 @@ In this section, you create an Azure Databricks service by using the Azure porta
 
 1. In the Azure portal, select **Create a resource** > **Analytics** > **Azure Databricks**.
 
-    ![Databricks on Azure portal](./media/databricks-extract-load-sql-data-warehouse/azure-databricks-on-portal.png "Databricks on Azure portal")
+    ![Databricks on Azure portal](./media/databricks/azure-databricks-on-portal.png "Databricks on Azure portal")
 
 2. Under **Azure Databricks Service**, provide the following values to create a Databricks service:
 
@@ -95,7 +95,7 @@ In this section, you create an Azure Databricks service by using the Azure porta
 
 4. The account creation takes a few minutes. During account creation, the portal displays the **Submitting deployment for Azure Databricks** tile on the right. To monitor the operation status, view the progress bar at the top.
 
-    ![Databricks deployment tile](./media/databricks-extract-load-sql-data-warehouse/databricks-deployment-tile.png "Databricks deployment tile")
+    ![Databricks deployment tile](./media/databricks/databricks-deployment-tile.png "Databricks deployment tile")
 
 ## Create a Spark cluster in Azure Databricks
 
@@ -103,11 +103,11 @@ In this section, you create an Azure Databricks service by using the Azure porta
 
 2. You're redirected to the Azure Databricks portal. From the portal, select **Cluster**.
 
-    ![Databricks on Azure](./media/databricks-extract-load-sql-data-warehouse/databricks-on-azure.png "Databricks on Azure")
+    ![Databricks on Azure](./media/databricks/databricks-on-azure.png "Databricks on Azure")
 
 3. In the **New cluster** page, provide the values to create a cluster.
 
-    ![Create Databricks Spark cluster on Azure](./media/databricks-extract-load-sql-data-warehouse/create-databricks-spark-cluster.png "Create Databricks Spark cluster on Azure")
+    ![Create Databricks Spark cluster on Azure](./media/databricks/create-databricks-spark-cluster.png "Create Databricks Spark cluster on Azure")
 
 4. Fill in values for the following fields, and accept the default values for the other fields:
 
@@ -127,11 +127,11 @@ In this section, you create a notebook in Azure Databricks workspace and then ru
 
 2. On the left, select **Workspace**. From the **Workspace** drop-down, select **Create** > **Notebook**.
 
-    ![Create a notebook in Databricks](./media/databricks-extract-load-sql-data-warehouse/databricks-create-notebook.png "Create notebook in Databricks")
+    ![Create a notebook in Databricks](./media/databricks/databricks-create-notebook.png "Create notebook in Databricks")
 
 3. In the **Create Notebook** dialog box, enter a name for the notebook. Select **Scala** as the language, and then select the Spark cluster that you created earlier.
 
-    ![Provide details for a notebook in Databricks](./media/databricks-extract-load-sql-data-warehouse/databricks-notebook-details.png "Provide details for a notebook in Databricks")
+    ![Provide details for a notebook in Databricks](./media/databricks/databricks-notebook-details.png "Provide details for a notebook in Databricks")
 
 4. Select **Create**.
 
@@ -344,17 +344,17 @@ As mentioned earlier, the SQL Data Warehouse connector uses Azure Blob storage a
 
 6. Connect to the SQL database and verify that you see a database named **SampleTable**.
 
-   ![Verify the sample table](./media/databricks-extract-load-sql-data-warehouse/verify-sample-table.png "Verify sample table")
+   ![Verify the sample table](./media/databricks/verify-sample-table.png "Verify sample table")
 
 7. Run a select query to verify the contents of the table. The table should have the same data as the **renamedColumnsDF** dataframe.
 
-    ![Verify the sample table content](./media/databricks-extract-load-sql-data-warehouse/verify-sample-table-content.png "Verify the sample table content")
+    ![Verify the sample table content](./media/databricks/verify-sample-table-content.png "Verify the sample table content")
 
 ## Clean up resources
 
 After you finish the tutorial, you can terminate the cluster. From the Azure Databricks workspace, select **Clusters** on the left. For the cluster to terminate, under **Actions**, point to the ellipsis (...) and select the **Terminate** icon.
 
-![Stop a Databricks cluster](./media/databricks-extract-load-sql-data-warehouse/terminate-databricks-cluster.png "Stop a Databricks cluster")
+![Stop a Databricks cluster](./media/databricks/terminate-databricks-cluster.png "Stop a Databricks cluster")
 
 If you don't manually terminate the cluster, it automatically stops, provided you selected the **Terminate after \_\_ minutes of inactivity** check box when you created the cluster. In such a case, the cluster automatically stops if it's been inactive for the specified time.
 
