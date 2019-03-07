@@ -19,6 +19,8 @@
   items:
   - name: Analytics and visualization samples
     href: samples-azure-data-lake-analytics.md
+  - name: Azure Databricks sample
+    href: tutorial-databricks-hindex.md
   - name: PySpark samples
     href: samples-azure-hdinsight.md
 - name: Reference
