@@ -10,10 +10,6 @@
   items:
   - name: Get Microsoft Academic Graph on Azure Storage
     href: get-started-setup-provisioning.md
-  - name: Set up Azure Data Lake Analytics for Microsoft Academic Graph
-    href: get-started-setup-azure-data-lake-analytics.md
-  - name: Set up HDInsight/Spark for Microsoft Academic Graph
-    href: get-started-setup-azure-hdinsight.md
 - name: Azure Data Lake Analytics
   expanded: true
   items:
