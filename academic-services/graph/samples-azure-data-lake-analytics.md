@@ -14,7 +14,7 @@ Illustrates how to perform analytics and visualization for Microsoft Academic Gr
 
 Complete these tasks before you begin this tutorial:
 
-* Setting up provisioning of Microsoft Academic Graph to an Azure blob storage account. See [Get Microsoft Academic Graph on Azure storage](./get-started-setup-provisioning.md.md).
+* Setting up provisioning of Microsoft Academic Graph to an Azure blob storage account. See [Get Microsoft Academic Graph on Azure storage](./get-started-setup-provisioning.md).
 * Setting up Azure Data Lake Analytics. [Get Microsoft Academic Graph on Azure storage](./get-started-setup-azure-data-lake-analytics.md).
 
 ## Sample projects
