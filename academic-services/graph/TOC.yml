@@ -14,13 +14,25 @@
     href: get-started-setup-azure-data-lake-analytics.md
   - name: Set up HDInsight/Spark for Microsoft Academic Graph
     href: get-started-setup-azure-hdinsight.md
-- name: Samples
+- name: Azure Data Lake Analytics
   expanded: true
   items:
+  - name: Set up Azure Data Lake Analytics for Microsoft Academic Graph
+    href: get-started-setup-azure-data-lake-analytics.md
   - name: Analytics and visualization samples
     href: samples-azure-data-lake-analytics.md
+- name: Azure Databricks
+  expanded: true
+  items:
+  - name: Set up Azure Databricks for Microsoft Academic Graph
+    href: get-started-databricks.md
   - name: Azure Databricks sample
     href: tutorial-databricks-hindex.md
+- name: HDInsight/Spark
+  expanded: true
+  items:
+  - name: Set up HDInsight/Spark for Microsoft Academic Graph
+    href: get-started-setup-azure-hdinsight.md
   - name: PySpark samples
     href: samples-azure-hdinsight.md
 - name: Reference
