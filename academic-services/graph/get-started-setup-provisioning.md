@@ -59,6 +59,12 @@ Please create a new Azure subscription for the distribution previews. If your or
 
     ![Save new storage account resource name and access keys for later](media/create-storage-account/access-keys.png "Save new storage account resource name and access keys for later")
 
+1. Make sure that you have these items of information:
+
+   :heavy_check_mark:  The name of your blob storage account.
+
+   :heavy_check_mark:  The access key of your blob storage account.
+
 ## Sign up for MAG provisioning
 
 To sign up for MAG on AS distribution preview, send the following information using your school or company email account to <a href="mailto:academicapi@microsoft.com?subject=Access request to Microsoft Academic Graph (MAG) on Azure Storage (AS) distribution preview">academicapi@microsoft.com</a> with the subject "Access request to Microsoft Academic Graph (MAG) on Azure Storage (AS) distribution preview":
