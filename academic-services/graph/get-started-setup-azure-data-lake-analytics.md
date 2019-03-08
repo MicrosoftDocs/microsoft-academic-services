@@ -36,3 +36,10 @@ Complete these tasks before you begin this tutorial:
 1. On the "add data source" dialog, select storage type "azure storage", selection method "select account" and the Azure Storage account you created for MAG provisioning:
 
    ![Select storage account created earlier](media/configure-analytics-account-select.png "Select storage account created earlier")
+
+## Next steps
+
+Advance to the next step to learn about analytics and visualization using Azure Data Lake Analytics.
+
+> [!div class="nextstepaction"]
+>[Analytics and visualization samples](samples-azure-data-lake-analytics.md)
