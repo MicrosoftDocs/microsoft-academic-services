@@ -30,7 +30,7 @@ Please create a new Azure subscription for the distribution previews. If your or
 
 1. Home > Create a resource > Storage > Storage account
 
-    ![Create new storage account resource](media/create-storage-account-select.png "Create new storage account resource")
+    ![Create new storage account resource](media/create-storage-account/select.png "Create new storage account resource")
 
 1.  Provide following values to create an Azure Storage account. Then click "Review + create" button.
 
@@ -45,19 +45,19 @@ Please create a new Azure subscription for the distribution previews. If your or
     |**Replication** | LRS |
     |**Access tier** | Cool |
 
-    ![Enter details for new storage account resource](media/create-storage-account-details.png "Enter details for new storage account resource")
+    ![Enter details for new storage account resource](media/create-storage-account/details.png "Enter details for new storage account resource")
 
 1. Verify that the information you entered is correct and click the "create" button
 
-    ![Submit new storage account resource for creation](media/create-storage-account-submit.png "Submit new storage account resource for creation")
+    ![Submit new storage account resource for creation](media/create-storage-account/submit.png "Submit new storage account resource for creation")
 
 1. Once notified that the storage account has been created, click “go to resource”
 
-    ![Navigate to the new storage account resource](media/create-storage-account-go-to-resource.png "Navigate to the new storage account resource")
+    ![Navigate to the new storage account resource](media/create-storage-account/go-to-resource.png "Navigate to the new storage account resource")
 
 1. Go to “access keys” and take note of the “storage account name” and the “primary key”
 
-    ![Save new storage account resource name and access keys for later](media/create-storage-account-access-keys.png "Save new storage account resource name and access keys for later")
+    ![Save new storage account resource name and access keys for later](media/create-storage-account/access-keys.png "Save new storage account resource name and access keys for later")
 
 ## Sign up for MAG provisioning
 
