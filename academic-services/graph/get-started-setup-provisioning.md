@@ -77,3 +77,23 @@ To sign up for MAG on AS distribution preview, send the following information us
 
 > [!NOTE]
 > MAG is currently in a free preview period, so there are no charges associated with the provisioning or use of the data/service itself. However Azure requires you to cover all costs associated with standard resource creation, usage, etc. For cost estimates associated with MAG please see the [Pricing](resources-pricing.md) page. <br/><br/>Most research institutions have an "Enterprise Account" with Microsoft including Azure subscription. The pricing for Enterprise Accounts differ from the individual account shown in Azure's price calculator. <br/><br/>If you have an Enterprise Account, please check with your individual institution's Information Technology/Computer Center resource on the process of setting up Azure to get MAG. You might need to obtain a "Master Agreement #" and involve MLSP (Microsoft Licensed Solution Provider) for help.
+
+## Next steps
+
+In this tutorial, you learned how to:
+
+> [!div class="checklist"]
+> * Create an Azure Databricks service
+> * Create a Spark cluster in Azure Databricks
+> * Create a notebook in Azure Databricks
+> * Extract data from a Data Lake Storage Gen2 account
+> * Transform data in Azure Databricks
+> * Load data into Azure SQL Data Warehouse
+
+Advance to the next tutorial to learn about streaming real-time data into Azure Databricks using Azure Event Hubs.
+
+> [!div class="nextstepaction"]
+>[Using Azure Data Lake Analytics for Microsoft Academic Graph](get-started-setup-azure-data-lake-analytics.md)
+
+> [!div class="nextstepaction"]
+>[Using Azure Databricks for Microsoft Academic Graph](get-started-databricks.md)
