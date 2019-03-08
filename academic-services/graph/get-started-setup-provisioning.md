@@ -80,17 +80,7 @@ To sign up for MAG on AS distribution preview, send the following information us
 
 ## Next steps
 
-In this tutorial, you learned how to:
-
-> [!div class="checklist"]
-> * Create an Azure Databricks service
-> * Create a Spark cluster in Azure Databricks
-> * Create a notebook in Azure Databricks
-> * Extract data from a Data Lake Storage Gen2 account
-> * Transform data in Azure Databricks
-> * Load data into Azure SQL Data Warehouse
-
-Advance to the next tutorial to learn about streaming real-time data into Azure Databricks using Azure Event Hubs.
+Advance to the next tutorial to learn about using Azure Data Lake Analytics or Databricks for Microsoft Academic Graph.
 
 > [!div class="nextstepaction"]
 >[Using Azure Data Lake Analytics for Microsoft Academic Graph](get-started-setup-azure-data-lake-analytics.md)
