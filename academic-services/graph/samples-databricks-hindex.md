@@ -2,7 +2,7 @@
 title: 'Sample: Compute Author H-Index using Azure Databricks'
 description: Compute Author H-Index for Microsoft Academic Graph using Azure Databricks
 services: microsoft-academic-services
-ms.topic: sample
+ms.topic: tutorial
 ms.service: microsoft-academic-services
 ms.date: 3/6/2019
 ---
