@@ -4,11 +4,11 @@ description: Compute Author H-Index for Microsoft Academic Graph using Azure Dat
 services: microsoft-academic-services
 ms.topic: tutorial
 ms.service: microsoft-academic-services
-ms.date: 3/6/2019
+ms.date: 3/10/2019
 ---
 # Sample: Compute Author H-Index using Azure Databricks
 
-In this tutorial, you perform an ETL (extract, transform, and load data) operation by using Azure Databricks. You extract data from Azure Data Lake Storage Gen2 into Azure Databricks, run transformations on the data in Azure Databricks, and then load the transformed data into Azure SQL Data Warehouse.
+In this tutorial, you extract and transform MAG data using Azure Databricks.
 
 ## Prerequisites
 
@@ -95,9 +95,7 @@ In this section, you create the first notebook cell and define configration vari
 
 You can now load MAG data files as data frames in Azure Databricks and create temporary views to be referenced in SQL blocks later.
 
-1. **Get affiliations**
-
-Paste the following code in a new cell. Press the **SHIFT + ENTER** keys to run the code in this block.
+1. **Get affiliations**. Paste the following code in a new cell. Press the **SHIFT + ENTER** keys to run the code in this block.
 
    ```python
    AffiliationsPath = 'mag/Affiliations.txt' 
@@ -122,7 +120,7 @@ Paste the following code in a new cell. Press the **SHIFT + ENTER** keys to run 
    ...
    ``` 
 
-1. Get authors. Paste the following code in a new cell. Press the **SHIFT + ENTER** keys to run the code in this block.
+1. **Get authors**. Paste the following code in a new cell. Press the **SHIFT + ENTER** keys to run the code in this block.
 
    ```python
    AuthorsPath = 'mag/Authors.txt'
@@ -146,7 +144,7 @@ Paste the following code in a new cell. Press the **SHIFT + ENTER** keys to run 
    ...
    ``` 
 
-1. Get (puthor, paper) pairs. Paste the following code in a new cell. Press the **SHIFT + ENTER** keys to run the code in this block.
+1. **Get (puthor, paper) pairs**. Paste the following code in a new cell. Press the **SHIFT + ENTER** keys to run the code in this block.
 
    ```python
    PaperAuthorAffiliationsPath = 'mag/PaperAuthorAffiliations.txt'
@@ -171,7 +169,7 @@ Paste the following code in a new cell. Press the **SHIFT + ENTER** keys to run 
    ...
    ``` 
 
-1. Get papers. Paste the following code in a new cell. Press the **SHIFT + ENTER** keys to run the code in this block.
+1. **Get papers**. Paste the following code in a new cell. Press the **SHIFT + ENTER** keys to run the code in this block.
 
    ```python
    PapersPath = 'mag/Papers.txt'
@@ -204,7 +202,7 @@ Paste the following code in a new cell. Press the **SHIFT + ENTER** keys to run 
 
 In this section, you compute h-index for all authors using SQL blocks.
 
-1. First, create an author-paper-citation view. Paste the following code in a new cell. Press the **SHIFT + ENTER** keys to run the code in this block.
+1. **Create an author-paper-citation view**. Paste the following code in a new cell. Press the **SHIFT + ENTER** keys to run the code in this block.
 
    ```sql
    %sql
@@ -219,7 +217,7 @@ In this section, you compute h-index for all authors using SQL blocks.
            ON A.PaperId == P.PaperId;
    ```
 
-1. Order AuthorPaperCitation view by citation. Paste the following code in a new cell. Press the **SHIFT + ENTER** keys to run the code in this block.
+1. **Order AuthorPaperCitation view by citation**. Paste the following code in a new cell. Press the **SHIFT + ENTER** keys to run the code in this block.
 
    ```sql
    %sql
@@ -233,7 +231,7 @@ In this section, you compute h-index for all authors using SQL blocks.
        FROM AuthorPaperCitation;
    ```
 
-1. Compute h-index for each author. Paste the following code in a new cell. Press the **SHIFT + ENTER** keys to run the code in this block.
+1. **Compute h-index for all authors**. Paste the following code in a new cell. Press the **SHIFT + ENTER** keys to run the code in this block.
 
    ```sql
    %sql
@@ -247,7 +245,7 @@ In this section, you compute h-index for all authors using SQL blocks.
        GROUP BY AuthorId;
    ```
 
-1. Get author detail information. Paste the following code in a new cell. Press the **SHIFT + ENTER** keys to run the code in this block.
+1. **Get author detail information**. Paste the following code in a new cell. Press the **SHIFT + ENTER** keys to run the code in this block.
 
    ```sql
    %sql
