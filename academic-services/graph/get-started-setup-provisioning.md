@@ -86,7 +86,7 @@ Advance to next sections to learn about entity data schema and using Azure Data 
 >[Entity Data Schema](reference-data-schema.md)
 
 > [!div class="nextstepaction"]
->[Using Azure Data Lake Analytics](get-started-setup-azure-data-lake-analytics.md)
+>[Set up Azure Data Lake Analytics](get-started-setup-azure-data-lake-analytics.md)
 
 > [!div class="nextstepaction"]
->[Using Azure Databricks](get-started-databricks.md)
+>[Set up Azure Databricks](get-started-databricks.md)
