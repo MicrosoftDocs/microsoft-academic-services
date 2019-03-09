@@ -44,9 +44,9 @@ In this section, you create a notebook in Azure Databricks workspace
 
 1. Select **Create**.
 
-## Create a file system in the Azure Data Lake Storage Gen2 account
+## Define configration variables
 
-In this section, you create a notebook in Azure Databricks workspace and then run code snippets to configure the storage account
+In this section, you create a notebook cell and define configration variables
 
 1. Copy and paste the following code block into the first cell.
 
@@ -68,47 +68,35 @@ In this section, you create a notebook in Azure Databricks workspace and then ru
 
 1. Press the **SHIFT + ENTER** keys to run the code in this block.
 
-## Mount Azure Storage as a file system in the cluster
+## Mount Azure Storage as a file system of the cluster
 
 1. Copy and paste the following code block into the first cell.
 
-
-    %sh wget -P /tmp https://raw.githubusercontent.com/Azure/usql/master/Examples/Samples/Data/json/radiowebsite/small_radio_json.json
-    if (not any(mount.mountPoint == MagDir for mount in dbutils.fs.mounts())):
-      dbutils.fs.mount(
-        source = ('wasbs://%s@%s.blob.core.windows.net' % (MagContainer, AzureStorageAccount)),
-        mount_point = MagDir,
-        extra_configs = {('fs.azure.account.key.%s.blob.core.windows.net' % AzureStorageAccount) : AzureStorageAccessKey})
-
-    if (not any(mount.mountPoint == OutputDir for mount in dbutils.fs.mounts())):
-      dbutils.fs.mount(
-        source = ('wasbs://%s@%s.blob.core.windows.net' % (OutputContainer, AzureStorageAccount)),
-        mount_point = OutputDir,
-        extra_configs = {('fs.azure.account.key.%s.blob.core.windows.net' % AzureStorageAccount) : AzureStorageAccessKey})
-
-    dbutils.fs.ls('/mnt')
-
-
-abc test
-
-   ```python
-   AzureStorageAccount = '<AzureStorageAccount>'     # Azure Storage account containing MAG dataset
-   AzureStorageAccessKey = '<AzureStorageAccessKey>' # Access Key of the Azure Storage account
-   MagContainer = '<MagContainer>'                   # The container name in Azure Storage account containing MAG dataset, Usually in forms of mag-yyyy-mm-dd
-
-   MagDir = '/mnt/mag'
    ```
+   if (not any(mount.mountPoint == MagDir for mount in dbutils.fs.mounts())):
+     dbutils.fs.mount(
+       source = ('wasbs://%s@%s.blob.core.windows.net' % (MagContainer, AzureStorageAccount)),
+       mount_point = MagDir,
+       extra_configs = {('fs.azure.account.key.%s.blob.core.windows.net' % AzureStorageAccount) : AzureStorageAccessKey})
 
-1. In this code block, replace the `AzureStorageAccount`, `AzureStorageAccessKey`, and `MagContainer` placeholder values in this code block with the values that you collected while completing the prerequisites of this sample.
+   if (not any(mount.mountPoint == OutputDir for mount in dbutils.fs.mounts())):
+     dbutils.fs.mount(
+       source = ('wasbs://%s@%s.blob.core.windows.net' % (OutputContainer, AzureStorageAccount)),
+       mount_point = OutputDir,
+       extra_configs = {('fs.azure.account.key.%s.blob.core.windows.net' % AzureStorageAccount) : AzureStorageAccessKey})
 
-   * The `AzureStorageAccount` is the name of your Azure Storage account.
-
-   * The `AzureStorageAccessKey` is the access key of the Azure Storage account.
-
-   * The `MagContainer` is the container name in Azure Storage account containing MAG dataset, Usually in forms of mag-yyyy-mm-dd.
+   dbutils.fs.ls('/mnt')
+   ```
 
 1. Press the **SHIFT + ENTER** keys to run the code in this block.
 
+   You see an output similar to the following snippet:
+
+   ```
+   Out[2]: 
+   [FileInfo(path='dbfs:/mnt/mag/', name='mag/', size=0),
+    FileInfo(path='dbfs:/mnt/output/', name='output/', size=0)]
+   ``` 
 ## Ingest sample data into the Azure Data Lake Storage Gen2 account
 
 Before you begin with this section, you must complete the following prerequisites:
