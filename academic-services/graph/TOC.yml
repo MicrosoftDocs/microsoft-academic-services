@@ -18,14 +18,14 @@
 - name: Azure Data Lake Analytics
   expanded: true
   items:
-  - name: Set up Azure Data Lake Analytics for Microsoft Academic Graph
+  - name: Set up Azure Data Lake Analytics
     href: get-started-setup-azure-data-lake-analytics.md
   - name: Analytics and visualization samples
     href: samples-azure-data-lake-analytics.md
 - name: Azure Databricks
   expanded: true
   items:
-  - name: Set up Azure Databricks for Microsoft Academic Graph
+  - name: Set up Azure Databricks
     href: get-started-databricks.md
   - name: Azure Databricks sample
     href: samples-databricks-hindex.md
