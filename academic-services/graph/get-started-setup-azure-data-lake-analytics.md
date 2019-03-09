@@ -43,3 +43,7 @@ Advance to the next step to learn about analytics and visualization using Azure 
 
 > [!div class="nextstepaction"]
 >[Analytics and visualization samples](samples-azure-data-lake-analytics.md)
+
+## Resources
+
+* [Get started with Azure Data Lake Analytics using Azure portal](https://docs.microsoft.com/en-us/azure/data-lake-analytics/data-lake-analytics-get-started-portal)
