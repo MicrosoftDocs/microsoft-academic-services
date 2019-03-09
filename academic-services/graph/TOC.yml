@@ -28,7 +28,7 @@
   - name: Set up Azure Databricks for Microsoft Academic Graph
     href: get-started-databricks.md
   - name: Azure Databricks sample
-    href: tutorial-databricks-hindex.md
+    href: samples-databricks-hindex.md
 - name: Resources
   expanded: true
   items:
