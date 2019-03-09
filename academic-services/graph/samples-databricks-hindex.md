@@ -40,7 +40,7 @@ In this section, you create a notebook in Azure Databricks workspace
 
 1. In the **Create Notebook** dialog box, enter a name for the notebook. Select **Python** as the language, and then select the Spark cluster that you created earlier.
 
-    ![Provide details for a notebook in Databricks](./media/databricks/databricks-notebook-details.png "Provide details for a notebook in Databricks")
+    ![Provide details for a notebook in Databricks](./media/databricks/create-notebook.png "Provide details for a notebook in Databricks")
 
 1. Select **Create**.
 
