@@ -277,7 +277,7 @@ In this section, you compute h-index for all authors using SQL blocks.
 
 In this section, you query the top authors by h-index and visualize the result.
 
-1. Query the authors with highest h-index.
+1. Query the authors with highest h-index. Paste the following code in a new cell. Press the **SHIFT + ENTER** keys to run the code in this block.
 
    ```sql
    %sql
@@ -292,8 +292,6 @@ In this section, you query the top authors by h-index and visualize the result.
    ORDER BY HIndex DESC, AuthorId
    LIMIT 100;
    ```
-
-1. Press the **SHIFT + ENTER** keys to run the code in this block.
 
 1. Click the table button to see the result in table form.
 
@@ -310,23 +308,6 @@ After you finish the tutorial, you can terminate the cluster. From the Azure Dat
 ![Stop a Databricks cluster](media/databricks/terminate-databricks-cluster.png "Stop a Databricks cluster")
 
 If you don't manually terminate the cluster, it automatically stops, provided you selected the **Terminate after \_\_ minutes of inactivity** check box when you created the cluster. In such a case, the cluster automatically stops if it's been inactive for the specified time.
-
-## Next steps
-
-In this tutorial, you learned how to:
-
-> [!div class="checklist"]
-> * Create an Azure Databricks service
-> * Create a Spark cluster in Azure Databricks
-> * Create a notebook in Azure Databricks
-> * Extract data from a Data Lake Storage Gen2 account
-> * Transform data in Azure Databricks
-> * Load data into Azure SQL Data Warehouse
-
-Advance to the next tutorial to learn about streaming real-time data into Azure Databricks using Azure Event Hubs.
-
-> [!div class="nextstepaction"]
->[Stream data into Azure Databricks using Event Hubs](databricks-stream-from-eventhubs.md)
 
 ## Resources
 
