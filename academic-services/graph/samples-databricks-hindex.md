@@ -307,7 +307,7 @@ In this section, you query the top authors by h-index and visualize the result.
 
 After you finish the tutorial, you can terminate the cluster. From the Azure Databricks workspace, select **Clusters** on the left. For the cluster to terminate, under **Actions**, point to the ellipsis (...) and select the **Terminate** icon.
 
-![Stop a Databricks cluster](./media/databricks/terminate-databricks-cluster.png "Stop a Databricks cluster")
+![Stop a Databricks cluster](media/databricks/terminate-databricks-cluster.png "Stop a Databricks cluster")
 
 If you don't manually terminate the cluster, it automatically stops, provided you selected the **Terminate after \_\_ minutes of inactivity** check box when you created the cluster. In such a case, the cluster automatically stops if it's been inactive for the specified time.
 
