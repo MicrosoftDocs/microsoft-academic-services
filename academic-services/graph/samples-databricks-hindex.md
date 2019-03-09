@@ -70,19 +70,13 @@ In this section, you create a notebook cell and define configration variables
 
 ## Mount Azure Storage as a file system of the cluster
 
-1. Copy and paste the following code block into the first cell.
+1. Copy and paste the following code block in a new cell.
 
    ```
    if (not any(mount.mountPoint == MagDir for mount in dbutils.fs.mounts())):
      dbutils.fs.mount(
        source = ('wasbs://%s@%s.blob.core.windows.net' % (MagContainer, AzureStorageAccount)),
        mount_point = MagDir,
-       extra_configs = {('fs.azure.account.key.%s.blob.core.windows.net' % AzureStorageAccount) : AzureStorageAccessKey})
-
-   if (not any(mount.mountPoint == OutputDir for mount in dbutils.fs.mounts())):
-     dbutils.fs.mount(
-       source = ('wasbs://%s@%s.blob.core.windows.net' % (OutputContainer, AzureStorageAccount)),
-       mount_point = OutputDir,
        extra_configs = {('fs.azure.account.key.%s.blob.core.windows.net' % AzureStorageAccount) : AzureStorageAccessKey})
 
    dbutils.fs.ls('/mnt')
@@ -93,57 +87,122 @@ In this section, you create a notebook cell and define configration variables
    You see an output similar to the following snippet:
 
    ```
-   Out[2]: 
-   [FileInfo(path='dbfs:/mnt/mag/', name='mag/', size=0),
-    FileInfo(path='dbfs:/mnt/output/', name='output/', size=0)]
+   Out[1]: 
+   [FileInfo(path='dbfs:/mnt/mag/', name='mag/', size=0)]
    ``` 
-## Ingest sample data into the Azure Data Lake Storage Gen2 account
 
-Before you begin with this section, you must complete the following prerequisites:
+## Extract data from the MAG in Azure Storage
 
-Enter the following code into a notebook cell:
+You can now load the MAG data files as data frames in Azure Databricks
 
-    %sh wget -P /tmp https://raw.githubusercontent.com/Azure/usql/master/Examples/Samples/Data/json/radiowebsite/small_radio_json.json
+1. Get affiliations. Paste the following code in a new cell.
 
-In the cell, press **SHIFT + ENTER** to run the code.
+   ```python
+   AffiliationsPath = 'mag/Affiliations.txt' 
+   AffiliationsFields = ['AffiliationId', 'Rank', 'NormalizedName', 'DisplayName', 'GridId', 'OfficialPage', 'WikiPage', 'PaperCount', 'CitationCount', 'CreatedDate']
+   Affiliations = spark.read.format('csv').options(header='false', inferSchema='true', delimiter='\t').load(('%s/%s' % (MagDir, AffiliationsPath))).toDF(*AffiliationsFields)
 
-Now in a new cell below this one, enter the following code, and replace the values that appear in brackets with the same values you used earlier:
-
-    dbutils.fs.cp("file:///tmp/small_radio_json.json", "abfss://<file-system>@<account-name>.dfs.core.windows.net/")
-
-In the cell, press **SHIFT + ENTER** to run the code.
-
-## Extract data from the Azure Data Lake Storage Gen2 account
-
-1. You can now load the sample json file as a data frame in Azure Databricks. Paste the following code in a new cell. Replace the placeholders shown in brackets with your values.
-
-   ```scala
-   val df = spark.read.json("abfss://<file-system-name>@<storage-account-name>.dfs.core.windows.net/small_radio_json.json")
+   Affiliations = Affiliations.select(Affiliations.AffiliationId, Affiliations.DisplayName)
+   Affiliations.show(10)
+   Affiliations.createOrReplaceTempView('Affiliations')
    ```
 
-   * Replace the  `file-system-name` placeholder value with the name that you gave your file system in Storage Explorer.
+1. Press the **SHIFT + ENTER** keys to run the code in this block.
 
-   * Replace the `storage-account-name` placeholder with the name of your storage account.
-
-2. Press the **SHIFT + ENTER** keys to run the code in this block.
-
-3. Run the following code to see the contents of the data frame:
-
-    ```scala
-    df.show()
-    ```
    You see an output similar to the following snippet:
 
-   ```bash
-   +---------------------+---------+---------+------+-------------+----------+---------+-------+--------------------+------+--------+-------------+---------+--------------------+------+-------------+------+
-   |               artist|     auth|firstName|gender|itemInSession|  lastName|   length|  level|            location|method|    page| registration|sessionId|                song|status|           ts|userId|
-   +---------------------+---------+---------+------+-------------+----------+---------+-------+--------------------+------+--------+-------------+---------+--------------------+------+-------------+------+
-   | El Arrebato         |Logged In| Annalyse|     F|            2|Montgomery|234.57914| free  |  Killeen-Temple, TX|   PUT|NextSong|1384448062332|     1879|Quiero Quererte Q...|   200|1409318650332|   309|
-   | Creedence Clearwa...|Logged In|   Dylann|     M|            9|    Thomas|340.87138| paid  |       Anchorage, AK|   PUT|NextSong|1400723739332|       10|        Born To Move|   200|1409318653332|    11|
-   | Gorillaz            |Logged In|     Liam|     M|           11|     Watts|246.17751| paid  |New York-Newark-J...|   PUT|NextSong|1406279422332|     2047|                DARE|   200|1409318685332|   201|
-   ...
-   ...
    ```
+   +-------------+--------------------+
+   |AffiliationId|         DisplayName|
+   +-------------+--------------------+
+   |     20455151|         Air Liquide|
+   |     24386293|Hellenic National...|
+   |     32956416|Catholic Universi...|
+   ...
+   ...
+   ``` 
+
+1. Get authors. Paste the following code in a new cell.
+
+   ```python
+   AuthorsPath = 'mag/Authors.txt'
+   AuthorsFields = ['AuthorId', 'Rank', 'NormalizedName', 'DisplayName', 'LastKnownAffiliationId', 'PaperCount', 'CitationCount', 'CreatedDate']
+   Authors = spark.read.format('csv').options(header='false', inferSchema='true', delimiter='\t').load(('%s/%s' % (MagDir, AuthorsPath))).toDF(*AuthorsFields)
+
+   Authors = Authors.select(Authors.AuthorId, Authors.DisplayName, Authors.LastKnownAffiliationId, Authors.PaperCount)
+   Authors.show(10)
+   Authors.createOrReplaceTempView('Authors')
+   ```
+
+1. Press the **SHIFT + ENTER** keys to run the code in this block.
+
+   You see an output similar to the following snippet:
+
+   ```
+   +--------+--------------------+----------------------+----------+
+   |AuthorId|         DisplayName|LastKnownAffiliationId|PaperCount|
+   +--------+--------------------+----------------------+----------+
+   |     584|Gözde Özdikmenli-...|              79946792|         2|
+   |     859|          Gy. Tolmár|                  null|         2|
+   |     978|      Ximena Faúndez|             162148367|        18|
+   ...
+   ``` 
+
+1. Get (puthor, paper) pairs. Paste the following code in a new cell.
+
+   ```python
+   PaperAuthorAffiliationsPath = 'mag/PaperAuthorAffiliations.txt'
+   PaperAuthorAffiliationsFields = ['PaperId', 'AuthorId', 'AffiliationId', 'AuthorSequenceNumber', 'OriginalAffiliation']
+   PaperAuthorAffiliations = spark.read.format('csv').options(header='false', inferSchema='true', delimiter='\t').load(('%s/%s' % (MagDir, PaperAuthorAffiliationsPath))).toDF(*PaperAuthorAffiliationsFields)
+
+   AuthorPaper = PaperAuthorAffiliations.select(PaperAuthorAffiliations.AuthorId, PaperAuthorAffiliations.PaperId).distinct()
+   AuthorPaper.show(10)
+   AuthorPaper.createOrReplaceTempView('AuthorPaper')
+   ```
+
+1. Press the **SHIFT + ENTER** keys to run the code in this block.
+
+   You see an output similar to the following snippet:
+
+   ```
+   +----------+--------+
+   |  AuthorId| PaperId|
+   +----------+--------+
+   |2121966975|94980387|
+   |2502082315|94984326|
+   |2713129682|94984597|
+   ...
+   ...
+   ``` 
+
+1. Get papers. Paste the following code in a new cell.
+
+   ```python
+   PapersPath = 'mag/Papers.txt'
+   PapersFields = ['PaperId', 'Rank', 'Doi', 'DocType', 'PaperTitle', 'OriginalTitle', 'BookTitle', 'Year', 'Date', \
+                   'Publisher', 'JournalId', 'ConferenceSeriesId', 'ConferenceInstanceId', 'Volume', 'Issue', 'FirstPage', \
+                   'LastPage', 'ReferenceCount', 'CitationCount', 'EstimatedCitation', 'OriginalVenue', 'CreatedDate']
+   Papers = spark.read.format('csv').options(header='false', inferSchema='true', delimiter='\t').load(('%s/%s' % (MagDir, PapersPath))).toDF(*PapersFields)
+
+   PaperCitation = Papers.select(Papers.PaperId, Papers.EstimatedCitation).where(Papers.EstimatedCitation > 0)
+   PaperCitation.show(10)
+   PaperCitation.createOrReplaceTempView('PaperCitation')
+   ```
+
+1. Press the **SHIFT + ENTER** keys to run the code in this block.
+
+   You see an output similar to the following snippet:
+
+   ```
+   +----------+-----------------+
+   |   PaperId|EstimatedCitation|
+   +----------+-----------------+
+   |2088151486|               61|
+   |2864100843|                1|
+   |2260674751|                5|
+   ...
+   ...
+   ``` 
 
    You have now extracted the data from Azure Data Lake Storage Gen2 into Azure Databricks.
 
