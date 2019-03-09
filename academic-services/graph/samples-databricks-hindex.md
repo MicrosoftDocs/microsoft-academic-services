@@ -46,7 +46,7 @@ In this section, you create a notebook in Azure Databricks workspace
 
 ## Define configration variables
 
-In this section, you create a notebook cell and define configration variables
+In this section, you create the first notebook cell and define configration variables
 
 1. Copy and paste the following code block into the first cell.
 
@@ -93,9 +93,11 @@ In this section, you create a notebook cell and define configration variables
 
 ## Load MAG data files from Azure Storage
 
-You can now load MAG data files as data frames in Azure Databricks. Then create temporary views to be referenced in SQL block later.
+You can now load MAG data files as data frames in Azure Databricks and create temporary views to be referenced in SQL blocks later.
 
-1. Get affiliations. Paste the following code in a new cell.
+1. **Get affiliations**
+
+Paste the following code in a new cell. Press the **SHIFT + ENTER** keys to run the code in this block.
 
    ```python
    AffiliationsPath = 'mag/Affiliations.txt' 
@@ -106,8 +108,6 @@ You can now load MAG data files as data frames in Azure Databricks. Then create 
    Affiliations.show(10)
    Affiliations.createOrReplaceTempView('Affiliations')
    ```
-
-1. Press the **SHIFT + ENTER** keys to run the code in this block.
 
    You see an output similar to the following snippet:
 
@@ -122,7 +122,7 @@ You can now load MAG data files as data frames in Azure Databricks. Then create 
    ...
    ``` 
 
-1. Get authors. Paste the following code in a new cell.
+1. Get authors. Paste the following code in a new cell. Press the **SHIFT + ENTER** keys to run the code in this block.
 
    ```python
    AuthorsPath = 'mag/Authors.txt'
@@ -133,8 +133,6 @@ You can now load MAG data files as data frames in Azure Databricks. Then create 
    Authors.show(10)
    Authors.createOrReplaceTempView('Authors')
    ```
-
-1. Press the **SHIFT + ENTER** keys to run the code in this block.
 
    You see an output similar to the following snippet:
 
@@ -148,7 +146,7 @@ You can now load MAG data files as data frames in Azure Databricks. Then create 
    ...
    ``` 
 
-1. Get (puthor, paper) pairs. Paste the following code in a new cell.
+1. Get (puthor, paper) pairs. Paste the following code in a new cell. Press the **SHIFT + ENTER** keys to run the code in this block.
 
    ```python
    PaperAuthorAffiliationsPath = 'mag/PaperAuthorAffiliations.txt'
@@ -159,8 +157,6 @@ You can now load MAG data files as data frames in Azure Databricks. Then create 
    AuthorPaper.show(10)
    AuthorPaper.createOrReplaceTempView('AuthorPaper')
    ```
-
-1. Press the **SHIFT + ENTER** keys to run the code in this block.
 
    You see an output similar to the following snippet:
 
@@ -175,7 +171,7 @@ You can now load MAG data files as data frames in Azure Databricks. Then create 
    ...
    ``` 
 
-1. Get papers. Paste the following code in a new cell.
+1. Get papers. Paste the following code in a new cell. Press the **SHIFT + ENTER** keys to run the code in this block.
 
    ```python
    PapersPath = 'mag/Papers.txt'
@@ -188,8 +184,6 @@ You can now load MAG data files as data frames in Azure Databricks. Then create 
    PaperCitation.show(10)
    PaperCitation.createOrReplaceTempView('PaperCitation')
    ```
-
-1. Press the **SHIFT + ENTER** keys to run the code in this block.
 
    You see an output similar to the following snippet:
 
@@ -204,7 +198,7 @@ You can now load MAG data files as data frames in Azure Databricks. Then create 
    ...
    ``` 
 
-   You have now extracted the data from Azure Data Lake Storage Gen2 into Azure Databricks.
+   You have now extracted MAG data from Azure Storage into Azure Databricks.
 
 ## Compute Author H-Index
 
@@ -225,7 +219,7 @@ In this section, you compute h-index for all authors using SQL blocks.
            ON A.PaperId == P.PaperId;
    ```
 
-1. Order AuthorPaperCitation view by citation. Press the **SHIFT + ENTER** keys to run the code in this block.
+1. Order AuthorPaperCitation view by citation. Paste the following code in a new cell. Press the **SHIFT + ENTER** keys to run the code in this block.
 
    ```sql
    %sql
