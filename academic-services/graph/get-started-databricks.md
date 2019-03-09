@@ -16,14 +16,6 @@ Complete these tasks before you begin this tutorial:
 
 * Setting up provisioning of Microsoft Academic Graph to an Azure blob storage account. See [Get Microsoft Academic Graph on Azure storage](./get-started-setup-provisioning.md.md).
 
-## Gather the information that you need
-
-   Before you begin, you should have these items of information:
-
-   :heavy_check_mark:  The name of your blob storage account.
-
-   :heavy_check_mark:  The access key of your blob storage account.
-
 ## Create an Azure Databricks service
 
 In this section, you create an Azure Databricks service by using the Azure portal.
