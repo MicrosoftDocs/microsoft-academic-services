@@ -83,10 +83,10 @@ To sign up for MAG on AS distribution preview, send the following information us
 Advance to next sections to learn about entity data schema and using Azure Data Lake Analytics or Databricks for Microsoft Academic Graph.
 
 > [!div class="nextstepaction"]
->[Microsoft Academic Graph Entity Data Schema](reference-data-schema.md)
+>[Entity Data Schema](reference-data-schema.md)
 
 > [!div class="nextstepaction"]
->[Using Azure Data Lake Analytics for Microsoft Academic Graph](get-started-setup-azure-data-lake-analytics.md)
+>[Using Azure Data Lake Analytics](get-started-setup-azure-data-lake-analytics.md)
 
 > [!div class="nextstepaction"]
->[Using Azure Databricks for Microsoft Academic Graph](get-started-databricks.md)
+>[Using Azure Databricks](get-started-databricks.md)
