@@ -242,8 +242,7 @@ Column # | Name | Type | Note
 Advance to next sections to learn about using Azure Data Lake Analytics or Databricks for Microsoft Academic Graph.
 
 > [!div class="nextstepaction"]
->[Using Azure Data Lake Analytics](get-started-setup-azure-data-lake-analytics.md)
+>[Set up Azure Data Lake Analytics](get-started-setup-azure-data-lake-analytics.md)
 
 > [!div class="nextstepaction"]
->[Using Azure Databricks](get-started-databricks.md)
-
+>[Set up Azure Databricks](get-started-databricks.md)
