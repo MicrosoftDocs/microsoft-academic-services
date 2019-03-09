@@ -28,44 +28,86 @@ Complete these tasks before you begin this tutorial:
    
    :heavy_check_mark:  The name of blob storage container containing MAG dataset.
 
+## Create a notebook in Azure Databricks
+
+In this section, you create a notebook in Azure Databricks workspace
+
+1. In the [Azure portal](https://portal.azure.com), go to the Azure Databricks service that you created, and select **Launch Workspace**.
+
+1. On the left, select **Workspace**. From the **Workspace** drop-down, select **Create** > **Notebook**.
+
+    ![Create a notebook in Databricks](./media/databricks/databricks-create-notebook.png "Create notebook in Databricks")
+
+1. In the **Create Notebook** dialog box, enter a name for the notebook. Select **Python** as the language, and then select the Spark cluster that you created earlier.
+
+    ![Provide details for a notebook in Databricks](./media/databricks/databricks-notebook-details.png "Provide details for a notebook in Databricks")
+
+1. Select **Create**.
+
 ## Create a file system in the Azure Data Lake Storage Gen2 account
 
 In this section, you create a notebook in Azure Databricks workspace and then run code snippets to configure the storage account
 
-1. In the [Azure portal](https://portal.azure.com), go to the Azure Databricks service that you created, and select **Launch Workspace**.
+1. Copy and paste the following code block into the first cell.
 
-2. On the left, select **Workspace**. From the **Workspace** drop-down, select **Create** > **Notebook**.
+   ```python
+   AzureStorageAccount = '<AzureStorageAccount>'     # Azure Storage account containing MAG dataset
+   AzureStorageAccessKey = '<AzureStorageAccessKey>' # Access Key of the Azure Storage account
+   MagContainer = '<MagContainer>'                   # The container name in Azure Storage account containing MAG dataset, Usually in forms of mag-yyyy-mm-dd
 
-    ![Create a notebook in Databricks](./media/databricks/databricks-create-notebook.png "Create notebook in Databricks")
-
-3. In the **Create Notebook** dialog box, enter a name for the notebook. Select **Scala** as the language, and then select the Spark cluster that you created earlier.
-
-    ![Provide details for a notebook in Databricks](./media/databricks/databricks-notebook-details.png "Provide details for a notebook in Databricks")
-
-4. Select **Create**.
-
-5. Copy and paste the following code block into the first cell.
-
-   ```scala
-   spark.conf.set("fs.azure.account.auth.type.<storage-account-name>.dfs.core.windows.net", "OAuth")
-   spark.conf.set("fs.azure.account.oauth.provider.type.<storage-account-name>.dfs.core.windows.net", "org.apache.hadoop.fs.azurebfs.oauth2.ClientCredsTokenProvider")
-   spark.conf.set("fs.azure.account.oauth2.client.id.<storage-account-name>.dfs.core.windows.net", "<application-id>")
-   spark.conf.set("fs.azure.account.oauth2.client.secret.<storage-account-name>.dfs.core.windows.net", "<authentication-key>")
-   spark.conf.set("fs.azure.account.oauth2.client.endpoint.<storage-account-name>.dfs.core.windows.net", "https://login.microsoftonline.com/<tenant-id>/oauth2/token")
-   spark.conf.set("fs.azure.createRemoteFileSystemDuringInitialization", "true")
-   dbutils.fs.ls("abfss://<file-system-name>@<storage-account-name>.dfs.core.windows.net/")
-   spark.conf.set("fs.azure.createRemoteFileSystemDuringInitialization", "false")
+   MagDir = '/mnt/mag'
    ```
 
-6. In this code block, replace the `application-id`, `authentication-id`, `tenant-id`, and `storage-account-name` placeholder values in this code block with the values that you collected while completing the prerequisites of this tutorial. Replace the `file-system-name` placeholder value with whatever name you want to give the file system.
+1. In this code block, replace the `AzureStorageAccount`, `AzureStorageAccessKey`, and `MagContainer` placeholder values in this code block with the values that you collected while completing the prerequisites of this sample.
 
-   * The `application-id`, and `authentication-id` are from the app that you registered with active directory as part of creating a service principal.
+   * The `AzureStorageAccount` is the name of your Azure Storage account.
 
-   * The `tenant-id` is from your subscription.
+   * The `AzureStorageAccessKey` is the access key of the Azure Storage account.
 
-   * The `storage-account-name` is the name of your Azure Data Lake Storage Gen2 storage account.
+   * The `MagContainer` is the container name in Azure Storage account containing MAG dataset, Usually in forms of mag-yyyy-mm-dd.
 
-7. Press the **SHIFT + ENTER** keys to run the code in this block.
+1. Press the **SHIFT + ENTER** keys to run the code in this block.
+
+## Mount Azure Storage as a file system in the cluster
+
+1. Copy and paste the following code block into the first cell.
+
+
+    %sh wget -P /tmp https://raw.githubusercontent.com/Azure/usql/master/Examples/Samples/Data/json/radiowebsite/small_radio_json.json
+    if (not any(mount.mountPoint == MagDir for mount in dbutils.fs.mounts())):
+      dbutils.fs.mount(
+        source = ('wasbs://%s@%s.blob.core.windows.net' % (MagContainer, AzureStorageAccount)),
+        mount_point = MagDir,
+        extra_configs = {('fs.azure.account.key.%s.blob.core.windows.net' % AzureStorageAccount) : AzureStorageAccessKey})
+
+    if (not any(mount.mountPoint == OutputDir for mount in dbutils.fs.mounts())):
+      dbutils.fs.mount(
+        source = ('wasbs://%s@%s.blob.core.windows.net' % (OutputContainer, AzureStorageAccount)),
+        mount_point = OutputDir,
+        extra_configs = {('fs.azure.account.key.%s.blob.core.windows.net' % AzureStorageAccount) : AzureStorageAccessKey})
+
+    dbutils.fs.ls('/mnt')
+
+
+abc test
+
+   ```python
+   AzureStorageAccount = '<AzureStorageAccount>'     # Azure Storage account containing MAG dataset
+   AzureStorageAccessKey = '<AzureStorageAccessKey>' # Access Key of the Azure Storage account
+   MagContainer = '<MagContainer>'                   # The container name in Azure Storage account containing MAG dataset, Usually in forms of mag-yyyy-mm-dd
+
+   MagDir = '/mnt/mag'
+   ```
+
+1. In this code block, replace the `AzureStorageAccount`, `AzureStorageAccessKey`, and `MagContainer` placeholder values in this code block with the values that you collected while completing the prerequisites of this sample.
+
+   * The `AzureStorageAccount` is the name of your Azure Storage account.
+
+   * The `AzureStorageAccessKey` is the access key of the Azure Storage account.
+
+   * The `MagContainer` is the container name in Azure Storage account containing MAG dataset, Usually in forms of mag-yyyy-mm-dd.
+
+1. Press the **SHIFT + ENTER** keys to run the code in this block.
 
 ## Ingest sample data into the Azure Data Lake Storage Gen2 account
 
