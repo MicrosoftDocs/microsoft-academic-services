@@ -68,3 +68,8 @@ Advance to the next section to learn about computing author h-index.
 
 > [!div class="nextstepaction"]
 >[Author h-index sample](samples-databricks-hindex.md)
+
+## Resources
+
+* [Create an Azure Databricks service](https://azure.microsoft.com/en-us/services/databricks/).
+* [Create a cluster for the Azure Databricks service](https://docs.azuredatabricks.net/user-guide/clusters/create.html).
