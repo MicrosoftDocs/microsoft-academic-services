@@ -2,7 +2,7 @@
 title: Microsoft Academic Graph data schema
 description: Documents the complete, most recent Microsoft Academic Graph entity data schema, including the name and type of each attribute
 ms.topic: reference
-ms.date: 2/13/2019
+ms.date: 3/6/2019
 ---
 # Microsoft Academic Graph data schema
 
@@ -236,3 +236,14 @@ Column # | Name | Type | Note
 5 | DisplayMame 2 | string |
 6 | Type2 | string | general, disease, disease_cause, medical_treatment, symptom
 7 | Rank | float | Confidence range between 0 and 1. Bigger number representing higher confidence.
+
+## Next steps
+
+Advance to next sections to learn about using Azure Data Lake Analytics or Databricks for Microsoft Academic Graph.
+
+> [!div class="nextstepaction"]
+>[Using Azure Data Lake Analytics for Microsoft Academic Graph](get-started-setup-azure-data-lake-analytics.md)
+
+> [!div class="nextstepaction"]
+>[Using Azure Databricks for Microsoft Academic Graph](get-started-databricks.md)
+
