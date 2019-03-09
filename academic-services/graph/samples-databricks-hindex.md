@@ -206,16 +206,70 @@ You can now load the MAG data files as data frames in Azure Databricks
 
    You have now extracted the data from Azure Data Lake Storage Gen2 into Azure Databricks.
 
-## Transform data in Azure Databricks
+## Compute Author H-Index
 
 The raw sample data **small_radio_json.json** file captures the audience for a radio station and has a variety of columns. In this section, you transform the data to only retrieve specific columns from the dataset.
 
-1. First, retrieve only the columns **firstName**, **lastName**, **gender**, **location**, and **level** from the dataframe that you created.
+1. First, create an author-paper-citation view. Paste the following code in a new cell. Press the **SHIFT + ENTER** keys to run the code in this block.
 
-   ```scala
-   val specificColumnsDf = df.select("firstname", "lastname", "gender", "location", "level")
-   specificColumnsDf.show()
+   ```sql
+   %sql
+   -- Generate author, paper, citation view
+   CREATE OR REPLACE TEMPORARY VIEW AuthorPaperCitation
+       AS SELECT
+           A.AuthorId,
+		     A.PaperId,
+           P.EstimatedCitation
+       FROM AuthorPaper AS A
+       INNER JOIN PaperCitation AS P
+           ON A.PaperId == P.PaperId;
    ```
+
+1. Order AuthorPaperCitation view by citation. Press the **SHIFT + ENTER** keys to run the code in this block.
+
+   ```sql
+   %sql
+   -- Order author, paper, citation view by citation
+   CREATE OR REPLACE TEMPORARY VIEW AuthorPaperOrderByCitation
+       AS SELECT
+           AuthorId,
+		     PaperId,
+           EstimatedCitation,
+		   ROW_NUMBER() OVER(PARTITION BY AuthorId ORDER BY EstimatedCitation DESC) AS Rank
+	    FROM AuthorPaperCitation;
+   ```
+
+1. Greate author h-index. Paste the following code in a new cell. Press the **SHIFT + ENTER** keys to run the code in this block.
+
+   ```sql
+   %sql
+   -- Generate author hindex
+   CREATE OR REPLACE TEMPORARY VIEW AuthorHIndexTemp
+       AS SELECT
+           AuthorId,
+           SUM(EstimatedCitation) AS TotalEstimatedCitation,
+		     MAX(CASE WHEN EstimatedCitation >= Rank THEN Rank ELSE 0 END) AS HIndex
+       FROM AuthorPaperOrderByCitation 
+       GROUP BY AuthorId;
+   ```
+
+1. First, create an author-paper-citation view. Paste the following code in a new cell. Press the **SHIFT + ENTER** keys to run the code in this block.
+
+   ```sql
+   %sql
+   -- Generate author, paper, citation view
+   CREATE OR REPLACE TEMPORARY VIEW AuthorPaperCitation
+       AS SELECT
+           A.AuthorId,
+		   A.PaperId,
+           P.EstimatedCitation
+       FROM AuthorPaper AS A
+       INNER JOIN PaperCitation AS P
+           ON A.PaperId == P.PaperId;
+   ```
+
+
+1. Press the **SHIFT + ENTER** keys to run the code in this block.
 
    You receive output as shown in the following snippet:
 
