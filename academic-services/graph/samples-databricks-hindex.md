@@ -283,3 +283,9 @@ Advance to the next tutorial to learn about streaming real-time data into Azure 
 
 > [!div class="nextstepaction"]
 >[Stream data into Azure Databricks using Event Hubs](databricks-stream-from-eventhubs.md)
+
+## Resources
+
+* [Create an Azure Databricks service](https://azure.microsoft.com/en-us/services/databricks/).
+* [Create a cluster for the Azure Databricks service](https://docs.azuredatabricks.net/user-guide/clusters/create.html).
+* [Import this notebook and attach it to the cluster](https://docs.databricks.com/user-guide/notebooks/notebook-manage.html#import-a-notebook).
