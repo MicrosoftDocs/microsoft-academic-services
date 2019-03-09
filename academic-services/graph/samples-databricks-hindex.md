@@ -1,123 +1,32 @@
 ---
-title: 'Tutorial: Compute Author H-Index using Azure Databricks'
+title: 'Sample: Compute Author H-Index using Azure Databricks'
 description: Compute Author H-Index for Microsoft Academic Graph using Azure Databricks
 services: microsoft-academic-services
-ms.topic: tutorial
+ms.topic: sample
 ms.service: microsoft-academic-services
 ms.date: 3/6/2019
 ---
-# Tutorial: Compute Author H-Index using Azure Databricks
+# Sample: Compute Author H-Index using Azure Databricks
 
 In this tutorial, you perform an ETL (extract, transform, and load data) operation by using Azure Databricks. You extract data from Azure Data Lake Storage Gen2 into Azure Databricks, run transformations on the data in Azure Databricks, and then load the transformed data into Azure SQL Data Warehouse.
-
-The steps in this tutorial use the SQL Data Warehouse connector for Azure Databricks to transfer data to Azure Databricks. This connector, in turn, uses Azure Blob Storage as temporary storage for the data being transferred between an Azure Databricks cluster and Azure SQL Data Warehouse.
-
-The following illustration shows the application flow:
-
-![Azure Databricks with Data Lake Store and SQL Data Warehouse](./media/databricks/databricks-extract-transform-load-sql-datawarehouse.png "Azure Databricks with Data Lake Store and SQL Data Warehouse")
-
-This tutorial covers the following tasks:
-
-> [!div class="checklist"]
-> * Create an Azure Databricks service.
-> * Create a Spark cluster in Azure Databricks.
-> * Create a file system in the Data Lake Storage Gen2 account.
-> * Upload sample data to the Azure Data Lake Storage Gen2 account.
-> * Create a service principal.
-> * Extract data from the Azure Data Lake Storage Gen2 account.
-> * Transform data in Azure Databricks.
-> * Load data into Azure SQL Data Warehouse.
-
-If you don’t have an Azure subscription, create a [free account](https://azure.microsoft.com/free/?WT.mc_id=A261C142F) before you begin.
 
 ## Prerequisites
 
 Complete these tasks before you begin this tutorial:
 
-* Create an Azure SQL data warehouse, create a server-level firewall rule, and connect to the server as a server admin. See [Quickstart: Create an Azure SQL data warehouse](../sql-data-warehouse/create-data-warehouse-portal.md).
+* Setting up provisioning of Microsoft Academic Graph to an Azure blob storage account. See [Get Microsoft Academic Graph on Azure storage](get-started-setup-provisioning.md).
 
-* Create a database master key for the Azure SQL data warehouse. See [Create a database master key](https://docs.microsoft.com/sql/relational-databases/security/encryption/create-a-database-master-key).
-
-* Create an Azure Blob storage account, and a container within it. Also, retrieve the access key to access the storage account. See [Quickstart: Create an Azure Blob storage account](../storage/blobs/storage-quickstart-blobs-portal.md).
-
-* Create an Azure Data Lake Storage Gen2 storage account. See [Create a Azure Data Lake Storage Gen2 account](../storage/blobs/data-lake-storage-quickstart-create-account.md).
-
-*  Create a service principal. See [How to: Use the portal to create an Azure AD application and service principal that can access resources](https://docs.microsoft.com/azure/active-directory/develop/howto-create-service-principal-portal).
-
-   There's a couple of specific things that you'll have to do as you perform the steps in that article.
-
-   * When performing the steps in the [Assign the application to a role](https://docs.microsoft.com/azure/active-directory/develop/howto-create-service-principal-portal#assign-the-application-to-a-role) section of the article, make sure to assign the **Storage Blob Data Contributor** role to the service principal.
-
-     > [!IMPORTANT]
-     > Make sure to assign the role in the scope of the Data Lake Storage Gen2 storage account. You can assign a role to the parent resource group or subscription, but you'll receive permissions-related errors until those role assignments propagate to the storage account.
-
-   * When performing the steps in the [Get values for signing in](https://docs.microsoft.com/azure/active-directory/develop/howto-create-service-principal-portal#get-values-for-signing-in) section of the article, paste the tenant ID, application ID, and authentication key values into a text file. You'll need those soon.
-
-* Sign in to the [Azure portal](https://portal.azure.com/).
+* Setting up Azure Databricks service. See [Setting up Azure Databricks](get-started-databricks.md).
 
 ## Gather the information that you need
 
-Make sure that you complete the prerequisites of this tutorial.
-
    Before you begin, you should have these items of information:
 
-   :heavy_check_mark:  The database name, database server name, user name, and password of your Azure SQL Data warehouse.
+   :heavy_check_mark:  The name of your blob storage account.
 
    :heavy_check_mark:  The access key of your blob storage account.
-
-   :heavy_check_mark:  The name of your Data Lake Storage Gen2 storage account.
-
-   :heavy_check_mark:  The tenant ID of your subscription.
-
-   :heavy_check_mark:  The application ID of the app that you registered with Azure Active Directory (Azure AD).
-
-   :heavy_check_mark:  The authentication key for the app that you registered with Azure AD.
-
-## Create an Azure Databricks service
-
-In this section, you create an Azure Databricks service by using the Azure portal.
-
-1. In the Azure portal, select **Create a resource** > **Analytics** > **Azure Databricks**.
-
-    ![Databricks on Azure portal](./media/databricks/azure-databricks-on-portal.png "Databricks on Azure portal")
-
-2. Under **Azure Databricks Service**, provide the following values to create a Databricks service:
-
-    |Property  |Description  |
-    |---------|---------|
-    |**Workspace name**     | Provide a name for your Databricks workspace.        |
-    |**Subscription**     | From the drop-down, select your Azure subscription.        |
-    |**Resource group**     | Specify whether you want to create a new resource group or use an existing one. A resource group is a container that holds related resources for an Azure solution. For more information, see [Azure Resource Group overview](../azure-resource-manager/resource-group-overview.md). |
-    |**Location**     | Select **West US 2**.  For other available regions, see [Azure services available by region](https://azure.microsoft.com/regions/services/).      |
-    |**Pricing Tier**     |  Select **Standard**.     |
-
-3. Select **Pin to dashboard** and then select **Create**.
-
-4. The account creation takes a few minutes. During account creation, the portal displays the **Submitting deployment for Azure Databricks** tile on the right. To monitor the operation status, view the progress bar at the top.
-
-    ![Databricks deployment tile](./media/databricks/databricks-deployment-tile.png "Databricks deployment tile")
-
-## Create a Spark cluster in Azure Databricks
-
-1. In the Azure portal, go to the Databricks service that you created, and select **Launch Workspace**.
-
-2. You're redirected to the Azure Databricks portal. From the portal, select **Cluster**.
-
-    ![Databricks on Azure](./media/databricks/databricks-on-azure.png "Databricks on Azure")
-
-3. In the **New cluster** page, provide the values to create a cluster.
-
-    ![Create Databricks Spark cluster on Azure](./media/databricks/create-databricks-spark-cluster.png "Create Databricks Spark cluster on Azure")
-
-4. Fill in values for the following fields, and accept the default values for the other fields:
-
-    * Enter a name for the cluster.
-
-    * For this article, create a cluster with the **5.1** runtime.
-
-    * Make sure you select the **Terminate after \_\_ minutes of inactivity** check box. If the cluster isn't being used, provide a duration (in minutes) to terminate the cluster.
-
-    * Select **Create cluster**. After the cluster is running, you can attach notebooks to the cluster and run Spark jobs.
+   
+   :heavy_check_mark:  The name of blob storage container containing MAG dataset.
 
 ## Create a file system in the Azure Data Lake Storage Gen2 account
 
