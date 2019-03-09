@@ -91,9 +91,9 @@ In this section, you create a notebook cell and define configration variables
    [FileInfo(path='dbfs:/mnt/mag/', name='mag/', size=0)]
    ``` 
 
-## Extract data from the MAG in Azure Storage
+## Load MAG data files from Azure Storage
 
-You can now load the MAG data files as data frames in Azure Databricks
+You can now load MAG data files as data frames in Azure Databricks. Then create temporary views to be referenced in SQL block later.
 
 1. Get affiliations. Paste the following code in a new cell.
 
@@ -208,7 +208,7 @@ You can now load the MAG data files as data frames in Azure Databricks
 
 ## Compute Author H-Index
 
-The raw sample data **small_radio_json.json** file captures the audience for a radio station and has a variety of columns. In this section, you transform the data to only retrieve specific columns from the dataset.
+In this section, you compute h-index for all authors using SQL blocks.
 
 1. First, create an author-paper-citation view. Paste the following code in a new cell. Press the **SHIFT + ENTER** keys to run the code in this block.
 
@@ -218,7 +218,7 @@ The raw sample data **small_radio_json.json** file captures the audience for a r
    CREATE OR REPLACE TEMPORARY VIEW AuthorPaperCitation
        AS SELECT
            A.AuthorId,
-		     A.PaperId,
+           A.PaperId,
            P.EstimatedCitation
        FROM AuthorPaper AS A
        INNER JOIN PaperCitation AS P
@@ -233,13 +233,13 @@ The raw sample data **small_radio_json.json** file captures the audience for a r
    CREATE OR REPLACE TEMPORARY VIEW AuthorPaperOrderByCitation
        AS SELECT
            AuthorId,
-		     PaperId,
+           PaperId,
            EstimatedCitation,
-		   ROW_NUMBER() OVER(PARTITION BY AuthorId ORDER BY EstimatedCitation DESC) AS Rank
-	    FROM AuthorPaperCitation;
+           ROW_NUMBER() OVER(PARTITION BY AuthorId ORDER BY EstimatedCitation DESC) AS Rank
+       FROM AuthorPaperCitation;
    ```
 
-1. Greate author h-index. Paste the following code in a new cell. Press the **SHIFT + ENTER** keys to run the code in this block.
+1. Compute h-index for each author. Paste the following code in a new cell. Press the **SHIFT + ENTER** keys to run the code in this block.
 
    ```sql
    %sql
@@ -248,159 +248,60 @@ The raw sample data **small_radio_json.json** file captures the audience for a r
        AS SELECT
            AuthorId,
            SUM(EstimatedCitation) AS TotalEstimatedCitation,
-		     MAX(CASE WHEN EstimatedCitation >= Rank THEN Rank ELSE 0 END) AS HIndex
+           MAX(CASE WHEN EstimatedCitation >= Rank THEN Rank ELSE 0 END) AS HIndex
        FROM AuthorPaperOrderByCitation 
        GROUP BY AuthorId;
    ```
 
-1. First, create an author-paper-citation view. Paste the following code in a new cell. Press the **SHIFT + ENTER** keys to run the code in this block.
+1. Get author detail information. Paste the following code in a new cell. Press the **SHIFT + ENTER** keys to run the code in this block.
 
    ```sql
    %sql
-   -- Generate author, paper, citation view
-   CREATE OR REPLACE TEMPORARY VIEW AuthorPaperCitation
+   -- Get author detail information
+   CREATE OR REPLACE TEMPORARY VIEW AuthorHIndex
        AS SELECT
-           A.AuthorId,
-		   A.PaperId,
-           P.EstimatedCitation
-       FROM AuthorPaper AS A
-       INNER JOIN PaperCitation AS P
-           ON A.PaperId == P.PaperId;
+           I.AuthorId,
+           A.DisplayName,
+           AF.DisplayName AS AffiliationDisplayName,
+           A.PaperCount,
+           I.TotalEstimatedCitation,
+           I.HIndex
+       FROM AuthorHIndexTemp AS I
+       INNER JOIN Authors AS A
+           ON A.AuthorId == I.AuthorId
+       LEFT OUTER JOIN Affiliations AS AF
+           ON A.LastKnownAffiliationId == AF.Affiliation
    ```
 
+## Query and visualize result 
+
+In this section, you query the top authors by h-index and visualize the result.
+
+1. Query the authors with highest h-index.
+
+   ```sql
+   %sql
+   -- Filter authors with top hindex
+   SELECT
+       DisplayName,
+       AffiliationDisplayName,
+       PaperCount,
+       TotalEstimatedCitation,
+       HIndex
+   FROM AuthorHIndex 
+   ORDER BY HIndex DESC, AuthorId
+   LIMIT 100;
+   ```
 
 1. Press the **SHIFT + ENTER** keys to run the code in this block.
 
-   You receive output as shown in the following snippet:
+1. Click the table button to see the result in table form.
 
-   ```bash
-   +---------+----------+------+--------------------+-----+
-   |firstname|  lastname|gender|            location|level|
-   +---------+----------+------+--------------------+-----+
-   | Annalyse|Montgomery|     F|  Killeen-Temple, TX| free|
-   |   Dylann|    Thomas|     M|       Anchorage, AK| paid|
-   |     Liam|     Watts|     M|New York-Newark-J...| paid|
-   |     Tess|  Townsend|     F|Nashville-Davidso...| free|
-   |  Margaux|     Smith|     F|Atlanta-Sandy Spr...| free|
-   |     Alan|     Morse|     M|Chicago-Napervill...| paid|
-   |Gabriella|   Shelton|     F|San Jose-Sunnyval...| free|
-   |   Elijah|  Williams|     M|Detroit-Warren-De...| paid|
-   |  Margaux|     Smith|     F|Atlanta-Sandy Spr...| free|
-   |     Tess|  Townsend|     F|Nashville-Davidso...| free|
-   |     Alan|     Morse|     M|Chicago-Napervill...| paid|
-   |     Liam|     Watts|     M|New York-Newark-J...| paid|
-   |     Liam|     Watts|     M|New York-Newark-J...| paid|
-   |   Dylann|    Thomas|     M|       Anchorage, AK| paid|
-   |     Alan|     Morse|     M|Chicago-Napervill...| paid|
-   |   Elijah|  Williams|     M|Detroit-Warren-De...| paid|
-   |  Margaux|     Smith|     F|Atlanta-Sandy Spr...| free|
-   |     Alan|     Morse|     M|Chicago-Napervill...| paid|
-   |   Dylann|    Thomas|     M|       Anchorage, AK| paid|
-   |  Margaux|     Smith|     F|Atlanta-Sandy Spr...| free|
-   +---------+----------+------+--------------------+-----+
-   ```
+   ![Author H-Index table](media/databricks/hindex-table.png "Verify sample table")
 
-2. You can further transform this data to rename the column **level** to **subscription_type**.
+1. Click the graph button to plot the result.
 
-   ```scala
-   val renamedColumnsDF = specificColumnsDf.withColumnRenamed("level", "subscription_type")
-   renamedColumnsDF.show()
-   ```
-
-   You receive output as shown in the following snippet.
-
-   ```bash
-   +---------+----------+------+--------------------+-----------------+
-   |firstname|  lastname|gender|            location|subscription_type|
-   +---------+----------+------+--------------------+-----------------+
-   | Annalyse|Montgomery|     F|  Killeen-Temple, TX|             free|
-   |   Dylann|    Thomas|     M|       Anchorage, AK|             paid|
-   |     Liam|     Watts|     M|New York-Newark-J...|             paid|
-   |     Tess|  Townsend|     F|Nashville-Davidso...|             free|
-   |  Margaux|     Smith|     F|Atlanta-Sandy Spr...|             free|
-   |     Alan|     Morse|     M|Chicago-Napervill...|             paid|
-   |Gabriella|   Shelton|     F|San Jose-Sunnyval...|             free|
-   |   Elijah|  Williams|     M|Detroit-Warren-De...|             paid|
-   |  Margaux|     Smith|     F|Atlanta-Sandy Spr...|             free|
-   |     Tess|  Townsend|     F|Nashville-Davidso...|             free|
-   |     Alan|     Morse|     M|Chicago-Napervill...|             paid|
-   |     Liam|     Watts|     M|New York-Newark-J...|             paid|
-   |     Liam|     Watts|     M|New York-Newark-J...|             paid|
-   |   Dylann|    Thomas|     M|       Anchorage, AK|             paid|
-   |     Alan|     Morse|     M|Chicago-Napervill...|             paid|
-   |   Elijah|  Williams|     M|Detroit-Warren-De...|             paid|
-   |  Margaux|     Smith|     F|Atlanta-Sandy Spr...|             free|
-   |     Alan|     Morse|     M|Chicago-Napervill...|             paid|
-   |   Dylann|    Thomas|     M|       Anchorage, AK|             paid|
-   |  Margaux|     Smith|     F|Atlanta-Sandy Spr...|             free|
-   +---------+----------+------+--------------------+-----------------+
-   ```
-
-## Load data into Azure SQL Data Warehouse
-
-In this section, you upload the transformed data into Azure SQL Data Warehouse. You use the Azure SQL Data Warehouse connector for Azure Databricks to directly upload a dataframe as a table in a SQL data warehouse.
-
-As mentioned earlier, the SQL Data Warehouse connector uses Azure Blob storage as temporary storage to upload data between Azure Databricks and Azure SQL Data Warehouse. So, you start by providing the configuration to connect to the storage account. You must already have already created the account as part of the prerequisites for this article.
-
-1. Provide the configuration to access the Azure Storage account from Azure Databricks.
-
-   ```scala
-   val blobStorage = "<blob-storage-account-name>.blob.core.windows.net"
-   val blobContainer = "<blob-container-name>"
-   val blobAccessKey =  "<access-key>"
-   ```
-
-2. Specify a temporary folder to use while moving data between Azure Databricks and Azure SQL Data Warehouse.
-
-   ```scala
-   val tempDir = "wasbs://" + blobContainer + "@" + blobStorage +"/tempDirs"
-   ```
-
-3. Run the following snippet to store Azure Blob storage access keys in the configuration. This action ensures that you don't have to keep the access key in the notebook in plain text.
-
-   ```scala
-   val acntInfo = "fs.azure.account.key."+ blobStorage
-   sc.hadoopConfiguration.set(acntInfo, blobAccessKey)
-   ```
-
-4. Provide the values to connect to the Azure SQL Data Warehouse instance. You must have created a SQL data warehouse as a prerequisite.
-
-   ```scala
-   //SQL Data Warehouse related settings
-   val dwDatabase = "<database-name>"
-   val dwServer = "<database-server-name>"
-   val dwUser = "<user-name>"
-   val dwPass = "<password>"
-   val dwJdbcPort =  "1433"
-   val dwJdbcExtraOptions = "encrypt=true;trustServerCertificate=true;hostNameInCertificate=*.database.windows.net;loginTimeout=30;"
-   val sqlDwUrl = "jdbc:sqlserver://" + dwServer + ":" + dwJdbcPort + ";database=" + dwDatabase + ";user=" + dwUser+";password=" + dwPass + ";$dwJdbcExtraOptions"
-   val sqlDwUrlSmall = "jdbc:sqlserver://" + dwServer + ":" + dwJdbcPort + ";database=" + dwDatabase + ";user=" + dwUser+";password=" + dwPass
-   ```
-
-5. Run the following snippet to load the transformed dataframe, **renamedColumnsDF**, as a table in a SQL data warehouse. This snippet creates a table called **SampleTable** in the SQL database.
-
-   ```scala
-   spark.conf.set(
-       "spark.sql.parquet.writeLegacyFormat",
-       "true")
-
-   renamedColumnsDF.write
-       .format("com.databricks.spark.sqldw")
-       .option("url", sqlDwUrlSmall) 
-       .option("dbtable", "SampleTable")
-       .option( "forward_spark_azure_storage_credentials","True")
-       .option("tempdir", tempDir)
-       .mode("overwrite")
-       .save()
-   ```
-
-6. Connect to the SQL database and verify that you see a database named **SampleTable**.
-
-   ![Verify the sample table](./media/databricks/verify-sample-table.png "Verify sample table")
-
-7. Run a select query to verify the contents of the table. The table should have the same data as the **renamedColumnsDF** dataframe.
-
-    ![Verify the sample table content](./media/databricks/verify-sample-table-content.png "Verify the sample table content")
+   ![Author H-Index graph](media/databricks/hindex-graph.png "Verify sample table")
 
 ## Clean up resources
 
