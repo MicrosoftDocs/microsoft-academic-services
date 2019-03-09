@@ -1,59 +1,20 @@
 ---
-title: 'Tutorial: Compute Author H-Index using Azure Databricks'
-description: Compute Author H-Index for Microsoft Academic Graph using Azure Databricks
+title: 'Microsoft Academic Graph using Azure Databricks'
+description: Set up AzureDatabricks for Microsoft Academic Graph
 services: microsoft-academic-services
-ms.topic: tutorial
+ms.topic: get-started-article
 ms.service: microsoft-academic-services
 ms.date: 3/6/2019
 ---
 # Tutorial: Compute Author H-Index using Azure Databricks
 
-In this tutorial, you perform an ETL (extract, transform, and load data) operation by using Azure Databricks. You extract data from Azure Data Lake Storage Gen2 into Azure Databricks, run transformations on the data in Azure Databricks, and then load the transformed data into Azure SQL Data Warehouse.
-
-The steps in this tutorial use the SQL Data Warehouse connector for Azure Databricks to transfer data to Azure Databricks. This connector, in turn, uses Azure Blob Storage as temporary storage for the data being transferred between an Azure Databricks cluster and Azure SQL Data Warehouse.
-
-The following illustration shows the application flow:
-
-![Azure Databricks with Data Lake Store and SQL Data Warehouse](./media/databricks/databricks-extract-transform-load-sql-datawarehouse.png "Azure Databricks with Data Lake Store and SQL Data Warehouse")
-
-This tutorial covers the following tasks:
-
-> [!div class="checklist"]
-> * Create an Azure Databricks service.
-> * Create a Spark cluster in Azure Databricks.
-> * Create a file system in the Data Lake Storage Gen2 account.
-> * Upload sample data to the Azure Data Lake Storage Gen2 account.
-> * Create a service principal.
-> * Extract data from the Azure Data Lake Storage Gen2 account.
-> * Transform data in Azure Databricks.
-> * Load data into Azure SQL Data Warehouse.
-
-If you don’t have an Azure subscription, create a [free account](https://azure.microsoft.com/free/?WT.mc_id=A261C142F) before you begin.
+You could set up Azure Databricks to run Analytics script on Microsoft Academic Graph. Here are the step-by-step instructions
 
 ## Prerequisites
 
 Complete these tasks before you begin this tutorial:
 
 * Setting up provisioning of Microsoft Academic Graph to an Azure blob storage account. See [Get Microsoft Academic Graph on Azure storage](./get-started-setup-provisioning.md.md).
-
-* Create a database master key for the Azure SQL data warehouse. See [Create a database master key](https://docs.microsoft.com/sql/relational-databases/security/encryption/create-a-database-master-key).
-
-* Create an Azure Blob storage account, and a container within it. Also, retrieve the access key to access the storage account. See [Quickstart: Create an Azure Blob storage account](../storage/blobs/storage-quickstart-blobs-portal.md).
-
-* Create an Azure Data Lake Storage Gen2 storage account. See [Create a Azure Data Lake Storage Gen2 account](../storage/blobs/data-lake-storage-quickstart-create-account.md).
-
-*  Create a service principal. See [How to: Use the portal to create an Azure AD application and service principal that can access resources](https://docs.microsoft.com/azure/active-directory/develop/howto-create-service-principal-portal).
-
-   There's a couple of specific things that you'll have to do as you perform the steps in that article.
-
-   * When performing the steps in the [Assign the application to a role](https://docs.microsoft.com/azure/active-directory/develop/howto-create-service-principal-portal#assign-the-application-to-a-role) section of the article, make sure to assign the **Storage Blob Data Contributor** role to the service principal.
-
-     > [!IMPORTANT]
-     > Make sure to assign the role in the scope of the Data Lake Storage Gen2 storage account. You can assign a role to the parent resource group or subscription, but you'll receive permissions-related errors until those role assignments propagate to the storage account.
-
-   * When performing the steps in the [Get values for signing in](https://docs.microsoft.com/azure/active-directory/develop/howto-create-service-principal-portal#get-values-for-signing-in) section of the article, paste the tenant ID, application ID, and authentication key values into a text file. You'll need those soon.
-
-* Sign in to the [Azure portal](https://portal.azure.com/).
 
 ## Gather the information that you need
 
