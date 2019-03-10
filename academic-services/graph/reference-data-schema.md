@@ -245,4 +245,4 @@ Advance to next sections to learn about using Azure Data Lake Analytics or Datab
 >[Set up Azure Data Lake Analytics](get-started-setup-azure-data-lake-analytics.md)
 
 > [!div class="nextstepaction"]
->[Set up Azure Databricks](get-started-databricks.md)
+>[Set up Azure Databricks](get-started-setup-databricks.md)
