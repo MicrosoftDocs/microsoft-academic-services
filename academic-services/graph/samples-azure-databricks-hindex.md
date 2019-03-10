@@ -81,7 +81,7 @@ In this section, you mount MAG dataset in Azure Storage as a file system of the 
        mount_point = MagDir,
        extra_configs = {('fs.azure.account.key.%s.blob.core.windows.net' % AzureStorageAccount) : AzureStorageAccessKey})
 
-   dbutils.fs.ls('/mnt')
+   dbutils.fs.ls(MagDir)
    ```
 
 1. Press the **SHIFT + ENTER** keys to run the code in this block.
@@ -89,8 +89,11 @@ In this section, you mount MAG dataset in Azure Storage as a file system of the 
    You see an output similar to the following snippet:
 
    ```
-   Out[1]: 
-   [FileInfo(path='dbfs:/mnt/mag/', name='mag/', size=0)]
+   Out[3]: 
+   [FileInfo(path='dbfs:/mnt/mag/advanced/', name='advanced/', size=0),
+    FileInfo(path='dbfs:/mnt/mag/mag/', name='mag/', size=0),
+    FileInfo(path='dbfs:/mnt/mag/nlp/', name='nlp/', size=0),
+    FileInfo(path='dbfs:/mnt/mag/samples/', name='samples/', size=0)]
    ``` 
 
 ## Extract MAG data files from Azure Storage
