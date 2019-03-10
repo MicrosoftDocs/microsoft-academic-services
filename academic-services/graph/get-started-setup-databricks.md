@@ -67,7 +67,7 @@ In this section, you create an Azure Databricks service by using the Azure porta
 Advance to the next section to learn about computing author h-index.
 
 > [!div class="nextstepaction"]
->[Author h-index sample](samples-databricks-hindex.md)
+>[Author h-index sample](samples-azure-databricks-hindex.md)
 
 ## Resources
 
