@@ -8,7 +8,7 @@ ms.date: 3/10/2019
 ---
 # Sample: Compute Author H-Index using Azure Databricks
 
-In this tutorial, you extract and transform MAG data using Azure Databricks.
+In this tutorial, you compute H-Index for all authors in Microsoft Academic Graph (MAG) using Azure Databricks. You extract data from Azure Storage into Azure Databricks, run transformations on the data in Azure Databricks, and then visualize the result in table and graph forms.
 
 ## Prerequisites
 
@@ -30,7 +30,7 @@ Complete these tasks before you begin this tutorial:
 
 ## Create a notebook in Azure Databricks
 
-In this section, you create a notebook in Azure Databricks workspace
+In this section, you create a notebook in Azure Databricks workspace.
 
 1. In the [Azure portal](https://portal.azure.com), go to the Azure Databricks service that you created, and select **Launch Workspace**.
 
@@ -46,9 +46,9 @@ In this section, you create a notebook in Azure Databricks workspace
 
 ## Define configration variables
 
-In this section, you create the first notebook cell and define configration variables
+In this section, you create the first notebook cell and define configration variables.
 
-1. Copy and paste the following code block into the first cell.
+1. Copy and paste following code block into the first cell.
 
    ```python
    AzureStorageAccount = '<AzureStorageAccount>'     # Azure Storage account containing MAG dataset
@@ -58,7 +58,7 @@ In this section, you create the first notebook cell and define configration vari
    MagDir = '/mnt/mag'
    ```
 
-1. In this code block, replace the `AzureStorageAccount`, `AzureStorageAccessKey`, and `MagContainer` placeholder values in this code block with the values that you collected while completing the prerequisites of this sample.
+1. In this code block, replace `AzureStorageAccount`, `AzureStorageAccessKey`, and `MagContainer` placeholder values with the values that you collected while completing the prerequisites of this sample.
 
    * The `AzureStorageAccount` is the name of your Azure Storage account.
 
@@ -91,11 +91,11 @@ In this section, you create the first notebook cell and define configration vari
    [FileInfo(path='dbfs:/mnt/mag/', name='mag/', size=0)]
    ``` 
 
-## Load MAG data files from Azure Storage
+## Extract MAG data files from Azure Storage
 
-You can now load MAG data files as data frames in Azure Databricks and create temporary views to be referenced in SQL blocks later.
+You can now extract MAG data files to create data frames in Azure Databricks. Then  create temporary views to be referenced in SQL blocks later.
 
-1. **Get affiliations**. Paste the following code in a new cell. Press the **SHIFT + ENTER** keys to run the code in this block.
+1. Get **affiliations**. Paste the following code in a new cell. Press the **SHIFT + ENTER** keys to run the code in this block.
 
    ```python
    AffiliationsPath = 'mag/Affiliations.txt' 
@@ -120,7 +120,7 @@ You can now load MAG data files as data frames in Azure Databricks and create te
    ...
    ``` 
 
-1. **Get authors**. Paste the following code in a new cell. Press the **SHIFT + ENTER** keys to run the code in this block.
+1. Get **authors**. Paste the following code in a new cell. Press the **SHIFT + ENTER** keys to run the code in this block.
 
    ```python
    AuthorsPath = 'mag/Authors.txt'
@@ -144,7 +144,7 @@ You can now load MAG data files as data frames in Azure Databricks and create te
    ...
    ``` 
 
-1. **Get (puthor, paper) pairs**. Paste the following code in a new cell. Press the **SHIFT + ENTER** keys to run the code in this block.
+1. Get **(puthor, paper) pairs**. Paste the following code in a new cell. Press the **SHIFT + ENTER** keys to run the code in this block.
 
    ```python
    PaperAuthorAffiliationsPath = 'mag/PaperAuthorAffiliations.txt'
@@ -169,7 +169,7 @@ You can now load MAG data files as data frames in Azure Databricks and create te
    ...
    ``` 
 
-1. **Get papers**. Paste the following code in a new cell. Press the **SHIFT + ENTER** keys to run the code in this block.
+1. Get **papers**. Paste the following code in a new cell. Press the **SHIFT + ENTER** keys to run the code in this block.
 
    ```python
    PapersPath = 'mag/Papers.txt'
@@ -196,7 +196,7 @@ You can now load MAG data files as data frames in Azure Databricks and create te
    ...
    ``` 
 
-   You have now extracted MAG data from Azure Storage into Azure Databricks.
+   You have now extracted MAG data from Azure Storage into Azure Databricks and created temporary views to use later
 
 ## Compute Author H-Index
 
@@ -267,9 +267,9 @@ In this section, you compute h-index for all authors using SQL blocks.
 
 ## Query and visualize result 
 
-In this section, you query the top authors by h-index and visualize the result.
+In this section, you query top authors by h-index and visualize the result.
 
-1. Query the authors with highest h-index. Paste the following code in a new cell. Press the **SHIFT + ENTER** keys to run the code in this block.
+1. Query top authors with highest h-index. Paste the following code in a new cell. Press the **SHIFT + ENTER** keys to run the code in this block.
 
    ```sql
    %sql
@@ -285,11 +285,11 @@ In this section, you query the top authors by h-index and visualize the result.
    LIMIT 100;
    ```
 
-1. Click the table button to see the result in table form.
+1. Select the table button to see the result in table form.
 
    ![Author H-Index table](media/databricks/hindex-table.png "Verify sample table")
 
-1. Click the graph button to plot the result.
+1. Select the graph button to plot the result.
 
    ![Author H-Index graph](media/databricks/hindex-graph.png "Verify sample table")
 
