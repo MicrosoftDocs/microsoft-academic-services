@@ -198,7 +198,7 @@ You can now extract MAG data files to create data frames in Azure Databricks. Th
    ...
    ``` 
 
-   You have now extracted MAG data from Azure Storage into Azure Databricks and created temporary views to use later
+   You have now extracted MAG data from Azure Storage into Azure Databricks and created temporary views to use later.
 
 ## Compute Author H-Index
 
