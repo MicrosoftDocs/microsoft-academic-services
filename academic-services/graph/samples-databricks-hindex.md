@@ -8,7 +8,7 @@ ms.date: 3/10/2019
 ---
 # Sample: Compute Author H-Index using Azure Databricks
 
-In this tutorial, you compute H-Index for all authors in Microsoft Academic Graph (MAG) using Azure Databricks. You extract data from Azure Storage into Azure Databricks, run transformations on the data, and then visualize result in table and graph forms.
+In this tutorial, you compute H-Index for all authors in Microsoft Academic Graph (MAG) using Azure Databricks. You extract data from Azure Storage into data frames, compute H-Index, and visualize the result in table and graph forms.
 
 ## Prerequisites
 
@@ -36,11 +36,11 @@ In this section, you create a notebook in Azure Databricks workspace.
 
 1. On the left, select **Workspace**. From the **Workspace** drop-down, select **Create** > **Notebook**.
 
-    ![Create a notebook in Databricks](./media/databricks/databricks-create-notebook.png "Create notebook in Databricks")
+    ![Create a notebook in Databricks](media/databricks/databricks-create-notebook.png "Create notebook in Databricks")
 
 1. In the **Create Notebook** dialog box, enter a name for the notebook. Select **Python** as the language.
 
-    ![Provide details for a notebook in Databricks](./media/databricks/create-notebook.png "Provide details for a notebook in Databricks")
+    ![Provide details for a notebook in Databricks](media/databricks/create-notebook.png "Provide details for a notebook in Databricks")
 
 1. Select **Create**.
 
@@ -64,11 +64,13 @@ In this section, you create the first notebook cell and define configration vari
 
    * The `AzureStorageAccessKey` is the access key of the Azure Storage account.
 
-   * The `MagContainer` is the container name in Azure Storage account containing MAG dataset, Usually in forms of mag-yyyy-mm-dd.
+   * The `MagContainer` is the container name in Azure Storage account containing MAG dataset, Usually in the form of **mag-yyyy-mm-dd**.
 
 1. Press the **SHIFT + ENTER** keys to run the code in this block.
 
 ## Mount Azure Storage as a file system of the cluster
+
+In this section, you mount MAG dataset in Azure Storage as a file system of the cluster.
 
 1. Copy and paste the following code block in a new cell.
 
@@ -95,7 +97,7 @@ In this section, you create the first notebook cell and define configration vari
 
 You can now extract MAG data files to create data frames in Azure Databricks. Then  create temporary views to be referenced in SQL blocks later.
 
-1. Get **affiliations**. Paste the following code in a new cell. Press the **SHIFT + ENTER** keys to run the code in this block.
+1. Get **Affiliations**. Paste the following code in a new cell.
 
    ```python
    AffiliationsPath = 'mag/Affiliations.txt' 
@@ -107,7 +109,7 @@ You can now extract MAG data files to create data frames in Azure Databricks. Th
    Affiliations.createOrReplaceTempView('Affiliations')
    ```
 
-   You see an output similar to the following snippet:
+   Press the **SHIFT + ENTER** keys to run the code in this block. You see an output similar to the following snippet:
 
    ```
    +-------------+--------------------+
@@ -120,7 +122,7 @@ You can now extract MAG data files to create data frames in Azure Databricks. Th
    ...
    ``` 
 
-1. Get **authors**. Paste the following code in a new cell. Press the **SHIFT + ENTER** keys to run the code in this block.
+1. Get **Authors**. Paste the following code in a new cell.
 
    ```python
    AuthorsPath = 'mag/Authors.txt'
@@ -132,7 +134,7 @@ You can now extract MAG data files to create data frames in Azure Databricks. Th
    Authors.createOrReplaceTempView('Authors')
    ```
 
-   You see an output similar to the following snippet:
+   Press the **SHIFT + ENTER** keys to run the code in this block. You see an output similar to the following snippet:
 
    ```
    +--------+--------------------+----------------------+----------+
@@ -144,7 +146,7 @@ You can now extract MAG data files to create data frames in Azure Databricks. Th
    ...
    ``` 
 
-1. Get **(puthor, paper) pairs**. Paste the following code in a new cell. Press the **SHIFT + ENTER** keys to run the code in this block.
+1. Get **(Author, Paper) pairs**. Paste the following code in a new cell.
 
    ```python
    PaperAuthorAffiliationsPath = 'mag/PaperAuthorAffiliations.txt'
@@ -156,7 +158,7 @@ You can now extract MAG data files to create data frames in Azure Databricks. Th
    AuthorPaper.createOrReplaceTempView('AuthorPaper')
    ```
 
-   You see an output similar to the following snippet:
+   Press the **SHIFT + ENTER** keys to run the code in this block. You see an output similar to the following snippet:
 
    ```
    +----------+--------+
@@ -169,7 +171,7 @@ You can now extract MAG data files to create data frames in Azure Databricks. Th
    ...
    ``` 
 
-1. Get **papers**. Paste the following code in a new cell. Press the **SHIFT + ENTER** keys to run the code in this block.
+1. Get **Papers**. Paste the following code in a new cell.
 
    ```python
    PapersPath = 'mag/Papers.txt'
@@ -183,7 +185,7 @@ You can now extract MAG data files to create data frames in Azure Databricks. Th
    PaperCitation.createOrReplaceTempView('PaperCitation')
    ```
 
-   You see an output similar to the following snippet:
+   Press the **SHIFT + ENTER** keys to run the code in this block. You see an output similar to the following snippet:
 
    ```
    +----------+-----------------+
@@ -200,7 +202,7 @@ You can now extract MAG data files to create data frames in Azure Databricks. Th
 
 ## Compute Author H-Index
 
-In this section, you compute h-index for all authors using SQL blocks.
+In this section, you compute h-index for all authors.
 
 1. **Create an author-paper-citation view**. Paste the following code in a new cell. Press the **SHIFT + ENTER** keys to run the code in this block.
 
@@ -285,11 +287,11 @@ In this section, you query top authors by h-index and visualize the result.
    LIMIT 100;
    ```
 
-1. Select the table button to see the result in table form.
+1. Select the **table** icon to see result in table form.
 
    ![Author H-Index table](media/databricks/hindex-table.png "Verify sample table")
 
-1. Select the graph button to plot the result.
+1. Select the **graph** icon to see result in graph form.
 
    ![Author H-Index graph](media/databricks/hindex-graph.png "Verify sample table")
 
