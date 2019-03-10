@@ -15,14 +15,14 @@
   items:
   - name: Entity data schema
     href: reference-data-schema.md
-- name: Azure Data Lake Analytics
+- name: Using Azure Data Lake Analytics
   expanded: true
   items:
   - name: Set up Azure Data Lake Analytics
     href: get-started-setup-azure-data-lake-analytics.md
   - name: Analytics and visualization samples
     href: samples-azure-data-lake-analytics.md
-- name: Azure Databricks
+- name: Using Azure Databricks
   expanded: true
   items:
   - name: Set up Azure Databricks
