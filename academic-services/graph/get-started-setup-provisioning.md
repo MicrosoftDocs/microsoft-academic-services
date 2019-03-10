@@ -2,7 +2,7 @@
 title: Get Microsoft Academic Graph on Azure storage
 description: Step-by-step instructions for setting up one-time or automatic provisioning of Microsoft Academic Graph to an Azure blob storage account
 ms.topic: get-started-article
-ms.date: 3/6/2019
+ms.date: 3/10/2019
 ---
 # Get Microsoft Academic Graph on Azure storage
 
@@ -89,4 +89,4 @@ Advance to next sections to learn about entity data schema and using Azure Data 
 >[Set up Azure Data Lake Analytics](get-started-setup-azure-data-lake-analytics.md)
 
 > [!div class="nextstepaction"]
->[Set up Azure Databricks](get-started-databricks.md)
+>[Set up Azure Databricks](get-started-setup-databricks.md)
