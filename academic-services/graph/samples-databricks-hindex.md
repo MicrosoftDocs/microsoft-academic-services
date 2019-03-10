@@ -8,7 +8,7 @@ ms.date: 3/10/2019
 ---
 # Sample: Compute Author H-Index using Azure Databricks
 
-In this tutorial, you compute H-Index for all authors in Microsoft Academic Graph (MAG) using Azure Databricks. You extract data from Azure Storage into Azure Databricks, run transformations on the data in Azure Databricks, and then visualize the result in table and graph forms.
+In this tutorial, you compute H-Index for all authors in Microsoft Academic Graph (MAG) using Azure Databricks. You extract data from Azure Storage into Azure Databricks, run transformations on the data, and then visualize result in table and graph forms.
 
 ## Prerequisites
 
