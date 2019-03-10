@@ -4,7 +4,7 @@ description: Set up AzureDatabricks for Microsoft Academic Graph
 services: microsoft-academic-services
 ms.topic: get-started-article
 ms.service: microsoft-academic-services
-ms.date: 3/6/2019
+ms.date: 3/10/2019
 ---
 # Set up  Azure Databricks for Microsoft Academic Graph
 
@@ -14,7 +14,7 @@ You could set up Azure Databricks to run Analytics script on Microsoft Academic 
 
 Complete these tasks before you begin this tutorial:
 
-* Setting up provisioning of Microsoft Academic Graph to an Azure blob storage account. See [Get Microsoft Academic Graph on Azure storage](./get-started-setup-provisioning.md.md).
+* Setting up provisioning of Microsoft Academic Graph to an Azure blob storage account. See [Get Microsoft Academic Graph on Azure storage](./get-started-setup-provisioning.md).
 
 ## Create an Azure Databricks service
 
@@ -22,7 +22,7 @@ In this section, you create an Azure Databricks service by using the Azure porta
 
 1. In the Azure portal, select **Create a resource** > **Analytics** > **Azure Databricks**.
 
-    ![Databricks on Azure portal](./media/databricks/azure-databricks-on-portal.png "Databricks on Azure portal")
+    ![Databricks on Azure portal](media/databricks/azure-databricks-on-portal.png "Databricks on Azure portal")
 
 2. Under **Azure Databricks Service**, provide the following values to create a Databricks service:
 
@@ -38,7 +38,7 @@ In this section, you create an Azure Databricks service by using the Azure porta
 
 4. The account creation takes a few minutes. During account creation, the portal displays the **Submitting deployment for Azure Databricks** tile on the right. To monitor the operation status, view the progress bar at the top.
 
-    ![Databricks deployment tile](./media/databricks/databricks-deployment-tile.png "Databricks deployment tile")
+    ![Databricks deployment tile](media/databricks/databricks-deployment-tile.png "Databricks deployment tile")
 
 ## Create a Spark cluster in Azure Databricks
 
@@ -46,11 +46,11 @@ In this section, you create an Azure Databricks service by using the Azure porta
 
 2. You're redirected to the Azure Databricks portal. From the portal, select **Cluster**.
 
-    ![Databricks on Azure](./media/databricks/databricks-on-azure.png "Databricks on Azure")
+    ![Databricks on Azure](media/databricks/databricks-on-azure.png "Databricks on Azure")
 
 3. In the **New cluster** page, provide the values to create a cluster.
 
-    ![Create Databricks Spark cluster on Azure](./media/databricks/create-databricks-spark-cluster.png "Create Databricks Spark cluster on Azure")
+    ![Create Databricks Spark cluster on Azure](media/databricks/create-databricks-spark-cluster.png "Create Databricks Spark cluster on Azure")
 
 4. Fill in values for the following fields, and accept the default values for the other fields:
 
