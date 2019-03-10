@@ -242,7 +242,7 @@ In this section, you compute h-index for all authors.
        FROM AuthorPaperCitation;
    ```
 
-  Press the **SHIFT + ENTER** keys to run the code in this block. You see following output:
+   Press the **SHIFT + ENTER** keys to run the code in this block. You see following output:
 
    ```
    OK
