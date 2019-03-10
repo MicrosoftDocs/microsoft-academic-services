@@ -207,7 +207,7 @@ You can now extract MAG data files to create data frames in Azure Databricks. Th
 
 In this section, you compute h-index for all authors.
 
-1. **Create an author-paper-citation view**. Paste the following code in a new cell. Press the **SHIFT + ENTER** keys to run the code in this block.
+1. **Create an author-paper-citation view**. Paste the following code in a new cell.
 
    ```sql
    %sql
@@ -222,7 +222,13 @@ In this section, you compute h-index for all authors.
            ON A.PaperId == P.PaperId;
    ```
 
-1. **Order AuthorPaperCitation view by citation**. Paste the following code in a new cell. Press the **SHIFT + ENTER** keys to run the code in this block.
+   Press the **SHIFT + ENTER** keys to run the code in this block. You see following output:
+
+   ```
+   OK
+   ```
+
+1. **Order AuthorPaperCitation view by citation**. Paste the following code in a new cell.
 
    ```sql
    %sql
@@ -236,7 +242,13 @@ In this section, you compute h-index for all authors.
        FROM AuthorPaperCitation;
    ```
 
-1. **Compute h-index for all authors**. Paste the following code in a new cell. Press the **SHIFT + ENTER** keys to run the code in this block.
+  Press the **SHIFT + ENTER** keys to run the code in this block. You see following output:
+
+   ```
+   OK
+   ```
+
+1. **Compute h-index for all authors**. Paste the following code in a new cell.
 
    ```sql
    %sql
@@ -250,7 +262,13 @@ In this section, you compute h-index for all authors.
        GROUP BY AuthorId;
    ```
 
-1. **Get author detail information**. Paste the following code in a new cell. Press the **SHIFT + ENTER** keys to run the code in this block.
+   Press the **SHIFT + ENTER** keys to run the code in this block. You see following output:
+
+   ```
+   OK
+   ```
+
+1. **Get author detail information**. Paste the following code in a new cell.
 
    ```sql
    %sql
@@ -268,6 +286,12 @@ In this section, you compute h-index for all authors.
            ON A.AuthorId == I.AuthorId
        LEFT OUTER JOIN Affiliations AS AF
            ON A.LastKnownAffiliationId == AF.AffiliationId;
+   ```
+
+   Press the **SHIFT + ENTER** keys to run the code in this block. You see following output:
+
+   ```
+   OK
    ```
 
 ## Query and visualize result 
