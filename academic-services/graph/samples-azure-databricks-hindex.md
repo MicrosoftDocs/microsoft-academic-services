@@ -267,7 +267,7 @@ In this section, you compute h-index for all authors.
        INNER JOIN Authors AS A
            ON A.AuthorId == I.AuthorId
        LEFT OUTER JOIN Affiliations AS AF
-           ON A.LastKnownAffiliationId == AF.Affiliation
+           ON A.LastKnownAffiliationId == AF.AffiliationId
    ```
 
 ## Query and visualize result 
