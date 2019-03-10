@@ -26,9 +26,9 @@
   expanded: true
   items:
   - name: Set up Azure Databricks
-    href: get-started-databricks.md
+    href: get-started-setup-databricks.md
   - name: Author h-index sample
-    href: samples-databricks-hindex.md
+    href: samples-azure-databricks-hindex.md
 - name: Resources
   expanded: true
   items:
