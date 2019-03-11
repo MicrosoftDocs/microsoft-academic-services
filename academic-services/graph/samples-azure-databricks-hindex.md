@@ -335,4 +335,4 @@ If you don't manually terminate the cluster, it automatically stops, provided yo
 * [Create an Azure Databricks service](https://azure.microsoft.com/en-us/services/databricks/).
 * [Create a cluster for the Azure Databricks service](https://docs.azuredatabricks.net/user-guide/clusters/create.html).
 * [Import this notebook and attach it to the cluster](https://docs.databricks.com/user-guide/notebooks/notebook-manage.html#import-a-notebook).
-* [h-index](https://en.wikipedia.org/wiki/H-index)
+* [H-index](https://en.wikipedia.org/wiki/H-index)
