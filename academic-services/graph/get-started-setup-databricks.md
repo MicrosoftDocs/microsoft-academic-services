@@ -24,7 +24,7 @@ In this section, you create an Azure Databricks service by using the Azure porta
 
     ![Databricks on Azure portal](media/databricks/azure-databricks-on-portal.png "Databricks on Azure portal")
 
-2. Under **Azure Databricks Service**, provide the following values to create a Databricks service:
+1. Under **Azure Databricks Service**, provide the following values to create a Databricks service:
 
     |Property  |Description  |
     |---------|---------|
@@ -34,9 +34,9 @@ In this section, you create an Azure Databricks service by using the Azure porta
     |**Location**     | Select **West US 2**.  For other available regions, see [Azure services available by region](https://azure.microsoft.com/regions/services/).      |
     |**Pricing Tier**     |  Select **Standard**.     |
 
-3. Select **Pin to dashboard** and then select **Create**.
+1. Select **Create**.
 
-4. The account creation takes a few minutes. During account creation, the portal displays the **Submitting deployment for Azure Databricks** tile on the right. To monitor the operation status, view the progress bar at the top.
+1. The account creation takes a few minutes. During account creation, the portal displays the **Submitting deployment for Azure Databricks** tile on the right. To monitor the operation status, view the progress bar at the top.
 
     ![Databricks deployment tile](media/databricks/databricks-deployment-tile.png "Databricks deployment tile")
 
@@ -44,19 +44,17 @@ In this section, you create an Azure Databricks service by using the Azure porta
 
 1. In the Azure portal, go to the Databricks service that you created, and select **Launch Workspace**.
 
-2. You're redirected to the Azure Databricks portal. From the portal, select **Cluster**.
+1. You're redirected to the Azure Databricks portal. From the portal, select **Cluster**.
 
     ![Databricks on Azure](media/databricks/databricks-on-azure.png "Databricks on Azure")
 
-3. In the **New cluster** page, provide the values to create a cluster.
+1. In the **New cluster** page, provide the values to create a cluster.
 
     ![Create Databricks Spark cluster on Azure](media/databricks/create-databricks-spark-cluster.png "Create Databricks Spark cluster on Azure")
 
-4. Fill in values for the following fields, and accept the default values for the other fields:
+   Fill in values for the following fields, and accept the default values for the other fields:
 
     * Enter a name for the cluster.
-
-    * For this article, create a cluster with the **5.1** runtime.
 
     * Make sure you select the **Terminate after \_\_ minutes of inactivity** check box. If the cluster isn't being used, provide a duration (in minutes) to terminate the cluster.
 
