@@ -2,7 +2,7 @@
 title: Get Microsoft Academic Graph on Azure storage
 description: Step-by-step instructions for setting up one-time or automatic provisioning of Microsoft Academic Graph to an Azure blob storage account
 ms.topic: get-started-article
-ms.date: 2/13/2019
+ms.date: 3/10/2019
 ---
 # Get Microsoft Academic Graph on Azure storage
 
@@ -15,11 +15,6 @@ When using Microsoft Academic data (MAG, MAKES, etc.) in a product or service, o
 > [!NOTE]
 > Arnab Sinha, Zhihong Shen, Yang Song, Hao Ma, Darrin Eide, Bo-June (Paul) Hsu, and Kuansan Wang. 2015. An Overview of Microsoft Academic Service (MA) and Applications. In Proceedings of the 24th International Conference on World Wide Web (WWW '15 Companion). ACM, New York, NY, USA, 243-246. DOI=http://dx.doi.org/10.1145/2740908.2742839
 
-## Pre-requisites
-
-- [Azure account + subscription](https://azure.microsoft.com/en-us/get-started)
-- [Azure Storage account](https://docs.microsoft.com/en-us/azure/storage/)
-
 ## Setup storage account to receive MAG graph releases
 
 ### [Create an Azure Subscription](https://azure.microsoft.com/en-us/get-started)
@@ -30,29 +25,40 @@ Please create a new Azure subscription for the distribution previews. If your or
 
 1. Home > Create a resource > Storage > Storage account
 
-    ![Create new storage account resource](media/create-storage-account-select.png "Create new storage account resource")
+    ![Create new storage account resource](media/create-storage-account/select.png "Create new storage account resource")
 
-1. Specify "mag" for the resource group, “magas<org_name>” for the account name, "Storage (general purpose v1)" for account kind, “LRS” for replication, and “standard” for performance, then click the "review + create" button
+1.  Provide following values to create an Azure Storage account. Then click "Review + create" button.
 
-    ![Enter details for new storage account resource](media/create-storage-account-details.png "Enter details for new storage account resource")
+    |Property  |Description  |
+    |---------|---------|
+    |**Subscription** | From the drop-down, select your Azure subscription. |
+    |**Resource group** | Specify whether you want to create a new resource group or use an existing one. A resource group is a container that holds related resources for an Azure solution. For more information, see [Azure Resource Group overview](http://docs.microsoft.com/azure/azure-resource-manager/resource-group-overview). |
+    |**Storage account name** | Provide a name for your Databricks workspace, e.g. **magas<org_name>**. You don’t need to use your organization name after the "magas", however the account name must be unique among all Azure Storage Accounts. |
+    |**Location**    | Select whatever location (region) that is most appropriate for your existing Azure resources |
+    |**Performance** | Standard |
+    |**Account kind**| StorageV2 (general purpose v2) |
+    |**Replication** | LRS |
+    |**Access tier** | Cool |
 
-    > [!IMPORTANT]
-    > You don’t need to use your organization name after the "magas", however the account name must be unique among all Azure Storage Accounts
-
-    > [!NOTE]
-    > Select whatever location (region) that is most appropriate for your existing Azure resources
+    ![Enter details for new storage account resource](media/create-storage-account/details.png "Enter details for new storage account resource")
 
 1. Verify that the information you entered is correct and click the "create" button
 
-    ![Submit new storage account resource for creation](media/create-storage-account-submit.png "Submit new storage account resource for creation")
+    ![Submit new storage account resource for creation](media/create-storage-account/submit.png "Submit new storage account resource for creation")
 
 1. Once notified that the storage account has been created, click “go to resource”
 
-    ![Navigate to the new storage account resource](media/create-storage-account-go-to-resource.png "Navigate to the new storage account resource")
+    ![Navigate to the new storage account resource](media/create-storage-account/go-to-resource.png "Navigate to the new storage account resource")
 
 1. Go to “access keys” and take note of the “storage account name” and the “primary key”
 
-    ![Save new storage account resource name and access keys for later](media/create-storage-account-access-keys.png "Save new storage account resource name and access keys for later")
+    ![Save new storage account resource name and access keys for later](media/create-storage-account/access-keys.png "Save new storage account resource name and access keys for later")
+
+1. Make sure that you have these items of information:
+
+   :heavy_check_mark:  The name of your blob storage account.
+
+   :heavy_check_mark:  The access key of your blob storage account.
 
 ## Sign up for MAG provisioning
 
@@ -71,3 +77,16 @@ To sign up for MAG on AS distribution preview, send the following information us
 
 > [!NOTE]
 > MAG is currently in a free preview period, so there are no charges associated with the provisioning or use of the data/service itself. However Azure requires you to cover all costs associated with standard resource creation, usage, etc. For cost estimates associated with MAG please see the [Pricing](resources-pricing.md) page. <br/><br/>Most research institutions have an "Enterprise Account" with Microsoft including Azure subscription. The pricing for Enterprise Accounts differ from the individual account shown in Azure's price calculator. <br/><br/>If you have an Enterprise Account, please check with your individual institution's Information Technology/Computer Center resource on the process of setting up Azure to get MAG. You might need to obtain a "Master Agreement #" and involve MLSP (Microsoft Licensed Solution Provider) for help.
+
+## Next steps
+
+Advance to next sections to learn about entity data schema and using Azure Data Lake Analytics or Databricks for Microsoft Academic Graph.
+
+> [!div class="nextstepaction"]
+>[Entity Data Schema](reference-data-schema.md)
+
+> [!div class="nextstepaction"]
+>[Set up Azure Data Lake Analytics](get-started-setup-azure-data-lake-analytics.md)
+
+> [!div class="nextstepaction"]
+>[Set up Azure Databricks](get-started-setup-databricks.md)

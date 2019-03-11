@@ -2,11 +2,20 @@
 title: FAQ about Microsoft Academic Graph
 description: Answers some of the most frequently asked questions about the Microsoft Academic Graph
 ms.topic: reference
-ms.date: 12/13/2018
+ms.date: 3/10/2019
 ---
 # Frequently Asked Questions about Microsoft Academic Graph
 
 Answers some of the most frequently asked questions about the Microsoft Academic Graph
+
+## License
+
+Microsoft Academic Graph is licensed under [ODC-BY](https://opendatacommons.org/licenses/by/1.0/)
+
+When using Microsoft Academic data (MAG, MAKES, etc.) in a product or service, or including data in a redistribution, please acknowledge Microsoft Academic using the URI https://aka.ms/msracad. For publications and reports, please cite the following article:
+
+> [!NOTE]
+> Arnab Sinha, Zhihong Shen, Yang Song, Hao Ma, Darrin Eide, Bo-June (Paul) Hsu, and Kuansan Wang. 2015. An Overview of Microsoft Academic Service (MA) and Applications. In Proceedings of the 24th International Conference on World Wide Web (WWW '15 Companion). ACM, New York, NY, USA, 243-246. DOI=http://dx.doi.org/10.1145/2740908.2742839 
 
 ## How much does Microsoft Academic Graph cost
 
