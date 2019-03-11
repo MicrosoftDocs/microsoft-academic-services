@@ -58,7 +58,7 @@ In this section, you create an Azure Databricks service by using the Azure porta
 
     * Make sure you select the **Terminate after \_\_ minutes of inactivity** check box. If the cluster isn't being used, provide a duration (in minutes) to terminate the cluster.
 
-    * Select **Create cluster**. After the cluster is running, you can attach notebooks to the cluster and run Spark jobs.
+1. Select **Create cluster**. After the cluster is running, you can attach notebooks to the cluster and run Spark jobs.
 
 ## Next steps
 
