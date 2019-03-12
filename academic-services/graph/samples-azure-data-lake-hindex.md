@@ -34,7 +34,9 @@ Complete these tasks before you begin this tutorial:
 
 In this section, you create a notebook in Azure Databricks workspace.
 
-1. In the [Azure portal](https://portal.azure.com), go to the Azure Databricks service that you created, and select **Launch Workspace**.
+1. In the [Azure portal](https://portal.azure.com), go to the Azure Data Lake Analytics service that you created, and select **Overview**, **New Job**.
+
+  ![Azure Data Lake Analytics - New job](media/samples-azure-data-lake-hindex/new-job.png "Azure Data Lake Analytics - New job")
 
 1. On the left, select **Workspace**. From the **Workspace** drop-down, select **Create** > **Notebook**.
 
