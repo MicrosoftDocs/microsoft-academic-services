@@ -21,7 +21,7 @@
     href: samples-azure-data-lake-analytics.md
   - name: Set up Azure Databricks
     href: get-started-setup-databricks.md
-  - name: Databricks Author h-index sample
+  - name: Databricks author h-index sample
     href: samples-azure-databricks-hindex.md
 - name: Reference
   expanded: true
