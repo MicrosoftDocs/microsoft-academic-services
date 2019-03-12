@@ -26,7 +26,9 @@ Complete these tasks before you begin this tutorial:
 
    :heavy_check_mark:  The access key of your blob storage account.
    
-   :heavy_check_mark:  The name of blob storage container containing MAG dataset.
+   :heavy_check_mark:  The name of your blob storage container containing MAG dataset.
+
+   :heavy_check_mark:  The name of your Azure Data Lake Analytics account.
 
 ## Create a notebook in Azure Databricks
 
