@@ -38,6 +38,9 @@ In this section, you create a notebook in Azure Databricks workspace.
 
 1. Copy and paste the following code block in the script window.
 
+   > [!NOTE]
+   > To work with the latest schema, instead of the code block above, you could use samples/CreateFunctions.usql in the MAG dataset.
+
    ```U-SQL
    DROP FUNCTION IF EXISTS Affiliations;
    CREATE FUNCTION Affiliations(@BaseDir string = "")
@@ -193,9 +196,6 @@ In this section, you create a notebook in Azure Databricks workspace.
 1. The job should finish successfully.
 
    ![CreateFunctions job status](media/samples-azure-data-lake-hindex/create-functions-status.png "CreateFunctions job status")
-
-> [!NOTE]
-> To work with the latest schema, instead of the code block above, you could use samples/CreateFunctions.usql in the MAG dataset.
 
 ## Compute author h-index
 
