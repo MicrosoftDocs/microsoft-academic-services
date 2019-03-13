@@ -208,55 +208,97 @@ In this section, you create a notebook in Azure Databricks workspace.
    DECLARE @uriPrefix   string = "wasb://" + @dataVersion + "@" + @blobAccount + "/";
    DECLARE @OutAuthorHindex string = "/Output/AuthorHIndex.tsv";
    
-   @papers = Papers(@uriPrefix);
+   @Affiliations = Affiliations(@uriPrefix);
+   @Authors = Authors(@uriPrefix);
+   @Papers = Papers(@uriPrefix);
+   @PaperAuthorAffiliations = PaperAuthorAffiliations(@uriPrefix);
    
-   @paperAuthorAffiliations = PaperAuthorAffiliations(@uriPrefix);
-   
-   //
-   // Get (paper,author)
-   //
-   @selectedAuthorPaper =
-       SELECT DISTINCT
-           PaperId,
-           AuthorId
-       FROM @paperAuthorAffiliations;
-   
-   //
-   // Get EstimatedCitation from Papers table
-   //
-   @selectedAuthorPaperCitation =
+   // Get Affiliations
+   @Affiliations =
        SELECT
-           A.PaperId,
-           A.AuthorId,
-           P.EstimatedCitation
-       FROM @selectedAuthorPaper AS A
-       INNER JOIN @papers AS P
-           ON A.PaperId == P.PaperId
-       WHERE P.EstimatedCitation > 0;
-
-   //
-   // Compute Paper Rank by EstimatedCitation
-   //
-   @authorPaperCitationOrderByCitation =
+           AffiliationId,
+           DisplayName
+       FROM @Affiliations;
+   
+   // Get Authors
+   @Authors =
        SELECT
-           PaperId,
            AuthorId,
+           DisplayName,
+           LastKnownAffiliationId,
+           PaperCount
+       FROM @Authors;
+   
+   // Get (Author, Paper) pairs
+   @AuthorPaper =
+       SELECT DISTINCT
+           AuthorId,
+           PaperId
+       FROM @PaperAuthorAffiliations;
+   
+   // Get Papers
+   @PaperCitation =
+       SELECT
+           PaperId,
+           EstimatedCitation
+       FROM @Papers
+       WHERE EstimatedCitation > 0;
+   
+   // Generate author, paper, citation view
+   @AuthorPaperCitation =
+       SELECT
+           A.AuthorId,
+           A.PaperId,
+           P.EstimatedCitation
+       FROM @AuthorPaper AS A
+       INNER JOIN @PaperCitation AS P
+           ON A.PaperId == P.PaperId;
+   
+   // Order author, paper, citation view by citation
+   @AuthorPaperOrderByCitation =
+       SELECT
+           AuthorId,
+           PaperId,
            EstimatedCitation,
            ROW_NUMBER() OVER(PARTITION BY AuthorId ORDER BY EstimatedCitation DESC) AS Rank
-       FROM @selectedAuthorPaperCitation;
-
-   //
-   // Compute HIndex and total citation count
-   //
-   @authorHIndex =
+       FROM @AuthorPaperCitation;
+   
+   // Generate author hindex
+   @AuthorHIndexTemp =
        SELECT
            AuthorId,
-           SUM(EstimatedCitation) AS CitationCount,
-           MAX((EstimatedCitation >= Rank) ? Rank : 0) AS Hindex
-       FROM @authorPaperCitationOrderByCitation 
+           SUM(EstimatedCitation) AS TotalEstimatedCitation,
+           MAX(CASE WHEN EstimatedCitation >= Rank THEN Rank ELSE 0 END) AS HIndex
+       FROM @AuthorPaperOrderByCitation 
        GROUP BY AuthorId;
+   
+   // Get author detail information
+   @AuthorHIndex =
+       SELECT
+           I.AuthorId,
+           A.DisplayName,
+           AF.DisplayName AS AffiliationDisplayName,
+           A.PaperCount,
+           I.TotalEstimatedCitation,
+           I.HIndex
+       FROM @AuthorHIndexTemp AS I
+       INNER JOIN @Authors AS A
+           ON A.AuthorId == I.AuthorId
+       LEFT OUTER JOIN @Affiliations AS AF
+           ON A.LastKnownAffiliationId == AF.AffiliationId;
+   
+   // Filter authors with top hindex
+   SELECT
+       DisplayName,
+       AffiliationDisplayName,
+       PaperCount,
+       TotalEstimatedCitation,
+       HIndex
+   FROM @AuthorHIndex 
+   ORDER BY HIndex DESC, AuthorId
+   LIMIT 100;
 
-   OUTPUT @authorHIndex
+   OUTPUT @AuthorHIndex
    TO @OutAuthorHindex
    USING Outputters.Tsv(quoting : false);
    ```
