@@ -30,13 +30,13 @@ Complete these tasks before you begin this tutorial:
 
    :heavy_check_mark:  The name of your Azure Data Lake Analytics account.
 
-## Create a notebook in Azure Databricks
+## Define functions to extract MAG data from Azure Storage
 
 In this section, you create a notebook in Azure Databricks workspace.
 
 1. In the [Azure portal](https://portal.azure.com), go to the Azure Data Lake Analytics service that you created, and select **Overview** > **New Job**.
 
-  ![Azure Data Lake Analytics - New job](media/samples-azure-data-lake-hindex/new-job.png "Azure Data Lake Analytics - New job")
+   ![Azure Data Lake Analytics - New job](media/samples-azure-data-lake-hindex/new-job.png "Azure Data Lake Analytics - New job")
 
 1. Copy and paste the following code block in the script window.
 
@@ -190,13 +190,23 @@ In this section, you create a notebook in Azure Databricks workspace.
    
 1. Provide a **Job name** and select **Submit**.
 
-  ![Submit CreateFunctions job](media/samples-azure-data-lake-hindex/CreateFunctions.png "Submit CreateFunctions job")
+   ![Submit CreateFunctions job](media/samples-azure-data-lake-hindex/create-functions.png "Submit CreateFunctions job")
+
+1. Provide a **Job name** and select **Submit**. The job should finish successfully.
+
+   ![CreateFunctions job status](media/samples-azure-data-lake-hindex/create-functions-status.png "CreateFunctions job status")
+
+## Compute author h-index
+
+1. In the [Azure portal](https://portal.azure.com), go to the Azure Data Lake Analytics service that you created, and select **Overview** > **New Job**.
+
+   ![Azure Data Lake Analytics - New job](media/samples-azure-data-lake-hindex/new-job.png "Azure Data Lake Analytics - New job")
 
 1. Copy and paste the following code block in the script window.
    
    ```U-SQL
-   DECLARE @dataVersion string = "mag-##DataVersion##";
-   DECLARE @blobAccount string = "##YourBlobAccount##";
+   DECLARE @dataVersion string = "<MagContainer>";
+   DECLARE @blobAccount string = "<AzureStorageAccount>";
    DECLARE @uriPrefix   string = "wasb://" + @dataVersion + "@" + @blobAccount + "/";
    DECLARE @OutAuthorHindex string = "/output/AuthorHIndex.tsv";
    
@@ -253,19 +263,15 @@ In this section, you create a notebook in Azure Databricks workspace.
    USING Outputters.Tsv(quoting : false);
    ```
 
-1. Provide a **Job name** and select **Submit**.
+1. In this code block, replace **`<AzureStorageAccount>`**, and **`<MagContainer>`** placeholder values with the values that you collected while completing the prerequisites of this sample.
 
-  ![Submit CreateFunctions job](media/samples-azure-data-lake-hindex/CreateFunctions.png "Submit CreateFunctions job")
+   * The **`<AzureStorageAccount>`** is the name of your Azure Storage account containing MAG dataset.
 
-1. On the left, select **Workspace**. From the **Workspace** drop-down, select **Create** > **Notebook**.
+   * The **`<MagContainer>`** is the container name in Azure Storage account containing MAG dataset, Usually in the form of **mag-yyyy-mm-dd**.
 
-    ![Create a notebook in Databricks](media/databricks/databricks-create-notebook.png "Create notebook in Databricks")
+1. Provide a **Job name** and select **Submit**. The job should finish successfully.
 
-1. In the **Create Notebook** dialog box, enter a name for the notebook. Select **Python** as the language.
-
-    ![Provide details for a notebook in Databricks](media/databricks/create-notebook.png "Provide details for a notebook in Databricks")
-
-1. Select **Create**.
+   ![CreateFunctions job status](media/samples-azure-data-lake-hindex/create-functions-status.png "CreateFunctions job status")
 
 ## Define configration variables
 
