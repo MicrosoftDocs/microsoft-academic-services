@@ -60,6 +60,12 @@ In this section, you create the first notebook cell and define configration vari
 
 1. In this code block, replace `<AzureStorageAccount>`, `<AzureStorageAccessKey>`, and `<MagContainer>` placeholder values with the values that you collected while completing the prerequisites of this sample.
 
+   |Property  |Description  |
+   |---------|---------|
+   |**`<AzureStorageAccount>`** | The name of your Azure Storage account. |
+   |**`<AzureStorageAccessKey>`** | The access key of your Azure Storage account. |
+   |**`<MagContainer>`** | The container name in Azure Storage account containing MAG dataset, Usually in the form of **mag-yyyy-mm-dd**. |
+
    * The `<AzureStorageAccount>` is the name of your Azure Storage account.
 
    * The `<AzureStorageAccessKey>` is the access key of the Azure Storage account.
