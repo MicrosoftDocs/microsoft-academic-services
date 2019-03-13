@@ -58,13 +58,13 @@ In this section, you create the first notebook cell and define configration vari
    MagDir = '/mnt/mag'
    ```
 
-1. In this code block, replace `AzureStorageAccount`, `AzureStorageAccessKey`, and `MagContainer` placeholder values with the values that you collected while completing the prerequisites of this sample.
+1. In this code block, replace `<AzureStorageAccount>`, `<AzureStorageAccessKey>`, and `<MagContainer>` placeholder values with the values that you collected while completing the prerequisites of this sample.
 
-   * The `AzureStorageAccount` is the name of your Azure Storage account.
+   * The `<AzureStorageAccount>` is the name of your Azure Storage account.
 
-   * The `AzureStorageAccessKey` is the access key of the Azure Storage account.
+   * The `<AzureStorageAccessKey>` is the access key of the Azure Storage account.
 
-   * The `MagContainer` is the container name in Azure Storage account containing MAG dataset, Usually in the form of **mag-yyyy-mm-dd**.
+   * The `<MagContainer>` is the container name in Azure Storage account containing MAG dataset, Usually in the form of **mag-yyyy-mm-dd**.
 
 1. Press the **SHIFT + ENTER** keys to run the code in this block.
 
