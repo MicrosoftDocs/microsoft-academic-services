@@ -194,6 +194,9 @@ In this section, you create a notebook in Azure Databricks workspace.
 
    ![CreateFunctions job status](media/samples-azure-data-lake-hindex/create-functions-status.png "CreateFunctions job status")
 
+> [!NOTE]
+> To work with the latest schema, instead of the code block above, you could use samples/CreateFunctions.usql in the MAG dataset.
+
 ## Compute author h-index
 
 1. In the [Azure portal](https://portal.azure.com), go to the Azure Data Lake Analytics service that you created, and select **Overview** > **New Job**.
@@ -309,11 +312,13 @@ In this section, you create a notebook in Azure Databricks workspace.
 
    * The `<MagContainer>` is the container name in Azure Storage account containing MAG dataset, Usually in the form of **mag-yyyy-mm-dd**.
 
-1. Provide a **Job name** and select **Submit**. The job should finish successfully.
+1. Provide a **Job name** and select **Submit**.
 
-   ![CreateFunctions job status](media/samples-azure-data-lake-hindex/create-functions-status.png "CreateFunctions job status")
+   ![Submit AuthorHIndex job](media/samples-azure-data-lake-hindex/create-functions.png "Submit AuthorHIndex job")
 
-1. Output goes "/Output/AuthorHIndex.tsv" in your Azure Data Lake Storage (ADLS).
+1. The job should finish successfully. Output goes "/Output/AuthorHIndex.tsv" in your Azure Data Lake Storage (ADLS).
+
+   ![AuthorHIndex job status](media/samples-azure-data-lake-hindex/create-functions-status.png "AuthorHIndex job status")
 
 ## View output data
 
