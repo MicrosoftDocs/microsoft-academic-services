@@ -40,526 +40,218 @@ In this section, you create a notebook in Azure Databricks workspace.
 
 1. Copy and paste the following code block in the script window.
 
-```
-DROP FUNCTION IF EXISTS Affiliations;
+   ```U-SQL
+   DROP FUNCTION IF EXISTS Affiliations;
+   CREATE FUNCTION Affiliations(@BaseDir string = "")
+     RETURNS @_Affiliations TABLE
+     (
+       AffiliationId long,
+       Rank uint,
+       NormalizedName string,
+       DisplayName string,
+       GridId string,
+       OfficialPage string,
+       WikiPage string,
+       PaperCount long,
+       CitationCount long,
+       CreatedDate DateTime
+     )
+     AS BEGIN
+     DECLARE @_Path string = @BaseDir + "mag/Affiliations.txt";
+     @_Affiliations =
+     EXTRACT
+       AffiliationId long,
+       Rank uint,
+       NormalizedName string,
+       DisplayName string,
+       GridId string,
+       OfficialPage string,
+       WikiPage string,
+       PaperCount long,
+       CitationCount long,
+       CreatedDate DateTime
+     FROM @_Path
+     USING Extractors.Tsv(silent: false, quoting: false);
+     RETURN;
+   END;
+   
+   DROP FUNCTION IF EXISTS Authors;
+   CREATE FUNCTION Authors(@BaseDir string = "")
+     RETURNS @_Authors TABLE
+     (
+       AuthorId long,
+       Rank uint,
+       NormalizedName string,
+       DisplayName string,
+       LastKnownAffiliationId long?,
+       PaperCount long,
+       CitationCount long,
+       CreatedDate DateTime
+     )
+     AS BEGIN
+     DECLARE @_Path string = @BaseDir + "mag/Authors.txt";
+     @_Authors =
+     EXTRACT
+       AuthorId long,
+       Rank uint,
+       NormalizedName string,
+       DisplayName string,
+       LastKnownAffiliationId long?,
+       PaperCount long,
+       CitationCount long,
+       CreatedDate DateTime
+     FROM @_Path
+     USING Extractors.Tsv(silent: false, quoting: false);
+     RETURN;
+   END;
+   
+   DROP FUNCTION IF EXISTS PaperAuthorAffiliations;
+   CREATE FUNCTION PaperAuthorAffiliations(@BaseDir string = "")
+     RETURNS @_PaperAuthorAffiliations TABLE
+     (
+       PaperId long,
+       AuthorId long,
+       AffiliationId long?,
+       AuthorSequenceNumber uint,
+       OriginalAffiliation string
+     )
+     AS BEGIN
+     DECLARE @_Path string = @BaseDir + "mag/PaperAuthorAffiliations.txt";
+     @_PaperAuthorAffiliations =
+     EXTRACT
+       PaperId long,
+       AuthorId long,
+       AffiliationId long?,
+       AuthorSequenceNumber uint,
+       OriginalAffiliation string
+     FROM @_Path
+     USING Extractors.Tsv(silent: false, quoting: false);
+     RETURN;
+   END;
+   
+   DROP FUNCTION IF EXISTS Papers;
+   CREATE FUNCTION Papers(@BaseDir string = "")
+     RETURNS @_Papers TABLE
+     (
+       PaperId long,
+       Rank uint,
+       Doi string,
+       DocType string,
+       PaperTitle string,
+       OriginalTitle string,
+       BookTitle string,
+       Year int?,
+       Date DateTime?,
+       Publisher string,
+       JournalId long?,
+       ConferenceSeriesId long?,
+       ConferenceInstanceId long?,
+       Volume string,
+       Issue string,
+       FirstPage string,
+       LastPage string,
+       ReferenceCount long,
+       CitationCount long,
+       EstimatedCitation long,
+       OriginalVenue string,
+       CreatedDate DateTime
+     )
+     AS BEGIN
+     DECLARE @_Path string = @BaseDir + "mag/Papers.txt";
+     @_Papers =
+     EXTRACT
+       PaperId long,
+       Rank uint,
+       Doi string,
+       DocType string,
+       PaperTitle string,
+       OriginalTitle string,
+       BookTitle string,
+       Year int?,
+       Date DateTime?,
+       Publisher string,
+       JournalId long?,
+       ConferenceSeriesId long?,
+       ConferenceInstanceId long?,
+       Volume string,
+       Issue string,
+       FirstPage string,
+       LastPage string,
+       ReferenceCount long,
+       CitationCount long,
+       EstimatedCitation long,
+       OriginalVenue string,
+       CreatedDate DateTime
+     FROM @_Path
+     USING Extractors.Tsv(silent: false, quoting: false);
+     RETURN;
+   END;
+   ```
+   
+1. Provide a **Job name** and select **Submit**.
 
-CREATE FUNCTION Affiliations(@BaseDir string = "")
-  RETURNS @_Affiliations TABLE
-  (
-    AffiliationId long,
-    Rank uint,
-    NormalizedName string,
-    DisplayName string,
-    GridId string,
-    OfficialPage string,
-    WikiPage string,
-    PaperCount long,
-    CitationCount long,
-    CreatedDate DateTime
-  )
-  AS BEGIN
-  DECLARE @_Path string = @BaseDir + "mag/Affiliations.txt";
-  @_Affiliations =
-  EXTRACT
-    AffiliationId long,
-    Rank uint,
-    NormalizedName string,
-    DisplayName string,
-    GridId string,
-    OfficialPage string,
-    WikiPage string,
-    PaperCount long,
-    CitationCount long,
-    CreatedDate DateTime
-  FROM @_Path
-  USING Extractors.Tsv(silent: false, quoting: false);
-  RETURN;
-END;
+  ![Submit CreateFunctions job](media/samples-azure-data-lake-hindex/CreateFunctions.png "Submit CreateFunctions job")
 
+1. Copy and paste the following code block in the script window.
+   
+   ```U-SQL
+   DECLARE @dataVersion string = "mag-##DataVersion##";
+   DECLARE @blobAccount string = "##YourBlobAccount##";
+   DECLARE @uriPrefix   string = "wasb://" + @dataVersion + "@" + @blobAccount + "/";
+   DECLARE @OutAuthorHindex string = "/output/AuthorHIndex.tsv";
+   
+   @papers = Papers(@uriPrefix);
+   
+   @paperAuthorAffiliations = PaperAuthorAffiliations(@uriPrefix);
+   
+   //
+   // Get (paper,author)
+   //
+   @selectedAuthorPaper =
+       SELECT DISTINCT
+           PaperId,
+           AuthorId
+       FROM @paperAuthorAffiliations;
+   
+   //
+   // Get EstimatedCitation from Papers table
+   //
+   @selectedAuthorPaperCitation =
+    SELECT
+        A.PaperId,
+        A.AuthorId,
+        P.EstimatedCitation
+    FROM @selectedAuthorPaper AS A
+    INNER JOIN @papers AS P
+        ON A.PaperId == P.PaperId
+    WHERE P.EstimatedCitation > 0;
 
-DROP FUNCTION IF EXISTS Authors;
+   //
+   // Compute Paper Rank by EstimatedCitation
+   //
+   @authorPaperCitationOrderByCitation =
+       SELECT
+           PaperId,
+           AuthorId,
+           EstimatedCitation,
+           ROW_NUMBER() OVER(PARTITION BY AuthorId ORDER BY EstimatedCitation DESC) AS Rank
+       FROM @selectedAuthorPaperCitation;
 
-CREATE FUNCTION Authors(@BaseDir string = "")
-  RETURNS @_Authors TABLE
-  (
-    AuthorId long,
-    Rank uint,
-    NormalizedName string,
-    DisplayName string,
-    LastKnownAffiliationId long?,
-    PaperCount long,
-    CitationCount long,
-    CreatedDate DateTime
-  )
-  AS BEGIN
-  DECLARE @_Path string = @BaseDir + "mag/Authors.txt";
-  @_Authors =
-  EXTRACT
-    AuthorId long,
-    Rank uint,
-    NormalizedName string,
-    DisplayName string,
-    LastKnownAffiliationId long?,
-    PaperCount long,
-    CitationCount long,
-    CreatedDate DateTime
-  FROM @_Path
-  USING Extractors.Tsv(silent: false, quoting: false);
-  RETURN;
-END;
+   //
+   // Compute HIndex and total citation count
+   //
+   @authorHIndex =
+       SELECT
+           AuthorId,
+           SUM(EstimatedCitation) AS CitationCount,
+           MAX((EstimatedCitation >= Rank) ? Rank : 0) AS Hindex
+       FROM @authorPaperCitationOrderByCitation 
+       GROUP BY AuthorId;
 
-
-DROP FUNCTION IF EXISTS ConferenceInstances;
-
-CREATE FUNCTION ConferenceInstances(@BaseDir string = "")
-  RETURNS @_ConferenceInstances TABLE
-  (
-    ConferenceInstanceId long,
-    NormalizedName string,
-    DisplayName string,
-    ConferenceSeriesId long,
-    Location string,
-    OfficialUrl string,
-    StartDate DateTime?,
-    EndDate DateTime?,
-    AbstractRegistrationDate DateTime?,
-    SubmissionDeadlineDate DateTime?,
-    NotificationDueDate DateTime?,
-    FinalVersionDueDate DateTime?,
-    PaperCount long,
-    CitationCount long,
-    CreatedDate DateTime
-  )
-  AS BEGIN
-  DECLARE @_Path string = @BaseDir + "mag/ConferenceInstances.txt";
-  @_ConferenceInstances =
-  EXTRACT
-    ConferenceInstanceId long,
-    NormalizedName string,
-    DisplayName string,
-    ConferenceSeriesId long,
-    Location string,
-    OfficialUrl string,
-    StartDate DateTime?,
-    EndDate DateTime?,
-    AbstractRegistrationDate DateTime?,
-    SubmissionDeadlineDate DateTime?,
-    NotificationDueDate DateTime?,
-    FinalVersionDueDate DateTime?,
-    PaperCount long,
-    CitationCount long,
-    CreatedDate DateTime
-  FROM @_Path
-  USING Extractors.Tsv(silent: false, quoting: false);
-  RETURN;
-END;
-
-
-DROP FUNCTION IF EXISTS ConferenceSeries;
-
-CREATE FUNCTION ConferenceSeries(@BaseDir string = "")
-  RETURNS @_ConferenceSeries TABLE
-  (
-    ConferenceSeriesId long,
-    Rank uint,
-    NormalizedName string,
-    DisplayName string,
-    PaperCount long,
-    CitationCount long,
-    CreatedDate DateTime
-  )
-  AS BEGIN
-  DECLARE @_Path string = @BaseDir + "mag/ConferenceSeries.txt";
-  @_ConferenceSeries =
-  EXTRACT
-    ConferenceSeriesId long,
-    Rank uint,
-    NormalizedName string,
-    DisplayName string,
-    PaperCount long,
-    CitationCount long,
-    CreatedDate DateTime
-  FROM @_Path
-  USING Extractors.Tsv(silent: false, quoting: false);
-  RETURN;
-END;
-
-
-DROP FUNCTION IF EXISTS FieldOfStudyChildren;
-
-CREATE FUNCTION FieldOfStudyChildren(@BaseDir string = "")
-  RETURNS @_FieldOfStudyChildren TABLE
-  (
-    FieldOfStudyId long,
-    ChildFieldOfStudyId long
-  )
-  AS BEGIN
-  DECLARE @_Path string = @BaseDir + "advanced/FieldOfStudyChildren.txt";
-  @_FieldOfStudyChildren =
-  EXTRACT
-    FieldOfStudyId long,
-    ChildFieldOfStudyId long
-  FROM @_Path
-  USING Extractors.Tsv(silent: false, quoting: false);
-  RETURN;
-END;
-
-
-DROP FUNCTION IF EXISTS FieldsOfStudy;
-
-CREATE FUNCTION FieldsOfStudy(@BaseDir string = "")
-  RETURNS @_FieldsOfStudy TABLE
-  (
-    FieldOfStudyId long,
-    Rank uint,
-    NormalizedName string,
-    DisplayName string,
-    MainType string,
-    Level int,
-    PaperCount long,
-    CitationCount long,
-    CreatedDate DateTime
-  )
-  AS BEGIN
-  DECLARE @_Path string = @BaseDir + "mag/FieldsOfStudy.txt";
-  @_FieldsOfStudy =
-  EXTRACT
-    FieldOfStudyId long,
-    Rank uint,
-    NormalizedName string,
-    DisplayName string,
-    MainType string,
-    Level int,
-    PaperCount long,
-    CitationCount long,
-    CreatedDate DateTime
-  FROM @_Path
-  USING Extractors.Tsv(silent: false, quoting: false);
-  RETURN;
-END;
-
-
-DROP FUNCTION IF EXISTS Journals;
-
-CREATE FUNCTION Journals(@BaseDir string = "")
-  RETURNS @_Journals TABLE
-  (
-    JournalId long,
-    Rank uint,
-    NormalizedName string,
-    DisplayName string,
-    Issn string,
-    Publisher string,
-    Webpage string,
-    PaperCount long,
-    CitationCount long,
-    CreatedDate DateTime
-  )
-  AS BEGIN
-  DECLARE @_Path string = @BaseDir + "mag/Journals.txt";
-  @_Journals =
-  EXTRACT
-    JournalId long,
-    Rank uint,
-    NormalizedName string,
-    DisplayName string,
-    Issn string,
-    Publisher string,
-    Webpage string,
-    PaperCount long,
-    CitationCount long,
-    CreatedDate DateTime
-  FROM @_Path
-  USING Extractors.Tsv(silent: false, quoting: false);
-  RETURN;
-END;
-
-
-DROP FUNCTION IF EXISTS PaperAbstractsInvertedIndex;
-
-CREATE FUNCTION PaperAbstractsInvertedIndex(@BaseDir string = "")
-  RETURNS @_PaperAbstractsInvertedIndex TABLE
-  (
-    PaperId long,
-    IndexedAbstract string
-  )
-  AS BEGIN
-  DECLARE @_Path string = @BaseDir + "nlp/PaperAbstractsInvertedIndex.txt";
-  @_PaperAbstractsInvertedIndex =
-  EXTRACT
-    PaperId long,
-    IndexedAbstract string
-  FROM @_Path
-  USING Extractors.Tsv(silent: false, quoting: false);
-  RETURN;
-END;
-
-
-DROP FUNCTION IF EXISTS PaperAuthorAffiliations;
-
-CREATE FUNCTION PaperAuthorAffiliations(@BaseDir string = "")
-  RETURNS @_PaperAuthorAffiliations TABLE
-  (
-    PaperId long,
-    AuthorId long,
-    AffiliationId long?,
-    AuthorSequenceNumber uint,
-    OriginalAffiliation string
-  )
-  AS BEGIN
-  DECLARE @_Path string = @BaseDir + "mag/PaperAuthorAffiliations.txt";
-  @_PaperAuthorAffiliations =
-  EXTRACT
-    PaperId long,
-    AuthorId long,
-    AffiliationId long?,
-    AuthorSequenceNumber uint,
-    OriginalAffiliation string
-  FROM @_Path
-  USING Extractors.Tsv(silent: false, quoting: false);
-  RETURN;
-END;
-
-
-DROP FUNCTION IF EXISTS PaperCitationContexts;
-
-CREATE FUNCTION PaperCitationContexts(@BaseDir string = "")
-  RETURNS @_PaperCitationContexts TABLE
-  (
-    PaperId long,
-    PaperReferenceId long,
-    CitationContext string
-  )
-  AS BEGIN
-  DECLARE @_Path string = @BaseDir + "nlp/PaperCitationContexts.txt";
-  @_PaperCitationContexts =
-  EXTRACT
-    PaperId long,
-    PaperReferenceId long,
-    CitationContext string
-  FROM @_Path
-  USING Extractors.Tsv(silent: false, quoting: false);
-  RETURN;
-END;
-
-
-DROP FUNCTION IF EXISTS PaperFieldsOfStudy;
-
-CREATE FUNCTION PaperFieldsOfStudy(@BaseDir string = "")
-  RETURNS @_PaperFieldsOfStudy TABLE
-  (
-    PaperId long,
-    FieldOfStudyId long,
-    Score float
-  )
-  AS BEGIN
-  DECLARE @_Path string = @BaseDir + "advanced/PaperFieldsOfStudy.txt";
-  @_PaperFieldsOfStudy =
-  EXTRACT
-    PaperId long,
-    FieldOfStudyId long,
-    Score float
-  FROM @_Path
-  USING Extractors.Tsv(silent: false, quoting: false);
-  RETURN;
-END;
-
-
-DROP FUNCTION IF EXISTS PaperLanguages;
-
-CREATE FUNCTION PaperLanguages(@BaseDir string = "")
-  RETURNS @_PaperLanguages TABLE
-  (
-    PaperId long,
-    LanguageCode string
-  )
-  AS BEGIN
-  DECLARE @_Path string = @BaseDir + "nlp/PaperLanguages.txt";
-  @_PaperLanguages =
-  EXTRACT
-    PaperId long,
-    LanguageCode string
-  FROM @_Path
-  USING Extractors.Tsv(silent: false, quoting: false);
-  RETURN;
-END;
-
-
-DROP FUNCTION IF EXISTS PaperRecommendations;
-
-CREATE FUNCTION PaperRecommendations(@BaseDir string = "")
-  RETURNS @_PaperRecommendations TABLE
-  (
-    PaperId long,
-    RecommendedPaperId long,
-    Score float
-  )
-  AS BEGIN
-  DECLARE @_Path string = @BaseDir + "advanced/PaperRecommendations.txt";
-  @_PaperRecommendations =
-  EXTRACT
-    PaperId long,
-    RecommendedPaperId long,
-    Score float
-  FROM @_Path
-  USING Extractors.Tsv(silent: false, quoting: false);
-  RETURN;
-END;
-
-
-DROP FUNCTION IF EXISTS PaperReferences;
-
-CREATE FUNCTION PaperReferences(@BaseDir string = "")
-  RETURNS @_PaperReferences TABLE
-  (
-    PaperId long,
-    PaperReferenceId long
-  )
-  AS BEGIN
-  DECLARE @_Path string = @BaseDir + "mag/PaperReferences.txt";
-  @_PaperReferences =
-  EXTRACT
-    PaperId long,
-    PaperReferenceId long
-  FROM @_Path
-  USING Extractors.Tsv(silent: false, quoting: false);
-  RETURN;
-END;
-
-
-DROP FUNCTION IF EXISTS PaperResources;
-
-CREATE FUNCTION PaperResources(@BaseDir string = "")
-  RETURNS @_PaperResources TABLE
-  (
-    PaperId long,
-    ResourceType int,
-    ResourceUrl string,
-    SourceUrl string,
-    RelationshipType int
-  )
-  AS BEGIN
-  DECLARE @_Path string = @BaseDir + "mag/PaperResources.txt";
-  @_PaperResources =
-  EXTRACT
-    PaperId long,
-    ResourceType int,
-    ResourceUrl string,
-    SourceUrl string,
-    RelationshipType int
-  FROM @_Path
-  USING Extractors.Tsv(silent: false, quoting: false);
-  RETURN;
-END;
-
-
-DROP FUNCTION IF EXISTS PaperUrls;
-
-CREATE FUNCTION PaperUrls(@BaseDir string = "")
-  RETURNS @_PaperUrls TABLE
-  (
-    PaperId long,
-    SourceType int?,
-    SourceUrl string
-  )
-  AS BEGIN
-  DECLARE @_Path string = @BaseDir + "mag/PaperUrls.txt";
-  @_PaperUrls =
-  EXTRACT
-    PaperId long,
-    SourceType int?,
-    SourceUrl string
-  FROM @_Path
-  USING Extractors.Tsv(silent: false, quoting: false);
-  RETURN;
-END;
-
-
-DROP FUNCTION IF EXISTS Papers;
-
-CREATE FUNCTION Papers(@BaseDir string = "")
-  RETURNS @_Papers TABLE
-  (
-    PaperId long,
-    Rank uint,
-    Doi string,
-    DocType string,
-    PaperTitle string,
-    OriginalTitle string,
-    BookTitle string,
-    Year int?,
-    Date DateTime?,
-    Publisher string,
-    JournalId long?,
-    ConferenceSeriesId long?,
-    ConferenceInstanceId long?,
-    Volume string,
-    Issue string,
-    FirstPage string,
-    LastPage string,
-    ReferenceCount long,
-    CitationCount long,
-    EstimatedCitation long,
-    OriginalVenue string,
-    CreatedDate DateTime
-  )
-  AS BEGIN
-  DECLARE @_Path string = @BaseDir + "mag/Papers.txt";
-  @_Papers =
-  EXTRACT
-    PaperId long,
-    Rank uint,
-    Doi string,
-    DocType string,
-    PaperTitle string,
-    OriginalTitle string,
-    BookTitle string,
-    Year int?,
-    Date DateTime?,
-    Publisher string,
-    JournalId long?,
-    ConferenceSeriesId long?,
-    ConferenceInstanceId long?,
-    Volume string,
-    Issue string,
-    FirstPage string,
-    LastPage string,
-    ReferenceCount long,
-    CitationCount long,
-    EstimatedCitation long,
-    OriginalVenue string,
-    CreatedDate DateTime
-  FROM @_Path
-  USING Extractors.Tsv(silent: false, quoting: false);
-  RETURN;
-END;
-
-
-DROP FUNCTION IF EXISTS RelatedFieldOfStudy;
-
-CREATE FUNCTION RelatedFieldOfStudy(@BaseDir string = "")
-  RETURNS @_RelatedFieldOfStudy TABLE
-  (
-    FieldOfStudyId1 long,
-    Type1 string,
-    FieldOfStudyId2 long,
-    Type2 string,
-    Rank float
-  )
-  AS BEGIN
-  DECLARE @_Path string = @BaseDir + "advanced/RelatedFieldOfStudy.txt";
-  @_RelatedFieldOfStudy =
-  EXTRACT
-    FieldOfStudyId1 long,
-    Type1 string,
-    FieldOfStudyId2 long,
-    Type2 string,
-    Rank float
-  FROM @_Path
-  USING Extractors.Tsv(silent: false, quoting: false);
-  RETURN;
-END;
-```
+   OUTPUT @authorHIndex
+   TO @OutAuthorHindex
+   USING Outputters.Tsv(quoting : false);
+   ```
 
 1. Provide a **Job name** and select **Submit**.
 
