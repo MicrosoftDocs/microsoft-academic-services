@@ -22,13 +22,11 @@ Complete these tasks before you begin this tutorial:
 
    Before you begin, you should have these items of information:
 
-   :heavy_check_mark:  The name of your blob storage account.
-
-   :heavy_check_mark:  The access key of your blob storage account.
-   
-   :heavy_check_mark:  The name of your blob storage container containing MAG dataset.
-
    :heavy_check_mark:  The name of your Azure Data Lake Analytics account.
+
+   :heavy_check_mark:  The name of your Azure Storage account containing MAG dataset.
+
+   :heavy_check_mark:  The name of the container in your Azure Storage account containing MAG dataset.
 
 ## Define functions to extract MAG data from Azure Storage
 
@@ -192,7 +190,7 @@ In this section, you create a notebook in Azure Databricks workspace.
 
    ![Submit CreateFunctions job](media/samples-azure-data-lake-hindex/create-functions.png "Submit CreateFunctions job")
 
-1. Provide a **Job name** and select **Submit**. The job should finish successfully.
+1. The job should finish successfully.
 
    ![CreateFunctions job status](media/samples-azure-data-lake-hindex/create-functions-status.png "CreateFunctions job status")
 
