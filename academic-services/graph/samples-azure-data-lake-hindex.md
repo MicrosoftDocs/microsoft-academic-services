@@ -227,14 +227,14 @@ In this section, you create a notebook in Azure Databricks workspace.
    // Get EstimatedCitation from Papers table
    //
    @selectedAuthorPaperCitation =
-    SELECT
-        A.PaperId,
-        A.AuthorId,
-        P.EstimatedCitation
-    FROM @selectedAuthorPaper AS A
-    INNER JOIN @papers AS P
-        ON A.PaperId == P.PaperId
-    WHERE P.EstimatedCitation > 0;
+       SELECT
+           A.PaperId,
+           A.AuthorId,
+           P.EstimatedCitation
+       FROM @selectedAuthorPaper AS A
+       INNER JOIN @papers AS P
+           ON A.PaperId == P.PaperId
+       WHERE P.EstimatedCitation > 0;
 
    //
    // Compute Paper Rank by EstimatedCitation
