@@ -308,9 +308,10 @@ In this section, you create a notebook in Azure Databricks workspace.
 
 1. In this code block, replace `<AzureStorageAccount>`, and `<MagContainer>` placeholder values with the values that you collected while completing the prerequisites of this sample.
 
-   * The `<AzureStorageAccount>` is the name of your Azure Storage account containing MAG dataset.
-
-   * The `<MagContainer>` is the container name in Azure Storage account containing MAG dataset, Usually in the form of **mag-yyyy-mm-dd**.
+   |Property  |Description  |
+   |---------|---------|
+   |**`<AzureStorageAccount>`** | The name of your Azure Storage account containing MAG dataset. |
+   |**`<MagContainer>`** | The container name in Azure Storage account containing MAG dataset, Usually in the form of **mag-yyyy-mm-dd**. |
 
 1. Provide a **Job name** and select **Submit**.
 
