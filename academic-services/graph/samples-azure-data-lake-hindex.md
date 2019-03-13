@@ -22,7 +22,7 @@ Complete these tasks before you begin this tutorial:
 
    Before you begin, you should have these items of information:
 
-   :heavy_check_mark:  The name of your Azure Data Lake Analytics account.
+   :heavy_check_mark:  The name of your Azure Data Lake Analytics service.
 
    :heavy_check_mark:  The name of your Azure Storage account containing MAG dataset.
 
@@ -30,7 +30,7 @@ Complete these tasks before you begin this tutorial:
 
 ## Define functions to extract MAG data from Azure Storage
 
-In this section, you create a notebook in Azure Databricks workspace.
+In prerequisite [Setting up Azure Data Lake Analytics](get-started-setup-azure-data-lake-analytics.md), you added the Azure Storage created for MAG provision as a data source for the Azure Data Lake Analytics service (ADLA). In this section, you submit a job to create functions in ADLA for extracting MAG data from the Azure Storage.
 
 1. In the [Azure portal](https://portal.azure.com), go to the Azure Data Lake Analytics service that you created, and select **Overview** > **New Job**.
 
