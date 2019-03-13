@@ -66,12 +66,6 @@ In this section, you create the first notebook cell and define configration vari
    |**`<AzureStorageAccessKey>`** | The access key of your Azure Storage account. |
    |**`<MagContainer>`** | The container name in Azure Storage account containing MAG dataset, Usually in the form of **mag-yyyy-mm-dd**. |
 
-   * The `<AzureStorageAccount>` is the name of your Azure Storage account.
-
-   * The `<AzureStorageAccessKey>` is the access key of the Azure Storage account.
-
-   * The `<MagContainer>` is the container name in Azure Storage account containing MAG dataset, Usually in the form of **mag-yyyy-mm-dd**.
-
 1. Press the **SHIFT + ENTER** keys to run the code in this block.
 
 ## Mount Azure Storage as a file system of the cluster
