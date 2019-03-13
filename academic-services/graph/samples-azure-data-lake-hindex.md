@@ -39,7 +39,7 @@ In this section, you create a notebook in Azure Databricks workspace.
 1. Copy and paste the following code block in the script window.
 
    > [!NOTE]
-   > To work with the latest schema, instead of the code block above, you could use samples/CreateFunctions.usql in the MAG dataset.
+   > To work with the latest MAG dataset schema, instead of the code block below, you could use code in samples/CreateFunctions.usql in the MAG dataset.
 
    ```U-SQL
    DROP FUNCTION IF EXISTS Affiliations;
