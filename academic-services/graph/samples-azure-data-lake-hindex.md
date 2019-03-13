@@ -196,7 +196,7 @@ In this section, you create a notebook in Azure Databricks workspace.
 
    ![CreateFunctions job status](media/samples-azure-data-lake-hindex/create-functions-status.png "CreateFunctions job status")
 
-## Compute author h-index
+## Compute Author H-Index
 
 1. In the [Azure portal](https://portal.azure.com), go to the Azure Data Lake Analytics service that you created, and select **Overview** > **New Job**.
 
@@ -208,7 +208,7 @@ In this section, you create a notebook in Azure Databricks workspace.
    DECLARE @dataVersion string = "<MagContainer>";
    DECLARE @blobAccount string = "<AzureStorageAccount>";
    DECLARE @uriPrefix   string = "wasb://" + @dataVersion + "@" + @blobAccount + "/";
-   DECLARE @OutAuthorHindex string = "/output/AuthorHIndex.tsv";
+   DECLARE @OutAuthorHindex string = "/Output/AuthorHIndex.tsv";
    
    @papers = Papers(@uriPrefix);
    
@@ -273,88 +273,8 @@ In this section, you create a notebook in Azure Databricks workspace.
 
    ![CreateFunctions job status](media/samples-azure-data-lake-hindex/create-functions-status.png "CreateFunctions job status")
 
-## Define configration variables
+1. Output goes "/Output/AuthorHIndex.tsv" in your Azure Data Lake Storage (ADLS).
 
-In this section, you create the first notebook cell and define configration variables.
-
-1. Copy and paste following code block into the first cell.
-
-   ```python
-   AzureStorageAccount = '<AzureStorageAccount>'     # Azure Storage account containing MAG dataset
-   AzureStorageAccessKey = '<AzureStorageAccessKey>' # Access Key of the Azure Storage account
-   MagContainer = '<MagContainer>'                   # The container name in Azure Storage account containing MAG dataset, Usually in forms of mag-yyyy-mm-dd
-
-   MagDir = '/mnt/mag'
-   ```
-
-1. In this code block, replace `AzureStorageAccount`, `AzureStorageAccessKey`, and `MagContainer` placeholder values with the values that you collected while completing the prerequisites of this sample.
-
-   * The `AzureStorageAccount` is the name of your Azure Storage account.
-
-   * The `AzureStorageAccessKey` is the access key of the Azure Storage account.
-
-   * The `MagContainer` is the container name in Azure Storage account containing MAG dataset, Usually in the form of **mag-yyyy-mm-dd**.
-
-1. Press the **SHIFT + ENTER** keys to run the code in this block.
-
-## Mount Azure Storage as a file system of the cluster
-
-In this section, you mount MAG dataset in Azure Storage as a file system of the cluster.
-
-1. Press the **SHIFT + ENTER** keys to run the code in this block.
-
-   You see an output similar to the following snippet:
-
-   ```
-   Out[3]: 
-   [FileInfo(path='dbfs:/mnt/mag/advanced/', name='advanced/', size=0),
-    FileInfo(path='dbfs:/mnt/mag/mag/', name='mag/', size=0),
-    FileInfo(path='dbfs:/mnt/mag/nlp/', name='nlp/', size=0),
-    FileInfo(path='dbfs:/mnt/mag/samples/', name='samples/', size=0)]
-   ``` 
-
-## Create MAG data frames and temporary views
-
-In this section you will create data frames and temporary views for several different MAG entity types. These views will be used later on in the tutorial. Note that some of the cells might take several minutes to run.
-
-1. Get **Affiliations**. Paste the following code in a new cell.
-
-   ```python
-   AffiliationsPath = 'mag/Affiliations.txt' 
-   AffiliationsFields = ['AffiliationId', 'Rank', 'NormalizedName', 'DisplayName', 'GridId', 'OfficialPage', 'WikiPage', 'PaperCount', 'CitationCount', 'CreatedDate']
-   Affiliations = spark.read.format('csv').options(header='false', inferSchema='true', delimiter='\t').load(('%s/%s' % (MagDir, AffiliationsPath))).toDF(*AffiliationsFields)
-
-   Affiliations = Affiliations.select(Affiliations.AffiliationId, Affiliations.DisplayName)
-   Affiliations.show(10)
-   Affiliations.createOrReplaceTempView('Affiliations')
-   ```
-
-   Press the **SHIFT + ENTER** keys to run the code in this block. You see an output similar to the following snippet:
-
-   ```
-   +-------------+--------------------+
-   |AffiliationId|         DisplayName|
-   +-------------+--------------------+
-   |     20455151|         Air Liquide|
-   |     24386293|Hellenic National...|
-   |     32956416|Catholic Universi...|
-   ...
-   ...
-   ``` 
-
-1. Get **Authors**. Paste the following code in a new cell.
-
-   ```python
-   AuthorsPath = 'mag/Authors.txt'
-   AuthorsFields = ['AuthorId', 'Rank', 'NormalizedName', 'DisplayName', 'LastKnownAffiliationId', 'PaperCount', 'CitationCount', 'CreatedDate']
-   Authors = spark.read.format('csv').options(header='false', inferSchema='true', delimiter='\t').load(('%s/%s' % (MagDir, AuthorsPath))).toDF(*AuthorsFields)
-
-   Authors = Authors.select(Authors.AuthorId, Authors.DisplayName, Authors.LastKnownAffiliationId, Authors.PaperCount)
-   Authors.show(10)
-   Authors.createOrReplaceTempView('Authors')
-   ```
-
-   Press the **SHIFT + ENTER** keys to run the code in this block. You see an output similar to the following snippet:
 
    ```
    +--------+--------------------+----------------------+----------+
