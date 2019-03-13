@@ -1,14 +1,14 @@
 ---
-title: 'Tutorial: Compute Author H-Index using Azure Data Lake Analytics (U-SQL)'
-description: Compute Author H-Index for Microsoft Academic Graph using Azure Data Lake Analytics (U-SQL)
+title: 'Tutorial: Compute author h-index using Azure Data Lake Analytics (U-SQL)'
+description: Compute author h-index for Microsoft Academic Graph using Azure Data Lake Analytics (U-SQL)
 services: microsoft-academic-services
 ms.topic: tutorial
 ms.service: microsoft-academic-services
 ms.date: 3/15/2019
 ---
-# Tutorial: Compute Author H-Index using Azure Data Lake Analytics (U-SQL)
+# Tutorial: Compute author h-index using Azure Data Lake Analytics (U-SQL)
 
-In this tutorial, you compute H-Index for all authors in Microsoft Academic Graph (MAG) using Azure Data Lake Analytics (U-SQL). You extract data from Azure Storage, compute H-Index, and save the result in Azure Data Lake Storage.
+In this tutorial, you compute h-index for all authors in Microsoft Academic Graph (MAG) using Azure Data Lake Analytics (U-SQL). You extract data from Azure Storage, compute h-index, and save the result in Azure Data Lake Storage.
 
 ## Prerequisites
 
