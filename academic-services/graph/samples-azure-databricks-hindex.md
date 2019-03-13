@@ -203,7 +203,7 @@ In this section you will create data frames and temporary views for several diff
 
    You have now extracted MAG data from Azure Storage into Azure Databricks and created temporary views to use later.
 
-## Compute Author H-Index
+## Compute author h-index
 
 In this section, you compute h-index for all authors.
 
