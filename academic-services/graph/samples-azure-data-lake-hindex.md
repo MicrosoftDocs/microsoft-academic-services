@@ -191,7 +191,7 @@ In prerequisite [Setting up Azure Data Lake Analytics](get-started-setup-azure-d
    
 1. Provide a **Job name** and select **Submit**.
 
-   ![Submit CreateFunctions job](media/samples-azure-data-lake-hindex/create-functions.png "Submit CreateFunctions job")
+   ![Submit CreateFunctions job](media/samples-azure-data-lake-hindex/submit-job.png "Submit CreateFunctions job")
 
 1. The job should finish successfully.
 
@@ -315,7 +315,7 @@ In prerequisite [Setting up Azure Data Lake Analytics](get-started-setup-azure-d
 
 1. Provide a **Job name** and select **Submit**.
 
-   ![Submit AuthorHIndex job](media/samples-azure-data-lake-hindex/create-functions.png "Submit AuthorHIndex job")
+   ![Submit AuthorHIndex job](media/samples-azure-data-lake-hindex/submit-job.png "Submit AuthorHIndex job")
 
 1. The job should finish successfully. Output goes "/Output/AuthorHIndex.tsv" in your Azure Data Lake Storage (ADLS).
 
