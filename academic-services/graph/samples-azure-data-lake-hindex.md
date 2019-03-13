@@ -196,7 +196,7 @@ In this section, you create a notebook in Azure Databricks workspace.
 
    ![CreateFunctions job status](media/samples-azure-data-lake-hindex/create-functions-status.png "CreateFunctions job status")
 
-## Compute Author H-Index
+## Compute author h-index
 
 1. In the [Azure portal](https://portal.azure.com), go to the Azure Data Lake Analytics service that you created, and select **Overview** > **New Job**.
 
@@ -275,163 +275,7 @@ In this section, you create a notebook in Azure Databricks workspace.
 
 1. Output goes "/Output/AuthorHIndex.tsv" in your Azure Data Lake Storage (ADLS).
 
-
-   ```
-   +--------+--------------------+----------------------+----------+
-   |AuthorId|         DisplayName|LastKnownAffiliationId|PaperCount|
-   +--------+--------------------+----------------------+----------+
-   |     584|Gözde Özdikmenli-...|              79946792|         2|
-   |     859|          Gy. Tolmár|                  null|         2|
-   |     978|      Ximena Faúndez|             162148367|        18|
-   ...
-   ``` 
-
-1. Get **(Author, Paper) pairs**. Paste the following code in a new cell.
-
-   ```python
-   PaperAuthorAffiliationsPath = 'mag/PaperAuthorAffiliations.txt'
-   PaperAuthorAffiliationsFields = ['PaperId', 'AuthorId', 'AffiliationId', 'AuthorSequenceNumber', 'OriginalAffiliation']
-   PaperAuthorAffiliations = spark.read.format('csv').options(header='false', inferSchema='true', delimiter='\t').load(('%s/%s' % (MagDir, PaperAuthorAffiliationsPath))).toDF(*PaperAuthorAffiliationsFields)
-
-   AuthorPaper = PaperAuthorAffiliations.select(PaperAuthorAffiliations.AuthorId, PaperAuthorAffiliations.PaperId).distinct()
-   AuthorPaper.show(10)
-   AuthorPaper.createOrReplaceTempView('AuthorPaper')
-   ```
-
-   Press the **SHIFT + ENTER** keys to run the code in this block. You see an output similar to the following snippet:
-
-   ```
-   +----------+--------+
-   |  AuthorId| PaperId|
-   +----------+--------+
-   |2121966975|94980387|
-   |2502082315|94984326|
-   |2713129682|94984597|
-   ...
-   ...
-   ``` 
-
-1. Get **Papers**. Paste the following code in a new cell.
-
-   ```python
-   PapersPath = 'mag/Papers.txt'
-   PapersFields = ['PaperId', 'Rank', 'Doi', 'DocType', 'PaperTitle', 'OriginalTitle', 'BookTitle', 'Year', 'Date', \
-                   'Publisher', 'JournalId', 'ConferenceSeriesId', 'ConferenceInstanceId', 'Volume', 'Issue', 'FirstPage', \
-                   'LastPage', 'ReferenceCount', 'CitationCount', 'EstimatedCitation', 'OriginalVenue', 'CreatedDate']
-   Papers = spark.read.format('csv').options(header='false', inferSchema='true', delimiter='\t').load(('%s/%s' % (MagDir, PapersPath))).toDF(*PapersFields)
-
-   PaperCitation = Papers.select(Papers.PaperId, Papers.EstimatedCitation).where(Papers.EstimatedCitation > 0)
-   PaperCitation.show(10)
-   PaperCitation.createOrReplaceTempView('PaperCitation')
-   ```
-
-   Press the **SHIFT + ENTER** keys to run the code in this block. You see an output similar to the following snippet:
-
-   ```
-   +----------+-----------------+
-   |   PaperId|EstimatedCitation|
-   +----------+-----------------+
-   |2088151486|               61|
-   |2864100843|                1|
-   |2260674751|                5|
-   ...
-   ...
-   ``` 
-
-   You have now extracted MAG data from Azure Storage into Azure Databricks and created temporary views to use later.
-
-## Compute Author H-Index
-
-In this section, you compute h-index for all authors.
-
-1. **Create an author-paper-citation view**. Paste the following code in a new cell.
-
-   ```sql
-   %sql
-   -- Generate author, paper, citation view
-   CREATE OR REPLACE TEMPORARY VIEW AuthorPaperCitation
-       AS SELECT
-           A.AuthorId,
-           A.PaperId,
-           P.EstimatedCitation
-       FROM AuthorPaper AS A
-       INNER JOIN PaperCitation AS P
-           ON A.PaperId == P.PaperId;
-   ```
-
-   Press the **SHIFT + ENTER** keys to run the code in this block. You see following output:
-
-   ```
-   OK
-   ```
-
-1. **Order AuthorPaperCitation view by citation**. Paste the following code in a new cell.
-
-   ```sql
-   %sql
-   -- Order author, paper, citation view by citation
-   CREATE OR REPLACE TEMPORARY VIEW AuthorPaperOrderByCitation
-       AS SELECT
-           AuthorId,
-           PaperId,
-           EstimatedCitation,
-           ROW_NUMBER() OVER(PARTITION BY AuthorId ORDER BY EstimatedCitation DESC) AS Rank
-       FROM AuthorPaperCitation;
-   ```
-
-   Press the **SHIFT + ENTER** keys to run the code in this block. You see following output:
-
-   ```
-   OK
-   ```
-
-1. **Compute h-index for all authors**. Paste the following code in a new cell.
-
-   ```sql
-   %sql
-   -- Generate author hindex
-   CREATE OR REPLACE TEMPORARY VIEW AuthorHIndexTemp
-       AS SELECT
-           AuthorId,
-           SUM(EstimatedCitation) AS TotalEstimatedCitation,
-           MAX(CASE WHEN EstimatedCitation >= Rank THEN Rank ELSE 0 END) AS HIndex
-       FROM AuthorPaperOrderByCitation 
-       GROUP BY AuthorId;
-   ```
-
-   Press the **SHIFT + ENTER** keys to run the code in this block. You see following output:
-
-   ```
-   OK
-   ```
-
-1. **Get author detail information**. Paste the following code in a new cell.
-
-   ```sql
-   %sql
-   -- Get author detail information
-   CREATE OR REPLACE TEMPORARY VIEW AuthorHIndex
-       AS SELECT
-           I.AuthorId,
-           A.DisplayName,
-           AF.DisplayName AS AffiliationDisplayName,
-           A.PaperCount,
-           I.TotalEstimatedCitation,
-           I.HIndex
-       FROM AuthorHIndexTemp AS I
-       INNER JOIN Authors AS A
-           ON A.AuthorId == I.AuthorId
-       LEFT OUTER JOIN Affiliations AS AF
-           ON A.LastKnownAffiliationId == AF.AffiliationId;
-   ```
-
-   Press the **SHIFT + ENTER** keys to run the code in this block. You see following output:
-
-   ```
-   OK
-   ```
-
-## Query and visualize result 
+## View output data
 
 In this section, you query top authors by h-index and visualize the result.
 
@@ -458,14 +302,6 @@ In this section, you query top authors by h-index and visualize the result.
 1. Select the **graph** icon to see result in graph form.
 
    ![Author H-Index graph](media/databricks/hindex-graph.png "Verify sample table")
-
-## Clean up resources
-
-After you finish the tutorial, you can terminate the cluster. From the Azure Databricks workspace, select **Clusters** on the left. For the cluster to terminate, under **Actions**, point to the ellipsis (...) and select the **Terminate** icon.
-
-![Stop a Databricks cluster](media/databricks/terminate-databricks-cluster.png "Stop a Databricks cluster")
-
-If you don't manually terminate the cluster, it automatically stops, provided you selected the **Terminate after \_\_ minutes of inactivity** check box when you created the cluster. In such a case, the cluster automatically stops if it's been inactive for the specified time.
 
 ## Resources
 
