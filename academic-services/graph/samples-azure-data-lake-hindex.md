@@ -349,6 +349,13 @@ In this section, you query top authors by h-index and visualize the result.
 
    ![Author H-Index graph](media/databricks/hindex-graph.png "Verify sample table")
 
+## Next steps
+
+Advance to the next step to learn about analytics and visualization using Azure Data Lake Analytics.
+
+> [!div class="nextstepaction"]
+>[Analytics and visualization samples](samples-azure-data-lake-analytics.md)
+
 ## Resources
 
 * [Get started with Azure Data Lake Analytics using Azure portal](https://docs.microsoft.com/en-us/azure/data-lake-analytics/data-lake-analytics-get-started-portal)
