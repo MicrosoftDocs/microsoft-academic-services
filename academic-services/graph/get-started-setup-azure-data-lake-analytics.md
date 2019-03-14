@@ -14,6 +14,12 @@ Complete these tasks before you begin this tutorial:
 
 * Setting up provisioning of Microsoft Academic Graph to an Azure blob storage account. See [Get Microsoft Academic Graph on Azure storage](./get-started-setup-provisioning.md).
 
+## Gather the information that you need
+
+Before you begin, you should have these items of information:
+
+   :heavy_check_mark:  The name of your Azure Storage (AS) account.
+
 ## Create Azure Data Lake Analytics account
 
 1. Home > Create a resource > Analytics > Data Lake Analytics
@@ -27,13 +33,19 @@ Complete these tasks before you begin this tutorial:
     > [!IMPORTANT]
     > Both accounts require a globally unique name
 
+1. Make sure that you have these items of information:
+
+   :heavy_check_mark: The name of your Azure Data Lake Analytics (ADLA) account, e.g. **mymagadla** in the above example.
+
+   :heavy_check_mark: The name of your Azure Data Lake Storage (ADLS) account, e.g. **mymagadls** in the above example.
+
 ## Configure Azure Data Lake Analytics to use Microsoft Academic Graph
 
 1. Navigate to the new Azure Data Lake Analytics account created in the first section and add a new data source:
 
    ![Add new data source to analytics account](media/configure-analytics-account-datasource.png "Add new data source to analytics account")
 
-1. On the "add data source" dialog, select storage type "azure storage", selection method "select account" and the Azure Storage account you created for MAG provisioning:
+1. On the "add data source" dialog, select storage type "azure storage", selection method "select account" and the Azure Storage (AS) account you created for MAG provisioning:
 
    ![Select storage account created earlier](media/configure-analytics-account-select.png "Select storage account created earlier")
 
