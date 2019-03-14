@@ -22,17 +22,17 @@ Complete these tasks before you begin this tutorial:
 
    Before you begin, you should have these items of information:
 
-   :heavy_check_mark:  The name of your Azure Data Lake Analytics (ADLA) service.
+   :heavy_check_mark:  The name of your Azure Data Lake Analytics (ADLA) service from [Set up Azure Data Lake Analytics](get-started-setup-azure-data-lake-analytics.md).
 
-   :heavy_check_mark:  The name of your Azure Data Lake Storage (ADLS) service.
+   :heavy_check_mark:  The name of your Azure Data Lake Storage (ADLS) from [Set up Azure Data Lake Analytics](get-started-setup-azure-data-lake-analytics.md).
    
-   :heavy_check_mark:  The name of your Azure Storage (AS) account containing MAG dataset.
+   :heavy_check_mark:  The name of your Azure Storage (AS) account containing MAG dataset from [Get Microsoft Academic Graph on Azure storage](get-started-setup-provisioning.md).
    
    :heavy_check_mark:  The name of the container in your Azure Storage (AS) account containing MAG dataset.
 
-## Define functions to extract MAG data from Azure Storage
+## Define functions to extract MAG data
 
-In prerequisite [Setting up Azure Data Lake Analytics](get-started-setup-azure-data-lake-analytics.md), you added the Azure Storage created for MAG provision as a data source for the Azure Data Lake Analytics service (ADLA). In this section, you submit a job to create functions in ADLA for extracting MAG data from the Azure Storage.
+In prerequisite [Set up Azure Data Lake Analytics](get-started-setup-azure-data-lake-analytics.md), you added the Azure Storage  (AS) created for MAG provision as a data source for the Azure Data Lake Analytics service (ADLA). In this section, you submit an ADLA job to create functions extracting MAG data from Azure Storage (AS).
 
 1. In the [Azure portal](https://portal.azure.com), go to the Azure Data Lake Analytics (ADLA) service that you created, and select **Overview** > **New Job**.
 
@@ -201,7 +201,9 @@ In prerequisite [Setting up Azure Data Lake Analytics](get-started-setup-azure-d
 
 ## Compute author h-index
 
-1. In the [Azure portal](https://portal.azure.com), go to the Azure Data Lake Analytics service that you created, and select **Overview** > **New Job**.
+In this section, you submit an ADLA job to compute author h-index and save output to Azure Data Lake Storage (ADLS).
+
+1. In the [Azure portal](https://portal.azure.com), go to the Azure Data Lake Analytics (ADLA) service that you created, and select **Overview** > **New Job**.
 
    ![Azure Data Lake Analytics - New job](media/samples-azure-data-lake-hindex/new-job.png "Azure Data Lake Analytics - New job")
 
@@ -325,31 +327,19 @@ In prerequisite [Setting up Azure Data Lake Analytics](get-started-setup-azure-d
 
 ## View output data
 
-In previous section, the job output goes to "/Output/AuthorHIndex.tsv" in your Azure Data Lake Storage (ADLS). In this section, you use [Azure portal](http://portal.azure.com/) to view output content.
+The output of the ADLA job in previous section goes to "/Output/AuthorHIndex.tsv" in the Azure Data Lake Storage (ADLS). In this section, you use [Azure portal](http://portal.azure.com/) to view output content.
 
-1. Query top authors with highest h-index. Paste the following code in a new cell. Press the **SHIFT + ENTER** keys to run the code in this block.
+1. In the [Azure portal](https://portal.azure.com), go to the Azure Data Lake Storage (ADLS) service that you created, and select **Data Explorer**.
 
-   ```sql
-   %sql
-   -- Filter authors with top hindex
-   SELECT
-       DisplayName,
-       AffiliationDisplayName,
-       PaperCount,
-       TotalEstimatedCitation,
-       HIndex
-   FROM AuthorHIndex 
-   ORDER BY HIndex DESC, AuthorId
-   LIMIT 100;
-   ```
+   ![Data Explorer](media/samples-azure-data-lake-hindex/adls-data-explorer.png "Data Explorer")
 
-1. Select the **table** icon to see result in table form.
+1. Select **Output** > **AuthorHIndex.tsv**.
 
-   ![Author H-Index table](media/databricks/hindex-table.png "Verify sample table")
+   ![AuthorHIndex.tsv](media/samples-azure-data-lake-hindex/adls-data-explorer-2.png "AuthorHIndex.tsv")
 
-1. Select the **graph** icon to see result in graph form.
+1. You view the author h-index output.
 
-   ![Author H-Index graph](media/databricks/hindex-graph.png "Verify sample table")
+   ![AuthorHIndex.tsv preview](media/samples-azure-data-lake-hindex/adls-file-preview.png "AuthorHIndex.tsv preview")
 
 ## Next steps
 
