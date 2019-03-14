@@ -18,7 +18,8 @@ Complete these tasks before you begin this tutorial:
 
 Before you begin, you should have these items of information:
 
-   :heavy_check_mark:  The name of your Azure Storage (AS) account.
+   :heavy_check_mark:  The name of your Azure Storage (AS) account containing MAG dataset from [Get Microsoft Academic Graph on Azure storage](get-started-setup-provisioning.md).
+
 
 ## Create Azure Data Lake Analytics account
 
