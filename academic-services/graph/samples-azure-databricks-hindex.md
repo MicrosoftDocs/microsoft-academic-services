@@ -22,11 +22,11 @@ Complete these tasks before you begin this tutorial:
 
    Before you begin, you should have these items of information:
 
-   :heavy_check_mark:  The name of your blob storage account.
+   :heavy_check_mark:  The name of your Azure Storage (AS) account.
 
-   :heavy_check_mark:  The access key of your blob storage account.
-   
-   :heavy_check_mark:  The name of blob storage container containing MAG dataset.
+   :heavy_check_mark:  The access key of your Azure Storage (AS) account.
+
+   :heavy_check_mark:  The name of Azure Storage (AS) container containing MAG dataset.
 
 ## Create a notebook in Azure Databricks
 
@@ -51,9 +51,9 @@ In this section, you create the first notebook cell and define configration vari
 1. Copy and paste following code block into the first cell.
 
    ```python
-   AzureStorageAccount = '<AzureStorageAccount>'     # Azure Storage account containing MAG dataset
-   AzureStorageAccessKey = '<AzureStorageAccessKey>' # Access Key of the Azure Storage account
-   MagContainer = '<MagContainer>'                   # The container name in Azure Storage account containing MAG dataset, Usually in forms of mag-yyyy-mm-dd
+   AzureStorageAccount = '<AzureStorageAccount>'     # Azure Storage (AS) account containing MAG dataset
+   AzureStorageAccessKey = '<AzureStorageAccessKey>' # Access Key of the Azure Storage (AS) account
+   MagContainer = '<MagContainer>'                   # The container name in Azure Storage (AS) account containing MAG dataset, Usually in forms of mag-yyyy-mm-dd
 
    MagDir = '/mnt/mag'
    ```
