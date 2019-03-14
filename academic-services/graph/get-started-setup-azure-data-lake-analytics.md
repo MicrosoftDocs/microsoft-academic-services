@@ -55,7 +55,7 @@ Before you begin, you should have these items of information:
 Advance to the next step to learn about analytics and visualization using Azure Data Lake Analytics.
 
 > [!div class="nextstepaction"]
->[Analytics author h-index sample (U-SQL)](samples-azure-data-lake-hindex.md)
+>[Analytics author h-index sample (U-SQL)](tutorial-azure-data-lake-hindex.md)
 
 > [!div class="nextstepaction"]
 >[Analytics and visualization samples](samples-azure-data-lake-analytics.md)
