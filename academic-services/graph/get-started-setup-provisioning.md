@@ -86,7 +86,7 @@ Advance to next sections to learn about entity data schema and using Azure Data 
 >[Microsoft Academic Graph data schema](reference-data-schema.md)
 
 > [!div class="nextstepaction"]
->[Set up Azure Data Lake Analytics](get-started-setup-azure-data-lake-analytics.md)
+>[Set up Azure Data Lake Analytics for Microsoft Academic Graph](get-started-setup-azure-data-lake-analytics.md)
 
 > [!div class="nextstepaction"]
->[Set up Azure Databricks](get-started-setup-databricks.md)
+>[Set up Azure Databricks for Microsoft Academic Graph](get-started-setup-databricks.md)
