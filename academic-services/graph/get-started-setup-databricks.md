@@ -4,7 +4,7 @@ description: Set up AzureDatabricks for Microsoft Academic Graph
 services: microsoft-academic-services
 ms.topic: get-started-article
 ms.service: microsoft-academic-services
-ms.date: 3/10/2019
+ms.date: 3/14/2019
 ---
 # Set up  Azure Databricks for Microsoft Academic Graph
 
@@ -65,7 +65,7 @@ In this section, you create an Azure Databricks service by using the Azure porta
 Advance to the next section to learn about computing author h-index.
 
 > [!div class="nextstepaction"]
->[Author h-index sample](samples-azure-databricks-hindex.md)
+>[Compute author h-index tutorial (Python/SQL)](tutorial-azure-databricks-hindex.md)
 
 ## Resources
 
