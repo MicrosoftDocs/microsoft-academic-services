@@ -1,14 +1,14 @@
 ---
-title: 'Tutorial: Compute Author H-Index using Azure Databricks'
-description: Compute Author H-Index for Microsoft Academic Graph using Azure Databricks
+title: 'Tutorial: Compute author h-index using Azure Databricks'
+description: Compute author h-index for Microsoft Academic Graph using Azure Databricks
 services: microsoft-academic-services
 ms.topic: tutorial
 ms.service: microsoft-academic-services
-ms.date: 3/10/2019
+ms.date: 3/14/2019
 ---
-# Tutorial: Compute Author H-Index using Azure Databricks
+# Tutorial: Compute author h-index using Azure Databricks
 
-In this tutorial, you compute H-Index for all authors in Microsoft Academic Graph (MAG) using Azure Databricks. You extract data from Azure Storage into data frames, compute H-Index, and visualize the result in table and graph forms.
+In this tutorial, you compute h-index for all authors in Microsoft Academic Graph (MAG) using Azure Databricks. You extract data from Azure Storage into data frames, compute h-index, and visualize the result in table and graph forms.
 
 ## Prerequisites
 
@@ -16,17 +16,17 @@ Complete these tasks before you begin this tutorial:
 
 * Setting up provisioning of Microsoft Academic Graph to an Azure blob storage account. See [Get Microsoft Academic Graph on Azure storage](get-started-setup-provisioning.md).
 
-* Setting up Azure Databricks service. See [Setting up Azure Databricks](get-started-setup-databricks.md).
+* Setting up Azure Databricks service. See [Set up Azure Databricks](get-started-setup-databricks.md).
 
 ## Gather the information that you need
 
    Before you begin, you should have these items of information:
 
-   :heavy_check_mark:  The name of your blob storage account.
+   :heavy_check_mark:  The name of your Azure Storage (AS) account containing MAG dataset from [Get Microsoft Academic Graph on Azure storage](get-started-setup-provisioning.md).
 
-   :heavy_check_mark:  The access key of your blob storage account.
-   
-   :heavy_check_mark:  The name of blob storage container containing MAG dataset.
+   :heavy_check_mark:  The access key of your Azure Storage (AS) account from [Get Microsoft Academic Graph on Azure storage](get-started-setup-provisioning.md).
+
+   :heavy_check_mark:  The name of the container in your Azure Storage (AS) account containing MAG dataset.
 
 ## Create a notebook in Azure Databricks
 
@@ -51,20 +51,20 @@ In this section, you create the first notebook cell and define configration vari
 1. Copy and paste following code block into the first cell.
 
    ```python
-   AzureStorageAccount = '<AzureStorageAccount>'     # Azure Storage account containing MAG dataset
-   AzureStorageAccessKey = '<AzureStorageAccessKey>' # Access Key of the Azure Storage account
-   MagContainer = '<MagContainer>'                   # The container name in Azure Storage account containing MAG dataset, Usually in forms of mag-yyyy-mm-dd
+   AzureStorageAccount = '<AzureStorageAccount>'     # Azure Storage (AS) account containing MAG dataset
+   AzureStorageAccessKey = '<AzureStorageAccessKey>' # Access Key of the Azure Storage (AS) account
+   MagContainer = '<MagContainer>'                   # The container name in Azure Storage (AS) account containing MAG dataset, Usually in forms of mag-yyyy-mm-dd
 
    MagDir = '/mnt/mag'
    ```
 
-1. In this code block, replace `AzureStorageAccount`, `AzureStorageAccessKey`, and `MagContainer` placeholder values with the values that you collected while completing the prerequisites of this sample.
+1. In this code block, replace `<AzureStorageAccount>`, `<AzureStorageAccessKey>`, and `<MagContainer>` placeholder values with the values that you collected while completing the prerequisites of this sample.
 
-   * The `AzureStorageAccount` is the name of your Azure Storage account.
-
-   * The `AzureStorageAccessKey` is the access key of the Azure Storage account.
-
-   * The `MagContainer` is the container name in Azure Storage account containing MAG dataset, Usually in the form of **mag-yyyy-mm-dd**.
+   |Value  |Description  |
+   |---------|---------|
+   |**`<AzureStorageAccount>`** | The name of your Azure Storage account. |
+   |**`<AzureStorageAccessKey>`** | The access key of your Azure Storage account. |
+   |**`<MagContainer>`** | The container name in Azure Storage account containing MAG dataset, Usually in the form of **mag-yyyy-mm-dd**. |
 
 1. Press the **SHIFT + ENTER** keys to run the code in this block.
 
@@ -203,7 +203,7 @@ In this section you will create data frames and temporary views for several diff
 
    You have now extracted MAG data from Azure Storage into Azure Databricks and created temporary views to use later.
 
-## Compute Author H-Index
+## Compute author h-index
 
 In this section, you compute h-index for all authors.
 
@@ -332,7 +332,7 @@ If you don't manually terminate the cluster, it automatically stops, provided yo
 
 ## Resources
 
-* [Create an Azure Databricks service](https://azure.microsoft.com/en-us/services/databricks/).
+* [Create an Azure Databricks service](https://azure.microsoft.com/services/databricks/).
 * [Create a cluster for the Azure Databricks service](https://docs.azuredatabricks.net/user-guide/clusters/create.html).
 * [Import this notebook and attach it to the cluster](https://docs.databricks.com/user-guide/notebooks/notebook-manage.html#import-a-notebook).
 * [H-index](https://en.wikipedia.org/wiki/H-index)
