@@ -4,7 +4,7 @@ description: Compute Author H-Index for Microsoft Academic Graph using Azure Dat
 services: microsoft-academic-services
 ms.topic: tutorial
 ms.service: microsoft-academic-services
-ms.date: 3/10/2019
+ms.date: 3/14/2019
 ---
 # Tutorial: Compute Author H-Index using Azure Databricks
 
