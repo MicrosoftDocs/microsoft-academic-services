@@ -16,19 +16,24 @@ sections:
     style: unordered
     items:
     - html: <a href="get-started-setup-provisioning">Get Microsoft Academic Graph on Azure storage</a>
+    - html: <a href="get-started-setup-azure-data-lake-analytics">Set up Azure Data Lake Analytics for Microsoft Academic Graph</a>
+    - html: <a href="get-started-setup-databricks">Set up Azure Databricks for Microsoft Academic Graph</a>
 - title: Technology overview
   items: 
   - type: list
     style: unordered
     items:
     - html: <a href="reference-data-schema">Microsoft Academic Graph entity data schema</a>
+- title: Tutorial
+  items:
+  - type: list
+    style: unordered
+    items:
+    - html: <a href="tutorial-azure-data-lake-hindex">Compute author h-index using Azure Data Lake Analytics (U-SQl)</a>
+    - html: <a href="tutorial-azure-databricks-hindex">Compute author h-index using Azure Databricks (Python/SQL)</a>
 - title: Samples
   items:
   - type: list
     style: unordered
     items:
-    - html: <a href="get-started-setup-azure-data-lake-analytics">Set up Azure Data Lake Analytics for Microsoft Academic Graph</a>
-    - html: <a href="samples-azure-data-lake-hindex">Compute author H-Index using Azure Data Lake Analytics (U-SQl)</a>
     - html: <a href="samples-azure-data-lake-analytics">Analytics and visualization samples for Microsoft Academic Graph</a>
-    - html: <a href="get-started-setup-databricks">Set up Azure Databricks for Microsoft Academic Graph</a>
-    - html: <a href="samples-azure-databricks-hindex">Compute author H-Index using Azure Databricks</a>
