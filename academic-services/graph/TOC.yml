@@ -10,19 +10,25 @@
   items:
   - name: Get Microsoft Academic Graph on Azure Storage
     href: get-started-setup-provisioning.md
+  - name: Set up Azure Data Lake Analytics
+    href: get-started-setup-azure-data-lake-analytics.md
+  - name: Set up Azure Databricks
+    href: get-started-setup-databricks.md
 - name: Tutorials
   expanded: true
   items:
-  - name: Set up Azure Data Lake Analytics
-    href: get-started-setup-azure-data-lake-analytics.md
-  - name: Analytics author h-index sample (U-SQL)
-    href: samples-azure-data-lake-hindex.md
+  - name: Tutorials
+    expanded: true
+    items:
+    - name: Analytics author h-index sample (U-SQL)
+      href: tutorial-azure-data-lake-hindex.md
+    - name: Databricks author h-index sample
+      href: tutorial-azure-databricks-hindex.md
+- name: Samples
+  expanded: true
+  items:
   - name: Analytics and visualization samples
     href: samples-azure-data-lake-analytics.md
-  - name: Set up Azure Databricks
-    href: get-started-setup-databricks.md
-  - name: Databricks author h-index sample
-    href: samples-azure-databricks-hindex.md
 - name: Reference
   expanded: true
   items:
