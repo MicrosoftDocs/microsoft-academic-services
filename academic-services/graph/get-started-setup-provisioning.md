@@ -56,9 +56,9 @@ Please create a new Azure subscription for the distribution previews. If your or
 
 1. Make sure that you have these items of information:
 
-   :heavy_check_mark:  The name of your blob storage account.
+   :heavy_check_mark:  The name of your Azure Storage (AS) account.
 
-   :heavy_check_mark:  The access key of your blob storage account.
+   :heavy_check_mark:  The access key of Azure Storage (AS) account.
 
 ## Sign up for MAG provisioning
 
@@ -69,8 +69,8 @@ To sign up for MAG on AS distribution preview, send the following information us
   - If university, please provide the university’s name, department, group/advisor, and your role (undergraduate student, grad student, professor, etc.)
 - Brief description of the project you will be using MAG for
 - Name of your Microsoft sales representative, if you have one
-- Azure storage account name
-- Azure storage account primary access key
+- Azure Storage (AS) account name
+- Azure Storage (AS) account primary access key
 - Which type of provisioning model you want:
   1. One-time provisioning of the most recent MAG release
   1. Automatic provisioning of each new MAG release (~every 1-2 weeks)
