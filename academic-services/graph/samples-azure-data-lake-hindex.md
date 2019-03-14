@@ -223,7 +223,7 @@ In this section, you submit an ADLA job to compute author h-index and save outpu
    // Get Affiliations
    @Affiliations =
        SELECT
-           AffiliationId,
+           (long?)AffiliationId AS AffiliationId, // Change datatype join with PaperAuthorAffiliations later
            DisplayName
        FROM @Affiliations;
    
@@ -284,29 +284,20 @@ In this section, you submit an ADLA job to compute author h-index and save outpu
        SELECT
            I.AuthorId,
            A.DisplayName,
-           AF.DisplayName AS AffiliationDisplayName,
+           F.DisplayName AS AffiliationDisplayName,
            A.PaperCount,
            I.TotalEstimatedCitation,
            I.HIndex
        FROM @AuthorHIndexTemp AS I
        INNER JOIN @Authors AS A
            ON A.AuthorId == I.AuthorId
-       LEFT OUTER JOIN @Affiliations AS AF
-           ON A.LastKnownAffiliationId == AF.AffiliationId;
+       LEFT OUTER JOIN @Affiliations AS F
+           ON A.LastKnownAffiliationId == F.AffiliationId;
    
-   // Filter authors with top hindex
-   SELECT
-       DisplayName,
-       AffiliationDisplayName,
-       PaperCount,
-       TotalEstimatedCitation,
-       HIndex
-   FROM @AuthorHIndex 
-   ORDER BY HIndex DESC, AuthorId
-   LIMIT 100;
-
    OUTPUT @AuthorHIndex
    TO @OutAuthorHindex
+   ORDER BY HIndex DESC, AuthorId
+   FETCH 100 ROWS
    USING Outputters.Tsv(quoting : false);
    ```
 
@@ -337,7 +328,7 @@ The output of the ADLA job in previous section goes to "/Output/AuthorHIndex.tsv
 
    ![AuthorHIndex.tsv](media/samples-azure-data-lake-hindex/adls-data-explorer-2.png "AuthorHIndex.tsv")
 
-1. You view the author h-index output.
+1. You see an output similar to the following snippet:
 
    ![AuthorHIndex.tsv preview](media/samples-azure-data-lake-hindex/adls-file-preview.png "AuthorHIndex.tsv preview")
 
