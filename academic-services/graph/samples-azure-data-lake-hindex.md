@@ -22,17 +22,19 @@ Complete these tasks before you begin this tutorial:
 
    Before you begin, you should have these items of information:
 
-   :heavy_check_mark:  The name of your Azure Data Lake Analytics service.
+   :heavy_check_mark:  The name of your Azure Data Lake Analytics (ADLA) service.
 
-   :heavy_check_mark:  The name of your Azure Storage account containing MAG dataset.
-
-   :heavy_check_mark:  The name of the container in your Azure Storage account containing MAG dataset.
+   :heavy_check_mark:  The name of your Azure Data Lake Storage (ADLS) service.
+   
+   :heavy_check_mark:  The name of your Azure Storage (AS) account containing MAG dataset.
+   
+   :heavy_check_mark:  The name of the container in your Azure Storage (AS) account containing MAG dataset.
 
 ## Define functions to extract MAG data from Azure Storage
 
 In prerequisite [Setting up Azure Data Lake Analytics](get-started-setup-azure-data-lake-analytics.md), you added the Azure Storage created for MAG provision as a data source for the Azure Data Lake Analytics service (ADLA). In this section, you submit a job to create functions in ADLA for extracting MAG data from the Azure Storage.
 
-1. In the [Azure portal](https://portal.azure.com), go to the Azure Data Lake Analytics service that you created, and select **Overview** > **New Job**.
+1. In the [Azure portal](https://portal.azure.com), go to the Azure Data Lake Analytics (ADLA) service that you created, and select **Overview** > **New Job**.
 
    ![Azure Data Lake Analytics - New job](media/samples-azure-data-lake-hindex/new-job.png "Azure Data Lake Analytics - New job")
 
@@ -310,20 +312,20 @@ In prerequisite [Setting up Azure Data Lake Analytics](get-started-setup-azure-d
 
    |Value  |Description  |
    |---------|---------|
-   |**`<AzureStorageAccount>`** | The name of your Azure Storage account containing MAG dataset. |
-   |**`<MagContainer>`** | The container name in Azure Storage account containing MAG dataset, Usually in the form of **mag-yyyy-mm-dd**. |
+   |**`<AzureStorageAccount>`** | The name of your Azure Storage (AS) account containing MAG dataset. |
+   |**`<MagContainer>`** | The container name in Azure Storage (AS) account containing MAG dataset, Usually in the form of **mag-yyyy-mm-dd**. |
 
-1. Provide a **Job name** and select **Submit**.
+1. Provide a **Job name**, change **AUs** to 5, and select **Submit**.
 
    ![Submit AuthorHIndex job](media/samples-azure-data-lake-hindex/author-hindex-submit.png "Submit AuthorHIndex job")
 
-1. The job should finish successfully. Output goes "/Output/AuthorHIndex.tsv" in your Azure Data Lake Storage (ADLS).
+1. The job should finish successfully in about 10 minutes.
 
    ![AuthorHIndex job status](media/samples-azure-data-lake-hindex/author-hindex-status.png "AuthorHIndex job status")
 
 ## View output data
 
-In this section, you query top authors by h-index and visualize the result.
+In previous section, the job output goes to "/Output/AuthorHIndex.tsv" in your Azure Data Lake Storage (ADLS). In this section, you use [Azure portal](http://portal.azure.com/) to view output content.
 
 1. Query top authors with highest h-index. Paste the following code in a new cell. Press the **SHIFT + ENTER** keys to run the code in this block.
 
