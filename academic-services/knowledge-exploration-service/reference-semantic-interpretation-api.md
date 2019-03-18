@@ -1,12 +1,12 @@
 ---
-title: Semantic interpretation engine reference
-description: The Microsoft Academic Knowledge Exploration Service semantic interpretation engine enables natural language query interpretation and completions for entities in the Microsoft Academic Graph
+title: Semantic interpretation API reference
+description: The Microsoft Academic Knowledge Exploration Service semantic interpretation API enables natural language query interpretation and completions for entities in the Microsoft Academic Graph
 ms.topic: reference
 ms.date: 10/17/2018
 ---
-# Microsoft Academic Knowledge Exploration Service semantic interpretation engine
+# Microsoft Academic Knowledge Exploration Service semantic interpretation API
 
-The Microsoft Academic Knowledge Exploration Service semantic interpretation engine enables natural language query interpretation and completions for entities in the Microsoft Academic Graph. It generates query expressions which can be evaluated using the [entity engine's](reference-entity-engine.md) evaluate API method.
+The Microsoft Academic Knowledge Exploration Service semantic interpretation API enables natural language query interpretation and completions for entities in the Microsoft Academic Graph. It generates query expressions which can be evaluated using the [entity APIs](reference-entity-engine.md) evaluate API method.
 
 ## Open Data License: [ODC-BY](https://opendatacommons.org/licenses/by/1.0/)
 
@@ -18,7 +18,7 @@ When using Microsoft Academic data (MAG, MAKES, etc.) in a product or service, o
 ## Paper entity schema
 
 > [!IMPORTANT]
-> Each engine (semantic interpretation, entity) indexes a different set of attributes for paper entities
+> Each API (semantic interpretation, entity) indexes a different set of attributes for paper entities
 
 Attribute | Description | Type | Operations
 --- | --- | --- | ---

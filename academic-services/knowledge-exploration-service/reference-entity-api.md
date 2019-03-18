@@ -1,12 +1,12 @@
 ---
-title: Entity engine reference
-description: The Microsoft Academic Knowledge Exploration Service entity engine enables query evaluation (evaluate) and histogram calculation (calchistogram) for academic entities in the Microsoft Academic Graph
+title: Entity API reference
+description: The Microsoft Academic Knowledge Exploration Service entity API enables query evaluation (evaluate) and histogram calculation (calchistogram) for academic entities in the Microsoft Academic Graph
 ms.topic: reference
 ms.date: 10/17/2018
 ---
-# Microsoft Academic Knowledge Exploration Service entity engine
+# Microsoft Academic Knowledge Exploration Service entity API
 
-The Microsoft Academic Knowledge Exploration Service entity engine enables query evaluation (evaluate) and histogram calculation (calchistogram) for academic entities in the Microsoft Academic Graph.
+The Microsoft Academic Knowledge Exploration Service entity API enables query evaluation (evaluate) and histogram calculation (calchistogram) for academic entities in the Microsoft Academic Graph.
 
 ## Open Data License: [ODC-BY](https://opendatacommons.org/licenses/by/1.0/)
 
@@ -110,7 +110,7 @@ DJN | Journal display name | Blob | None
 ## Paper entity schema
 
 > [!IMPORTANT]
-> Each engine (semantic interpretation, entity) indexes a different set of attributes for paper entities
+> Each API (semantic interpretation, entity) indexes a different set of attributes for paper entities
 
 Attribute | Description | Type | Operations
 --- | --- | --- | ---
@@ -151,7 +151,7 @@ J.JN | Normalized journal name | String | Equals
 Speech Recognition Grammar Specification (SRGS) is a [W3C recommended standard](https://www.w3.org/TR/speech-grammar/) for defining the syntax for grammar representation.
 
 > [!IMPORTANT]
-> Because the entity engine is not designed for interpreting natural language academic queries, its grammar is essentially a placeholder that only enables simple entity lookup by ID. To interpret natural language academic queries, please use the [semantic interpretation engine](reference-semantic-interpretation-engine.md).
+> Because the entity API is not designed for interpreting natural language academic queries, its grammar is essentially a placeholder that only enables simple entity lookup by ID. To interpret natural language academic queries, please use the [semantic interpretation API](reference-semantic-interpretation-engine.md).
 
 ``` XML
 <?xml version="1.0" encoding="utf-8"?>

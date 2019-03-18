@@ -8,10 +8,10 @@ ms.date: 10/17/2018
 
 Answers to the most frequently asked questions about Microsoft Academic Knowledge Exploration Service
 
-## How frequently are new engines released
+## How frequently are new APIs released
 
-New Microsoft Academic Knowledge Exploration Service engines are released alongside new Microsoft Academic Graph releases, which occur every 1-2 weeks.
+New Microsoft Academic Knowledge Exploration Service APIs are released alongside new Microsoft Academic Graph releases, which occur every 1-2 weeks.
 
-## How to know when a new engine is available
+## How to know when a new API is available
 
 New MAG/MAKES releases are announced on the [Microsoft Academic Twitter feed](https://twitter.com/MSFTAcademic).

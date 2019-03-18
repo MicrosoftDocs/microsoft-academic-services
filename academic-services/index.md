@@ -49,7 +49,7 @@ hide_bc: true
                                                     </div>
                                                     <div class="cardText">
                                                         <h3>Microsoft Academic Knowledge Exploration Service (MAKES)</h3>
-                                                        <p>Learn all about MAKES, including how to access, deploy, manage and use MAKES engines, and documentation on the available versions.</p>
+                                                        <p>Learn all about MAKES, including how to access, deploy, manage and use the MAKES APIs, and documentation on the available versions.</p>
                                                     </div>
                                                 </div>
                                             </div>

@@ -8,7 +8,7 @@ ms.date: 10/17/2018
 
 Provides Azure cost estimator links to model the cost of using Microsoft Academic Knowledge Exploration Service
 
-Engine | Storage* | Cloud service instance* | Cost estimate
+API | Storage* | Cloud service instance* | Cost estimate
 --- | --- | --- | ---
 Entity | 150gb | D3 v2 | [Pricing calculator](https://azure.com/e/28e8cebb3121478fb9da64dd713c1780)
 Entity | 150gb | E32 v3 | [Pricing calculator](https://azure.com/e/36cd753d9d00476582b3375ebd4358e2)
@@ -18,4 +18,4 @@ Both | 350gb | D3 v2, D4 v2 | [Pricing calculator](https://azure.com/e/9791e10a2
 Both | 350gb | 2 x E32 v3 | [Pricing calculator](https://azure.com/e/d7c28fa94a9e4472819df82a39ed0c68)
 
 > [!IMPORTANT]
-> \* Price estimates are based on cloud services instances being online at all times (1 month) and only the most recent version of the engine being retained in storage. Use the Azure estimator links above to model different use scenarios, e.g. use hour pricing to simulate only keeping instances online when needed.
+> \* Price estimates are based on cloud services instances being online at all times (1 month) and only the most recent version of the API being retained in storage. Use the Azure estimator links above to model different use scenarios, e.g. use hour pricing to simulate only keeping instances online when needed.
