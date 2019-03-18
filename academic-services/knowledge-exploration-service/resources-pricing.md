@@ -2,7 +2,7 @@
 title: Microsoft Academic Knowledge Exploration Service pricing
 description: Provides Azure cost estimator links to model the cost of using Microsoft Academic Knowledge Exploration Service
 ms.topic: reference
-ms.date: 10/17/2018
+ms.date: 03/18/2018
 ---
 # Microsoft Academic Knowledge Exploration Service pricing
 

@@ -2,7 +2,7 @@
 title: Deploy API with Azure
 description: Step-by-step guide for deploying Microsoft Academic Knowledge Exploration Service APIs using the Azure Management Portal
 ms.topic: tutorial
-ms.date: 10/17/2018
+ms.date: 03/18/2018
 ---
 # Deploy Microsoft Academic Knowledge Exploration Service API using Azure Management Portal
 

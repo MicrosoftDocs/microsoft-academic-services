@@ -2,7 +2,7 @@
 title: Semantic interpretation API reference
 description: The Microsoft Academic Knowledge Exploration Service semantic interpretation API enables natural language query interpretation and completions for entities in the Microsoft Academic Graph
 ms.topic: reference
-ms.date: 10/17/2018
+ms.date: 03/18/2018
 ---
 # Microsoft Academic Knowledge Exploration Service semantic interpretation API
 

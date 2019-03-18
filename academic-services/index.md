@@ -3,7 +3,7 @@ title: Microsoft Academic Services Documentation
 description: Microsoft Academic Services provide Azure based solutions for interacting with the Microsoft Academic Graph, a comprehensive, heterogeneous graph of the worlds scientific publications
 layout: HubPage
 ms.topic: hub-page
-ms.date: 10/17/2018
+ms.date: 03/18/2018
 hide_bc: true
 ---
 <div id="main" class="v2">
