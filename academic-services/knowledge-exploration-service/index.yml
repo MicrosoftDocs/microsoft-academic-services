@@ -6,7 +6,7 @@ metadata:
   description: Learn about Microsoft Academic Knowledge Exporation Service, including technology overviews, API references, how-to guides, tutorials and more.
   meta.description: Learn about Microsoft Academic Knowledge Exporation Service, including technology overviews, API references, how-to guides, tutorials and more.
   ms.topic: landing-page
-  ms.date: 10/17/2018
+  ms.date: 03/18/2018
 abstract:
   description: Microsoft Academic Knowledge Exploration Service offers a fast and effective way to add interactive academic search and refinement to applications. Learn about Microsoft Academic Knowledge Exporation Service, including technology overviews, API references, how-to guides, tutorials and more.
 sections:
@@ -24,12 +24,12 @@ sections:
     style: unordered
     items:
     - html: <a href="get-started-setup-provisioning">Get Microsoft Academic Knowledge Exploration Service</a>
-    - html: <a href="how-to-deploy-makes-azure-management-portal">Deploy Microsoft Academic Knowledge Exploration Service engine using Azure Management Portal</a>
+    - html: <a href="how-to-deploy-makes-azure-management-portal">Deploy Microsoft Academic Knowledge Exploration Service API using Azure Management Portal</a>
 - title: Reference
   items:
   - type: list
     style: unordered
     items:
-    - html: <a href="reference-entity-engine">Entity engine</a>
-    - html: <a href="reference-semantic-interpretation-engine">Semantic interpretation engine</a>
+    - html: <a href="reference-entity-api">Entity API</a>
+    - html: <a href="reference-semantic-interpretation-api">Semantic interpretation API</a>
     - html: <a href="/azure/cognitive-services/KES/webapi">KES API methods</a>
