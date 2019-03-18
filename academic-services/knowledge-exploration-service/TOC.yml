@@ -8,12 +8,12 @@
 - name: Get started
   expanded: true
   items:
-  - name: Setup MAKES engine provisioning
+  - name: Setup MAKES API provisioning
     href: get-started-setup-provisioning.md
 - name: How to
   expanded: true
   items:
-  - name: Deploy MAKES engines
+  - name: Deploy MAKES APIs
     expanded: true
     items:
     - name: Using Azure Management Portal
@@ -21,13 +21,13 @@
 - name: Reference
   expanded: true
   items:
-  - name: MAKES engines
+  - name: MAKES APIs
     expanded: true
     items:
-      - name: Entity engine
-        href: reference-entity-engine.md
-      - name: Semantic Interpretation engine
-        href: reference-semantic-interpretation-engine.md
+      - name: Entity API
+        href: reference-entity-api.md
+      - name: Semantic Interpretation API
+        href: reference-semantic-interpretation-api.md
   - name: KES API methods
     href: /azure/cognitive-services/KES/webapi
 - name: Resources

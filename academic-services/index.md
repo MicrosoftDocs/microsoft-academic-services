@@ -3,7 +3,7 @@ title: Microsoft Academic Services Documentation
 description: Microsoft Academic Services provide Azure based solutions for interacting with the Microsoft Academic Graph, a comprehensive, heterogeneous graph of the worlds scientific publications
 layout: HubPage
 ms.topic: hub-page
-ms.date: 10/17/2018
+ms.date: 03/18/2018
 hide_bc: true
 ---
 <div id="main" class="v2">
@@ -49,7 +49,7 @@ hide_bc: true
                                                     </div>
                                                     <div class="cardText">
                                                         <h3>Microsoft Academic Knowledge Exploration Service (MAKES)</h3>
-                                                        <p>Learn all about MAKES, including how to access, deploy, manage and use MAKES engines, and documentation on the available versions.</p>
+                                                        <p>Learn all about MAKES, including how to access, deploy, manage and use the MAKES APIs, and documentation on the available versions.</p>
                                                     </div>
                                                 </div>
                                             </div>
