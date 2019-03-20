@@ -4,7 +4,7 @@ description: Compute author h-index for Microsoft Academic Graph using Azure Dat
 services: microsoft-academic-services
 ms.topic: tutorial
 ms.service: microsoft-academic-services
-ms.date: 3/14/2019
+ms.date: 3/20/2019
 ---
 # Tutorial: Compute author h-index using Azure Data Lake Analytics (U-SQL)
 
@@ -22,11 +22,11 @@ Complete these tasks before you begin this tutorial:
 
    Before you begin, you should have these items of information:
 
-   :heavy_check_mark:  The name of your Azure Storage (AS) account containing MAG dataset from [Get Microsoft Academic Graph on Azure storage](get-started-setup-provisioning.md).
+   :heavy_check_mark:  The name of your Azure Storage (AS) account containing MAG dataset from [Get Microsoft Academic Graph on Azure storage](get-started-setup-provisioning#note-azure-storage-account-name-and-primary-key).
 
-   :heavy_check_mark:  The name of your Azure Data Lake Analytics (ADLA) service from [Set up Azure Data Lake Analytics](get-started-setup-azure-data-lake-analytics.md).
+   :heavy_check_mark:  The name of your Azure Data Lake Analytics (ADLA) service from [Set up Azure Data Lake Analytics](get-started-setup-azure-data-lake-analytics#create-azure-data-lake-analytics-account).
 
-   :heavy_check_mark:  The name of your Azure Data Lake Storage (ADLS) from [Set up Azure Data Lake Analytics](get-started-setup-azure-data-lake-analytics.md).
+   :heavy_check_mark:  The name of your Azure Data Lake Storage (ADLS) from [Set up Azure Data Lake Analytics](get-started-setup-azure-data-lake-analytics#create-azure-data-lake-analytics-account).
 
    :heavy_check_mark:  The name of the container in your Azure Storage (AS) account containing MAG dataset.
 
@@ -47,32 +47,12 @@ In prerequisite [Set up Azure Data Lake Analytics](get-started-setup-azure-data-
    DROP FUNCTION IF EXISTS Affiliations;
    CREATE FUNCTION Affiliations(@BaseDir string = "")
      RETURNS @_Affiliations TABLE
-     (
-       AffiliationId long,
-       Rank uint,
-       NormalizedName string,
-       DisplayName string,
-       GridId string,
-       OfficialPage string,
-       WikiPage string,
-       PaperCount long,
-       CitationCount long,
-       CreatedDate DateTime
-     )
+     ( AffiliationId long, Rank uint, NormalizedName string, DisplayName string, GridId string, OfficialPage string, WikiPage string, PaperCount long, CitationCount long, CreatedDate DateTime )
      AS BEGIN
      DECLARE @_Path string = @BaseDir + "mag/Affiliations.txt";
      @_Affiliations =
      EXTRACT
-       AffiliationId long,
-       Rank uint,
-       NormalizedName string,
-       DisplayName string,
-       GridId string,
-       OfficialPage string,
-       WikiPage string,
-       PaperCount long,
-       CitationCount long,
-       CreatedDate DateTime
+       AffiliationId long, Rank uint, NormalizedName string, DisplayName string, GridId string, OfficialPage string, WikiPage string, PaperCount long, CitationCount long, CreatedDate DateTime
      FROM @_Path
      USING Extractors.Tsv(silent: false, quoting: false);
      RETURN;
@@ -81,28 +61,12 @@ In prerequisite [Set up Azure Data Lake Analytics](get-started-setup-azure-data-
    DROP FUNCTION IF EXISTS Authors;
    CREATE FUNCTION Authors(@BaseDir string = "")
      RETURNS @_Authors TABLE
-     (
-       AuthorId long,
-       Rank uint,
-       NormalizedName string,
-       DisplayName string,
-       LastKnownAffiliationId long?,
-       PaperCount long,
-       CitationCount long,
-       CreatedDate DateTime
-     )
+     ( AuthorId long, Rank uint, NormalizedName string, DisplayName string, LastKnownAffiliationId long?, PaperCount long, CitationCount long, CreatedDate DateTime )
      AS BEGIN
      DECLARE @_Path string = @BaseDir + "mag/Authors.txt";
      @_Authors =
      EXTRACT
-       AuthorId long,
-       Rank uint,
-       NormalizedName string,
-       DisplayName string,
-       LastKnownAffiliationId long?,
-       PaperCount long,
-       CitationCount long,
-       CreatedDate DateTime
+       AuthorId long, Rank uint, NormalizedName string, DisplayName string, LastKnownAffiliationId long?, PaperCount long, CitationCount long, CreatedDate DateTime
      FROM @_Path
      USING Extractors.Tsv(silent: false, quoting: false);
      RETURN;
@@ -111,22 +75,12 @@ In prerequisite [Set up Azure Data Lake Analytics](get-started-setup-azure-data-
    DROP FUNCTION IF EXISTS PaperAuthorAffiliations;
    CREATE FUNCTION PaperAuthorAffiliations(@BaseDir string = "")
      RETURNS @_PaperAuthorAffiliations TABLE
-     (
-       PaperId long,
-       AuthorId long,
-       AffiliationId long?,
-       AuthorSequenceNumber uint,
-       OriginalAffiliation string
-     )
+     ( PaperId long, AuthorId long, AffiliationId long?, AuthorSequenceNumber uint, OriginalAffiliation string )
      AS BEGIN
      DECLARE @_Path string = @BaseDir + "mag/PaperAuthorAffiliations.txt";
      @_PaperAuthorAffiliations =
      EXTRACT
-       PaperId long,
-       AuthorId long,
-       AffiliationId long?,
-       AuthorSequenceNumber uint,
-       OriginalAffiliation string
+       PaperId long, AuthorId long, AffiliationId long?, AuthorSequenceNumber uint, OriginalAffiliation string
      FROM @_Path
      USING Extractors.Tsv(silent: false, quoting: false);
      RETURN;
@@ -135,56 +89,12 @@ In prerequisite [Set up Azure Data Lake Analytics](get-started-setup-azure-data-
    DROP FUNCTION IF EXISTS Papers;
    CREATE FUNCTION Papers(@BaseDir string = "")
      RETURNS @_Papers TABLE
-     (
-       PaperId long,
-       Rank uint,
-       Doi string,
-       DocType string,
-       PaperTitle string,
-       OriginalTitle string,
-       BookTitle string,
-       Year int?,
-       Date DateTime?,
-       Publisher string,
-       JournalId long?,
-       ConferenceSeriesId long?,
-       ConferenceInstanceId long?,
-       Volume string,
-       Issue string,
-       FirstPage string,
-       LastPage string,
-       ReferenceCount long,
-       CitationCount long,
-       EstimatedCitation long,
-       OriginalVenue string,
-       CreatedDate DateTime
-     )
+     ( PaperId long, Rank uint, Doi string, DocType string, PaperTitle string, OriginalTitle string, BookTitle string, Year int?, Date DateTime?, Publisher string, JournalId long?, ConferenceSeriesId long?, ConferenceInstanceId long?, Volume string, Issue string, FirstPage string, LastPage string, ReferenceCount long, CitationCount long, EstimatedCitation long, OriginalVenue string, CreatedDate DateTime )
      AS BEGIN
      DECLARE @_Path string = @BaseDir + "mag/Papers.txt";
      @_Papers =
      EXTRACT
-       PaperId long,
-       Rank uint,
-       Doi string,
-       DocType string,
-       PaperTitle string,
-       OriginalTitle string,
-       BookTitle string,
-       Year int?,
-       Date DateTime?,
-       Publisher string,
-       JournalId long?,
-       ConferenceSeriesId long?,
-       ConferenceInstanceId long?,
-       Volume string,
-       Issue string,
-       FirstPage string,
-       LastPage string,
-       ReferenceCount long,
-       CitationCount long,
-       EstimatedCitation long,
-       OriginalVenue string,
-       CreatedDate DateTime
+       PaperId long, Rank uint, Doi string, DocType string, PaperTitle string, OriginalTitle string, BookTitle string, Year int?, Date DateTime?, Publisher string, JournalId long?, ConferenceSeriesId long?, ConferenceInstanceId long?, Volume string, Issue string, FirstPage string, LastPage string, ReferenceCount long, CitationCount long, EstimatedCitation long, OriginalVenue string, CreatedDate DateTime
      FROM @_Path
      USING Extractors.Tsv(silent: false, quoting: false);
      RETURN;
