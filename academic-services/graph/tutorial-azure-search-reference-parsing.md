@@ -1,6 +1,6 @@
 ---
-title: Organizational patent search using Azure Search
-description: Set up Azure Search service to do organizational patent search using the Microsoft Academic Graph
+title: Academic reference parsing using Azure Search
+description: Set up Azure Search service to enable reference parsing using the Microsoft Academic Graph
 services: microsoft-academic-services
 ms.topic: tutorial
 ms.service: microsoft-academic-services
@@ -9,7 +9,12 @@ ms.date: 3/18/2019
 
 # Tutorial: Set up organizational patent search with Azure Search
 
-Step-by-step instructions for setting up an Azure Search service to do organizational patent search using data from the Microsoft Academic Graph.
+Step-by-step instructions for setting up an Azure Search service to enable academic reference parsing using data from the Microsoft Academic Graph.
+
+> [!WARNING]
+> This is an **advanced** tutorial that creates an Azure Search service that indexes **all of the papers in the Microsoft Academic Graph**.
+>
+> Because of the scope of the data being indexed, it requires a significant amount of time and resource use to complete.
 
 ## Prerequisites
 
@@ -45,8 +50,8 @@ SET @@FeaturePreviews = "DataPartitionedOutput:on";
 
 // Make sure to run CreateFunctions script from common scripts first!
 
-DECLARE @azureSearchIndexerCount int = 1;
-DECLARE @dataPartitionCount int = 10;
+DECLARE @azureSearchIndexerCount int = 36;
+DECLARE @dataPartitionCount int = 100;
 
 DECLARE @blobAccount string = "<AzureStorageAccount>";
 DECLARE @dataVersion string = "<MagContainer>";
@@ -86,40 +91,20 @@ DECLARE @output = "wasb://" + @dataVersion + "@" + @blobAccount + "/azure-search
         @uriPrefix
     );
 
-@affiliations =
-    Affiliations
+@journals =
+    Journals
     (
         @uriPrefix
     );
 
-@paperFieldsOfStudy =
-    PaperFieldsOfStudy
-    (
-        @uriPrefix
-    );
-
-@fieldsOfStudy =
-    FieldsOfStudy
+@conferenceSeries =
+    ConferenceSeries
     (
         @uriPrefix
     );
 
 //
-// Filter academic data to only include patents published in affiliation with Microsoft
-//
-@papers =
-    SELECT DISTINCT P.*
-    FROM @papers AS P
-         INNER JOIN
-             @paperAuthorAffiliations AS Paa
-         ON P.PaperId == Paa.PaperId
-         INNER JOIN
-             @affiliations AS A
-         ON Paa.AfId == A.AffiliationId
-    WHERE A.NormalizedName == "microsoft" AND P.DocType == "Patent";
-
-//
-// Filter paper authors and fields of study using filtered papers, then flatten into string associated with each paper
+// Flatten paper authors into a string associated with each paper
 //
 @paperAuthorsDistinct =
     SELECT DISTINCT A.PaperId,
@@ -127,7 +112,8 @@ DECLARE @output = "wasb://" + @dataVersion + "@" + @blobAccount + "/azure-search
                     A.AuthorSequenceNumber
     FROM @paperAuthorAffiliations AS A
     INNER JOIN @papers AS P
-        ON A.PaperId == P.PaperId;
+        ON A.PaperId == P.PaperId
+    OPTION(ROWCOUNT=500000000);
 
 @paperAuthors =
     SELECT P.PaperId,
@@ -136,59 +122,49 @@ DECLARE @output = "wasb://" + @dataVersion + "@" + @blobAccount + "/azure-search
     FROM @paperAuthorsDistinct AS P
          INNER JOIN
              @authors AS A
-         ON P.AuthorId == A.AuthorId;
+         ON P.AuthorId == A.AuthorId
+    OPTION(ROWCOUNT=500000000);
 
 @paperAuthorsAggregated =
     SELECT PaperId,
            "[" + string.Join(",", MAP_AGG("\"" + AuthorName + "\"", AuthorSequenceNumber).OrderBy(a => a.Value).Select(a => a.Key)) + "]" AS Authors
     FROM @paperAuthors
-    GROUP BY PaperId;
-
-@paperFieldsOfStudyDistinct =
-    SELECT DISTINCT A.PaperId,
-                    A.FieldOfStudyId
-    FROM @paperFieldsOfStudy AS A
-    INNER JOIN @papers AS P
-        ON A.PaperId == P.PaperId;
-
-@paperFieldsOfStudyDistinct =
-    SELECT P.PaperId,
-           F.NormalizedName AS FieldOfStudyName
-    FROM @paperFieldsOfStudyDistinct AS P
-         INNER JOIN
-             @fieldsOfStudy AS F
-         ON P.FieldOfStudyId == F.FieldOfStudyId;
-
-@paperFieldsOfStudyAggregated =
-    SELECT PaperId,
-           "[" + string.Join(",", ARRAY_AGG("\"" + FieldOfStudyName + "\"")) + "]" AS FieldsOfStudy
-    FROM @paperFieldsOfStudyDistinct
-    GROUP BY PaperId;
+    GROUP BY PaperId
+    OPTION(ROWCOUNT=200000000);
 
 //
-// Generate tab delimited text files containing the partitioned academic data we filtered/flattened above
+// Generate tab delimited files containing the partitioned academic data we filtered/flattened above
 //
 @paperDocumentFields =
     SELECT P.PaperId,
            P.Rank,
-           P.EstimatedCitation,
            P.Year,
+           (P.JournalId == null?null : J.NormalizedName) AS Journal,
+           (P.ConferenceSeriesId == null?null : C.NormalizedName) AS Conference,
            A.Authors,
+           P.Volume,
+           P.Issue,
+           P.FirstPage,
+           P.LastPage,
            P.PaperTitle,
-           F.FieldsOfStudy,
+           P.Doi,
            (int) (P.PaperId % @azureSearchIndexerCount) AS ForIndexerNumber,
            (int) (P.PaperId % @dataPartitionCount) AS PartitionNumber
     FROM @papers AS P
          LEFT OUTER JOIN
+             @journals AS J
+         ON P.JId == J.JournalId
+         LEFT OUTER JOIN
+             @conferenceSeries AS C
+         ON P.CId == C.ConferenceSeriesId
+         LEFT OUTER JOIN
              @paperAuthorsAggregated AS A
          ON P.PaperId == A.PaperId
-         LEFT OUTER JOIN
-             @paperFieldsOfStudyAggregated AS F
-         ON P.PaperId == F.PaperId;
+    OPTION(ROWCOUNT=200000000);
 
 //
 // Generates partitioned files based on the values in the ForIndexerNumber and PartitionNumber columns
-//
+// 
 OUTPUT @paperDocumentFields
 TO @output
 USING Outputters.Tsv(quoting : false);
@@ -201,11 +177,6 @@ USING Outputters.Tsv(quoting : false);
    |---------|---------|
    |**`<AzureStorageAccount>`** | The name of your Azure Storage (AS) account containing MAG dataset. |
    |**`<MagContainer>`** | The container name in Azure Storage (AS) account containing MAG dataset, Usually in the form of **mag-yyyy-mm-dd**. |
-
-    > [!TIP]
-    > This tutorial uses Microsoft as an organization by default. You can target any organization by finding its NormalizedName in the Microsoft Academic Graph and then changing 'WHERE A.NormalizedName == "microsoft" AND P.DocType == "Patent"' to 'WHERE A.NormalizedName == "org_name" AND P.DocType == "Patent"'.
-    >
-    > Please note that doing this may impact time estimates for script execution and index generation later on in this tutorial.
 
 1. Provide a **Job name**, change **AUs** to 50, and select **Submit**
 
@@ -317,7 +288,7 @@ Once the indexer has completed, you can immediately begin querying the service b
 If you're interested in creating a more comprehensive Azure Search service using the full Microsoft Academic Graph, take a look at our reference parsing tutorial.
 
 > [!div class="nextstepaction"]
->[Academic reference parsing](tutorial-azure-search-reference-parsing.md)
+>[Academic citation parsing](tutorial-azure-search-citation-parsing.md)
 
 ## Resources
 

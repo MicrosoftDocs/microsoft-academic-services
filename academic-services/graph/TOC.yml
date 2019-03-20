@@ -29,8 +29,8 @@
     items:
     - name: Organizational patent search
       href: tutorial-azure-search-org-patents.md
-    - name: Academic citation parsing
-      href: tutorial-azure-search-citation-parsing.md
+    - name: Academic reference parsing
+      href: tutorial-azure-search-reference-parsing.md
 - name: Samples
   expanded: true
   items:
