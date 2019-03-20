@@ -46,7 +46,7 @@ Please create a new Azure subscription for the distribution previews. If your or
 
     ![Submit new storage account resource for creation](media/create-storage-account/submit.png "Submit new storage account resource for creation")
 
-### Note the Azure storage name and primary key
+### Note Azure storage account name and primary key
 
 1. Once notified that the storage account has been created, click “go to resource”
 
