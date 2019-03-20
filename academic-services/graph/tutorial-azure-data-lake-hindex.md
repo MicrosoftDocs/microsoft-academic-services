@@ -89,9 +89,7 @@ In prerequisite [Set up Azure Data Lake Analytics](get-started-setup-azure-data-
    DROP FUNCTION IF EXISTS Papers;
    CREATE FUNCTION Papers(@BaseDir string = "")
      RETURNS @_Papers TABLE
-     (
-       PaperId long, Rank uint, Doi string, DocType string, PaperTitle string, OriginalTitle string, BookTitle string, Year int?, Date DateTime?, Publisher string, JournalId long?, ConferenceSeriesId long?, ConferenceInstanceId long?, Volume string, Issue string, FirstPage string, LastPage string, ReferenceCount long, CitationCount long, EstimatedCitation long, OriginalVenue string, CreatedDate DateTime
-     )
+     ( PaperId long, Rank uint, Doi string, DocType string, PaperTitle string, OriginalTitle string, BookTitle string, Year int?, Date DateTime?, Publisher string, JournalId long?, ConferenceSeriesId long?, ConferenceInstanceId long?, Volume string, Issue string, FirstPage string, LastPage string, ReferenceCount long, CitationCount long, EstimatedCitation long, OriginalVenue string, CreatedDate DateTime )
      AS BEGIN
      DECLARE @_Path string = @BaseDir + "mag/Papers.txt";
      @_Papers =
