@@ -7,14 +7,16 @@ ms.service: microsoft-academic-services
 ms.date: 3/18/2019
 ---
 
-# Tutorial: Set up organizational patent search with Azure Search
+# Tutorial: Set up academic reference parsing with Azure Search
 
-Step-by-step instructions for setting up an Azure Search service to enable academic reference parsing using data from the Microsoft Academic Graph.
+This tutorial provides step-by-step instructions for setting up an Azure Search service to enable academic reference parsing using data from the Microsoft Academic Graph.
 
 > [!WARNING]
 > This is an **advanced** tutorial that creates an Azure Search service that indexes **all of the papers in the Microsoft Academic Graph**.
 >
-> Because of the scope of the data being indexed, it requires a significant amount of time and resource use to complete.
+> Because of the large scope of the data in the Microsoft Academic Graph, the Azure Search service requires a significant amount of time and resources to both setup and keep online.
+>
+> Please take the time to familiarize yourself with the costs associated with Azure Search in the [capacity planning](https://docs.microsoft.com/en-us/azure/search/search-sku-tier) documentation.
 
 ## Prerequisites
 
@@ -38,6 +40,175 @@ Complete these tasks before beginning this tutorial:
 
    :heavy_check_mark:  The connection string of your Azure Storage account containing the MAG data set. It should look similar to ```DefaultEndpointsProtocol=https;AccountName=<AzureStorageAccountName>;AccountKey=<AzureStorageAccountKey>;EndpointSuffix=core.windows.net```
 
+## Define functions to extract MAG data
+
+In prerequisite [Set up Azure Data Lake Analytics](get-started-setup-azure-data-lake-analytics.md), you added the Azure Storage created for MAG provision as a data source for the Azure Data Lake Analytics service (ADLA). In this section, you submit an ADLA job to create functions extracting MAG data from Azure Storage (AS).
+
+1. In the [Azure portal](https://portal.azure.com), go to the Azure Data Lake Analytics (ADLA) service that you created, and select **Overview** > **New Job**.
+
+   ![Azure Data Lake Analytics - New job](media/samples-azure-data-lake-hindex/new-job.png "Azure Data Lake Analytics - New job")
+
+1. Copy and paste the following code block in the script window.
+
+   > [!NOTE]
+   > To work with the latest MAG data set schema, instead of the code block below, you could use code in samples/CreateFunctions.usql in the MAG data set.
+
+   ```U-SQL
+   DROP FUNCTION IF EXISTS Affiliations;
+   CREATE FUNCTION Affiliations(@BaseDir string = "")
+     RETURNS @_Affiliations TABLE
+     (
+       AffiliationId long,
+       Rank uint,
+       NormalizedName string,
+       DisplayName string,
+       GridId string,
+       OfficialPage string,
+       WikiPage string,
+       PaperCount long,
+       CitationCount long,
+       CreatedDate DateTime
+     )
+     AS BEGIN
+     DECLARE @_Path string = @BaseDir + "mag/Affiliations.txt";
+     @_Affiliations =
+     EXTRACT
+       AffiliationId long,
+       Rank uint,
+       NormalizedName string,
+       DisplayName string,
+       GridId string,
+       OfficialPage string,
+       WikiPage string,
+       PaperCount long,
+       CitationCount long,
+       CreatedDate DateTime
+     FROM @_Path
+     USING Extractors.Tsv(silent: false, quoting: false);
+     RETURN;
+   END;
+
+   DROP FUNCTION IF EXISTS Authors;
+   CREATE FUNCTION Authors(@BaseDir string = "")
+     RETURNS @_Authors TABLE
+     (
+       AuthorId long,
+       Rank uint,
+       NormalizedName string,
+       DisplayName string,
+       LastKnownAffiliationId long?,
+       PaperCount long,
+       CitationCount long,
+       CreatedDate DateTime
+     )
+     AS BEGIN
+     DECLARE @_Path string = @BaseDir + "mag/Authors.txt";
+     @_Authors =
+     EXTRACT
+       AuthorId long,
+       Rank uint,
+       NormalizedName string,
+       DisplayName string,
+       LastKnownAffiliationId long?,
+       PaperCount long,
+       CitationCount long,
+       CreatedDate DateTime
+     FROM @_Path
+     USING Extractors.Tsv(silent: false, quoting: false);
+     RETURN;
+   END;
+
+   DROP FUNCTION IF EXISTS PaperAuthorAffiliations;
+   CREATE FUNCTION PaperAuthorAffiliations(@BaseDir string = "")
+     RETURNS @_PaperAuthorAffiliations TABLE
+     (
+       PaperId long,
+       AuthorId long,
+       AffiliationId long?,
+       AuthorSequenceNumber uint,
+       OriginalAffiliation string
+     )
+     AS BEGIN
+     DECLARE @_Path string = @BaseDir + "mag/PaperAuthorAffiliations.txt";
+     @_PaperAuthorAffiliations =
+     EXTRACT
+       PaperId long,
+       AuthorId long,
+       AffiliationId long?,
+       AuthorSequenceNumber uint,
+       OriginalAffiliation string
+     FROM @_Path
+     USING Extractors.Tsv(silent: false, quoting: false);
+     RETURN;
+   END;
+
+   DROP FUNCTION IF EXISTS Papers;
+   CREATE FUNCTION Papers(@BaseDir string = "")
+     RETURNS @_Papers TABLE
+     (
+       PaperId long,
+       Rank uint,
+       Doi string,
+       DocType string,
+       PaperTitle string,
+       OriginalTitle string,
+       BookTitle string,
+       Year int?,
+       Date DateTime?,
+       Publisher string,
+       JournalId long?,
+       ConferenceSeriesId long?,
+       ConferenceInstanceId long?,
+       Volume string,
+       Issue string,
+       FirstPage string,
+       LastPage string,
+       ReferenceCount long,
+       CitationCount long,
+       EstimatedCitation long,
+       OriginalVenue string,
+       CreatedDate DateTime
+     )
+     AS BEGIN
+     DECLARE @_Path string = @BaseDir + "mag/Papers.txt";
+     @_Papers =
+     EXTRACT
+       PaperId long,
+       Rank uint,
+       Doi string,
+       DocType string,
+       PaperTitle string,
+       OriginalTitle string,
+       BookTitle string,
+       Year int?,
+       Date DateTime?,
+       Publisher string,
+       JournalId long?,
+       ConferenceSeriesId long?,
+       ConferenceInstanceId long?,
+       Volume string,
+       Issue string,
+       FirstPage string,
+       LastPage string,
+       ReferenceCount long,
+       CitationCount long,
+       EstimatedCitation long,
+       OriginalVenue string,
+       CreatedDate DateTime
+     FROM @_Path
+     USING Extractors.Tsv(silent: false, quoting: false);
+     RETURN;
+   END;
+   ```
+
+1. Provide a **Job name** and select **Submit**.
+
+   ![Submit CreateFunctions job](media/samples-azure-data-lake-hindex/create-functions-submit.png "Submit CreateFunctions job")
+
+1. The job should finish successfully.
+
+   ![CreateFunctions job status](media/samples-azure-data-lake-hindex/create-functions-status.png "CreateFunctions job status")
+
 ## Generate text documents for academic papers
 
 In prerequisite [Set up Azure Data Lake Analytics](get-started-setup-azure-data-lake-analytics.md), you added the Azure Storage (AS) created for MAG provision as a data source for the Azure Data Lake Analytics service (ADLA). In this section, you submit an ADLA job to generate text files containing academic data that will be used to create an Azure Search service.
@@ -49,28 +220,50 @@ In prerequisite [Set up Azure Data Lake Analytics](get-started-setup-azure-data-
 1. Copy and paste the following code block in the script window.
 
 ```U-SQL
-SET @@FeaturePreviews = "DataPartitionedOutput:on";
+// Enables OUTPUT statements to generate dynamic files using column values
+SET @@EnablePartitionedOutput = "DataPartitionedOutput:on";
 
-// Make sure to run CreateFunctions script from common scripts first!
+// The Azure blob storage account name that contains the Microsoft Academic Graph data to be used by this script
+DECLARE @inputBlobAccount string = "<MagAzureStorageAccount>";
 
-DECLARE @azureSearchIndexerCount int = 36;
-DECLARE @dataPartitionCount int = 100;
+// The Azure blob storage container name that contains the Microsoft Academic Graph data to be used by this script
+DECLARE @inputBlobContainer string = "<MagContainer>";
 
-DECLARE @blobAccount string = "<AzureStorageAccount>";
-DECLARE @dataVersion string = "<MagContainer>";
+// The Windows Azure Blob Storage (WASB) URI of the Microsoft Academic Graph data to be used by this script
+DECLARE @inputUri string = "wasb://" + @inputBlobContainer + "@" + @blobAccount + "/";
 
-DECLARE @uriPrefix string = "wasb://" + @dataVersion + "@" + @blobAccount + "/";
-DECLARE @output = "wasb://" + @dataVersion + "@" + @blobAccount + "/azure-search-data/{PartitionNumber}-data.{ForIndexerNumber}";
+// The Azure blob storage account name that output files will be generated in
+DECLARE @outputBlobAccount string = "<OutputAzureStorageAccount>";
+
+// The Azure blob storage container name that output files will be generated in
+// ***IMPORTANT: This container must exist before running this script otherwise the script will fail
+DECLARE @outputBlobContainer string = "<OutputContainer>";
+
+// The Windows Azure Blob Storage (WASB) URI  that output files will be generated in
+DECLARE @outputUri = "wasb://" + @outputBlobContainer + "@" + @outputBlobAccount + "/azure-search-data/{FileNumber}-data.{IndexerNumber}";
+
+// The number of Azure Search indexers that will be used when indexing the documents generated by this script
+DECLARE @maximumIndexerCount int = 6;
+
+// The the number of files to generate for each indexer
+DECLARE @maximumFileCountPerIndexer int = 500;
 
 //
 // Load academic data
 //
-@papers =
-    Papers
-    (
-        @uriPrefix
-    );
+@papers = Papers(@inputUri);
 
+@paperAuthorAffiliations = PaperAuthorAffiliations(@inputUri);
+
+@authors = Authors(@inputUri);
+
+@journals = Journals(@inputUri);
+
+@conferenceSeries = ConferenceSeries(@inputUri);
+
+//
+// Generate non-null values for optional fields to ensure we can properly join
+//
 @papers =
     SELECT *,
            (JournalId == null? (long) - 1 : JournalId.Value) AS JId,
@@ -78,36 +271,12 @@ DECLARE @output = "wasb://" + @dataVersion + "@" + @blobAccount + "/azure-search
     FROM @papers;
 
 @paperAuthorAffiliations =
-    PaperAuthorAffiliations
-    (
-        @uriPrefix
-    );
-
-@paperAuthorAffiliations =
     SELECT *,
            (AffiliationId == null? (long) - 1 : AffiliationId.Value) AS AfId
     FROM @paperAuthorAffiliations;
 
-@authors =
-    Authors
-    (
-        @uriPrefix
-    );
-
-@journals =
-    Journals
-    (
-        @uriPrefix
-    );
-
-@conferenceSeries =
-    ConferenceSeries
-    (
-        @uriPrefix
-    );
-
 //
-// Flatten paper authors into a string associated with each paper
+// Filter and flatten paper author data into a single attribute for each paper
 //
 @paperAuthorsDistinct =
     SELECT DISTINCT A.PaperId,
@@ -151,8 +320,8 @@ DECLARE @output = "wasb://" + @dataVersion + "@" + @blobAccount + "/azure-search
            P.LastPage,
            P.PaperTitle,
            P.Doi,
-           (int) (P.PaperId % @azureSearchIndexerCount) AS ForIndexerNumber,
-           (int) (P.PaperId % @dataPartitionCount) AS PartitionNumber
+           (int) (P.PaperId % @maximumIndexerCount) AS IndexerNumber,
+           (int) (P.PaperId % @maximumFileCountPerIndexer) AS FileNumber
     FROM @papers AS P
          LEFT OUTER JOIN
              @journals AS J
@@ -167,19 +336,21 @@ DECLARE @output = "wasb://" + @dataVersion + "@" + @blobAccount + "/azure-search
 
 //
 // Generates partitioned files based on the values in the ForIndexerNumber and PartitionNumber columns
-// 
+//
 OUTPUT @paperDocumentFields
 TO @output
 USING Outputters.Tsv(quoting : false);
 
 ```
 
-1. In this code block, replace `<AzureStorageAccount>`, and `<MagContainer>` placeholder values with the values that you collected while completing the prerequisites of this sample
+1. Replace placeholder values in the script using the table below
 
    |Value  |Description  |
    |---------|---------|
-   |**`<AzureStorageAccount>`** | The name of your Azure Storage (AS) account containing MAG dataset. |
-   |**`<MagContainer>`** | The container name in Azure Storage (AS) account containing MAG dataset, Usually in the form of **mag-yyyy-mm-dd**. |
+   |**`<MagAzureStorageAccount>`** | The name of your Azure Storage account containing the Microsoft Academic Graph data set. |
+   |**`<MagContainer>`** | The container name in your Azure Storage account containing the Microsoft Academic graph data set, usually in the form of **mag-yyyy-mm-dd**. |
+   |**`<OutputAzureStorageAccount>`** | The name of your Azure Storage account where you'd like the text documents to go. |
+   |**`<OutputContainer>`** | The container name in your Azure Storage account where you'd like the text documents to go. |
 
 1. Provide a **Job name**, change **AUs** to 50, and select **Submit**
 
@@ -191,13 +362,18 @@ USING Outputters.Tsv(quoting : false);
 
 ## Create Azure Search service
 
+> [!WARNING]
+> Because of the large scope of the data in the Microsoft Academic Graph, the Azure Search service requires a significant amount of time and resources to both setup and keep online.
+>
+> Please take the time to familiarize yourself with the costs associated with Azure Search in the [capacity planning](https://docs.microsoft.com/en-us/azure/search/search-sku-tier) documentation.
+
 1. Go to the Azure Management Portal and create a new Azure Search service
 
    ![Create new Azure Search service](media/tutorial-search-new-service.png)
 
 1. Enter information for a new service then click the create button
 
-    ![Enter information for a new service](media/tutorial-search-create-service.png)
+    ![Enter information for a new service](media/tutorial-search-create-service-standard.png)
 
     1. Enter a unique name for the service
     1. Create a new resource group for the service with the same name as the service
@@ -286,7 +462,7 @@ You should receive a "201 created" response similar to the following:
 
 ## Create indexers
 
-The Microsoft Academic Graph has well over 200 million papers, which can take a considerable amount of time to index. To help reduce the amount of time taken to index the papers we create **four indexers** each targeting a specific subset of the text documents generated earlier.
+The Microsoft Academic Graph has well over 200 million papers, which can take a considerable amount of time to index. To help reduce the amount of time taken to index the papers we create **six indexers** each targeting a specific subset of the text documents generated earlier.
 
 * Keep the request headers and action verb as-is
 * Change the resource to ```/indexers```. The full URL should look like
@@ -379,6 +555,50 @@ The Microsoft Academic Graph has well over 200 million papers, which can take a 
     }
     ```
 
+* Change the request body to the following JSON and click the "send" button
+
+    ```JSON
+    {
+        "name" : "mag-indexer-5",
+        "dataSourceName" : "azure-search-data",
+        "targetIndexName" : "mag-index",
+        "schedule" : {
+            "interval" : "PT5M"
+        },
+        "parameters" : {
+            "configuration" : {
+                "parsingMode" : "delimitedText",
+                "delimitedTextHeaders" : "id,rank,year,journal,conference,authors,volume,issue,first_page,last_page,title,doi",
+                "delimitedTextDelimiter": "	",
+                "firstLineContainsHeaders": false,
+                "indexedFileNameExtensions": ".4"
+            }
+        }
+    }
+    ```
+
+* Change the request body to the following JSON and click the "send" button
+
+    ```JSON
+    {
+        "name" : "mag-indexer-6",
+        "dataSourceName" : "azure-search-data",
+        "targetIndexName" : "mag-index",
+        "schedule" : {
+            "interval" : "PT5M"
+        },
+        "parameters" : {
+            "configuration" : {
+                "parsingMode" : "delimitedText",
+                "delimitedTextHeaders" : "id,rank,year,journal,conference,authors,volume,issue,first_page,last_page,title,doi",
+                "delimitedTextDelimiter": "	",
+                "firstLineContainsHeaders": false,
+                "indexedFileNameExtensions": ".5"
+            }
+        }
+    }
+    ```
+
 ## Scale up the service
 
 In addition to creating multiple indexers, we also need to scale up the services search units (SU) so ensure that each indexer can be run concurrently and that there is sufficient space to store the index.
@@ -412,16 +632,19 @@ Once the indexer has completed, you can immediately begin querying the service b
 
 ![Load search explorer](media/tutorial-search-load-search-explorer.png)
 
-### Example: Patents about search indexers
+The fields included in this index make it optimal for finding papers that match citation strings.
 
-![Searching for patents about search indexers](media/tutorial-search-example-search-indexer.png)
+Try some of the following:
 
-### Example: Patents about face recognition and AI created before 2000
-
-![Load search explorer](media/tutorial-search-example-face-recognition.png)
-
-> [!NOTE]
-> This example makes use of filter expressions to restrict which content is considered before looking for the search terms. See the [Azure Search filter expression](https://docs.microsoft.com/en-us/azure/search/search-explorer#filter-expressions-greater-than-less-than-equal-to) documentation for more details.
+* Lloyd, K., Wright, S., Suchet-Pearson, S., Burarrwanga, L., Hodge, P. (2012). Weaving lives together: collaborative fieldwork in North East Arnhem Land, Australia. Annales de Géographie, 121(5), 513–524.
+* Brodsky, F. M., Chen, C.-Y., Knuehl, C., Towler, M. C., Wakeham, D. E. (2001). Biological Basket Weaving: Formation and Function of Clathrin-Coated Vesicles. Annual Review of Cell and Developmental Biology, 17(1), 517–568.
+* Winkel, B., et al. “Efficient Least-Squares Basket-Weaving.” Astronomy and Astrophysics, vol. 547, 2012.
+* Partan, Jim, Jim Kurose, and Brian Neil Levine. 2006. “A Survey of Practical Issues in Underwater Networks.” In Proceedings of the 1st ACM International Workshop on Underwater Networks, 17–24.
+* Mabuchi, Kazumi, et al. Dust Collection Basket for Floating Substance and Dust Collection System Using It. 2008.
+* Toft, Peter Andreas. “Moravian and Inuit Encounters: Transculturation of Landscapes and Material Culture in West Greenland.” Arctic, vol. 69, no. 5, 2017, pp. 1–13.
+* Williams, Eduardo. 2014. “Aquatic Environments in Mesoamerica: Pre-Hispanic Subsistence Activities.”
+* Hill, Lisa. 2001. “The Hidden Theology of Adam Smith.” European Journal of The History of Economic Thought 8 (1): 1–29.
+* Dammers, C. R., McCauley, R. N. (2006). Basket Weaving: The Euromarket Experience with Basket Currency Bonds. BIS Quarterly Review.
 
 ## Resources
 
