@@ -211,7 +211,7 @@ In prerequisite [Set up Azure Data Lake Analytics](get-started-setup-azure-data-
 
 ```U-SQL
 // Enables OUTPUT statements to generate dynamic files using column values
-SET @@EnablePartitionedOutput = "DataPartitionedOutput:on";
+SET @@FeaturePreviews = "DataPartitionedOutput:on";
 
 // The Azure blob storage account name that contains the Microsoft Academic Graph data to be used by this script
 DECLARE @inputBlobAccount string = "<MagAzureStorageAccount>";
