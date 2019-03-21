@@ -30,6 +30,175 @@ Complete these tasks before beginning this tutorial:
 
    :heavy_check_mark:  The name of the container in your Azure Storage (AS) account containing MAG dataset.
 
+## Define functions to extract MAG data
+
+In prerequisite [Set up Azure Data Lake Analytics](get-started-setup-azure-data-lake-analytics.md), you added the Azure Storage created for MAG provision as a data source for the Azure Data Lake Analytics service (ADLA). In this section, you submit an ADLA job to create functions extracting MAG data from Azure Storage (AS).
+
+1. In the [Azure portal](https://portal.azure.com), go to the Azure Data Lake Analytics (ADLA) service that you created, and select **Overview** > **New Job**.
+
+   ![Azure Data Lake Analytics - New job](media/samples-azure-data-lake-hindex/new-job.png "Azure Data Lake Analytics - New job")
+
+1. Copy and paste the following code block in the script window.
+
+   > [!NOTE]
+   > To work with the latest MAG data set schema, instead of the code block below, you could use code in samples/CreateFunctions.usql in the MAG data set.
+
+   ```U-SQL
+   DROP FUNCTION IF EXISTS Affiliations;
+   CREATE FUNCTION Affiliations(@BaseDir string = "")
+     RETURNS @_Affiliations TABLE
+     (
+       AffiliationId long,
+       Rank uint,
+       NormalizedName string,
+       DisplayName string,
+       GridId string,
+       OfficialPage string,
+       WikiPage string,
+       PaperCount long,
+       CitationCount long,
+       CreatedDate DateTime
+     )
+     AS BEGIN
+     DECLARE @_Path string = @BaseDir + "mag/Affiliations.txt";
+     @_Affiliations =
+     EXTRACT
+       AffiliationId long,
+       Rank uint,
+       NormalizedName string,
+       DisplayName string,
+       GridId string,
+       OfficialPage string,
+       WikiPage string,
+       PaperCount long,
+       CitationCount long,
+       CreatedDate DateTime
+     FROM @_Path
+     USING Extractors.Tsv(silent: false, quoting: false);
+     RETURN;
+   END;
+
+   DROP FUNCTION IF EXISTS Authors;
+   CREATE FUNCTION Authors(@BaseDir string = "")
+     RETURNS @_Authors TABLE
+     (
+       AuthorId long,
+       Rank uint,
+       NormalizedName string,
+       DisplayName string,
+       LastKnownAffiliationId long?,
+       PaperCount long,
+       CitationCount long,
+       CreatedDate DateTime
+     )
+     AS BEGIN
+     DECLARE @_Path string = @BaseDir + "mag/Authors.txt";
+     @_Authors =
+     EXTRACT
+       AuthorId long,
+       Rank uint,
+       NormalizedName string,
+       DisplayName string,
+       LastKnownAffiliationId long?,
+       PaperCount long,
+       CitationCount long,
+       CreatedDate DateTime
+     FROM @_Path
+     USING Extractors.Tsv(silent: false, quoting: false);
+     RETURN;
+   END;
+
+   DROP FUNCTION IF EXISTS PaperAuthorAffiliations;
+   CREATE FUNCTION PaperAuthorAffiliations(@BaseDir string = "")
+     RETURNS @_PaperAuthorAffiliations TABLE
+     (
+       PaperId long,
+       AuthorId long,
+       AffiliationId long?,
+       AuthorSequenceNumber uint,
+       OriginalAffiliation string
+     )
+     AS BEGIN
+     DECLARE @_Path string = @BaseDir + "mag/PaperAuthorAffiliations.txt";
+     @_PaperAuthorAffiliations =
+     EXTRACT
+       PaperId long,
+       AuthorId long,
+       AffiliationId long?,
+       AuthorSequenceNumber uint,
+       OriginalAffiliation string
+     FROM @_Path
+     USING Extractors.Tsv(silent: false, quoting: false);
+     RETURN;
+   END;
+
+   DROP FUNCTION IF EXISTS Papers;
+   CREATE FUNCTION Papers(@BaseDir string = "")
+     RETURNS @_Papers TABLE
+     (
+       PaperId long,
+       Rank uint,
+       Doi string,
+       DocType string,
+       PaperTitle string,
+       OriginalTitle string,
+       BookTitle string,
+       Year int?,
+       Date DateTime?,
+       Publisher string,
+       JournalId long?,
+       ConferenceSeriesId long?,
+       ConferenceInstanceId long?,
+       Volume string,
+       Issue string,
+       FirstPage string,
+       LastPage string,
+       ReferenceCount long,
+       CitationCount long,
+       EstimatedCitation long,
+       OriginalVenue string,
+       CreatedDate DateTime
+     )
+     AS BEGIN
+     DECLARE @_Path string = @BaseDir + "mag/Papers.txt";
+     @_Papers =
+     EXTRACT
+       PaperId long,
+       Rank uint,
+       Doi string,
+       DocType string,
+       PaperTitle string,
+       OriginalTitle string,
+       BookTitle string,
+       Year int?,
+       Date DateTime?,
+       Publisher string,
+       JournalId long?,
+       ConferenceSeriesId long?,
+       ConferenceInstanceId long?,
+       Volume string,
+       Issue string,
+       FirstPage string,
+       LastPage string,
+       ReferenceCount long,
+       CitationCount long,
+       EstimatedCitation long,
+       OriginalVenue string,
+       CreatedDate DateTime
+     FROM @_Path
+     USING Extractors.Tsv(silent: false, quoting: false);
+     RETURN;
+   END;
+   ```
+
+1. Provide a **Job name** and select **Submit**.
+
+   ![Submit CreateFunctions job](media/samples-azure-data-lake-hindex/create-functions-submit.png "Submit CreateFunctions job")
+
+1. The job should finish successfully.
+
+   ![CreateFunctions job status](media/samples-azure-data-lake-hindex/create-functions-status.png "CreateFunctions job status")
+
 ## Generate text documents for organizational patents
 
 In prerequisite [Set up Azure Data Lake Analytics](get-started-setup-azure-data-lake-analytics.md), you added the Azure Storage (AS) created for MAG provision as a data source for the Azure Data Lake Analytics service (ADLA). In this section, you submit an ADLA job to generate text files containing academic data that will be used to create an Azure Search service.
@@ -41,28 +210,56 @@ In prerequisite [Set up Azure Data Lake Analytics](get-started-setup-azure-data-
 1. Copy and paste the following code block in the script window.
 
 ```U-SQL
-SET @@FeaturePreviews = "DataPartitionedOutput:on";
+// Enables OUTPUT statements to generate dynamic files using column values
+SET @@EnablePartitionedOutput = "DataPartitionedOutput:on";
 
-// Make sure to run CreateFunctions script from common scripts first!
+// The Azure blob storage account name that contains the Microsoft Academic Graph data to be used by this script
+DECLARE @inputBlobAccount string = "<MagAzureStorageAccount>";
 
-DECLARE @azureSearchIndexerCount int = 1;
-DECLARE @dataPartitionCount int = 10;
+// The Azure blob storage container name that contains the Microsoft Academic Graph data to be used by this script
+DECLARE @inputBlobContainer string = "<MagContainer>";
 
-DECLARE @blobAccount string = "<AzureStorageAccount>";
-DECLARE @dataVersion string = "<MagContainer>";
+// The Windows Azure Blob Storage (WASB) URI of the Microsoft Academic Graph data to be used by this script
+DECLARE @inputUri string = "wasb://" + @inputBlobContainer + "@" + @blobAccount + "/";
 
-DECLARE @uriPrefix string = "wasb://" + @dataVersion + "@" + @blobAccount + "/";
-DECLARE @output = "wasb://" + @dataVersion + "@" + @blobAccount + "/azure-search-data/{PartitionNumber}-data.{ForIndexerNumber}";
+// The Azure blob storage account name that output files will be generated in
+DECLARE @outputBlobAccount string = "<OutputAzureStorageAccount>";
+
+// The Azure blob storage container name that output files will be generated in
+// ***IMPORTANT: This container must exist before running this script otherwise the script will fail
+DECLARE @outputBlobContainer string = "<OutputContainer>";
+
+// The Windows Azure Blob Storage (WASB) URI  that output files will be generated in
+DECLARE @outputUri = "wasb://" + @outputBlobContainer + "@" + @outputBlobAccount + "/azure-search-data/{FileNumber}-data.{IndexerNumber}";
+
+// The number of Azure Search indexers that will be used when indexing the documents generated by this script
+DECLARE @maximumIndexerCount int = 1;
+
+// The the number of files to generate for each indexer
+DECLARE @maximumFileCountPerIndexer int = 10;
+
+// The affiliation that should be used to filter the results returned by this script
+// To target a custom affiliation, find its normalized name and enter it below
+DECLARE @affiliationNormalizedNameFilter string = "microsoft";
 
 //
 // Load academic data
 //
-@papers =
-    Papers
-    (
-        @uriPrefix
-    );
+@papers = Papers(@inputUri);
 
+@paperAuthorAffiliations = PaperAuthorAffiliations(@inputUri);
+
+@authors = Authors(@inputUri);
+
+@affiliations = Affiliations(@inputUri);
+
+@paperFieldsOfStudy = PaperFieldsOfStudy(@inputUri);
+
+@fieldsOfStudy = FieldsOfStudy(@inputUri);
+
+//
+// Generate non-null values for optional fields to ensure we can properly join
+//
 @papers =
     SELECT *,
            (JournalId == null? (long) - 1 : JournalId.Value) AS JId,
@@ -70,39 +267,9 @@ DECLARE @output = "wasb://" + @dataVersion + "@" + @blobAccount + "/azure-search
     FROM @papers;
 
 @paperAuthorAffiliations =
-    PaperAuthorAffiliations
-    (
-        @uriPrefix
-    );
-
-@paperAuthorAffiliations =
     SELECT *,
            (AffiliationId == null? (long) - 1 : AffiliationId.Value) AS AfId
     FROM @paperAuthorAffiliations;
-
-@authors =
-    Authors
-    (
-        @uriPrefix
-    );
-
-@affiliations =
-    Affiliations
-    (
-        @uriPrefix
-    );
-
-@paperFieldsOfStudy =
-    PaperFieldsOfStudy
-    (
-        @uriPrefix
-    );
-
-@fieldsOfStudy =
-    FieldsOfStudy
-    (
-        @uriPrefix
-    );
 
 //
 // Filter academic data to only include patents published in affiliation with Microsoft
@@ -116,10 +283,10 @@ DECLARE @output = "wasb://" + @dataVersion + "@" + @blobAccount + "/azure-search
          INNER JOIN
              @affiliations AS A
          ON Paa.AfId == A.AffiliationId
-    WHERE A.NormalizedName == "microsoft" AND P.DocType == "Patent";
+    WHERE A.NormalizedName == @affiliationNormalizedNameFilter AND P.DocType == "Patent";
 
 //
-// Filter paper authors and fields of study using filtered papers, then flatten into string associated with each paper
+// Filter and flatten paper author data into a single attribute for each paper
 //
 @paperAuthorsDistinct =
     SELECT DISTINCT A.PaperId,
@@ -144,17 +311,20 @@ DECLARE @output = "wasb://" + @dataVersion + "@" + @blobAccount + "/azure-search
     FROM @paperAuthors
     GROUP BY PaperId;
 
-@paperFieldsOfStudyDistinct =
+//
+// Filter and flatten paper field of study data into a single attribute for each paper
+//
+@paperFieldsOfStudy =
     SELECT DISTINCT A.PaperId,
                     A.FieldOfStudyId
     FROM @paperFieldsOfStudy AS A
     INNER JOIN @papers AS P
         ON A.PaperId == P.PaperId;
 
-@paperFieldsOfStudyDistinct =
+@paperFieldsOfStudy =
     SELECT P.PaperId,
            F.NormalizedName AS FieldOfStudyName
-    FROM @paperFieldsOfStudyDistinct AS P
+    FROM @paperFieldsOfStudy AS P
          INNER JOIN
              @fieldsOfStudy AS F
          ON P.FieldOfStudyId == F.FieldOfStudyId;
@@ -166,7 +336,7 @@ DECLARE @output = "wasb://" + @dataVersion + "@" + @blobAccount + "/azure-search
     GROUP BY PaperId;
 
 //
-// Generate tab delimited text files containing the partitioned academic data we filtered/flattened above
+// Generate tab delimited files containing the partitioned academic data we filtered/flattened above
 //
 @paperDocumentFields =
     SELECT P.PaperId,
@@ -176,8 +346,8 @@ DECLARE @output = "wasb://" + @dataVersion + "@" + @blobAccount + "/azure-search
            A.Authors,
            P.PaperTitle,
            F.FieldsOfStudy,
-           (int) (P.PaperId % @azureSearchIndexerCount) AS ForIndexerNumber,
-           (int) (P.PaperId % @dataPartitionCount) AS PartitionNumber
+           (int) (P.PaperId % @maximumIndexerCount) AS IndexerNumber,
+           (int) (P.PaperId % @maximumFileCountPerIndexer) AS FileNumber
     FROM @papers AS P
          LEFT OUTER JOIN
              @paperAuthorsAggregated AS A
@@ -195,12 +365,14 @@ USING Outputters.Tsv(quoting : false);
 
 ```
 
-1. In this code block, replace `<AzureStorageAccount>`, and `<MagContainer>` placeholder values with the values that you collected while completing the prerequisites of this sample
+1. Replace placeholder values in the script using the table below
 
    |Value  |Description  |
    |---------|---------|
-   |**`<AzureStorageAccount>`** | The name of your Azure Storage (AS) account containing MAG dataset. |
-   |**`<MagContainer>`** | The container name in Azure Storage (AS) account containing MAG dataset, Usually in the form of **mag-yyyy-mm-dd**. |
+   |**`<MagAzureStorageAccount>`** | The name of your Azure Storage account containing the Microsoft Academic Graph data set. |
+   |**`<MagContainer>`** | The container name in your Azure Storage account containing the Microsoft Academic graph data set, usually in the form of **mag-yyyy-mm-dd**. |
+   |**`<OutputAzureStorageAccount>`** | The name of your Azure Storage account where you'd like the text documents to go. |
+   |**`<OutputContainer>`** | The container name in your Azure Storage account where you'd like the text documents to go. |
 
     > [!TIP]
     > This tutorial uses Microsoft as an organization by default. You can target any organization by finding its NormalizedName in the Microsoft Academic Graph and then changing 'WHERE A.NormalizedName == "microsoft" AND P.DocType == "Patent"' to 'WHERE A.NormalizedName == "org_name" AND P.DocType == "Patent"'.
