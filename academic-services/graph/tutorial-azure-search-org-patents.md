@@ -220,7 +220,7 @@ DECLARE @inputBlobAccount string = "<MagAzureStorageAccount>";
 DECLARE @inputBlobContainer string = "<MagContainer>";
 
 // The Windows Azure Blob Storage (WASB) URI of the Microsoft Academic Graph data to be used by this script
-DECLARE @inputUri string = "wasb://" + @inputBlobContainer + "@" + @blobAccount + "/";
+DECLARE @inputUri string = "wasb://" + @inputBlobContainer + "@" + @inputBlobAccount + "/";
 
 // The Azure blob storage account name that output files will be generated in
 DECLARE @outputBlobAccount string = "<OutputAzureStorageAccount>";
@@ -332,7 +332,7 @@ DECLARE @affiliationNormalizedNameFilter string = "microsoft";
 @paperFieldsOfStudyAggregated =
     SELECT PaperId,
            "[" + string.Join(",", ARRAY_AGG("\"" + FieldOfStudyName + "\"")) + "]" AS FieldsOfStudy
-    FROM @paperFieldsOfStudyDistinct
+    FROM @paperFieldsOfStudy
     GROUP BY PaperId;
 
 //
@@ -360,7 +360,7 @@ DECLARE @affiliationNormalizedNameFilter string = "microsoft";
 // Generates partitioned files based on the values in the ForIndexerNumber and PartitionNumber columns
 //
 OUTPUT @paperDocumentFields
-TO @output
+TO @outputUri
 USING Outputters.Tsv(quoting : false);
 
 ```
@@ -375,7 +375,7 @@ USING Outputters.Tsv(quoting : false);
    |**`<OutputContainer>`** | The container name in your Azure Storage account where you'd like the text documents to go. |
 
     > [!TIP]
-    > This tutorial uses Microsoft as an organization by default. You can target any organization by finding its NormalizedName in the Microsoft Academic Graph and then changing 'WHERE A.NormalizedName == "microsoft" AND P.DocType == "Patent"' to 'WHERE A.NormalizedName == "org_name" AND P.DocType == "Patent"'.
+    > This tutorial uses Microsoft as an organization by default. You can target any organization by finding its NormalizedName in the Microsoft Academic Graph and then changing the value of the affiliationNormalizedNameFilter variable to said name.
     >
     > Please note that doing this may impact time estimates for script execution and index generation later on in this tutorial.
 

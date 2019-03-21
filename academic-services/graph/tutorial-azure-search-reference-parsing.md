@@ -230,7 +230,7 @@ DECLARE @inputBlobAccount string = "<MagAzureStorageAccount>";
 DECLARE @inputBlobContainer string = "<MagContainer>";
 
 // The Windows Azure Blob Storage (WASB) URI of the Microsoft Academic Graph data to be used by this script
-DECLARE @inputUri string = "wasb://" + @inputBlobContainer + "@" + @blobAccount + "/";
+DECLARE @inputUri string = "wasb://" + @inputBlobContainer + "@" + @inputBlobAccount + "/";
 
 // The Azure blob storage account name that output files will be generated in
 DECLARE @outputBlobAccount string = "<OutputAzureStorageAccount>";
@@ -338,7 +338,7 @@ DECLARE @maximumFileCountPerIndexer int = 500;
 // Generates partitioned files based on the values in the ForIndexerNumber and PartitionNumber columns
 //
 OUTPUT @paperDocumentFields
-TO @output
+TO @outputUri
 USING Outputters.Tsv(quoting : false);
 
 ```
@@ -626,7 +626,7 @@ Once the indexers have completed, you can optionally scale the service back down
 > [!TIP]
 > The performance of individual search queries can be improved by increasing the number of partitions, and likewise the number of concurrent search requests (throughput) can be improved by increasing the number of replicas. For more details about Azure Search performance, please see [Scale partitions and replicas for query and indexing workloads](https://docs.microsoft.com/en-us/azure/search/search-capacity-planning)
 
-## Query the Azure Search service
+## Reference parsing with search explorer
 
 Once the indexer has completed, you can immediately begin querying the service by clicking the "Search explorer" button from the overview section:
 
@@ -645,6 +645,8 @@ Try some of the following:
 * Williams, Eduardo. 2014. “Aquatic Environments in Mesoamerica: Pre-Hispanic Subsistence Activities.”
 * Hill, Lisa. 2001. “The Hidden Theology of Adam Smith.” European Journal of The History of Economic Thought 8 (1): 1–29.
 * Dammers, C. R., McCauley, R. N. (2006). Basket Weaving: The Euromarket Experience with Basket Currency Bonds. BIS Quarterly Review.
+
+## Refrence parsing with API
 
 ## Resources
 
