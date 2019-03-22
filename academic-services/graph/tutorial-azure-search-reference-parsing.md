@@ -9,7 +9,7 @@ ms.date: 3/22/2019
 
 # Tutorial: Set up academic reference parsing with Azure Search
 
-This tutorial provides step-by-step instructions for setting up an Azure Search service that enables full-text search of all paper entities in the Microsoft Academic Graph, and uses fields that make it suited for looking up academic reference (citation) strings.
+This tutorial provides step-by-step instructions for setting up an Azure Search service that enables full-text search of all paper entities in the Microsoft Academic Graph, and is optimized for queries using academic reference (citation) strings.
 
 After completing this tutorial, you should be able to:
 
@@ -58,92 +58,92 @@ In prerequisite [Set up Azure Data Lake Analytics](get-started-setup-azure-data-
 
 1. Copy and paste the following code block in the script window.
 
-> [!NOTE]
-> To work with the latest MAG data set schema, instead of the code block below, you could use code in samples/CreateFunctions.usql in the MAG data set.
-
-```U-SQL
-
-DROP FUNCTION IF EXISTS Authors;
-CREATE FUNCTION Authors(@BaseDir string = "")
-  RETURNS @_Authors TABLE
-  (
-    AuthorId long, Rank uint, NormalizedName string, DisplayName string, LastKnownAffiliationId long?, PaperCount long, CitationCount long, CreatedDate DateTime
-  )
-  AS BEGIN
-  DECLARE @_Path string = @BaseDir + "mag/Authors.txt";
-  @_Authors =
-  EXTRACT
-    AuthorId long, Rank uint, NormalizedName string, DisplayName string, LastKnownAffiliationId long?, PaperCount long, CitationCount long, CreatedDate DateTime
-  FROM @_Path
-  USING Extractors.Tsv(silent: false, quoting: false);
-  RETURN;
-END;
-
-DROP FUNCTION IF EXISTS ConferenceSeries;
-CREATE FUNCTION ConferenceSeries(@BaseDir string = "")
-  RETURNS @_ConferenceSeries TABLE
-  (
-    ConferenceSeriesId long, Rank uint, NormalizedName string, DisplayName string, PaperCount long, CitationCount long, CreatedDate DateTime
-  )
-  AS BEGIN
-  DECLARE @_Path string = @BaseDir + "mag/ConferenceSeries.txt";
-  @_ConferenceSeries =
-  EXTRACT
-    ConferenceSeriesId long, Rank uint, NormalizedName string, DisplayName string, PaperCount long, CitationCount long, CreatedDate DateTime
-  FROM @_Path
-  USING Extractors.Tsv(silent: false, quoting: false);
-  RETURN;
-END;
-
-DROP FUNCTION IF EXISTS Journals;
-CREATE FUNCTION Journals(@BaseDir string = "")
-  RETURNS @_Journals TABLE
-  (
-    JournalId long, Rank uint, NormalizedName string, DisplayName string, Issn string, Publisher string, Webpage string, PaperCount long, CitationCount long, CreatedDate DateTime
-  )
-  AS BEGIN
-  DECLARE @_Path string = @BaseDir + "mag/Journals.txt";
-  @_Journals =
-  EXTRACT
-    JournalId long, Rank uint, NormalizedName string, DisplayName string, Issn string, Publisher string, Webpage string, PaperCount long, CitationCount long, CreatedDate DateTime
-  FROM @_Path
-  USING Extractors.Tsv(silent: false, quoting: false);
-  RETURN;
-END;
-
-DROP FUNCTION IF EXISTS PaperAuthorAffiliations;
-CREATE FUNCTION PaperAuthorAffiliations(@BaseDir string = "")
-  RETURNS @_PaperAuthorAffiliations TABLE
-  (
-    PaperId long, AuthorId long, AffiliationId long?, AuthorSequenceNumber uint, OriginalAffiliation string
-  )
-  AS BEGIN
-  DECLARE @_Path string = @BaseDir + "mag/PaperAuthorAffiliations.txt";
-  @_PaperAuthorAffiliations =
-  EXTRACT
-    PaperId long, AuthorId long, AffiliationId long?, AuthorSequenceNumber uint, OriginalAffiliation string
-  FROM @_Path
-  USING Extractors.Tsv(silent: false, quoting: false);
-  RETURN;
-END;
-
-DROP FUNCTION IF EXISTS Papers;
-CREATE FUNCTION Papers(@BaseDir string = "")
-  RETURNS @_Papers TABLE
-  (
-    PaperId long, Rank uint, Doi string, DocType string, PaperTitle string, OriginalTitle string, BookTitle string, Year int?, Date DateTime?, Publisher string, JournalId long?, ConferenceSeriesId long?, ConferenceInstanceId long?, Volume string, Issue string, FirstPage string, LastPage string, ReferenceCount long, CitationCount long, EstimatedCitation long, OriginalVenue string, CreatedDate DateTime
-  )
-  AS BEGIN
-  DECLARE @_Path string = @BaseDir + "mag/Papers.txt";
-  @_Papers =
-  EXTRACT
-    PaperId long, Rank uint, Doi string, DocType string, PaperTitle string, OriginalTitle string, BookTitle string, Year int?, Date DateTime?, Publisher string, JournalId long?, ConferenceSeriesId long?, ConferenceInstanceId long?, Volume string, Issue string, FirstPage string, LastPage string, ReferenceCount long, CitationCount long, EstimatedCitation long, OriginalVenue string, CreatedDate DateTime
-  FROM @_Path
-  USING Extractors.Tsv(silent: false, quoting: false);
-  RETURN;
-END;
-
-```
+    > [!NOTE]
+    > To work with the latest MAG data set schema, instead of the code block below, you could use code in samples/CreateFunctions.usql in the MAG data set.
+    
+    ```U-SQL
+    
+    DROP FUNCTION IF EXISTS Authors;
+    CREATE FUNCTION Authors(@BaseDir string = "")
+      RETURNS @_Authors TABLE
+      (
+        AuthorId long, Rank uint, NormalizedName string, DisplayName string, LastKnownAffiliationId long?, PaperCount long, CitationCount long, CreatedDate DateTime
+      )
+      AS BEGIN
+      DECLARE @_Path string = @BaseDir + "mag/Authors.txt";
+      @_Authors =
+      EXTRACT
+        AuthorId long, Rank uint, NormalizedName string, DisplayName string, LastKnownAffiliationId long?, PaperCount long, CitationCount long, CreatedDate DateTime
+      FROM @_Path
+      USING Extractors.Tsv(silent: false, quoting: false);
+      RETURN;
+    END;
+    
+    DROP FUNCTION IF EXISTS ConferenceSeries;
+    CREATE FUNCTION ConferenceSeries(@BaseDir string = "")
+      RETURNS @_ConferenceSeries TABLE
+      (
+        ConferenceSeriesId long, Rank uint, NormalizedName string, DisplayName string, PaperCount long, CitationCount long, CreatedDate DateTime
+      )
+      AS BEGIN
+      DECLARE @_Path string = @BaseDir + "mag/ConferenceSeries.txt";
+      @_ConferenceSeries =
+      EXTRACT
+        ConferenceSeriesId long, Rank uint, NormalizedName string, DisplayName string, PaperCount long, CitationCount long, CreatedDate DateTime
+      FROM @_Path
+      USING Extractors.Tsv(silent: false, quoting: false);
+      RETURN;
+    END;
+    
+    DROP FUNCTION IF EXISTS Journals;
+    CREATE FUNCTION Journals(@BaseDir string = "")
+      RETURNS @_Journals TABLE
+      (
+        JournalId long, Rank uint, NormalizedName string, DisplayName string, Issn string, Publisher string, Webpage string, PaperCount long, CitationCount long, CreatedDate DateTime
+      )
+      AS BEGIN
+      DECLARE @_Path string = @BaseDir + "mag/Journals.txt";
+      @_Journals =
+      EXTRACT
+        JournalId long, Rank uint, NormalizedName string, DisplayName string, Issn string, Publisher string, Webpage string, PaperCount long, CitationCount long, CreatedDate DateTime
+      FROM @_Path
+      USING Extractors.Tsv(silent: false, quoting: false);
+      RETURN;
+    END;
+    
+    DROP FUNCTION IF EXISTS PaperAuthorAffiliations;
+    CREATE FUNCTION PaperAuthorAffiliations(@BaseDir string = "")
+      RETURNS @_PaperAuthorAffiliations TABLE
+      (
+        PaperId long, AuthorId long, AffiliationId long?, AuthorSequenceNumber uint, OriginalAffiliation string
+      )
+      AS BEGIN
+      DECLARE @_Path string = @BaseDir + "mag/PaperAuthorAffiliations.txt";
+      @_PaperAuthorAffiliations =
+      EXTRACT
+        PaperId long, AuthorId long, AffiliationId long?, AuthorSequenceNumber uint, OriginalAffiliation string
+      FROM @_Path
+      USING Extractors.Tsv(silent: false, quoting: false);
+      RETURN;
+    END;
+    
+    DROP FUNCTION IF EXISTS Papers;
+    CREATE FUNCTION Papers(@BaseDir string = "")
+      RETURNS @_Papers TABLE
+      (
+        PaperId long, Rank uint, Doi string, DocType string, PaperTitle string, OriginalTitle string, BookTitle string, Year int?, Date DateTime?, Publisher string, JournalId long?, ConferenceSeriesId long?, ConferenceInstanceId long?, Volume string, Issue string, FirstPage string, LastPage string, ReferenceCount long, CitationCount long, EstimatedCitation long, OriginalVenue string, CreatedDate DateTime
+      )
+      AS BEGIN
+      DECLARE @_Path string = @BaseDir + "mag/Papers.txt";
+      @_Papers =
+      EXTRACT
+        PaperId long, Rank uint, Doi string, DocType string, PaperTitle string, OriginalTitle string, BookTitle string, Year int?, Date DateTime?, Publisher string, JournalId long?, ConferenceSeriesId long?, ConferenceInstanceId long?, Volume string, Issue string, FirstPage string, LastPage string, ReferenceCount long, CitationCount long, EstimatedCitation long, OriginalVenue string, CreatedDate DateTime
+      FROM @_Path
+      USING Extractors.Tsv(silent: false, quoting: false);
+      RETURN;
+    END;
+    
+    ```
 
 1. Provide a **Job name** and select **Submit**.
 
@@ -163,129 +163,129 @@ In prerequisite [Set up Azure Data Lake Analytics](get-started-setup-azure-data-
 
 1. Copy and paste the following code block in the script window.
 
-```U-SQL
-// Enables OUTPUT statements to generate dynamic files using column values
-SET @@FeaturePreviews = "DataPartitionedOutput:on";
-
-// The Azure blob storage account name that contains the Microsoft Academic Graph data to be used by this script
-DECLARE @inputBlobAccount string = "<MagAzureStorageAccount>";
-
-// The Azure blob storage container name that contains the Microsoft Academic Graph data to be used by this script
-DECLARE @inputBlobContainer string = "<MagContainer>";
-
-// The Windows Azure Blob Storage (WASB) URI of the Microsoft Academic Graph data to be used by this script
-DECLARE @inputUri string = "wasb://" + @inputBlobContainer + "@" + @inputBlobAccount + "/";
-
-// The Azure blob storage account name that output files will be generated in
-DECLARE @outputBlobAccount string = "<OutputAzureStorageAccount>";
-
-// The Azure blob storage container name that output files will be generated in
-// ***IMPORTANT: This container must exist before running this script otherwise the script will fail
-DECLARE @outputBlobContainer string = "<OutputContainer>";
-
-// The Windows Azure Blob Storage (WASB) URI  that output files will be generated in
-DECLARE @outputUri = "wasb://" + @outputBlobContainer + "@" + @outputBlobAccount + "/azure-search-data/{FileNumber}-data.{IndexerNumber}";
-
-// The number of Azure Search indexers that will be used when indexing the documents generated by this script
-DECLARE @maximumIndexerCount int = 6;
-
-// The the number of files to generate for each indexer
-DECLARE @maximumFileCountPerIndexer int = 500;
-
-//
-// Load academic data
-//
-@papers = Papers(@inputUri);
-
-@paperAuthorAffiliations = PaperAuthorAffiliations(@inputUri);
-
-@authors = Authors(@inputUri);
-
-@journals = Journals(@inputUri);
-
-@conferenceSeries = ConferenceSeries(@inputUri);
-
-//
-// Generate non-null values for optional fields to ensure we can properly join
-//
-@papers =
-    SELECT *,
-           (JournalId == null? (long) - 1 : JournalId.Value) AS JId,
-           (ConferenceSeriesId == null? (long) - 1 : ConferenceSeriesId.Value) AS CId
-    FROM @papers;
-
-@paperAuthorAffiliations =
-    SELECT *,
-           (AffiliationId == null? (long) - 1 : AffiliationId.Value) AS AfId
-    FROM @paperAuthorAffiliations;
-
-//
-// Filter and flatten paper author data into a single attribute for each paper
-//
-@paperAuthorsDistinct =
-    SELECT DISTINCT A.PaperId,
-                    A.AuthorId,
-                    A.AuthorSequenceNumber
-    FROM @paperAuthorAffiliations AS A
-    INNER JOIN @papers AS P
-        ON A.PaperId == P.PaperId
-    OPTION(ROWCOUNT=500000000);
-
-@paperAuthors =
-    SELECT P.PaperId,
-           A.NormalizedName AS AuthorName,
-           P.AuthorSequenceNumber
-    FROM @paperAuthorsDistinct AS P
-         INNER JOIN
-             @authors AS A
-         ON P.AuthorId == A.AuthorId
-    OPTION(ROWCOUNT=500000000);
-
-@paperAuthorsAggregated =
-    SELECT PaperId,
-           "[" + string.Join(",", MAP_AGG("\"" + AuthorName + "\"", AuthorSequenceNumber).OrderBy(a => a.Value).Select(a => a.Key)) + "]" AS Authors
-    FROM @paperAuthors
-    GROUP BY PaperId
-    OPTION(ROWCOUNT=200000000);
-
-//
-// Generate tab delimited files containing the partitioned academic data we filtered/flattened above
-//
-@paperDocumentFields =
-    SELECT P.PaperId,
-           P.Rank,
-           P.Year,
-           (P.JournalId == null?null : J.NormalizedName) AS Journal,
-           (P.ConferenceSeriesId == null?null : C.NormalizedName) AS Conference,
-           A.Authors,
-           P.Volume,
-           P.Issue,
-           P.FirstPage,
-           P.LastPage,
-           P.PaperTitle,
-           P.Doi,
-           (int) (P.PaperId % @maximumIndexerCount) AS IndexerNumber,
-           (int) (P.PaperId % @maximumFileCountPerIndexer) AS FileNumber
-    FROM @papers AS P
-         LEFT OUTER JOIN
-             @journals AS J
-         ON P.JId == J.JournalId
-         LEFT OUTER JOIN
-             @conferenceSeries AS C
-         ON P.CId == C.ConferenceSeriesId
-         LEFT OUTER JOIN
-             @paperAuthorsAggregated AS A
-         ON P.PaperId == A.PaperId
-    OPTION(ROWCOUNT=200000000);
-
-//
-// Generates partitioned files based on the values in the ForIndexerNumber and PartitionNumber columns
-//
-OUTPUT @paperDocumentFields
-TO @outputUri
-USING Outputters.Tsv(quoting : false);
-
-```
+    ```U-SQL
+    // Enables OUTPUT statements to generate dynamic files using column values
+    SET @@FeaturePreviews = "DataPartitionedOutput:on";
+    
+    // The Azure blob storage account name that contains the Microsoft Academic Graph data to be used by this script
+    DECLARE @inputBlobAccount string = "<MagAzureStorageAccount>";
+    
+    // The Azure blob storage container name that contains the Microsoft Academic Graph data to be used by this script
+    DECLARE @inputBlobContainer string = "<MagContainer>";
+    
+    // The Windows Azure Blob Storage (WASB) URI of the Microsoft Academic Graph data to be used by this script
+    DECLARE @inputUri string = "wasb://" + @inputBlobContainer + "@" + @inputBlobAccount + "/";
+    
+    // The Azure blob storage account name that output files will be generated in
+    DECLARE @outputBlobAccount string = "<OutputAzureStorageAccount>";
+    
+    // The Azure blob storage container name that output files will be generated in
+    // ***IMPORTANT: This container must exist before running this script otherwise the script will fail
+    DECLARE @outputBlobContainer string = "<OutputContainer>";
+    
+    // The Windows Azure Blob Storage (WASB) URI  that output files will be generated in
+    DECLARE @outputUri = "wasb://" + @outputBlobContainer + "@" + @outputBlobAccount + "/azure-search-data/{FileNumber}-data.{IndexerNumber}";
+    
+    // The number of Azure Search indexers that will be used when indexing the documents generated by this script
+    DECLARE @maximumIndexerCount int = 6;
+    
+    // The the number of files to generate for each indexer
+    DECLARE @maximumFileCountPerIndexer int = 500;
+    
+    //
+    // Load academic data
+    //
+    @papers = Papers(@inputUri);
+    
+    @paperAuthorAffiliations = PaperAuthorAffiliations(@inputUri);
+    
+    @authors = Authors(@inputUri);
+    
+    @journals = Journals(@inputUri);
+    
+    @conferenceSeries = ConferenceSeries(@inputUri);
+    
+    //
+    // Generate non-null values for optional fields to ensure we can properly join
+    //
+    @papers =
+        SELECT *,
+               (JournalId == null? (long) - 1 : JournalId.Value) AS JId,
+               (ConferenceSeriesId == null? (long) - 1 : ConferenceSeriesId.Value) AS CId
+        FROM @papers;
+    
+    @paperAuthorAffiliations =
+        SELECT *,
+               (AffiliationId == null? (long) - 1 : AffiliationId.Value) AS AfId
+        FROM @paperAuthorAffiliations;
+    
+    //
+    // Filter and flatten paper author data into a single attribute for each paper
+    //
+    @paperAuthorsDistinct =
+        SELECT DISTINCT A.PaperId,
+                        A.AuthorId,
+                        A.AuthorSequenceNumber
+        FROM @paperAuthorAffiliations AS A
+        INNER JOIN @papers AS P
+            ON A.PaperId == P.PaperId
+        OPTION(ROWCOUNT=500000000);
+    
+    @paperAuthors =
+        SELECT P.PaperId,
+               A.NormalizedName AS AuthorName,
+               P.AuthorSequenceNumber
+        FROM @paperAuthorsDistinct AS P
+             INNER JOIN
+                 @authors AS A
+             ON P.AuthorId == A.AuthorId
+        OPTION(ROWCOUNT=500000000);
+    
+    @paperAuthorsAggregated =
+        SELECT PaperId,
+               "[" + string.Join(",", MAP_AGG("\"" + AuthorName + "\"", AuthorSequenceNumber).OrderBy(a => a.Value).Select(a => a.Key)) + "]" AS Authors
+        FROM @paperAuthors
+        GROUP BY PaperId
+        OPTION(ROWCOUNT=200000000);
+    
+    //
+    // Generate tab delimited files containing the partitioned academic data we filtered/flattened above
+    //
+    @paperDocumentFields =
+        SELECT P.PaperId,
+               P.Rank,
+               P.Year,
+               (P.JournalId == null?null : J.NormalizedName) AS Journal,
+               (P.ConferenceSeriesId == null?null : C.NormalizedName) AS Conference,
+               A.Authors,
+               P.Volume,
+               P.Issue,
+               P.FirstPage,
+               P.LastPage,
+               P.PaperTitle,
+               P.Doi,
+               (int) (P.PaperId % @maximumIndexerCount) AS IndexerNumber,
+               (int) (P.PaperId % @maximumFileCountPerIndexer) AS FileNumber
+        FROM @papers AS P
+             LEFT OUTER JOIN
+                 @journals AS J
+             ON P.JId == J.JournalId
+             LEFT OUTER JOIN
+                 @conferenceSeries AS C
+             ON P.CId == C.ConferenceSeriesId
+             LEFT OUTER JOIN
+                 @paperAuthorsAggregated AS A
+             ON P.PaperId == A.PaperId
+        OPTION(ROWCOUNT=200000000);
+    
+    //
+    // Generates partitioned files based on the values in the ForIndexerNumber and PartitionNumber columns
+    //
+    OUTPUT @paperDocumentFields
+    TO @outputUri
+    USING Outputters.Tsv(quoting : false);
+    
+    ```
 
 1. Replace placeholder values in the script using the table below
 
