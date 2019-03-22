@@ -9,7 +9,14 @@ ms.date: 3/22/2019
 
 # Tutorial: Set up organizational patent search with Azure Search
 
-Step-by-step instructions for setting up an Azure Search service to do organizational patent search using data from the Microsoft Academic Graph.
+This tutorial provides step-by-step instructions for setting up an Azure Search service that enables full-text search of an organizations patents, as covered by the Microsoft Academic Graph.
+
+After completing this tutorial, you should be able to:
+
+* Transform academic entities into text documents suitable for full-text indexing
+* Create an Azure Search service
+* Create simple Azure Search service data sources, indexers and indexes
+* Perform simple full-text searches using the Azure Search "search explorer" tool
 
 ## Prerequisites
 

@@ -9,7 +9,15 @@ ms.date: 3/22/2019
 
 # Tutorial: Set up academic reference parsing with Azure Search
 
-This tutorial provides step-by-step instructions for setting up an Azure Search service to enable academic reference parsing using data from the Microsoft Academic Graph.
+This tutorial provides step-by-step instructions for setting up an Azure Search service that enables full-text search of all paper entities in the Microsoft Academic Graph, and uses fields that make it suited for looking up academic reference (citation) strings.
+
+After completing this tutorial, you should be able to:
+
+* Transform academic entities into text documents suitable for full-text indexing
+* Create an Azure Search service
+* Create Azure Search service data sources, indexers and indexes using the REST API
+* Perform full-text searches using the Azure Search "search explorer" tool
+* Perform full-text searches using the Azure Search REST API
 
 > [!WARNING]
 > This is an **advanced** tutorial that creates an Azure Search service that indexes **all of the papers in the Microsoft Academic Graph**.

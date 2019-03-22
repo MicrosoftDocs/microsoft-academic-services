@@ -24,7 +24,7 @@
       href: tutorial-azure-data-lake-hindex.md
     - name: Databricks (Python/SQL)
       href: tutorial-azure-databricks-hindex.md
-  - name: Fulltext search using Azure Search
+  - name: Full-text search using Azure Search
     expanded: true
     items:
     - name: Organizational patent search
