@@ -717,7 +717,7 @@ The response should look similar to the following:
 }
 ```
 
-This response includes a lot of useful details about why a document was matched, including the individual fields that were matched including the specific lexical terms (denoted by the &gt;q&lt; tags).
+This response includes a lot of useful details about why a document was matched, including the individual fields that were matched including the specific lexical terms (denoted by the ```<q>``` tags).
 
 > [!TIP]
 > To learn more about searching documents with the Azure Search REST API, see the [Search Documents (Azure Search Service REST API)](https://docs.microsoft.com/en-us/rest/api/searchservice/search-documents) documentation.
