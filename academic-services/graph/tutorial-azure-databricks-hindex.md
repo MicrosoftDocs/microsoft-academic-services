@@ -98,7 +98,7 @@ In this section, you mount MAG dataset in Azure Storage as a file system of the 
 
 ## Define functions to extract MAG data
 
-In this section, you define functions extracting MAG data from Azure Storage (AS).
+In this section, you define functions to extract MAG data from Azure Storage (AS).
 
 1. Paste the following code in a new cell.
 
