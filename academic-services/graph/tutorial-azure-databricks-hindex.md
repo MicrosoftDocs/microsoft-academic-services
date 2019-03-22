@@ -100,7 +100,7 @@ In this section, you mount MAG dataset in Azure Storage as a file system of the 
 
 In this section, you define functions to extract MAG data from Azure Storage (AS).
 
-1. Paste the following code in a new cell.
+1. Paste the following code in a new cell and press the **SHIFT + ENTER** keys to run the code in this block.
 
    ```python
    def getAffiliationsDataFrame(dir):
