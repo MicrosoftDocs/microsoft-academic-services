@@ -96,6 +96,34 @@ In this section, you mount MAG dataset in Azure Storage as a file system of the 
     FileInfo(path='dbfs:/mnt/mag/samples/', name='samples/', size=0)]
    ``` 
 
+## Define functions to extract MAG data
+
+In this section, you define functions extracting MAG data from Azure Storage (AS).
+
+1. Paste the following code in a new cell.
+
+   ```python
+   def getAffiliationsDataFrame(dir):
+     path = 'mag/Affiliations.txt'
+     header = ['AffiliationId', 'Rank', 'NormalizedName', 'DisplayName', 'GridId', 'OfficialPage', 'WikiPage', 'PaperCount', 'CitationCount', 'CreatedDate']
+     return spark.read.format('csv').options(header='false', inferSchema='true', delimiter='\t').load('%s/%s' % (dir, path)).toDF(*header)
+
+   def getAuthorsDataFrame(dir):
+     path = 'mag/Authors.txt'
+     header = ['AuthorId', 'Rank', 'NormalizedName', 'DisplayName', 'LastKnownAffiliationId', 'PaperCount', 'CitationCount', 'CreatedDate']
+     return spark.read.format('csv').options(header='false', inferSchema='true', delimiter='\t').load('%s/%s' % (dir, path)).toDF(*header)
+
+   def getPaperAuthorAffiliationsDataFrame(dir):
+     path = 'mag/PaperAuthorAffiliations.txt'
+     header = ['PaperId', 'AuthorId', 'AffiliationId', 'AuthorSequenceNumber', 'OriginalAffiliation']
+     return spark.read.format('csv').options(header='false', inferSchema='true', delimiter='\t').load('%s/%s' % (dir, path)).toDF(*header)
+
+   def getPapersDataFrame(dir):
+     path = 'mag/Papers.txt'
+     header = ['PaperId', 'Rank', 'Doi', 'DocType', 'PaperTitle', 'OriginalTitle', 'BookTitle', 'Year', 'Date', 'Publisher', 'JournalId', 'ConferenceSeriesId', 'ConferenceInstanceId', 'Volume', 'Issue', 'FirstPage', 'LastPage', 'ReferenceCount', 'CitationCount', 'EstimatedCitation', 'OriginalVenue', 'CreatedDate']
+     return spark.read.format('csv').options(header='false', inferSchema='true', delimiter='\t').load('%s/%s' % (dir, path)).toDF(*header)
+   ```
+
 ## Create MAG data frames and temporary views
 
 In this section you will create data frames and temporary views for several different MAG entity types. These views will be used later on in the tutorial. Note that some of the cells might take several minutes to run.
@@ -103,10 +131,7 @@ In this section you will create data frames and temporary views for several diff
 1. Get **Affiliations**. Paste the following code in a new cell.
 
    ```python
-   AffiliationsPath = 'mag/Affiliations.txt' 
-   AffiliationsFields = ['AffiliationId', 'Rank', 'NormalizedName', 'DisplayName', 'GridId', 'OfficialPage', 'WikiPage', 'PaperCount', 'CitationCount', 'CreatedDate']
-   Affiliations = spark.read.format('csv').options(header='false', inferSchema='true', delimiter='\t').load(('%s/%s' % (MagDir, AffiliationsPath))).toDF(*AffiliationsFields)
-
+   Affiliations = getAffiliationsDataFrame(MagDir)
    Affiliations = Affiliations.select(Affiliations.AffiliationId, Affiliations.DisplayName)
    Affiliations.show(10)
    Affiliations.createOrReplaceTempView('Affiliations')
@@ -128,10 +153,7 @@ In this section you will create data frames and temporary views for several diff
 1. Get **Authors**. Paste the following code in a new cell.
 
    ```python
-   AuthorsPath = 'mag/Authors.txt'
-   AuthorsFields = ['AuthorId', 'Rank', 'NormalizedName', 'DisplayName', 'LastKnownAffiliationId', 'PaperCount', 'CitationCount', 'CreatedDate']
-   Authors = spark.read.format('csv').options(header='false', inferSchema='true', delimiter='\t').load(('%s/%s' % (MagDir, AuthorsPath))).toDF(*AuthorsFields)
-
+   Authors = getAuthorsDataFrame(MagDir)
    Authors = Authors.select(Authors.AuthorId, Authors.DisplayName, Authors.LastKnownAffiliationId, Authors.PaperCount)
    Authors.show(10)
    Authors.createOrReplaceTempView('Authors')
@@ -152,10 +174,7 @@ In this section you will create data frames and temporary views for several diff
 1. Get **(Author, Paper) pairs**. Paste the following code in a new cell.
 
    ```python
-   PaperAuthorAffiliationsPath = 'mag/PaperAuthorAffiliations.txt'
-   PaperAuthorAffiliationsFields = ['PaperId', 'AuthorId', 'AffiliationId', 'AuthorSequenceNumber', 'OriginalAffiliation']
-   PaperAuthorAffiliations = spark.read.format('csv').options(header='false', inferSchema='true', delimiter='\t').load(('%s/%s' % (MagDir, PaperAuthorAffiliationsPath))).toDF(*PaperAuthorAffiliationsFields)
-
+   PaperAuthorAffiliations = getPaperAuthorAffiliationsDataFrame(MagDir)
    AuthorPaper = PaperAuthorAffiliations.select(PaperAuthorAffiliations.AuthorId, PaperAuthorAffiliations.PaperId).distinct()
    AuthorPaper.show(10)
    AuthorPaper.createOrReplaceTempView('AuthorPaper')
@@ -177,12 +196,7 @@ In this section you will create data frames and temporary views for several diff
 1. Get **Papers**. Paste the following code in a new cell.
 
    ```python
-   PapersPath = 'mag/Papers.txt'
-   PapersFields = ['PaperId', 'Rank', 'Doi', 'DocType', 'PaperTitle', 'OriginalTitle', 'BookTitle', 'Year', 'Date', \
-                   'Publisher', 'JournalId', 'ConferenceSeriesId', 'ConferenceInstanceId', 'Volume', 'Issue', 'FirstPage', \
-                   'LastPage', 'ReferenceCount', 'CitationCount', 'EstimatedCitation', 'OriginalVenue', 'CreatedDate']
-   Papers = spark.read.format('csv').options(header='false', inferSchema='true', delimiter='\t').load(('%s/%s' % (MagDir, PapersPath))).toDF(*PapersFields)
-
+   Papers = getPapersDataFrame(MagDir)
    PaperCitation = Papers.select(Papers.PaperId, Papers.EstimatedCitation).where(Papers.EstimatedCitation > 0)
    PaperCitation.show(10)
    PaperCitation.createOrReplaceTempView('PaperCitation')
