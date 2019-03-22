@@ -358,7 +358,7 @@ This should result in a Postman request similar to the following:
 * Keep the request headers and action verb as-is
 * Change the resource to ```/datasources```. The full URL should look like
 ```https://my-search-service.search.windows.net/datasources?api-version=2017-11-11```
-* Click the "Body" tab in the request and copy/paste the JSON below, changing "<AzureStorageAccountConnectionString>" and "<MagContainer>" to the values for your Azure Storage Account and MAG containers, respectively
+* Click the "Body" tab in the request and copy/paste the JSON below, changing ```<AzureStorageAccountConnectionString>``` and ```<MagContainer>``` to the values for your Azure Storage Account and MAG containers, respectively
 
     ```JSON
     {
@@ -556,7 +556,7 @@ To do this, navigate to the scale section of the service and change the number o
 
 ## Waiting for indexers to complete
 
-The indexing operation can take a long time to complete, likely between 8-12 hours.
+The indexing operation can take a long time to complete, likely between 16-24 hours.
 
 The indexers will each show a "success" status once they have completed indexing their respective sections, and the index should show a document count roughly equal to the total number of papers in the graph (you can see the most current count by visiting [Microsoft Academic](https://academic.microsoft.com/)).
 
@@ -599,7 +599,7 @@ For example, searching "Williams, Eduardo. 2014. “Aquatic Environments in Meso
 
 ```JSON
 {
-    "@odata.context": "https://academic-reference-parsing.search.windows.net/indexes('mag-index')/$metadata#docs(*)",
+    "@odata.context": "https://my-search-service.search.windows.net/indexes('mag-index')/$metadata#docs(*)",
     "value": [
         {
             "@search.score": 1.7316712,
@@ -661,7 +661,7 @@ The response should look similar to the following:
 
 ```JSON
 {
-    "@odata.context": "https://academic-reference-parsing.search.windows.net/indexes('mag-index')/$metadata#docs(*)",
+    "@odata.context": "https://my-search-service.search.windows.net/indexes('mag-index')/$metadata#docs(*)",
     "value": [
         {
             "@search.score": 1.4480418,
