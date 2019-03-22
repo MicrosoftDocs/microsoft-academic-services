@@ -30,11 +30,11 @@ Complete these tasks before beginning this tutorial:
 
    Before you begin, you should have these items of information:
 
-   :heavy_check_mark:  The name of your Azure Storage (AS) account containing MAG dataset from [Get Microsoft Academic Graph on Azure storage](get-started-setup-provisioning.md).
+   :heavy_check_mark:  The name of your Azure Storage (AS) account containing MAG dataset from [Get Microsoft Academic Graph on Azure storage](get-started-setup-provisioning#note-azure-storage-account-name-and-primary-key).
 
-   :heavy_check_mark:  The name of your Azure Data Lake Analytics (ADLA) service from [Set up Azure Data Lake Analytics](get-started-setup-azure-data-lake-analytics.md).
+   :heavy_check_mark:  The name of your Azure Data Lake Analytics (ADLA) service from [Set up Azure Data Lake Analytics](get-started-setup-azure-data-lake-analytics#create-azure-data-lake-analytics-account).
 
-   :heavy_check_mark:  The name of your Azure Data Lake Storage (ADLS) from [Set up Azure Data Lake Analytics](get-started-setup-azure-data-lake-analytics.md).
+   :heavy_check_mark:  The name of your Azure Data Lake Storage (ADLS) from [Set up Azure Data Lake Analytics](get-started-setup-azure-data-lake-analytics#create-azure-data-lake-analytics-account).
 
    :heavy_check_mark:  The name of the container in your Azure Storage account containing the MAG data set.
 
@@ -50,156 +50,92 @@ In prerequisite [Set up Azure Data Lake Analytics](get-started-setup-azure-data-
 
 1. Copy and paste the following code block in the script window.
 
-   > [!NOTE]
-   > To work with the latest MAG data set schema, instead of the code block below, you could use code in samples/CreateFunctions.usql in the MAG data set.
+> [!NOTE]
+> To work with the latest MAG data set schema, instead of the code block below, you could use code in samples/CreateFunctions.usql in the MAG data set.
 
-   ```U-SQL
-   DROP FUNCTION IF EXISTS Affiliations;
-   CREATE FUNCTION Affiliations(@BaseDir string = "")
-     RETURNS @_Affiliations TABLE
-     (
-       AffiliationId long,
-       Rank uint,
-       NormalizedName string,
-       DisplayName string,
-       GridId string,
-       OfficialPage string,
-       WikiPage string,
-       PaperCount long,
-       CitationCount long,
-       CreatedDate DateTime
-     )
-     AS BEGIN
-     DECLARE @_Path string = @BaseDir + "mag/Affiliations.txt";
-     @_Affiliations =
-     EXTRACT
-       AffiliationId long,
-       Rank uint,
-       NormalizedName string,
-       DisplayName string,
-       GridId string,
-       OfficialPage string,
-       WikiPage string,
-       PaperCount long,
-       CitationCount long,
-       CreatedDate DateTime
-     FROM @_Path
-     USING Extractors.Tsv(silent: false, quoting: false);
-     RETURN;
-   END;
+```U-SQL
 
-   DROP FUNCTION IF EXISTS Authors;
-   CREATE FUNCTION Authors(@BaseDir string = "")
-     RETURNS @_Authors TABLE
-     (
-       AuthorId long,
-       Rank uint,
-       NormalizedName string,
-       DisplayName string,
-       LastKnownAffiliationId long?,
-       PaperCount long,
-       CitationCount long,
-       CreatedDate DateTime
-     )
-     AS BEGIN
-     DECLARE @_Path string = @BaseDir + "mag/Authors.txt";
-     @_Authors =
-     EXTRACT
-       AuthorId long,
-       Rank uint,
-       NormalizedName string,
-       DisplayName string,
-       LastKnownAffiliationId long?,
-       PaperCount long,
-       CitationCount long,
-       CreatedDate DateTime
-     FROM @_Path
-     USING Extractors.Tsv(silent: false, quoting: false);
-     RETURN;
-   END;
+DROP FUNCTION IF EXISTS Authors;
+CREATE FUNCTION Authors(@BaseDir string = "")
+  RETURNS @_Authors TABLE
+  (
+    AuthorId long, Rank uint, NormalizedName string, DisplayName string, LastKnownAffiliationId long?, PaperCount long, CitationCount long, CreatedDate DateTime
+  )
+  AS BEGIN
+  DECLARE @_Path string = @BaseDir + "mag/Authors.txt";
+  @_Authors =
+  EXTRACT
+    AuthorId long, Rank uint, NormalizedName string, DisplayName string, LastKnownAffiliationId long?, PaperCount long, CitationCount long, CreatedDate DateTime
+  FROM @_Path
+  USING Extractors.Tsv(silent: false, quoting: false);
+  RETURN;
+END;
 
-   DROP FUNCTION IF EXISTS PaperAuthorAffiliations;
-   CREATE FUNCTION PaperAuthorAffiliations(@BaseDir string = "")
-     RETURNS @_PaperAuthorAffiliations TABLE
-     (
-       PaperId long,
-       AuthorId long,
-       AffiliationId long?,
-       AuthorSequenceNumber uint,
-       OriginalAffiliation string
-     )
-     AS BEGIN
-     DECLARE @_Path string = @BaseDir + "mag/PaperAuthorAffiliations.txt";
-     @_PaperAuthorAffiliations =
-     EXTRACT
-       PaperId long,
-       AuthorId long,
-       AffiliationId long?,
-       AuthorSequenceNumber uint,
-       OriginalAffiliation string
-     FROM @_Path
-     USING Extractors.Tsv(silent: false, quoting: false);
-     RETURN;
-   END;
+DROP FUNCTION IF EXISTS ConferenceSeries;
+CREATE FUNCTION ConferenceSeries(@BaseDir string = "")
+  RETURNS @_ConferenceSeries TABLE
+  (
+    ConferenceSeriesId long, Rank uint, NormalizedName string, DisplayName string, PaperCount long, CitationCount long, CreatedDate DateTime
+  )
+  AS BEGIN
+  DECLARE @_Path string = @BaseDir + "mag/ConferenceSeries.txt";
+  @_ConferenceSeries =
+  EXTRACT
+    ConferenceSeriesId long, Rank uint, NormalizedName string, DisplayName string, PaperCount long, CitationCount long, CreatedDate DateTime
+  FROM @_Path
+  USING Extractors.Tsv(silent: false, quoting: false);
+  RETURN;
+END;
 
-   DROP FUNCTION IF EXISTS Papers;
-   CREATE FUNCTION Papers(@BaseDir string = "")
-     RETURNS @_Papers TABLE
-     (
-       PaperId long,
-       Rank uint,
-       Doi string,
-       DocType string,
-       PaperTitle string,
-       OriginalTitle string,
-       BookTitle string,
-       Year int?,
-       Date DateTime?,
-       Publisher string,
-       JournalId long?,
-       ConferenceSeriesId long?,
-       ConferenceInstanceId long?,
-       Volume string,
-       Issue string,
-       FirstPage string,
-       LastPage string,
-       ReferenceCount long,
-       CitationCount long,
-       EstimatedCitation long,
-       OriginalVenue string,
-       CreatedDate DateTime
-     )
-     AS BEGIN
-     DECLARE @_Path string = @BaseDir + "mag/Papers.txt";
-     @_Papers =
-     EXTRACT
-       PaperId long,
-       Rank uint,
-       Doi string,
-       DocType string,
-       PaperTitle string,
-       OriginalTitle string,
-       BookTitle string,
-       Year int?,
-       Date DateTime?,
-       Publisher string,
-       JournalId long?,
-       ConferenceSeriesId long?,
-       ConferenceInstanceId long?,
-       Volume string,
-       Issue string,
-       FirstPage string,
-       LastPage string,
-       ReferenceCount long,
-       CitationCount long,
-       EstimatedCitation long,
-       OriginalVenue string,
-       CreatedDate DateTime
-     FROM @_Path
-     USING Extractors.Tsv(silent: false, quoting: false);
-     RETURN;
-   END;
-   ```
+DROP FUNCTION IF EXISTS Journals;
+CREATE FUNCTION Journals(@BaseDir string = "")
+  RETURNS @_Journals TABLE
+  (
+    JournalId long, Rank uint, NormalizedName string, DisplayName string, Issn string, Publisher string, Webpage string, PaperCount long, CitationCount long, CreatedDate DateTime
+  )
+  AS BEGIN
+  DECLARE @_Path string = @BaseDir + "mag/Journals.txt";
+  @_Journals =
+  EXTRACT
+    JournalId long, Rank uint, NormalizedName string, DisplayName string, Issn string, Publisher string, Webpage string, PaperCount long, CitationCount long, CreatedDate DateTime
+  FROM @_Path
+  USING Extractors.Tsv(silent: false, quoting: false);
+  RETURN;
+END;
+
+DROP FUNCTION IF EXISTS PaperAuthorAffiliations;
+CREATE FUNCTION PaperAuthorAffiliations(@BaseDir string = "")
+  RETURNS @_PaperAuthorAffiliations TABLE
+  (
+    PaperId long, AuthorId long, AffiliationId long?, AuthorSequenceNumber uint, OriginalAffiliation string
+  )
+  AS BEGIN
+  DECLARE @_Path string = @BaseDir + "mag/PaperAuthorAffiliations.txt";
+  @_PaperAuthorAffiliations =
+  EXTRACT
+    PaperId long, AuthorId long, AffiliationId long?, AuthorSequenceNumber uint, OriginalAffiliation string
+  FROM @_Path
+  USING Extractors.Tsv(silent: false, quoting: false);
+  RETURN;
+END;
+
+DROP FUNCTION IF EXISTS Papers;
+CREATE FUNCTION Papers(@BaseDir string = "")
+  RETURNS @_Papers TABLE
+  (
+    PaperId long, Rank uint, Doi string, DocType string, PaperTitle string, OriginalTitle string, BookTitle string, Year int?, Date DateTime?, Publisher string, JournalId long?, ConferenceSeriesId long?, ConferenceInstanceId long?, Volume string, Issue string, FirstPage string, LastPage string, ReferenceCount long, CitationCount long, EstimatedCitation long, OriginalVenue string, CreatedDate DateTime
+  )
+  AS BEGIN
+  DECLARE @_Path string = @BaseDir + "mag/Papers.txt";
+  @_Papers =
+  EXTRACT
+    PaperId long, Rank uint, Doi string, DocType string, PaperTitle string, OriginalTitle string, BookTitle string, Year int?, Date DateTime?, Publisher string, JournalId long?, ConferenceSeriesId long?, ConferenceInstanceId long?, Volume string, Issue string, FirstPage string, LastPage string, ReferenceCount long, CitationCount long, EstimatedCitation long, OriginalVenue string, CreatedDate DateTime
+  FROM @_Path
+  USING Extractors.Tsv(silent: false, quoting: false);
+  RETURN;
+END;
+
+```
 
 1. Provide a **Job name** and select **Submit**.
 
@@ -421,7 +357,7 @@ This should result in a Postman request similar to the following:
         "name" : "azure-search-data",
         "type" : "azureblob",
         "credentials" : { "connectionString" : "<AzureStorageAccountConnectionString>" },
-        "container" : { "name" : "<MagContainer>", "query" : "azure-search" }
+        "container" : { "name" : "<MagContainer>", "query" : "azure-search-data" }
     }
     ```
 
@@ -634,7 +570,12 @@ Once the indexer has completed, you can immediately begin querying the service b
 
 The fields included in this index make it optimal for finding papers that match citation strings.
 
-Try some of the following:
+> [!IMPORTANT]
+> The search explorer tool does not URL-escape queries, so URI-sensitive characters (i.e. &, ?, etc.) can cause it to return invalid results.
+>
+> The citations below have had such characters removed, however if you are copy/pasting your own references be warned that you need to account for removing the special characters, or alternatively use the API (see below section)
+
+Try some of the following (sourced from the "cite" feature on [Microsoft Academic](https://academic.microsoft.com/)):
 
 * Lloyd, K., Wright, S., Suchet-Pearson, S., Burarrwanga, L., Hodge, P. (2012). Weaving lives together: collaborative fieldwork in North East Arnhem Land, Australia. Annales de Géographie, 121(5), 513–524.
 * Brodsky, F. M., Chen, C.-Y., Knuehl, C., Towler, M. C., Wakeham, D. E. (2001). Biological Basket Weaving: Formation and Function of Clathrin-Coated Vesicles. Annual Review of Cell and Developmental Biology, 17(1), 517–568.
@@ -646,7 +587,132 @@ Try some of the following:
 * Hill, Lisa. 2001. “The Hidden Theology of Adam Smith.” European Journal of The History of Economic Thought 8 (1): 1–29.
 * Dammers, C. R., McCauley, R. N. (2006). Basket Weaving: The Euromarket Experience with Basket Currency Bonds. BIS Quarterly Review.
 
-## Refrence parsing with API
+For example, searching "Williams, Eduardo. 2014. “Aquatic Environments in Mesoamerica: Pre-Hispanic Subsistence Activities.”" should result in JSON similar to the following:
+
+```JSON
+{
+    "@odata.context": "https://academic-reference-parsing.search.windows.net/indexes('mag-index')/$metadata#docs(*)",
+    "value": [
+        {
+            "@search.score": 1.7316712,
+            "id": "165267322",
+            "rank": 24764,
+            "year": "2014",
+            "journal": null,
+            "conference": null,
+            "authors": [
+                "eduardo williams"
+            ],
+            "volume": null,
+            "issue": null,
+            "first_page": null,
+            "last_page": null,
+            "title": "aquatic environments in mesoamerica pre hispanic subsistence activities",
+            "doi": null
+        },
+        ...
+    ]
+}
+```
+
+The search explorer response only provides basic details about each matching paper:
+
+* Document score based on the search query (the higher this value the better)
+* All of the retrievable index fields in each matching result
+
+> [!TIP]
+> To better understand how Azure Search service (and full text search in general) handles scoring, check out the [full text search scoring](https://docs.microsoft.com/en-us/azure/search/search-lucene-query-architecture#stage-4-scoring) documentation.
+
+To better leverage everything Azure Search service provides check out the next section, which directly queries the index using the REST API.
+
+## Reference parsing with Azure Search REST API
+
+Once the indexer has completed, you can immediately begin querying it using the Azure Search REST API.
+
+To get started, load Postman and create a new request with the following details:
+
+* Configure the basic request following the [configure initial Postman request](#configure-initial-postman-request) earlier in the tutorial
+* Set the action verb to POST
+* Change the resource to ```/indexes/mag-index/docs/search```. The full URL should look like
+```https://my-search-service.search.windows.net/indexes/mag-index/docs/search?api-version=2017-11-11```
+* Change request body to the following JSON and click the "send" button
+
+```JSON
+{  
+     "highlight": "year,journal,conference,authors,volume,issue,first_page,last_page,title,doi",  
+     "highlightPreTag": "<q>",  
+     "highlightPostTag": "</q>",  
+     "search": "Lloyd, K., Wright, S., Suchet-Pearson, S., Burarrwanga, L., Hodge, & P. (2012). Weaving lives together: collaborative fieldwork in North East Arnhem Land, Australia. Annales de Géographie, 121(5), 513–524.",  
+     "searchFields": "year,journal,conference,authors,volume,issue,first_page,last_page,title,doi",  
+     "select": "id,rank,year,title",
+     "top": 2
+}
+```
+
+The response should look similar to the following:
+
+```JSON
+{
+    "@odata.context": "https://academic-reference-parsing.search.windows.net/indexes('mag-index')/$metadata#docs(*)",
+    "value": [
+        {
+            "@search.score": 1.4480418,
+            "@search.highlights": {
+                "last_page": [
+                    "<q>524</q>"
+                ],
+                "authors": [
+                    "kate <q>lloyd</q>",
+                    "sarah <q>wright</q>",
+                    "laklak <q>burarrwanga</q>",
+                    "paul <q>hodge</q>"
+                ],
+                "year": [
+                    "<q>2012</q>"
+                ],
+                "volume": [
+                    "<q>121</q>"
+                ],
+                "title": [
+                    "<q>weaving</q> <q>lives</q> <q>together</q> <q>collaborative</q> <q>fieldwork</q> <q>in</q> <q>north</q> <q>east</q> <q>arnhem</q> <q>land</q> <q>australia</q>"
+                ],
+                "issue": [
+                    "<q>5</q>"
+                ],
+                "first_page": [
+                    "<q>513</q>"
+                ]
+            },
+            "id": "2048732395",
+            "rank": 22068,
+            "year": "2012",
+            "title": "weaving lives together collaborative fieldwork in north east arnhem land australia"
+        },
+        {
+            "@search.score": 0.38991615,
+            "@search.highlights": {
+                "authors": [
+                    "lak lak <q>burarrwanga</q>",
+                    "sarah <q>wright</q>",
+                    "kate <q>lloyd</q>"
+                ],
+                "title": [
+                    "<q>weaving</q> <q>lives</q> <q>together</q> at bawaka <q>north</q> <q>east</q> <q>arnhem</q> <q>land</q>"
+                ]
+            },
+            "id": "2461544671",
+            "rank": 21674,
+            "year": "2008",
+            "title": "weaving lives together at bawaka north east arnhem land"
+        }
+    ]
+}
+```
+
+This response includes a lot of useful details about why a document was matched, including the individual fields that were matched including the specific lexical terms (denoted by the &gt;q&lt; tags).
+
+> [!TIP]
+> To learn more about searching documents with the Azure Search REST API, see the [Search Documents (Azure Search Service REST API)](https://docs.microsoft.com/en-us/rest/api/searchservice/search-documents) documentation.
 
 ## Resources
 
