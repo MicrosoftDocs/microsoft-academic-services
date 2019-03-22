@@ -6,7 +6,7 @@ metadata:
   description: Learn about Microsoft Academic Graph, including getting started guides, data schema reference, sample analytics
   meta.description: Learn about Microsoft Academic Graph, including getting started guides, data schema reference, sample analytics
   ms.topic: landing-page
-  ms.date: 3/14/2019
+  ms.date: 3/22/2019
 abstract:
   description: Learn about Microsoft Academic Graph, including getting started guide, data schema reference, sample analytics.
 sections:
@@ -24,13 +24,15 @@ sections:
     style: unordered
     items:
     - html: <a href="reference-data-schema">Microsoft Academic Graph entity data schema</a>
-- title: Tutorial
+- title: Tutorials
   items:
   - type: list
     style: unordered
     items:
     - html: <a href="tutorial-azure-data-lake-hindex">Compute author h-index using Azure Data Lake Analytics (U-SQL)</a>
     - html: <a href="tutorial-azure-databricks-hindex">Compute author h-index using Azure Databricks (Python/SQL)</a>
+    - html: <a href="tutorial-azure-search-org-patents">Organizational patent search using Azure Search service</a>
+    - html: <a href="tutorial-azure-search-org-patents">Academic reference parsing using Azure Search service</a>
 - title: Samples
   items:
   - type: list
