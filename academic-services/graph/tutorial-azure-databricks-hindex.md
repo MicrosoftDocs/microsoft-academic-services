@@ -176,7 +176,7 @@ In this section you will create data frames and temporary views for several diff
 1. Get **(Author, Paper) pairs**. Paste the following code in a new cell.
 
    ```python
-   # Get (puthor, paper) pairs
+   # Get (author, paper) pairs
    PaperAuthorAffiliations = getPaperAuthorAffiliationsDataFrame(MagDir)
    AuthorPaper = PaperAuthorAffiliations.select(PaperAuthorAffiliations.AuthorId, PaperAuthorAffiliations.PaperId).distinct()
    AuthorPaper.show(10)
