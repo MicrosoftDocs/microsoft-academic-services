@@ -124,7 +124,7 @@ In this section, you define functions to extract MAG data from Azure Storage (AS
      return spark.read.format('csv').options(header='false', inferSchema='true', delimiter='\t').load('%s/%s' % (dir, path)).toDF(*header)
    ```
 
-## Create MAG data frames and temporary views
+## Create data frames and temporary views
 
 In this section you will create data frames and temporary views for several different MAG entity types. These views will be used later on in the tutorial. Note that some of the cells might take several minutes to run.
 
