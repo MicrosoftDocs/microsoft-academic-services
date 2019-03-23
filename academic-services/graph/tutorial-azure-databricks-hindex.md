@@ -75,11 +75,13 @@ In this section, you mount MAG dataset in Azure Storage as a file system of the 
 1. Copy and paste the following code block in a new cell.
 
    ```
-   if (not any(mount.mountPoint == MagDir for mount in dbutils.fs.mounts())):
-     dbutils.fs.mount(
-       source = ('wasbs://%s@%s.blob.core.windows.net' % (MagContainer, AzureStorageAccount)),
-       mount_point = MagDir,
-       extra_configs = {('fs.azure.account.key.%s.blob.core.windows.net' % AzureStorageAccount) : AzureStorageAccessKey})
+   if (any(mount.mountPoint == MagDir for mount in dbutils.fs.mounts())):
+     dbutils.fs.unmount(MagDir)
+
+   dbutils.fs.mount(
+     source = ('wasbs://%s@%s.blob.core.windows.net' % (MagContainer, AzureStorageAccount)),
+     mount_point = MagDir,
+     extra_configs = {('fs.azure.account.key.%s.blob.core.windows.net' % AzureStorageAccount) : AzureStorageAccessKey})
 
    dbutils.fs.ls(MagDir)
    ```
