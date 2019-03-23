@@ -131,6 +131,7 @@ In this section you will create data frames and temporary views for several diff
 1. Get **Affiliations**. Paste the following code in a new cell.
 
    ```python
+   # Get affiliations
    Affiliations = getAffiliationsDataFrame(MagDir)
    Affiliations = Affiliations.select(Affiliations.AffiliationId, Affiliations.DisplayName)
    Affiliations.show(10)
@@ -153,6 +154,7 @@ In this section you will create data frames and temporary views for several diff
 1. Get **Authors**. Paste the following code in a new cell.
 
    ```python
+   # Get authors
    Authors = getAuthorsDataFrame(MagDir)
    Authors = Authors.select(Authors.AuthorId, Authors.DisplayName, Authors.LastKnownAffiliationId, Authors.PaperCount)
    Authors.show(10)
@@ -174,6 +176,7 @@ In this section you will create data frames and temporary views for several diff
 1. Get **(Author, Paper) pairs**. Paste the following code in a new cell.
 
    ```python
+   # Get (puthor, paper) pairs
    PaperAuthorAffiliations = getPaperAuthorAffiliationsDataFrame(MagDir)
    AuthorPaper = PaperAuthorAffiliations.select(PaperAuthorAffiliations.AuthorId, PaperAuthorAffiliations.PaperId).distinct()
    AuthorPaper.show(10)
@@ -196,6 +199,7 @@ In this section you will create data frames and temporary views for several diff
 1. Get **Papers**. Paste the following code in a new cell.
 
    ```python
+   # Get paper citation
    Papers = getPapersDataFrame(MagDir)
    PaperCitation = Papers.select(Papers.PaperId, Papers.EstimatedCitation).where(Papers.EstimatedCitation > 0)
    PaperCitation.show(10)
