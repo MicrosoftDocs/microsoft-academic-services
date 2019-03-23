@@ -195,7 +195,7 @@ Column # | Name | Type | Note
 Column # | Name | Type | Note
 --- | --- | --- | ---
 1 | PaperId | long | FOREIGN KEY REFERENCES Papers(PaperId)
-2 | SourceType | int? | 1 = Html, 2 = Text, 3 = Pdf, 4 = Doc, 5 = Ppt, 6 = Xls, 8 = Rtf, 12 = Xml, 13 = Rss, 20 = Swf, 27 = Ics, 31 = Pub, 33 = Ods, 34 = Odp, 35 = Odt, 36 = Zip, 40 = Mp3, 0 = unknown, 999 = unknown, NULL = unknown
+2 | SourceType | int? | 1 = Html, 2 = Text, 3 = Pdf, 4 = Doc, 5 = Ppt, 6 = Xls, 8 = Rtf, 12 = Xml, 13 = Rss, 20 = Swf, 27 = Ics, 31 = Pub, 33 = Ods, 34 = Odp, 35 = Odt, 36 = Zip, 40 = Mp3, 0/999/NULL = unknown
 3 | SourceUrl | string |
 
 ## Papers.txt
