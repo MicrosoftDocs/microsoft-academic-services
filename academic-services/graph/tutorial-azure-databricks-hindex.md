@@ -91,7 +91,8 @@ In this section, you mount MAG dataset in Azure Storage as a file system of the 
    You see an output similar to the following snippet:
 
    ```
-   Out[3]: 
+   /mnt/mag has been unmounted.
+   Out[4]:
    [FileInfo(path='dbfs:/mnt/mag/advanced/', name='advanced/', size=0),
     FileInfo(path='dbfs:/mnt/mag/mag/', name='mag/', size=0),
     FileInfo(path='dbfs:/mnt/mag/nlp/', name='nlp/', size=0),
