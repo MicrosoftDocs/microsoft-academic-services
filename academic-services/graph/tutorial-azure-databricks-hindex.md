@@ -118,7 +118,7 @@ In this section, you define functions to extract MAG data from Azure Storage (AS
 
    def getPaperAuthorAffiliationsDataFrame(dir):
      path = 'mag/PaperAuthorAffiliations.txt'
-     header = ['PaperId', 'AuthorId', 'AffiliationId', 'AuthorSequenceNumber', 'OriginalAffiliation']
+     header = ['PaperId', 'AuthorId', 'AffiliationId', 'AuthorSequenceNumber', 'OriginalAuthor', 'OriginalAffiliation']
      return spark.read.format('csv').options(header='false', inferSchema='true', delimiter='\t').load('%s/%s' % (dir, path)).toDF(*header)
 
    def getPapersDataFrame(dir):
