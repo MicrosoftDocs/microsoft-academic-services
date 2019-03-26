@@ -22,16 +22,19 @@ Illustrates how to perform analytics for Microsoft Academic Graph using PySpark 
 
 ## Getting started with sample projects
 
-### Pre-requisites
+### Prerequisites
 
-* [Get Microsoft Academic Graph on Azure storage](get-started-setup-provisioning.md)
-* [Set up Azure HDInsight/Spark for Microsoft Academic Graph](get-started-setup-azure-hdinsight.md)
+Before running these examples, you need to complete the following setups:
+
+* Setting up provisioning of Microsoft Academic Graph to an Azure blob storage account. See [Get Microsoft Academic Graph on Azure storage](get-started-setup-provisioning.md).
+
+* Setting up Azure Databricks service. See [Set up Azure Databricks](get-started-setup-databricks.md).
 
 ### Quick-start
 
 1. Download or clone the [samples repository](https://github.com/Azure-Samples/microsoft-academic-graph-pyspark-samples)
-2. For each tutorial there should be: A Python script(.py).
-3. Copy `CreatePySparkFunctions.py` from samples directory in MAG dataset to the code execution directory.
+1. [Create a notebook](https://docs.azuredatabricks.net/user-guide/notebooks/notebook-manage.html#create-a-notebook) and run `samples/CreatePySparkFunctions.py` in your MAG dataset.
+1. [Create a notebook](https://docs.azuredatabricks.net/user-guide/notebooks/notebook-manage.html#create-a-notebook) and run `src\Lab0_Setup.py` before you run other scripts.
 
 ## Working with PySpark scripts on Azure HDInsight/Spark
 
