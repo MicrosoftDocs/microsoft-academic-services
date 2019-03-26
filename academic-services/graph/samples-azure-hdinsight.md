@@ -64,9 +64,9 @@ Before you begin, you should have these items of information:
 
 ### Run lab script
 
-1. Copy the lab script  in a new cell.
+1. Copy a lab script into a new cell.
 
-1. Press the **SHIFT + ENTER** keys to run the code in this block. Please note taht some scripts take more than 10 minutes to run.
+1. Press the **SHIFT + ENTER** keys to run the code in this block. Please note taht some scripts take more than 10 minutes to complete.
 
 ### View results with Microsoft Azure Storage Explorer
 
