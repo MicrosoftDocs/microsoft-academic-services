@@ -28,6 +28,8 @@ Before running these examples, you need to complete the following setups:
 
 * Setting up Azure Databricks service. See [Set up Azure Databricks](get-started-setup-databricks.md).
 
+* Download or clone the [samples repository](https://github.com/Azure-Samples/microsoft-academic-graph-pyspark-samples)
+
 ## Gather the information that you need
 
 Before you begin, you should have these items of information:
@@ -39,10 +41,6 @@ Before you begin, you should have these items of information:
    :heavy_check_mark:  The name of the container in your Azure Storage (AS) account containing MAG dataset.
 
    :heavy_check_mark:  The name of the output container in your Azure Storage (AS) account.
-
-## Quick-start
-
-1. Download or clone the [samples repository](https://github.com/Azure-Samples/microsoft-academic-graph-pyspark-samples)
 
 ## Create a notebook in Azure Databricks
 
