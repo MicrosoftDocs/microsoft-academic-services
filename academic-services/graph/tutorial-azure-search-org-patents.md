@@ -4,7 +4,7 @@ description: Set up Azure Search service to do organizational patent search usin
 services: microsoft-academic-services
 ms.topic: tutorial
 ms.service: microsoft-academic-services
-ms.date: 3/22/2019
+ms.date: 3/26/2019
 ---
 
 # Tutorial: Set up organizational patent search with Azure Search
