@@ -36,7 +36,7 @@
   items:
   - name: Analytics and visualization
     href: samples-azure-data-lake-analytics.md
-  - name: Analytics on Databricks (PySpark)
+  - name: Analytics (Databricks/PySpark)
     href: samples-azure-databricks.md
 - name: Reference
   expanded: true
