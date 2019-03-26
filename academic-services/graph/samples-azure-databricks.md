@@ -131,9 +131,9 @@ In this section, you define functions to extract MAG data from Azure Storage (AS
 
 1. Press the **SHIFT + ENTER** keys to run the code in this block.
 
-## Run lab scripts
+## Run scripts in the repository
 
-1. Copy content in a lab script and paste into a new cell.
+1. Copy content in a script and paste into a new cell.
 
 1. Press the **SHIFT + ENTER** keys to run the code in this block. Please note taht some scripts take more than 10 minutes to complete.
 
