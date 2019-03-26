@@ -1,6 +1,6 @@
 ---
 title: PySpark samples for Microsoft Academic Graph
-description: Perform analytics for Microsoft Academic Graph using PySpark on HDInsight/Spark cluster
+description: Perform analytics for Microsoft Academic Graph using PySpark on Azure Databricks
 services: microsoft-academic-services
 ms.topic: tutorial
 ms.service: microsoft-academic-services
@@ -8,7 +8,7 @@ ms.date: 2/11/2019
 ---
 # PySpark analytics samples for Microsoft Academic Graph
 
-Illustrates how to perform analytics for Microsoft Academic Graph using PySpark on HDInsight/Spark cluster.
+Illustrates how to perform analytics for Microsoft Academic Graph using PySpark on Azure Databricks.
 
 ## Sample projects
 
@@ -30,47 +30,51 @@ Before running these examples, you need to complete the following setups:
 
 * Setting up Azure Databricks service. See [Set up Azure Databricks](get-started-setup-databricks.md).
 
+### Gather the information that you need
+
+Before you begin, you should have these items of information:
+
+   :heavy_check_mark:  The name of your Azure Storage (AS) account containing MAG dataset from [Get Microsoft Academic Graph on Azure storage](get-started-setup-provisioning.md#note-azure-storage-account-name-and-primary-key).
+
+   :heavy_check_mark:  The access key of your Azure Storage (AS) account from [Get Microsoft Academic Graph on Azure storage](get-started-setup-provisioning.md#note-azure-storage-account-name-and-primary-key).
+
+   :heavy_check_mark:  The name of the container in your Azure Storage (AS) account containing MAG dataset.
+
+   :heavy_check_mark:  The name of the output container in your Azure Storage (AS) account.
+
 ### Quick-start
 
 1. Download or clone the [samples repository](https://github.com/Azure-Samples/microsoft-academic-graph-pyspark-samples)
 1. [Create a notebook](https://docs.azuredatabricks.net/user-guide/notebooks/notebook-manage.html#create-a-notebook) and run `samples/CreatePySparkFunctions.py` in your MAG dataset.
 1. [Create a notebook](https://docs.azuredatabricks.net/user-guide/notebooks/notebook-manage.html#create-a-notebook) and run `src\Lab0_Setup.py` before you run other scripts.
 
-## Working with PySpark scripts on Azure HDInsight/Spark
+## Working with PySpark scripts on Azure Databricks
 
-* How to run PySpark scripts
-  * Login HDInsigth/Spark with ssh
+### Create a notebook in Azure Databricks
 
-    ![Login HDInsigth/Spark with ssh](media/samples-login-hdinsight.png "Login HDInsigth/Spark with ssh")
+1. In the [Azure portal](https://portal.azure.com), go to the Azure Databricks service that you created, and select **Launch Workspace**.
 
-  * Make sure the script file is available on HDInsight/Spark cluster. Run the script with python command.
+1. On the left, select **Workspace**. From the **Workspace** drop-down, select **Create** > **Notebook**.
 
-    ![Run PySpark script in ssh terminal](media/samples-run-pyspark-script.png "Run PySpark script in ssh terminal")
+    ![Create a notebook in Databricks](media/databricks/databricks-create-notebook.png "Create notebook in Databricks")
 
-* View results with Microsoft Azure Storage Explorer
+1. In the **Create Notebook** dialog box, enter a name for the notebook. Select **Python** as the language.
 
-    ![View result with Microsoft Azure Storage Explorer](media/samples-view-pyspark-script-results.png "View result with Microsoft Azure Storage Explorer")
+    ![Provide details for a notebook in Databricks](media/databricks/create-notebook.png "Provide details for a notebook in Databricks")
 
-* Credentials to access Azure storage from Azure HDInsight/Spark.
+### Run lab script
 
-  Add following code to `$SPARK_HOME/conf/core-site.xml` (ensure you run as root).
+1. Copy the lab script  in a new cell.
 
-        <?xml version="1.0" encoding="UTF-8"?>
-        <?xml-stylesheet type="text/xsl" href="configuration.xsl"?>
-        <configuration>
-        <property>
-          <name>fs.AbstractFileSystem.wasb.Impl</name>
-          <value>org.apache.hadoop.fs.azure.Wasb</value>
-        </property>
-        <property>
-          <name>fs.azure.account.key.YOURSTORAGEACCOUNT.blob.core.windows.net</name>
-          <value>YOURSTORAGEACCOUNTKEY</value>
-        </property>
-        </configuration>
+1. Press the **SHIFT + ENTER** keys to run the code in this block. Please note taht some scripts take more than 10 minutes to run.
+
+### View results with Microsoft Azure Storage Explorer
+
+![View result with Microsoft Azure Storage Explorer](media/samples-view-pyspark-script-results.png "View result with Microsoft Azure Storage Explorer")
 
 ## Resources
 
-* [Apache Spark in Azure HDInsight](https://docs.microsoft.com/en-us/azure/hdinsight/spark/apache-spark-overview)
+* [Create an Azure Databricks service](https://azure.microsoft.com/services/databricks/).
+* [Create a cluster for the Azure Databricks service](https://docs.azuredatabricks.net/user-guide/clusters/create.html).
+* [Import this notebook and attach it to the cluster](https://docs.databricks.com/user-guide/notebooks/notebook-manage.html#import-a-notebook).
 * [Get started with Storage Explorer](https://docs.microsoft.com/en-us/azure/vs-azure-tools-storage-manage-with-storage-explorer)
-* [Apache Spark Documentation](https://spark.apache.org/docs/2.3.0/)
-* [Spark for Azure HDInsight](https://blogs.msdn.microsoft.com/uk_faculty_connection/2017/03/15/spark-for-azure-hdinsight/)
