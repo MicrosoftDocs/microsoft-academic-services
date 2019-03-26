@@ -128,11 +128,13 @@ In this section, you mount MAG dataset in Azure Storage as a file system of the 
 
 In this section, you define functions to extract MAG data from Azure Storage (AS).
 
-1. Copy script `samples/CreatePySparkFunctions.py` in MAG dataset. Paste the code into a new cell. Press the **SHIFT + ENTER** keys to run the code in this block.
+1. Copy content in script `samples/CreatePySparkFunctions.py` in MAG dataset. Paste the code into a new cell.
+
+1. Press the **SHIFT + ENTER** keys to run the code in this block.
 
 ## Run lab scripts
 
-1. Copy a lab script into a new cell.
+1. Copy content in a lab script and paste into a new cell.
 
 1. Press the **SHIFT + ENTER** keys to run the code in this block. Please note taht some scripts take more than 10 minutes to complete.
 
