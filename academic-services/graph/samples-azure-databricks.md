@@ -20,9 +20,7 @@ Illustrates how to perform analytics for Microsoft Academic Graph using PySpark 
 * [Get collaborated affiliations of an Affiliation using its publications](https://github.com/Azure-Samples/microsoft-academic-graph-pyspark-samples/blob/master/src/Lab6_GetPartnerData.py)
 * [Get publication and citation counts by year](https://github.com/Azure-Samples/microsoft-academic-graph-pyspark-samples/blob/master/src/Lab7_GroupByYear.py)
 
-## Getting started with sample projects
-
-### Prerequisites
+## Prerequisites
 
 Before running these examples, you need to complete the following setups:
 
@@ -30,7 +28,7 @@ Before running these examples, you need to complete the following setups:
 
 * Setting up Azure Databricks service. See [Set up Azure Databricks](get-started-setup-databricks.md).
 
-### Gather the information that you need
+## Gather the information that you need
 
 Before you begin, you should have these items of information:
 
@@ -42,7 +40,7 @@ Before you begin, you should have these items of information:
 
    :heavy_check_mark:  The name of the output container in your Azure Storage (AS) account.
 
-### Quick-start
+## Quick-start
 
 1. Download or clone the [samples repository](https://github.com/Azure-Samples/microsoft-academic-graph-pyspark-samples)
 
@@ -50,9 +48,9 @@ Before you begin, you should have these items of information:
 
 1. [Create a notebook](https://docs.azuredatabricks.net/user-guide/notebooks/notebook-manage.html#create-a-notebook) and run `src/Lab0_Setup.py` in the repository before you run other scripts.
 
-## Working with PySpark scripts on Azure Databricks
+## Create a notebook in Azure Databricks
 
-### Create a notebook in Azure Databricks
+In this section, you create a notebook in Azure Databricks workspace.
 
 1. In the [Azure portal](https://portal.azure.com), go to the Azure Databricks service that you created, and select **Launch Workspace**.
 
@@ -64,13 +62,87 @@ Before you begin, you should have these items of information:
 
     ![Provide details for a notebook in Databricks](media/databricks/create-notebook.png "Provide details for a notebook in Databricks")
 
-### Run lab script
+1. Select **Create**.
+
+## Define configration variables
+
+In this section, you create the first notebook cell and define configration variables.
+
+1. Copy and paste following code block into the first cell.
+
+   ```python
+   AzureStorageAccount = '<AzureStorageAccount>'     # Azure Storage (AS) account containing MAG dataset
+   AzureStorageAccessKey = '<AzureStorageAccessKey>' # Access Key of the Azure Storage (AS) account
+   MagContainer = '<MagContainer>'                   # The container name in Azure Storage (AS) account containing MAG dataset, Usually in forms of mag-yyyy-mm-dd
+   OutputContainer = '<OutputContainer>'             # The container name in Azure Storage (AS) account where the output goes to
+
+   MagDir = '/mnt/mag'
+   OutputDir = '/mnt/output'
+   ```
+
+1. In this code block, replace `<AzureStorageAccount>`, `<AzureStorageAccessKey>`, and `<MagContainer>` placeholder values with the values that you collected while completing the prerequisites of this sample.
+
+   |Value  |Description  |
+   |---------|---------|
+   |**`<AzureStorageAccount>`** | The name of your Azure Storage account. |
+   |**`<AzureStorageAccessKey>`** | The access key of your Azure Storage account. |
+   |**`<MagContainer>`** | The container name in Azure Storage account containing MAG dataset, Usually in the form of **mag-yyyy-mm-dd**. |
+   |**`<OutputContainer>`** | The container name in Azure Storage (AS) account where the output goes to |
+
+1. Press the **SHIFT + ENTER** keys to run the code in this block.
+
+## Mount Azure Storage as a file system of the cluster
+
+In this section, you mount MAG dataset in Azure Storage as a file system of the cluster.
+
+1. Copy and paste the following code block in a new cell.
+
+   ```
+   if (any(mount.mountPoint == MagDir for mount in dbutils.fs.mounts())):
+     dbutils.fs.unmount(MagDir)
+
+   if (any(mount.mountPoint == OutputDir for mount in dbutils.fs.mounts())):
+     dbutils.fs.unmount(OutputDir)
+
+   dbutils.fs.mount(
+     source = ('wasbs://%s@%s.blob.core.windows.net' % (MagContainer, AzureStorageAccount)),
+     mount_point = MagDir,
+     extra_configs = {('fs.azure.account.key.%s.blob.core.windows.net' % AzureStorageAccount) : AzureStorageAccessKey})
+
+   dbutils.fs.mount(
+     source = ('wasbs://%s@%s.blob.core.windows.net' % (OutputContainer, AzureStorageAccount)),
+     mount_point = OutputDir,
+     extra_configs = {('fs.azure.account.key.%s.blob.core.windows.net' % AzureStorageAccount) : AzureStorageAccessKey})
+
+   dbutils.fs.ls('/mnt)
+   ```
+
+1. Press the **SHIFT + ENTER** keys to run the code in this block.
+
+   You see an output similar to the following snippet:
+
+   ```
+   /mnt/mag has been unmounted.
+   Out[4]:
+   [FileInfo(path='dbfs:/mnt/mag/advanced/', name='advanced/', size=0),
+    FileInfo(path='dbfs:/mnt/mag/mag/', name='mag/', size=0),
+    FileInfo(path='dbfs:/mnt/mag/nlp/', name='nlp/', size=0),
+    FileInfo(path='dbfs:/mnt/mag/samples/', name='samples/', size=0)]
+   ``` 
+
+## Define functions to extract MAG data
+
+In this section, you define functions to extract MAG data from Azure Storage (AS).
+
+1. Copy script `samples/CreatePySparkFunctions.py` in MAG dataset. Paste the code into a new cell. Press the **SHIFT + ENTER** keys to run the code in this block.
+
+## Run lab scripts
 
 1. Copy a lab script into a new cell.
 
 1. Press the **SHIFT + ENTER** keys to run the code in this block. Please note taht some scripts take more than 10 minutes to complete.
 
-### View results with Microsoft Azure Storage Explorer
+## View results with Microsoft Azure Storage Explorer
 
 ![View result with Microsoft Azure Storage Explorer](media/samples-view-pyspark-script-results.png "View result with Microsoft Azure Storage Explorer")
 
