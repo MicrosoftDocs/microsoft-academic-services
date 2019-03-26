@@ -44,10 +44,6 @@ Before you begin, you should have these items of information:
 
 1. Download or clone the [samples repository](https://github.com/Azure-Samples/microsoft-academic-graph-pyspark-samples)
 
-1. [Create a notebook](https://docs.azuredatabricks.net/user-guide/notebooks/notebook-manage.html#create-a-notebook) and run `samples/CreatePySparkFunctions.py` in your MAG dataset.
-
-1. [Create a notebook](https://docs.azuredatabricks.net/user-guide/notebooks/notebook-manage.html#create-a-notebook) and run `src/Lab0_Setup.py` in the repository before you run other scripts.
-
 ## Create a notebook in Azure Databricks
 
 In this section, you create a notebook in Azure Databricks workspace.
