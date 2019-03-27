@@ -143,7 +143,7 @@ In this section, you define functions to extract MAG data from Azure Storage (AS
 
 ## Resources
 
-* [Create an Azure Databricks service](https://azure.microsoft.com/services/databricks/).
-* [Create a cluster for the Azure Databricks service](https://docs.azuredatabricks.net/user-guide/clusters/create.html).
-* [Import a Databrick notebook](https://docs.databricks.com/user-guide/notebooks/notebook-manage.html#import-a-notebook).
+* [Create an Azure Databricks service](https://azure.microsoft.com/services/databricks/)
+* [Create a cluster for the Azure Databricks service](https://docs.azuredatabricks.net/user-guide/clusters/create.html)
+* [Import a Databrick notebook](https://docs.databricks.com/user-guide/notebooks/notebook-manage.html#import-a-notebook)
 * [Get started with Storage Explorer](https://docs.microsoft.com/en-us/azure/vs-azure-tools-storage-manage-with-storage-explorer)
