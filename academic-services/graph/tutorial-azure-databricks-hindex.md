@@ -4,7 +4,7 @@ description: Compute author h-index for Microsoft Academic Graph using Azure Dat
 services: microsoft-academic-services
 ms.topic: tutorial
 ms.service: microsoft-academic-services
-ms.date: 3/23/2019
+ms.date: 3/26/2019
 ---
 # Tutorial: Compute author h-index using Azure Databricks
 
@@ -118,7 +118,7 @@ In this section, you define functions to extract MAG data from Azure Storage (AS
 
    def getPaperAuthorAffiliationsDataFrame(dir):
      path = 'mag/PaperAuthorAffiliations.txt'
-     header = ['PaperId', 'AuthorId', 'AffiliationId', 'AuthorSequenceNumber', 'OriginalAffiliation']
+     header = ['PaperId', 'AuthorId', 'AffiliationId', 'AuthorSequenceNumber', 'OriginalAuthor', 'OriginalAffiliation']
      return spark.read.format('csv').options(header='false', inferSchema='true', delimiter='\t').load('%s/%s' % (dir, path)).toDF(*header)
 
    def getPapersDataFrame(dir):

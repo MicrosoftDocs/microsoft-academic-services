@@ -4,7 +4,7 @@ description: Set up Azure Search service to enable reference parsing using the M
 services: microsoft-academic-services
 ms.topic: tutorial
 ms.service: microsoft-academic-services
-ms.date: 3/22/2019
+ms.date: 3/26/2019
 ---
 
 # Tutorial: Set up academic reference parsing with Azure Search
@@ -115,13 +115,13 @@ In prerequisite [Set up Azure Data Lake Analytics](get-started-setup-azure-data-
     CREATE FUNCTION PaperAuthorAffiliations(@BaseDir string = "")
       RETURNS @_PaperAuthorAffiliations TABLE
       (
-        PaperId long, AuthorId long, AffiliationId long?, AuthorSequenceNumber uint, OriginalAffiliation string
+        PaperId long, AuthorId long, AffiliationId long?, AuthorSequenceNumber uint, OriginalAuthor string, OriginalAffiliation string
       )
       AS BEGIN
       DECLARE @_Path string = @BaseDir + "mag/PaperAuthorAffiliations.txt";
       @_PaperAuthorAffiliations =
       EXTRACT
-        PaperId long, AuthorId long, AffiliationId long?, AuthorSequenceNumber uint, OriginalAffiliation string
+        PaperId long, AuthorId long, AffiliationId long?, AuthorSequenceNumber uint, OriginalAuthor string, OriginalAffiliation string
       FROM @_Path
       USING Extractors.Tsv(silent: false, quoting: false);
       RETURN;
