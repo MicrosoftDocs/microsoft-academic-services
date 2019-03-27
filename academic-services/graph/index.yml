@@ -38,4 +38,5 @@ sections:
   - type: list
     style: unordered
     items:
-    - html: <a href="samples-azure-data-lake-analytics">Analytics and visualization samples for Microsoft Academic Graph</a>
+    - html: <a href="samples-azure-data-lake-analytics">Analytics and visualization samples (U-SQL/PowerBI)</a>
+    - html: <a href="samples-azure-databricks">Analytics samples (Databricks/PySpark)</a>

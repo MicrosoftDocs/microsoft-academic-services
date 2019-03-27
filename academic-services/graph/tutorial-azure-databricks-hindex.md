@@ -105,6 +105,9 @@ In this section, you define functions to extract MAG data from Azure Storage (AS
 
 1. Paste the following code in a new cell. Press the **SHIFT + ENTER** keys to run the code in this block.
 
+   > [!NOTE]
+   > To work with the latest MAG dataset schema, instead of the code block below, you could use code in samples/CreatePySparkFunctions.py in the MAG dataset.
+
    ```python
    def getAffiliationsDataFrame(dir):
      path = 'mag/Affiliations.txt'
