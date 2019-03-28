@@ -107,7 +107,7 @@ In this section, you create a MicrosoftAcademicGraph instance to access MAG data
 
 1. Copy and paste the following code block in a new cell.
 
-   ```
+   ```python
    # Create a MicrosoftAcademicGraph instance to MAG dataset
    MAG = MicrosoftAcademicGraph(container=MagContainer, account=AzureStorageAccount, key=AzureStorageAccessKey)
    ```
