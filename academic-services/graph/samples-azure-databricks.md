@@ -119,12 +119,12 @@ In this section, you add a new notebook cell and define configration variables.
 
 ## Create MicrosoftAcademicGraph and AzureStorageUtil instances
 
-In this section, you create a MicrosoftAcademicGraph instance to access MAG data files, and an AzureStorageUtil instance to access other Azure Storage files
+In this section, you create a MicrosoftAcademicGraph instance to access MAG dataset, and an AzureStorageUtil instance to access other Azure Storage files
 
 1. Copy and paste the following code block in a new cell.
 
    ```python
-   # Create a MicrosoftAcademicGraph instance to access MAG data files
+   # Create a MicrosoftAcademicGraph instance to access MAG dataset
    MAG = MicrosoftAcademicGraph(container=MagContainer, account=AzureStorageAccount, key=AzureStorageAccessKey)
 
    # Create a AzureStorageUtil instance to access other Azure Storage files
