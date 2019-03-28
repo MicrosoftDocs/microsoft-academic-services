@@ -47,7 +47,7 @@ In this section, you import PySparkMagClass.py as a notebook in Azure Databricks
 
     ![Provide details for a notebook in Databricks](media/databricks/import-notebook-dialog.png "Provide details for a notebook in Databricks")
 
-1. Select **Import**.
+1. Select **Import**. This will create a notebook with path `/PySparkMagClass`. No need to run this notebook.
 
 ## Create a notebook in Azure Databricks
 
