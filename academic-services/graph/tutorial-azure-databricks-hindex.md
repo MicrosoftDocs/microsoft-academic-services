@@ -72,6 +72,7 @@ In this section, you create the first notebook cell to run PySparkMagClass noteb
 1. Copy and paste following code block into the first cell to define MicrosoftAcademicGraph class.
 
    ```python
+   # Call PySparkMagClass notebook to define MicrosoftAcademicGraph class
    %run "/PySparkMagClass"
    ```
 
@@ -84,6 +85,7 @@ In this section, you add a new notebook cell and define configration variables.
 1. Copy and paste following code block into the first cell.
 
    ```python
+   # Define configration variables
    AzureStorageAccount = '<AzureStorageAccount>'     # Azure Storage (AS) account containing MAG dataset
    AzureStorageAccessKey = '<AzureStorageAccessKey>' # Access Key of the Azure Storage (AS) account
    MagContainer = '<MagContainer>'                   # The container name in Azure Storage (AS) account containing MAG dataset, Usually in forms of mag-yyyy-mm-dd
