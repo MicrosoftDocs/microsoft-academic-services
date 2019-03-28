@@ -39,6 +39,9 @@ In this section, you import PySparkMagClass.py as a notebook in Azure Databricks
 1. On the left, select **Workspace**. From the **Workspace** drop-down, select **Import**.
 
     ![Import a notebook in Databricks](media/databricks/import-notebook.png "import notebook in Databricks")
+    
+   > [!NOTE]
+   > Please import this notebook under **Workspace** level, not under **Shared** or **Users** level.
 
 1. Drag and drop PySparkMagClass.py to the **Import Notebook** dialog box
 
