@@ -47,7 +47,7 @@ In this section, you import PySparkMagClass.py as a notebook in Azure Databricks
 1. Select **Import**. This will create a notebook with path `"/PySparkMagClass"`. No need to run this notebook.
 
    > [!NOTE]
-   > Please import this notebook under **Workspace** level. The full path of this notebook is `"/PySparkMagClass"`. If you import it under **Shared** or **Users** levels, please note the full path and use it in the next section.
+   > Please import this notebook under **Workspace** level. The full path of this notebook will be `"/PySparkMagClass"`. If you import it under **Shared** or **Users** levels, please note the actual full path and use it in following sections.
 
 ## Create a new notebook
 
