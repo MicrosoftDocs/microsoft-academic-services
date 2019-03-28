@@ -121,7 +121,7 @@ In this section you will create data frames and temporary views for several diff
    # Get affiliations
    Affiliations = MAG.dataframe('Affiliations')
    Affiliations = Affiliations.select(Affiliations.AffiliationId, Affiliations.DisplayName)
-   Affiliations.show(5)
+   Affiliations.show(3)
    Affiliations.createOrReplaceTempView('Affiliations')
    ```
 
@@ -134,8 +134,7 @@ In this section you will create data frames and temporary views for several diff
    |     20455151|         Air Liquide|
    |     24386293|Hellenic National...|
    |     32956416|Catholic Universi...|
-   ...
-   ...
+   +-------------+--------------------+
    ``` 
 
 1. Get **Authors**. Paste the following code in a new cell.
@@ -144,7 +143,7 @@ In this section you will create data frames and temporary views for several diff
    # Get authors
    Authors = MAG.dataframe('Authors')
    Authors = Authors.select(Authors.AuthorId, Authors.DisplayName, Authors.LastKnownAffiliationId, Authors.PaperCount)
-   Authors.show(5)
+   Authors.show(3)
    Authors.createOrReplaceTempView('Authors')
    ```
 
@@ -157,7 +156,7 @@ In this section you will create data frames and temporary views for several diff
    |     584|Gözde Özdikmenli-...|              79946792|         2|
    |     859|          Gy. Tolmár|                  null|         2|
    |     978|      Ximena Faúndez|             162148367|        18|
-   ...
+   +--------+--------------------+----------------------+----------+
    ``` 
 
 1. Get **(Author, Paper) pairs**. Paste the following code in a new cell.
@@ -166,7 +165,7 @@ In this section you will create data frames and temporary views for several diff
    # Get (author, paper) pairs
    PaperAuthorAffiliations = MAG.dataframe('PaperAuthorAffiliations')
    AuthorPaper = PaperAuthorAffiliations.select(PaperAuthorAffiliations.AuthorId, PaperAuthorAffiliations.PaperId).distinct()
-   AuthorPaper.show(5)
+   AuthorPaper.show(3)
    AuthorPaper.createOrReplaceTempView('AuthorPaper')
    ```
 
@@ -179,8 +178,7 @@ In this section you will create data frames and temporary views for several diff
    |2121966975|94980387|
    |2502082315|94984326|
    |2713129682|94984597|
-   ...
-   ...
+   +----------+--------+
    ``` 
 
 1. Get **Papers**. Paste the following code in a new cell.
@@ -189,7 +187,7 @@ In this section you will create data frames and temporary views for several diff
    # Get paper citation
    Papers = MAG.dataframe('Papers')
    PaperCitation = Papers.select(Papers.PaperId, Papers.EstimatedCitation).where(Papers.EstimatedCitation > 0)
-   PaperCitation.show(5)
+   PaperCitation.show(3)
    PaperCitation.createOrReplaceTempView('PaperCitation')
    ```
 
@@ -202,8 +200,7 @@ In this section you will create data frames and temporary views for several diff
    |2088151486|               61|
    |2864100843|                1|
    |2260674751|                5|
-   ...
-   ...
+   +----------+-----------------+
    ``` 
 
    You have now extracted MAG data from Azure Storage into Azure Databricks and created temporary views to use later.
