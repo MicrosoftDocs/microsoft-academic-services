@@ -138,6 +138,7 @@ In this section you will create data frames and temporary views for several diff
    |     24386293|Hellenic National...|
    |     32956416|Catholic Universi...|
    +-------------+--------------------+
+   only showing top 3 rows
    ``` 
 
 1. Get **Authors**. Paste the following code in a new cell.
@@ -160,6 +161,7 @@ In this section you will create data frames and temporary views for several diff
    |     859|          Gy. Tolmár|                  null|         2|
    |     978|      Ximena Faúndez|             162148367|        18|
    +--------+--------------------+----------------------+----------+
+   only showing top 3 rows
    ``` 
 
 1. Get **(Author, Paper) pairs**. Paste the following code in a new cell.
@@ -182,6 +184,7 @@ In this section you will create data frames and temporary views for several diff
    |2502082315|94984326|
    |2713129682|94984597|
    +----------+--------+
+   only showing top 3 rows
    ``` 
 
 1. Get **Papers**. Paste the following code in a new cell.
@@ -204,6 +207,7 @@ In this section you will create data frames and temporary views for several diff
    |2864100843|                1|
    |2260674751|                5|
    +----------+-----------------+
+   only showing top 3 rows
    ``` 
 
    You have now extracted MAG data from Azure Storage into Azure Databricks and created temporary views to use later.
