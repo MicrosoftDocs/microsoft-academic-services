@@ -137,7 +137,7 @@ In this section, you create a MicrosoftAcademicGraph instance to access MAG data
 
 1. Copy content in a script and paste into a new cell.
 
-1. Press the **SHIFT + ENTER** keys to run the code in this block. Please note that some scripts take more than 10 minutes to complete.
+1. Press the **SHIFT + ENTER** keys to run the code in this cell. Please note that some scripts take more than 10 minutes to complete.
 
 ## View results with Microsoft Azure Storage Explorer
 
