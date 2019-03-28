@@ -72,7 +72,6 @@ In this section, you create the first notebook cell to run PySparkMagClass noteb
 1. Copy and paste following code block into the first cell.
 
    ```python
-   # Call PySparkMagClass notebook to define MicrosoftAcademicGraph class
    %run "/PySparkMagClass"
    ```
 
