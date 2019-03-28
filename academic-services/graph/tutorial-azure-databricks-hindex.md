@@ -51,7 +51,7 @@ In this section, you import PySparkMagClass.py as a notebook in Azure Databricks
 
 ## Create a notebook in Azure Databricks
 
-In this section, you create a notebook in Azure Databricks workspace.
+In this section, you create a new notebook in Azure Databricks workspace.
 
 1. In the [Azure portal](https://portal.azure.com), go to the Azure Databricks service that you created, and select **Launch Workspace**.
 
@@ -65,9 +65,21 @@ In this section, you create a notebook in Azure Databricks workspace.
 
 1. Select **Create**.
 
+## First notebook cell
+
+In this section, you create the first notebook cell to run PySparkMagClass notebook.
+
+1. Copy and paste following code block into the first cell to define MicrosoftAcademicGraph class.
+
+   ```python
+   %run "/PySparkMagClass"
+   ```
+
+1. Press the **SHIFT + ENTER** keys to run the code in this block.
+
 ## Define configration variables
 
-In this section, you create the first notebook cell and define configration variables.
+In this section, you add a new notebook cell and define configration variables.
 
 1. Copy and paste following code block into the first cell.
 
@@ -75,8 +87,6 @@ In this section, you create the first notebook cell and define configration vari
    AzureStorageAccount = '<AzureStorageAccount>'     # Azure Storage (AS) account containing MAG dataset
    AzureStorageAccessKey = '<AzureStorageAccessKey>' # Access Key of the Azure Storage (AS) account
    MagContainer = '<MagContainer>'                   # The container name in Azure Storage (AS) account containing MAG dataset, Usually in forms of mag-yyyy-mm-dd
-
-   MagDir = '/mnt/mag'
    ```
 
 1. In this code block, replace `<AzureStorageAccount>`, `<AzureStorageAccessKey>`, and `<MagContainer>` placeholder values with the values that you collected while completing the prerequisites of this sample.
@@ -89,67 +99,17 @@ In this section, you create the first notebook cell and define configration vari
 
 1. Press the **SHIFT + ENTER** keys to run the code in this block.
 
-## Mount Azure Storage as a file system of the cluster
+## Create a MicrosoftAcademicGraph instance
 
-In this section, you mount MAG dataset in Azure Storage as a file system of the cluster.
+In this section, you create a MicrosoftAcademicGraph instance to access MAG dataset.
 
 1. Copy and paste the following code block in a new cell.
 
    ```
-   if (any(mount.mountPoint == MagDir for mount in dbutils.fs.mounts())):
-     dbutils.fs.unmount(MagDir)
-
-   dbutils.fs.mount(
-     source = ('wasbs://%s@%s.blob.core.windows.net' % (MagContainer, AzureStorageAccount)),
-     mount_point = MagDir,
-     extra_configs = {('fs.azure.account.key.%s.blob.core.windows.net' % AzureStorageAccount) : AzureStorageAccessKey})
-
-   dbutils.fs.ls(MagDir)
+   MAG = MicrosoftAcademicGraph(container=MagContainer, account=AzureStorageAccount, key=AzureStorageAccessKey)
    ```
 
 1. Press the **SHIFT + ENTER** keys to run the code in this block.
-
-   You see an output similar to the following snippet:
-
-   ```
-   /mnt/mag has been unmounted.
-   Out[4]:
-   [FileInfo(path='dbfs:/mnt/mag/advanced/', name='advanced/', size=0),
-    FileInfo(path='dbfs:/mnt/mag/mag/', name='mag/', size=0),
-    FileInfo(path='dbfs:/mnt/mag/nlp/', name='nlp/', size=0),
-    FileInfo(path='dbfs:/mnt/mag/samples/', name='samples/', size=0)]
-   ``` 
-
-## Define functions to extract MAG data
-
-In this section, you define functions to extract MAG data from Azure Storage (AS).
-
-1. Paste the following code in a new cell. Press the **SHIFT + ENTER** keys to run the code in this block.
-
-   > [!NOTE]
-   > To work with the latest MAG dataset schema, instead of the code block below, you could use code in samples/CreatePySparkFunctions.py in the MAG dataset.
-
-   ```python
-   def getAffiliationsDataFrame(dir):
-     path = 'mag/Affiliations.txt'
-     header = ['AffiliationId', 'Rank', 'NormalizedName', 'DisplayName', 'GridId', 'OfficialPage', 'WikiPage', 'PaperCount', 'CitationCount', 'CreatedDate']
-     return spark.read.format('csv').options(header='false', inferSchema='true', delimiter='\t').load('%s/%s' % (dir, path)).toDF(*header)
-
-   def getAuthorsDataFrame(dir):
-     path = 'mag/Authors.txt'
-     header = ['AuthorId', 'Rank', 'NormalizedName', 'DisplayName', 'LastKnownAffiliationId', 'PaperCount', 'CitationCount', 'CreatedDate']
-     return spark.read.format('csv').options(header='false', inferSchema='true', delimiter='\t').load('%s/%s' % (dir, path)).toDF(*header)
-
-   def getPaperAuthorAffiliationsDataFrame(dir):
-     path = 'mag/PaperAuthorAffiliations.txt'
-     header = ['PaperId', 'AuthorId', 'AffiliationId', 'AuthorSequenceNumber', 'OriginalAuthor', 'OriginalAffiliation']
-     return spark.read.format('csv').options(header='false', inferSchema='true', delimiter='\t').load('%s/%s' % (dir, path)).toDF(*header)
-
-   def getPapersDataFrame(dir):
-     path = 'mag/Papers.txt'
-     header = ['PaperId', 'Rank', 'Doi', 'DocType', 'PaperTitle', 'OriginalTitle', 'BookTitle', 'Year', 'Date', 'Publisher', 'JournalId', 'ConferenceSeriesId', 'ConferenceInstanceId', 'Volume', 'Issue', 'FirstPage', 'LastPage', 'ReferenceCount', 'CitationCount', 'EstimatedCitation', 'OriginalVenue', 'CreatedDate']
-     return spark.read.format('csv').options(header='false', inferSchema='true', delimiter='\t').load('%s/%s' % (dir, path)).toDF(*header)
-   ```
 
 ## Create data frames and temporary views
 
@@ -159,9 +119,9 @@ In this section you will create data frames and temporary views for several diff
 
    ```python
    # Get affiliations
-   Affiliations = getAffiliationsDataFrame(MagDir)
+   Affiliations = MAG.dataframe('Affiliations')
    Affiliations = Affiliations.select(Affiliations.AffiliationId, Affiliations.DisplayName)
-   Affiliations.show(10)
+   Affiliations.show(5)
    Affiliations.createOrReplaceTempView('Affiliations')
    ```
 
@@ -182,9 +142,9 @@ In this section you will create data frames and temporary views for several diff
 
    ```python
    # Get authors
-   Authors = getAuthorsDataFrame(MagDir)
+   Authors = MAG.dataframe('Authors')
    Authors = Authors.select(Authors.AuthorId, Authors.DisplayName, Authors.LastKnownAffiliationId, Authors.PaperCount)
-   Authors.show(10)
+   Authors.show(5)
    Authors.createOrReplaceTempView('Authors')
    ```
 
@@ -204,9 +164,9 @@ In this section you will create data frames and temporary views for several diff
 
    ```python
    # Get (author, paper) pairs
-   PaperAuthorAffiliations = getPaperAuthorAffiliationsDataFrame(MagDir)
+   PaperAuthorAffiliations = MAG.dataframe('PaperAuthorAffiliations')
    AuthorPaper = PaperAuthorAffiliations.select(PaperAuthorAffiliations.AuthorId, PaperAuthorAffiliations.PaperId).distinct()
-   AuthorPaper.show(10)
+   AuthorPaper.show(5)
    AuthorPaper.createOrReplaceTempView('AuthorPaper')
    ```
 
@@ -227,9 +187,9 @@ In this section you will create data frames and temporary views for several diff
 
    ```python
    # Get paper citation
-   Papers = getPapersDataFrame(MagDir)
+   Papers = MAG.dataframe('Papers')
    PaperCitation = Papers.select(Papers.PaperId, Papers.EstimatedCitation).where(Papers.EstimatedCitation > 0)
-   PaperCitation.show(10)
+   PaperCitation.show(5)
    PaperCitation.createOrReplaceTempView('PaperCitation')
    ```
 
