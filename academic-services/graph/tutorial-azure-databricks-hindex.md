@@ -69,14 +69,14 @@ In this section, you create a new notebook in Azure Databricks workspace.
 
 In this section, you create the first notebook cell to run PySparkMagClass notebook.
 
-1. Copy and paste following code block into the first cell to define MicrosoftAcademicGraph class.
+1. Copy and paste following code block into the first cell.
 
    ```python
    # Call PySparkMagClass notebook to define MicrosoftAcademicGraph class
    %run "/PySparkMagClass"
    ```
 
-1. Press the **SHIFT + ENTER** keys to run the code in this block.
+1. Press the **SHIFT + ENTER** keys to run the code in this block. It defines MicrosoftAcademicGraph class.
 
 ## Define configration variables
 
