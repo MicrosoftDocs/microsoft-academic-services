@@ -125,10 +125,10 @@ In this section, you create a MicrosoftAcademicGraph instance to access MAG data
 
    ```python
    # Create a MicrosoftAcademicGraph instance to access MAG dataset
-   MAG = MicrosoftAcademicGraph(container=MagContainer, account=AzureStorageAccount, key=AzureStorageAccessKey)
+   mag = MicrosoftAcademicGraph(container=MagContainer, account=AzureStorageAccount, key=AzureStorageAccessKey)
 
    # Create a AzureStorageUtil instance to access other Azure Storage files
-   ASU = AzureStorageUtil(container=OutputContainer, account=AzureStorageAccount, key=AzureStorageAccessKey)
+   asu = AzureStorageUtil(container=OutputContainer, account=AzureStorageAccount, key=AzureStorageAccessKey)
    ```
 
 1. Press the **SHIFT + ENTER** keys to run the code in this block.
