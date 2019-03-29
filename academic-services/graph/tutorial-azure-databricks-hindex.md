@@ -121,7 +121,7 @@ In this section you will create data frames and temporary views for several diff
 
    ```python
    # Get affiliations
-   Affiliations = MAG.dataframe('Affiliations')
+   Affiliations = MAG.getDataframe('Affiliations')
    Affiliations = Affiliations.select(Affiliations.AffiliationId, Affiliations.DisplayName)
    Affiliations.show(3)
    Affiliations.createOrReplaceTempView('Affiliations')
@@ -144,7 +144,7 @@ In this section you will create data frames and temporary views for several diff
 
    ```python
    # Get authors
-   Authors = MAG.dataframe('Authors')
+   Authors = MAG.getDataframe('Authors')
    Authors = Authors.select(Authors.AuthorId, Authors.DisplayName, Authors.LastKnownAffiliationId, Authors.PaperCount)
    Authors.show(3)
    Authors.createOrReplaceTempView('Authors')
@@ -167,7 +167,7 @@ In this section you will create data frames and temporary views for several diff
 
    ```python
    # Get (author, paper) pairs
-   PaperAuthorAffiliations = MAG.dataframe('PaperAuthorAffiliations')
+   PaperAuthorAffiliations = MAG.getDataframe('PaperAuthorAffiliations')
    AuthorPaper = PaperAuthorAffiliations.select(PaperAuthorAffiliations.AuthorId, PaperAuthorAffiliations.PaperId).distinct()
    AuthorPaper.show(3)
    AuthorPaper.createOrReplaceTempView('AuthorPaper')
@@ -190,7 +190,7 @@ In this section you will create data frames and temporary views for several diff
 
    ```python
    # Get paper citation
-   Papers = MAG.dataframe('Papers')
+   Papers = MAG.getDataframe('Papers')
    PaperCitation = Papers.select(Papers.PaperId, Papers.EstimatedCitation).where(Papers.EstimatedCitation > 0)
    PaperCitation.show(3)
    PaperCitation.createOrReplaceTempView('PaperCitation')
