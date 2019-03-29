@@ -42,9 +42,30 @@ Before you begin, you should have these items of information:
 
    :heavy_check_mark:  The name of the output container in your Azure Storage (AS) account.
 
-## Create a notebook in Azure Databricks
+## Import PySparkMagClass.py as a notebook
 
-In this section, you create a notebook in Azure Databricks workspace.
+In this section, you import PySparkMagClass.py as a notebook in Azure Databricks workspace. This utility notebook will be called from another notebook later.
+
+1. Save samples\PySparkMagClass.py in MAG dataset to local drive.
+
+1. In the [Azure portal](https://portal.azure.com), go to the Azure Databricks service that you created, and select **Launch Workspace**.
+
+1. On the left, select **Workspace**. From the **Workspace** drop-down, select **Import**.
+
+    ![Import a notebook in Databricks](media/databricks/import-notebook.png "import notebook in Databricks")
+    
+1. Drag and drop PySparkMagClass.py to the **Import Notebook** dialog box
+
+    ![Provide details for a notebook in Databricks](media/databricks/import-notebook-dialog.png "Provide details for a notebook in Databricks")
+
+1. Select **Import**. This will create a notebook with path `"/PySparkMagClass"`. No need to run this notebook.
+
+   > [!NOTE]
+   > Please import this notebook under **Workspace** level. The full path of this notebook will be `"/PySparkMagClass"`. If you import it under **Shared** or **Users** levels, please note the actual full path and use it in following sections.
+
+## Create a new notebook
+
+In this section, you create a new notebook in Azure Databricks workspace.
 
 1. In the [Azure portal](https://portal.azure.com), go to the Azure Databricks service that you created, and select **Launch Workspace**.
 
@@ -58,20 +79,30 @@ In this section, you create a notebook in Azure Databricks workspace.
 
 1. Select **Create**.
 
-## Define configration variables
+## Create first notebook cell
 
-In this section, you create the first notebook cell and define configration variables.
+In this section, you create the first notebook cell to run PySparkMagClass notebook.
 
 1. Copy and paste following code block into the first cell.
 
    ```python
+   %run "/PySparkMagClass"
+   ```
+
+1. Press the **SHIFT + ENTER** keys to run the code in this block. It defines MicrosoftAcademicGraph class.
+
+## Define configration variables
+
+In this section, you add a new notebook cell and define configration variables.
+
+1. Copy and paste following code block into the first cell.
+
+   ```python
+   # Define configration variables
    AzureStorageAccount = '<AzureStorageAccount>'     # Azure Storage (AS) account containing MAG dataset
    AzureStorageAccessKey = '<AzureStorageAccessKey>' # Access Key of the Azure Storage (AS) account
    MagContainer = '<MagContainer>'                   # The container name in Azure Storage (AS) account containing MAG dataset, Usually in forms of mag-yyyy-mm-dd
    OutputContainer = '<OutputContainer>'             # The container name in Azure Storage (AS) account where the output goes to
-
-   MagDir = '/mnt/mag'
-   OutputDir = '/mnt/output'
    ```
 
 1. In this code block, replace `<AzureStorageAccount>`, `<AzureStorageAccessKey>`, and `<MagContainer>` placeholder values with the values that you collected while completing the prerequisites of this sample.
@@ -85,49 +116,19 @@ In this section, you create the first notebook cell and define configration vari
 
 1. Press the **SHIFT + ENTER** keys to run the code in this block.
 
-## Mount Azure Storage as a file system of the cluster
+## Create MicrosoftAcademicGraph and AzureStorageUtil instances
 
-In this section, you mount MAG dataset in Azure Storage as a file system of the cluster.
+In this section, you create a MicrosoftAcademicGraph instance to access MAG dataset, and an AzureStorageUtil instance to access other Azure Storage files.
 
 1. Copy and paste the following code block in a new cell.
 
+   ```python
+   # Create a MicrosoftAcademicGraph instance to access MAG dataset
+   mag = MicrosoftAcademicGraph(container=MagContainer, account=AzureStorageAccount, key=AzureStorageAccessKey)
+
+   # Create a AzureStorageUtil instance to access other Azure Storage files
+   asu = AzureStorageUtil(container=OutputContainer, account=AzureStorageAccount, key=AzureStorageAccessKey)
    ```
-   if (any(mount.mountPoint == MagDir for mount in dbutils.fs.mounts())):
-     dbutils.fs.unmount(MagDir)
-
-   dbutils.fs.mount(
-     source = ('wasbs://%s@%s.blob.core.windows.net' % (MagContainer, AzureStorageAccount)),
-     mount_point = MagDir,
-     extra_configs = {('fs.azure.account.key.%s.blob.core.windows.net' % AzureStorageAccount) : AzureStorageAccessKey})
-
-   if (any(mount.mountPoint == OutputDir for mount in dbutils.fs.mounts())):
-     dbutils.fs.unmount(OutputDir)
-
-   dbutils.fs.mount(
-     source = ('wasbs://%s@%s.blob.core.windows.net' % (OutputContainer, AzureStorageAccount)),
-     mount_point = OutputDir,
-     extra_configs = {('fs.azure.account.key.%s.blob.core.windows.net' % AzureStorageAccount) : AzureStorageAccessKey})
-
-   dbutils.fs.ls('/mnt')
-   ```
-
-1. Press the **SHIFT + ENTER** keys to run the code in this block.
-
-   You see an output similar to the following snippet:
-
-   ```
-   /mnt/mag has been unmounted.
-   /mnt/output has been unmounted.
-   Out[3]: 
-   [FileInfo(path='dbfs:/mnt/mag/', name='mag/', size=0),
-    FileInfo(path='dbfs:/mnt/output/', name='output/', size=0)]   Out[4]:
-   ``` 
-
-## Define functions to extract MAG data
-
-In this section, you define functions to extract MAG data from Azure Storage (AS).
-
-1. Copy content in script `samples/CreatePySparkFunctions.py` in MAG dataset. Paste the code into a new cell.
 
 1. Press the **SHIFT + ENTER** keys to run the code in this block.
 
@@ -135,7 +136,7 @@ In this section, you define functions to extract MAG data from Azure Storage (AS
 
 1. Copy content in a script and paste into a new cell.
 
-1. Press the **SHIFT + ENTER** keys to run the code in this block. Please note that some scripts take more than 10 minutes to complete.
+1. Press the **SHIFT + ENTER** keys to run the code in this cell. Please note that some scripts take more than 10 minutes to complete.
 
 ## View results with Microsoft Azure Storage Explorer
 
