@@ -30,7 +30,7 @@ Complete these tasks before you begin this tutorial:
 
 ## Import PySparkMagClass.py as a notebook
 
-In this section, you import PySparkMagClass.py as a notebook in Azure Databricks workspace. This utility notebook will be called from another notebook later.
+In this section, you import PySparkMagClass.py as a shared notebook in Azure Databricks workspace. You could run this utility notebook from other notebooks.
 
 1. Save samples\PySparkMagClass.py in MAG dataset to local drive.
 
@@ -55,7 +55,7 @@ In this section, you create a new notebook in Azure Databricks workspace.
 
 1. In the [Azure portal](https://portal.azure.com), go to the Azure Databricks service that you created, and select **Launch Workspace**.
 
-1. On the left, select **Workspace**. From the **Workspace** drop-down, select **Create** > **Notebook**. Optionally, you could create this notebook in users level.
+1. On the left, select **Workspace**. From the **Workspace** drop-down, select **Create** > **Notebook**. Optionally, you could create this notebook in **Users** level.
 
     ![Create a notebook in Databricks](media/databricks/databricks-create-notebook.png "Create notebook in Databricks")
 
