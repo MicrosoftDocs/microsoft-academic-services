@@ -36,7 +36,7 @@ In this section, you import PySparkMagClass.py as a notebook in Azure Databricks
 
 1. In the [Azure portal](https://portal.azure.com), go to the Azure Databricks service that you created, and select **Launch Workspace**.
 
-1. On the left, select **Workspace**. From the **Workspace** drop-down, select **Import**.
+1. On the left, select **Workspace**. From the **Workspace** > **Shared** drop-down, select **Import**.
 
     ![Import a notebook in Databricks](media/databricks/import-notebook.png "import notebook in Databricks")
     
@@ -44,10 +44,10 @@ In this section, you import PySparkMagClass.py as a notebook in Azure Databricks
 
     ![Provide details for a notebook in Databricks](media/databricks/import-notebook-dialog.png "Provide details for a notebook in Databricks")
 
-1. Select **Import**. This will create a notebook with path `"/PySparkMagClass"`. No need to run this notebook.
+1. Select **Import**. This will create a notebook with path `"/Shared/PySparkMagClass"`. No need to run this notebook.
 
    > [!NOTE]
-   > Please import this notebook under **Workspace** level. The full path of this notebook will be `"/PySparkMagClass"`. If you import it under **Shared** or **Users** levels, please note the actual full path and use it in following sections.
+   > When importing this notebook under **Shared** folder. The full path of this notebook is `"/Shared/PySparkMagClass"`. If you import it under other folders, note the actual full path and use it in following sections.
 
 ## Create a new notebook
 
@@ -55,7 +55,7 @@ In this section, you create a new notebook in Azure Databricks workspace.
 
 1. In the [Azure portal](https://portal.azure.com), go to the Azure Databricks service that you created, and select **Launch Workspace**.
 
-1. On the left, select **Workspace**. From the **Workspace** drop-down, select **Create** > **Notebook**.
+1. On the left, select **Workspace**. From the **Workspace** drop-down, select **Create** > **Notebook**. Optionally, you could create this notebook in users level.
 
     ![Create a notebook in Databricks](media/databricks/databricks-create-notebook.png "Create notebook in Databricks")
 
@@ -72,7 +72,7 @@ In this section, you create the first notebook cell to run PySparkMagClass noteb
 1. Copy and paste following code block into the first cell.
 
    ```python
-   %run "/PySparkMagClass"
+   %run "/Shared/PySparkMagClass"
    ```
 
 1. Press the **SHIFT + ENTER** keys to run the code in this block. It defines MicrosoftAcademicGraph class.
