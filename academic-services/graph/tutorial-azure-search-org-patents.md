@@ -4,7 +4,7 @@ description: Set up Azure Search service to do organizational patent search usin
 services: microsoft-academic-services
 ms.topic: tutorial
 ms.service: microsoft-academic-services
-ms.date: 3/26/2019
+ms.date: 4/8/2019
 ---
 
 # Tutorial: Set up organizational patent search with Azure Search
@@ -250,7 +250,9 @@ In prerequisite [Set up Azure Data Lake Analytics](get-started-setup-azure-data-
     @paperAuthorsDistinct =
         SELECT DISTINCT A.PaperId,
                         A.AuthorId,
-                        A.AuthorSequenceNumber
+
+                        // NOTE: Casting AuthorSequenceNumber to nullable as MAP_AGG requires it
+                        ((uint?)A.AuthorSequenceNumber) AS AuthorSequenceNumber
         FROM @paperAuthorAffiliations AS A
         INNER JOIN @papers AS P
             ON A.PaperId == P.PaperId;
