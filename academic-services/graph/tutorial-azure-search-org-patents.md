@@ -104,13 +104,13 @@ In prerequisite [Set up Azure Data Lake Analytics](get-started-setup-azure-data-
     CREATE FUNCTION PaperAuthorAffiliations(@BaseDir string = "")
       RETURNS @_PaperAuthorAffiliations TABLE
       (
-        PaperId long, AuthorId long, AffiliationId long?, AuthorSequenceNumber int, OriginalAuthor string, OriginalAffiliation string
+        PaperId long, AuthorId long, AffiliationId long?, AuthorSequenceNumber uint, OriginalAuthor string, OriginalAffiliation string
       )
       AS BEGIN
       DECLARE @_Path string = @BaseDir + "mag/PaperAuthorAffiliations.txt";
       @_PaperAuthorAffiliations =
       EXTRACT
-        PaperId long, AuthorId long, AffiliationId long?, AuthorSequenceNumber int, OriginalAuthor string, OriginalAffiliation string
+        PaperId long, AuthorId long, AffiliationId long?, AuthorSequenceNumber uint, OriginalAuthor string, OriginalAffiliation string
       FROM @_Path
       USING Extractors.Tsv(silent: false, quoting: false);
       RETURN;
