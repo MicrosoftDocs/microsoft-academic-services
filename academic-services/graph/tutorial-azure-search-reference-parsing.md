@@ -226,8 +226,8 @@ In prerequisite [Set up Azure Data Lake Analytics](get-started-setup-azure-data-
         SELECT DISTINCT A.PaperId,
                         A.AuthorId,
 
-                        // NOTE: Casting AuthorSequenceNumber to int as MAP_AGG requires it
-                        ((int)A.AuthorSequenceNumber) AS AuthorSequenceNumber
+                        // NOTE: Casting AuthorSequenceNumber to nullable as MAP_AGG requires it
+                        ((uint?)A.AuthorSequenceNumber) AS AuthorSequenceNumber
         FROM @paperAuthorAffiliations AS A
         INNER JOIN @papers AS P
             ON A.PaperId == P.PaperId
