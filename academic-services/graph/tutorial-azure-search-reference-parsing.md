@@ -4,7 +4,7 @@ description: Set up Azure Search service to enable reference parsing using the M
 services: microsoft-academic-services
 ms.topic: tutorial
 ms.service: microsoft-academic-services
-ms.date: 3/26/2019
+ms.date: 4/8/2019
 ---
 
 # Tutorial: Set up academic reference parsing with Azure Search
