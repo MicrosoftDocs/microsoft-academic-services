@@ -89,8 +89,8 @@ Column # | Name | Type | Note
 
 Column # | Name | Type | Note
 --- | --- | --- | ---
-1 | FieldOfStudyId | long | PRIMARY KEY. FOREIGN KEY REFERENCES FieldsOfStudy(FieldOfStudyId)
-2 | ChildFieldOfStudyId | long | PRIMARY KEY. FOREIGN KEY REFERENCES FieldsOfStudy(FieldOfStudyId)
+1 | FieldOfStudyId | long | PRIMARY KEY <br> FOREIGN KEY REFERENCES FieldsOfStudy(FieldOfStudyId)
+2 | ChildFieldOfStudyId | long | PRIMARY KEY <br> FOREIGN KEY REFERENCES FieldsOfStudy(FieldOfStudyId)
 
 ## FieldsOfStudy.txt
 
