@@ -125,7 +125,7 @@ Column # | Name | Type | Note
 
 Column # | Name | Type | Note
 --- | --- | --- | ---
-1 | PaperId | long | PRIMARY KEY. FOREIGN KEY REFERENCES Papers(PaperId)
+1 | PaperId | long | PRIMARY KEY <br> FOREIGN KEY REFERENCES Papers(PaperId)
 2 | IndexedAbstract | string | See [Microsoft Academic Graph FAQ](resources-faq.md)
 
 ## PaperAuthorAffiliations.txt
@@ -154,37 +154,37 @@ Column # | Name | Type | Note
 
 Column # | Name | Type | Note
 --- | --- | --- | ---
-1 | PaperId | long | PRIMARY KEY. FOREIGN KEY REFERENCES Papers(PaperId)
-2 | FieldOfStudyId | long | PRIMARY KEY. FOREIGN KEY REFERENCES FieldsOfStudy(FieldOfStudyId)
+1 | PaperId | long | PRIMARY KEY <br> FOREIGN KEY REFERENCES Papers(PaperId)
+2 | FieldOfStudyId | long | PRIMARY KEY <br> FOREIGN KEY REFERENCES FieldsOfStudy(FieldOfStudyId)
 3 | Score | float | Confidence range between 0 and 1. Bigger number representing higher confidence.
 
 ## PaperLanguages.txt
 
 Column # | Name | Type | Note
 --- | --- | --- | ---
-1 | PaperId | long | PRIMARY KEY. FOREIGN KEY REFERENCES Papers(PaperId)
+1 | PaperId | long | PRIMARY KEY <br> FOREIGN KEY REFERENCES Papers(PaperId)
 2 | LanguageCode | string | PRIMARY KEY
 
 ## PaperRecommendations.txt
 
 Column # | Name | Type | Note
 --- | --- | --- | ---
-1 | PaperId | long | PRIMARY KEY. FOREIGN KEY REFERENCES Papers(PaperId)
-2 | RecommendedPaperId | long | PRIMARY KEY. FOREIGN KEY REFERENCES Papers(PaperId)
+1 | PaperId | long | PRIMARY KEY <br> FOREIGN KEY REFERENCES Papers(PaperId)
+2 | RecommendedPaperId | long | PRIMARY KEY <br> FOREIGN KEY REFERENCES Papers(PaperId)
 3 | Score | float | Confidence range between 0 and 1. Bigger number representing higher confidence.
 
 ## PaperReferences.txt
 
 Column # | Name | Type | Note
 --- | --- | --- | ---
-1 | PaperId | long | PRIMARY KEY. FOREIGN KEY REFERENCES Papers(PaperId)
-2 | PaperReferenceId | long | PRIMARY KEY. FOREIGN KEY REFERENCES Papers(PaperId)
+1 | PaperId | long | PRIMARY KEY <br> FOREIGN KEY REFERENCES Papers(PaperId)
+2 | PaperReferenceId | long | PRIMARY KEY <br> FOREIGN KEY REFERENCES Papers(PaperId)
 
 ## PaperResources.txt
 
 Column # | Name | Type | Note
 --- | --- | --- | ---
-1 | PaperId | long | PRIMARY KEY. FOREIGN KEY REFERENCES Papers(PaperId)
+1 | PaperId | long | PRIMARY KEY <br> FOREIGN KEY REFERENCES Papers(PaperId)
 2 | ResourceType | int |
 3 | ResourceUrl | string | Bit flags. 1 = Project, 2 = Data, 4 = Code
 4 | SourceUrl | string | PRIMARY KEY
@@ -194,7 +194,7 @@ Column # | Name | Type | Note
 
 Column # | Name | Type | Note
 --- | --- | --- | ---
-1 | PaperId | long | PRIMARY KEY. FOREIGN KEY REFERENCES Papers(PaperId)
+1 | PaperId | long | PRIMARY KEY <br> FOREIGN KEY REFERENCES Papers(PaperId)
 2 | SourceType | int? | 1 = Html, 2 = Text, 3 = Pdf, 4 = Doc, 5 = Ppt, 6 = Xls, 8 = Rtf, 12 = Xml, 13 = Rss, 20 = Swf, 27 = Ics, 31 = Pub, 33 = Ods, 34 = Odp, 35 = Odt, 36 = Zip, 40 = Mp3, 0/999/NULL = unknown
 3 | SourceUrl | string | PRIMARY KEY
 
