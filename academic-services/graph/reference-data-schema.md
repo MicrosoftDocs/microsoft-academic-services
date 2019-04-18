@@ -121,7 +121,7 @@ Column # | Name | Type | Note
 9 | CitationCount | long |
 10 | CreatedDate | DateTime |
 
-## PaperAbstractInvertedIndex.txt
+## PaperAbstractsInvertedIndex.txt
 
 Column # | Name | Type | Note
 --- | --- | --- | ---
