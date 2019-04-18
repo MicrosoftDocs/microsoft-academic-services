@@ -184,10 +184,10 @@ Column # | Name | Type | Note
 
 Column # | Name | Type | Note
 --- | --- | --- | ---
-1 | PaperId | long | PRIMARY KEY <br> FOREIGN KEY REFERENCES Papers(PaperId)
+1 | PaperId | long | FOREIGN KEY REFERENCES Papers(PaperId)
 2 | ResourceType | int |
 3 | ResourceUrl | string | Bit flags. 1 = Project, 2 = Data, 4 = Code
-4 | SourceUrl | string | PRIMARY KEY
+4 | SourceUrl | string |
 5 | RelationshipType | int | Bit flags. 1 = Own, 2 = Cite
 
 ## PaperUrls.txt
