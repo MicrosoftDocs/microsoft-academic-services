@@ -85,7 +85,7 @@ Column # | Name | Type | Note
 6 | CitationCount | long |
 7 | CreatedDate | DateTime |
 
-## FieldsOfStudyChildren.txt
+## FieldOfStudyChildren.txt
 
 Column # | Name | Type | Note
 --- | --- | --- | ---
