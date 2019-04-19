@@ -2,7 +2,7 @@
 title: Microsoft Academic Graph data schema
 description: Documents the complete, most recent Microsoft Academic Graph entity data schema, including the name and type of each attribute
 ms.topic: reference
-ms.date: 3/26/2019
+ms.date: 4/16/2019
 # Microsoft Academic Graph data schema
 
 Documents the complete, most recent Microsoft Academic Graph entity data schema, including the name and type of each attribute.
@@ -85,12 +85,12 @@ Column # | Name | Type | Note
 6 | CitationCount | long |
 7 | CreatedDate | DateTime |
 
-## FieldsOfStudyChildren.txt
+## FieldOfStudyChildren.txt
 
 Column # | Name | Type | Note
 --- | --- | --- | ---
-1 | FieldOfStudyId | long | FOREIGN KEY REFERENCES FieldsOfStudy(FieldOfStudyId)
-2 | ChildFieldOfStudyId | long | FOREIGN KEY REFERENCES FieldsOfStudy(FieldOfStudyId)
+1 | FieldOfStudyId | long | PRIMARY KEY <br> FOREIGN KEY REFERENCES FieldsOfStudy(FieldOfStudyId)
+2 | ChildFieldOfStudyId | long | PRIMARY KEY <br> FOREIGN KEY REFERENCES FieldsOfStudy(FieldOfStudyId)
 
 ## FieldsOfStudy.txt
 
@@ -121,11 +121,11 @@ Column # | Name | Type | Note
 9 | CitationCount | long |
 10 | CreatedDate | DateTime |
 
-## PaperAbstractInvertedIndex.txt
+## PaperAbstractsInvertedIndex.txt
 
 Column # | Name | Type | Note
 --- | --- | --- | ---
-1 | PaperId | long | FOREIGN KEY REFERENCES Papers(PaperId)
+1 | PaperId | long | PRIMARY KEY <br> FOREIGN KEY REFERENCES Papers(PaperId)
 2 | IndexedAbstract | string | See [Microsoft Academic Graph FAQ](resources-faq.md)
 
 ## PaperAuthorAffiliations.txt
@@ -154,31 +154,31 @@ Column # | Name | Type | Note
 
 Column # | Name | Type | Note
 --- | --- | --- | ---
-1 | PaperId | long | FOREIGN KEY REFERENCES Papers(PaperId)
-2 | FieldOfStudyId | long | FOREIGN KEY REFERENCES FieldsOfStudy(FieldOfStudyId)
+1 | PaperId | long | PRIMARY KEY <br> FOREIGN KEY REFERENCES Papers(PaperId)
+2 | FieldOfStudyId | long | PRIMARY KEY <br> FOREIGN KEY REFERENCES FieldsOfStudy(FieldOfStudyId)
 3 | Score | float | Confidence range between 0 and 1. Bigger number representing higher confidence.
 
 ## PaperLanguages.txt
 
 Column # | Name | Type | Note
 --- | --- | --- | ---
-1 | PaperId | long | FOREIGN KEY REFERENCES Papers(PaperId)
-2 | LanguageCode | string |
+1 | PaperId | long | PRIMARY KEY <br> FOREIGN KEY REFERENCES Papers(PaperId)
+2 | LanguageCode | string | PRIMARY KEY
 
 ## PaperRecommendations.txt
 
 Column # | Name | Type | Note
 --- | --- | --- | ---
-1 | PaperId | long | FOREIGN KEY REFERENCES Papers(PaperId)
-2 | RecommendedPaperId | long | FOREIGN KEY REFERENCES Papers(PaperId)
+1 | PaperId | long | PRIMARY KEY <br> FOREIGN KEY REFERENCES Papers(PaperId)
+2 | RecommendedPaperId | long | PRIMARY KEY <br> FOREIGN KEY REFERENCES Papers(PaperId)
 3 | Score | float | Confidence range between 0 and 1. Bigger number representing higher confidence.
 
 ## PaperReferences.txt
 
 Column # | Name | Type | Note
 --- | --- | --- | ---
-1 | PaperId | long | FOREIGN KEY REFERENCES Papers(PaperId)
-2 | PaperReferenceId | long | FOREIGN KEY REFERENCES Papers(PaperId)
+1 | PaperId | long | PRIMARY KEY <br> FOREIGN KEY REFERENCES Papers(PaperId)
+2 | PaperReferenceId | long | PRIMARY KEY <br> FOREIGN KEY REFERENCES Papers(PaperId)
 
 ## PaperResources.txt
 
@@ -194,9 +194,9 @@ Column # | Name | Type | Note
 
 Column # | Name | Type | Note
 --- | --- | --- | ---
-1 | PaperId | long | FOREIGN KEY REFERENCES Papers(PaperId)
+1 | PaperId | long | PRIMARY KEY <br> FOREIGN KEY REFERENCES Papers(PaperId)
 2 | SourceType | int? | 1 = Html, 2 = Text, 3 = Pdf, 4 = Doc, 5 = Ppt, 6 = Xls, 8 = Rtf, 12 = Xml, 13 = Rss, 20 = Swf, 27 = Ics, 31 = Pub, 33 = Ods, 34 = Odp, 35 = Odt, 36 = Zip, 40 = Mp3, 0/999/NULL = unknown
-3 | SourceUrl | string |
+3 | SourceUrl | string | PRIMARY KEY
 
 ## Papers.txt
 
@@ -230,9 +230,7 @@ Column # | Name | Type | Note
 Column # | Name | Type | Note
 --- | --- | --- | ---
 1 | FieldOfStudyId1 | long | FOREIGN KEY REFERENCES FieldsOfStudy(FieldOfStudyId)
-2 | DisplayName 1 | string |
-3 | Type1 | string | general, disease, disease_cause, medical_treatment, symptom
-4 | FieldOfStudyId2 | long | FOREIGN KEY REFERENCES FieldsOfStudy(FieldOfStudyId)
-5 | DisplayMame 2 | string |
-6 | Type2 | string | general, disease, disease_cause, medical_treatment, symptom
-7 | Rank | float | Confidence range between 0 and 1. Bigger number representing higher confidence.
+2 | Type1 | string | general, disease, disease_cause, medical_treatment, symptom
+3 | FieldOfStudyId2 | long | FOREIGN KEY REFERENCES FieldsOfStudy(FieldOfStudyId)
+4 | Type2 | string | general, disease, disease_cause, medical_treatment, symptom
+5 | Rank | float | Confidence range between 0 and 1. Bigger number representing higher confidence.
