@@ -38,7 +38,9 @@ Column # | Name | Type | Note
 7 | WikiPage | string |
 8 | PaperCount | long |
 9 | CitationCount | long |
-10 | CreatedDate | DateTime |
+10 | Latitude | float? |
+11 | Longitude | float? |
+12 | CreatedDate | DateTime |
 
 ## Authors.txt
 
@@ -71,7 +73,9 @@ Column # | Name | Type | Note
 12 | FinalVersionDueDate | DateTime? |
 13 | PaperCount | long |
 14 | CitationCount | long |
-15 | CreatedDate | DateTime |
+15 | Latitude | float? |
+16 | Longitude | float? |
+17 | CreatedDate | DateTime |
 
 ## ConferenceSeries.txt
 
@@ -84,6 +88,17 @@ Column # | Name | Type | Note
 5 | PaperCount | long |
 6 | CitationCount | long |
 7 | CreatedDate | DateTime |
+
+## EntityRelatedEntities.txt
+
+Column # | Name | Type | Note
+--- | --- | --- | ---
+1 | EntityId | long |
+2 | EntityType | string |
+3 | RelatedEntityId | long |
+4 | RelatedEntityType | string |
+5 | RelatedType | int |
+6 | Score | float |
 
 ## FieldOfStudyChildren.txt
 
