@@ -94,10 +94,10 @@ Column # | Name | Type | Note
 Column # | Name | Type | Note
 --- | --- | --- | ---
 1 | EntityId | long |
-2 | EntityType | string |
+2 | EntityType | string | af: affiliation<br>j: journal<br>c: conference
 3 | RelatedEntityId | long |
-4 | RelatedEntityType | string |
-5 | RelatedType | int |
+4 | RelatedEntityType | string | af: affiliation<br>j: journal<br>c: conference
+5 | RelatedType | int | 0: two entities are similar if they appear on the same paper <br> 1: two entities are similar if they have common coauthors <br> 2: two entities are similar if they are co-cited by others <br> 3: two entities are similar if they have common fields of study <br> 4: two entities are similar if they appear in the same venue <br> 5: Entity A is similar to entity B if A cites B <br> 6: Entity A is similar to entity B if A is cited by B
 6 | Score | float | Confidence range between 0 and 1. Bigger number representing higher confidence.
 
 ## FieldOfStudyChildren.txt
