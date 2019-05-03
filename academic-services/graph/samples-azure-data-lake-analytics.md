@@ -4,7 +4,7 @@ description: Perform analytics and visualization for Microsoft Academic Graph us
 services: microsoft-academic-services
 ms.topic: tutorial
 ms.service: microsoft-academic-services
-ms.date: 3/14/2019
+ms.date: 5/3/2019
 ---
 # Analytics and visualization samples for Microsoft Academic Graph
 
@@ -16,6 +16,38 @@ Complete these tasks before you begin this tutorial:
 
 * Setting up provisioning of Microsoft Academic Graph to an Azure blob storage account. See [Get Microsoft Academic Graph on Azure storage](get-started-setup-provisioning.md).
 * Setting up Azure Data Lake Analytics. See [Set up Azure Data Lake Analytics](get-started-setup-azure-data-lake-analytics.md).
+* [Microsoft Power BI Desktop client](https://powerbi.microsoft.com/en-us/desktop/)
+* Visual Studio 2017 or Visual Studio 2015 with [Data Lake tools](https://www.microsoft.com/en-us/download/details.aspx?id=49504)
+
+## Gather the information that you need
+
+   Before you begin, you should have these items of information:
+
+   :heavy_check_mark:  The name of your Azure Storage (AS) account containing MAG dataset from [Get Microsoft Academic Graph on Azure storage](get-started-setup-provisioning.md#note-azure-storage-account-name-and-primary-key).
+
+   :heavy_check_mark:  The name of your Azure Data Lake Analytics (ADLA) service from [Set up Azure Data Lake Analytics](get-started-setup-azure-data-lake-analytics.md#create-azure-data-lake-analytics-account).
+
+   :heavy_check_mark:  The name of your Azure Data Lake Storage (ADLS) from [Set up Azure Data Lake Analytics](get-started-setup-azure-data-lake-analytics.md#create-azure-data-lake-analytics-account).
+
+   :heavy_check_mark:  The name of the container in your Azure Storage (AS) account containing MAG dataset.
+
+## Create database from MAG data
+
+In prerequisite [Set up Azure Data Lake Analytics](get-started-setup-azure-data-lake-analytics.md), you added the Azure Storage  (AS) created for MAG provision as a data source for the Azure Data Lake Analytics service (ADLA). In this section, you submit an ADLA job to create database from MAG data.
+
+1. In the [Azure portal](https://portal.azure.com), go to the Azure Data Lake Analytics (ADLA) service that you created, and select **Overview** > **New Job**.
+
+   ![Azure Data Lake Analytics - New job](media/samples-azure-data-lake-hindex/new-job.png "Azure Data Lake Analytics - New job")
+
+1. Copy code in samples/CreateDatabase.usql and paste into the code block.
+   
+1. Provide a **Job name** and select **Submit**.
+
+   ![Submit CreateFunctions job](media/samples-azure-data-lake-hindex/create-functions-submit.png "Submit CreateFunctions job")
+
+1. The job should finish successfully.
+
+   ![CreateFunctions job status](media/samples-azure-data-lake-hindex/create-functions-status.png "CreateFunctions job status")
 
 ## Sample projects
 
@@ -34,20 +66,10 @@ Complete these tasks before you begin this tutorial:
 
 ## Getting started with sample projects
 
-### Prerequisites
-
-* [Get Microsoft Academic Graph on Azure Storage](get-started-setup-provisioning.md)
-* [Set up Azure Data Lake Analytics for Microsoft Academic Graph](get-started-setup-azure-data-lake-analytics.md)
-* [Microsoft Power BI Desktop client](https://powerbi.microsoft.com/en-us/desktop/)
-* Visual Studio 2017 or Visual Studio 2015 with [Data Lake tools](https://www.microsoft.com/en-us/download/details.aspx?id=49504)
-
-### Quick-start
-
 1. Download or clone the [samples repository](https://github.com/Azure-Samples/academic-knowledge-analytics-visualization/)
-2. Open the solution /src/AcademicAnalytics.sln
-3. Take a look at the academic graph data schema and run CreateDatabase.usql from [common scripts](https://github.com/Azure-Samples/academic-knowledge-analytics-visualization/tree/master/src/AcademicAnalytics/00.%20Common%20Scripts)
-4. For each tutorial there should be: A U-SQL script(.usql), a Power BI report (.pbix), a Power BI template (.pbit) and a README explaining the tutorial.
-5. Although each tutorial is different, running the U-SQL script as is and filling out the Power BI template using the same U-SQL parameters should give you a Power BI report with visualizations that match the Power BI report example included in the tutorial. Since the Microsoft Academic graph is contently improving, different graph versions may give you slightly different results.
+1. Open the solution /src/AcademicAnalytics.sln
+1. For each tutorial there should be: A U-SQL script(.usql), a Power BI report (.pbix), a Power BI template (.pbit) and a README explaining the tutorial.
+1. Although each tutorial is different, running the U-SQL script as is and filling out the Power BI template using the same U-SQL parameters should give you a Power BI report with visualizations that match the Power BI report example included in the tutorial. Since the Microsoft Academic graph is contently improving, different graph versions may give you slightly different results.
 
 ## Working with U-SQL scripts
 
