@@ -98,7 +98,7 @@ Column # | Name | Type | Note
 3 | RelatedEntityId | long |
 4 | RelatedEntityType | string |
 5 | RelatedType | int |
-6 | Score | float |
+6 | Score | float | Confidence range between 0 and 1. Bigger number representing higher confidence.
 
 ## FieldOfStudyChildren.txt
 
