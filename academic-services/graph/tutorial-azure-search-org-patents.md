@@ -4,7 +4,7 @@ description: Set up Azure Search service to do organizational patent search usin
 services: microsoft-academic-services
 ms.topic: tutorial
 ms.service: microsoft-academic-services
-ms.date: 4/8/2019
+ms.date: 5/3/2019
 ---
 
 # Tutorial: Set up organizational patent search with Azure Search
@@ -55,14 +55,12 @@ In prerequisite [Set up Azure Data Lake Analytics](get-started-setup-azure-data-
     DROP FUNCTION IF EXISTS Affiliations;
     CREATE FUNCTION Affiliations(@BaseDir string = "")
       RETURNS @_Affiliations TABLE
-      (
-        AffiliationId long, Rank uint, NormalizedName string, DisplayName string, GridId string, OfficialPage string, WikiPage string, PaperCount long, CitationCount long, CreatedDate DateTime
-      )
+      ( AffiliationId long, Rank uint, NormalizedName string, DisplayName string, GridId string, OfficialPage string, WikiPage string, PaperCount long, CitationCount long, Latitude float?, Longitude float?, CreatedDate DateTime )
       AS BEGIN
       DECLARE @_Path string = @BaseDir + "mag/Affiliations.txt";
       @_Affiliations =
       EXTRACT
-        AffiliationId long, Rank uint, NormalizedName string, DisplayName string, GridId string, OfficialPage string, WikiPage string, PaperCount long, CitationCount long, CreatedDate DateTime
+        AffiliationId long, Rank uint, NormalizedName string, DisplayName string, GridId string, OfficialPage string, WikiPage string, PaperCount long, CitationCount long, Latitude float?, Longitude float?, CreatedDate DateTime
       FROM @_Path
       USING Extractors.Tsv(silent: false, quoting: false);
       RETURN;
@@ -71,9 +69,7 @@ In prerequisite [Set up Azure Data Lake Analytics](get-started-setup-azure-data-
     DROP FUNCTION IF EXISTS Authors;
     CREATE FUNCTION Authors(@BaseDir string = "")
       RETURNS @_Authors TABLE
-      (
-        AuthorId long, Rank uint, NormalizedName string, DisplayName string, LastKnownAffiliationId long?, PaperCount long, CitationCount long, CreatedDate DateTime
-      )
+      ( AuthorId long, Rank uint, NormalizedName string, DisplayName string, LastKnownAffiliationId long?, PaperCount long, CitationCount long, CreatedDate DateTime )
       AS BEGIN
       DECLARE @_Path string = @BaseDir + "mag/Authors.txt";
       @_Authors =
@@ -87,11 +83,9 @@ In prerequisite [Set up Azure Data Lake Analytics](get-started-setup-azure-data-
     DROP FUNCTION IF EXISTS FieldsOfStudy;
     CREATE FUNCTION FieldsOfStudy(@BaseDir string = "")
       RETURNS @_FieldsOfStudy TABLE
-      (
-        FieldOfStudyId long, Rank uint, NormalizedName string, DisplayName string, MainType string, Level int, PaperCount long, CitationCount long, CreatedDate DateTime
-      )
+      ( FieldOfStudyId long, Rank uint, NormalizedName string, DisplayName string, MainType string, Level int, PaperCount long, CitationCount long, CreatedDate DateTime )
       AS BEGIN
-      DECLARE @_Path string = @BaseDir + "mag/FieldsOfStudy.txt";
+      DECLARE @_Path string = @BaseDir + "advanced/FieldsOfStudy.txt";
       @_FieldsOfStudy =
       EXTRACT
         FieldOfStudyId long, Rank uint, NormalizedName string, DisplayName string, MainType string, Level int, PaperCount long, CitationCount long, CreatedDate DateTime
@@ -103,9 +97,7 @@ In prerequisite [Set up Azure Data Lake Analytics](get-started-setup-azure-data-
     DROP FUNCTION IF EXISTS PaperAuthorAffiliations;
     CREATE FUNCTION PaperAuthorAffiliations(@BaseDir string = "")
       RETURNS @_PaperAuthorAffiliations TABLE
-      (
-        PaperId long, AuthorId long, AffiliationId long?, AuthorSequenceNumber uint, OriginalAuthor string, OriginalAffiliation string
-      )
+      ( PaperId long, AuthorId long, AffiliationId long?, AuthorSequenceNumber uint, OriginalAuthor string, OriginalAffiliation string )
       AS BEGIN
       DECLARE @_Path string = @BaseDir + "mag/PaperAuthorAffiliations.txt";
       @_PaperAuthorAffiliations =
@@ -119,9 +111,7 @@ In prerequisite [Set up Azure Data Lake Analytics](get-started-setup-azure-data-
     DROP FUNCTION IF EXISTS PaperFieldsOfStudy;
     CREATE FUNCTION PaperFieldsOfStudy(@BaseDir string = "")
       RETURNS @_PaperFieldsOfStudy TABLE
-      (
-        PaperId long, FieldOfStudyId long, Score float
-      )
+      ( PaperId long, FieldOfStudyId long, Score float )
       AS BEGIN
       DECLARE @_Path string = @BaseDir + "advanced/PaperFieldsOfStudy.txt";
       @_PaperFieldsOfStudy =
@@ -135,9 +125,7 @@ In prerequisite [Set up Azure Data Lake Analytics](get-started-setup-azure-data-
     DROP FUNCTION IF EXISTS Papers;
     CREATE FUNCTION Papers(@BaseDir string = "")
       RETURNS @_Papers TABLE
-      (
-        PaperId long, Rank uint, Doi string, DocType string, PaperTitle string, OriginalTitle string, BookTitle string, Year int?, Date DateTime?, Publisher string, JournalId long?, ConferenceSeriesId long?, ConferenceInstanceId long?, Volume string, Issue string, FirstPage string, LastPage string, ReferenceCount long, CitationCount long, EstimatedCitation long, OriginalVenue string, CreatedDate DateTime
-      )
+      ( PaperId long, Rank uint, Doi string, DocType string, PaperTitle string, OriginalTitle string, BookTitle string, Year int?, Date DateTime?, Publisher string, JournalId long?, ConferenceSeriesId long?, ConferenceInstanceId long?, Volume string, Issue string, FirstPage string, LastPage string, ReferenceCount long, CitationCount long, EstimatedCitation long, OriginalVenue string, CreatedDate DateTime )
       AS BEGIN
       DECLARE @_Path string = @BaseDir + "mag/Papers.txt";
       @_Papers =
