@@ -4,7 +4,7 @@ description: Compute author h-index for Microsoft Academic Graph using Azure Dat
 services: microsoft-academic-services
 ms.topic: tutorial
 ms.service: microsoft-academic-services
-ms.date: 3/26/2019
+ms.date: 5/3/2019
 ---
 # Tutorial: Compute author h-index using Azure Data Lake Analytics (U-SQL)
 
@@ -46,12 +46,12 @@ In prerequisite [Set up Azure Data Lake Analytics](get-started-setup-azure-data-
    DROP FUNCTION IF EXISTS Affiliations;
    CREATE FUNCTION Affiliations(@BaseDir string = "")
      RETURNS @_Affiliations TABLE
-     ( AffiliationId long, Rank uint, NormalizedName string, DisplayName string, GridId string, OfficialPage string, WikiPage string, PaperCount long, CitationCount long, CreatedDate DateTime )
+     ( AffiliationId long, Rank uint, NormalizedName string, DisplayName string, GridId string, OfficialPage string, WikiPage string, PaperCount long, CitationCount long, Latitude float?, Longitude float?, CreatedDate DateTime )
      AS BEGIN
      DECLARE @_Path string = @BaseDir + "mag/Affiliations.txt";
      @_Affiliations =
      EXTRACT
-       AffiliationId long, Rank uint, NormalizedName string, DisplayName string, GridId string, OfficialPage string, WikiPage string, PaperCount long, CitationCount long, CreatedDate DateTime
+       AffiliationId long, Rank uint, NormalizedName string, DisplayName string, GridId string, OfficialPage string, WikiPage string, PaperCount long, CitationCount long, Latitude float?, Longitude float?, CreatedDate DateTime
      FROM @_Path
      USING Extractors.Tsv(silent: false, quoting: false);
      RETURN;
