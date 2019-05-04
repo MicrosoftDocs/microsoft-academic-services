@@ -91,15 +91,15 @@ In prerequisite [Set up Azure Data Lake Analytics](get-started-setup-azure-data-
       RETURN;
     END;
     
-    DROP FUNCTION IF EXISTS ConferenceSeries;
-    CREATE FUNCTION ConferenceSeries(@BaseDir string = "")
-      RETURNS @_ConferenceSeries TABLE
-      ( ConferenceSeriesId long, Rank uint, NormalizedName string, DisplayName string, PaperCount long, CitationCount long, CreatedDate DateTime )
+    DROP FUNCTION IF EXISTS Journals;
+    CREATE FUNCTION Journals(@BaseDir string = "")
+      RETURNS @_Journals TABLE
+      ( JournalId long, Rank uint, NormalizedName string, DisplayName string, Issn string, Publisher string, Webpage string, PaperCount long, CitationCount long, CreatedDate DateTime )
       AS BEGIN
-      DECLARE @_Path string = @BaseDir + "mag/ConferenceSeries.txt";
-      @_ConferenceSeries =
+      DECLARE @_Path string = @BaseDir + "mag/Journals.txt";
+      @_Journals =
       EXTRACT
-        ConferenceSeriesId long, Rank uint, NormalizedName string, DisplayName string, PaperCount long, CitationCount long, CreatedDate DateTime
+        JournalId long, Rank uint, NormalizedName string, DisplayName string, Issn string, Publisher string, Webpage string, PaperCount long, CitationCount long, CreatedDate DateTime
       FROM @_Path
       USING Extractors.Tsv(silent: false, quoting: false);
       RETURN;
