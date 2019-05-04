@@ -62,7 +62,6 @@ In prerequisite [Set up Azure Data Lake Analytics](get-started-setup-azure-data-
     > To work with the latest MAG data set schema, instead of the code block below, you could use code in samples/CreateFunctions.usql in the MAG data set.
     
     ```U-SQL
-    
     DROP FUNCTION IF EXISTS Authors;
     CREATE FUNCTION Authors(@BaseDir string = "")
       RETURNS @_Authors TABLE
@@ -132,7 +131,6 @@ In prerequisite [Set up Azure Data Lake Analytics](get-started-setup-azure-data-
       USING Extractors.Tsv(silent: false, quoting: false);
       RETURN;
     END;
-    
     ```
 
 1. Provide a **Job name** and select **Submit**.
