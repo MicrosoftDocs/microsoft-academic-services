@@ -2,7 +2,7 @@
 title: Microsoft Academic Graph data schema
 description: Documents the complete, most recent Microsoft Academic Graph entity data schema, including the name and type of each attribute
 ms.topic: reference
-ms.date: 4/16/2019
+ms.date: 5/2/2019
 # Microsoft Academic Graph data schema
 
 Documents the complete, most recent Microsoft Academic Graph entity data schema, including the name and type of each attribute.
@@ -38,7 +38,9 @@ Column # | Name | Type | Note
 7 | WikiPage | string |
 8 | PaperCount | long |
 9 | CitationCount | long |
-10 | CreatedDate | DateTime |
+10 | Latitude | float? |
+11 | Longitude | float? |
+12 | CreatedDate | DateTime |
 
 ## Authors.txt
 
@@ -71,7 +73,9 @@ Column # | Name | Type | Note
 12 | FinalVersionDueDate | DateTime? |
 13 | PaperCount | long |
 14 | CitationCount | long |
-15 | CreatedDate | DateTime |
+15 | Latitude | float? |
+16 | Longitude | float? |
+17 | CreatedDate | DateTime |
 
 ## ConferenceSeries.txt
 
@@ -84,6 +88,17 @@ Column # | Name | Type | Note
 5 | PaperCount | long |
 6 | CitationCount | long |
 7 | CreatedDate | DateTime |
+
+## EntityRelatedEntities.txt
+
+Column # | Name | Type | Note
+--- | --- | --- | ---
+1 | EntityId | long |
+2 | EntityType | string | af: Affiliation <br> j: Journal <br> c: Conference
+3 | RelatedEntityId | long |
+4 | RelatedEntityType | string | af: Affiliation <br> j: Journal <br> c: Conference
+5 | RelatedType | int | 0: Two entities are similar if they appear on the same paper <br> 1: Two entities are similar if they have common coauthors <br> 2: Two entities are similar if they are co-cited by others <br> 3: Two entities are similar if they have common fields of study <br> 4: Two entities are similar if they appear in the same venue <br> 5: Entity A is similar to entity B if A cites B <br> 6: Entity A is similar to entity B if A is cited by B
+6 | Score | float | Confidence range between 0 and 1. Bigger number representing higher confidence.
 
 ## FieldOfStudyChildren.txt
 
