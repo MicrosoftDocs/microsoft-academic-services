@@ -47,8 +47,6 @@ In prerequisite [Set up Azure Data Lake Analytics](get-started-setup-azure-data-
 
 1. The job should finish successfully.
 
-   ![CreateFunctions job status](media/samples-azure-data-lake-hindex/create-functions-status.png "CreateFunctions job status")
-
 ## Sample projects
 
 * [Field of Study Top Authors](https://github.com/Azure-Samples/academic-knowledge-analytics-visualization/tree/master/src/AcademicAnalytics/01.%20Field%20of%20Study%20Top%20Authors)
