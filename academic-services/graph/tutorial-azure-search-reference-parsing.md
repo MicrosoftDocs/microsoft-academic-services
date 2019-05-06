@@ -4,7 +4,7 @@ description: Set up Azure Search service to enable reference parsing using the M
 services: microsoft-academic-services
 ms.topic: tutorial
 ms.service: microsoft-academic-services
-ms.date: 4/8/2019
+ms.date: 5/3/2019
 ---
 
 # Tutorial: Set up academic reference parsing with Azure Search
@@ -62,13 +62,10 @@ In prerequisite [Set up Azure Data Lake Analytics](get-started-setup-azure-data-
     > To work with the latest MAG data set schema, instead of the code block below, you could use code in samples/CreateFunctions.usql in the MAG data set.
     
     ```U-SQL
-    
     DROP FUNCTION IF EXISTS Authors;
     CREATE FUNCTION Authors(@BaseDir string = "")
       RETURNS @_Authors TABLE
-      (
-        AuthorId long, Rank uint, NormalizedName string, DisplayName string, LastKnownAffiliationId long?, PaperCount long, CitationCount long, CreatedDate DateTime
-      )
+      ( AuthorId long, Rank uint, NormalizedName string, DisplayName string, LastKnownAffiliationId long?, PaperCount long, CitationCount long, CreatedDate DateTime )
       AS BEGIN
       DECLARE @_Path string = @BaseDir + "mag/Authors.txt";
       @_Authors =
@@ -82,9 +79,7 @@ In prerequisite [Set up Azure Data Lake Analytics](get-started-setup-azure-data-
     DROP FUNCTION IF EXISTS ConferenceSeries;
     CREATE FUNCTION ConferenceSeries(@BaseDir string = "")
       RETURNS @_ConferenceSeries TABLE
-      (
-        ConferenceSeriesId long, Rank uint, NormalizedName string, DisplayName string, PaperCount long, CitationCount long, CreatedDate DateTime
-      )
+      ( ConferenceSeriesId long, Rank uint, NormalizedName string, DisplayName string, PaperCount long, CitationCount long, CreatedDate DateTime )
       AS BEGIN
       DECLARE @_Path string = @BaseDir + "mag/ConferenceSeries.txt";
       @_ConferenceSeries =
@@ -98,9 +93,7 @@ In prerequisite [Set up Azure Data Lake Analytics](get-started-setup-azure-data-
     DROP FUNCTION IF EXISTS Journals;
     CREATE FUNCTION Journals(@BaseDir string = "")
       RETURNS @_Journals TABLE
-      (
-        JournalId long, Rank uint, NormalizedName string, DisplayName string, Issn string, Publisher string, Webpage string, PaperCount long, CitationCount long, CreatedDate DateTime
-      )
+      ( JournalId long, Rank uint, NormalizedName string, DisplayName string, Issn string, Publisher string, Webpage string, PaperCount long, CitationCount long, CreatedDate DateTime )
       AS BEGIN
       DECLARE @_Path string = @BaseDir + "mag/Journals.txt";
       @_Journals =
@@ -114,9 +107,7 @@ In prerequisite [Set up Azure Data Lake Analytics](get-started-setup-azure-data-
     DROP FUNCTION IF EXISTS PaperAuthorAffiliations;
     CREATE FUNCTION PaperAuthorAffiliations(@BaseDir string = "")
       RETURNS @_PaperAuthorAffiliations TABLE
-      (
-        PaperId long, AuthorId long, AffiliationId long?, AuthorSequenceNumber uint, OriginalAuthor string, OriginalAffiliation string
-      )
+      ( PaperId long, AuthorId long, AffiliationId long?, AuthorSequenceNumber uint, OriginalAuthor string, OriginalAffiliation string )
       AS BEGIN
       DECLARE @_Path string = @BaseDir + "mag/PaperAuthorAffiliations.txt";
       @_PaperAuthorAffiliations =
@@ -130,9 +121,7 @@ In prerequisite [Set up Azure Data Lake Analytics](get-started-setup-azure-data-
     DROP FUNCTION IF EXISTS Papers;
     CREATE FUNCTION Papers(@BaseDir string = "")
       RETURNS @_Papers TABLE
-      (
-        PaperId long, Rank uint, Doi string, DocType string, PaperTitle string, OriginalTitle string, BookTitle string, Year int?, Date DateTime?, Publisher string, JournalId long?, ConferenceSeriesId long?, ConferenceInstanceId long?, Volume string, Issue string, FirstPage string, LastPage string, ReferenceCount long, CitationCount long, EstimatedCitation long, OriginalVenue string, CreatedDate DateTime
-      )
+      ( PaperId long, Rank uint, Doi string, DocType string, PaperTitle string, OriginalTitle string, BookTitle string, Year int?, Date DateTime?, Publisher string, JournalId long?, ConferenceSeriesId long?, ConferenceInstanceId long?, Volume string, Issue string, FirstPage string, LastPage string, ReferenceCount long, CitationCount long, EstimatedCitation long, OriginalVenue string, CreatedDate DateTime )
       AS BEGIN
       DECLARE @_Path string = @BaseDir + "mag/Papers.txt";
       @_Papers =
@@ -142,7 +131,6 @@ In prerequisite [Set up Azure Data Lake Analytics](get-started-setup-azure-data-
       USING Extractors.Tsv(silent: false, quoting: false);
       RETURN;
     END;
-    
     ```
 
 1. Provide a **Job name** and select **Submit**.
