@@ -43,7 +43,7 @@ In prerequisite [Set up Azure Data Lake Analytics](get-started-setup-azure-data-
    
 1. Provide a **Job name** and select **Submit**.
 
-   ![Submit CreateFunctions job](media/samples-azure-data-lake-hindex/create-functions-submit.png "Submit CreateFunctions job")
+   ![Submit CreateFunctions job](media/samples-azure-data-lake-hindex/create-functions-submit.png "Submit CreateDatabase job")
 
 1. The job should finish successfully.
 
