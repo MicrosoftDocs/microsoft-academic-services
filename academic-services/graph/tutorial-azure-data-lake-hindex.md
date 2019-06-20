@@ -4,7 +4,7 @@ description: Compute author h-index for Microsoft Academic Graph using Azure Dat
 services: microsoft-academic-services
 ms.topic: tutorial
 ms.service: microsoft-academic-services
-ms.date: 5/3/2019
+ms.date: 6/20/2019
 ---
 # Tutorial: Compute author h-index using Azure Data Lake Analytics (U-SQL)
 
@@ -88,12 +88,12 @@ In prerequisite [Set up Azure Data Lake Analytics](get-started-setup-azure-data-
    DROP FUNCTION IF EXISTS Papers;
    CREATE FUNCTION Papers(@BaseDir string = "")
      RETURNS @_Papers TABLE
-     ( PaperId long, Rank uint, Doi string, DocType string, PaperTitle string, OriginalTitle string, BookTitle string, Year int?, Date DateTime?, Publisher string, JournalId long?, ConferenceSeriesId long?, ConferenceInstanceId long?, Volume string, Issue string, FirstPage string, LastPage string, ReferenceCount long, CitationCount long, EstimatedCitation long, OriginalVenue string, CreatedDate DateTime )
+     ( PaperId long, Rank uint, Doi string, DocType string, PaperTitle string, OriginalTitle string, BookTitle string, Year int?, Date DateTime?, Publisher string, JournalId long?, ConferenceSeriesId long?, ConferenceInstanceId long?, Volume string, Issue string, FirstPage string, LastPage string, ReferenceCount long, CitationCount long, EstimatedCitation long, OriginalVenue string, FamilyId long?, CreatedDate DateTime )
      AS BEGIN
      DECLARE @_Path string = @BaseDir + "mag/Papers.txt";
      @_Papers =
      EXTRACT
-       PaperId long, Rank uint, Doi string, DocType string, PaperTitle string, OriginalTitle string, BookTitle string, Year int?, Date DateTime?, Publisher string, JournalId long?, ConferenceSeriesId long?, ConferenceInstanceId long?, Volume string, Issue string, FirstPage string, LastPage string, ReferenceCount long, CitationCount long, EstimatedCitation long, OriginalVenue string, CreatedDate DateTime
+       PaperId long, Rank uint, Doi string, DocType string, PaperTitle string, OriginalTitle string, BookTitle string, Year int?, Date DateTime?, Publisher string, JournalId long?, ConferenceSeriesId long?, ConferenceInstanceId long?, Volume string, Issue string, FirstPage string, LastPage string, ReferenceCount long, CitationCount long, EstimatedCitation long, OriginalVenue string, FamilyId long?, CreatedDate DateTime
      FROM @_Path
      USING Extractors.Tsv(silent: false, quoting: false);
      RETURN;
@@ -145,12 +145,20 @@ In this section, you submit an ADLA job to compute author h-index and save outpu
            PaperCount
        FROM @Authors;
    
-   // Get (Author, Paper) pairs
-   @AuthorPaper =
-       SELECT DISTINCT
-           AuthorId,
-           PaperId
-       FROM @PaperAuthorAffiliations;
+   // Get (Paper, EstimatedCitation). Treat papers with same FamilyId as a single paper and sum the EstimatedCitation
+   @PaperCitation =
+       SELECT
+           (long)(FamilyId == null ? PaperId : FamilyId) AS PaperId,
+           EstimatedCitation
+       FROM @Papers
+       WHERE EstimatedCitation > 0;
+
+   @PaperCitation =
+       SELECT
+           PaperId,
+           SUM(EstimatedCitation) AS EstimatedCitation
+       FROM @PaperCitation
+       GROUP BY PaperId;
    
    // Get Papers
    @PaperCitation =
