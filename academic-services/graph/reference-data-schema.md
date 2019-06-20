@@ -238,7 +238,8 @@ Column # | Name | Type | Note
 19 | CitationCount | long |
 20 | EstimatedCitation | long |
 21 | OriginalVenue | string |
-22 | CreatedDate | DateTime |
+22 | FamilyId | long? |
+23 | CreatedDate | DateTime |
 
 ## RelatedFieldOfStudy.txt
 
