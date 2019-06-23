@@ -122,7 +122,7 @@ In this section, you submit an ADLA job to compute author h-index and save outpu
    DECLARE @dataVersion string = "<MagContainer>";
    DECLARE @blobAccount string = "<AzureStorageAccount>";
    DECLARE @uriPrefix   string = "wasb://" + @dataVersion + "@" + @blobAccount + "/";
-   DECLARE @OutAuthorHindex string = "/Output/AuthorHIndex.tsv";
+   DECLARE @outAuthorHindex string = "/Output/AuthorHIndex.tsv";
    
    @Affiliations = Affiliations(@uriPrefix);
    @Authors = Authors(@uriPrefix);
@@ -211,7 +211,7 @@ In this section, you submit an ADLA job to compute author h-index and save outpu
            ON A.LastKnownAffiliationId == F.AffiliationId;
    
    OUTPUT @AuthorHIndex
-   TO @OutAuthorHindex
+   TO @outAuthorHindex
    ORDER BY HIndex DESC, AuthorId
    FETCH 100 ROWS
    USING Outputters.Tsv(quoting : false);
