@@ -145,6 +145,13 @@ In this section, you submit an ADLA job to compute author h-index and save outpu
            PaperCount
        FROM @Authors;
    
+   // Get (Author, Paper) pairs
+   @AuthorPaper =
+       SELECT DISTINCT
+           AuthorId,
+           PaperId
+       FROM @PaperAuthorAffiliations;
+
    // Get (Paper, EstimatedCitation). Treat papers with same FamilyId as a single paper and sum the EstimatedCitation
    @PaperCitation =
        SELECT
@@ -159,15 +166,7 @@ In this section, you submit an ADLA job to compute author h-index and save outpu
            SUM(EstimatedCitation) AS EstimatedCitation
        FROM @PaperCitation
        GROUP BY PaperId;
-   
-   // Get Papers
-   @PaperCitation =
-       SELECT
-           PaperId,
-           EstimatedCitation
-       FROM @Papers
-       WHERE EstimatedCitation > 0;
-   
+
    // Generate author, paper, citation view
    @AuthorPaperCitation =
        SELECT
