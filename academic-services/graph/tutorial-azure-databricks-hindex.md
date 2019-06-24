@@ -113,7 +113,7 @@ In this section, you create a MicrosoftAcademicGraph instance to access MAG data
 
 ## Create data frames and temporary views
 
-In this section you will create data frames and temporary views for several different MAG entity types. These views will be used later on in the tutorial. Note that some of the cells might take several minutes to run.
+In this section you will create data frames for several different MAG entity types. These data frames will be used later on in the tutorial. Note that some of the cells might take several minutes to run.
 
 1. Get **Affiliations**. Paste the following code in a new cell.
 
@@ -198,7 +198,7 @@ In this section you will create data frames and temporary views for several diff
 
    Press the **SHIFT + ENTER** keys to run the code in this block.
 
-   You have now extracted MAG data from Azure Storage into Azure Databricks and created temporary views to use later.
+   You have now extracted MAG data from Azure Storage into Azure Databricks.
 
 ## Compute author h-index
 
@@ -210,7 +210,7 @@ In this section, you compute h-index for all authors.
    # Generate author, paper, citation view
    AuthorPaperCitation = AuthorPaper \
        .join(PaperCitation, AuthorPaper.PaperId == PaperCitation.PaperId, 'inner') \
-       .select(AuthorPaper.AuthorId, AuthorPaper.PaperId, PaperCitation.EstimatedCitation)   ```
+       .select(AuthorPaper.AuthorId, AuthorPaper.PaperId, PaperCitation.EstimatedCitation)
    ```
 
    Press the **SHIFT + ENTER** keys to run the code in this block.
