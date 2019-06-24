@@ -111,9 +111,20 @@ In this section, you create a MicrosoftAcademicGraph instance to access MAG data
 
 1. Press the **SHIFT + ENTER** keys to run the code in this block.
 
-## Create data frames and temporary views
+## Import functions
 
-In this section you will create data frames for several different MAG entity types. These data frames will be used later on in the tutorial. Note that some of the cells might take several minutes to run.
+In this section, you import pyspark sql functions.
+
+1. Copy and paste the following code block in a new cell. Press the **SHIFT + ENTER** keys to run the code in this block.
+
+   ```python
+   from pyspark.sql import functions as F
+   from pyspark.sql.window import Window
+   ```
+
+## Create data frames for MAG entities
+
+In this section you will create data frames for several different MAG entities. These data frames will be used later on in the tutorial. Note that some of the cells might take several minutes to run.
 
 1. Get **Affiliations**. Paste the following code in a new cell.
 
@@ -181,7 +192,7 @@ In this section you will create data frames for several different MAG entity typ
    only showing top 3 rows
    ``` 
 
-1. Get **(Paper, EstimatedCitation) pairs**. Paste the following code in a new cell.
+1. Get **(Paper, EstimatedCitation) pairs**. Paste the following code in a new cell. Press the **SHIFT + ENTER** keys to run the code in this block.
 
    ```python
    # Get (Paper, EstimatedCitation). Treat papers with same FamilyId as a single paper and sum the EstimatedCitation
@@ -196,15 +207,13 @@ In this section you will create data frames for several different MAG entity typ
      .agg(F.sum(p.EstimatedCitation).alias('EstimatedCitation'))
    ```
 
-   Press the **SHIFT + ENTER** keys to run the code in this block.
-
    You have now extracted MAG data from Azure Storage into Azure Databricks.
 
 ## Compute author h-index
 
 In this section, you compute h-index for all authors.
 
-1. **Create an author-paper-citation view**. Paste the following code in a new cell.
+1. **Create an author-paper-citation view**. Paste the following code in a new cell. Press the **SHIFT + ENTER** keys to run the code in this block.
 
    ```python
    # Generate author, paper, citation view
@@ -213,9 +222,7 @@ In this section, you compute h-index for all authors.
        .select(AuthorPaper.AuthorId, AuthorPaper.PaperId, PaperCitation.EstimatedCitation)
    ```
 
-   Press the **SHIFT + ENTER** keys to run the code in this block.
-
-1. **Order AuthorPaperCitation view by citation**. Paste the following code in a new cell.
+1. **Order AuthorPaperCitation view by citation**. Paste the following code in a new cell. Press the **SHIFT + ENTER** keys to run the code in this block.
 
    ```python
    # Order author, paper, citation view by citation
@@ -223,9 +230,7 @@ In this section, you compute h-index for all authors.
      .withColumn('Rank', F.row_number().over(Window.partitionBy('AuthorId').orderBy(F.desc('EstimatedCitation'))))
    ```
 
-   Press the **SHIFT + ENTER** keys to run the code in this block.
-
-1. **Compute h-index for all authors**. Paste the following code in a new cell.
+1. **Compute h-index for all authors**. Paste the following code in a new cell. Press the **SHIFT + ENTER** keys to run the code in this block.
 
    ```python
    # Generate author hindex
@@ -236,9 +241,7 @@ In this section, you compute h-index for all authors.
           F.max(F.when(ap.EstimatedCitation >= ap.Rank, ap.Rank).otherwise(0)).alias('HIndex'))
    ```
 
-   Press the **SHIFT + ENTER** keys to run the code in this block.
-
-1. **Get author detail information**. Paste the following code in a new cell.
+1. **Get author detail information**. Paste the following code in a new cell. Press the **SHIFT + ENTER** keys to run the code in this block.
 
    ```python
    # Get author detail information
@@ -253,8 +256,6 @@ In this section, you compute h-index for all authors.
 
    AuthorHIndex.createOrReplaceTempView('AuthorHIndex')
    ```
-
-   Press the **SHIFT + ENTER** keys to run the code in this block.
 
 ## Query and visualize result 
 
