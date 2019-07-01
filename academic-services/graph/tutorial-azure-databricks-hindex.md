@@ -253,28 +253,20 @@ In this section, you compute h-index for all authors.
      .join(a, a.AuthorId == i.AuthorId, 'inner') \
      .join(af, a.LastKnownAffiliationId == af.AffiliationId, 'outer') \
      .select(i.AuthorId, a.DisplayName, af.DisplayName.alias('AffiliationDisplayName'), a.PaperCount, i.TotalEstimatedCitation, i.HIndex)
-
-   AuthorHIndex.createOrReplaceTempView('AuthorHIndex')
    ```
 
-## Query and visualize result 
+## Visualize result 
 
 In this section, you query top authors by h-index and visualize the result.
 
 1. Query top authors with highest h-index. Paste the following code in a new cell. Press the **SHIFT + ENTER** keys to run the code in this block.
 
-   ```sql
-   %sql
-   -- Filter authors with top hindex
-   SELECT
-       DisplayName,
-       AffiliationDisplayName,
-       PaperCount,
-       TotalEstimatedCitation,
-       HIndex
-   FROM AuthorHIndex 
-   ORDER BY HIndex DESC, AuthorId
-   LIMIT 100;
+   ```python
+   TopAuthorHIndex = AuthorHIndex \
+     .select(AuthorHIndex.DisplayName, AuthorHIndex.AffiliationDisplayName, AuthorHIndex.PaperCount, AuthorHIndex.TotalEstimatedCitation, AuthorHIndex.HIndex) \
+     .orderBy(F.desc('HIndex')) \
+     .limit(100)
+   display(TopAuthorHIndex)
    ```
 
 1. Select the **table** icon to see result in table form.
