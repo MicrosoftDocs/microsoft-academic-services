@@ -22,7 +22,7 @@
     items:
     - name: Azure Data Analytics (U-SQL)
       href: tutorial-azure-data-lake-hindex.md
-    - name: Databricks (Python/SQL)
+    - name: Databricks (PySpark)
       href: tutorial-azure-databricks-hindex.md
   - name: Full-text search using Azure Search
     expanded: true
