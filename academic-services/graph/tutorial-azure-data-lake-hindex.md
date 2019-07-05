@@ -152,7 +152,8 @@ In this section, you submit an ADLA job to compute author h-index and save outpu
            PaperId
        FROM @PaperAuthorAffiliations;
 
-   // Get (Paper, EstimatedCitation). Treat papers with same FamilyId as a single paper and sum the EstimatedCitation
+   // Get (Paper, EstimatedCitation).
+   // Treat papers with same FamilyId as a single paper and sum the EstimatedCitation
    @PaperCitation =
        SELECT
            (long)(FamilyId == null ? PaperId : FamilyId) AS PaperId,
@@ -177,7 +178,7 @@ In this section, you submit an ADLA job to compute author h-index and save outpu
        INNER JOIN @PaperCitation AS P
            ON A.PaperId == P.PaperId;
    
-   // Order author, paper, citation view by citation
+   // Order author, paper by citation
    @AuthorPaperOrderByCitation =
        SELECT
            AuthorId,
