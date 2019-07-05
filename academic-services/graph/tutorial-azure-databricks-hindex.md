@@ -195,7 +195,8 @@ In this section you will create data frames for several different MAG entities. 
 1. Get **(Paper, EstimatedCitation) pairs**. Paste the following code in a new cell. Press the **SHIFT + ENTER** keys to run the code in this block.
 
    ```python
-   # Get (Paper, EstimatedCitation). Treat papers with same FamilyId as a single paper and sum the EstimatedCitation
+   # Get (Paper, EstimatedCitation).
+   # Treat papers with same FamilyId as a single paper and sum the EstimatedCitation
    Papers = MAG.getDataframe('Papers')
    p = Papers.where(Papers.EstimatedCitation > 0) \
      .select(F.when(Papers.FamilyId.isNull(), Papers.PaperId).otherwise(Papers.FamilyId).alias('PaperId'), \
@@ -213,19 +214,19 @@ In this section you will create data frames for several different MAG entities. 
 
 In this section, you compute h-index for all authors.
 
-1. **Create an author-paper-citation view**. Paste the following code in a new cell. Press the **SHIFT + ENTER** keys to run the code in this block.
+1. **Create an author-paper-citation table**. Paste the following code in a new cell. Press the **SHIFT + ENTER** keys to run the code in this block.
 
    ```python
-   # Generate author, paper, citation view
+   # Generate author, paper, citation table
    AuthorPaperCitation = AuthorPaper \
        .join(PaperCitation, AuthorPaper.PaperId == PaperCitation.PaperId, 'inner') \
        .select(AuthorPaper.AuthorId, AuthorPaper.PaperId, PaperCitation.EstimatedCitation)
    ```
 
-1. **Order AuthorPaperCitation view by citation**. Paste the following code in a new cell. Press the **SHIFT + ENTER** keys to run the code in this block.
+1. **Order AuthorPaperCitation by citation**. Paste the following code in a new cell. Press the **SHIFT + ENTER** keys to run the code in this block.
 
    ```python
-   # Order author, paper, citation view by citation
+   # Order author, paper by citation
    AuthorPaperOrderByCitation = AuthorPaperCitation \
      .withColumn('Rank', F.row_number().over(Window.partitionBy('AuthorId').orderBy(F.desc('EstimatedCitation'))))
    ```
