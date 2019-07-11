@@ -2,7 +2,7 @@
 title: Microsoft Academic Graph data schema
 description: Documents the complete, most recent Microsoft Academic Graph entity data schema, including the name and type of each attribute
 ms.topic: reference
-ms.date: 5/2/2019
+ms.date: 6/20/2019
 # Microsoft Academic Graph data schema
 
 Documents the complete, most recent Microsoft Academic Graph entity data schema, including the name and type of each attribute.
@@ -200,8 +200,8 @@ Column # | Name | Type | Note
 Column # | Name | Type | Note
 --- | --- | --- | ---
 1 | PaperId | long | FOREIGN KEY REFERENCES Papers(PaperId)
-2 | ResourceType | int |
-3 | ResourceUrl | string | Bit flags. 1 = Project, 2 = Data, 4 = Code
+2 | ResourceType | int | Bit flags. 1 = Project, 2 = Data, 4 = Code
+3 | ResourceUrl | string |
 4 | SourceUrl | string |
 5 | RelationshipType | int | Bit flags. 1 = Own, 2 = Cite
 
@@ -238,7 +238,8 @@ Column # | Name | Type | Note
 19 | CitationCount | long |
 20 | EstimatedCitation | long |
 21 | OriginalVenue | string |
-22 | CreatedDate | DateTime |
+22 | FamilyId | long? |
+23 | CreatedDate | DateTime |
 
 ## RelatedFieldOfStudy.txt
 
