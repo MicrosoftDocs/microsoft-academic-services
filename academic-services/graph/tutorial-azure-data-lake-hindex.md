@@ -4,7 +4,7 @@ description: Compute author h-index for Microsoft Academic Graph using Azure Dat
 services: microsoft-academic-services
 ms.topic: tutorial
 ms.service: microsoft-academic-services
-ms.date: 5/3/2019
+ms.date: 7/5/2019
 ---
 # Tutorial: Compute author h-index using Azure Data Lake Analytics (U-SQL)
 
@@ -37,68 +37,7 @@ In prerequisite [Set up Azure Data Lake Analytics](get-started-setup-azure-data-
 
    ![Azure Data Lake Analytics - New job](media/samples-azure-data-lake-hindex/new-job.png "Azure Data Lake Analytics - New job")
 
-1. Copy and paste the following code block in the script window.
-
-   > [!NOTE]
-   > To work with the latest MAG dataset schema, instead of the code block below, you could use code in samples/CreateFunctions.usql in the MAG dataset.
-
-   ```U-SQL
-   DROP FUNCTION IF EXISTS Affiliations;
-   CREATE FUNCTION Affiliations(@BaseDir string = "")
-     RETURNS @_Affiliations TABLE
-     ( AffiliationId long, Rank uint, NormalizedName string, DisplayName string, GridId string, OfficialPage string, WikiPage string, PaperCount long, CitationCount long, Latitude float?, Longitude float?, CreatedDate DateTime )
-     AS BEGIN
-     DECLARE @_Path string = @BaseDir + "mag/Affiliations.txt";
-     @_Affiliations =
-     EXTRACT
-       AffiliationId long, Rank uint, NormalizedName string, DisplayName string, GridId string, OfficialPage string, WikiPage string, PaperCount long, CitationCount long, Latitude float?, Longitude float?, CreatedDate DateTime
-     FROM @_Path
-     USING Extractors.Tsv(silent: false, quoting: false);
-     RETURN;
-   END;
-   
-   DROP FUNCTION IF EXISTS Authors;
-   CREATE FUNCTION Authors(@BaseDir string = "")
-     RETURNS @_Authors TABLE
-     ( AuthorId long, Rank uint, NormalizedName string, DisplayName string, LastKnownAffiliationId long?, PaperCount long, CitationCount long, CreatedDate DateTime )
-     AS BEGIN
-     DECLARE @_Path string = @BaseDir + "mag/Authors.txt";
-     @_Authors =
-     EXTRACT
-       AuthorId long, Rank uint, NormalizedName string, DisplayName string, LastKnownAffiliationId long?, PaperCount long, CitationCount long, CreatedDate DateTime
-     FROM @_Path
-     USING Extractors.Tsv(silent: false, quoting: false);
-     RETURN;
-   END;
-   
-   DROP FUNCTION IF EXISTS PaperAuthorAffiliations;
-   CREATE FUNCTION PaperAuthorAffiliations(@BaseDir string = "")
-     RETURNS @_PaperAuthorAffiliations TABLE
-     ( PaperId long, AuthorId long, AffiliationId long?, AuthorSequenceNumber uint, OriginalAuthor string, OriginalAffiliation string )
-     AS BEGIN
-     DECLARE @_Path string = @BaseDir + "mag/PaperAuthorAffiliations.txt";
-     @_PaperAuthorAffiliations =
-     EXTRACT
-       PaperId long, AuthorId long, AffiliationId long?, AuthorSequenceNumber uint, OriginalAuthor string, OriginalAffiliation string
-     FROM @_Path
-     USING Extractors.Tsv(silent: false, quoting: false);
-     RETURN;
-   END;
-   
-   DROP FUNCTION IF EXISTS Papers;
-   CREATE FUNCTION Papers(@BaseDir string = "")
-     RETURNS @_Papers TABLE
-     ( PaperId long, Rank uint, Doi string, DocType string, PaperTitle string, OriginalTitle string, BookTitle string, Year int?, Date DateTime?, Publisher string, JournalId long?, ConferenceSeriesId long?, ConferenceInstanceId long?, Volume string, Issue string, FirstPage string, LastPage string, ReferenceCount long, CitationCount long, EstimatedCitation long, OriginalVenue string, CreatedDate DateTime )
-     AS BEGIN
-     DECLARE @_Path string = @BaseDir + "mag/Papers.txt";
-     @_Papers =
-     EXTRACT
-       PaperId long, Rank uint, Doi string, DocType string, PaperTitle string, OriginalTitle string, BookTitle string, Year int?, Date DateTime?, Publisher string, JournalId long?, ConferenceSeriesId long?, ConferenceInstanceId long?, Volume string, Issue string, FirstPage string, LastPage string, ReferenceCount long, CitationCount long, EstimatedCitation long, OriginalVenue string, CreatedDate DateTime
-     FROM @_Path
-     USING Extractors.Tsv(silent: false, quoting: false);
-     RETURN;
-   END;
-   ```
+1. Copy code in samples/CreateFunctions.usql and paste into the code block.
    
 1. Provide a **Job name** and select **Submit**.
 
@@ -122,7 +61,7 @@ In this section, you submit an ADLA job to compute author h-index and save outpu
    DECLARE @dataVersion string = "<MagContainer>";
    DECLARE @blobAccount string = "<AzureStorageAccount>";
    DECLARE @uriPrefix   string = "wasb://" + @dataVersion + "@" + @blobAccount + "/";
-   DECLARE @OutAuthorHindex string = "/Output/AuthorHIndex.tsv";
+   DECLARE @outAuthorHindex string = "/Output/AuthorHIndex.tsv";
    
    @Affiliations = Affiliations(@uriPrefix);
    @Authors = Authors(@uriPrefix);
@@ -151,15 +90,23 @@ In this section, you submit an ADLA job to compute author h-index and save outpu
            AuthorId,
            PaperId
        FROM @PaperAuthorAffiliations;
-   
-   // Get Papers
+
+   // Get (Paper, EstimatedCitation).
+   // Treat papers with same FamilyId as a single paper and sum the EstimatedCitation
    @PaperCitation =
        SELECT
-           PaperId,
+           (long)(FamilyId == null ? PaperId : FamilyId) AS PaperId,
            EstimatedCitation
        FROM @Papers
        WHERE EstimatedCitation > 0;
-   
+
+   @PaperCitation =
+       SELECT
+           PaperId,
+           SUM(EstimatedCitation) AS EstimatedCitation
+       FROM @PaperCitation
+       GROUP BY PaperId;
+
    // Generate author, paper, citation view
    @AuthorPaperCitation =
        SELECT
@@ -170,7 +117,7 @@ In this section, you submit an ADLA job to compute author h-index and save outpu
        INNER JOIN @PaperCitation AS P
            ON A.PaperId == P.PaperId;
    
-   // Order author, paper, citation view by citation
+   // Order author, paper by citation
    @AuthorPaperOrderByCitation =
        SELECT
            AuthorId,
@@ -204,7 +151,7 @@ In this section, you submit an ADLA job to compute author h-index and save outpu
            ON A.LastKnownAffiliationId == F.AffiliationId;
    
    OUTPUT @AuthorHIndex
-   TO @OutAuthorHindex
+   TO @outAuthorHindex
    ORDER BY HIndex DESC, AuthorId
    FETCH 100 ROWS
    USING Outputters.Tsv(quoting : false);

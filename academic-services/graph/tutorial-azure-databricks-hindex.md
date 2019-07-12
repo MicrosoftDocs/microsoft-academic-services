@@ -4,7 +4,7 @@ description: Compute author h-index for Microsoft Academic Graph using Azure Dat
 services: microsoft-academic-services
 ms.topic: tutorial
 ms.service: microsoft-academic-services
-ms.date: 3/26/2019
+ms.date: 7/5/2019
 ---
 # Tutorial: Compute author h-index using Azure Databricks
 
@@ -111,9 +111,20 @@ In this section, you create a MicrosoftAcademicGraph instance to access MAG data
 
 1. Press the **SHIFT + ENTER** keys to run the code in this block.
 
-## Create data frames and temporary views
+## Import functions
 
-In this section you will create data frames and temporary views for several different MAG entity types. These views will be used later on in the tutorial. Note that some of the cells might take several minutes to run.
+In this section, you import pyspark sql functions.
+
+1. Copy and paste the following code block in a new cell. Press the **SHIFT + ENTER** keys to run the code in this block.
+
+   ```python
+   from pyspark.sql import functions as F
+   from pyspark.sql.window import Window
+   ```
+
+## Create data frames for MAG entities
+
+In this section you will create data frames for several different MAG entities. These data frames will be used later on in the tutorial. Note that some of the cells might take several minutes to run.
 
 1. Get **Affiliations**. Paste the following code in a new cell.
 
@@ -122,7 +133,6 @@ In this section you will create data frames and temporary views for several diff
    Affiliations = MAG.getDataframe('Affiliations')
    Affiliations = Affiliations.select(Affiliations.AffiliationId, Affiliations.DisplayName)
    Affiliations.show(3)
-   Affiliations.createOrReplaceTempView('Affiliations')
    ```
 
    Press the **SHIFT + ENTER** keys to run the code in this block. You see an output similar to the following snippet:
@@ -145,7 +155,6 @@ In this section you will create data frames and temporary views for several diff
    Authors = MAG.getDataframe('Authors')
    Authors = Authors.select(Authors.AuthorId, Authors.DisplayName, Authors.LastKnownAffiliationId, Authors.PaperCount)
    Authors.show(3)
-   Authors.createOrReplaceTempView('Authors')
    ```
 
    Press the **SHIFT + ENTER** keys to run the code in this block. You see an output similar to the following snippet:
@@ -168,7 +177,6 @@ In this section you will create data frames and temporary views for several diff
    PaperAuthorAffiliations = MAG.getDataframe('PaperAuthorAffiliations')
    AuthorPaper = PaperAuthorAffiliations.select(PaperAuthorAffiliations.AuthorId, PaperAuthorAffiliations.PaperId).distinct()
    AuthorPaper.show(3)
-   AuthorPaper.createOrReplaceTempView('AuthorPaper')
    ```
 
    Press the **SHIFT + ENTER** keys to run the code in this block. You see an output similar to the following snippet:
@@ -184,140 +192,82 @@ In this section you will create data frames and temporary views for several diff
    only showing top 3 rows
    ``` 
 
-1. Get **Papers**. Paste the following code in a new cell.
+1. Get **(Paper, EstimatedCitation) pairs**. Paste the following code in a new cell. Press the **SHIFT + ENTER** keys to run the code in this block.
 
    ```python
-   # Get paper citation
+   # Get (Paper, EstimatedCitation).
+   # Treat papers with same FamilyId as a single paper and sum the EstimatedCitation
    Papers = MAG.getDataframe('Papers')
-   PaperCitation = Papers.select(Papers.PaperId, Papers.EstimatedCitation).where(Papers.EstimatedCitation > 0)
-   PaperCitation.show(3)
-   PaperCitation.createOrReplaceTempView('PaperCitation')
+   p = Papers.where(Papers.EstimatedCitation > 0) \
+     .select(F.when(Papers.FamilyId.isNull(), Papers.PaperId).otherwise(Papers.FamilyId).alias('PaperId'), \
+             Papers.EstimatedCitation) \
+     .alias('p')
+
+   PaperCitation = p \
+     .groupBy(p.PaperId) \
+     .agg(F.sum(p.EstimatedCitation).alias('EstimatedCitation'))
    ```
 
-   Press the **SHIFT + ENTER** keys to run the code in this block. You see an output similar to the following snippet:
-
-   ```
-   +----------+-----------------+
-   |   PaperId|EstimatedCitation|
-   +----------+-----------------+
-   |2088151486|               61|
-   |2864100843|                1|
-   |2260674751|                5|
-   +----------+-----------------+
-   only showing top 3 rows
-   ``` 
-
-   You have now extracted MAG data from Azure Storage into Azure Databricks and created temporary views to use later.
+   You have now extracted MAG data from Azure Storage into Azure Databricks.
 
 ## Compute author h-index
 
 In this section, you compute h-index for all authors.
 
-1. **Create an author-paper-citation view**. Paste the following code in a new cell.
+1. **Create an author-paper-citation table**. Paste the following code in a new cell. Press the **SHIFT + ENTER** keys to run the code in this block.
 
-   ```sql
-   %sql
-   -- Generate author, paper, citation view
-   CREATE OR REPLACE TEMPORARY VIEW AuthorPaperCitation
-       AS SELECT
-           A.AuthorId,
-           A.PaperId,
-           P.EstimatedCitation
-       FROM AuthorPaper AS A
-       INNER JOIN PaperCitation AS P
-           ON A.PaperId == P.PaperId;
+   ```python
+   # Generate author, paper, citation table
+   AuthorPaperCitation = AuthorPaper \
+       .join(PaperCitation, AuthorPaper.PaperId == PaperCitation.PaperId, 'inner') \
+       .select(AuthorPaper.AuthorId, AuthorPaper.PaperId, PaperCitation.EstimatedCitation)
    ```
 
-   Press the **SHIFT + ENTER** keys to run the code in this block. You see following output:
+1. **Order AuthorPaperCitation by citation**. Paste the following code in a new cell. Press the **SHIFT + ENTER** keys to run the code in this block.
 
-   ```
-   OK
-   ```
-
-1. **Order AuthorPaperCitation view by citation**. Paste the following code in a new cell.
-
-   ```sql
-   %sql
-   -- Order author, paper, citation view by citation
-   CREATE OR REPLACE TEMPORARY VIEW AuthorPaperOrderByCitation
-       AS SELECT
-           AuthorId,
-           PaperId,
-           EstimatedCitation,
-           ROW_NUMBER() OVER(PARTITION BY AuthorId ORDER BY EstimatedCitation DESC) AS Rank
-       FROM AuthorPaperCitation;
+   ```python
+   # Order author, paper by citation
+   AuthorPaperOrderByCitation = AuthorPaperCitation \
+     .withColumn('Rank', F.row_number().over(Window.partitionBy('AuthorId').orderBy(F.desc('EstimatedCitation'))))
    ```
 
-   Press the **SHIFT + ENTER** keys to run the code in this block. You see following output:
+1. **Compute h-index for all authors**. Paste the following code in a new cell. Press the **SHIFT + ENTER** keys to run the code in this block.
 
-   ```
-   OK
-   ```
-
-1. **Compute h-index for all authors**. Paste the following code in a new cell.
-
-   ```sql
-   %sql
-   -- Generate author hindex
-   CREATE OR REPLACE TEMPORARY VIEW AuthorHIndexTemp
-       AS SELECT
-           AuthorId,
-           SUM(EstimatedCitation) AS TotalEstimatedCitation,
-           MAX(CASE WHEN EstimatedCitation >= Rank THEN Rank ELSE 0 END) AS HIndex
-       FROM AuthorPaperOrderByCitation 
-       GROUP BY AuthorId;
+   ```python
+   # Generate author hindex
+   ap = AuthorPaperOrderByCitation.alias('ap')
+   AuthorHIndexTemp = ap \
+     .groupBy(ap.AuthorId) \
+     .agg(F.sum(ap.EstimatedCitation).alias('TotalEstimatedCitation'), \
+          F.max(F.when(ap.EstimatedCitation >= ap.Rank, ap.Rank).otherwise(0)).alias('HIndex'))
    ```
 
-   Press the **SHIFT + ENTER** keys to run the code in this block. You see following output:
+1. **Get author detail information**. Paste the following code in a new cell. Press the **SHIFT + ENTER** keys to run the code in this block.
 
-   ```
-   OK
-   ```
+   ```python
+   # Get author detail information
+   i = AuthorHIndexTemp.alias('i')
+   a = Authors.alias('a')
+   af = Affiliations.alias('af')
 
-1. **Get author detail information**. Paste the following code in a new cell.
-
-   ```sql
-   %sql
-   -- Get author detail information
-   CREATE OR REPLACE TEMPORARY VIEW AuthorHIndex
-       AS SELECT
-           I.AuthorId,
-           A.DisplayName,
-           AF.DisplayName AS AffiliationDisplayName,
-           A.PaperCount,
-           I.TotalEstimatedCitation,
-           I.HIndex
-       FROM AuthorHIndexTemp AS I
-       INNER JOIN Authors AS A
-           ON A.AuthorId == I.AuthorId
-       LEFT OUTER JOIN Affiliations AS AF
-           ON A.LastKnownAffiliationId == AF.AffiliationId;
+   AuthorHIndex = i \
+     .join(a, a.AuthorId == i.AuthorId, 'inner') \
+     .join(af, a.LastKnownAffiliationId == af.AffiliationId, 'outer') \
+     .select(i.AuthorId, a.DisplayName, af.DisplayName.alias('AffiliationDisplayName'), a.PaperCount, i.TotalEstimatedCitation, i.HIndex)
    ```
 
-   Press the **SHIFT + ENTER** keys to run the code in this block. You see following output:
-
-   ```
-   OK
-   ```
-
-## Query and visualize result 
+## Visualize result 
 
 In this section, you query top authors by h-index and visualize the result.
 
 1. Query top authors with highest h-index. Paste the following code in a new cell. Press the **SHIFT + ENTER** keys to run the code in this block.
 
-   ```sql
-   %sql
-   -- Filter authors with top hindex
-   SELECT
-       DisplayName,
-       AffiliationDisplayName,
-       PaperCount,
-       TotalEstimatedCitation,
-       HIndex
-   FROM AuthorHIndex 
-   ORDER BY HIndex DESC, AuthorId
-   LIMIT 100;
+   ```python
+   TopAuthorHIndex = AuthorHIndex \
+     .select(AuthorHIndex.DisplayName, AuthorHIndex.AffiliationDisplayName, AuthorHIndex.PaperCount, AuthorHIndex.TotalEstimatedCitation, AuthorHIndex.HIndex) \
+     .orderBy(F.desc('HIndex')) \
+     .limit(100)
+   display(TopAuthorHIndex)
    ```
 
 1. Select the **table** icon to see result in table form.
