@@ -185,7 +185,7 @@ Column # | Name | Type | Note
 Column # | Name | Type | Note
 --- | --- | --- | ---
 1 | PaperId | long | PRIMARY KEY <br> FOREIGN KEY REFERENCES Papers(PaperId)
-2 | IndexedAbstract | string | See [Microsoft Academic Graph FAQ](resources-faq.md)
+2 | IndexedAbstract | string | See [Microsoft Academic Graph FAQ](resources-faq.md#what-format-are-paper-abstracts-published-in)
 
 ## nlp/PaperCitationContexts.txt
 
