@@ -2,8 +2,7 @@
 title: Microsoft Academic Graph data schema
 description: Documents the complete, most recent Microsoft Academic Graph entity data schema, including the name and type of each attribute
 ms.topic: reference
-ms.date: 8/19/2019
----
+ms.date: 6/20/2019
 # Microsoft Academic Graph data schema
 
 Documents the complete, most recent Microsoft Academic Graph entity data schema, including the name and type of each attribute.
@@ -17,7 +16,7 @@ When using Microsoft Academic data (MAG, MAKES, etc.) in a product or service, o
 
 ## Entity Relationship Diagram
 
- [![Entity Relationship Diagram](media/erd/entity-relationship-diagram-thumbnail.png)](media/erd/entity-relationship-diagram.png)
+ [![Entity Relationship Diagram](media/entity-relationship-diagram-thumbnail.png)](media/entity-relationship-diagram.png)
 
 ## Note on "rank"
 
@@ -26,7 +25,7 @@ When using Microsoft Academic data (MAG, MAKES, etc.) in a product or service, o
 > [!NOTE]
 > Rank = -1000 * Ln( probability of an entity being important )
 
-## mag/Affiliations.txt
+## Affiliations.txt
 
 Column # | Name | Type | Note
 --- | --- | --- | ---
@@ -43,7 +42,7 @@ Column # | Name | Type | Note
 11 | Longitude | float? |
 12 | CreatedDate | DateTime |
 
-## mag/Authors.txt
+## Authors.txt
 
 Column # | Name | Type | Note
 --- | --- | --- | ---
@@ -56,7 +55,7 @@ Column # | Name | Type | Note
 7 | CitationCount | long |
 8 | CreatedDate | DateTime |
 
-## mag/ConferenceInstances.txt
+## ConferenceInstances.txt
 
 Column # | Name | Type | Note
 --- | --- | --- | ---
@@ -78,7 +77,7 @@ Column # | Name | Type | Note
 16 | Longitude | float? |
 17 | CreatedDate | DateTime |
 
-## mag/ConferenceSeries.txt
+## ConferenceSeries.txt
 
 Column # | Name | Type | Note
 --- | --- | --- | ---
@@ -90,7 +89,39 @@ Column # | Name | Type | Note
 6 | CitationCount | long |
 7 | CreatedDate | DateTime |
 
-## mag/Journals.txt
+## EntityRelatedEntities.txt
+
+Column # | Name | Type | Note
+--- | --- | --- | ---
+1 | EntityId | long |
+2 | EntityType | string | af: Affiliation <br> j: Journal <br> c: Conference
+3 | RelatedEntityId | long |
+4 | RelatedEntityType | string | af: Affiliation <br> j: Journal <br> c: Conference
+5 | RelatedType | int | 0: Two entities are similar if they appear on the same paper <br> 1: Two entities are similar if they have common coauthors <br> 2: Two entities are similar if they are co-cited by others <br> 3: Two entities are similar if they have common fields of study <br> 4: Two entities are similar if they appear in the same venue <br> 5: Entity A is similar to entity B if A cites B <br> 6: Entity A is similar to entity B if A is cited by B
+6 | Score | float | Confidence range between 0 and 1. Bigger number representing higher confidence.
+
+## FieldOfStudyChildren.txt
+
+Column # | Name | Type | Note
+--- | --- | --- | ---
+1 | FieldOfStudyId | long | PRIMARY KEY <br> FOREIGN KEY REFERENCES FieldsOfStudy(FieldOfStudyId)
+2 | ChildFieldOfStudyId | long | PRIMARY KEY <br> FOREIGN KEY REFERENCES FieldsOfStudy(FieldOfStudyId)
+
+## FieldsOfStudy.txt
+
+Column # | Name | Type | Note
+--- | --- | --- | ---
+1 | FieldOfStudyId | long | PRIMARY KEY
+2 | Rank | uint |
+3 | NormalizedName | string |
+4 | DisplayName | string |
+5 | MainType | string |
+6 | Level | Int | 0 - 5
+7 | PaperCount | long |
+8 | CitationCount | long |
+9 | CreatedDate | DateTime |
+
+## Journals.txt
 
 Column # | Name | Type | Note
 --- | --- | --- | ---
@@ -105,7 +136,14 @@ Column # | Name | Type | Note
 9 | CitationCount | long |
 10 | CreatedDate | DateTime |
 
-## mag/PaperAuthorAffiliations.txt
+## PaperAbstractsInvertedIndex.txt
+
+Column # | Name | Type | Note
+--- | --- | --- | ---
+1 | PaperId | long | PRIMARY KEY <br> FOREIGN KEY REFERENCES Papers(PaperId)
+2 | IndexedAbstract | string | See [Microsoft Academic Graph FAQ](resources-faq.md)
+
+## PaperAuthorAffiliations.txt
 
 Column # | Name | Type | Note
 --- | --- | --- | ---
@@ -119,22 +157,45 @@ Column # | Name | Type | Note
 > [!NOTE]
 > It is possible to have multiple rows with same (PaperId, AuthorId, AffiliationId) when an author is associated with multiple affiliations.
 
-## mag/PaperExtendedAttributes.txt
+## PaperCitationContexts.txt
 
 Column # | Name | Type | Note
 --- | --- | --- | ---
 1 | PaperId | long | FOREIGN KEY REFERENCES Papers(PaperId)
-2 | AttributeType | int | 1: PatentId <br> 2: PubMedId <br> 3: PmcId
-3 | AttributeValue | string |
+2 | PaperReferenceId | long | FOREIGN KEY REFERENCES Papers(PaperId)
+3 | CitationContext | string |
 
-## mag/PaperReferences.txt
+## PaperFieldsOfStudy.txt
+
+Column # | Name | Type | Note
+--- | --- | --- | ---
+1 | PaperId | long | PRIMARY KEY <br> FOREIGN KEY REFERENCES Papers(PaperId)
+2 | FieldOfStudyId | long | PRIMARY KEY <br> FOREIGN KEY REFERENCES FieldsOfStudy(FieldOfStudyId)
+3 | Score | float | Confidence range between 0 and 1. Bigger number representing higher confidence.
+
+## PaperLanguages.txt
+
+Column # | Name | Type | Note
+--- | --- | --- | ---
+1 | PaperId | long | PRIMARY KEY <br> FOREIGN KEY REFERENCES Papers(PaperId)
+2 | LanguageCode | string | PRIMARY KEY
+
+## PaperRecommendations.txt
+
+Column # | Name | Type | Note
+--- | --- | --- | ---
+1 | PaperId | long | PRIMARY KEY <br> FOREIGN KEY REFERENCES Papers(PaperId)
+2 | RecommendedPaperId | long | PRIMARY KEY <br> FOREIGN KEY REFERENCES Papers(PaperId)
+3 | Score | float | Confidence range between 0 and 1. Bigger number representing higher confidence.
+
+## PaperReferences.txt
 
 Column # | Name | Type | Note
 --- | --- | --- | ---
 1 | PaperId | long | PRIMARY KEY <br> FOREIGN KEY REFERENCES Papers(PaperId)
 2 | PaperReferenceId | long | PRIMARY KEY <br> FOREIGN KEY REFERENCES Papers(PaperId)
 
-## mag/PaperResources.txt
+## PaperResources.txt
 
 Column # | Name | Type | Note
 --- | --- | --- | ---
@@ -144,7 +205,7 @@ Column # | Name | Type | Note
 4 | SourceUrl | string |
 5 | RelationshipType | int | Bit flags. 1 = Own, 2 = Cite
 
-## mag/PaperUrls.txt
+## PaperUrls.txt
 
 Column # | Name | Type | Note
 --- | --- | --- | ---
@@ -152,7 +213,7 @@ Column # | Name | Type | Note
 2 | SourceType | int? | 1 = Html, 2 = Text, 3 = Pdf, 4 = Doc, 5 = Ppt, 6 = Xls, 8 = Rtf, 12 = Xml, 13 = Rss, 20 = Swf, 27 = Ics, 31 = Pub, 33 = Ods, 34 = Odp, 35 = Odt, 36 = Zip, 40 = Mp3, 0/999/NULL = unknown
 3 | SourceUrl | string | PRIMARY KEY
 
-## mag/Papers.txt
+## Papers.txt
 
 Column # | Name | Type | Note
 --- | --- | --- | ---
@@ -177,88 +238,10 @@ Column # | Name | Type | Note
 19 | CitationCount | long |
 20 | EstimatedCitation | long |
 21 | OriginalVenue | string |
-22 | FamilyId | long? | Papers with same FamilyId are same papers published in different venues
+22 | FamilyId | long? |
 23 | CreatedDate | DateTime |
 
-## nlp/PaperAbstractsInvertedIndex.txt
-
-Column # | Name | Type | Note
---- | --- | --- | ---
-1 | PaperId | long | PRIMARY KEY <br> FOREIGN KEY REFERENCES Papers(PaperId)
-2 | IndexedAbstract | string | See [Microsoft Academic Graph FAQ](resources-faq.md#what-format-are-paper-abstracts-published-in)
-
-## nlp/PaperCitationContexts.txt
-
-Column # | Name | Type | Note
---- | --- | --- | ---
-1 | PaperId | long | FOREIGN KEY REFERENCES Papers(PaperId)
-2 | PaperReferenceId | long | FOREIGN KEY REFERENCES Papers(PaperId)
-3 | CitationContext | string |
-
-## nlp/PaperLanguages.txt
-
-Column # | Name | Type | Note
---- | --- | --- | ---
-1 | PaperId | long | PRIMARY KEY <br> FOREIGN KEY REFERENCES Papers(PaperId)
-2 | LanguageCode | string | PRIMARY KEY
-
-## advanced/EntityRelatedEntities.txt
-
-Column # | Name | Type | Note
---- | --- | --- | ---
-1 | EntityId | long |
-2 | EntityType | string | af: Affiliation <br> j: Journal <br> c: Conference
-3 | RelatedEntityId | long |
-4 | RelatedEntityType | string | af: Affiliation <br> j: Journal <br> c: Conference
-5 | RelatedType | int | 0: Two entities are similar if they appear on the same paper <br> 1: Two entities are similar if they have common coauthors <br> 2: Two entities are similar if they are co-cited by others <br> 3: Two entities are similar if they have common fields of study <br> 4: Two entities are similar if they appear in the same venue <br> 5: Entity A is similar to entity B if A cites B <br> 6: Entity A is similar to entity B if A is cited by B
-6 | Score | float | Confidence range between 0 and 1. Bigger number representing higher confidence.
-
-## advanced/FieldOfStudyChildren.txt
-
-Column # | Name | Type | Note
---- | --- | --- | ---
-1 | FieldOfStudyId | long | PRIMARY KEY <br> FOREIGN KEY REFERENCES FieldsOfStudy(FieldOfStudyId)
-2 | ChildFieldOfStudyId | long | PRIMARY KEY <br> FOREIGN KEY REFERENCES FieldsOfStudy(FieldOfStudyId)
-
-## advanced/FieldOfStudyExtendedAttributes.txt
-
-Column # | Name | Type | Note
---- | --- | --- | ---
-1 | FieldOfStudyId | long | FOREIGN KEY REFERENCES FieldsOfStudy(FieldOfStudyId)
-2 | AttributeType | int | 1: UMLSId <br> 2: SourceUrl
-3 | AttributeValue | string |
-
-## advanced/FieldsOfStudy.txt
-
-Column # | Name | Type | Note
---- | --- | --- | ---
-1 | FieldOfStudyId | long | PRIMARY KEY
-2 | Rank | uint |
-3 | NormalizedName | string |
-4 | DisplayName | string |
-5 | MainType | string |
-6 | Level | Int | 0 - 5
-7 | PaperCount | long |
-8 | CitationCount | long |
-9 | CreatedDate | DateTime |
-
-## advanced/PaperFieldsOfStudy.txt
-
-Column # | Name | Type | Note
---- | --- | --- | ---
-1 | PaperId | long | PRIMARY KEY <br> FOREIGN KEY REFERENCES Papers(PaperId)
-2 | FieldOfStudyId | long | PRIMARY KEY <br> FOREIGN KEY REFERENCES FieldsOfStudy(FieldOfStudyId)
-3 | Score | float | Confidence range between 0 and 1. Bigger number representing higher confidence.
-
-## advanced/PaperRecommendations.txt
-
-Column # | Name | Type | Note
---- | --- | --- | ---
-1 | PaperId | long | PRIMARY KEY <br> FOREIGN KEY REFERENCES Papers(PaperId)
-2 | RecommendedPaperId | long | PRIMARY KEY <br> FOREIGN KEY REFERENCES Papers(PaperId)
-3 | Score | float | Confidence range between 0 and 1. Bigger number representing higher confidence.
-
-## advanced/RelatedFieldOfStudy.txt
+## RelatedFieldOfStudy.txt
 
 Column # | Name | Type | Note
 --- | --- | --- | ---
