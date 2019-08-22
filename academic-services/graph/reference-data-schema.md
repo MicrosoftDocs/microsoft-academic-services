@@ -121,7 +121,7 @@ Column # | Name | Type | Note
 5 | RelatedType | int | 0: Two entities are similar if they appear on the same paper <br> 1: Two entities are similar if they have common coauthors <br> 2: Two entities are similar if they are co-cited by others <br> 3: Two entities are similar if they have common fields of study <br> 4: Two entities are similar if they appear in the same venue <br> 5: Entity A is similar to entity B if A cites B <br> 6: Entity A is similar to entity B if A is cited by B
 6 | Score | float | Confidence range between 0 and 1. Bigger number representing higher confidence.
 
-## Field Of Study Children
+## Field of Study Children
 
 **Path** `advanced/FieldOfStudyChildren.txt`
 
@@ -144,7 +144,7 @@ Column # | Name | Type | Note
 2 | AttributeType | int | 1: UMLSId <br> 2: SourceUrl
 3 | AttributeValue | string |
 
-## Fields Of Study
+## Fields of Study
 
 **Path** `advanced/FieldsOfStudy.txt`
 
@@ -234,7 +234,7 @@ Column # | Name | Type | Note
 2 | AttributeType | int | 1: PatentId <br> 2: PubMedId <br> 3: PmcId
 3 | AttributeValue | string |
 
-## Paper Fields Of Study
+## Paper Fields of Study
 
 **Path** `advanced/PaperFieldsOfStudy.txt`
 
@@ -338,7 +338,7 @@ Column # | Name | Type | Note
 22 | FamilyId | long? | Papers with same FamilyId are same papers published in different venues
 23 | CreatedDate | DateTime |
 
-## Related Field Of Study
+## Related Field of Study
 
 **Path** `advanced/RelatedFieldOfStudy.txt`
 
