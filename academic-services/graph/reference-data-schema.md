@@ -29,7 +29,10 @@ When using Microsoft Academic data (MAG, MAKES, etc.) in a product or service, o
 ## Affiliations.txt
 
 ### Path
-   mag/Affiliations.txt
+
+```
+mag/Affiliations.txt
+```
 
 ### Schema
 
