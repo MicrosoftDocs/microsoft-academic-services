@@ -246,7 +246,7 @@ Column # | Name | Type | Note
 2 | FieldOfStudyId | long | PRIMARY KEY <br> FOREIGN KEY REFERENCES FieldsOfStudy(FieldOfStudyId)
 3 | Score | float | Confidence range between 0 and 1. Bigger number representing higher confidence.
 
-## PaperLanguages.txt
+## Paper Languages
 
 **Path**: nlp/PaperLanguages.txt
 
