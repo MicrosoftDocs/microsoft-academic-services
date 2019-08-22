@@ -26,12 +26,11 @@ When using Microsoft Academic data (MAG, MAKES, etc.) in a product or service, o
 > [!NOTE]
 > Rank = -1000 * Ln( probability of an entity being important )
 
-## Affiliations.txt
+## Affiliations
 
-### Path
-   mag/Affiliations.txt
+**Path** `mag/Affiliations.txt`
 
-### Schema
+**Schema**
 
 Column # | Name | Type | Note
 --- | --- | --- | ---
@@ -48,12 +47,11 @@ Column # | Name | Type | Note
 11 | Longitude | float? |
 12 | CreatedDate | DateTime |
 
-## Authors.txt
+## Authors
 
-### Path
-   mag/Authors.txt
+**Path** `mag/Authors.txt`
 
-### Schema
+**Schema**
 
 Column # | Name | Type | Note
 --- | --- | --- | ---
@@ -66,12 +64,11 @@ Column # | Name | Type | Note
 7 | CitationCount | long |
 8 | CreatedDate | DateTime |
 
-## ConferenceInstances.txt
+## Conference Instances
 
-### Path
-   mag/ConferenceInstances.txt
+**Path** `mag/ConferenceInstances.txt`
 
-### Schema
+**Schema**
 
 Column # | Name | Type | Note
 --- | --- | --- | ---
@@ -93,12 +90,11 @@ Column # | Name | Type | Note
 16 | Longitude | float? |
 17 | CreatedDate | DateTime |
 
-## ConferenceSeries.txt
+## Conference Series
 
-### Path
-   mag/ConferenceSeries.txt
+**Path** `mag/ConferenceSeries.txt`
 
-### Schema
+**Schema**
 
 Column # | Name | Type | Note
 --- | --- | --- | ---
@@ -110,12 +106,11 @@ Column # | Name | Type | Note
 6 | CitationCount | long |
 7 | CreatedDate | DateTime |
 
-## EntityRelatedEntities.txt
+## Entity Related Entities
 
-### Path
-   advanced/EntityRelatedEntities.txt
+**Path** `advanced/EntityRelatedEntities.txt`
 
-### Schema
+**Schema**
 
 Column # | Name | Type | Note
 --- | --- | --- | ---
@@ -126,24 +121,22 @@ Column # | Name | Type | Note
 5 | RelatedType | int | 0: Two entities are similar if they appear on the same paper <br> 1: Two entities are similar if they have common coauthors <br> 2: Two entities are similar if they are co-cited by others <br> 3: Two entities are similar if they have common fields of study <br> 4: Two entities are similar if they appear in the same venue <br> 5: Entity A is similar to entity B if A cites B <br> 6: Entity A is similar to entity B if A is cited by B
 6 | Score | float | Confidence range between 0 and 1. Bigger number representing higher confidence.
 
-## FieldOfStudyChildren.txt
+## Field of Study Children
 
-### Path
-   advanced/FieldOfStudyChildren.txt
+**Path** `advanced/FieldOfStudyChildren.txt`
 
-### Schema
+**Schema**
 
 Column # | Name | Type | Note
 --- | --- | --- | ---
 1 | FieldOfStudyId | long | PRIMARY KEY <br> FOREIGN KEY REFERENCES FieldsOfStudy(FieldOfStudyId)
 2 | ChildFieldOfStudyId | long | PRIMARY KEY <br> FOREIGN KEY REFERENCES FieldsOfStudy(FieldOfStudyId)
 
-## FieldOfStudyExtendedAttributes.txt
+## Field of Study Extended Attributes
 
-### Path
-   advanced/FieldOfStudyExtendedAttributes.txt
+**Path** `advanced/FieldOfStudyExtendedAttributes.txt`
 
-### Schema
+**Schema**
 
 Column # | Name | Type | Note
 --- | --- | --- | ---
@@ -151,12 +144,11 @@ Column # | Name | Type | Note
 2 | AttributeType | int | 1: UMLSId <br> 2: SourceUrl
 3 | AttributeValue | string |
 
-## FieldsOfStudy.txt
+## Fields of Study
 
-### Path
-   advanced/FieldsOfStudy.txt
+**Path** `advanced/FieldsOfStudy.txt`
 
-### Schema
+**Schema**
 
 Column # | Name | Type | Note
 --- | --- | --- | ---
@@ -170,12 +162,11 @@ Column # | Name | Type | Note
 8 | CitationCount | long |
 9 | CreatedDate | DateTime |
 
-## Journals.txt
+## Journals
 
-### Path
-   mag/Journals.txt
+**Path** `mag/Journals.txt`
 
-### Schema
+**Schema**
 
 Column # | Name | Type | Note
 --- | --- | --- | ---
@@ -190,24 +181,22 @@ Column # | Name | Type | Note
 9 | CitationCount | long |
 10 | CreatedDate | DateTime |
 
-## PaperAbstractsInvertedIndex.txt
+## Paper Abstracts Inverted Index
 
-### Path
-   nlp/PaperAbstractsInvertedIndex.txt
+**Path** `nlp/PaperAbstractsInvertedIndex.txt`
 
-### Schema
+**Schema**
 
 Column # | Name | Type | Note
 --- | --- | --- | ---
 1 | PaperId | long | PRIMARY KEY <br> FOREIGN KEY REFERENCES Papers(PaperId)
 2 | IndexedAbstract | string | See [Microsoft Academic Graph FAQ](resources-faq.md#what-format-are-paper-abstracts-published-in)
 
-## PaperAuthorAffiliations.txt
+## Paper Author Affiliations
 
-### Path
-   mag/PaperAuthorAffiliations.txt
+**Path** `mag/PaperAuthorAffiliations.txt`
 
-### Schema
+**Schema**
 
 Column # | Name | Type | Note
 --- | --- | --- | ---
@@ -221,12 +210,11 @@ Column # | Name | Type | Note
 > [!NOTE]
 > It is possible to have multiple rows with same (PaperId, AuthorId, AffiliationId) when an author is associated with multiple affiliations.
 
-## PaperCitationContexts.txt
+## Paper Citation Contexts
 
-### Path
-   nlp/PaperCitationContexts.txt
+**Path** `nlp/PaperCitationContexts.txt`
 
-### Schema
+**Schema**
 
 Column # | Name | Type | Note
 --- | --- | --- | ---
@@ -234,12 +222,11 @@ Column # | Name | Type | Note
 2 | PaperReferenceId | long | FOREIGN KEY REFERENCES Papers(PaperId)
 3 | CitationContext | string |
 
-## PaperExtendedAttributes.txt
+## Paper Extended Attributes
 
-### Path
-   mag/PaperExtendedAttributes.txt
+**Path** `mag/PaperExtendedAttributes.txt`
 
-### Schema
+**Schema**
 
 Column # | Name | Type | Note
 --- | --- | --- | ---
@@ -247,12 +234,11 @@ Column # | Name | Type | Note
 2 | AttributeType | int | 1: PatentId <br> 2: PubMedId <br> 3: PmcId
 3 | AttributeValue | string |
 
-## PaperFieldsOfStudy.txt
+## Paper Fields of Study
 
-### Path
-   advanced/PaperFieldsOfStudy.txt
+**Path** `advanced/PaperFieldsOfStudy.txt`
 
-### Schema
+**Schema**
 
 Column # | Name | Type | Note
 --- | --- | --- | ---
@@ -260,24 +246,22 @@ Column # | Name | Type | Note
 2 | FieldOfStudyId | long | PRIMARY KEY <br> FOREIGN KEY REFERENCES FieldsOfStudy(FieldOfStudyId)
 3 | Score | float | Confidence range between 0 and 1. Bigger number representing higher confidence.
 
-## PaperLanguages.txt
+## Paper Languages
 
-### Path
-   nlp/PaperLanguages.txt
+**Path** `nlp/PaperLanguages.txt`
 
-### Schema
+**Schema**
 
 Column # | Name | Type | Note
 --- | --- | --- | ---
 1 | PaperId | long | PRIMARY KEY <br> FOREIGN KEY REFERENCES Papers(PaperId)
 2 | LanguageCode | string | PRIMARY KEY
 
-## PaperRecommendations.txt
+## Paper Recommendations
 
-### Path
-   advanced/PaperRecommendations.txt
+**Path** `advanced/PaperRecommendations.txt`
 
-### Schema
+**Schema**
 
 Column # | Name | Type | Note
 --- | --- | --- | ---
@@ -285,24 +269,22 @@ Column # | Name | Type | Note
 2 | RecommendedPaperId | long | PRIMARY KEY <br> FOREIGN KEY REFERENCES Papers(PaperId)
 3 | Score | float | Confidence range between 0 and 1. Bigger number representing higher confidence.
 
-## PaperReferences.txt
+## Paper References
 
-### Path
-   mag/PaperReferences.txt
+**Path** `mag/PaperReferences.txt`
 
-### Schema
+**Schema**
 
 Column # | Name | Type | Note
 --- | --- | --- | ---
 1 | PaperId | long | PRIMARY KEY <br> FOREIGN KEY REFERENCES Papers(PaperId)
 2 | PaperReferenceId | long | PRIMARY KEY <br> FOREIGN KEY REFERENCES Papers(PaperId)
 
-## PaperResources.txt
+## Paper Resources
 
-### Path
-   mag/PaperResources.txt
+**Path** `mag/PaperResources.txt`
 
-### Schema
+**Schema**
 
 Column # | Name | Type | Note
 --- | --- | --- | ---
@@ -312,12 +294,11 @@ Column # | Name | Type | Note
 4 | SourceUrl | string |
 5 | RelationshipType | int | Bit flags. 1 = Own, 2 = Cite
 
-## PaperUrls.txt
+## Paper Urls
 
-### Path
-   mag/PaperUrls.txt
+**Path** `mag/PaperUrls.txt`
 
-### Schema
+**Schema**
 
 Column # | Name | Type | Note
 --- | --- | --- | ---
@@ -325,12 +306,11 @@ Column # | Name | Type | Note
 2 | SourceType | int? | 1 = Html, 2 = Text, 3 = Pdf, 4 = Doc, 5 = Ppt, 6 = Xls, 8 = Rtf, 12 = Xml, 13 = Rss, 20 = Swf, 27 = Ics, 31 = Pub, 33 = Ods, 34 = Odp, 35 = Odt, 36 = Zip, 40 = Mp3, 0/999/NULL = unknown
 3 | SourceUrl | string | PRIMARY KEY
 
-## Papers.txt
+## Papers
 
-### Path
-   mag/Papers.txt
+**Path** `mag/Papers.txt`
 
-### Schema
+**Schema**
 
 Column # | Name | Type | Note
 --- | --- | --- | ---
@@ -358,12 +338,11 @@ Column # | Name | Type | Note
 22 | FamilyId | long? | Papers with same FamilyId are same papers published in different venues
 23 | CreatedDate | DateTime |
 
-## RelatedFieldOfStudy.txt
+## Related Field of Study
 
-### Path
-   advanced/RelatedFieldOfStudy.txt
+**Path** `advanced/RelatedFieldOfStudy.txt`
 
-### Schema
+**Schema**
 
 Column # | Name | Type | Note
 --- | --- | --- | ---
