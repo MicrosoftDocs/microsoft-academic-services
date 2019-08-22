@@ -28,7 +28,7 @@ When using Microsoft Academic data (MAG, MAKES, etc.) in a product or service, o
 
 ## Affiliations
 
-**Path** mag/Affiliations.txt
+**Path** `mag/Affiliations.txt`
 
 **Schema**
 
@@ -66,9 +66,9 @@ Column # | Name | Type | Note
 
 ## Conference Instances
 
-### Path `mag/ConferenceInstances.txt`
+**Path** `mag/ConferenceInstances.txt`
 
-### Schema
+**Schema**
 
 Column # | Name | Type | Note
 --- | --- | --- | ---
@@ -92,7 +92,7 @@ Column # | Name | Type | Note
 
 ## Conference Series
 
-**Path** mag/ConferenceSeries.txt
+**Path** `mag/ConferenceSeries.txt`
 
 **Schema**
 
@@ -108,7 +108,7 @@ Column # | Name | Type | Note
 
 ## Entity Related Entities
 
-**Path** advanced/EntityRelatedEntities.txt
+**Path** `advanced/EntityRelatedEntities.txt`
 
 **Schema**
 
@@ -123,7 +123,7 @@ Column # | Name | Type | Note
 
 ## Field Of Study Children
 
-**Path** advanced/FieldOfStudyChildren.txt
+**Path** `advanced/FieldOfStudyChildren.txt`
 
 **Schema**
 
@@ -134,7 +134,7 @@ Column # | Name | Type | Note
 
 ## Field Of Study Extended Attributes
 
-**Path** advanced/FieldOfStudyExtendedAttributes.txt
+**Path** `advanced/FieldOfStudyExtendedAttributes.txt`
 
 **Schema**
 
@@ -146,7 +146,7 @@ Column # | Name | Type | Note
 
 ## Fields Of Study
 
-**Path** advanced/FieldsOfStudy.txt
+**Path** `advanced/FieldsOfStudy.txt`
 
 **Schema**
 
@@ -164,7 +164,7 @@ Column # | Name | Type | Note
 
 ## Journals
 
-**Path** mag/Journals.txt
+**Path** `mag/Journals.txt`
 
 **Schema**
 
@@ -183,7 +183,7 @@ Column # | Name | Type | Note
 
 ## Paper Abstracts Inverted Index
 
-**Path** nlp/PaperAbstractsInvertedIndex.txt
+**Path** `nlp/PaperAbstractsInvertedIndex.txt`
 
 **Schema**
 
@@ -194,7 +194,7 @@ Column # | Name | Type | Note
 
 ## Paper Author Affiliations
 
-**Path** mag/PaperAuthorAffiliations.txt
+**Path** `mag/PaperAuthorAffiliations.txt`
 
 **Schema**
 
@@ -212,7 +212,7 @@ Column # | Name | Type | Note
 
 ## Paper Citation Contexts
 
-**Path** nlp/PaperCitationContexts.txt
+**Path** `nlp/PaperCitationContexts.txt`
 
 **Schema**
 
@@ -224,7 +224,7 @@ Column # | Name | Type | Note
 
 ## Paper Extended Attributes
 
-**Path** mag/PaperExtendedAttributes.txt
+**Path** `mag/PaperExtendedAttributes.txt`
 
 **Schema**
 
@@ -236,7 +236,7 @@ Column # | Name | Type | Note
 
 ## Paper Fields Of Study
 
-**Path** advanced/PaperFieldsOfStudy.txt
+**Path** `advanced/PaperFieldsOfStudy.txt`
 
 **Schema**
 
@@ -248,7 +248,7 @@ Column # | Name | Type | Note
 
 ## Paper Languages
 
-**Path** nlp/PaperLanguages.txt
+**Path** `nlp/PaperLanguages.txt`
 
 **Schema**
 
@@ -259,7 +259,7 @@ Column # | Name | Type | Note
 
 ## Paper Recommendations
 
-**Path** advanced/PaperRecommendations.txt
+**Path** `advanced/PaperRecommendations.txt`
 
 **Schema**
 
@@ -271,7 +271,7 @@ Column # | Name | Type | Note
 
 ## Paper References
 
-**Path** mag/PaperReferences.txt
+**Path** `mag/PaperReferences.txt`
 
 **Schema**
 
@@ -282,7 +282,7 @@ Column # | Name | Type | Note
 
 ## Paper Resources
 
-**Path** mag/PaperResources.txt
+**Path** `mag/PaperResources.txt`
 
 **Schema**
 
@@ -296,7 +296,7 @@ Column # | Name | Type | Note
 
 ## Paper Urls
 
-**Path** mag/PaperUrls.txt
+**Path** `mag/PaperUrls.txt`
 
 **Schema**
 
@@ -308,7 +308,7 @@ Column # | Name | Type | Note
 
 ## Papers
 
-**Path** mag/Papers.txt
+**Path** `mag/Papers.txt`
 
 **Schema**
 
@@ -340,7 +340,7 @@ Column # | Name | Type | Note
 
 ## Related Field Of Study
 
-**Path** advanced/RelatedFieldOfStudy.txt
+**Path** `advanced/RelatedFieldOfStudy.txt`
 
 **Schema**
 
