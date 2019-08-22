@@ -29,7 +29,7 @@ When using Microsoft Academic data (MAG, MAKES, etc.) in a product or service, o
 ## Affiliations.txt
 
 ### Path
-  mag/Affiliations.txt
+    mag/Affiliations.txt
 
 ### Schema
 
@@ -51,7 +51,7 @@ Column # | Name | Type | Note
 ## Authors.txt
 
 ### Path
-  mag/Authors.txt
+    mag/Authors.txt
 
 ### Schema
 
@@ -69,7 +69,7 @@ Column # | Name | Type | Note
 ## ConferenceInstances.txt
 
 ### Path
-  mag/ConferenceInstances.txt
+    mag/ConferenceInstances.txt
 
 ### Schema
 
@@ -96,7 +96,7 @@ Column # | Name | Type | Note
 ## ConferenceSeries.txt
 
 ### Path
-  mag/ConferenceSeries.txt
+    mag/ConferenceSeries.txt
 
 ### Schema
 
@@ -113,7 +113,7 @@ Column # | Name | Type | Note
 ## EntityRelatedEntities.txt
 
 ### Path
-  advanced/EntityRelatedEntities.txt
+    advanced/EntityRelatedEntities.txt
 
 ### Schema
 
@@ -129,7 +129,7 @@ Column # | Name | Type | Note
 ## FieldOfStudyChildren.txt
 
 ### Path
-  advanced/FieldOfStudyChildren.txt
+    advanced/FieldOfStudyChildren.txt
 
 ### Schema
 
@@ -141,7 +141,7 @@ Column # | Name | Type | Note
 ## FieldOfStudyExtendedAttributes.txt
 
 ### Path
-  advanced/FieldOfStudyExtendedAttributes.txt
+    advanced/FieldOfStudyExtendedAttributes.txt
 
 ### Schema
 
@@ -154,7 +154,7 @@ Column # | Name | Type | Note
 ## FieldsOfStudy.txt
 
 ### Path
-  advanced/FieldsOfStudy.txt
+    advanced/FieldsOfStudy.txt
 
 ### Schema
 
@@ -173,7 +173,7 @@ Column # | Name | Type | Note
 ## Journals.txt
 
 ### Path
-  mag/Journals.txt
+    mag/Journals.txt
 
 ### Schema
 
@@ -193,7 +193,7 @@ Column # | Name | Type | Note
 ## PaperAbstractsInvertedIndex.txt
 
 ### Path
-  nlp/PaperAbstractsInvertedIndex.txt
+    nlp/PaperAbstractsInvertedIndex.txt
 
 ### Schema
 
@@ -205,7 +205,7 @@ Column # | Name | Type | Note
 ## PaperAuthorAffiliations.txt
 
 ### Path
-  mag/PaperAuthorAffiliations.txt
+    mag/PaperAuthorAffiliations.txt
 
 ### Schema
 
@@ -224,7 +224,7 @@ Column # | Name | Type | Note
 ## PaperCitationContexts.txt
 
 ### Path
-  nlp/PaperCitationContexts.txt
+    nlp/PaperCitationContexts.txt
 
 ### Schema
 
@@ -237,7 +237,7 @@ Column # | Name | Type | Note
 ## PaperExtendedAttributes.txt
 
 ### Path
-  mag/PaperExtendedAttributes.txt
+    mag/PaperExtendedAttributes.txt
 
 ### Schema
 
@@ -250,7 +250,7 @@ Column # | Name | Type | Note
 ## PaperFieldsOfStudy.txt
 
 ### Path
-  advanced/PaperFieldsOfStudy.txt
+    advanced/PaperFieldsOfStudy.txt
 
 ### Schema
 
@@ -263,7 +263,7 @@ Column # | Name | Type | Note
 ## PaperLanguages.txt
 
 ### Path
-  nlp/PaperLanguages.txt
+    nlp/PaperLanguages.txt
 
 ### Schema
 
@@ -275,7 +275,7 @@ Column # | Name | Type | Note
 ## PaperRecommendations.txt
 
 ### Path
-  advanced/PaperRecommendations.txt
+    advanced/PaperRecommendations.txt
 
 ### Schema
 
@@ -288,7 +288,7 @@ Column # | Name | Type | Note
 ## PaperReferences.txt
 
 ### Path
-  mag/PaperReferences.txt
+    mag/PaperReferences.txt
 
 ### Schema
 
@@ -300,7 +300,7 @@ Column # | Name | Type | Note
 ## PaperResources.txt
 
 ### Path
-  mag/PaperResources.txt
+    mag/PaperResources.txt
 
 ### Schema
 
@@ -315,7 +315,7 @@ Column # | Name | Type | Note
 ## PaperUrls.txt
 
 ### Path
-  mag/PaperUrls.txt
+    mag/PaperUrls.txt
 
 ### Schema
 
@@ -328,7 +328,7 @@ Column # | Name | Type | Note
 ## Papers.txt
 
 ### Path
-  mag/Papers.txt
+    mag/Papers.txt
 
 ### Schema
 
@@ -361,7 +361,7 @@ Column # | Name | Type | Note
 ## RelatedFieldOfStudy.txt
 
 ### Path
-  advanced/RelatedFieldOfStudy.txt
+    advanced/RelatedFieldOfStudy.txt
 
 ### Schema
 
