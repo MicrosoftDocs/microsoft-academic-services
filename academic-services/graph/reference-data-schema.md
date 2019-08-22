@@ -66,9 +66,9 @@ Column # | Name | Type | Note
 
 ## Conference Instances
 
-**Path** mag/ConferenceInstances.txt
+###Path `mag/ConferenceInstances.txt`
 
-**Schema**
+###Schema
 
 Column # | Name | Type | Note
 --- | --- | --- | ---
