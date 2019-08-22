@@ -132,7 +132,7 @@ Column # | Name | Type | Note
 1 | FieldOfStudyId | long | PRIMARY KEY <br> FOREIGN KEY REFERENCES FieldsOfStudy(FieldOfStudyId)
 2 | ChildFieldOfStudyId | long | PRIMARY KEY <br> FOREIGN KEY REFERENCES FieldsOfStudy(FieldOfStudyId)
 
-## Field Of Study Extended Attributes
+## Field of Study Extended Attributes
 
 **Path** `advanced/FieldOfStudyExtendedAttributes.txt`
 
