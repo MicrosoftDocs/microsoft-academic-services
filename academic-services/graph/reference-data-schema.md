@@ -53,8 +53,7 @@ Column # | Name | Type | Note
 
 ## Authors
 
-### Path
-   mag/Authors.txt
+### Path: mag/Authors.txt
 
 ### Schema
 
