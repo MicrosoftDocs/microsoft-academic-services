@@ -335,7 +335,7 @@ Column # | Name | Type | Note
 19 | CitationCount | long |
 20 | EstimatedCitation | long |
 21 | OriginalVenue | string |
-22 | FamilyId | long? | See [FAQ](resources-faq.md#what-format-are-paper-abstracts-published-in) <br>Papers with same FamilyId are same papers published in different venues
+22 | FamilyId | long? | See [FAQ](resources-faq.md#what-is-familyid-in-paperstxt)
 23 | CreatedDate | DateTime |
 
 ## Related Field of Study
