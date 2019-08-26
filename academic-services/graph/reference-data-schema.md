@@ -19,7 +19,7 @@ When using Microsoft Academic data (MAG, MAKES, etc.) in a product or service, o
 
  [![Entity Relationship Diagram](media/erd/entity-relationship-diagram-thumbnail.png)](media/erd/entity-relationship-diagram.png)
 
-## Note on "rank"
+## Note on "Rank"
 
 “Rank” values in the entity files are the log probability of an entity being important multiplied by a constant(-1000), i.e.:
 
