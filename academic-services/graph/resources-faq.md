@@ -56,4 +56,4 @@ It is relatively easy and inexpensive to compute citation counts and h-index usi
 
 ## What is FamilyId in Papers.txt
 
-Some papers were published in multiple venues, e.g. in archive and a conference. These papers share the same FamilyId where the FamilyId is the one of the PaperIds.
+Some papers were published in multiple venues, e.g. in archive and a conference. These papers share same FamilyId where the value  being the PaperIds of the main paper.
