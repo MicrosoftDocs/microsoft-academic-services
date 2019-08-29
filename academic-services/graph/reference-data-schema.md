@@ -2,7 +2,7 @@
 title: Microsoft Academic Graph data schema
 description: Documents the complete, most recent Microsoft Academic Graph entity data schema, including the name and type of each attribute
 ms.topic: reference
-ms.date: 8/19/2019
+ms.date: 8/26/2019
 ---
 # Microsoft Academic Graph data schema
 
@@ -19,7 +19,7 @@ When using Microsoft Academic data (MAG, MAKES, etc.) in a product or service, o
 
  [![Entity Relationship Diagram](media/erd/entity-relationship-diagram-thumbnail.png)](media/erd/entity-relationship-diagram.png)
 
-## Note on "rank"
+## Note on "Rank"
 
 “Rank” values in the entity files are the log probability of an entity being important multiplied by a constant(-1000), i.e.:
 
@@ -190,7 +190,7 @@ Column # | Name | Type | Note
 Column # | Name | Type | Note
 --- | --- | --- | ---
 1 | PaperId | long | PRIMARY KEY <br> FOREIGN KEY REFERENCES Papers(PaperId)
-2 | IndexedAbstract | string | See [Microsoft Academic Graph FAQ](resources-faq.md#what-format-are-paper-abstracts-published-in)
+2 | IndexedAbstract | string | See [FAQ](resources-faq.md#what-format-are-paper-abstracts-published-in)
 
 ## Paper Author Affiliations
 
@@ -317,7 +317,7 @@ Column # | Name | Type | Note
 1 | PaperId | long | PRIMARY KEY
 2 | Rank | uint |
 3 | Doi | string |
-4 | DocType | string | Book, BookChapter, Conference, Dataset, Journal, Patent, NULL : unknown
+4 | DocType | string | Book, BookChapter, Conference, Dataset, Journal, Patent, Repository, NULL : unknown
 5 | PaperTitle | string |
 6 | OriginalTitle | string |
 7 | BookTitle | string |
@@ -335,7 +335,7 @@ Column # | Name | Type | Note
 19 | CitationCount | long |
 20 | EstimatedCitation | long |
 21 | OriginalVenue | string |
-22 | FamilyId | long? | Papers with same FamilyId are same papers published in different venues
+22 | FamilyId | long? | See [FAQ](resources-faq.md#what-is-familyid-in-paperstxt)
 23 | CreatedDate | DateTime |
 
 ## Related Field of Study
