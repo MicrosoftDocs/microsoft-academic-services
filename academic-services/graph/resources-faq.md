@@ -2,7 +2,7 @@
 title: FAQ about Microsoft Academic Graph
 description: Answers some of the most frequently asked questions about the Microsoft Academic Graph
 ms.topic: reference
-ms.date: 3/10/2019
+ms.date: 8/26/2019
 ---
 # Frequently Asked Questions about Microsoft Academic Graph
 
@@ -53,3 +53,7 @@ An entities "importance" is calculated using its relationships with other entiti
 ## What is the cost to compute authors citation counts and h-index
 
 It is relatively easy and inexpensive to compute citation counts and h-index using [U-SQL](https://msdn.microsoft.com/en-us/azure/data-lake-analytics/u-sql/u-sql-language-reference) with [Azure Data Lake Analytic](https://azure.microsoft.com/en-us/services/data-lake-analytics/) for all authors in MAG, currently 250 million in total. The cost range from $1 (USD) with 1 AU running for 40 minutes to $2 with 16AU running for 5 minutes.
+
+## What is FamilyId in Papers.txt
+
+Some papers were published in multiple venues, e.g. in archive and a conference. These papers share same FamilyId where the value  being the PaperId of the main paper.
