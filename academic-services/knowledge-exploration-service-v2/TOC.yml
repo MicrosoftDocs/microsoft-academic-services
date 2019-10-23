@@ -1,0 +1,70 @@
+- name: Microsoft Academic Knowledge Exploration Service Documentation
+  href: index.yml
+- name: Overview
+  expanded: true
+  items:
+  - name: What is Microsoft Academic Knowledge Exploration Service?
+    href: overview.md
+- name: Get started
+  expanded: true
+  items:
+  - name: Subscribe
+    href: get-started-subscribe.md
+- name: How-to guides
+  expanded: true
+  items:
+  - name: Deploy service
+    expanded: true
+    items:
+    - name: Using deployment tool
+      href: how-to-deploy-tool.md
+    - name: Using Azure Powershell
+      href: how-to-deploy-powershell.md
+    - name: Using Azure CLI
+      href: how-to-deploy-cli.md
+    - name: Using Azure Management Portal
+      href: how-to-deploy-portal.md
+  - name: Customize schema
+    href: how-to-customize-schema.md
+  - name: Customize grammar
+    href: how-to-customize-grammar.md
+  - name: Customize data
+    href: how-to-customize-data.md
+- name: Reference
+  expanded: true
+  items:
+  - name: Default entity schema
+    expanded: true
+    items:
+      - name: Affiliation
+        href: reference-affiliation.md
+      - name: Author
+        href: reference-author.md
+      - name: Conference instance
+        href: reference-conference-instance.md
+      - name: Conference series
+        href: reference-conference-series.md
+      - name: Field of study
+        href: reference-field-of-study.md
+      - name: Journal
+        href: reference-journal.md
+      - name: Paper
+        href: reference-paper.md
+  - name: REST
+    expanded: true
+    items:
+      - name: Interpret query
+        href: reference-interpret-query.md
+      - name: Evaluate expression
+        href: reference-evaluate-expression.md
+      - name: Calculate histogram
+        href: reference-calculate-histogram.md
+- name: Resources
+  expanded: true
+  items:
+  - name: FAQ
+    href: resources-faq.md
+  - name: Pricing
+    href: resources-pricing.md
+  - name: Stack Overflow
+    href: http://stackoverflow.com/questions/tagged/microsoft-academic-knowledge-exploration-service
