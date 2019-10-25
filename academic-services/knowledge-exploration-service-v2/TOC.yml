@@ -1,4 +1,4 @@
-- name: Microsoft Academic Knowledge Exploration Service Documentation
+- name: Microsoft Academic Knowledge Exploration Service documentation
   href: index.yml
 - name: Overview
   expanded: true
@@ -10,31 +10,25 @@
   items:
   - name: Subscribe
     href: get-started-subscribe.md
+- name: Concepts
+  expanded: true
+  items:
+  - name: Structured query expressions
+    href: concepts-query-expressions.md
 - name: How-to guides
   expanded: true
   items:
   - name: Deploy service
-    expanded: true
+    expanded: false
     items:
     - name: Using deployment tool
       href: how-to-deploy-tool.md
-    - name: Using Azure Powershell
-      href: how-to-deploy-powershell.md
-    - name: Using Azure CLI
-      href: how-to-deploy-cli.md
-    - name: Using Azure Management Portal
-      href: how-to-deploy-portal.md
-  - name: Customize schema
-    href: how-to-customize-schema.md
-  - name: Customize grammar
-    href: how-to-customize-grammar.md
-  - name: Customize data
-    href: how-to-customize-data.md
 - name: Reference
   expanded: true
   items:
-  - name: Default entity schema
-    expanded: true
+  - name: Entity schema
+    href: reference-entity-schema.md
+    expanded: false
     items:
       - name: Affiliation
         href: reference-affiliation.md
@@ -50,15 +44,21 @@
         href: reference-journal.md
       - name: Paper
         href: reference-paper.md
-  - name: REST
-    expanded: true
+  - name: REST API
+    expanded: false
     items:
-      - name: Interpret query
-        href: reference-interpret-query.md
-      - name: Evaluate expression
-        href: reference-evaluate-expression.md
-      - name: Calculate histogram
-        href: reference-calculate-histogram.md
+      - name: GET Evaluate
+        href: reference-get-evaluate.md
+      - name: GET Histogram
+        href: reference-get-histogram.md
+      - name: GET Interpret
+        href: reference-get-interpret.md
+      - name: POST Evaluate
+        href: reference-post-evaluate.md
+      - name: POST Histogram
+        href: reference-post-histogram.md
+      - name: POST Interpret
+        href: reference-post-interpret.md
 - name: Resources
   expanded: true
   items:
