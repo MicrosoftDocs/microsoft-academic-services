@@ -5,16 +5,29 @@ ms.topic: reference
 ms.date: 
 ---
 
-# <name> REST API
+# Interpret REST API
 
 ``` HTTP
-GET|POST http://[service name].[service region].cloudapp.azure.com/<name>?[query parameters]
+GET http://{serviceName}.{serviceRegion}.cloudapp.azure.com/interpret?query={query}
+```  
+
+With optional parameters:
+
+``` HTTP
+GET http://{serviceName}.{serviceRegion}.cloudapp.azure.com/interpret?query={query}&top={top}&skip={skip}&timeout={timeout}&allowCompletions={allowCompletions}&topEntitiesPerInterpretation={topEntitiesPerInterpretation}&select={select}
 ```  
 
 ## URI Parameters
 
 Name | In | Required | Type | Description
 --- | --- | --- | --- | ---
+`query` | query | Required | string | The natural language query to generate interpretations for. See the [natural language queries](concepts-queries.md) page for more details.
+`top` | query | Optional | integer | The number of interpretations to generate in the result set. Defaults to 5.
+`skip` | query | Optional | integer | The number of interpretations to skip in the result set. Defaults to 0.
+`timeout` | query | Optional | integer | The maximum amount of time in milliseconds to use when generating interpretations. Defaults to 2000. <br/><br/>If the timeout is hit, all interpretations that have been generated will be returned and a "timedOut" flag will be set in the response indicating that the timeout was hit before the total number of requested interpretations was met.
+`allowCompletions` | query | Optional | boolean | Indicates if interpretations should be generated that infer entity attribute values beyond what was provided in the query. <br/><br/>For example, the for query "microsoft machine le", if `allowCompletions` is set to true an interpretation could be generated that completes "le" to "learning", i.e. "microsoft machine learning".
+`topEntitiesPerInterpretation` | query | Optional | integer | The number of entities that should be returned for each interpretation that match the interpretted query expression.
+`select` | query | Optional | string | A list of comma-separated attributes to include for each entity returned for each interpretation. See the [entity schema](reference-entity-schema.md) for the attributes that can be requested. If no attributes are specified then the each entity will only contain its corresponding score.
 
 ## Request Body
 

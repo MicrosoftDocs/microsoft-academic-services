@@ -18,19 +18,19 @@ GET http://{serviceName}.{serviceRegion}.cloudapp.azure.com/evaluate?expression=
 With optional parameters:
 
 ``` HTTP
-GET http://{serviceName}.{serviceRegion}.cloudapp.azure.com/evaluate?expression={expression}&select={select}&skip={skip}&top={top}&orderBy={orderBy}&totalCount={count}
+GET http://{serviceName}.{serviceRegion}.cloudapp.azure.com/evaluate?expression={expression}&select={select}&skip={skip}&top={top}&orderBy={orderBy}&totalCount={totalCount}
 ```  
 
 ## URI Parameters
 
 Name | In | Required | Type | Description
 --- | --- | --- | --- | ---
-`expression` | query | Required | string | Structured query expression to evaluate. See [structured query expressions](concepts-query-expressions.md) for documentation on how to construct them.
+`expression` | query | Required | string | Structured query expression to evaluate. See [structured query expressions](concepts-query-expressions.md) for documentation.
 `select` | query | Optional | string | A list of comma-separated attributes to include for each entity in the result set. See the [entity schema](reference-entity-schema.md) for the attributes that can be requested. Returned entities aren't required to have the attributes, which means the list can include attributes from different entity types. This is useful when the query expression potentially matches multiple types of entities. If no attributes are specified then the each entity will only contain its corresponding score.
 `skip` | query | Optional | integer | The number of matching entities to skip in the result set. Defaults to 0.
 `top` | query | Optional | integer | The number of matching entities to retrieve in the result set. The default page size is 10, while the maximum page size is 1000.
-`orderBy` | query | Optional | string | The attribute to use for sorting the result set, followed by an optional sort order indicator in the format "asc" for ascending and "desc" for descending. E.g. Year:desc would return entities ordered newest first. The default value is entity log probability score in descending order. Note that changing the default order of large result sets can take a very long time, so changing sort order should be used cautiously.
-`totalCount` | query | Optional | boolean | Specifies whether to return the total count of entities available in the result set. Defaults to false. Note that for very large result sets, including the total count can be a costly operation and may cause the evaluate to take longer than expected.
+`orderBy` | query | Optional | string | The attribute to use for sorting the result set, followed by an optional sort order indicator in the format "asc" for ascending and "desc" for descending. E.g. Year:desc would return entities ordered newest first. The default value is entity log probability score in descending order. <br/><br/>Note that changing the default order of large result sets can take a very long time, so changing sort order should be used cautiously.
+`totalCount` | query | Optional | boolean | Specifies whether to return the total count of entities available in the result set. Defaults to false. <br/><br/>Note that for very large result sets, including the total count can be a costly operation and may cause the evaluate to take longer than expected.
 
 ## Request Body
 

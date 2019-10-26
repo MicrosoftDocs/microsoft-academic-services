@@ -13,6 +13,8 @@
 - name: Concepts
   expanded: true
   items:
+  - name: Natural language queries
+    href: concepts-queries.md
   - name: Structured query expressions
     href: concepts-query-expressions.md
 - name: How-to guides

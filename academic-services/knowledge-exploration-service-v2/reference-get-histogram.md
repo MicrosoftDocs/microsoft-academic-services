@@ -8,7 +8,13 @@ ms.date:
 # <name> REST API
 
 ``` HTTP
-GET|POST http://[service name].[service region].cloudapp.azure.com/<name>?[query parameters]
+GET|POST http://{serviceName}.{serviceRegion}.cloudapp.azure.com/<name>?{queryParameters}
+```  
+
+With optional parameters:
+
+``` HTTP
+GET|POST http://{serviceName}.{serviceRegion}.cloudapp.azure.com/<name>?{queryParameters}
 ```  
 
 ## URI Parameters
