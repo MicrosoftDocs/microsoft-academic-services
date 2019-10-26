@@ -25,7 +25,7 @@ GET http://{serviceName}.{serviceRegion}.cloudapp.azure.com/evaluate?expression=
 
 Name | In | Required | Type | Description
 --- | --- | --- | --- | ---
-`expression` | query | True | string | Structured query expression to evaluate.
+`expression` | query | True | string | Structured query expression to evaluate. See [structured query expressions](concepts-query-expressions.md) for documentation on how to construct them.
 `select` | query | | string | A list of comma-separated attributes to include for each entity in the result set. See the [entity schema](reference-entity-schema.md) for the attributes that can be requested. Returned entities aren't required to have the attributes, which means the list can include attributes from different entity types. This is useful when the query expression potentially matches multiple types of entities. If no attributes are specified then the each entity will only contain its corresponding score.
 `skip` | query | | integer | The number of matching entities to skip in the result set. Defaults to 0.
 `top` | query | | integer | The number of matching entities to retrieve in the result set. The default page size is 10, while the maximum page size is 1000.

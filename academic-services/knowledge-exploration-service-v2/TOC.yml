@@ -27,9 +27,10 @@
   expanded: true
   items:
   - name: Entity schema
-    href: reference-entity-schema.md
     expanded: false
     items:
+      - name: Overview
+        href: reference-entity-schema.md
       - name: Affiliation
         href: reference-affiliation.md
       - name: Author
