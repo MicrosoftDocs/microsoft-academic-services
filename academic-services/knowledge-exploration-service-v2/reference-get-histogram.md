@@ -35,7 +35,7 @@ Name | In | Required | Type | Description
 
 Name | Type | Description
 --- | --- | ---
-200 OK | [HistogramResponse](#HistogramResponse) | Histogram response successfully generated.
+200 OK | [HistogramResponse](#histogramresponse) | Histogram response successfully generated.
 
 ## Examples
 
@@ -71,13 +71,13 @@ Status code: XXX
 
 | | |
 | --- | --- |
-| [HistogramResponse](#HistogramResponse) | Histogram response container |
+| [HistogramResponse](#histogramresponse) | Histogram response container |
 
 ### HistogramResponse
 Name | Type | Description
 --- | --- | ---
 expressionEvaluated | string | The query expression evaluated to generate matching entities which were used for generating histograms
-histograms | [HistogramAttribute[]](#HistogramAttribute) | An array of histogram containers
+histograms | [HistogramAttribute[]](#histogramattribute) | An array of histogram containers
 numberOfEntitiesUsed | integer | The number of matching entities that were used to generate histograms
 
 ## See also
