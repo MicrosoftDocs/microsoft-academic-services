@@ -35,7 +35,7 @@ Name | In | Required | Type | Description
 
 Name | Type | Description
 --- | --- | ---
-200 OK | [HistogramResponse](#HistogramResponse) | A histograms response container.
+200 OK | [HistogramResponse](#HistogramResponse) | Histogram response successfully generated.
 
 ## Examples
 
@@ -69,9 +69,9 @@ Status code: XXX
 
 ## Definitions
 
- | 
---- | ---
-[HistogramResponse](#HistogramResponse) | Histogram response container
+| | |
+| --- | --- |
+| [HistogramResponse](#HistogramResponse) | Histogram response container |
 
 ### HistogramResponse
 Name | Type | Description
