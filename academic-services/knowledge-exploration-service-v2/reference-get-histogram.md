@@ -18,7 +18,7 @@ GET http://{serviceName}.{serviceRegion}.cloudapp.azure.com/histogram?expression
 With optional parameters:
 
 ``` HTTP
-GET http://{serviceName}.{serviceRegion}.cloudapp.azure.com/histogram?expression={expression}
+GET http://{serviceName}.{serviceRegion}.cloudapp.azure.com/histogram?expression={expression}&select={select}&skip={skip}&top={top}&numberOfEntitiesToUse={numberOfEntitiesToUse}
 ```  
 
 ## URI Parameters
@@ -31,15 +31,11 @@ Name | In | Required | Type | Description
 `top` | query | Optional | integer | The number of histogram values to return for each attribute. <br/><br/>Defaults to 10.
 `numberOfEntitiesToUse` | query | Optional | integer | The number of matching entities to use when calculating histograms. <br/><br/>Defaults to 0, which indicates that all matching entities should be used. <br/><br/>Note that this operation can take a long time to complete for expressions that generate many matching entities.
 
-## Request Body
-
-Name | Required | Type | Description
---- | --- | --- | ---
-
 ## Responses
 
 Name | Type | Description
 --- | --- | ---
+200 OK | [HistogramResponse](#HistogramResponse) | A histograms response container.
 
 ## Examples
 
@@ -73,7 +69,14 @@ Status code: XXX
 
 ## Definitions
 
+--- | ---
+[HistogramResponse](#HistogramResponse) | Histograms response container
+
+### HistogramsResponse
 Name | Type | Description
 --- | --- | ---
+expressionEvaluated | string | The query expression evaluated to generate matching entities which were used for generating histograms
+histograms | [HistogramAttribute[]](#HistogramAttribute) | An array of histogram containers
+numberOfEntitiesUsed | integer | The number of matching entities that were used to generate histograms
 
 ## See also
