@@ -69,10 +69,11 @@ Status code: XXX
 
 ## Definitions
 
+ | 
 --- | ---
-[HistogramResponse](#HistogramResponse) | Histograms response container
+[HistogramResponse](#HistogramResponse) | Histogram response container
 
-### HistogramsResponse
+### HistogramResponse
 Name | Type | Description
 --- | --- | ---
 expressionEvaluated | string | The query expression evaluated to generate matching entities which were used for generating histograms
