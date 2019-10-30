@@ -7,26 +7,26 @@ ms.date:
 
 # Conference series entity schema
 
-## ConferenceSeries
+## conferenceSeries
 
 Name | Type | Operations | Description
 --- | --- | --- | ---
-ConferenceSeriesName | string | equals, startsWith |
-DisplayConferenceSeriesName | blob | |
-EntityType | string | equals |
-Id | int64 | equals |
-PaperCount | int32 | equals, isBetween |
-ReferenceCount | int32 | equals, isBetween |
-RelatedEntities | [RelatedEntity](#relatedentity)[] | composite |
+conferenceSeriesName | string | equals, startsWith |
+displayConferenceSeriesName | blob | |
+entityType | string | equals |
+id | int64 | equals |
+paperCount | int32 | equals, isBetween |
+referenceCount | int32 | equals, isBetween |
+relatedEntities | [relatedEntity](#relatedentity)[] | composite |
 
-## RelatedEntity
+## relatedEntity
 
 Name | Type | Operations | Description
 --- | --- | --- | ---
-Id | int62 | equals |
-Name | string | equals, startsWith |
-Relationship | int32 | equals |
-Score | double | isBetween |
-Type | string | equals |
+id | int62 | equals |
+name | string | equals, startsWith |
+relationship | int32 | equals |
+score | double | isBetween |
+type | string | equals |
 
 ## See also

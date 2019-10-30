@@ -7,44 +7,44 @@ ms.date:
 
 # Field of study entity schema
 
-## FieldOfStudy
+## fieldOfStudy
 
 Name | Type | Operations | Description
 --- | --- | --- | ---
-FieldOfStudyName | string | equals, startsWith |
-DisplayFieldOfStudyName | blob | |
-EntityType | string | equals |
-FieldOfStudyChildren | [FieldOfStudyChild](#fieldofstudychild)[] | composite |
-FieldOfStudyExtendedAttributes | [FieldOfStudyExtendedAttribute](#fieldofstudyextendedattribute)[] | composite |
-Id | int64 | equals |
-Level | int32 | equals, isBetween |
-MainType | string | equals |
-PaperCount | int32 | equals, isBetween |
-ReferenceCount | int32 | equals, isBetween |
-RelatedFieldsOfStudy | [RelatedFieldOfStudy](#relatedfieldofstudy)[] | composite |
+fieldOfStudyName | string | equals, startsWith |
+displayFieldOfStudyName | blob | |
+entityType | string | equals |
+children | [fieldOfStudyChild](#fieldofstudychild)[] | composite |
+fieldOfStudyExtendedAttributes | [fieldOfStudyExtendedAttribute](#fieldofstudyextendedattribute)[] | composite |
+id | int64 | equals |
+level | int32 | equals, isBetween |
+mainType | string | equals |
+paperCount | int32 | equals, isBetween |
+referenceCount | int32 | equals, isBetween |
+relatedFieldsOfStudy | [relatedFieldOfStudy](#relatedfieldofstudy)[] | composite |
 
-## FieldOfStudyChild
-
-Name | Type | Operations | Description
---- | --- | --- | ---
-Id | int64 | equals |
-Name | string | equals, startsWith |
-
-## FieldOfStudyExtendedAttribute
+## fieldOfStudyChild
 
 Name | Type | Operations | Description
 --- | --- | --- | ---
-AttributeType | int64 | equals |
-AttributeValue | string | equals |
+id | int64 | equals |
+name | string | equals, startsWith |
 
-## RelatedFieldOfStudy
+## fieldOfStudyExtendedAttribute
 
 Name | Type | Operations | Description
 --- | --- | --- | ---
-Id | int62 | equals |
-Name | string | equals, startsWith |
-Rank | double | isBetween |
-Relationship | string | equals |
-Type | string | equals |
+type | int64 | equals |
+value | string | equals |
+
+## relatedFieldOfStudy
+
+Name | Type | Operations | Description
+--- | --- | --- | ---
+id | int62 | equals |
+name | string | equals, startsWith |
+rank | double | isBetween |
+relationship | string | equals |
+type | string | equals |
 
 ## See also

@@ -7,28 +7,28 @@ ms.date:
 
 # Journal entity schema
 
-## Journal
+## journal
 
 Name | Type | Operations | Description
 --- | --- | --- | ---
-JournalName | string | equals, startsWith |
-DisplayJournalName | blob | |
-EntityType | string | equals |
-Id | int64 | equals |
-Issn | string | equals, startsWith |
-PaperCount | int32 | equals, isBetween |
-ReferenceCount | int32 | equals, isBetween |
-RelatedEntities | [RelatedEntity](#relatedentity)[] | composite |
-Webpage | string | equals, startsWith |
+displayJournalName | blob | |
+entityType | string | equals |
+id | int64 | equals |
+issn | string | equals, startsWith |
+journalName | string | equals, startsWith |
+paperCount | int32 | equals, isBetween |
+referenceCount | int32 | equals, isBetween |
+relatedEntities | [RelatedEntity](#relatedentity)[] | composite |
+webpage | string | equals, startsWith |
 
-## RelatedEntity
+## relatedEntity
 
 Name | Type | Operations | Description
 --- | --- | --- | ---
-Id | int62 | equals |
-Name | string | equals, startsWith |
-Relationship | int32 | equals |
-Score | double | isBetween |
-Type | string | equals |
+id | int62 | equals |
+name | string | equals, startsWith |
+relationship | int32 | equals |
+score | double | isBetween |
+type | string | equals |
 
 ## See also

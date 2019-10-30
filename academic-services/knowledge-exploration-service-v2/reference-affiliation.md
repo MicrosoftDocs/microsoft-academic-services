@@ -7,31 +7,31 @@ ms.date:
 
 # Affiliation entity schema
 
-## Affiliation
+## affiliation
 
 Name | Type | Operations | Description
 --- | --- | --- | ---
-AffiliationName | string | equals, startsWith |
-DisplayAffiliationName | blob | |
-EntityType | string | equals |
-GridId | string | equals |
-Id | int64 | equals |
-Latitude | double | equals, isBetween |
-Longitude | double | equals, isBetween |
-OfficialPage | string | equals |
-PaperCount | int32 | equals, isBetween |
-ReferenceCount | int32 | equals, isBetween |
-RelatedEntities | [RelatedEntity](#relatedentity)[] | composite |
-WikiPage | string | equals |
+affiliationName | string | equals, startsWith |
+displayAffiliationName | blob | |
+entityType | string | equals |
+gridId | string | equals |
+id | int64 | equals |
+latitude | double | equals, isBetween |
+longitude | double | equals, isBetween |
+officialPage | string | equals |
+paperCount | int32 | equals, isBetween |
+referenceCount | int32 | equals, isBetween |
+relatedEntities | [relatedEntity](#relatedentity)[] | composite |
+wikiPage | string | equals |
 
-## RelatedEntity
+## relatedEntity
 
 Name | Type | Operations | Description
 --- | --- | --- | ---
-Id | int62 | equals |
-Name | string | equals, startsWith |
-Relationship | int32 | equals |
-Score | double | isBetween |
-Type | string | equals |
+id | int62 | equals |
+name | string | equals, startsWith |
+relationship | int32 | equals |
+score | double | isBetween |
+type | string | equals |
 
 ## See also

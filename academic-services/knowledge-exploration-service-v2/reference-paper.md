@@ -7,100 +7,100 @@ ms.date:
 
 # Paper entity schema
 
-## Paper
+## paper
 
 Name | Type | Operations | Description
 --- | --- | --- | ---
-Authors | [PaperAuthor](#paperauthor)[] | composite |
-BookTitle | string | equals |
-CitationContexts | [PaperCitationContext](#papercitationcontext)[] | composite |
-CitationCount | int32 | equals, isBetween |
-ConferenceInstanceId | int64 | equals |
-ConferenceInstanceName | string | equals, startsWith |
-ConferenceSeriesId | int64 | equals |
-ConferenceSeriesName | string | equals, startsWith |
-Date | date | equals, isBetween |
-Doi | string | equals, startsWith |
-EntityType | string | equals |
-EstimatedCitation | int32 | equals, isBetween |
-ExtendedAttributes | [PaperExtendedAttribute](#paperextendedattribute)[] | composite |
-FamilyId | int64 | equals |
-FieldsOfStudy | [PaperFieldOfStudy](#paperfieldofstudy)[] | composite |
-FirstPage | string | equals |
-Id | int64 | equals |
-InvertedAbstract | blob | |
-Issue | string | equals |
-LastPage | string | equals |
-JournalId | int64 | equals |
-JournalName | string | equals, startsWith |
-OriginalTitle | blob | |
-OriginalVenue | blob | |
-PaperType | string | equals |
-Publisher | date | equals |
-Recommendations | [PaperRecommendation](#paperrecommendation)[] | composite |
-References | int64[] | equals |
-ReferenceCount | int32 | equals, isBetween |
-Resources | [PaperResource](#paperresource)[] | composite |
-Title | string | equals, startsWith |
-TitleWords | string[] | equals |
-Urls | [PaperUrl](#paperurl)[] | composite |
-Volume | string | equals |
-Year | int32 | equals, isBetween |
+authors | [PaperAuthor](#paperauthor)[] | composite |
+bookTitle | string | equals |
+citationContexts | [PaperCitationContext](#papercitationcontext)[] | composite |
+citationCount | int32 | equals, isBetween |
+conferenceInstanceId | int64 | equals |
+conferenceInstanceName | string | equals, startsWith |
+conferenceSeriesId | int64 | equals |
+conferenceSeriesName | string | equals, startsWith |
+date | date | equals, isBetween |
+doi | string | equals, startsWith |
+entityType | string | equals |
+estimatedCitation | int32 | equals, isBetween |
+extendedAttributes | [PaperExtendedAttribute](#paperextendedattribute)[] | composite |
+familyId | int64 | equals |
+fieldsOfStudy | [PaperFieldOfStudy](#paperfieldofstudy)[] | composite |
+firstPage | string | equals |
+id | int64 | equals |
+invertedAbstract | blob | |
+issue | string | equals |
+lastPage | string | equals |
+journalId | int64 | equals |
+journalName | string | equals, startsWith |
+originalTitle | blob | |
+originalVenue | blob | |
+paperType | string | equals |
+publisher | date | equals |
+recommendations | [PaperRecommendation](#paperrecommendation)[] | composite |
+references | int64[] | equals |
+referenceCount | int32 | equals, isBetween |
+resources | [PaperResource](#paperresource)[] | composite |
+title | string | equals, startsWith |
+titleWords | string[] | equals |
+urls | [PaperUrl](#paperurl)[] | composite |
+volume | string | equals |
+year | int32 | equals, isBetween |
 
-## PaperAuthor
-
-Name | Type | Operations | Description
---- | --- | --- | ---
-AffiliationId | int64 | equals |
-AffiliationName | string | equals, startsWith |
-Id | int64 | equals |
-Name | string | equals, startsWith |
-Sequence | int32 | equals |
-
-## PaperCitationContext
+## paperAuthor
 
 Name | Type | Operations | Description
 --- | --- | --- | ---
-CitationContext | blob | |
-PaperReferenceId | int64 | equals |
+affiliationId | int64 | equals |
+affiliationName | string | equals, startsWith |
+id | int64 | equals |
+name | string | equals, startsWith |
+sequence | int32 | equals |
 
-## PaperExtendedAttribute
-
-Name | Type | Operations | Description
---- | --- | --- | ---
-Type | string | equals |
-Value | string | equals |
-
-## PaperFieldOfStudy
+## paperCitationContext
 
 Name | Type | Operations | Description
 --- | --- | --- | ---
-Id | int64 | equals |
-Name | string | equals, startsWith |
-Score | double | isBetween |
+citationContext | blob | |
+paperReferenceId | int64 | equals |
 
-## PaperRecommendation
-
-Name | Type | Operations | Description
---- | --- | --- | ---
-Id | int64 | equals |
-Score | double | isBetween |
-
-## PaperResource
+## paperExtendedAttribute
 
 Name | Type | Operations | Description
 --- | --- | --- | ---
-Relationship | int32 | equals |
-SourceUrl | string | equals, startsWith |
-Type | int32 | equals |
-Url | string | equals, startsWith |
+type | string | equals |
+value | string | equals |
 
-## PaperUrl
+## paperFieldOfStudy
 
 Name | Type | Operations | Description
 --- | --- | --- | ---
-LanguageCode | string | equals |
-Type | int32 | equals |
-Url | string | equals, startsWith |
+id | int64 | equals |
+name | string | equals, startsWith |
+score | double | isBetween |
+
+## paperRecommendation
+
+Name | Type | Operations | Description
+--- | --- | --- | ---
+id | int64 | equals |
+score | double | isBetween |
+
+## paperResource
+
+Name | Type | Operations | Description
+--- | --- | --- | ---
+relationship | int32 | equals |
+sourceUrl | string | equals, startsWith |
+type | int32 | equals |
+url | string | equals, startsWith |
+
+## paperUrl
+
+Name | Type | Operations | Description
+--- | --- | --- | ---
+languageCode | string | equals |
+type | int32 | equals |
+url | string | equals, startsWith |
 
 ## See also

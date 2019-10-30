@@ -7,17 +7,17 @@ ms.date:
 
 # Author entity schema
 
-## Author
+## author
 
 Name | Type | Operations | Description
 --- | --- | --- | ---
-AuthorName | string | equals, startsWith |
-DisplayAuthorName | blob | |
-EntityType | string | equals |
-Id | int64 | equals |
-LastKnownAffiliationId | int64 | equals |
-LastKnownAffiliationName | string | equals, startsWith |
-PaperCount | int32 | equals, isBetween |
-ReferenceCount | int32 | equals, isBetween |
+authorName | string | equals, startsWith |
+displayAuthorName | blob | |
+entityType | string | equals |
+id | int64 | equals |
+lastKnownAffiliationId | int64 | equals |
+lastKnownAffiliationName | string | equals, startsWith |
+paperCount | int32 | equals, isBetween |
+referenceCount | int32 | equals, isBetween |
 
 ## See also

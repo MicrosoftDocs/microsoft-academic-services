@@ -7,25 +7,25 @@ ms.date:
 
 # Conference instance entity schema
 
-## ConferenceInstance
+## conferenceInstance
 
 Name | Type | Operations | Description
 --- | --- | --- | ---
-AbstractRegistrationDate | date | equals, isBetween |
-ConferenceInstanceName | string | equals, startsWith |
-DisplayConferenceInstanceName | blob | |
-EndDate | date | equals, isBetween |
-EntityType | string | equals |
-FinalVersionDueDate | date | equals, isBetween |
-Id | int64 | equals |
-Location | string | equals, startsWith |
-NotificationDueDate | date | equals, isBetween |
-OfficialUrl | string | equals |
-PaperCount | int32 | equals, isBetween |
-ParentConferenceSeriesId | int64 | equals |
-ParentConferenceSeriesName | string | equals, startsWith |
-ReferenceCount | int32 | equals, isBetween |
-StartDate | date | equals, isBetween |
-SubmissionDeadlineDate | date | equals, isBetween |
+abstractRegistrationDate | date | equals, isBetween |
+conferenceInstanceName | string | equals, startsWith |
+displayConferenceInstanceName | blob | |
+endDate | date | equals, isBetween |
+entityType | string | equals |
+finalVersionDueDate | date | equals, isBetween |
+id | int64 | equals |
+location | string | equals, startsWith |
+notificationDueDate | date | equals, isBetween |
+officialUrl | string | equals |
+paperCount | int32 | equals, isBetween |
+parentConferenceSeriesId | int64 | equals |
+parentConferenceSeriesName | string | equals, startsWith |
+referenceCount | int32 | equals, isBetween |
+startDate | date | equals, isBetween |
+submissionDeadlineDate | date | equals, isBetween |
 
 ## See also
