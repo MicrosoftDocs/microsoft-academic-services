@@ -11,9 +11,9 @@ ms.date:
 
 Name | Type | Operations | Description
 --- | --- | --- | ---
-authors | [PaperAuthor](#paperauthor)[] | composite |
+authors | [paperAuthor](#paperauthor)[] | composite |
 bookTitle | string | equals |
-citationContexts | [PaperCitationContext](#papercitationcontext)[] | composite |
+citationContexts | [paperCitationContext](#papercitationcontext)[] | composite |
 citationCount | int32 | equals, isBetween |
 conferenceInstanceId | int64 | equals |
 conferenceInstanceName | string | equals, startsWith |
@@ -23,9 +23,9 @@ date | date | equals, isBetween |
 doi | string | equals, startsWith |
 entityType | string | equals |
 estimatedCitation | int32 | equals, isBetween |
-extendedAttributes | [PaperExtendedAttribute](#paperextendedattribute)[] | composite |
+extendedAttributes | [paperExtendedAttribute](#paperextendedattribute)[] | composite |
 familyId | int64 | equals |
-fieldsOfStudy | [PaperFieldOfStudy](#paperfieldofstudy)[] | composite |
+fieldsOfStudy | [paperFieldOfStudy](#paperfieldofstudy)[] | composite |
 firstPage | string | equals |
 id | int64 | equals |
 invertedAbstract | blob | |
@@ -37,13 +37,13 @@ originalTitle | blob | |
 originalVenue | blob | |
 paperType | string | equals |
 publisher | date | equals |
-recommendations | [PaperRecommendation](#paperrecommendation)[] | composite |
+recommendations | [paperRecommendation](#paperrecommendation)[] | composite |
 references | int64[] | equals |
 referenceCount | int32 | equals, isBetween |
-resources | [PaperResource](#paperresource)[] | composite |
+resources | [paperResource](#paperresource)[] | composite |
 title | string | equals, startsWith |
 titleWords | string[] | equals |
-urls | [PaperUrl](#paperurl)[] | composite |
+urls | [paperUrl](#paperurl)[] | composite |
 volume | string | equals |
 year | int32 | equals, isBetween |
 

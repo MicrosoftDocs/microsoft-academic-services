@@ -18,7 +18,7 @@ issn | string | equals, startsWith |
 journalName | string | equals, startsWith |
 paperCount | int32 | equals, isBetween |
 referenceCount | int32 | equals, isBetween |
-relatedEntities | [RelatedEntity](#relatedentity)[] | composite |
+relatedEntities | [relatedEntity](#relatedentity)[] | composite |
 webpage | string | equals, startsWith |
 
 ## relatedEntity
