@@ -37,36 +37,6 @@ Name | Type | Description
 --- | --- | ---
 200 OK | [HistogramResponse](#histogramresponse) | Histogram response successfully generated and returned.
 
-## Examples
-
-### Example name
-
-Example description
-
-#### Sample Request
-
-``` HTTP
-GET|POST http://example.com
-```
-
-Request Body
-
-``` JSON
-{
-    "Sample": "Request"
-}
-```
-
-#### Sample Response
-
-Status code: XXX
-
-``` JSON
-{
-    "Sample": "Response"
-}
-```
-
 ## Definitions
 
 | | |
@@ -98,5 +68,3 @@ Name | Type | Description
 expressionEvaluated | string | The query expression evaluated to generate matching entities which were used for generating histograms.
 histograms | [HistogramAttribute](#histogramattribute)[] | An array of histogram containers.
 numberOfEntitiesUsed | integer | The number of matching entities that were used to generate histograms.
-
-## See also

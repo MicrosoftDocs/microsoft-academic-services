@@ -46,5 +46,3 @@ name | string | equals, startsWith |
 rank | double | isBetween |
 relationship | string | equals |
 type | string | equals |
-
-## See also

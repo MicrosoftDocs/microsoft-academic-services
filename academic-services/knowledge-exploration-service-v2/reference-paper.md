@@ -102,5 +102,3 @@ Name | Type | Operations | Description
 languageCode | string | equals |
 type | int32 | equals |
 url | string | equals, startsWith |
-
-## See also

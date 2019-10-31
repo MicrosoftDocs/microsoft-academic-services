@@ -38,36 +38,6 @@ Name | Type | Description
 --- | --- | ---
 200 OK | [EvaluateResponse](#evaluateresponse) | Evaluate response successfully generated and returned.
 
-## Examples
-
-### Example name
-
-Example description
-
-#### Sample Request
-
-``` HTTP
-GET|POST http://example.com
-```
-
-Request Body
-
-``` JSON
-{
-    "Sample": "Request"
-}
-```
-
-#### Sample Response
-
-Status code: XXX
-
-``` JSON
-{
-    "Sample": "Response"
-}
-```
-
 ## Definitions
 
 | | |
@@ -80,5 +50,3 @@ Name | Type | Description
 --- | --- | ---
 expressionEvaluate | string | The query expression evaluated to generate matching entities.
 matchingEntities | json[] | Array of JSON objects representing the entities matching the structured query expression that was evaluated. Each object will contain the attributes requested in `select` if available.
-
-## See also

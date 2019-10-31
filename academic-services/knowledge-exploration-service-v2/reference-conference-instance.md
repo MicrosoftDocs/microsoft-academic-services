@@ -27,5 +27,3 @@ parentConferenceSeriesName | string | equals, startsWith |
 referenceCount | int32 | equals, isBetween |
 startDate | date | equals, isBetween |
 submissionDeadlineDate | date | equals, isBetween |
-
-## See also

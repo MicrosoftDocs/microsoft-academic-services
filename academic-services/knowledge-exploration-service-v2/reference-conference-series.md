@@ -28,5 +28,3 @@ name | string | equals, startsWith |
 relationship | int32 | equals |
 score | double | isBetween |
 type | string | equals |
-
-## See also

@@ -19,5 +19,3 @@ lastKnownAffiliationId | int64 | equals |
 lastKnownAffiliationName | string | equals, startsWith |
 paperCount | int32 | equals, isBetween |
 referenceCount | int32 | equals, isBetween |
-
-## See also

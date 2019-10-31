@@ -30,36 +30,6 @@ Name | Type | Description
 --- | --- | ---
 200 OK | [InterpretResponse](#interpretresponse) | Interpret response successfully generated and returned.
 
-## Examples
-
-### Example name
-
-Example description
-
-#### Sample Request
-
-``` HTTP
-GET|POST http://example.com
-```
-
-Request Body
-
-``` JSON
-{
-    "Sample": "Request"
-}
-```
-
-#### Sample Response
-
-Status code: XXX
-
-``` JSON
-{
-    "Sample": "Response"
-}
-```
-
 ## Definitions
 
 | | |
@@ -96,5 +66,3 @@ queryExpression | string | The structured query expression that represents the s
 score | double | The semantic score associated with the interpretation. See the [natural language queries](concepts-queries.md) page for more details.
 semanticParse | string | The semantic parse of the natural language query. See the [natural language queries](concepts-queries.md) page for more details.
 topEntities | json[] | Array of JSON objects representing the entities matching the structured query expression for this interpretation. Each object will contain the attributes requested in `select` if available.
-
-## See also
