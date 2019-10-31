@@ -15,7 +15,7 @@ sections:
   - type: list
     style: unordered
     items:
-    - html: <a href="introduction">About Microsoft Academic Knowledge Exploration Service (MAKES)</a>
+    - html: <a href="overview.md">About Microsoft Academic Knowledge Exploration Service (MAKES)</a>
 - title: How-To Guides
   items:
   - type: paragraph
@@ -23,13 +23,14 @@ sections:
   - type: list
     style: unordered
     items:
-    - html: <a href="get-started-setup-provisioning">Get Microsoft Academic Knowledge Exploration Service</a>
-    - html: <a href="how-to-deploy-makes-azure-management-portal">Deploy Microsoft Academic Knowledge Exploration Service API using Azure Management Portal</a>
+    - html: <a href="get-started-subscribe">Get Microsoft Academic Knowledge Exploration Service</a>
+    - html: <a href="how-to-deploy-tool">Deploy Microsoft Academic Knowledge Exploration Service using KESM deployment tool</a>
 - title: Reference
   items:
   - type: list
     style: unordered
     items:
-    - html: <a href="reference-entity-api">Entity API</a>
-    - html: <a href="reference-semantic-interpretation-api">Semantic interpretation API</a>
-    - html: <a href="/azure/cognitive-services/KES/webapi">KES API methods</a>
+    - html: <a href="reference-entity-schema">Entity schema</a>
+    - html: <a href="reference-get-evaluate">Evaluate API</a>
+    - html: <a href="reference-get-histogram">Histogram API</a>
+    - html: <a href="reference-get-interpret">Interpret API</a>
