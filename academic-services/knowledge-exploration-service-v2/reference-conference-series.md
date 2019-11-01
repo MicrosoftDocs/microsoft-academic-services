@@ -17,9 +17,9 @@ entityType | string | equals |
 id | int64 | equals |
 paperCount | int32 | equals, isBetween |
 referenceCount | int32 | equals, isBetween |
-relatedEntities | [relatedEntity](#relatedentity)[] | composite |
+relatedEntities | [relatedEntities](#relatedEntities)[] | composite |
 
-## relatedEntity
+## relatedEntities
 
 Name | Type | Operations | Description
 --- | --- | --- | ---

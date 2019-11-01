@@ -18,10 +18,10 @@ issn | string | equals, startsWith |
 journalName | string | equals, startsWith |
 paperCount | int32 | equals, isBetween |
 referenceCount | int32 | equals, isBetween |
-relatedEntities | [relatedEntity](#relatedentity)[] | composite |
+relatedEntities | [relatedEntities](#relatedEntities)[] | composite |
 webpage | string | equals, startsWith |
 
-## relatedEntity
+## relatedEntities
 
 Name | Type | Operations | Description
 --- | --- | --- | ---

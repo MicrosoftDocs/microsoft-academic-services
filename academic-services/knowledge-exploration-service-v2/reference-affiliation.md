@@ -21,10 +21,10 @@ longitude | double | equals, isBetween |
 officialPage | string | equals |
 paperCount | int32 | equals, isBetween |
 referenceCount | int32 | equals, isBetween |
-relatedEntities | [relatedEntity](#relatedentity)[] | composite |
+relatedEntities | [relatedEntities](#relatedEntities)[] | composite |
 wikiPage | string | equals |
 
-## relatedEntity
+## relatedEntities
 
 Name | Type | Operations | Description
 --- | --- | --- | ---

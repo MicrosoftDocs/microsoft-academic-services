@@ -11,9 +11,9 @@ ms.date:
 
 Name | Type | Operations | Description
 --- | --- | --- | ---
-authors | [paperAuthor](#paperauthor)[] | composite |
+authors | [authors](#authors)[] | composite |
 bookTitle | string | equals |
-citationContexts | [paperCitationContext](#papercitationcontext)[] | composite |
+citationContexts | [citationContexts](#citationContexts)[] | composite |
 citationCount | int32 | equals, isBetween |
 conferenceInstanceId | int64 | equals |
 conferenceInstanceName | string | equals, startsWith |
@@ -23,9 +23,9 @@ date | date | equals, isBetween |
 doi | string | equals, startsWith |
 entityType | string | equals |
 estimatedCitation | int32 | equals, isBetween |
-extendedAttributes | [paperExtendedAttribute](#paperextendedattribute)[] | composite |
+extendedAttributes | [extendedAttributes](#extendedAttributes)[] | composite |
 familyId | int64 | equals |
-fieldsOfStudy | [paperFieldOfStudy](#paperfieldofstudy)[] | composite |
+fieldsOfStudy | [fieldsOfStudy](#fieldsOfStudy)[] | composite |
 firstPage | string | equals |
 id | int64 | equals |
 invertedAbstract | blob | |
@@ -37,17 +37,17 @@ originalTitle | blob | |
 originalVenue | blob | |
 paperType | string | equals |
 publisher | date | equals |
-recommendations | [paperRecommendation](#paperrecommendation)[] | composite |
+recommendations | [recommendations](#recommendations)[] | composite |
 references | int64[] | equals |
 referenceCount | int32 | equals, isBetween |
-resources | [paperResource](#paperresource)[] | composite |
+resources | [resources](#resources)[] | composite |
 title | string | equals, startsWith |
 titleWords | string[] | equals |
-urls | [paperUrl](#paperurl)[] | composite |
+urls | [urls](#urls)[] | composite |
 volume | string | equals |
 year | int32 | equals, isBetween |
 
-## paperAuthor
+## authors
 
 Name | Type | Operations | Description
 --- | --- | --- | ---
@@ -57,21 +57,21 @@ id | int64 | equals |
 name | string | equals, startsWith |
 sequence | int32 | equals |
 
-## paperCitationContext
+## citationContexts
 
 Name | Type | Operations | Description
 --- | --- | --- | ---
 citationContext | blob | |
 paperReferenceId | int64 | equals |
 
-## paperExtendedAttribute
+## extendedAttributes
 
 Name | Type | Operations | Description
 --- | --- | --- | ---
 type | string | equals |
 value | string | equals |
 
-## paperFieldOfStudy
+## fieldsOfStudy
 
 Name | Type | Operations | Description
 --- | --- | --- | ---
@@ -79,14 +79,14 @@ id | int64 | equals |
 name | string | equals, startsWith |
 score | double | isBetween |
 
-## paperRecommendation
+## recommendations
 
 Name | Type | Operations | Description
 --- | --- | --- | ---
 id | int64 | equals |
 score | double | isBetween |
 
-## paperResource
+## resources
 
 Name | Type | Operations | Description
 --- | --- | --- | ---
@@ -95,7 +95,7 @@ sourceUrl | string | equals, startsWith |
 type | int32 | equals |
 url | string | equals, startsWith |
 
-## paperUrl
+## urls
 
 Name | Type | Operations | Description
 --- | --- | --- | ---
