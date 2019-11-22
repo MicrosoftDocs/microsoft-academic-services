@@ -8,7 +8,7 @@ ms.date: 11/22/2019
 ---
 # Language Similarity Package
 
-Language Similarity Package is a package for understanding document semantics. We put together  pre-trained models and concept-tagging algorithms as a software package that executes in the end user’s environment. Users can also tag, compare, and rebuild concept hierarchies based on any private corpus.
+Language Similarity Package is a package for understanding document semantics. We put together  pre-trained models and concept-tagging algorithms in a package which executes in end user’s own environment. Users can also tag, compare, or rebuild concept hierarchies based on private corpus.
 
 ## Prerequisites
 
@@ -23,12 +23,12 @@ Before running these examples, you need to complete the following setups:
 
 ## Contents
 
-The LanguageSimilarity package is distributed as a single .zip file. It includes the algorithms, wrapped in dlls and a binary resource directory containing the pre‑trained models. After unzipping the package, users will see a folder structure as shown in the figure below. README.md and README.txt contain the general information about the package, system requirements, and API signature definitions.
+The LanguageSimilarity package is distributed as a single .zip file. It includes  algorithms in dlls, and resources containing pre‑trained models. After unzipping the package, users will see a folder structure as shown in the figure below. README.md and README.txt contain the general information about the package, system requirements, and API signature definitions.
 
   ![Language Similarity Package content](media/language-similarity/content.png "Language Similarity Package content")
 
-We include a C# demo project in the LanguageSimilarityExample folder that also has the file sample.txt as the sample input for the demo, where each line contains the parameter(s) for an API call.
-The demo is a console program that reads in the resource file directory and the path of the sample.txt file to initialize the LanguageSimilarity model.
+We also include a C# demo project in the LanguageSimilarityExample folder. It also contains sample.txt as the sample input for the demo.
+The demo is a console program that takes the resource directory and the sample.txt path file as paremeters. The resources is to initialize the LanguageSimilarity models, while sample.txt is used to provide examples for calling methods provided in this package.
 
 ## Methods
 
