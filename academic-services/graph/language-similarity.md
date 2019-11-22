@@ -26,15 +26,6 @@ Before running these examples, you need to complete the following setups:
 * [ComputeSimilarity](language-similarity-computesimilarity.md)
 * [GetTopFieldsOfStudy](language-similarity-gettopfieldsofstudy.md)
 
-## Run scripts in the repository
-
-1. Copy content in a script and paste into a new cell.
-
-1. Press the **SHIFT + ENTER** keys to run the code in this cell. Please note that some scripts take more than 10 minutes to complete.
-
 ## Resources
 
-* [Create an Azure Databricks service](https://azure.microsoft.com/services/databricks/)
-* [Create a cluster for the Azure Databricks service](https://docs.azuredatabricks.net/user-guide/clusters/create.html)
-* [Import a Databrick notebook](https://docs.databricks.com/user-guide/notebooks/notebook-manage.html#import-a-notebook)
-* [Get started with Storage Explorer](https://docs.microsoft.com/en-us/azure/vs-azure-tools-storage-manage-with-storage-explorer)
+* [Get started with Azure Data Lake Analytics using Azure portal](https://docs.microsoft.com/en-us/azure/data-lake-analytics/data-lake-analytics-get-started-portal)
