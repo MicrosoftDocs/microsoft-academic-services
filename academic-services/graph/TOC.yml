@@ -38,6 +38,24 @@
     href: samples-azure-data-lake-analytics.md
   - name: Analytics (Databricks/PySpark)
     href: samples-azure-databricks.md
+- name: Extras
+  expanded: true
+  items:
+  - name: Language Similarity Package
+    href: language-similarity.md
+    expanded: false
+    items:
+    - name: ComputeSimilarity
+      href: language-similarity-computesimilarity.md
+    - name: GetTopFieldsOfStudy
+      href: language-similarity-gettopfieldsofstudy.md
+  - name: Network Similarity Package
+    expanded: true
+    items:
+    - name: ComputeSimilarity
+      href: language-similarity-computesimilarity.md
+    - name: GetTopFieldsOfStudy
+      href: language-similarity-gettopfieldsofstudy.md
 - name: Reference
   expanded: true
   items:
