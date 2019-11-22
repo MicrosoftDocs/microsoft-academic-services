@@ -8,7 +8,7 @@ ms.date: 11/22/2019
 ---
 # Language Similarity Package
 
-Language Similarity Package is a package to understand document semantics. we put together  pre-trained models and concept-tagging algorithms as a software package that executes in the end user’s environment. Our customers can also tag, compare, and rebuild concept hierarchies based on any private corpus.
+Language Similarity Package is a package to understand document semantics. We put together  pre-trained models and concept-tagging algorithms as a software package that executes in the end user’s environment. Our customers can also tag, compare, and rebuild concept hierarchies based on any private corpus.
 
 ## Prerequisites
 
@@ -23,9 +23,8 @@ Before running these examples, you need to complete the following setups:
 
 ## Methods
 
-### [ComputeSimilarity] (language-similarity.md)
-### [GetTopFieldsOfStudy] (language-similarity.md)
-
+### [ComputeSimilarity](language-similarity.md)
+### [GetTopFieldsOfStudy](language-similarity.md)
 
 ## Run scripts in the repository
 
