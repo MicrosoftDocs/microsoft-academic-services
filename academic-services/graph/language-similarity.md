@@ -18,8 +18,8 @@ Before running these examples, you need to complete the following setups:
 
 * Request Language Similarity Package when requesting MAG.
 
-> [!NOTE]
-> Language Similarity Package is not included in basic MAG distribution. Please ask for Language Similarity Package when requesting MAG.
+  > [!NOTE]
+  > Language Similarity Package is not included in basic MAG distribution. Please ask for Language Similarity Package otherwise it will not be included in the MAG distribution.
 
 ## Contents
 
