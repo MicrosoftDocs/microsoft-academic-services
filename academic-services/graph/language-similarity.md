@@ -23,8 +23,8 @@ Before running these examples, you need to complete the following setups:
 
 ## Methods
 
-### [ComputeSimilarity](language-similarity.md)
-### [GetTopFieldsOfStudy](language-similarity.md)
+* [ComputeSimilarity](language-similarity.md)
+* [GetTopFieldsOfStudy](language-similarity.md)
 
 ## Run scripts in the repository
 
