@@ -42,20 +42,27 @@
   expanded: true
   items:
   - name: Language Similarity Package
-    href: language-similarity.md
-    expanded: false
+    expanded: true
     items:
-    - name: ComputeSimilarity
-      href: language-similarity-computesimilarity.md
-    - name: GetTopFieldsOfStudy
-      href: language-similarity-gettopfieldsofstudy.md
+    - name: Description
+      href: language-similarity.md
+    - name: Methods
+      items:
+      - name: ComputeSimilarity
+        href: language-similarity-computesimilarity.md
+      - name: GetTopFieldsOfStudy
+        href: language-similarity-gettopfieldsofstudy.md
   - name: Network Similarity Package
     expanded: true
     items:
-    - name: ComputeSimilarity
-      href: language-similarity-computesimilarity.md
-    - name: GetTopFieldsOfStudy
-      href: language-similarity-gettopfieldsofstudy.md
+    - name: Description
+      href: language-similarity.md
+    - name: Methods
+      items:
+      - name: ComputeSimilarity
+        href: language-similarity-computesimilarity.md
+      - name: GetTopFieldsOfStudy
+        href: language-similarity-gettopfieldsofstudy.md
 - name: Reference
   expanded: true
   items:
