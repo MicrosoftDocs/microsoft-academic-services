@@ -51,13 +51,19 @@ text2 | string |
           string resourceDir = @"..\..\..\resources";
           var languageSimilarity = new LanguageSimilarity(resourceDir);
 
-          // Call ComputeSimilarity to compute similarity between 2 strings
+          // Call ComputeSimilarity to get similarity score between 2 strings
           string text1 = "A speech understanding system includes a language model";
           string text2 = "The language model stores information related to words and semantic information";
           var score = languageSimilarity.ComputeSimilarity(text1, text2);
           Console.WriteLine(score);
       }
   }
+  ```
+
+**Example Output**
+
+  ```
+  0.7053913
   ```
 
 ## ComputeSimilarity(String, long)
@@ -89,7 +95,7 @@ fieldOfStudyId | long |
           string resourceDir = @"..\..\..\resources";
           var languageSimilarity = new LanguageSimilarity(resourceDir);
 
-          // Call ComputeSimilarity to compute similarity between a string and a concept
+          // Call ComputeSimilarity to get similarity score between a string and a concept
           string text = "A speech understanding system includes a language model";
           long fosid = 137293760; // language model
           var score = languageSimilarity.ComputeSimilarity(text, fosid);
@@ -97,3 +103,10 @@ fieldOfStudyId | long |
       }
   }
   ```
+
+**Example Output**
+
+  ```
+  0.615355
+  ```
+
