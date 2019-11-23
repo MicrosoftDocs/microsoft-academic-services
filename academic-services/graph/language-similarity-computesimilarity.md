@@ -26,9 +26,9 @@ Assemblies: Microsoft.Academic.LanguageSimilarity.dll
 
 Compute Similarity score between 2 strings.
 
-   ```C#
-   public static float ComputeSimilarity(string text1, string text2);
-   ```
+  ```C#
+  public static float ComputeSimilarity(string text1, string text2);
+  ```
 
 **Parameters**
 
@@ -89,7 +89,7 @@ fieldOfStudyId | long |
           string resourceDir = @"..\..\..\resources";
           var languageSimilarity = new LanguageSimilarity(resourceDir);
 
-          // Call ComputeSimilarity to compute similarity between 2 strings
+          // Call ComputeSimilarity to compute similarity between a string and a concept
           string text = "A speech understanding system includes a language model";
           long fosid = 137293760; // language model
           var score = languageSimilarity.ComputeSimilarity(text, fosid);
