@@ -1,18 +1,22 @@
 ---
-title: GetTopFieldsOfStudy
-description: GetTopFieldsOfStudy
+title: LanguageSimilarity.GetTopFieldsOfStudy Method
+description: LanguageSimilarity.GetTopFieldsOfStudy Method
 services: microsoft-academic-services
 ms.topic: extra
 ms.service: microsoft-academic-services
 ms.date: 11/22/2019
 ---
-# GetTopFieldsOfStudy Method
+# LanguageSimilarity.GetTopFieldsOfStudy Method
 
-Get top fields of study related to a string
+Namespace: Microsoft.Academic
 
-   ```C#
-   public static IEnumerable<Tuple<long,float>> GetTopFieldsOfStudy(string text, int maxCount=100, int minScore=0);
-   ```
+Assemblies: Microsoft.Academic.LanguageSimilarity.dll
+
+### Get top fields of study related to a string
+
+  ```C#
+  public static IEnumerable<Tuple<long,float>> GetTopFieldsOfStudy(string text, int maxCount=100, int minScore=0);
+  ```
 
 **Parameters**
 
