@@ -42,11 +42,11 @@ Returns a IEnumerable of `Tuple<long,float>`. The first item is a field of study
       {
           // Create an LanguageSimilarity instance and initialize with resources
           string resourceDir = @"..\..\..\resources";
-          var languageSimilarity = new LanguageSimilarity(resourceDir);
+          var ls = new LanguageSimilarity(resourceDir);
 
           // Call GetTopFieldsOfStudy to get top concepts related to a string
           string text = "A speech understanding system includes a language model";
-          var foses = languageSimilarity.GetTopFieldsOfStudy(text);
+          var foses = ls.GetTopFieldsOfStudy(text);
           foreach (var fos in foses)
           {
               Console.WriteLine("{0}\t{1}", fos.Item1, Math.Round(fos.Item2, 4));
