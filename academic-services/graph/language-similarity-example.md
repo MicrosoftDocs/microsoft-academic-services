@@ -4,59 +4,74 @@ description: Language Similarity Example
 services: microsoft-academic-services
 ms.topic: extra
 ms.service: microsoft-academic-services
-ms.date: 11/22/2019
+ms.date: 11/25/2019
 ---
 # Language Similarity Example
 
-### Get top fields of study related to a string
+We include a C# demo project in the LanguageSimilarityExample folder that also has the file sample.txt as the sample input for the demo, where each line contains the parameter(s) for an API call.
+
+## System Requirements
+
+1. Microsoft Windows 7 (or above) 64-bit OS
+2. .NET Framework version 4.5.2+
+3. Visual Studio 2015 (or above)
+
+## Running Demo Program
+
+1. Open the LanguageSimilarityExample solution.
+2. Start the LanguageSimilarityExample project. The parameters are pre-populated in the project file.
+
+The demo is a console program that reads in the resource file directory and the path of the sample.txt file to initialize the LanguageSimilarity model.
 
   ```C#
-  public static IEnumerable<Tuple<long,float>> GetTopFieldsOfStudy(string text, int maxCount=100, int minScore=0);
+  string resourceDir = args[0];
+  string sampleFilePath = args[1];
+
+  LanguageSimilarity languageSimilarity = new LanguageSimilarity(resourceDir);
   ```
 
-**Parameters**
-
-Parameter | Data Type | Note
---- | --- | ---
-text | string | 
-maxCount | int | default 100
-minScore | float | default 0
-
-**Examples**
+As you can see from the source code of sample.txt, each line is a command to an API call. Three examples are illustrated below:
 
   ```C#
-  using System;
-  using Microsoft.Academic;
-
-  class Test
+  using (StreamReader sr = new StreamReader(sampleFilePath))
   {
-      static void Main(string[] args)
+      string line;
+      while ((line = sr.ReadLine()) != null)
       {
-          // Create an LanguageSimilarity instance and initialize with resources
-          string resourceDir = @"..\..\..\resources";
-          var languageSimilarity = new LanguageSimilarity(resourceDir);
-
-          // Call GetTopFieldsOfStudy to get top concepts related to a string
-          string text = "A speech understanding system includes a language model";
-          var foses = languageSimilarity.GetTopFieldsOfStudy(text);
-          foreach (var fos in foses)
+          try
           {
-              Console.WriteLine("{0}\t{1}", fos.Item1, Math.Round(fos.Item2, 4));
+              Console.WriteLine(line);
+
+              var tokens = line.Split('\t');
+              if (tokens.Length < 2)
+              {
+                  continue;
+              }
+
+              switch (tokens[0])
+              {
+                  case "1":
+                      var score1 = languageSimilarity.ComputeSimilarity(tokens[1], tokens[2]);
+                      Console.WriteLine("=>\t{0}", Math.Round(score1, 4));
+                      break;
+                  case "2":
+                      var score2 = languageSimilarity.ComputeSimilarity(tokens[2], long.Parse(tokens[1]));
+                      Console.WriteLine("=>\t{0}", Math.Round(score2, 4));
+                      break;
+                  case "3":
+                      var foses = languageSimilarity.GetTopFieldsOfStudy(tokens[3], int.Parse(tokens[1]), float.Parse(tokens[2]));
+                      int count = 0;
+                      foreach (var fos in foses)
+                      {
+                          Console.WriteLine("=>\t{0}\t{1}\t{2}", ++count, fos.Item1, Math.Round(fos.Item2, 4));
+                      }
+                      break;
+              }
+          }
+          catch (ArgumentException e)
+          {
+              Console.WriteLine(e.Message);
           }
       }
   }
-  ```
-
-**Example Output**
-
-  ```
-  137293760       0.6154
-  204321447       0.4416
-  28490314        0.437
-  107457646       0.4348
-  188147891       0.4346
-  41895202        0.4304
-  41008148        0.4148
-  15744967        0.3746
-  144024400       0.3583
   ```
