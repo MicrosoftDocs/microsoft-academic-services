@@ -8,7 +8,7 @@ ms.date: 11/25/2019
 ---
 # Language Similarity Example
 
-We include a C# demo project in the LanguageSimilarityExample folder that also has the file sample.txt as the sample input for the demo, where each line contains the parameter(s) for an API call.
+We include a C# demo project in the LanguageSimilarityExample folder.  It contains sample.txt as a sample input for the demo project, where each line contains the parameter(s) for an API call.
 
 ## System Requirements
 
@@ -16,23 +16,22 @@ We include a C# demo project in the LanguageSimilarityExample folder that also h
 2. .NET Framework version 4.5.2+
 3. Visual Studio 2015 (or above)
 
-## Running Demo Program
+## Running the Program
 
-1. Open the LanguageSimilarityExample solution.
-2. Start the LanguageSimilarityExample project. The parameters are pre-populated in the project file.
+1. Open LanguageSimilarityExample solution.
+2. Start LanguageSimilarityExample project. The parameters are pre-populated in the project file.
 
-The demo is a console program that reads in the resource file directory and the path of the sample.txt file to initialize the LanguageSimilarity model.
+This demo is a console program that takes a resource directory and sample.txt path as input parameters. The resource directory is to initialize the LanguageSimilarity model.
 
   ```C#
   string resourceDir = args[0];
-  string sampleFilePath = args[1];
-
   LanguageSimilarity languageSimilarity = new LanguageSimilarity(resourceDir);
   ```
 
-As you can see from the source code of sample.txt, each line is a command to an API call. Three examples are illustrated below:
+Then it reads the sample.txt. Each line is a command to an API call. Three examples are illustrated below:
 
   ```C#
+  string sampleFilePath = args[1];
   using (StreamReader sr = new StreamReader(sampleFilePath))
   {
       string line;
