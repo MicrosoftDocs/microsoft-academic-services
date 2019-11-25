@@ -79,7 +79,7 @@ Returns a similarity score between a string and a field of study id. Score retur
 Name | Data Type | Note
 --- | --- | ---
 text | string |
-fieldOfStudyId | long |
+fieldOfStudyId | long | A Field‑of‑Study entity ID defined in MAG
 
 **Examples**
 
