@@ -49,12 +49,12 @@ text2 | string |
       {
           // Create an LanguageSimilarity instance and initialize with resources
           string resourceDir = @"..\..\..\resources";
-          var languageSimilarity = new LanguageSimilarity(resourceDir);
+          var ls = new LanguageSimilarity(resourceDir);
 
           // Call ComputeSimilarity to get similarity score between 2 strings
           string text1 = "A speech understanding system includes a language model";
           string text2 = "The language model stores information related to words and semantic information";
-          var score = languageSimilarity.ComputeSimilarity(text1, text2);
+          var score = ls.ComputeSimilarity(text1, text2);
           Console.WriteLine(score);
       }
   }
@@ -93,12 +93,12 @@ fieldOfStudyId | long | A Field‑of‑Study entity ID defined in MAG
       {
           // Create an LanguageSimilarity instance and initialize with resources
           string resourceDir = @"..\..\..\resources";
-          var languageSimilarity = new LanguageSimilarity(resourceDir);
+          var ls = new LanguageSimilarity(resourceDir);
 
           // Call ComputeSimilarity to get similarity score between a string and a concept
           string text = "A speech understanding system includes a language model";
           long fosid = 137293760; // language model
-          var score = languageSimilarity.ComputeSimilarity(text, fosid);
+          var score = ls.ComputeSimilarity(text, fosid);
           Console.WriteLine(score);
       }
   }
