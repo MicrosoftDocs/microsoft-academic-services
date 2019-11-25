@@ -13,18 +13,20 @@ Namespace: Microsoft.Academic
 Assemblies: Microsoft.Academic.LanguageSimilarity.dll
 
 ### Compute similarity score between 2 strings or between a string and a concept.
+Returns a similarity score between two strings. Score returned is between [0, 1].
+Returns a similarity score between a string and a field of study id. Score returned is between [0, 1].
 
 ## Overloads
 
 ---
-`ComputeSimilarity(String, String)`: Compute Similarity score between 2 strings
+`ComputeSimilarity(String, String)`: Returns a similarity score between two strings.
 
 ---
-`ComputeSimilarity(String, long)`: Compute Similarity score between a string and a concept
+`ComputeSimilarity(String, long)`: Returns a similarity score between a string and a field of study id.
 
 ## ComputeSimilarity(String, String)
 
-Compute Similarity score between 2 strings.
+Returns a similarity score between two strings. Score returned is between [0, 1].
 
   ```C#
   public static float ComputeSimilarity(string text1, string text2);
@@ -60,7 +62,7 @@ text2 | string |
   }
   ```
 
-**Example Output**
+**Output**
 
   ```
   0.7053913
@@ -68,7 +70,7 @@ text2 | string |
 
 ## ComputeSimilarity(String, long)
 
-Compute Similarity score between a string and a concept
+Returns a similarity score between a string and a field of study id. Score returned is between [0, 1].
 
    ```C#
    public static float ComputeSimilarity(string text, long fieldOfStudyId);
@@ -78,8 +80,8 @@ Compute Similarity score between a string and a concept
 
 Name | Data Type | Note
 --- | --- | ---
-text | string | 
-fieldOfStudyId | long | 
+text | string |
+fieldOfStudyId | long |
 
 **Examples**
 
@@ -104,9 +106,8 @@ fieldOfStudyId | long |
   }
   ```
 
-**Example Output**
+**Output**
 
   ```
   0.615355
   ```
-
