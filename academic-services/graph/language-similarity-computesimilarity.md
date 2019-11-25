@@ -4,7 +4,7 @@ description: LanguageSimilarity.ComputeSimilarity Method
 services: microsoft-academic-services
 ms.topic: extra
 ms.service: microsoft-academic-services
-ms.date: 11/22/2019
+ms.date: 11/25/2019
 ---
 # LanguageSimilarity.ComputeSimilarity Method
 
@@ -13,8 +13,6 @@ Namespace: Microsoft.Academic
 Assemblies: Microsoft.Academic.LanguageSimilarity.dll
 
 ### Compute similarity score between 2 strings or between a string and a concept.
-Returns a similarity score between two strings. Score returned is between [0, 1].
-Returns a similarity score between a string and a field of study id. Score returned is between [0, 1].
 
 ## Overloads
 
