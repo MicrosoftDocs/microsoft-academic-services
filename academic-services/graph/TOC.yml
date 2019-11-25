@@ -52,6 +52,8 @@
         href: language-similarity-computesimilarity.md
       - name: GetTopFieldsOfStudy
         href: language-similarity-gettopfieldsofstudy.md
+    - name: Example
+      href: language-similarity-example.md
   - name: Network Similarity Package
     expanded: true
     items:
