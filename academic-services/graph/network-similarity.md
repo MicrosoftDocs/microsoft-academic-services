@@ -6,7 +6,7 @@ ms.topic: extra
 ms.service: microsoft-academic-services
 ms.date: 11/25/2019
 ---
-# Language Similarity Package
+# Network Similarity Package
 
 The Microsoft Academic Network Similarity Package provides supplementary processing functionality for use with the Microsoft Academic Graph (MAG). This package includes Network Embedding resources and functions/scripts using Azure Data Lake Analytics (U-SQL) and Azure Databricks (PySpark).
 
@@ -51,4 +51,3 @@ The demo project is a console program which takes resource directory and the sam
 * [Get started with Azure Data Lake Analytics using Azure portal](https://docs.microsoft.com/azure/data-lake-analytics/data-lake-analytics-get-started-portal)
 * [Data Lake Analytics](https://azure.microsoft.com/services/data-lake-analytics/)
 * [U-SQL Language Reference](https://docs.microsoft.com/u-sql/)
-
