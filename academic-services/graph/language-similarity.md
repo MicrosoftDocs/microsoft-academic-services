@@ -51,5 +51,3 @@ The demo project is a console program which takes resource directory and the sam
 ## Resources
 
 * [Get started with Azure Data Lake Analytics using Azure portal](https://docs.microsoft.com/azure/data-lake-analytics/data-lake-analytics-get-started-portal)
-* [Data Lake Analytics](https://azure.microsoft.com/services/data-lake-analytics/)
-* [U-SQL Language Reference](https://docs.microsoft.com/u-sql/)
