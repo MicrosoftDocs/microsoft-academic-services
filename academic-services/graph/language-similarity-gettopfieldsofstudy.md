@@ -26,6 +26,10 @@ text | string | The string to label with fields of study.
 maxCount | int | Default 100. The maximum number of fields of study to return.
 minScore | float | Default 0. A minimum similarity score threshold. Fields of study with similarity scores less than `minScore` will not be in the returned list.
 
+**Return value**
+
+Returns a IEnumerable of `Tuple<long,float>`. The first item is a field of study entity ID defined in MAG. The second item is the similarity score between the input string and the field of study.
+
 **Examples**
 
   ```C#
