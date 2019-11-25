@@ -32,7 +32,11 @@ Before running these examples, you need to complete the following setups:
 
 ## Contents
 
-The LanguageSimilarity package is distributed as a single zip file. It includes algorithms in dlls, and resources with pre‑trained models. After unzipping the package, users will see a folder structure as shown in the figure below. README files contain general information about the package, system requirements, and API signatures.
+The LanguageSimilarity package is distributed as a single zip file. It is located at `nlp\LanguageSimilarity.zip` in the MAG container.
+
+  ![LanguageSimilarity.zip](media/language-similarity/language-similarity-zip.png "LanguageSimilarity.zip")
+
+It includes algorithms in dlls, and resources with pre‑trained models. After unzipping the package, users will see a folder structure as shown in the figure below. README files contain general information about the package, system requirements, and API signatures.
 
   ![Language Similarity Package content](media/language-similarity/content.png "Language Similarity Package content")
 
