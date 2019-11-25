@@ -12,7 +12,7 @@ Namespace: Microsoft.Academic
 
 Assemblies: Microsoft.Academic.LanguageSimilarity.dll
 
-### Get top fields of study related to a string
+### Takes in a string and labels it with fields of study available in MAG. Returns a list of tuples of type (long, float), with the first value in the tuple being the labeled field of study id and the second value being the similarity score.
 
   ```C#
   public static IEnumerable<Tuple<long,float>> GetTopFieldsOfStudy(string text, int maxCount=100, int minScore=0);
@@ -22,9 +22,9 @@ Assemblies: Microsoft.Academic.LanguageSimilarity.dll
 
 Parameter | Data Type | Note
 --- | --- | ---
-text | string | 
-maxCount | int | default 100
-minScore | float | default 0
+text | string | The string to label with fields of study.
+maxCount | int | Default 100. The maximum number of fields of study to return.
+minScore | float | Default 0. A minimum similarity score threshold. Fields of study with similarity scores less than `minScore` will not be in the returned list.
 
 **Examples**
 
@@ -51,7 +51,7 @@ minScore | float | default 0
   }
   ```
 
-**Example Output**
+**Output**
 
   ```
   137293760       0.6154
