@@ -4,7 +4,7 @@ description: LanguageSimilarity.GetTopFieldsOfStudy Method
 services: microsoft-academic-services
 ms.topic: extra
 ms.service: microsoft-academic-services
-ms.date: 11/22/2019
+ms.date: 11/25/2019
 ---
 # LanguageSimilarity.GetTopFieldsOfStudy Method
 
