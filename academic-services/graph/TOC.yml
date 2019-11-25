@@ -58,7 +58,7 @@
     expanded: true
     items:
     - name: Description
-      href: language-similarity.md
+      href: network-similarity.md
     - name: Methods
       items:
       - name: ComputeSimilarity
