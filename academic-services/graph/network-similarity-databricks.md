@@ -4,11 +4,11 @@ description: Network Similarity Sample (Databricks)
 services: microsoft-academic-services
 ms.topic: extra
 ms.service: microsoft-academic-services
-ms.date: 11/25/2019
+ms.date: 11/26/2019
 ---
 # Network Similarity Sample (Databricks)
 
-In this tutorial, you compute network similarity score and top related affiliations in Microsoft Academic Graph (MAG) using Azure Databricks.
+In this sample, you compute network similarity score and top related entities in Microsoft Academic Graph (MAG) using Azure Databricks.
 
 ## Prerequisites
 
@@ -40,7 +40,7 @@ In this section, you import PySparkMagClass.py as a shared notebook in Azure Dat
 
     ![Import a notebook in Databricks](media/databricks/import-shared-notebook.png "import notebook in Databricks")
     
-1. Drag and drop PySparkMagClass.py to the **Import Notebook** dialog box
+1. Drag and drop PySparkMagClass.py to the **Import Notebook** dialog box.
 
     ![Provide details for a notebook in Databricks](media/databricks/import-notebook-dialog.png "Provide details for a notebook in Databricks")
 
@@ -53,13 +53,11 @@ In this section, you import PySparkMagClass.py as a shared notebook in Azure Dat
 
 In this section, you import PySparkNetworkSimilarityClass.py as a shared notebook in Azure Databricks workspace. You will run this utility notebook from another notebook later.
 
-1. Save ns/PySparkMagClass.py in MAG dataset to local drive.
+1. Save ns/PySparkNetworkSimilarityClass.py in MAG dataset to local drive.
 
-1. In the [Azure portal](https://portal.azure.com), go to the Azure Databricks service that you created, and select **Launch Workspace**.
+1. In Azure Databricks workspace portal, from **Workspace** > **Shared** drop-down, select **Import**.
 
-1. On the left, select **Workspace**. From the **Workspace** > **Shared** drop-down, select **Import**.
-
-1. Drag and drop PySparkMagClass.py to the **Import Notebook** dialog box
+1. Drag and drop PySparkNetworkSimilarityClass.py to the **Import Notebook** dialog box.
 
 1. Select **Import**. This will create a notebook with path `"/Shared/PySparkNetworkSimilarityClass"`. No need to run this notebook.
 
@@ -69,15 +67,13 @@ In this section, you import NetworkSimilaritySample.py as a notebook in Azure Da
 
 1. Save ns/NetworkSimilaritySample.py in MAG dataset to local drive.
 
-1. In the [Azure portal](https://portal.azure.com), go to the Azure Databricks service that you created, and select **Launch Workspace**.
+1. In Azure Databricks workspace portal, from the **Workspace** > **Users** > **Your folder** drop-down, select **Import**.
 
-1. On the left, select **Workspace**. From the **Workspace** > **Users** > **Your alias** drop-down, select **Import**.
-
-1. Drag and drop PySparkNetworkSimilarityClass.py to the **Import Notebook** dialog box
+1. Drag and drop NetworkSimilaritySample.py to the **Import Notebook** dialog box.
 
 ## Run NetworkSimilaritySample notebook
 
-In this section, you run the newly imported notebook.
+In this section, you run the newly imported NetworkSimilaritySample notebook.
 
 - Click **Run All** button.
 
@@ -89,9 +85,9 @@ In this section, you run the newly imported notebook.
    ns = NetworkSimilarity(container=MagContainer, account=AzureStorageAccount, key=AzureStorageAccessKe, resource=ResourcePath)
    ```
 
-### Getting similarity score for 2 entities
+### Getting similarity score between two entities
 
-- Cmd 6 calls getSimilarity method to get similarity score for 2 entities
+- Cmd 6 calls getSimilarity method to get similarity score between two entities
 
    ```python
    score = ns.getSimilarity(EntityId1, EntityId2)
