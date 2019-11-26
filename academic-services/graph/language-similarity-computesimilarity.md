@@ -18,7 +18,7 @@ Assemblies: Microsoft.Academic.LanguageSimilarity.dll
 
 ---
 [ComputeSimilarity(String, String)](#computesimilaritystring-string) Returns a similarity score between two strings.
-<br>
+
 
 ---
 [ComputeSimilarity(String, long)](#computesimilaritystring-long) Returns a similarity score between a string and a field of study id.
