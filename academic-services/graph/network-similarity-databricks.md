@@ -86,7 +86,7 @@ In this section, you run the newly imported notebook.
 - Cmd 5 creates a NetworkSimilarity instance to compute similarity
 
    ```python
-   ns = NetworkSimilarity(container=MagContainer, account=AzureStorageAccount, sas=Sas, resource=ResourcePath)
+   ns = NetworkSimilarity(container=MagContainer, account=AzureStorageAccount, key=AzureStorageAccessKe, resource=ResourcePath)
    ```
 
 ### Calling getSimilarity method
@@ -117,11 +117,11 @@ In this section, you run the newly imported notebook.
 
 ### Getting entity details
 
-- Cmd 8 joins top entity id with affiliation table to get affiliation details
+- Cmd 8 joins top entities with affiliation table to get entity details
 
    ```python
    # Create a MicrosoftAcademicGraph instance to access MAG dataset
-   mag = MicrosoftAcademicGraph(container=MagContainer, account=AzureStorageAccount, sas=Sas)
+   mag = MicrosoftAcademicGraph(container=MagContainer, account=AzureStorageAccount, key=AzureStorageAccessKe)
 
    # Get authors dataframe
    affiliations = mag.getDataframe('Affiliations')
