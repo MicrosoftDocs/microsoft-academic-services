@@ -98,11 +98,11 @@ In this section, you run the newly imported notebook.
 
 1. You will see output for Cmd 7 as follows
 
-    ![GetTopEntities output](media/databricks/import-shared-notebook.png "GetTopEntities output")
+    ![GetTopEntities output](media/network-similarity/get-top-entities.png "GetTopEntities output")
 
 1. You will see output for Cmd 8 as follows
 
-    ![Top entities detail](media/databricks/import-shared-notebook.png "Top entities detail")
+    ![Top entities detail](media/network-similarity/top-entities-detail.png "Top entities detail")
 
 ## Clean up resources
 
@@ -117,4 +117,3 @@ If you don't manually terminate the cluster, it automatically stops, provided yo
 * [Create an Azure Databricks service](https://azure.microsoft.com/services/databricks/).
 * [Create a cluster for the Azure Databricks service](https://docs.azuredatabricks.net/user-guide/clusters/create.html).
 * [Import this notebook and attach it to the cluster](https://docs.databricks.com/user-guide/notebooks/notebook-manage.html#import-a-notebook).
-* [H-index](https://en.wikipedia.org/wiki/H-index)
