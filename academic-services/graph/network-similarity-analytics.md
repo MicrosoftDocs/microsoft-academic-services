@@ -4,11 +4,11 @@ description: Network Similarity Sample (Analytics)
 services: microsoft-academic-services
 ms.topic: extra
 ms.service: microsoft-academic-services
-ms.date: 11/25/2019
+ms.date: 11/26/2019
 ---
 # Network Similarity Sample (Analytics)
 
-In this tutorial, you compute network similarity score and top related affiliations in Microsoft Academic Graph (MAG) using Azure Databricks.
+In this tutorial, you compute network similarity score and top related affiliations in Microsoft Academic Graph (MAG) using Azure Data Analytics (U-SQL).
 
 ## Prerequisites
 
@@ -16,7 +16,7 @@ Complete these tasks before you begin this tutorial:
 
 * Setting up provisioning of Microsoft Academic Graph to an Azure blob storage account. See [Get Microsoft Academic Graph on Azure storage](get-started-setup-provisioning.md).
 
-* Setting up Azure Databricks service. See [Set up Azure Databricks](get-started-setup-databricks.md).
+* Setting up Azure Data Lake Analytics. See [Set up Azure Data Lake Analytics for Microsoft Academic Graph](get-started-setup-azure-data-lake-analytics.md).
 
 ## Gather the information that you need
 
@@ -24,9 +24,29 @@ Complete these tasks before you begin this tutorial:
 
    :heavy_check_mark:  The name of your Azure Storage (AS) account containing MAG dataset from [Get Microsoft Academic Graph on Azure storage](get-started-setup-provisioning.md#note-azure-storage-account-name-and-primary-key).
 
-   :heavy_check_mark:  The access key of your Azure Storage (AS) account from [Get Microsoft Academic Graph on Azure storage](get-started-setup-provisioning.md#note-azure-storage-account-name-and-primary-key).
+   :heavy_check_mark:  The name of your Azure Data Lake Analytics (ADLA) service from [Set up Azure Data Lake Analytics](get-started-setup-azure-data-lake-analytics.md#create-azure-data-lake-analytics-account).
+
+   :heavy_check_mark:  The name of your Azure Data Lake Storage (ADLS) from [Set up Azure Data Lake Analytics](get-started-setup-azure-data-lake-analytics.md#create-azure-data-lake-analytics-account).
 
    :heavy_check_mark:  The name of the container in your Azure Storage (AS) account containing MAG dataset.
+
+## Define functions to extract MAG data
+
+In prerequisite [Set up Azure Data Lake Analytics](get-started-setup-azure-data-lake-analytics.md), you added the Azure Storage  (AS) created for MAG provision as a data source for the Azure Data Lake Analytics service (ADLA). In this section, you submit an ADLA job to create functions extracting MAG data from Azure Storage (AS).
+
+1. In the [Azure portal](https://portal.azure.com), go to the Azure Data Lake Analytics (ADLA) service that you created, and select **Overview** > **New Job**.
+
+   ![Azure Data Lake Analytics - New job](media/samples-azure-data-lake-hindex/new-job.png "Azure Data Lake Analytics - New job")
+
+1. Copy code in samples/CreateFunctions.usql and paste into the code block.
+   
+1. Provide a **Job name** and select **Submit**.
+
+   ![Submit CreateFunctions job](media/samples-azure-data-lake-hindex/create-functions-submit.png "Submit CreateFunctions job")
+
+1. The job should finish successfully.
+
+   ![CreateFunctions job status](media/samples-azure-data-lake-hindex/create-functions-status.png "CreateFunctions job status")
 
 ## Import PySparkMagClass shared notebook
 
@@ -135,14 +155,8 @@ In this section, you run the newly imported notebook.
 
     ![Top entities detail](media/network-similarity/top-entities-detail.png "Top entities detail")
 
-## Clean up resources
-
-After you finish the tutorial, you can terminate the cluster. From the Azure Databricks workspace, select **Clusters** on the left. For the cluster to terminate, under **Actions**, point to the ellipsis (...) and select the **Terminate** icon.
-
-If you don't manually terminate the cluster, it automatically stops, provided you selected the **Terminate after \_\_ minutes of inactivity** check box when you created the cluster. In such a case, the cluster automatically stops if it's been inactive for the specified time.
-
 ## Resources
 
-* [Create an Azure Databricks service](https://azure.microsoft.com/services/databricks/).
-* [Create a cluster for the Azure Databricks service](https://docs.azuredatabricks.net/user-guide/clusters/create.html).
-* [Import this notebook and attach it to the cluster](https://docs.databricks.com/user-guide/notebooks/notebook-manage.html#import-a-notebook).
+* [Get started with Azure Data Lake Analytics using Azure portal](https://docs.microsoft.com/azure/data-lake-analytics/data-lake-analytics-get-started-portal)
+* [Data Lake Analytics](https://azure.microsoft.com/services/data-lake-analytics/)
+* [U-SQL Language Reference](https://docs.microsoft.com/u-sql/)
