@@ -17,7 +17,7 @@ Assemblies: Microsoft.Academic.LanguageSimilarity.dll
 ## Overloads
 
 ---
-[ComputeSimilarity(String, String)](#computesimilaritystring-string) Returns a similarity score between two strings.
+[ComputeSimilarity(String, String)](#computesimilaritystring-string) Returns a similarity score between two strings.  
 
 
 ---
