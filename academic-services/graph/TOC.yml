@@ -60,7 +60,7 @@
     - name: Description
       href: network-similarity.md
     - name: Sample (U-SQL)
-      href: network-similarity-databricks.md
+      href: network-similarity-analytics.md
     - name: Sample (Databricks)
       href: network-similarity-databricks.md
 - name: Reference
