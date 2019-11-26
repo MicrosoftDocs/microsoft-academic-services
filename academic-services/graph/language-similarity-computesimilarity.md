@@ -17,7 +17,7 @@ Assemblies: Microsoft.Academic.LanguageSimilarity.dll
 ## Overloads
 
 ---
-[ComputeSimilarity(String, String)](#computesimilaritystring-string) Returns a similarity score between two strings.  
+[ComputeSimilarity(String, String)](#computesimilaritystring-string) Returns a similarity score between two strings.
 
 
 ---
@@ -63,9 +63,7 @@ text2 | string |
 
 **Output**
 
-  ```
-  0.7053913
-  ```
+  > 0.7053913
 
 ## ComputeSimilarity(String, long)
 
@@ -107,6 +105,4 @@ fieldOfStudyId | long | A Field‑of‑Study entity ID defined in MAG
 
 **Output**
 
-  ```
-  0.615355
-  ```
+  > 0.615355
