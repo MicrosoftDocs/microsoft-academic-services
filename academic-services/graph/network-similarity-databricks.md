@@ -79,44 +79,45 @@ In this section, you import NetworkSimilaritySample.py as a notebook in Azure Da
 
 In this section, you run the newly imported notebook.
 
-1. Click **Run All** button.
+- Click **Run All** button.
 
 ### Creating a NetworkSimilarity instance
 
+- Cmd 5 creates a NetworkSimilarity instance to compute similarity
+
    ```python
-   # Create a NetworkSimilarity instance to compute similarity
    ns = NetworkSimilarity(container=MagContainer, account=AzureStorageAccount, sas=Sas, resource=ResourcePath)
    ```
 
 ### Calling getSimilarity method
 
-1. Cmd 6 calls getSimilarity method
+- Cmd 6 calls getSimilarity method
 
    ```python
    score = ns.getSimilarity(EntityId1, EntityId2)
    print(score)
    ```
 
-1. You will see output as follows
+- You will see output as follows
 
     > 0.7666980387511901
 
 ### Calling getTopEntities method
 
-1. Cmd 7 calls getTopEntities method
+- Cmd 7 calls getTopEntities method
 
    ```python
    topEntities = ns.getTopEntities(EntityId1)
    display(topEntities)
    ```
 
-1. You will see output as follows
+- You will see output as follows
 
     ![GetTopEntities output](media/network-similarity/get-top-entities.png "GetTopEntities output")
 
 ### Getting entity details
 
-1. Cmd 8 joins top entity id with affiliation table to get affiliation details
+- Cmd 8 joins top entity id with affiliation table to get affiliation details
 
    ```python
    # Create a MicrosoftAcademicGraph instance to access MAG dataset
@@ -130,7 +131,7 @@ In this section, you run the newly imported notebook.
    display(topEntitiesWithName)
    ```
 
-1. You will see output for Cmd 8 as follows
+- You will see output for Cmd 8 as follows
 
     ![Top entities detail](media/network-similarity/top-entities-detail.png "Top entities detail")
 
