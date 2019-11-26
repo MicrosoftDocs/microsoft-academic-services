@@ -59,12 +59,10 @@
     items:
     - name: Description
       href: network-similarity.md
-    - name: Methods
-      items:
-      - name: ComputeSimilarity
-        href: language-similarity-computesimilarity.md
-      - name: GetTopFieldsOfStudy
-        href: language-similarity-gettopfieldsofstudy.md
+    - name: Sample (U-SQL)
+      href: network-similarity-databricks.md
+    - name: Sample (Databricks)
+      href: network-similarity-databricks.md
 - name: Reference
   expanded: true
   items:
