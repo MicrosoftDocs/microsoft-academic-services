@@ -81,13 +81,54 @@ In this section, you run the newly imported notebook.
 
 1. Click **Run All** button.
 
-1. You will see output for Cmd 6 as follows
+## Create a NetworkSimilarity instance
+
+   ```python
+   # Create a NetworkSimilarity instance to compute similarity
+   ns = NetworkSimilarity(container=MagContainer, account=AzureStorageAccount, sas=Sas, resource=ResourcePath)
+   ```
+
+## getSimilarity method
+
+1. Cmd 6 calls getSimilarity method
+
+   ```python
+   score = ns.getSimilarity(EntityId1, EntityId2)
+   print(score)
+   ```
+
+1. You will see output as follows
 
     > 0.7666980387511901
 
-1. You will see output for Cmd 7 as follows
+## getTopEntities method
+
+1. Cmd 7 calls getTopEntities method
+
+   ```python
+   topEntities = ns.getTopEntities(EntityId1)
+   display(topEntities)
+   ```
+
+1. You will see output as follows
 
     ![GetTopEntities output](media/network-similarity/get-top-entities.png "GetTopEntities output")
+
+## getTopEntities method
+
+1. Cmd 8 joins top entity id with affiliation table to get affiliation details
+
+   ```python
+   # Create a MicrosoftAcademicGraph instance to access MAG dataset
+   mag = MicrosoftAcademicGraph(container=MagContainer, account=AzureStorageAccount, sas=Sas)
+
+   # Get authors dataframe
+   affiliations = mag.getDataframe('Affiliations')
+
+   # Join top entities with authors to show auhtor names
+   topEntitiesWithName = topEntities.join(affiliations, topEntities.EntityId == affiliations.AffiliationId, 'inner').select(topEntities.EntityId, affiliations.DisplayName, topEntities.Score).orderBy(topEntities.Score.desc())
+   display(topEntitiesWithName)
+   ```
 
 1. You will see output for Cmd 8 as follows
 
