@@ -1,12 +1,12 @@
 ---
-title: Network Similarity Sample
-description: Network Similarity Sample
+title: Network Similarity Sample (Databricks)
+description: Network Similarity Sample (Databricks)
 services: microsoft-academic-services
 ms.topic: extra
 ms.service: microsoft-academic-services
 ms.date: 11/25/2019
 ---
-# Network Similarity Sample
+# Network Similarity Sample (Databricks)
 
 In this tutorial, you compute network similarity score and top related affiliations in Microsoft Academic Graph (MAG) using Azure Databricks.
 
@@ -96,8 +96,6 @@ In this section, you run the newly imported notebook.
 ## Clean up resources
 
 After you finish the tutorial, you can terminate the cluster. From the Azure Databricks workspace, select **Clusters** on the left. For the cluster to terminate, under **Actions**, point to the ellipsis (...) and select the **Terminate** icon.
-
-![Stop a Databricks cluster](media/databricks/terminate-databricks-cluster.png "Stop a Databricks cluster")
 
 If you don't manually terminate the cluster, it automatically stops, provided you selected the **Terminate after \_\_ minutes of inactivity** check box when you created the cluster. In such a case, the cluster automatically stops if it's been inactive for the specified time.
 
