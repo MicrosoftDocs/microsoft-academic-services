@@ -17,10 +17,10 @@ Assemblies: Microsoft.Academic.LanguageSimilarity.dll
 ## Overloads
 
 ---
-`ComputeSimilarity(String, String)`: Returns a similarity score between two strings.
+[ComputeSimilarity(String, String)](#computesimilaritystring-string) Returns a similarity score between two strings.
 
 ---
-`ComputeSimilarity(String, long)`: Returns a similarity score between a string and a field of study id.
+[ComputeSimilarity(String, long)](#computesimilaritystring-long) Returns a similarity score between a string and a field of study id.
 
 ## ComputeSimilarity(String, String)
 
