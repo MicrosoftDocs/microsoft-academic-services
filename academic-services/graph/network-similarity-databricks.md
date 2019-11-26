@@ -89,9 +89,9 @@ In this section, you run the newly imported notebook.
    ns = NetworkSimilarity(container=MagContainer, account=AzureStorageAccount, key=AzureStorageAccessKe, resource=ResourcePath)
    ```
 
-### Calling getSimilarity method
+### Getting similarity score for 2 entities
 
-- Cmd 6 calls getSimilarity method
+- Cmd 6 calls getSimilarity method to get similarity score for 2 entities
 
    ```python
    score = ns.getSimilarity(EntityId1, EntityId2)
@@ -102,9 +102,9 @@ In this section, you run the newly imported notebook.
 
     > 0.7666980387511901
 
-### Calling getTopEntities method
+### Getting top related entities
 
-- Cmd 7 calls getTopEntities method
+- Cmd 7 calls getTopEntities method to get top related entities
 
    ```python
    topEntities = ns.getTopEntities(EntityId1)
