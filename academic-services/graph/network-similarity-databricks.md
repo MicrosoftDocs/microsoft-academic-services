@@ -8,7 +8,7 @@ ms.date: 11/25/2019
 ---
 # Network Similarity Sample
 
-In this tutorial, you compute h-index for all authors in Microsoft Academic Graph (MAG) using Azure Databricks. You extract data from Azure Storage into data frames, compute h-index, and visualize the result in table and graph forms.
+In this tutorial, you compute network similarity score and top related affiliations in Microsoft Academic Graph (MAG) using Azure Databricks.
 
 ## Prerequisites
 
@@ -28,11 +28,11 @@ Complete these tasks before you begin this tutorial:
 
    :heavy_check_mark:  The name of the container in your Azure Storage (AS) account containing MAG dataset.
 
-## Import PySparkMagClass.py as a notebook
+## Import PySparkMagClass.py as a shared notebook
 
-In this section, you import PySparkMagClass.py as a shared notebook in Azure Databricks workspace. You could run this utility notebook from other notebooks later.
+In this section, you import PySparkMagClass.py as a shared notebook in Azure Databricks workspace. You will run this utility notebook from another notebook later.
 
-1. Save samples\PySparkMagClass.py in MAG dataset to local drive.
+1. Save samples/PySparkMagClass.py in MAG dataset to local drive.
 
 1. In the [Azure portal](https://portal.azure.com), go to the Azure Databricks service that you created, and select **Launch Workspace**.
 
@@ -49,234 +49,60 @@ In this section, you import PySparkMagClass.py as a shared notebook in Azure Dat
    > [!NOTE]
    > When importing this notebook under **Shared** folder. The full path of this notebook is `"/Shared/PySparkMagClass"`. If you import it under other folders, note the actual full path and use it in following sections.
 
-## Create a new notebook
+## Import PySparkNetworkSimilarityClass.py as a shared notebook
 
-In this section, you create a new notebook in Azure Databricks workspace.
+In this section, you import PySparkNetworkSimilarityClass.py as a shared notebook in Azure Databricks workspace. You will run this utility notebook from another notebook later.
 
-1. On the left, select **Workspace**. From the **Workspace** drop-down, select **Create** > **Notebook**. Optionally, you could create this notebook in **Users** level.
+1. Save ns/PySparkMagClass.py in MAG dataset to local drive.
 
-    ![Create a notebook in Databricks](media/databricks/databricks-create-notebook.png "Create notebook in Databricks")
+1. In the [Azure portal](https://portal.azure.com), go to the Azure Databricks service that you created, and select **Launch Workspace**.
 
-1. In the **Create Notebook** dialog box, enter a name for the notebook. Select **Python** as the language.
+1. On the left, select **Workspace**. From the **Workspace** > **Shared** drop-down, select **Import**.
 
-    ![Provide details for a notebook in Databricks](media/databricks/create-notebook.png "Provide details for a notebook in Databricks")
+    ![Import a notebook in Databricks](media/databricks/import-shared-notebook.png "import notebook in Databricks")
+    
+1. Drag and drop PySparkMagClass.py to the **Import Notebook** dialog box
 
-1. Select **Create**.
+    ![Provide details for a notebook in Databricks](media/databricks/import-notebook-dialog.png "Provide details for a notebook in Databricks")
 
-## Create first notebook cell
+1. Select **Import**. This will create a notebook with path `"/Shared/PySparkNetworkSimilarityClass"`. No need to run this notebook.
 
-In this section, you create the first notebook cell to run PySparkMagClass notebook.
+   > [!NOTE]
+   > When importing this notebook under **Shared** folder. The full path of this notebook is `"/Shared/PySparkNetworkSimilarityClass"`. If you import it under other folders, note the actual full path and use it in following sections.
 
-1. Copy and paste following code block into the first cell.
+## Import NetworkSimilaritySample.py as a notebook
 
-   ```python
-   %run "/Shared/PySparkMagClass"
-   ```
+In this section, you import NetworkSimilaritySample.py as a notebook in Azure Databricks workspace. You will run this notebook.
 
-1. Press the **SHIFT + ENTER** keys to run the code in this block. It defines MicrosoftAcademicGraph class.
+1. Save ns/NetworkSimilaritySample.py in MAG dataset to local drive.
 
-## Define configration variables
+1. In the [Azure portal](https://portal.azure.com), go to the Azure Databricks service that you created, and select **Launch Workspace**.
 
-In this section, you add a new notebook cell and define configration variables.
+1. On the left, select **Workspace**. From the **Workspace** > **Users** > **Your alias** drop-down, select **Import**.
 
-1. Copy and paste following code block into the first cell.
+    ![Import a notebook in Databricks](media/databricks/import-shared-notebook.png "import notebook in Databricks")
+    
+1. Drag and drop PySparkNetworkSimilarityClass.py to the **Import Notebook** dialog box
 
-   ```python
-   # Define configration variables
-   AzureStorageAccount = '<AzureStorageAccount>'     # Azure Storage (AS) account containing MAG dataset
-   AzureStorageAccessKey = '<AzureStorageAccessKey>' # Access Key of the Azure Storage (AS) account
-   MagContainer = '<MagContainer>'                   # The container name in Azure Storage (AS) account containing MAG dataset, Usually in forms of mag-yyyy-mm-dd
-   ```
+    ![Provide details for a notebook in Databricks](media/databricks/import-notebook-dialog.png "Provide details for a notebook in Databricks")
 
-1. In this code block, replace `<AzureStorageAccount>`, `<AzureStorageAccessKey>`, and `<MagContainer>` placeholder values with the values that you collected while completing the prerequisites of this sample.
+## Run NetworkSimilaritySample notebook
 
-   |Value  |Description  |
-   |---------|---------|
-   |**`<AzureStorageAccount>`** | The name of your Azure Storage account. |
-   |**`<AzureStorageAccessKey>`** | The access key of your Azure Storage account. |
-   |**`<MagContainer>`** | The container name in Azure Storage account containing MAG dataset, Usually in the form of **mag-yyyy-mm-dd**. |
+In this section, you run the newly imported notebook.
 
-1. Press the **SHIFT + ENTER** keys to run the code in this block.
+1. Click **Run All** button.
 
-## Create a MicrosoftAcademicGraph instance
+1. You will see output for Cmd 6 as follows
 
-In this section, you create a MicrosoftAcademicGraph instance to access MAG dataset.
+    > 0.7666980387511901
 
-1. Copy and paste the following code block in a new cell.
+1. You will see output for Cmd 7 as follows
 
-   ```python
-   # Create a MicrosoftAcademicGraph instance to access MAG dataset
-   MAG = MicrosoftAcademicGraph(container=MagContainer, account=AzureStorageAccount, key=AzureStorageAccessKey)
-   ```
+    ![GetTopEntities output](media/databricks/import-shared-notebook.png "GetTopEntities output")
 
-1. Press the **SHIFT + ENTER** keys to run the code in this block.
+1. You will see output for Cmd 8 as follows
 
-## Import functions
-
-In this section, you import pyspark sql functions.
-
-1. Copy and paste the following code block in a new cell. Press the **SHIFT + ENTER** keys to run the code in this block.
-
-   ```python
-   from pyspark.sql import functions as F
-   from pyspark.sql.window import Window
-   ```
-
-## Create data frames for MAG entities
-
-In this section you will create data frames for several different MAG entities. These data frames will be used later on in the tutorial. Note that some of the cells might take several minutes to run.
-
-1. Get **Affiliations**. Paste the following code in a new cell.
-
-   ```python
-   # Get affiliations
-   Affiliations = MAG.getDataframe('Affiliations')
-   Affiliations = Affiliations.select(Affiliations.AffiliationId, Affiliations.DisplayName)
-   Affiliations.show(3)
-   ```
-
-   Press the **SHIFT + ENTER** keys to run the code in this block. You see an output similar to the following snippet:
-
-   ```
-   +-------------+--------------------+
-   |AffiliationId|         DisplayName|
-   +-------------+--------------------+
-   |     20455151|         Air Liquide|
-   |     24386293|Hellenic National...|
-   |     32956416|Catholic Universi...|
-   +-------------+--------------------+
-   only showing top 3 rows
-   ``` 
-
-1. Get **Authors**. Paste the following code in a new cell.
-
-   ```python
-   # Get authors
-   Authors = MAG.getDataframe('Authors')
-   Authors = Authors.select(Authors.AuthorId, Authors.DisplayName, Authors.LastKnownAffiliationId, Authors.PaperCount)
-   Authors.show(3)
-   ```
-
-   Press the **SHIFT + ENTER** keys to run the code in this block. You see an output similar to the following snippet:
-
-   ```
-   +--------+--------------------+----------------------+----------+
-   |AuthorId|         DisplayName|LastKnownAffiliationId|PaperCount|
-   +--------+--------------------+----------------------+----------+
-   |     584|Gözde Özdikmenli-...|              79946792|         2|
-   |     859|          Gy. Tolmár|                  null|         2|
-   |     978|      Ximena Faúndez|             162148367|        18|
-   +--------+--------------------+----------------------+----------+
-   only showing top 3 rows
-   ``` 
-
-1. Get **(Author, Paper) pairs**. Paste the following code in a new cell.
-
-   ```python
-   # Get (author, paper) pairs
-   PaperAuthorAffiliations = MAG.getDataframe('PaperAuthorAffiliations')
-   AuthorPaper = PaperAuthorAffiliations.select(PaperAuthorAffiliations.AuthorId, PaperAuthorAffiliations.PaperId).distinct()
-   AuthorPaper.show(3)
-   ```
-
-   Press the **SHIFT + ENTER** keys to run the code in this block. You see an output similar to the following snippet:
-
-   ```
-   +----------+--------+
-   |  AuthorId| PaperId|
-   +----------+--------+
-   |2121966975|94980387|
-   |2502082315|94984326|
-   |2713129682|94984597|
-   +----------+--------+
-   only showing top 3 rows
-   ``` 
-
-1. Get **(Paper, EstimatedCitation) pairs**. Paste the following code in a new cell. Press the **SHIFT + ENTER** keys to run the code in this block.
-
-   ```python
-   # Get (Paper, EstimatedCitation).
-   # Treat papers with same FamilyId as a single paper and sum the EstimatedCitation
-   Papers = MAG.getDataframe('Papers')
-   p = Papers.where(Papers.EstimatedCitation > 0) \
-     .select(F.when(Papers.FamilyId.isNull(), Papers.PaperId).otherwise(Papers.FamilyId).alias('PaperId'), \
-             Papers.EstimatedCitation) \
-     .alias('p')
-
-   PaperCitation = p \
-     .groupBy(p.PaperId) \
-     .agg(F.sum(p.EstimatedCitation).alias('EstimatedCitation'))
-   ```
-
-   You have now extracted MAG data from Azure Storage into Azure Databricks.
-
-## Compute author h-index
-
-In this section, you compute h-index for all authors.
-
-1. **Create an author-paper-citation table**. Paste the following code in a new cell. Press the **SHIFT + ENTER** keys to run the code in this block.
-
-   ```python
-   # Generate author, paper, citation table
-   AuthorPaperCitation = AuthorPaper \
-       .join(PaperCitation, AuthorPaper.PaperId == PaperCitation.PaperId, 'inner') \
-       .select(AuthorPaper.AuthorId, AuthorPaper.PaperId, PaperCitation.EstimatedCitation)
-   ```
-
-1. **Order AuthorPaperCitation by citation**. Paste the following code in a new cell. Press the **SHIFT + ENTER** keys to run the code in this block.
-
-   ```python
-   # Order author, paper by citation
-   AuthorPaperOrderByCitation = AuthorPaperCitation \
-     .withColumn('Rank', F.row_number().over(Window.partitionBy('AuthorId').orderBy(F.desc('EstimatedCitation'))))
-   ```
-
-1. **Compute h-index for all authors**. Paste the following code in a new cell. Press the **SHIFT + ENTER** keys to run the code in this block.
-
-   ```python
-   # Generate author hindex
-   ap = AuthorPaperOrderByCitation.alias('ap')
-   AuthorHIndexTemp = ap \
-     .groupBy(ap.AuthorId) \
-     .agg(F.sum(ap.EstimatedCitation).alias('TotalEstimatedCitation'), \
-          F.max(F.when(ap.EstimatedCitation >= ap.Rank, ap.Rank).otherwise(0)).alias('HIndex'))
-   ```
-
-1. **Get author detail information**. Paste the following code in a new cell. Press the **SHIFT + ENTER** keys to run the code in this block.
-
-   ```python
-   # Get author detail information
-   i = AuthorHIndexTemp.alias('i')
-   a = Authors.alias('a')
-   af = Affiliations.alias('af')
-
-   AuthorHIndex = i \
-     .join(a, a.AuthorId == i.AuthorId, 'inner') \
-     .join(af, a.LastKnownAffiliationId == af.AffiliationId, 'outer') \
-     .select(i.AuthorId, a.DisplayName, af.DisplayName.alias('AffiliationDisplayName'), a.PaperCount, i.TotalEstimatedCitation, i.HIndex)
-   ```
-
-## Visualize result 
-
-In this section, you query top authors by h-index and visualize the result.
-
-1. Query top authors with highest h-index. Paste the following code in a new cell. Press the **SHIFT + ENTER** keys to run the code in this block.
-
-   ```python
-   TopAuthorHIndex = AuthorHIndex \
-     .select(AuthorHIndex.DisplayName, AuthorHIndex.AffiliationDisplayName, AuthorHIndex.PaperCount, AuthorHIndex.TotalEstimatedCitation, AuthorHIndex.HIndex) \
-     .orderBy(F.desc('HIndex')) \
-     .limit(100)
-   display(TopAuthorHIndex)
-   ```
-
-1. Select the **table** icon to see result in table form.
-
-   ![Author H-Index table](media/databricks/hindex-table.png "Verify sample table")
-
-1. Select the **graph** icon to see result in graph form.
-
-   ![Author H-Index graph](media/databricks/hindex-graph.png "Verify sample table")
+    ![Top entities detail](media/databricks/import-shared-notebook.png "Top entities detail")
 
 ## Clean up resources
 
