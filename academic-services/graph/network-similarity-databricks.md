@@ -59,16 +59,9 @@ In this section, you import PySparkNetworkSimilarityClass.py as a shared noteboo
 
 1. On the left, select **Workspace**. From the **Workspace** > **Shared** drop-down, select **Import**.
 
-    ![Import a notebook in Databricks](media/databricks/import-shared-notebook.png "import notebook in Databricks")
-    
 1. Drag and drop PySparkMagClass.py to the **Import Notebook** dialog box
 
-    ![Provide details for a notebook in Databricks](media/databricks/import-notebook-dialog.png "Provide details for a notebook in Databricks")
-
 1. Select **Import**. This will create a notebook with path `"/Shared/PySparkNetworkSimilarityClass"`. No need to run this notebook.
-
-   > [!NOTE]
-   > When importing this notebook under **Shared** folder. The full path of this notebook is `"/Shared/PySparkNetworkSimilarityClass"`. If you import it under other folders, note the actual full path and use it in following sections.
 
 ## Import NetworkSimilaritySample.py as a notebook
 
@@ -80,11 +73,7 @@ In this section, you import NetworkSimilaritySample.py as a notebook in Azure Da
 
 1. On the left, select **Workspace**. From the **Workspace** > **Users** > **Your alias** drop-down, select **Import**.
 
-    ![Import a notebook in Databricks](media/databricks/import-shared-notebook.png "import notebook in Databricks")
-    
 1. Drag and drop PySparkNetworkSimilarityClass.py to the **Import Notebook** dialog box
-
-    ![Provide details for a notebook in Databricks](media/databricks/import-notebook-dialog.png "Provide details for a notebook in Databricks")
 
 ## Run NetworkSimilaritySample notebook
 
