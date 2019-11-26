@@ -81,14 +81,14 @@ In this section, you run the newly imported notebook.
 
 1. Click **Run All** button.
 
-## Create a NetworkSimilarity instance
+### Creating a NetworkSimilarity instance
 
    ```python
    # Create a NetworkSimilarity instance to compute similarity
    ns = NetworkSimilarity(container=MagContainer, account=AzureStorageAccount, sas=Sas, resource=ResourcePath)
    ```
 
-## getSimilarity method
+### Calling getSimilarity method
 
 1. Cmd 6 calls getSimilarity method
 
@@ -101,7 +101,7 @@ In this section, you run the newly imported notebook.
 
     > 0.7666980387511901
 
-## getTopEntities method
+### Calling getTopEntities method
 
 1. Cmd 7 calls getTopEntities method
 
@@ -114,7 +114,7 @@ In this section, you run the newly imported notebook.
 
     ![GetTopEntities output](media/network-similarity/get-top-entities.png "GetTopEntities output")
 
-## getTopEntities method
+### Getting entity details
 
 1. Cmd 8 joins top entity id with affiliation table to get affiliation details
 
