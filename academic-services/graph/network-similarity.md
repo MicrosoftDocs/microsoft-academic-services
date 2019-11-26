@@ -8,7 +8,9 @@ ms.date: 11/25/2019
 ---
 # Network Similarity Package
 
-The Microsoft Academic Network Similarity Package provides supplementary processing functionality for use with the Microsoft Academic Graph (MAG). This package includes Network Embedding resources and functions/scripts using Azure Data Lake Analytics (U-SQL) and Azure Databricks (PySpark).
+The Microsoft Academic Network Similarity Package provides supplementary processing functionality for use with the Microsoft Academic Graph (MAG). This package includes network embedding resources for academic entities. It also includes U-SQL functions to be used in Azure Data Lake Analytics and Python classes for Azure Databricks.
+
+The functions/classes perform the following tasks.
 
 1. Similarity comparison between 2 entities using pre-trained network embeddings on the MAG corpus, and
 2. Compute top similar entities based on the pre-trained network embeddings.
