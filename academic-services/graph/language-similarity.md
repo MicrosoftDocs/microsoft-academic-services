@@ -43,6 +43,10 @@ It includes algorithms in dlls and resources with pre‑trained models. After un
 We also include a C# demo project in the LanguageSimilarityExample folder. It contains sample.txt as input for the demo project.
 The demo project is a console program which takes resource directory and the sample.txt path as paremeters. The resource directory is to initialize the language similarity models, while sample.txt is used to provide prarmeters for calling methods in this package.
 
+## Constructors
+
+* [LanguageSimilarity(String)](language-similarity-constructor.md)
+
 ## Methods
 
 * [ComputeSimilarity](language-similarity-computesimilarity.md)
