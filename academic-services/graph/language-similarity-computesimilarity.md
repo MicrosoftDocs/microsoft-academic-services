@@ -33,7 +33,7 @@ Returns a similarity score between two strings. Score returned is between [0, 1]
 
 **Parameters**
 
-Name | Data Type | Note
+Name | Data Type | Description
 --- | --- | ---
 text1 | string | 
 text2 | string | 
@@ -75,7 +75,7 @@ Returns a similarity score between a string and a field of study id. Score retur
 
 **Parameters**
 
-Name | Data Type | Note
+Name | Data Type | Description
 --- | --- | ---
 text | string |
 fieldOfStudyId | long | A Field‑of‑Study entity ID defined in MAG
