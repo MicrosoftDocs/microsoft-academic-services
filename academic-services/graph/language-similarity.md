@@ -50,7 +50,7 @@ The demo project is a console program which takes resource directory and the sam
 
 ## Example
 
-* [LanguageSimilarityExample](language-similarity-example.md)
+* [Language Similarity Example](language-similarity-example.md)
 
 ## Resources
 
