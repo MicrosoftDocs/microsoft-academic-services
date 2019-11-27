@@ -32,21 +32,10 @@ The Network Similarity package is distributed in a separate folder (ns) in MAG.
 
   ![Network Similarity folder](media/network-similarity/folder.png "Network Similarity folder")
 
-The LanguageSimilarity package is distributed as a single zip file. It includes algorithms in dlls, and resources with pre‑trained models. After unzipping the package, users will see a folder structure as shown in the figure below. README files contain general information about the package, system requirements, and API signatures.
+## Examples
 
-  ![Language Similarity Package content](media/language-similarity/content.png "Language Similarity Package content")
-
-We also include a C# demo project in the LanguageSimilarityExample folder. It contains sample.txt as a sample input for the demo project.
-The demo project is a console program which takes resource directory and the sample.txt path file as paremeters. The resource directory is to initialize the language similarity models, while sample.txt is used to provide prarmeters for calling methods in this package.
-
-## Methods
-
-* [ComputeSimilarity](language-similarity-computesimilarity.md)
-* [GetTopFieldsOfStudy](language-similarity-gettopfieldsofstudy.md)
-
-## Example
-
-* [LanguageSimilarityExample](language-similarity-example.md)
+* [Network Similarity Example (U-SQL)](network-similarity-analytics.md)
+* [Network Similarity Example (Databricks)](network-similarity-databricks.md)
 
 ## Resources
 
