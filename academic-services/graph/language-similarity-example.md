@@ -8,7 +8,8 @@ ms.date: 11/25/2019
 ---
 # Language Similarity Example
 
-We include a C# demo project in the LanguageSimilarityExample folder.  It contains sample.txt as a sample input for the demo project, where each line contains the parameter(s) for an API call.
+Language Similarity Package includes a C# demo project in LanguageSimilarityExample folder.
+It contains sample.txt as a input for the demo project, where each line contains the parameter(s) for an API call.
 
 ## System Requirements
 
@@ -21,7 +22,9 @@ We include a C# demo project in the LanguageSimilarityExample folder.  It contai
 1. Open LanguageSimilarityExample solution.
 2. Start LanguageSimilarityExample project. The parameters are pre-populated in the project file.
 
-This demo is a console program that takes a resource directory and sample.txt path as input parameters. The resource directory is to initialize the LanguageSimilarity model.
+This demo is a console program which takes a resource directory and sample.txt path as input parameters.
+
+It first creates a LanguageSimilarity instance with resource directory to initialize the models.
 
   ```C#
   string resourceDir = args[0];
