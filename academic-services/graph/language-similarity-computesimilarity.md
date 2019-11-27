@@ -78,7 +78,7 @@ Returns a similarity score between a string and a field of study id. Score retur
 Name | Data Type | Description
 --- | --- | ---
 text | string |
-fieldOfStudyId | long | A Field‑of‑Study entity ID defined in MAG
+fieldOfStudyId | long | A field of study id defined in MAG
 
 **Examples**
 
