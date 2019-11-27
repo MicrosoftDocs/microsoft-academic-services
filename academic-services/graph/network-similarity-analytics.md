@@ -63,7 +63,14 @@ In prerequisite [Set up Azure Data Lake Analytics](get-started-setup-azure-data-
 1. In the [Azure portal](https://portal.azure.com), go to the Azure Data Lake Analytics (ADLA) service that you created, and select **Overview** > **New Job**.
 
 1. Copy code in **`ns/NetworkSimilaritySample.usql`** and paste into the code block.
-   
+
+1. Replace `<AzureStorageAccount>`, and `<MagContainer>` placeholder values with the values that you collected while completing the prerequisites of this sample.
+
+   |Value  |Description  |
+   |---------|---------|
+   |**`<AzureStorageAccount>`** | The name of your Azure Storage (AS) account containing MAG dataset. |
+   |**`<MagContainer>`** | The container name in Azure Storage (AS) account containing MAG dataset, Usually in the form of **mag-yyyy-mm-dd**. |
+
 1. Provide a **Job name** and select **Submit**.
 
 1. The job should finish successfully.
