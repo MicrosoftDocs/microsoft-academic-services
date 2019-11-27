@@ -20,7 +20,7 @@ Assemblies: Microsoft.Academic.LanguageSimilarity.dll
 
 **Parameters**
 
-Parameter | Data Type | Note
+Parameter | Data Type | Description
 --- | --- | ---
 text | string | The string to label with fields of study.
 maxCount | int | Default 100. The maximum number of fields of study to return.
