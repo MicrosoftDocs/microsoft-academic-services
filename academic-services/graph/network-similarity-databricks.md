@@ -32,7 +32,7 @@ Complete these tasks before you begin this tutorial:
 
 In this section, you import PySparkMagClass.py as a shared notebook in Azure Databricks workspace. You will run this utility notebook from another notebook later.
 
-1. Save samples/PySparkMagClass.py in MAG dataset to local drive.
+1. Save **`samples/PySparkMagClass.py`** in MAG dataset to local drive.
 
 1. In the [Azure portal](https://portal.azure.com), go to the Azure Databricks service that you created, and select **Launch Workspace**.
 
@@ -53,7 +53,7 @@ In this section, you import PySparkMagClass.py as a shared notebook in Azure Dat
 
 In this section, you import PySparkNetworkSimilarityClass.py as a shared notebook in Azure Databricks workspace. You will run this utility notebook from another notebook later.
 
-1. Save ns/PySparkNetworkSimilarityClass.py in MAG dataset to local drive.
+1. Save **`ns/PySparkNetworkSimilarityClass.py`** in MAG dataset to local drive.
 
 1. In Azure Databricks workspace portal, from **Workspace** > **Shared** drop-down, select **Import**.
 
@@ -65,7 +65,7 @@ In this section, you import PySparkNetworkSimilarityClass.py as a shared noteboo
 
 In this section, you import NetworkSimilaritySample.py as a notebook in Azure Databricks workspace.
 
-1. Save ns/NetworkSimilaritySample.py in MAG dataset to local drive.
+1. Save **`ns/NetworkSimilaritySample.py`** in MAG dataset to local drive.
 
 1. In Azure Databricks workspace portal, from the **Workspace** > **Users** > **Your folder** drop-down, select **Import**.
 
