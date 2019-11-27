@@ -46,6 +46,8 @@
     items:
     - name: Description
       href: language-similarity.md
+    - name: Constructor
+      href: language-similarity-constructor.md
     - name: Methods
       items:
       - name: ComputeSimilarity
