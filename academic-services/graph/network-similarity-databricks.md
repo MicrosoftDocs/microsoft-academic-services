@@ -109,7 +109,7 @@ In this section, you run the newly imported NetworkSimilaritySample notebook.
 
 - You will see output as follows
 
-    ![GetTopEntities output](media/network-similarity/get-top-entities.png "GetTopEntities output")
+    ![GetTopEntities output](media/network-similarity/databricks-get-top-entities.png "GetTopEntities output")
 
 ### Getting entity details
 
@@ -129,7 +129,7 @@ In this section, you run the newly imported NetworkSimilaritySample notebook.
 
 - You will see output for Cmd 8 as follows
 
-    ![Top entities detail](media/network-similarity/top-entities-detail.png "Top entities detail")
+    ![Top entities detail](media/network-similarity/databricks-top-entities-detail.png "Top entities detail")
 
 ## Clean up resources
 
