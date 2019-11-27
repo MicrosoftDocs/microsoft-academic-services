@@ -12,7 +12,7 @@ Namespace: Microsoft.Academic
 
 Assemblies: Microsoft.Academic.LanguageSimilarity.dll
 
-### Takes in a string and labels it with fields of study available in MAG. Returns a list of tuples of type (long, float), with the first value in the tuple being the labeled field of study id and the second value being the similarity score.
+### Takes in a string and labels it with fields of study available in MAG. Returns a list of tuples of type (long, float), where the first value in the tuple being the labeled field of study id and the second value being the similarity score.
 
   ```C#
   public IEnumerable<Tuple<long,float>> GetTopFieldsOfStudy(string text, int maxCount=100, int minScore=0);
@@ -28,7 +28,7 @@ minScore | float | Default 0. A minimum similarity score threshold. Fields of st
 
 **Return value**
 
-Returns a IEnumerable of `Tuple<long,float>`. The first item is a field of study entity ID defined in MAG. The second item is the similarity score between the input string and the field of study.
+Returns a IEnumerable of `Tuple<long,float>`. The first item is a field of study id defined in MAG. The second item is the similarity score between the input string and the field of study.
 
 **Examples**
 
