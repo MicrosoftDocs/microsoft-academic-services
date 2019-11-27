@@ -71,6 +71,14 @@ In this section, you import NetworkSimilaritySample.py as a notebook in Azure Da
 
 1. Drag and drop NetworkSimilaritySample.py to the **Import Notebook** dialog box.
 
+1. Replace `<AzureStorageAccount>`, `<AzureStorageAccessKey>`, and `<MagContainer>` placeholder values with the values that you collected while completing the prerequisites of this sample.
+
+   |Value  |Description  |
+   |---------|---------|
+   |**`<AzureStorageAccount>`** | The name of your Azure Storage account. |
+   |**`<AzureStorageAccessKey>`** | The access key of your Azure Storage account. |
+   |**`<MagContainer>`** | The container name in Azure Storage account containing MAG dataset, Usually in the form of **mag-yyyy-mm-dd**. |
+   
 ## Run NetworkSimilaritySample notebook
 
 In this section, you run the newly imported NetworkSimilaritySample notebook.
