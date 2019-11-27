@@ -59,7 +59,7 @@
     items:
     - name: Description
       href: network-similarity.md
-    - name: Sample (U-SQL)
+    - name: Sample (Analytics)
       href: network-similarity-analytics.md
     - name: Sample (Databricks)
       href: network-similarity-databricks.md
