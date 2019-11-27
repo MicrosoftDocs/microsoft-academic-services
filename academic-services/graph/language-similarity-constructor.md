@@ -20,7 +20,7 @@ Assemblies: Microsoft.Academic.LanguageSimilarity.dll
 
 **Parameters**
 
-Parameter | Data Type | Note
+Parameter | Data Type | Description
 --- | --- | ---
 resourceDir | string | A string specifying the path of the resource directory.
 
