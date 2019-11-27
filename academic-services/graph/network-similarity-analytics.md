@@ -38,7 +38,7 @@ In prerequisite [Set up Azure Data Lake Analytics](get-started-setup-azure-data-
 
    ![Azure Data Lake Analytics - New job](media/samples-azure-data-lake-hindex/new-job.png "Azure Data Lake Analytics - New job")
 
-1. Copy code in samples/CreateFunctions.usql and paste into the code block.
+1. Copy code in **`samples/CreateFunctions.usql`** and paste into the code block.
    
 1. Provide a **Job name** and select **Submit**.
 
@@ -52,7 +52,7 @@ In prerequisite [Set up Azure Data Lake Analytics](get-started-setup-azure-data-
 
 1. In the [Azure portal](https://portal.azure.com), go to the Azure Data Lake Analytics (ADLA) service that you created, and select **Overview** > **New Job**.
 
-1. Copy code in ns/NetworkSimilarityFunction.usql and paste into the code block.
+1. Copy code in **`ns/NetworkSimilarityFunction.usql`** and paste into the code block.
    
 1. Provide a **Job name** and select **Submit**.
 
@@ -62,7 +62,7 @@ In prerequisite [Set up Azure Data Lake Analytics](get-started-setup-azure-data-
 
 1. In the [Azure portal](https://portal.azure.com), go to the Azure Data Lake Analytics (ADLA) service that you created, and select **Overview** > **New Job**.
 
-1. Copy code in ns/NetworkSimilaritySample.usql and paste into the code block.
+1. Copy code in **`ns/NetworkSimilaritySample.usql`** and paste into the code block.
    
 1. Provide a **Job name** and select **Submit**.
 
@@ -76,9 +76,9 @@ In prerequisite [Set up Azure Data Lake Analytics](get-started-setup-azure-data-
    @score = AcademicGraph.NetworkSimilarity.GetSimilarity(@uriPrefix, @resourcePath, @entityId1, @entityId2);
    ```
 
-- You will see output as follows
+- You will see output in `/Output/NetworkSimilarity/GetSimilarity.tsv` as follows
 
-    > 0.7666980387511901
+    > 1290206253	201448701	af	0.766698062
 
 ### Getting top related entities
 
@@ -88,9 +88,9 @@ In prerequisite [Set up Azure Data Lake Analytics](get-started-setup-azure-data-
    @topEntities = AcademicGraph.NetworkSimilarity.GetTopEntities(@uriPrefix, @resourcePath, @entityId1, 20, (float)0);
    ```
 
-- You will see output as follows
+- You will see output in `/Output/NetworkSimilarity/GetTopEntities.tsv` as follows
 
-    ![GetTopEntities output](media/network-similarity/get-top-entities.png "GetTopEntities output")
+    ![GetTopEntities output](media/network-similarity/usql-get-top-entities.png "GetTopEntities output")
 
 ### Getting entity details
 
@@ -99,7 +99,7 @@ In prerequisite [Set up Azure Data Lake Analytics](get-started-setup-azure-data-
    ```U-SQL
    @affiliations = Affiliations(@uriPrefix);
 
-   @topEntityDetail =
+   @topEntityDetails =
        SELECT
            @topEntities.SimilarEntityId,
            @affiliations.DisplayName,
@@ -109,9 +109,9 @@ In prerequisite [Set up Azure Data Lake Analytics](get-started-setup-azure-data-
        ON @topEntities.SimilarEntityId == @affiliations.AffiliationId;
    ```
 
-- You will see output for Cmd 8 as follows
+- You will see output in `/Output/NetworkSimilarity/TopEntityDetails.tsv` as follows
 
-    ![Top entities detail](media/network-similarity/top-entities-detail.png "Top entities detail")
+    ![Top entities detail](media/network-similarity/usql-top-entities-detail.png "Top entities detail")
 
 ## Resources
 
