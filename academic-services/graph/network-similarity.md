@@ -4,7 +4,7 @@ description: Using Network Similarity Package
 services: microsoft-academic-services
 ms.topic: extra
 ms.service: microsoft-academic-services
-ms.date: 11/25/2019
+ms.date: 11/26/2019
 ---
 # Network Similarity Package
 
@@ -28,7 +28,7 @@ Before running these examples, you need to complete the following setups:
 
 ## Contents
 
-The Network Similarity package is distributed in a separate folder (ns) in MAG.
+The Network Similarity package is distributed in a separate folder (ns) in MAG. Files with usql extension are U-SQL scripts for Azure Data Lake Analytics. Files with py extension are Python script for Azure Databricks. Files with txt extension are network similarity resource files for different type of entities.
 
   ![Network Similarity folder](media/network-similarity/folder.png "Network Similarity folder")
 
