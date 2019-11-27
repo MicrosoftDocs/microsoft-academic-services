@@ -34,7 +34,7 @@ The Network Similarity package is distributed in a separate folder (ns) in MAG.
 
 ## Examples
 
-* [Network Similarity Example (U-SQL)](network-similarity-analytics.md)
+* [Network Similarity Example (Analytics)](network-similarity-analytics.md)
 * [Network Similarity Example (Databricks)](network-similarity-databricks.md)
 
 ## Resources
