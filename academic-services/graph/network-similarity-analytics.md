@@ -48,74 +48,32 @@ In prerequisite [Set up Azure Data Lake Analytics](get-started-setup-azure-data-
 
    ![CreateFunctions job status](media/samples-azure-data-lake-hindex/create-functions-status.png "CreateFunctions job status")
 
-## Import PySparkMagClass shared notebook
+## Define network similarity functions
 
-In this section, you import PySparkMagClass.py as a shared notebook in Azure Databricks workspace. You will run this utility notebook from another notebook later.
+1. In the [Azure portal](https://portal.azure.com), go to the Azure Data Lake Analytics (ADLA) service that you created, and select **Overview** > **New Job**.
 
-1. Save samples/PySparkMagClass.py in MAG dataset to local drive.
+1. Copy code in ns/NetworkSimilarityFunction.usql and paste into the code block.
+   
+1. Provide a **Job name** and select **Submit**.
 
-1. In the [Azure portal](https://portal.azure.com), go to the Azure Databricks service that you created, and select **Launch Workspace**.
+1. The job should finish successfully.
 
-1. On the left, select **Workspace**. From the **Workspace** > **Shared** drop-down, select **Import**.
+## Run NetworkSimilaritySample script
 
-    ![Import a notebook in Databricks](media/databricks/import-shared-notebook.png "import notebook in Databricks")
-    
-1. Drag and drop PySparkMagClass.py to the **Import Notebook** dialog box
+1. In the [Azure portal](https://portal.azure.com), go to the Azure Data Lake Analytics (ADLA) service that you created, and select **Overview** > **New Job**.
 
-    ![Provide details for a notebook in Databricks](media/databricks/import-notebook-dialog.png "Provide details for a notebook in Databricks")
+1. Copy code in ns/NetworkSimilaritySample.usql and paste into the code block.
+   
+1. Provide a **Job name** and select **Submit**.
 
-1. Select **Import**. This will create a notebook with path `"/Shared/PySparkMagClass"`. No need to run this notebook.
-
-   > [!NOTE]
-   > When importing this notebook under **Shared** folder. The full path of this notebook is `"/Shared/PySparkMagClass"`. If you import it under other folders, note the actual full path and use it in following sections.
-
-## Import PySparkNetworkSimilarityClass shared notebook
-
-In this section, you import PySparkNetworkSimilarityClass.py as a shared notebook in Azure Databricks workspace. You will run this utility notebook from another notebook later.
-
-1. Save ns/PySparkMagClass.py in MAG dataset to local drive.
-
-1. In the [Azure portal](https://portal.azure.com), go to the Azure Databricks service that you created, and select **Launch Workspace**.
-
-1. On the left, select **Workspace**. From the **Workspace** > **Shared** drop-down, select **Import**.
-
-1. Drag and drop PySparkMagClass.py to the **Import Notebook** dialog box
-
-1. Select **Import**. This will create a notebook with path `"/Shared/PySparkNetworkSimilarityClass"`. No need to run this notebook.
-
-## Import NetworkSimilaritySample notebook
-
-In this section, you import NetworkSimilaritySample.py as a notebook in Azure Databricks workspace.
-
-1. Save ns/NetworkSimilaritySample.py in MAG dataset to local drive.
-
-1. In the [Azure portal](https://portal.azure.com), go to the Azure Databricks service that you created, and select **Launch Workspace**.
-
-1. On the left, select **Workspace**. From the **Workspace** > **Users** > **Your alias** drop-down, select **Import**.
-
-1. Drag and drop PySparkNetworkSimilarityClass.py to the **Import Notebook** dialog box
-
-## Run NetworkSimilaritySample notebook
-
-In this section, you run the newly imported notebook.
-
-- Click **Run All** button.
-
-### Creating a NetworkSimilarity instance
-
-- Cmd 5 creates a NetworkSimilarity instance to compute similarity
-
-   ```python
-   ns = NetworkSimilarity(container=MagContainer, account=AzureStorageAccount, key=AzureStorageAccessKe, resource=ResourcePath)
-   ```
+1. The job should finish successfully.
 
 ### Getting similarity score between two entities
 
-- Cmd 6 calls getSimilarity method to get similarity score between two entities
+- Following script calls getSimilarity method to get similarity score between two entities
 
-   ```python
-   score = ns.getSimilarity(EntityId1, EntityId2)
-   print(score)
+   ```U-SQL
+   @score = AcademicGraph.NetworkSimilarity.GetSimilarity(@uriPrefix, @resourcePath, @entityId1, @entityId2);
    ```
 
 - You will see output as follows
@@ -124,11 +82,10 @@ In this section, you run the newly imported notebook.
 
 ### Getting top related entities
 
-- Cmd 7 calls getTopEntities method to get top related entities
+- Following script calls getTopEntities method to get top related entities
 
-   ```python
-   topEntities = ns.getTopEntities(EntityId1)
-   display(topEntities)
+   ```U-SQL
+   @topEntities = AcademicGraph.NetworkSimilarity.GetTopEntities(@uriPrefix, @resourcePath, @entityId1, 20, (float)0);
    ```
 
 - You will see output as follows
@@ -137,18 +94,19 @@ In this section, you run the newly imported notebook.
 
 ### Getting entity details
 
-- Cmd 8 joins top entities with affiliation table to get entity details
+- Following script joins top entities with affiliation table to get entity details
 
-   ```python
-   # Create a MicrosoftAcademicGraph instance to access MAG dataset
-   mag = MicrosoftAcademicGraph(container=MagContainer, account=AzureStorageAccount, key=AzureStorageAccessKe)
+   ```U-SQL
+   @affiliations = Affiliations(@uriPrefix);
 
-   # Get authors dataframe
-   affiliations = mag.getDataframe('Affiliations')
-
-   # Join top entities with authors to show auhtor names
-   topEntitiesWithName = topEntities.join(affiliations, topEntities.EntityId == affiliations.AffiliationId, 'inner').select(topEntities.EntityId, affiliations.DisplayName, topEntities.Score).orderBy(topEntities.Score.desc())
-   display(topEntitiesWithName)
+   @topEntityDetail =
+       SELECT
+           @topEntities.SimilarEntityId,
+           @affiliations.DisplayName,
+           @topEntities.Score
+       FROM @topEntities
+       INNER JOIN @affiliations
+       ON @topEntities.SimilarEntityId == @affiliations.AffiliationId;
    ```
 
 - You will see output for Cmd 8 as follows
