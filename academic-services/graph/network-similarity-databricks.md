@@ -123,7 +123,10 @@ In this section, you run the newly imported NetworkSimilaritySample notebook.
    affiliations = mag.getDataframe('Affiliations')
 
    # Join top entities with authors to show auhtor names
-   topEntitiesWithName = topEntities.join(affiliations, topEntities.EntityId == affiliations.AffiliationId, 'inner').select(topEntities.EntityId, affiliations.DisplayName, topEntities.Score).orderBy(topEntities.Score.desc())
+   topEntitiesWithName = topEntities \
+       .join(affiliations, topEntities.EntityId == affiliations.AffiliationId, 'inner') \
+       .select(topEntities.EntityId, affiliations.DisplayName, topEntities.Score) \
+       .orderBy(topEntities.Score.desc())
    display(topEntitiesWithName)
    ```
 
