@@ -4,7 +4,7 @@ description: LanguageSimilarity.GetTopFieldsOfStudy Method
 services: microsoft-academic-services
 ms.topic: extra
 ms.service: microsoft-academic-services
-ms.date: 11/25/2019
+ms.date: 11/27/2019
 ---
 # LanguageSimilarity.GetTopFieldsOfStudy Method
 
@@ -15,7 +15,7 @@ Assemblies: Microsoft.Academic.LanguageSimilarity.dll
 ### Takes in a string and labels it with fields of study available in MAG. Returns a list of tuples of type (long, float), with the first value in the tuple being the labeled field of study id and the second value being the similarity score.
 
   ```C#
-  public static IEnumerable<Tuple<long,float>> GetTopFieldsOfStudy(string text, int maxCount=100, int minScore=0);
+  public IEnumerable<Tuple<long,float>> GetTopFieldsOfStudy(string text, int maxCount=100, int minScore=0);
   ```
 
 **Parameters**
