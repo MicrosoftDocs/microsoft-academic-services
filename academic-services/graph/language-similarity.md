@@ -52,6 +52,10 @@ The demo project is a console program which takes resource directory and the sam
 * [ComputeSimilarity](language-similarity-computesimilarity.md)
 * [GetTopFieldsOfStudy](language-similarity-gettopfieldsofstudy.md)
 
-## Example
+## Sample
 
-* [Language Similarity Example](language-similarity-example.md)
+* [Language Similarity Sample (C#)](language-similarity-example.md)
+
+## Resource
+
+* [Get Microsoft Academic Graph on Azure storage](get-started-setup-provisioning.md)
