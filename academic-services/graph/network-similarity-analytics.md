@@ -8,7 +8,7 @@ ms.date: 11/26/2019
 ---
 # Network Similarity Sample (Analytics)
 
-In this tutorial, you compute network similarity score and top related affiliations in Microsoft Academic Graph (MAG) using Azure Data Analytics (U-SQL).
+In this sample, you compute network similarity score and top related affiliations in Microsoft Academic Graph (MAG) using Azure Data Analytics (U-SQL).
 
 ## Prerequisites
 
