@@ -37,8 +37,6 @@ The Network Similarity package is distributed in a separate folder (ns) in MAG. 
 * [Network Similarity Example (Analytics)](network-similarity-analytics.md)
 * [Network Similarity Example (Databricks)](network-similarity-databricks.md)
 
-## Resources
+## Resource
 
-* [Get started with Azure Data Lake Analytics using Azure portal](https://docs.microsoft.com/azure/data-lake-analytics/data-lake-analytics-get-started-portal)
-* [Data Lake Analytics](https://azure.microsoft.com/services/data-lake-analytics/)
-* [U-SQL Language Reference](https://docs.microsoft.com/u-sql/)
+* [Get Microsoft Academic Graph on Azure storage](get-started-setup-provisioning.md)
