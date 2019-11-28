@@ -32,10 +32,10 @@ The Network Similarity package is distributed in a separate folder (ns) in MAG. 
 
   ![Network Similarity folder](media/network-similarity/folder.png "Network Similarity folder")
 
-## Examples
+## Samples
 
-* [Network Similarity Example (Analytics)](network-similarity-analytics.md)
-* [Network Similarity Example (Databricks)](network-similarity-databricks.md)
+* [Network Similarity Sample (Analytics)](network-similarity-analytics.md)
+* [Network Similarity Sample (Databricks)](network-similarity-databricks.md)
 
 ## Resource
 
