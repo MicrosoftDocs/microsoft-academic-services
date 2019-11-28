@@ -25,7 +25,7 @@ Assemblies: Microsoft.Academic.LanguageSimilarity.dll
 
 ## ComputeSimilarity(String, String)
 
-Returns a similarity score between two strings. Score returned is between [0, 1].
+Returns a similarity score between two strings. Score returned is between [-1, 1], with bigger number representing higher similarity.
 
   ```C#
   public float ComputeSimilarity(string text1, string text2);
@@ -67,7 +67,7 @@ text2 | string |
 
 ## ComputeSimilarity(String, long)
 
-Returns a similarity score between a string and a field of study id. Score returned is between [0, 1].
+Returns a similarity score between a string and a field of study id. Score returned is between [-1, 1], with bigger number representing higher similarity.
 
    ```C#
    public float ComputeSimilarity(string text, long fieldOfStudyId);
