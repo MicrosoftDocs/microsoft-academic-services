@@ -55,7 +55,3 @@ The demo project is a console program which takes resource directory and the sam
 ## Example
 
 * [Language Similarity Example](language-similarity-example.md)
-
-## Resources
-
-* [Get started with Azure Data Lake Analytics using Azure portal](https://docs.microsoft.com/azure/data-lake-analytics/data-lake-analytics-get-started-portal)
