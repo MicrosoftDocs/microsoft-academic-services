@@ -18,12 +18,7 @@ sections:
     - html: <a href="get-started-setup-provisioning">Get Microsoft Academic Graph on Azure storage</a>
     - html: <a href="get-started-setup-azure-data-lake-analytics">Set up Azure Data Lake Analytics for Microsoft Academic Graph</a>
     - html: <a href="get-started-setup-databricks">Set up Azure Databricks for Microsoft Academic Graph</a>
-- title: References
-  items: 
-  - type: list
-    style: unordered
-    items:
-    - html: <a href="reference-data-schema">Microsoft Academic Graph entity data schema</a>
+    - html: <a href="reference-data-schema">Microsoft Academic Graph data schema</a>
     - html: <a href="language-similarity">Language Similarity Package</a>
     - html: <a href="network-similarity">Network Similarity Package</a>
 - title: Tutorials
