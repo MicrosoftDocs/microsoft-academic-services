@@ -6,7 +6,7 @@ metadata:
   description: Learn about Microsoft Academic Graph, including getting started guides, data schema reference, sample analytics
   meta.description: Learn about Microsoft Academic Graph, including getting started guides, data schema reference, sample analytics
   ms.topic: landing-page
-  ms.date: 11/25/2019
+  ms.date: 12/2/2019
 abstract:
   description: Learn about Microsoft Academic Graph, including getting started guide, data schema reference, sample analytics.
 sections:
@@ -18,12 +18,6 @@ sections:
     - html: <a href="get-started-setup-provisioning">Get Microsoft Academic Graph on Azure storage</a>
     - html: <a href="get-started-setup-azure-data-lake-analytics">Set up Azure Data Lake Analytics for Microsoft Academic Graph</a>
     - html: <a href="get-started-setup-databricks">Set up Azure Databricks for Microsoft Academic Graph</a>
-- title: Technology overview
-  items: 
-  - type: list
-    style: unordered
-    items:
-    - html: <a href="reference-data-schema">Microsoft Academic Graph entity data schema</a>
 - title: Tutorials
   items:
   - type: list
@@ -40,10 +34,14 @@ sections:
     items:
     - html: <a href="samples-azure-data-lake-analytics">Analytics and visualization samples (U-SQL/PowerBI)</a>
     - html: <a href="samples-azure-databricks">Analytics samples (Databricks/PySpark)</a>
-- title: Extras
-  items:
+    - html: <a href="language-similarity-example">Language similarity sample (C#)</a>
+    - html: <a href="network-similarity-analytics">Network similarity sample (U-SQL)</a>
+    - html: <a href="network-similarity-databricks">Network similarity sample(Databricks/PySpark)</a>
+- title: References
+  items: 
   - type: list
     style: unordered
     items:
+    - html: <a href="reference-data-schema">Microsoft Academic Graph entity data schema</a>
     - html: <a href="language-similarity">Language Similarity Package</a>
     - html: <a href="network-similarity">Network Similarity Package</a>
