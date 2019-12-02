@@ -10,36 +10,36 @@
   items:
   - name: Get Microsoft Academic Graph on Azure Storage
     href: get-started-setup-provisioning.md
-  - name: Set up Azure Data Lake Analytics for MAG
-    href: get-started-setup-azure-data-lake-analytics.md
-  - name: Set up Azure Databricks for MAG
-    href: get-started-setup-databricks.md
-- name: Reference
-  expanded: true
-  items:
-  - name: Microsoft Academic Graph
+  - name: Recommended Analytics options
     expanded: true
     items:
-    - name: Data schema
-      href: reference-data-schema.md
-  - name: Language Similarity Package
+    - name: Set up Azure Data Lake Analytics for MAG
+      href: get-started-setup-azure-data-lake-analytics.md
+    - name: Set up Azure Databricks for MAG
+      href: get-started-setup-databricks.md
+  - name: Microsoft Academic Graph data schema
+    href: reference-data-schema.md
+  - name: Utilities
     expanded: true
     items:
-    - name: Overview
-      href: language-similarity.md
-    - name: Methods
+    - name: Language Similarity Package
+      expanded: true
       items:
-      - name: Constructor
-        href: language-similarity-constructor.md
-      - name: ComputeSimilarity
-        href: language-similarity-computesimilarity.md
-      - name: GetTopFieldsOfStudy
-        href: language-similarity-gettopfieldsofstudy.md
-  - name: Network Similarity Package
-    expanded: true
-    items:
-    - name: Overview
-      href: network-similarity.md
+      - name: Overview
+        href: language-similarity.md
+      - name: Methods
+        items:
+        - name: Constructor
+          href: language-similarity-constructor.md
+        - name: ComputeSimilarity
+          href: language-similarity-computesimilarity.md
+        - name: GetTopFieldsOfStudy
+          href: language-similarity-gettopfieldsofstudy.md
+    - name: Network Similarity Package
+      expanded: true
+      items:
+      - name: Overview
+        href: network-similarity.md
 - name: Tutorials
   expanded: true
   items:
