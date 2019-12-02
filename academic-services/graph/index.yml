@@ -44,4 +44,4 @@ sections:
     - html: <a href="samples-azure-databricks">Analytics samples (PySpark)</a>
     - html: <a href="language-similarity-example">Language similarity sample (C#)</a>
     - html: <a href="network-similarity-analytics">Network similarity sample (U-SQL)</a>
-    - html: <a href="network-similarity-databricks">Network similarity sample(PySpark)</a>
+    - html: <a href="network-similarity-databricks">Network similarity sample (PySpark)</a>
