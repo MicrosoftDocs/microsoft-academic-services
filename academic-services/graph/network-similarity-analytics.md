@@ -1,12 +1,12 @@
 ---
-title: Network Similarity Sample (Analytics)
-description: Network Similarity Sample (Analytics)
+title: Network Similarity Sample (U-SQL)
+description: Network Similarity Sample (U-SQL)
 services: microsoft-academic-services
 ms.topic: extra
 ms.service: microsoft-academic-services
-ms.date: 11/26/2019
+ms.date: 12/2/2019
 ---
-# Network Similarity Sample (Analytics)
+# Network Similarity Sample (U-SQL)
 
 In this sample, you compute network similarity score and top related affiliations in Microsoft Academic Graph (MAG) using Azure Data Analytics (U-SQL).
 
