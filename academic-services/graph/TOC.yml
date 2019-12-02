@@ -10,7 +10,7 @@
   items:
   - name: Get Microsoft Academic Graph on Azure Storage
     href: get-started-setup-provisioning.md
-  - name: Recommended Analytics options
+  - name: Recommended analytics options
     expanded: true
     items:
     - name: Set up Azure Data Lake Analytics for MAG
