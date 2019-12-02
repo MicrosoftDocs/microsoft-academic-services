@@ -34,42 +34,51 @@
 - name: Samples
   expanded: true
   items:
-  - name: Analytics and visualization
-    href: samples-azure-data-lake-analytics.md
-  - name: Analytics (Databricks/PySpark)
-    href: samples-azure-databricks.md
-- name: Extras
-  expanded: true
-  items:
+  - name: Microsoft Academic Graph
+    expanded: true
+    items:
+    - name: Analytics and visualization (U-SQL + PowerBI)
+      href: samples-azure-data-lake-analytics.md
+    - name: Analytics (Databricks/PySpark)
+      href: samples-azure-databricks.md
   - name: Language Similarity Package
     expanded: true
     items:
-    - name: Description
-      href: language-similarity.md
-    - name: Constructor
-      href: language-similarity-constructor.md
-    - name: Methods
-      items:
-      - name: ComputeSimilarity
-        href: language-similarity-computesimilarity.md
-      - name: GetTopFieldsOfStudy
-        href: language-similarity-gettopfieldsofstudy.md
-    - name: Sample (C#)
+    - name: C#
       href: language-similarity-example.md
   - name: Network Similarity Package
     expanded: true
     items:
-    - name: Description
-      href: network-similarity.md
-    - name: Sample (Analytics)
+    - name: U-SQL
       href: network-similarity-analytics.md
-    - name: Sample (Databricks)
+    - name: Databricks
       href: network-similarity-databricks.md
 - name: Reference
   expanded: true
   items:
-  - name: Microsoft Academic Graph data schema
-    href: reference-data-schema.md
+  - name: Microsoft Academic Graph
+    expanded: true
+    items:
+    - name: Data schema
+      href: reference-data-schema.md
+  - name: Language Similarity Package
+    expanded: true
+    items:
+    - name: Overview
+      href: language-similarity.md
+    - name: Methods
+      items:
+      - name: Constructor
+        href: language-similarity-constructor.md
+      - name: ComputeSimilarity
+        href: language-similarity-computesimilarity.md
+      - name: GetTopFieldsOfStudy
+        href: language-similarity-gettopfieldsofstudy.md
+  - name: Network Similarity Package
+    expanded: true
+    items:
+    - name: Overview
+      href: network-similarity.md
 - name: Resources
   expanded: true
   items:
