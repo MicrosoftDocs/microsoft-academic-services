@@ -1,12 +1,12 @@
 ---
-title: Network Similarity Sample (Databricks)
-description: Network Similarity Sample (Databricks)
+title: Network Similarity Sample (PySpark)
+description: Network Similarity Sample (PySpark)
 services: microsoft-academic-services
 ms.topic: extra
 ms.service: microsoft-academic-services
-ms.date: 11/26/2019
+ms.date: 12/2/2019
 ---
-# Network Similarity Sample (Databricks)
+# Network Similarity Sample (PySpark)
 
 In this sample, you compute network similarity score and top related entities in Microsoft Academic Graph (MAG) using Azure Databricks.
 
