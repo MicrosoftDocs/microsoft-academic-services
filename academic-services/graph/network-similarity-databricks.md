@@ -88,7 +88,7 @@ In this section, you import NetworkSimilaritySample.py as a notebook in Azure Da
 - Cmd 5 creates a NetworkSimilarity instance to compute similarity
 
    ```python
-   ns = NetworkSimilarity(container=MagContainer, account=AzureStorageAccount, key=AzureStorageAccessKe, resource=ResourcePath)
+   ns = NetworkSimilarity(container=MagContainer, account=AzureStorageAccount, key=AzureStorageAccessKey, resource=ResourcePath)
    ```
 
 ### Getting similarity score between two entities
@@ -123,7 +123,7 @@ In this section, you import NetworkSimilaritySample.py as a notebook in Azure Da
 
    ```python
    # Create a MicrosoftAcademicGraph instance to access MAG dataset
-   mag = MicrosoftAcademicGraph(container=MagContainer, account=AzureStorageAccount, key=AzureStorageAccessKe)
+   mag = MicrosoftAcademicGraph(container=MagContainer, account=AzureStorageAccount, key=AzureStorageAccessKey)
 
    # Get authors dataframe
    affiliations = mag.getDataframe('Affiliations')
