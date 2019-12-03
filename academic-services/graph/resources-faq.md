@@ -2,7 +2,7 @@
 title: FAQ about Microsoft Academic Graph
 description: Answers some of the most frequently asked questions about the Microsoft Academic Graph
 ms.topic: reference
-ms.date: 8/26/2019
+ms.date: 12/2/2019
 ---
 # Frequently Asked Questions about Microsoft Academic Graph
 
@@ -12,10 +12,13 @@ Answers some of the most frequently asked questions about the Microsoft Academic
 
 Microsoft Academic Graph is licensed under [ODC-BY](https://opendatacommons.org/licenses/by/1.0/)
 
-When using Microsoft Academic data (MAG, MAKES, etc.) in a product or service, or including data in a redistribution, please acknowledge Microsoft Academic using the URI https://aka.ms/msracad. For publications and reports, please cite the following article:
+When using Microsoft Academic data (MAG, MAKES, etc.) in a product or service, or including data in a redistribution, please acknowledge Microsoft Academic using the URI https://aka.ms/msracad. For publications and reports, please cite following articles:
 
 > [!NOTE]
-> Arnab Sinha, Zhihong Shen, Yang Song, Hao Ma, Darrin Eide, Bo-June (Paul) Hsu, and Kuansan Wang. 2015. An Overview of Microsoft Academic Service (MA) and Applications. In Proceedings of the 24th International Conference on World Wide Web (WWW '15 Companion). ACM, New York, NY, USA, 243-246. DOI=http://dx.doi.org/10.1145/2740908.2742839 
+>
+> - Arnab Sinha, Zhihong Shen, Yang Song, Hao Ma, Darrin Eide, Bo-June (Paul) Hsu, and Kuansan Wang. 2015. An Overview of Microsoft Academic Service (MA) and Applications. In Proceedings of the 24th International Conference on World Wide Web (WWW '15 Companion). ACM, New York, NY, USA, 243-246. DOI=http://dx.doi.org/10.1145/2740908.2742839
+>
+> - K. Wang et al., “A Review of Microsoft Academic Services for Science of Science Studies”, Frontiers in Big Data, 2019, doi: 10.3389/fdata.2019.00045
 
 ## How much does Microsoft Academic Graph cost
 
@@ -52,7 +55,7 @@ An entities "importance" is calculated using its relationships with other entiti
 
 ## What is the cost to compute authors citation counts and h-index
 
-It is relatively easy and inexpensive to compute citation counts and h-index using [U-SQL](https://msdn.microsoft.com/en-us/azure/data-lake-analytics/u-sql/u-sql-language-reference) with [Azure Data Lake Analytic](https://azure.microsoft.com/en-us/services/data-lake-analytics/) for all authors in MAG, currently 250 million in total. The cost range from $1 (USD) with 1 AU running for 40 minutes to $2 with 16AU running for 5 minutes.
+It is relatively easy and inexpensive to compute citation counts and h-index using [U-SQL](https://msdn.microsoft.com/azure/data-lake-analytics/u-sql/u-sql-language-reference) with [Azure Data Lake Analytic](https://azure.microsoft.com/services/data-lake-analytics/) for all authors in MAG, currently 250 million in total. The cost range from $1 (USD) with 1 AU running for 40 minutes to $2 with 16AU running for 5 minutes.
 
 ## What is FamilyId in Papers.txt
 

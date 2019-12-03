@@ -2,7 +2,7 @@
 title: Microsoft Academic Graph data schema
 description: Documents the complete, most recent Microsoft Academic Graph entity data schema, including the name and type of each attribute
 ms.topic: reference
-ms.date: 10/17/2019
+ms.date: 12/2/2019
 ---
 # Microsoft Academic Graph data schema
 
@@ -10,10 +10,13 @@ Documents the complete, most recent Microsoft Academic Graph entity data schema,
 
 ## Open Data License: [ODC-BY](https://opendatacommons.org/licenses/by/1.0/)
 
-When using Microsoft Academic data (MAG, MAKES, etc.) in a product or service, or including data in a redistribution, please acknowledge Microsoft Academic using the URI https://aka.ms/msracad. For publications and reports, please cite the following article:
+When using Microsoft Academic data (MAG, MAKES, etc.) in a product or service, or including data in a redistribution, please acknowledge Microsoft Academic using the URI https://aka.ms/msracad. For publications and reports, please cite following articles:
 
 > [!NOTE]
-> Arnab Sinha, Zhihong Shen, Yang Song, Hao Ma, Darrin Eide, Bo-June (Paul) Hsu, and Kuansan Wang. 2015. An Overview of Microsoft Academic Service (MA) and Applications. In Proceedings of the 24th International Conference on World Wide Web (WWW '15 Companion). ACM, New York, NY, USA, 243-246. DOI=http://dx.doi.org/10.1145/2740908.2742839
+>
+> - Arnab Sinha, Zhihong Shen, Yang Song, Hao Ma, Darrin Eide, Bo-June (Paul) Hsu, and Kuansan Wang. 2015. An Overview of Microsoft Academic Service (MA) and Applications. In Proceedings of the 24th International Conference on World Wide Web (WWW '15 Companion). ACM, New York, NY, USA, 243-246. DOI=http://dx.doi.org/10.1145/2740908.2742839
+>
+> - K. Wang et al., “A Review of Microsoft Academic Services for Science of Science Studies”, Frontiers in Big Data, 2019, doi: 10.3389/fdata.2019.00045
 
 ## Entity Relationship Diagram
 
