@@ -16,9 +16,10 @@ When using Microsoft Academic data (MAG, MAKES, etc.) in a product or service, o
 
 > [!NOTE]
 >
-> Arnab Sinha, Zhihong Shen, Yang Song, Hao Ma, Darrin Eide, Bo-June (Paul) Hsu, and Kuansan Wang. 2015. An Overview of Microsoft Academic Service (MA) and Applications. In Proceedings of the 24th International Conference on World Wide Web (WWW '15 Companion). ACM, New York, NY, USA, 243-246. DOI=http://dx.doi.org/10.1145/2740908.2742839
+> - Arnab Sinha, Zhihong Shen, Yang Song, Hao Ma, Darrin Eide, Bo-June (Paul) Hsu, and Kuansan Wang. 2015. An Overview of Microsoft Academic Service (MA) and Applications. In Proceedings of the 24th International Conference on World Wide Web (WWW '15 Companion). ACM, New York, NY, USA, 243-246. DOI=http://dx.doi.org/10.1145/2740908.2742839
 >
-> K. Wang et al., “A Review of Microsoft Academic Services for Science of Science Studies”, Frontiers in Big Data, 2019, doi: 10.3389/fdata.2019.00045
+> - K. Wang et al., “A Review of Microsoft Academic Services for Science of Science Studies”, Frontiers in Big Data, 2019, doi: 10.3389/fdata.2019.00045
+
 ## How much does Microsoft Academic Graph cost
 
 Microsoft Academic Graph is currently in free preview. Consumers incur costs only on their own Azure resource usage associated with graph (i.e. storing, downloading, processing, analytics, etc.). See the [pricing](resources-pricing.md) page for Azure cost estimator links that pre-populate storage costs associated with storing the approximate size of the graph.
