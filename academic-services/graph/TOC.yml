@@ -28,6 +28,7 @@
       - name: Overview
         href: language-similarity.md
       - name: Methods
+        expanded: true
         items:
         - name: Constructor
           href: language-similarity-constructor.md
