@@ -10,45 +10,19 @@
   items:
   - name: Get Microsoft Academic Graph on Azure Storage
     href: get-started-setup-provisioning.md
-  - name: Recommended analytics options
-    expanded: true
-    items:
-    - name: Set up Azure Data Lake Analytics for MAG
-      href: get-started-setup-azure-data-lake-analytics.md
-    - name: Set up Azure Databricks for MAG
-      href: get-started-setup-databricks.md
-  - name: Microsoft Academic Graph data schema
-    href: reference-data-schema.md
-  - name: Utilities
-    expanded: true
-    items:
-    - name: Language Similarity Package
-      expanded: true
-      items:
-      - name: Overview
-        href: language-similarity.md
-      - name: Methods
-        items:
-        - name: Constructor
-          href: language-similarity-constructor.md
-        - name: ComputeSimilarity
-          href: language-similarity-computesimilarity.md
-        - name: GetTopFieldsOfStudy
-          href: language-similarity-gettopfieldsofstudy.md
-    - name: Network Similarity Package
-      expanded: true
-      items:
-      - name: Overview
-        href: network-similarity.md
+  - name: Set up Azure Data Lake Analytics for MAG
+    href: get-started-setup-azure-data-lake-analytics.md
+  - name: Set up Azure Databricks for MAG
+    href: get-started-setup-databricks.md
 - name: Tutorials
   expanded: true
   items:
   - name: Generate author h-index
     expanded: true
     items:
-    - name: U-SQL
+    - name: Azure Data Analytics (U-SQL)
       href: tutorial-azure-data-lake-hindex.md
-    - name: PySpark
+    - name: Databricks (PySpark)
       href: tutorial-azure-databricks-hindex.md
   - name: Full-text search using Azure Search
     expanded: true
@@ -60,25 +34,15 @@
 - name: Samples
   expanded: true
   items:
-  - name: Microsoft Academic Graph
-    expanded: true
-    items:
-    - name: U-SQL + PowerBI
-      href: samples-azure-data-lake-analytics.md
-    - name: PySpark
-      href: samples-azure-databricks.md
-  - name: Language Similarity Package
-    expanded: true
-    items:
-    - name: C#
-      href: language-similarity-example.md
-  - name: Network Similarity Package
-    expanded: true
-    items:
-    - name: U-SQL
-      href: network-similarity-analytics.md
-    - name: PySpark
-      href: network-similarity-databricks.md
+  - name: Analytics and visualization
+    href: samples-azure-data-lake-analytics.md
+  - name: Analytics (Databricks/PySpark)
+    href: samples-azure-databricks.md
+- name: Reference
+  expanded: true
+  items:
+  - name: Microsoft Academic Graph data schema
+    href: reference-data-schema.md
 - name: Resources
   expanded: true
   items:
