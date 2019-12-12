@@ -4,7 +4,8 @@ description: Microsoft Academic Knowledge Exploration Service enables self-hoste
 ms.topic: overview
 ms.date: 03/18/2018
 ---
-> [!IMPORTANT]We will be publishing a new version of MAKES early in the next calendar year (2020).  This version will be a turn-key solution to host MAKES in your Azure subscription.  For users of the Cognitive Service API, this will allow you to host your own un-throttled version of the API set provided by this service.
+> [!IMPORTANT]
+> We will be publishing a new version of MAKES early in the next calendar year (2020).  This version will be a turn-key solution to host MAKES in your Azure subscription.  For users of the Cognitive Service API, this will allow you to host your own un-throttled version of the API set provided by this service.
 
 # About Microsoft Academic Knowledge Exploration Service
 
