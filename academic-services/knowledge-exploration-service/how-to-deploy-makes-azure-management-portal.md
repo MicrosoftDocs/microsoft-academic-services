@@ -6,6 +6,9 @@ ms.date: 03/18/2018
 ---
 # Deploy Microsoft Academic Knowledge Exploration Service API using Azure Management Portal
 
+> [!IMPORTANT]
+> We will be publishing a new version of MAKES in early 2020.  This version will be a turn-key solution to host MAKES in your Azure subscription.  For users of Project Academic Knowledge, this MAKES version will mirror the schema and API methods supported by Project Academic Knowledge, enabling users to host their own un-throttled version of the API.
+
 Details step-by-step guide for deploying Microsoft Academic Knowledge Exploration Service APIs using the Azure Management Portal.
 
 ## Configure API build

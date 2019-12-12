@@ -6,6 +6,9 @@ ms.date: 03/18/2018
 ---
 # Frequently Asked Questions about Microsoft Academic Knowledge Exploration Service
 
+> [!IMPORTANT]
+> We will be publishing a new version of MAKES in early 2020.  This version will be a turn-key solution to host MAKES in your Azure subscription.  For users of Project Academic Knowledge, this MAKES version will mirror the schema and API methods supported by Project Academic Knowledge, enabling users to host their own un-throttled version of the API.
+
 Answers to the most frequently asked questions about Microsoft Academic Knowledge Exploration Service
 
 ## How frequently are new APIs released
