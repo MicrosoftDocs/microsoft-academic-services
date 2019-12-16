@@ -6,6 +6,9 @@ ms.date: 03/18/2018
 ---
 # Get started with Microsoft Academic Knowledge Exploration Service
 
+> [!IMPORTANT]
+> We will be publishing a new version of MAKES in early 2020.  This version will be a turn-key solution to host MAKES in your Azure subscription.  For users of [Project Academic Knowledge](https://www.microsoft.com/research/project/academic-knowledge/), this MAKES version will mirror the schema and API methods supported by that project, enabling users to host their own un-throttled version of the API's.
+
 Details step-by-step instructions for setting up one-time or automatic provisioning of Microsoft Academic Knowledge Exploration Service APIs to an Azure blob storage account.
 
 ## Open Data License: [ODC-BY](https://opendatacommons.org/licenses/by/1.0/)
@@ -17,16 +20,16 @@ When using Microsoft Academic data (MAG, MAKES, etc.) in a product or service, o
 
 ## Pre-requisites
 
-- [Azure account + subscription](https://azure.microsoft.com/en-us/get-started)
-- [Azure Storage account](https://docs.microsoft.com/en-us/azure/storage/)
+- [Azure account + subscription](https://azure.microsoft.com/get-started)
+- [Azure Storage account](https://docs.microsoft.com/azure/storage/)
 
 ## Setup storage account to receive MAKES API builds
 
-### [Create an Azure Subscription](https://azure.microsoft.com/en-us/get-started)
+### [Create an Azure Subscription](https://azure.microsoft.com/get-started)
 
 Please create a new Azure subscription for the distribution previews. If your organization already using Azure, this could be a separate subscription under the same tenant id. If you start from scratch, for example “create Azure free account”, the subscription will be created under a new tenant id.
 
-### [Create an Azure Storage Account](https://docs.microsoft.com/en-us/azure/storage/common/storage-quickstart-create-account?tabs=portal)
+### [Create an Azure Storage Account](https://docs.microsoft.com/azure/storage/common/storage-quickstart-create-account?tabs=portal)
 
 1. Home > Create a resource > Storage > Storage account
 
@@ -59,7 +62,7 @@ Please create a new Azure subscription for the distribution previews. If your or
     - Name of your Microsoft sales representative, if you have one
     - Azure storage account name
     - Azure storage account primary access key
-    - Which MAKES APIs you want to receive (semantic interpretation API, entity API, or both) 
+    - Which MAKES APIs you want to receive (semantic interpretation API, entity API, or both)
 
     > [!NOTE]
     > MAKES is currently in a free preview period, so there are no charges associated with the provisioning or use of data/service itself. However Azure requires you to cover all costs associated with standard resource creation, usage, etc. For cost estimates associated with MAKES please see the [Pricing](resources-pricing.md) page. <br/><br/>Most research institutions have an "Enterprise Account" with Microsoft including Azure subscription. The pricing for Enterprise Accounts differ from the individual account shown in Azure's price calculator. <br/><br/>If you have an Enterprise Account, please check with your individual institution's Information Technology/Computer Center resource on the process of setting up Azure to get MAKES. You might need to obtain a "Master Agreement #" and involve MLSP (Microsoft Licensed Solution Provider) for help.

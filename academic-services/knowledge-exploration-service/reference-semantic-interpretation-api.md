@@ -6,6 +6,9 @@ ms.date: 03/18/2018
 ---
 # Microsoft Academic Knowledge Exploration Service semantic interpretation API
 
+> [!IMPORTANT]
+> We will be publishing a new version of MAKES in early 2020.  This version will be a turn-key solution to host MAKES in your Azure subscription.  For users of [Project Academic Knowledge](https://www.microsoft.com/research/project/academic-knowledge/), this MAKES version will mirror the schema and API methods supported by that project, enabling users to host their own un-throttled version of the API's.
+
 The Microsoft Academic Knowledge Exploration Service semantic interpretation API enables natural language query interpretation and completions for entities in the Microsoft Academic Graph. It generates query expressions which can be evaluated using the [entity APIs](reference-entity-engine.md) evaluate API method.
 
 ## Open Data License: [ODC-BY](https://opendatacommons.org/licenses/by/1.0/)
@@ -49,7 +52,7 @@ Speech Recognition Grammar Specification (SRGS) is a [W3C recommended standard](
 
   <rule id="GetPapers">
     <tag>
-      query = All(); 
+      query = All();
     </tag>
     <one-of>
 
@@ -60,7 +63,7 @@ Speech Recognition Grammar Specification (SRGS) is a [W3C recommended standard](
           <item logprob="-0.010">paper</item>
           <item logprob="-0.050"></item>
         </one-of>
-        
+
         <item repeat="0-INF">
 
           <!-- Don't suggest more after end-of-string -->
@@ -74,7 +77,7 @@ Speech Recognition Grammar Specification (SRGS) is a [W3C recommended standard](
             <item logprob="-5.000">
               <attrref uri="academic#F.FN" name="q"/>
               <tag>
-                q = Composite(q); 
+                q = Composite(q);
                 query = And(query, q);
               </tag>
             </item>
@@ -86,8 +89,8 @@ Speech Recognition Grammar Specification (SRGS) is a [W3C recommended standard](
               </one-of>
               <attrref uri="academic#F.FN" name="q"/>
               <tag>
-                q = Composite(q); 
-                query = And(query, q); 
+                q = Composite(q);
+                query = And(query, q);
               </tag>
             </item>
 
@@ -95,7 +98,7 @@ Speech Recognition Grammar Specification (SRGS) is a [W3C recommended standard](
             <item logprob="-5.000">
               <attrref uri="academic#AA.AuN" name="q"/>
               <tag>
-                q = Composite(q); 
+                q = Composite(q);
                 query = And(query, q);
               </tag>
             </item>
@@ -109,7 +112,7 @@ Speech Recognition Grammar Specification (SRGS) is a [W3C recommended standard](
               </one-of>
               <attrref uri="academic#AA.AuN" name="q"/>
               <tag>
-                q = Composite(q); 
+                q = Composite(q);
                 query = And(query, q);
               </tag>
             </item>
@@ -118,7 +121,7 @@ Speech Recognition Grammar Specification (SRGS) is a [W3C recommended standard](
             <item logprob="-5.000">
               <attrref uri="academic#AA.AfN" name="q"/>
               <tag>
-                q = Composite(q); 
+                q = Composite(q);
                 query = And(query, q);
               </tag>
             </item>
@@ -131,7 +134,7 @@ Speech Recognition Grammar Specification (SRGS) is a [W3C recommended standard](
               </one-of>
               <attrref uri="academic#AA.AfN" name="q"/>
               <tag>
-                q = Composite(q); 
+                q = Composite(q);
                 query = And(query, q);
               </tag>
             </item>
@@ -141,8 +144,8 @@ Speech Recognition Grammar Specification (SRGS) is a [W3C recommended standard](
               <attrref uri="academic#AA.AuN" name="q1"/>
               <attrref uri="academic#AA.AfN" name="q2"/>
               <tag>
-                cq = And(q1, q2); 
-                q = Composite(cq); 
+                cq = And(q1, q2);
+                q = Composite(cq);
                 query = And(query, q);
               </tag>
             </item>
@@ -152,8 +155,8 @@ Speech Recognition Grammar Specification (SRGS) is a [W3C recommended standard](
               <attrref uri="academic#AA.AfN" name="q1"/>
               <attrref uri="academic#AA.AuN" name="q2"/>
               <tag>
-                cq = And(q1, q2); 
-                q = Composite(cq); 
+                cq = And(q1, q2);
+                q = Composite(cq);
                 query = And(query, q);
               </tag>
             </item>
@@ -168,8 +171,8 @@ Speech Recognition Grammar Specification (SRGS) is a [W3C recommended standard](
               <attrref uri="academic#AA.AuN" name="q1"/>
               <attrref uri="academic#AA.AfN" name="q2"/>
               <tag>
-                cq = And(q1, q2); 
-                q = Composite(cq); 
+                cq = And(q1, q2);
+                q = Composite(cq);
                 query = And(query, q);
               </tag>
             </item>
@@ -178,7 +181,7 @@ Speech Recognition Grammar Specification (SRGS) is a [W3C recommended standard](
             <item logprob="-5.000">
               <attrref uri="academic#J.JN" name="q"/>
               <tag>
-                q = Composite(q); 
+                q = Composite(q);
                 query = And(query, q);
               </tag>
             </item>
@@ -191,7 +194,7 @@ Speech Recognition Grammar Specification (SRGS) is a [W3C recommended standard](
               </one-of>
               <attrref uri="academic#J.JN" name="q"/>
               <tag>
-                q = Composite(q); 
+                q = Composite(q);
                 query = And(query, q);
               </tag>
             </item>
@@ -200,7 +203,7 @@ Speech Recognition Grammar Specification (SRGS) is a [W3C recommended standard](
             <item logprob="-5.000">
               <attrref uri="academic#C.CN" name="q"/>
               <tag>
-                q = Composite(q); 
+                q = Composite(q);
                 query = And(query, q);
               </tag>
             </item>
@@ -213,12 +216,12 @@ Speech Recognition Grammar Specification (SRGS) is a [W3C recommended standard](
               </one-of>
               <attrref uri="academic#C.CN" name="q"/>
               <tag>
-                q = Composite(q); 
+                q = Composite(q);
                 query = And(query, q);
               </tag>
             </item>
 
-            <!-- written during a specfic year/paper -->
+            <!-- written during a specific year/paper -->
             <item logprob="-10.000">
               <attrref uri="academic#Y" name="q"/>
               <tag>
@@ -226,7 +229,7 @@ Speech Recognition Grammar Specification (SRGS) is a [W3C recommended standard](
               </tag>
             </item>
 
-            <!-- written during a specfic year/paper with qualifiers -->
+            <!-- written during a specific year/paper with qualifiers -->
             <item logprob="-15.000">
               <one-of>
                 <item>written during</item>
@@ -239,7 +242,7 @@ Speech Recognition Grammar Specification (SRGS) is a [W3C recommended standard](
               </tag>
             </item>
 
-            <!-- written before a specfic year/paper -->
+            <!-- written before a specific year/paper -->
             <item logprob="-15.000">
               <one-of>
                 <item>before</item>
@@ -489,7 +492,7 @@ Speech Recognition Grammar Specification (SRGS) is a [W3C recommended standard](
           cnt = Count(query);
           AssertNotEquals(cnt, 0);
           out = query;
-          SetVariable("StructuredQuery", 1, "request");        
+          SetVariable("StructuredQuery", 1, "request");
         </tag>
       </item>
 

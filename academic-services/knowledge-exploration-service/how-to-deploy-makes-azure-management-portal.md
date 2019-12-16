@@ -6,6 +6,9 @@ ms.date: 03/18/2018
 ---
 # Deploy Microsoft Academic Knowledge Exploration Service API using Azure Management Portal
 
+> [!IMPORTANT]
+> We will be publishing a new version of MAKES in early 2020.  This version will be a turn-key solution to host MAKES in your Azure subscription.  For users of [Project Academic Knowledge](https://www.microsoft.com/research/project/academic-knowledge/), this MAKES version will mirror the schema and API methods supported by that project, enabling users to host their own un-throttled version of the API's.
+
 Details step-by-step guide for deploying Microsoft Academic Knowledge Exploration Service APIs using the Azure Management Portal.
 
 ## Configure API build
@@ -72,7 +75,7 @@ Before deploying a new MAKES API build it must first be configured to use the Az
     ![Select the new MAKES API build package](media/deploy-select-package-pick-api.png "Select the new MAKES API build package")
 
     > [!IMPORTANT]
-    > The name part after “package-“ corresponds to different types of pre-configured cloud service instances [detailed here](https://azure.microsoft.com/en-us/pricing/details/cloud-services/). **PLEASE NOTE THAT COSTS ASSOCIATED WITH DIFFERENT INSTANCE TYPES CAN VARY DRAMATICALLY.** See the “cloud service deployment options” section in the appendix for cost/benefit details of the different pre-configured cloud instance types.
+    > The name part after “package-“ corresponds to different types of pre-configured cloud service instances [detailed here](https://azure.microsoft.com/pricing/details/cloud-services/). **PLEASE NOTE THAT COSTS ASSOCIATED WITH DIFFERENT INSTANCE TYPES CAN VARY DRAMATICALLY.** See the “cloud service deployment options” section in the appendix for cost/benefit details of the different pre-configured cloud instance types.
 
 5. Select the MAKES API configuration
 
@@ -145,7 +148,7 @@ Before deploying a new MAKES API build it must first be configured to use the Az
     ![Select the MAKES API build package](media/deploy-select-package-pick-api.png "Select the MAKES API build package")
 
     > [!IMPORTANT]
-    > The name part after “package-“ corresponds to different types of pre-configured cloud service instances [detailed here](https://azure.microsoft.com/en-us/pricing/details/cloud-services/). **PLEASE NOTE THAT COSTS ASSOCIATED WITH DIFFERENT INSTANCE TYPES CAN VARY DRAMATICALLY.** See the “cloud service deployment options” section in the appendix for cost/benefit details of the different pre-configured cloud instance types.
+    > The name part after “package-“ corresponds to different types of pre-configured cloud service instances [detailed here](https://azure.microsoft.com/pricing/details/cloud-services/). **PLEASE NOTE THAT COSTS ASSOCIATED WITH DIFFERENT INSTANCE TYPES CAN VARY DRAMATICALLY.** See the “cloud service deployment options” section in the appendix for cost/benefit details of the different pre-configured cloud instance types.
 
 4. Select the MAKES API configuration
 

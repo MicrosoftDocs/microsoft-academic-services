@@ -6,6 +6,9 @@ ms.date: 03/18/2018
 ---
 # Microsoft Academic Knowledge Exploration Service pricing
 
+> [!IMPORTANT]
+> We will be publishing a new version of MAKES in early 2020.  This version will be a turn-key solution to host MAKES in your Azure subscription.  For users of [Project Academic Knowledge](https://www.microsoft.com/research/project/academic-knowledge/), this MAKES version will mirror the schema and API methods supported by that project, enabling users to host their own un-throttled version of the API's.
+
 Provides Azure cost estimator links to model the cost of using Microsoft Academic Knowledge Exploration Service
 
 API | Storage* | Cloud service instance* | Cost estimate
