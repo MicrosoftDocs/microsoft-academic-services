@@ -206,7 +206,7 @@ Column # | Name | Type | Note
 1 | PaperId | long | FOREIGN KEY REFERENCES Papers(PaperId)
 2 | AuthorId | long | FOREIGN KEY REFERENCES Authors(AuthorId)
 3 | AffiliationId | long? | FOREIGN KEY REFERENCES Affiliations(AffiliationId)
-4 | AuthorSequenceNumber | uint | 1-based author sequence number. 1: the 1st author listed on paper.
+4 | AuthorSequenceNumber | uint | 1-based author sequence number. 1: the 1st author listed on paper, 2: the 2nd author listed on paper, etc.
 5 | OriginalAuthor | string |
 6 | OriginalAffiliation | string |
 
