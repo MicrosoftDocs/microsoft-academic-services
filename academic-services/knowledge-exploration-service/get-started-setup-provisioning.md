@@ -1,6 +1,6 @@
 ---
-title: Setup API provisioning
-description: Step-by-step instructions for setting up one-time or automatic provisioning of Microsoft Academic Knowledge Exploration Service APIs to an Azure blob storage account
+title: Sign up for Microsoft Academic Knowledge Exploration Service(MAKES) distribution
+description: Step-by-step instructions for setting up one-time or automatic provisioning of MAKES to an Azure blob storage account
 ms.topic: get-started-article
 ms.date: 03/18/2018
 ---
@@ -33,9 +33,9 @@ Please create a new Azure subscription for the distribution previews. If your or
 
 1. Home > Create a resource > Storage > Storage account
 
-    ![Create new azure storage account](media/create-azure-storage-account.png "Create new azure storage account")
+    ![Create new azure storage account](../media/create-azure-storage-account.png "Create new azure storage account")
 
-2. Specify “makesas<org_name>” for the account name, “classic” for deployment model, “LRS” for replication, “standard” for performance and “makes” for the resource group
+2. Specify “makesas<org_name>” for the account name, “StorageV2" for account kind, “LRS” for replication, “standard” for performance and “makes” for the resource group
 
     ![Configure azure storage account details](media/create-azure-storage-account-configure.png "Configure azure storage account details")
 
@@ -73,10 +73,30 @@ MAKES API builds are deployed approximately once a week to all Azure storage acc
 
 Each API build has a unique name reflecting the date it was created, and is placed in the following location:
 
-- makes
+- MAKES tools only version
   - YYYY-MM-DD (release date)
-    - entity-engine
-    - semantic-interpretation-engine
+    - tools
+      - makes.zip
+      - indexer.zip
+      - preprocessor.zip
+      - jobManager.zip
+      - GenerateMakesEntitiesFromMag.usql
+    - webhost
+        -makes-service-host.zip
+- MAKES deluxe version
+  - YYYY-MM-DD (release date)
+    - indexes
+      - makes-YYYY-MM-DD-prod-index#.kes
+    - grammar
+      - makes-default-grammar.kesg
+    - tools
+      - makes.zip
+      - indexer.zip
+      - preprocessor.zip
+      - jobManager.zip
+      - GenerateMakesEntitiesFromMag.usql
+    - webhost
+      - makes-service-host.zip
 
 Example:
 
