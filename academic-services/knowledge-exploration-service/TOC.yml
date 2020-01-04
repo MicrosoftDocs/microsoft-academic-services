@@ -10,7 +10,7 @@
   items:
   - name: Sign up for MAKES
     href: get-started-setup-provisioning.md
-  - name: Create MAKES API Instance
+  - name: Create an API Instance
     href: get-started-create-api-instances.md
 - name: How to
   expanded: true
@@ -20,11 +20,11 @@
 - name: Reference
   expanded: true
   items:
-  - name: MAKES APIs Reference
+  - name: API
     href: reference-makes-api.md      
-  - name: MAKES API Entity Schema Reference
+  - name: API Entity Schema
     href: reference-makes-api-entity-schema.md   
-  - name: MAKES Command Line Tool Reference
+  - name: Command Line Tool
     href: reference-makes-command-line-tool.md
 - name: Resources
   expanded: true
