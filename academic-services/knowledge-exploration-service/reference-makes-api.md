@@ -1,12 +1,10 @@
 # MAKES API REFERENCE
 
-## MAKES APIs
+## Interpret
 
-### Interpret
+## Evaluate
 
-### Evaluate
-
-### Histogram
+## Histogram
 
 ## Project Academic Knowledge APIs
 

@@ -17,6 +17,15 @@
   items:
   - name: Create Index from MAG
     href: how-to-create-index-from-mag.md
+- name: Samples
+  expanded: true
+  items:
+  - name: Expert Finder
+    href: sample-expert-finder.md
+  - name: Academic Search
+    href: sample-academic-search.md
+  - name: Top Author Analytics
+    href: sample-top-authors-analytics.md    
 - name: Reference
   expanded: true
   items:
