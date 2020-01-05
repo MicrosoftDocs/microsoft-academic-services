@@ -15,6 +15,12 @@ ms.date: 01/03/2020
 
 ## Deploy MAKES API hosting resources
 
+Execute the following command to deploy hosting resources
+
+```cmd
+makes.exe CreateHostResource --MakesPackageBaseDir "https://[storage account name].blob.core.windows.net/makes/[release version]/"
+```
+
 ## Deploy MAKES API instances
 
 ## Next steps
