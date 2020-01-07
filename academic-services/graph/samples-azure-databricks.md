@@ -109,7 +109,7 @@ In this section, you add a new notebook cell and define configration variables.
    |---------|---------|
    |**`<AzureStorageAccount>`** | The name of your Azure Storage account. |
    |**`<AzureStorageAccessKey>`** | The access key of your Azure Storage account. |
-   |**`<MagContainer>`** | The container name in Azure Storage account containing MAG dataset, Usually in the form of **mag-yyyy-mm-dd**. |
+   |**`<MagContainer>`** | The container name in Azure Storage account containing MAG dataset, usually in the form of **mag-yyyy-mm-dd**. |
    |**`<OutputContainer>`** | The container name in Azure Storage (AS) account where the output goes to |
 
 1. Press the **SHIFT + ENTER** keys to run the code in this block.
