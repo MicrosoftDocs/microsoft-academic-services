@@ -162,7 +162,7 @@ In this section, you submit an ADLA job to compute author h-index and save outpu
    |Value  |Description  |
    |---------|---------|
    |**`<AzureStorageAccount>`** | The name of your Azure Storage (AS) account containing MAG dataset. |
-   |**`<MagContainer>`** | The container name in Azure Storage (AS) account containing MAG dataset, Usually in the form of **mag-yyyy-mm-dd**. |
+   |**`<MagContainer>`** | The container name in Azure Storage (AS) account containing MAG dataset, usually in the form of **mag-yyyy-mm-dd**. |
 
 1. Provide a **Job name**, change **AUs** to 5, and select **Submit**.
 
