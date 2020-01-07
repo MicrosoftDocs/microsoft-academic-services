@@ -40,6 +40,13 @@ In prerequisite [Set up Azure Data Lake Analytics](get-started-setup-azure-data-
    ![Azure Data Lake Analytics - New job](media/samples-azure-data-lake-hindex/new-job.png "Azure Data Lake Analytics - New job")
 
 1. Copy code in samples/CreateDatabase.usql and paste into the code block.
+
+1. Replace `##YourBlobAccount##`, and `mag-##DatasetVersion##` placeholder values with the values that you collected while completing the prerequisites of this sample.
+
+   |Value  |Description  |
+   |---------|---------|
+   |**`##YourBlobAccount##`** | The name of your Azure Storage (AS) account containing MAG dataset. |
+   |**`mag-##DatasetVersion##`** | The container name in Azure Storage (AS) account containing MAG dataset, usually in the form of **mag-yyyy-mm-dd**. |
    
 1. Provide a **Job name** and select **Submit**.
 
