@@ -99,7 +99,7 @@ In this section, you add a new notebook cell and define configration variables.
    # Define configration variables
    AzureStorageAccount = '<AzureStorageAccount>'     # Azure Storage (AS) account containing MAG dataset
    AzureStorageAccessKey = '<AzureStorageAccessKey>' # Access Key of the Azure Storage (AS) account
-   MagContainer = '<MagContainer>'                   # The container name in Azure Storage (AS) account containing MAG dataset, Usually in forms of mag-yyyy-mm-dd
+   MagContainer = '<MagContainer>'                   # The container name in Azure Storage (AS) account containing MAG dataset, usually in forms of mag-yyyy-mm-dd
    OutputContainer = '<OutputContainer>'             # The container name in Azure Storage (AS) account where the output goes to
    ```
 
@@ -109,7 +109,7 @@ In this section, you add a new notebook cell and define configration variables.
    |---------|---------|
    |**`<AzureStorageAccount>`** | The name of your Azure Storage account. |
    |**`<AzureStorageAccessKey>`** | The access key of your Azure Storage account. |
-   |**`<MagContainer>`** | The container name in Azure Storage account containing MAG dataset, Usually in the form of **mag-yyyy-mm-dd**. |
+   |**`<MagContainer>`** | The container name in Azure Storage account containing MAG dataset, usually in the form of **mag-yyyy-mm-dd**. |
    |**`<OutputContainer>`** | The container name in Azure Storage (AS) account where the output goes to |
 
 1. Press the **SHIFT + ENTER** keys to run the code in this block.
@@ -145,4 +145,4 @@ In this section, you create a MicrosoftAcademicGraph instance to access MAG data
 * [Create an Azure Databricks service](https://azure.microsoft.com/services/databricks/)
 * [Create a cluster for the Azure Databricks service](https://docs.azuredatabricks.net/user-guide/clusters/create.html)
 * [Import a Databrick notebook](https://docs.databricks.com/user-guide/notebooks/notebook-manage.html#import-a-notebook)
-* [Get started with Storage Explorer](https://docs.microsoft.com/en-us/azure/vs-azure-tools-storage-manage-with-storage-explorer)
+* [Get started with Storage Explorer](https://docs.microsoft.com/azure/vs-azure-tools-storage-manage-with-storage-explorer)
