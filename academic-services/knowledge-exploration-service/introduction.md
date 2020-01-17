@@ -6,7 +6,7 @@ ms.date: 02/05/2020
 ---
 # About Microsoft Academic Knowledge Exploration Service
 
-Microsoft Academic Knowledge Exploration Service (MAKES) was created to unlock the power of the [Microsoft Academic Graph (MAG)](../graph/index.yml) for realtime applications.  It enables users to build interactive solutions for knowledge based applications that can scale and deliver high quality results.  MAKES is a turn-key solution; running a single script will provision in Azure private instances of an interactive academic search API, powered by [Knowledge Exploration Service (KES) APIs](#Knowledge-Exploration-Service).  For an example of what can be built using MAKES, see the [Microsoft Academic Website](https://academic.microsoft.com/)).
+Microsoft Academic Knowledge Exploration Service (MAKES) was created to unlock the power of the [Microsoft Academic Graph (MAG)](../graph/index.yml) for realtime applications.  It enables users to build interactive solutions for knowledge based applications that can scale and deliver high quality results.  MAKES is a turn-key solution; running a single script will provision in Azure private instances of an interactive academic search API, powered by [Knowledge Exploration Service (KES) APIs](#knowledge-exploration-service).  For an example of what can be built using MAKES, see the [Microsoft Academic Website](https://academic.microsoft.com/)).
 
 Once signed up for MAKES, new versions of the service and indexes will be delivered to you every 1-2 weeks.  Users have the option of using the default index supplied by the service, which includes all the entities and meta data included in MAG, or using a sub-graph of MAG to create their own custom indexes to power MAKES.  Users are also able to combine private data with the data from MAG to create custom indexes and search experiences for MAKES.
 
@@ -32,9 +32,9 @@ The components shipped to a MAKES subscription include:
 
 - *MAKES VM Image* - A virtual machine image that is configured to support the MAKES web host application.
 
-- *MAKES Indexes* - Binary index files built from MAG that support the [Knowledge Exploration Service (KES)](#Knowledge-Exploration-Service).
+- *MAKES Indexes* - Binary index files built from MAG that support the [Knowledge Exploration Service (KES)](#knowledge-exploration-service).
 
-- *MAKES Grammar* - A binary grammar file built to support academic related queries using [KES](#Knowledge-Exploration-Service).
+- *MAKES Grammar* - A binary grammar file built to support academic related queries using [KES](#knowledge-exploration-service).
 
 - *Tools* - Scripts required to automatically provision MAKES to Azure.
 
