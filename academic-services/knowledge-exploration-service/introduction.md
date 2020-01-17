@@ -14,13 +14,13 @@ Once signed up for MAKES, new versions of the service and indexes will be delive
 
 Here are some key features of the Microsoft Academic Knowledge Exploration Service (MAKES):
 
-1. *Self-hosting the Academic Knowledge APIs* - Many organizations have found great value in our [Academic Knowledge API](https://www.microsoft.com/research/project/academic-knowledge/) (formerly Cognitive Service APIs), but have been limited by the throughput allowed.  MAKES is a turn-key solution to self-host this set of APIs without limits.
+- *Self-hosting the Academic Knowledge APIs* - Many organizations have found great value in our [Academic Knowledge API](https://www.microsoft.com/research/project/academic-knowledge/) (formerly Cognitive Service APIs), but have been limited by the throughput allowed.  MAKES is a turn-key solution to self-host this set of APIs without limits.
 
-2. *Create knowledge applications* - The set of MAKES APIs that are provisioned allow users to build dynamic knowledge applications that can analyze the state of research in particular areas, compare individuals and institutions and find objective connections between entities.
+- *Create knowledge applications* - The set of MAKES APIs that are provisioned allow users to build dynamic knowledge applications that can analyze the state of research in particular areas, compare individuals and institutions and find objective connections between entities.
 
-3. *Add a large corpus of academic entities to an existing search solution* - MAKES APIs can be federated to enhance existing search solutions allowing users access to a large corpus of academic research.
+- *Add a large corpus of academic entities to an existing search solution* - MAKES APIs can be federated to enhance existing search solutions allowing users access to a large corpus of academic research.
 
-4. *Create a custom index from a subset of the Microsoft Academic Graph* - In some cases you may not need all of the data in MAG, or you would like combine your own private data with data from MAG.  MAKES allows you to generate an index MAG and private data.  An example would be to build an index specific to certain Journals or Institutions and include publications from your own organization.
+- *Create a custom index from a subset of the Microsoft Academic Graph* - In some cases you may not need all of the data in MAG, or you would like combine your own private data with data from MAG.  MAKES allows you to generate an index MAG and private data.  An example would be to build an index specific to certain Journals or Institutions and include publications from your own organization.
 
 ## What is MAKES?
 
