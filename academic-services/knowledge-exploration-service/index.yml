@@ -24,7 +24,7 @@ sections:
     style: unordered
     items:
     - html: <a href="get-started-setup-provisioning">Sign up for Microsoft Academic Knowledge Exploration Service(MAKES)</a>
-    - html: <a href="get-started-create-api-instances">Deploy an MAKES API instance using MAKES command line tool</a>
+    - html: <a href="get-started-create-api-instances">Deploy a basic MAKES instance using the provided scripts</a>
 - title: Samples
   items:
   - type: paragraph
