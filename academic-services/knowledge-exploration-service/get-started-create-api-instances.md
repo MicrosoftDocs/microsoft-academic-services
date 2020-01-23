@@ -16,7 +16,7 @@ ms.date: 01/03/2020
 
 ## Verify the current release
 
-When new versions of the MAKES are released, a new folder will be created on your Azure Storage Account.  In this folder will be all of the elements required to self-host an instance of MAKES.  To get started, let's verify that MAKES has been pushed to your subscription.
+When new versions of MAKES are released, a new folder will be created on your Azure Storage Account.  In this folder will be all of the elements required to self-host an instance of MAKES.  To get started, let's verify that MAKES has been pushed to your subscription.
 
 - Open the [Azure portal](https://portal.azure.com) and navigate to Storage Accounts.
 
@@ -32,7 +32,7 @@ When new versions of the MAKES are released, a new folder will be created on you
 
 - Open the "makes" blob container and verify there is at least one folder in that container.  This folder should be named by the date of the MAKES release.  Ex: 2020-01-10-prod
 
-- Open the 'dated' folder, then verify there is a subfolder named 'tools'.
+- Open the 'dated' folder, then verify there is a sub folder named 'tools'.
 
 ![Verify tools folder](media/get-started-tools-folder.png)
 
