@@ -20,7 +20,7 @@ Here are some key features of the Microsoft Academic Knowledge Exploration Servi
 
 - *Add a large corpus of academic entities to an existing search solution* - Integrating MAKES can help enhance existing search solutions allowing users access to a large corpus of academic research.
 
-- *Create a custom index from a subset of the Microsoft Academic Graph* - In some cases you may not need all of the data in MAG, or you would like combine your own private data with data from MAG.  MAKES allows you to generate an index MAG and private data.  An example would be to build an index specific to certain Journals or Institutions and include publications from your own organization.
+- *Customization using MAKES build tool* - In some cases you may not need all of the data in MAG, or you would like combine your own private data with data from MAG.  The MAKES build tool allows users to easily create their own custom indexes, using subsets or super-sets of the Microsoft Academic Graph.  An example would be to build an index specific to certain Journals or Institutions and include publications from your own organization.
 
 ## What is MAKES?
 
@@ -28,11 +28,9 @@ The Microsoft Academic knowledge Exploration Service (MAKES) in its' basic form 
 
 The components shipped to a MAKES subscription include:
 
-- *MAKES Web Host Application* - This is the REST API web application that interacts with the MAKES index and grammar.
+- *Web Host Application* - This is the REST API web application that interacts with the MAKES index and grammar.
 
-- *MAKES VM Image* - A virtual machine image that is configured to support the MAKES web host application.
-
-- *MAKES Indexes* - Binary index files built from MAG that support the [Knowledge Exploration Service (KES)](#knowledge-exploration-service).
+- *Indexes* - Binary index files built from MAG that support the [Knowledge Exploration Service (KES)](#knowledge-exploration-service).
 
 - *Language model* - A binary grammar file built to support academic related queries using [KES](#knowledge-exploration-service). The grammar file is a SRGS based language model to support the natural language query processing provided by the MAKES Interpret method.
 
