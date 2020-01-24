@@ -31,10 +31,23 @@
 - name: Reference
   expanded: true
   items:
-  - name: API
-    href: reference-makes-api.md      
-  - name: API Entity Schema
+  - name: Entity Schema
     href: reference-makes-api-entity-schema.md   
+  - name: REST API
+    expanded: false
+    items:
+      - name: GET Evaluate
+        href: reference-get-evaluate.md
+      - name: GET Histogram
+        href: reference-get-histogram.md
+      - name: GET Interpret
+        href: reference-get-interpret.md
+      - name: POST Evaluate
+        href: reference-post-evaluate.md
+      - name: POST Histogram
+        href: reference-post-histogram.md
+      - name: POST Interpret
+        href: reference-post-interpret.md
   - name: Command Line Tool
     href: reference-makes-command-line-tool.md
 - name: Resources
