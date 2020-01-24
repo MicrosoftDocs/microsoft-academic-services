@@ -16,13 +16,13 @@ ms.date: 01/03/2020
 
 ## Verify the current release
 
-When new versions of MAKES are released, a new folder will be created on your Azure Storage Account.  In this folder will be all of the elements required to self-host an instance of MAKES.  To get started, let's verify that MAKES has been pushed to your subscription.
+When new versions of MAKES are released, a new folder will be created in the "makes" blob container of your Azure Storage Account.  In this folder will be all of the elements required to self-host an instance of MAKES.  To get started, let's verify that MAKES has been pushed to your subscription successfully.
 
 - Open the [Azure portal](https://portal.azure.com) and navigate to Storage Accounts.
 
-- Find the Storage Account that you have set up for your MAKES subscription.
+- Find the Storage Account that you have set up to receive your MAKES subscription.
 
-- Open the Storage Account in Storage Explorer.  This might require you to download the tool if you have not installed it already.
+- Open the Storage Account in *Storage Explorer*.  This might require you to download and install the tool if you have not installed it already.
 
 ![Open in Explorer](media/get-started-open-storage-account.png)
 
@@ -69,11 +69,11 @@ At this point the tool will take care of creating all of the required resources 
 Depending on the region your storage account is in and the region you are deploying to, deployment may take longer as the default indexes are quite large and need to be copied.  By default, the tool deploys to the WestUS region of Azure.  You can change this by adding parameters to the script.  For a reference of all the available parameters type:
 
 ```cmd
-kesm.exe help
+kesm.exe --help
 
-// For command specific help; type the command, appending 'help'
+// For command specific help; type the command, appending '--help'
 
-kesm.exe DeployHost help
+kesm.exe DeployHost --help
 ```
 
 Or, you can visit the [kesm.exe Command Line Reference](reference-makes-command-line-tool.md).
