@@ -18,7 +18,7 @@ Here are some key features of the Microsoft Academic Knowledge Exploration Servi
 
 - *Create knowledge applications* - MAKES enables users to build dynamic knowledge applications that can analyze the state of research in particular areas, compare individuals and institutions and find objective connections between entities.  Check out our tutorials and samples for useful examples!
 
-- *Add a large corpus of academic entities to an existing search solution* - MAKES APIs can be federated to enhance existing search solutions allowing users access to a large corpus of academic research.
+- *Add a large corpus of academic entities to an existing search solution* - Integrating MAKES can help enhance existing search solutions allowing users access to a large corpus of academic research.
 
 - *Create a custom index from a subset of the Microsoft Academic Graph* - In some cases you may not need all of the data in MAG, or you would like combine your own private data with data from MAG.  MAKES allows you to generate an index MAG and private data.  An example would be to build an index specific to certain Journals or Institutions and include publications from your own organization.
 
@@ -34,7 +34,7 @@ The components shipped to a MAKES subscription include:
 
 - *MAKES Indexes* - Binary index files built from MAG that support the [Knowledge Exploration Service (KES)](#knowledge-exploration-service).
 
-- *MAKES Grammar* - A binary grammar file built to support academic related queries using [KES](#knowledge-exploration-service).
+- *Language model* - A binary grammar file built to support academic related queries using [KES](#knowledge-exploration-service). The grammar file is a SRGS based language model to support the natural language query processing provided by the MAKES Interpret method.
 
 - *Management tools* - Includes tools that help users customize MAKES and deploy instances to Azure.
 
