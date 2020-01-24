@@ -14,7 +14,7 @@ ms.date: 01/03/2020
 - Microsoft Academic Knowledge Exploration Service (MAKES) subscription
 - Azure subscription
 
-## Verify the current release
+## 1. Verify the current release
 
 When new versions of MAKES are released, a new folder will be created in the "makes" blob container of your Azure Storage Account.  In this folder will be all of the elements required to self-host an instance of MAKES.  To get started, let's verify that MAKES has been pushed to your subscription successfully.
 
@@ -36,37 +36,45 @@ When new versions of MAKES are released, a new folder will be created in the "ma
 
 ![Verify tools folder](media/get-started-tools-folder.png)
 
-## Download the deployment script from your Azure Storage Account
+## 2. Download the deployment script from your Azure Storage Account
 
-Each MAKES deployment includes the scripts required to provision an instance of MAKES in Azure.  These tools are located in the 'tools' folder that you verified above.  To download the scripts, select the 'kesm.zip' file from Storage Explorer and click 'Download' from the top ribbon:
+Each MAKES deployment includes the scripts required to provision an instance of MAKES in Azure.  These tools are located in the 'tools' folder that you verified above.  To download the scripts, open the 'tools' folder, then open the 'kesm' folder.  The kesm folder will contain a set of sub-folders, one for each environment we support.  Select win-x86 if you are using a Windows machine or osx-x64 if you will be running the script on a Mac and open the folder.  Select the 'kesm.zip' file located in this folder from Storage Explorer and click 'Download' from the top ribbon:
 
 ![Download kesm.zip](media/get-started-download-kesm.png)
 
 Save this file to a local folder.
 
-## Unzip the script package
+## 3. Unzip the script package
 
-Once the file has been downloaded you will need to extract the contents.  Right click on the kesm.zip file.  If you are using the Windows operating system select "Extract All" from the context menu.  If you are using linux, select "Extract Here" or "Unzip Here".  If you are using a Mac, double-click the zip file and it will decompress into the same folder.
+Once the file has been downloaded you will need to extract the contents.  Right click on the kesm.zip file.  If you are using the Windows operating system select "Extract All" from the context menu.  If you are using a Mac, double-click the zip file and it will decompress into the same folder.
 
 If this has completed successfully you will have extracted a single file named kesm.exe.
 
-## Run the script
+## 4. Run the script
 
 At this point to are ready to deploy an instance of MAKES to your Azure account.  Open a command prompt (Windows) or terminal window (Mac) and navigate to the folder that you extracted the kesm.exe file to.
 
 Execute the following command to deploy hosting resources
 
 ```cmd
-kesm.exe DeployHost --HostName [whatever_name_you_would_like] --MakesPackage "https://[your_storage_account_name].blob.core.windows.net/makes/[release version]/"
+kesm.exe DeployHost --HostName [makes_instance_host_name] --MakesPackage "https://[makes_storage_account_name].blob.core.windows.net/makes/[makes_release_version]/"
 ```
 
-- Replace "[whatever_name_you_would_like]" with the host name for your service.  The hostname will be the host name of the server where your MAKES deployment will be hosted.  Ex: If you used 'testmakes01102020', your MAKES API will be hosted at http://testmakes10012020.westus.cloudapp.azure.net
+- Replace "[makes_instance_host_name]" with the host name for your service.  The hostname will be the host name of the server where your MAKES deployment will be hosted.  Ex: If you used 'testmakes01102020', your MAKES API will be hosted at http://testmakes10012020.westus.cloudapp.azure.net
 
-- Replace "[your_storage_account_name]" with the name of the storage account you downloaded the scripts from above.
+- Replace "[makes_storage_account_name]" with the name of the storage account you downloaded the scripts from above.
 
-At this point the tool will take care of creating all of the required resources and deploying your instance of MAKES.  This process can take a long time.  During the initial run it can take up to 3 hours to complete.  During the first run the script generates some resources that you only need to create once.  Subsequent deployments will not take as long if you specify existing resources.  See the [Command line Reference](reference-makes-command-line-tool.md) for more details.  
+- Replace "[makes_release_version"] with the MAKES release you would like to deploy.
 
-Depending on the region your storage account is in and the region you are deploying to, deployment may take longer as the default indexes are quite large and need to be copied.  By default, the tool deploys to the WestUS region of Azure.  You can change this by adding parameters to the script.  For a reference of all the available parameters type:
+```cmd
+kesm.exe DeployHost --HostName testmakes01102020 --MakesPackage "https://fooaccount.blob.core.windows.net/makes/2020-01-10-prod/"
+```
+
+At this point the tool will take care of creating all of the required resources and deploying MAKES.  During the initial run it can take up to 3 hours to complete this task.  On first run the script generates resources that you only need to create once.  Subsequent deployments to the same host will not take as long and should be much quicker, approximately 30 minutes->1 hour.  See the [Command line Reference](reference-makes-command-line-tool.md) for more details.  
+
+[!NOTE] To achieve the fastest instance start times, ensure that all resources (storage account, virtual machine scale set, etc.) are located in the same region. The "--Region" parameter controls which region new resources are created in. Visit the [Command line Reference](reference-makes-command-line-tool.md) section for full details on this and other parameters.
+
+Depending on the region your storage account is in and the region you are deploying to, deployment may take longer as the default indexes are quite large and need to be copied.  By default, the tool deploys to the WestUS region of Azure.  For a reference of all the available parameters type:
 
 ```cmd
 kesm.exe --help
