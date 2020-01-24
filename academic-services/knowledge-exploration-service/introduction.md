@@ -1,5 +1,5 @@
 ---
-title: About Microsoft Academic Knowledge Exploration Service (MAKES)
+title: About Microsoft Academic Knowledge Exploration Service
 description: Microsoft Academic Knowledge Exploration Service enables self-hosted interactive search of entities in the Microsoft Academic Graph
 ms.topic: overview
 ms.date: 02/05/2020
@@ -14,9 +14,9 @@ Once signed up for MAKES, new versions of the service and indexes will be delive
 
 Here are some key features of the Microsoft Academic Knowledge Exploration Service (MAKES):
 
-- *Self-hosting the Academic Knowledge APIs* - Many organizations have found great value in our [Academic Knowledge API](https://www.microsoft.com/research/project/academic-knowledge/) (formerly Cognitive Service APIs), but have been limited by the throughput allowed.  MAKES is a turn-key solution to self-host this set of APIs without limits.
+- *Self-hosting Project Academic Knowledge* - Many organizations have found great value in our [Academic Knowledge API](https://www.microsoft.com/research/project/academic-knowledge/) (formerly known as the Cognitive Service Academic Knowledge API), but have been limited by the throughput allowed.  MAKES is a turn-key solution to self-host this set of APIs without limits.
 
-- *Create knowledge applications* - The set of MAKES APIs that are provisioned allow users to build dynamic knowledge applications that can analyze the state of research in particular areas, compare individuals and institutions and find objective connections between entities.
+- *Create knowledge applications* - MAKES enables users to build dynamic knowledge applications that can analyze the state of research in particular areas, compare individuals and institutions and find objective connections between entities.  Check out our tutorials and samples for useful examples!
 
 - *Add a large corpus of academic entities to an existing search solution* - MAKES APIs can be federated to enhance existing search solutions allowing users access to a large corpus of academic research.
 
@@ -36,13 +36,13 @@ The components shipped to a MAKES subscription include:
 
 - *MAKES Grammar* - A binary grammar file built to support academic related queries using [KES](#knowledge-exploration-service).
 
-- *Tools* - Scripts required to automatically provision MAKES to Azure.
+- *Management tools* - Includes tools that help users customize MAKES and deploy instances to Azure.
 
 ## MAKES Architecture
 
-The MAKES API is designed to be hosted in an Azure Virtual Machine Scale Set to provide extensibility, scalability, and reliability.  Azure supports virtual machine scale sets with various features out of the box:
+The MAKES API is designed to be hosted in an Azure Virtual Machine Scale Set to provide extensibility, scalability, and reliability.  [Azure Virtual Machine Scale Sets](https://docs.microsoft.com/azure/virtual-machine-scale-sets/overview) allow users to easily configure:
 
-- Auto scaling
+- Auto scaling (not set up by default)
 
 - Load balancing
 
@@ -60,7 +60,7 @@ The most basic form of MAKES uses the following Azure assets:
 
 - *An Azure VM Image* - An Azure VM image will be provisioned by MAKES when deployed.
 
-- *Azure Virtual Machine Scale Set* - A scale set is provisioned by MAKES when deployed.  The scale set includes an Azure virtual network and security group, an Azure load balancer, a static public IP address and a premium SSD.
+- *[Azure Virtual Machine Scale Set](https://docs.microsoft.com/azure/virtual-machine-scale-sets/overview)* - A scale set is provisioned by MAKES when deployed.  The scale set includes an Azure virtual network and security group, an Azure load balancer, a static public IP address and a premium SSD.
 
 ![Required Azure Components](media/makes-components.png "Required Azure Components")
 
