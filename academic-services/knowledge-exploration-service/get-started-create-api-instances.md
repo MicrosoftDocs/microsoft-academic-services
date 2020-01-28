@@ -7,7 +7,7 @@ ms.date: 01/03/2020
 
 # Deploying a basic MAKES instance to Azure from your Subscription
 
- Step-by-step guide for deploying a basic MAKES instance from a Microsoft Academic Knowledge Exploration Service (MAKES) release. For more information on obtaining a MAKES release, visit [Get Microsoft Academic Knowledge Exploration Service on Azure storage](get-started-setup-provisioning.md)
+ Step-by-step guide for deploying a MAKES instance from a Microsoft Academic Knowledge Exploration Service (MAKES) release. For more information on obtaining a MAKES release, visit [Get Microsoft Academic Knowledge Exploration Service on Azure storage](get-started-setup-provisioning.md)
 
 ## Prerequisites
 
