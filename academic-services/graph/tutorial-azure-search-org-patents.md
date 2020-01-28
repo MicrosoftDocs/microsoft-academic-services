@@ -205,7 +205,7 @@ In prerequisite [Set up Azure Data Lake Analytics](get-started-setup-azure-data-
                P.PaperTitle,
                F.FieldsOfStudy,
                (int) (P.PaperId % @maximumIndexerCount) AS IndexerNumber,
-               (int) (P.PaperId % @maximumFileCountPerIndexer) AS FileNumber
+               (int) ((P.PaperId / @maximumIndexerCount) % @maximumFileCountPerIndexer) AS FileNumber
         FROM @papers AS P
              LEFT OUTER JOIN
                  @paperAuthorsAggregated AS A
