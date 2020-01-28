@@ -14,7 +14,7 @@ Once signed up for MAKES, new versions of the service and indexes will be delive
 
 Here are some key features of the Microsoft Academic Knowledge Exploration Service (MAKES):
 
-- *Self-hosting Project Academic Knowledge* - Many organizations have found great value in our [Academic Knowledge API](https://www.microsoft.com/research/project/academic-knowledge/) (formerly known as the Cognitive Service Academic Knowledge API), but have been limited by the throughput allowed.  MAKES is a turn-key solution to self-host this set of APIs without limits.
+- *Self-hosting Project Academic Knowledge* - Many organizations have found great value in our [Project Academic Knowledge API](https://www.microsoft.com/research/project/academic-knowledge/) (formerly known as the Cognitive Service Academic Knowledge API), but have been limited by the throughput allowed.  MAKES is a turn-key solution to self-host this set of APIs without limits.
 
 - *Create knowledge applications* - MAKES enables users to build dynamic knowledge applications that can analyze the state of research in particular areas, compare individuals and institutions and find objective connections between entities.  Check out our tutorials and samples for useful examples!
 
