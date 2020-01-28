@@ -38,7 +38,7 @@ When new versions of MAKES are released, a new folder will be created in the "ma
 
 ## 2. Download the deployment script from your Azure Storage Account
 
-Each MAKES deployment includes the scripts required to provision an instance of MAKES in Azure.  These tools are located in the 'tools' folder that you verified above.  To download the scripts, open the 'tools' folder, then open the 'kesm' folder.  The kesm folder will contain a set of sub-folders, one for each environment we support.  Select win-x86 if you are using a Windows machine or osx-x64 if you will be running the script on a Mac and open the folder.  Select the 'kesm.zip' file located in this folder from Storage Explorer and click 'Download' from the top ribbon:
+Each MAKES deployment includes the scripts required to provision an instance of MAKES in Azure.  These tools are located in the 'tools' folder that you verified above.  To download the scripts, open the 'tools' folder, then open the 'kesm' folder.  Select the 'kesm.zip' file located in this folder from Storage Explorer and click 'Download' from the top ribbon:
 
 ![Download kesm.zip](media/get-started-download-kesm.png)
 
@@ -46,9 +46,7 @@ Save this file to a local folder.
 
 ## 3. Unzip the script package
 
-Once the file has been downloaded you will need to extract the contents.  Right click on the kesm.zip file.  If you are using the Windows operating system select "Extract All" from the context menu.  If you are using a Mac, double-click the zip file and it will decompress into the same folder.
-
-If this has completed successfully you will have extracted a single file named kesm.exe.
+Once the file has been downloaded you will need to extract the contents.  Right click on the kesm.zip file.  If you are using the Windows operating system select "Extract All" from the context menu.  If you are using a Mac, double-click the zip file and it will decompress into the same folder.  When extracted, you will see two folders, one for each environment we support.  Select win-x86 if you are using a Windows machine or osx-x64 if you will be running the script on a Mac and open the folder.  In this folder are two files: kesm.exe and kesm.pdb.  The kesm.exe file is script that we will be running to deploy MAKES.
 
 ## 4. Run the script
 
