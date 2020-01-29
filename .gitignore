@@ -10,3 +10,5 @@ _repo.*/
 *.suo
 *.manifest
 *.testlog
+=======
+.vs/
