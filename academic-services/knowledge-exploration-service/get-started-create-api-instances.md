@@ -14,15 +14,15 @@ ms.date: 01/03/2020
 - Microsoft Academic Knowledge Exploration Service (MAKES) subscription
 - Azure subscription
 
-## 1. Verify the current release
+## Verify the current release
 
 When new versions of MAKES are released, a new folder will be created in the "makes" blob container of your Azure Storage Account.  In this folder will be all of the elements required to self-host an instance of MAKES.  To get started, let's verify that MAKES has been pushed to your subscription successfully.
 
-- Open the [Azure portal](https://portal.azure.com) and navigate to Storage Accounts.
+1. Open the [Azure portal](https://portal.azure.com) and navigate to Storage Accounts.
 
-- Find the Storage Account that you have set up to receive your MAKES subscription.
+2. Find the Storage Account that you have set up to receive your MAKES subscription.
 
-- Open the Storage Account in *Storage Explorer*.  This might require you to download and install the tool if you have not installed it already.
+3. Open the Storage Account in *Storage Explorer*.  This might require you to download and install the tool if you have not installed it already.
 
 ![Open in Explorer](media/get-started-open-storage-account.png)
 
@@ -30,13 +30,13 @@ When new versions of MAKES are released, a new folder will be created in the "ma
 
 ![Verify MAKES container](media/get-started-verify-makes-container.png)
 
-- Open the "makes" blob container and verify there is at least one folder in that container.  This folder should be named by the date of the MAKES release.  Ex: 2020-01-10-prod
+1. Open the "makes" blob container and verify there is at least one folder in that container.  This folder should be named by the date of the MAKES release.  Ex: 2020-01-10-prod
 
-- Open the 'dated' folder, then verify there is a sub folder named 'tools'.
+2. Open the 'dated' folder, then verify there is a sub folder named 'tools'.
 
 ![Verify tools folder](media/get-started-tools-folder.png)
 
-## 2. Download the deployment script from your Azure Storage Account
+## Download the deployment script from your Azure Storage Account
 
 Each MAKES deployment includes the scripts required to provision an instance of MAKES in Azure.  These tools are located in the 'tools' folder that you verified above.  To download the scripts, open the 'tools' folder, then open the 'kesm' folder.  Select the 'kesm.zip' file located in this folder from Storage Explorer and click 'Download' from the top ribbon:
 
@@ -44,11 +44,11 @@ Each MAKES deployment includes the scripts required to provision an instance of 
 
 Save this file to a local folder.
 
-## 3. Unzip the script package
+## Unzip the script package
 
 Once the file has been downloaded you will need to extract the contents.  Right click on the kesm.zip file.  If you are using the Windows operating system select "Extract All" from the context menu.  If you are using a Mac, double-click the zip file and it will decompress into the same folder.  When extracted, you will see two folders, one for each environment we support.  Select win-x86 if you are using a Windows machine or osx-x64 if you will be running the script on a Mac and open the folder.  In this folder are two files: kesm.exe and kesm.pdb.  The kesm.exe file is script that we will be running to deploy MAKES.
 
-## 4. Run the script
+## Run the script
 
 At this point to are ready to deploy an instance of MAKES to your Azure account.  Open a command prompt (Windows) or terminal window (Mac) and navigate to the folder that you extracted the kesm.exe file to.
 
@@ -58,11 +58,11 @@ Execute the following command to deploy hosting resources
 kesm.exe DeployHost --HostName [makes_instance_host_name] --MakesPackage "https://[makes_storage_account_name].blob.core.windows.net/makes/[makes_release_version]/"
 ```
 
-- Replace "[makes_instance_host_name]" with the host name for your service.  The hostname will be the host name of the server where your MAKES deployment will be hosted.  Ex: If you used 'testmakes01102020', your MAKES API will be hosted at http://testmakes10012020.westus.cloudapp.azure.net
+1. Replace "[makes_instance_host_name]" with the host name for your service.  The hostname will be the host name of the server where your MAKES deployment will be hosted.  Ex: If you used 'testmakes01102020', your MAKES API will be hosted at http://testmakes10012020.westus.cloudapp.azure.net
 
-- Replace "[makes_storage_account_name]" with the name of the storage account you downloaded the scripts from above.
+2. Replace "[makes_storage_account_name]" with the name of the storage account you downloaded the scripts from above.
 
-- Replace "[makes_release_version"] with the MAKES release you would like to deploy.
+3. Replace "[makes_release_version"] with the MAKES release you would like to deploy.
 
 ```cmd
 kesm.exe DeployHost --HostName testmakes01102020 --MakesPackage "https://fooaccount.blob.core.windows.net/makes/2020-01-10-prod/"
