@@ -23,12 +23,12 @@ GET http://{serviceName}.{serviceRegion}.cloudapp.azure.com/calchistogram?expr={
 
 ## URI Parameters
 
-Name | In | Required | Type | Description
---- | --- | --- | --- | ---
-`expr` | query | Required | string | Structured query expression to evaluate for matching entities used in generating histogram. See [structured query expressions](concepts-query-expressions.md) for documentation.
-`attributes` | query | Optional | string | A list of comma-separated attributes to generate histograms for. See the [entity schema](reference-entity-schema.md) for the attributes that can be requested. If no attributes are specified the response will still include the total number of matching entities. <br/><br/>Defaults to an empty string.
-`offset` | query | Optional | integer | The number of histogram values to skip. <br/><br/>Defaults to 0.
-`count` | query | Optional | integer | The number of histogram values to return for each attribute. <br/><br/>Defaults to 10.
+Name | Required | Type | Description
+--- | --- | --- | ---
+`expr` | Required | string | Structured query expression to evaluate for matching entities used in generating histogram. See [structured query expressions](concepts-query-expressions.md) for documentation.
+`attributes` | Optional | string | A list of comma-separated attributes to generate histograms for. See the [entity schema](reference-entity-schema.md) for the attributes that can be requested. If no attributes are specified the response will still include the total number of matching entities. <br/><br/>Defaults to an empty string.
+`offset` | Optional | integer | The number of histogram values to skip. <br/><br/>Defaults to 0.
+`count` | Optional | integer | The number of histogram values to return for each attribute. <br/><br/>Defaults to 10.
 
 ## Responses
 
