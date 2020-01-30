@@ -57,30 +57,14 @@ entities | json[] | Array of JSON objects representing the entities matching the
 #### Request headers
 
 ```http
-POST /evaluate HTTP/1.1
+GET /evaluate?expr=And(Composite(AA.AfN=%27microsoft%27),Composite(F.FN=%27machine%20learning%27),Y=2019)&orderby=&attributes=Id,DN,F.DFN,Y&offset=0&count=10 HTTP/1.1
 Host: makesexample.westus.cloudapp.azure.com
 Connection: keep-alive
-Content-Length: 186
-Accept: */*
-Origin: http://makesexample.westus.cloudapp.azure.com
-X-Requested-With: XMLHttpRequest
+Upgrade-Insecure-Requests: 1
 User-Agent: contoso/1.0
-Content-Type: application/json
-Referer: http://makesexample.westus.cloudapp.azure.com/
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
 Accept-Encoding: gzip, deflate
 Accept-Language: en-US,en;q=0.9
-```
-
-#### Request payload
-
-```json
-{
-  "expr": "And(Composite(AA.AfN='microsoft'),Composite(F.FN='machine learning'),Y=2019)",
-  "orderby": "",
-  "attributes": "Id,DN,F.DFN,Y",
-  "offset": 0,
-  "count": 10
-}
 ```
 
 #### Response header
@@ -90,9 +74,8 @@ HTTP/1.1 200 OK
 Transfer-Encoding: chunked
 Content-Type: application/json; charset=utf-8
 Server: Kestrel
-Access-Control-Allow-Origin: *
 X-Powered-By: ASP.NET
-Date: Thu, 30 Jan 2020 00:03:08 GMT
+Date: Thu, 30 Jan 2020 01:12:10 GMT
 ```
 
 #### Response payload
