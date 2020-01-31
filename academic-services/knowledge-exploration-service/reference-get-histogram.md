@@ -105,7 +105,6 @@ Date: Thu, 30 Jan 2020 01:13:55 GMT
     "histograms": [
         {
             "attribute": "F.DFN",
-            "distinct_values": 29487,
             "total_count": 29487,
             "histogram": [
                 {
@@ -162,7 +161,6 @@ Date: Thu, 30 Jan 2020 01:13:55 GMT
         },
         {
             "attribute": "C.CN",
-            "distinct_values": 697,
             "total_count": 1177,
             "histogram": [
                 {
