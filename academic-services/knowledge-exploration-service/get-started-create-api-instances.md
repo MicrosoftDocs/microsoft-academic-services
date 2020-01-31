@@ -7,12 +7,11 @@ ms.date: 01/03/2020
 
 # Deploying a basic MAKES instance to Azure from your Subscription
 
- Step-by-step guide for deploying a MAKES instance from a Microsoft Academic Knowledge Exploration Service (MAKES) release. For more information on obtaining a MAKES release, visit [Get Microsoft Academic Knowledge Exploration Service on Azure storage](get-started-setup-provisioning.md)
+ Step-by-step guide for deploying a MAKES instance from a Microsoft Academic Knowledge Exploration Service (MAKES) release. For more information on obtaining a MAKES release, visit [Sign up for MAKES](get-started-setup-provisioning.md)
 
 ## Prerequisites
 
-- Microsoft Academic Knowledge Exploration Service (MAKES) subscription
-- Azure subscription
+- [Microsoft Academic Knowledge Exploration Service (MAKES) subscription](get-started-setup-provisioning.md)
 
 ## Verify the current release
 
@@ -32,7 +31,21 @@ When new versions of MAKES are released, a new folder will be created in the "ma
 
 1. Open the "makes" blob container and verify there is at least one folder in that container.  This folder should be named by the date of the MAKES release.  Ex: 2020-01-10-prod
 
-2. Open the 'dated' folder, then verify there is a sub folder named 'tools'.
+2. Open the 'dated' folder.
+
+## Verify the folders and content
+
+There should be four (4) folders and a licence:
+
+- *grammar* - This folder holds the grammar files.
+
+- *index* - This folder holds the index files.
+
+- *tools* - This folder holds the scripts required to customize MAKES and deploy MAKES to Azure.
+
+- *webhost* - This folder holds the files required to create the VM instance of MAKES.
+
+- *License.docx* - Microsoft Word file with the license to use this data and software.
 
 ![Verify tools folder](media/get-started-tools-folder.png)
 

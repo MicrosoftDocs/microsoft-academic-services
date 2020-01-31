@@ -6,7 +6,7 @@ ms.date: 02/05/2020
 ---
 # About Microsoft Academic Knowledge Exploration Service
 
-Microsoft Academic Knowledge Exploration Service (MAKES) was created to unlock the power of the [Microsoft Academic Graph (MAG)](../graph/index.yml) for realtime applications.  It enables users to build interactive solutions for knowledge based applications that can scale and deliver high quality results.  MAKES is a turn-key solution; running a single script will provision in Azure private instances of an interactive academic search API, powered by [Knowledge Exploration Service (KES) APIs](#knowledge-exploration-service).  For an example of what can be built using MAKES, see the [Microsoft Academic Website](https://academic.microsoft.com/)).
+Microsoft Academic Knowledge Exploration Service (MAKES) was created to unlock the power of the [Microsoft Academic Graph (MAG)](../graph/index.yml) for realtime applications.  It enables users to build interactive solutions for knowledge based applications that can scale and deliver high quality results.  MAKES is a turn-key solution; running a single script will provision in Azure private instances of an interactive academic search API, powered by [Knowledge Exploration Service (KES) APIs](#knowledge-exploration-service).  For an example of what can be built using MAKES, see the [Microsoft Academic Website](https://academic.microsoft.com/).
 
 Once signed up for MAKES, new versions of the service and indexes will be delivered to you every 1-2 weeks.  Users have the option of using the default index supplied by the service, which includes all the entities and meta data included in MAG, or using a sub-graph of MAG to create their own custom indexes to power MAKES.  Users are also able to combine private data with the data from MAG to create custom indexes and search experiences for MAKES.
 
@@ -18,17 +18,17 @@ Here are some key features of the Microsoft Academic Knowledge Exploration Servi
 
 - *Create knowledge applications* - MAKES enables users to build dynamic knowledge applications that can analyze the state of research in particular areas, compare individuals and institutions and find objective connections between entities.  Check out our tutorials and samples for useful examples!
 
-- *Add a large corpus of academic entities to an existing search solution* - Integrating MAKES can help enhance existing search solutions allowing users access to a large corpus of academic research.
+- *Add a large corpus of academic entities to an existing search solution* - Integrating MAKES can help enhance existing search solutions by giving users access to a large corpus of academic research.
 
-- *Customization using MAKES build tool* - In some cases you may not need all of the data in MAG, or you would like combine your own private data with data from MAG.  The MAKES build tool allows users to easily create their own custom indexes, using subsets or super-sets of the Microsoft Academic Graph.  An example would be to build an index specific to certain Journals or Institutions and include publications from your own organization.
+- *Customization using the MAKES build tool* - In some cases you may not need all of the data in MAG, or you would like combine your own private data with MAG.  With the MAKES build tool you can easily create their own custom indexes using subsets or super-sets of the Microsoft Academic Graph.  As nn example, you could build an index specific to certain Journals or Institutions while including publications from your own organization.
 
 ## What is MAKES?
 
-The Microsoft Academic knowledge Exploration Service (MAKES) in its' basic form is a self hosted REST API leveraging an index of all the entities in the Microsoft Academic Graph (MAG).  MAKES subscriptions deliver all the components needed to self host instances of this REST API and index.  By subscribing to MAKES, these components are delivered to your Azure subscription when new versions of MAG are created; typically once every 1 to 2 weeks.  Users of MAKES run a provided script and instances are automatically provisioned to their Azure account.
+The Microsoft Academic knowledge Exploration Service (MAKES) in its' basic form is a self hosted [REST API](reference-makes-api.md) leveraging an index of all the entities in the Microsoft Academic Graph (MAG).  By subscribing to MAKES, the required components are delivered to your Azure subscription when new versions of MAG are created; typically once every 1 to 2 weeks.  A provided script can then be run and MAKES instances are automatically provisioned to your Azure account.
 
 The components shipped to a MAKES subscription include:
 
-- *Web Host Application* - This is the REST API web application that interacts with the MAKES index and grammar.
+- *Web Host Application* - This is the REST API web application that interacts with the MAKES index and grammar.  See the [MAKES API](reference-makes-api.md) documentation to see what endpoints are available.
 
 - *Indexes* - Binary index files built from MAG that support the [Knowledge Exploration Service (KES)](#knowledge-exploration-service).
 
@@ -54,7 +54,7 @@ Below is a diagram describing the internal MAKES architecture and how it interac
 
 The most basic form of MAKES uses the following Azure assets:
 
-- *An Azure Storage account* - You will need to provision and specify a storage account when subscribing to MAKES.  Each release of MAKES will push all the required componenets to this storage account.  MAKES deployments require ~650GB of space.
+- *An Azure Storage account* - You will need to provision and specify a storage account when subscribing to MAKES.  Each release of MAKES will push all the required components to this storage account.  MAKES deployments require ~650GB of space.
 
 - *An Azure VM Image* - An Azure VM image will be provisioned by MAKES when deployed.
 
@@ -66,7 +66,7 @@ The most basic form of MAKES uses the following Azure assets:
 
 MAKES is designed to scale to our users' requirements.  If more throughput is required, users are able to deploy additional virtual machines using the Azure Virtual Machine Scale Set.  By default, a load balancer is placed in front of a VM Scale set to distribute the load.
 
-Additionally, if your application needs to be scaled globally, you may deploy MAKES to different regions.  Using Azure Traffic Manager or Azure Front Door traffic will be directed to the closest instance to ensure optimal performance.
+Additionally, if your application needs to be scaled globally, you may deploy MAKES to different regions.  Using Azure Traffic Manager or Azure Front Door, traffic will be directed to the closest instance to ensure optimal performance.
 
 Below is an example of a geo-scalable architecture for MAKES:
 
