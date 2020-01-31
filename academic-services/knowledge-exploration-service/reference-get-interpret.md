@@ -1,0 +1,458 @@
+---
+title: GET Interpret
+description: Generates semantic interpretations of a natural language query
+ms.topic: reference
+ms.date: 2020-02-07
+---
+
+# Interpret REST API
+
+The **Interpret** method generates semantic interpretations of a natural language query.
+
+It can be used as either a way of interpreting a specific natural language query, or to generate natural language query suggestions using the original query as a stem.
+
+For full details on the language grammar see the [natural language queries](concepts-queries.md) page.
+
+``` HTTP
+GET http://{serviceName}.{serviceRegion}.cloudapp.azure.com/interpret?query={query}
+```  
+
+With optional parameters:
+
+``` HTTP
+GET http://{serviceName}.{serviceRegion}.cloudapp.azure.com/interpret?query={query}&count={count}&offset={offset}&timeout={timeout}&complete={complete}&entityCount={entityCount}&attributes={attributes}
+```  
+
+## URI Parameters
+
+Name | Required | Type | Description
+--- | --- | --- | ---
+`query` | Required | string | The natural language query to generate interpretations for. See the [natural language queries](concepts-queries.md) page for more details.
+`count` | Optional | integer | The maximum number of interpretations to generate. <br/><br/>Defaults to 5.
+`complete` | Optional | integer | A value of 1 indicates that interpretations should be generated that infer entity attribute values beyond what was provided in the query. <br/><br/>For example, the for query "microsoft machine le", if `complete` is set to 1 an interpretation could be generated that completes "le" to "learning", i.e. "microsoft machine learning". <br/><br/>A value of 0 indicates that no inference is made and only the exact query text provided is matched. <br/><br/>Defaults to 1.
+`normalize` | Optional | integer | Value of 1 indicates that the query should have normalization rules applied to it before being interpreted. See the [entity schema overview](reference-makes-api-entity-schema.md#normalization-rules) for documentation on the normalization rules that are applied to indexed string fields. <br/><br/>Defaults to 1.
+`offset` | Optional | integer | The number of interpretations to skip in the result set. <br/><br/>Defaults to 0.
+`timeout` | Optional | integer | The maximum amount of time in milliseconds to use when generating interpretations. <br/><br/>If the timeout is hit, all interpretations that have been generated will be returned and a "timedOut" flag will be set in the response indicating that the timeout was hit before the total number of requested interpretations was met. <br/><br/>Defaults to 2000.
+`entityCount` | Optional | integer | The maximum number of entities that should be returned for each interpretation that match the interpreted query expression. <br/><br/>By default this is set to 0, meaning no entities are returned.
+`attributes` | Optional | string | A list of comma-separated attributes to include for each entity returned for each interpretation. See the [entity schema overview](reference-makes-api-entity-schema.md#entity-types) for the attributes that can be requested. <br/><br/>If an asterisk (*) is specified, all available attributes will be returned. <br/><br/>Defaults to an empty string.
+
+## Responses
+
+Name | Type | Description
+--- | --- | ---
+200 OK | [InterpretResponse](#interpretresponse) | Interpret response successfully generated and returned.
+
+## Definitions
+
+| | |
+| --- | --- |
+[InterpretResponse](#interpretresponse) | Interpret response information.
+[Interpretation](#interpretation) | Information for an individual query interpretation.
+[InterpretationRuleMatch](#interpretationrulematch) | Information returned for grammar rules matched during interpretation.
+[InterpretationRuleMatchOutput](#interpretationrulematchoutput) | Output generated for a grammar rule match.
+
+### InterpretResponse
+
+Name | Type | Description
+--- | --- | ---
+query | string | The natural language query used to generate interpretations.
+interpretations | [Interpretation](#interpretation)[] | Array of interpretations ordered by relevance.
+timed_out | boolean | Set to true if the timeout duration was met before the requested number of interpretations could be generated.
+
+### Interpretation
+
+Name | Type | Description
+--- | --- | ---
+logprob | double | The semantic score associated with the interpretation. See the [natural language queries](concepts-queries.md) page for more details.
+parse | string | The semantic parse of the natural language query. See the [natural language queries](concepts-queries.md) page for more details.
+rules | [InterpretationRuleMatch](#interpretationrulematch)[] | Array of grammar rules matched when generating interpretation.
+
+### InterpretationRuleMatch
+
+Name | Type | Description
+--- | --- | ---
+name | string | The name of the matched rule. For the default grammar this will always be "#GetPapers".
+output | [InterpretationRuleMatchOutput](#interpretationrulematchoutput) | Output of the matched rule.
+
+### InterpretationRuleMatchOutput
+
+Name | Type | Description
+--- | --- | ---
+type | string | The type of output generated by the rule match. For the default grammar this will always be "query", meaning a query expression is generated for each interpretation.
+value | string | The structured query expression that represents the semantic parse interpreted from the natural language query. See [structured query expressions](concepts-query-expressions.md) for documentation.
+entities | json[] | Array of JSON objects representing the entities matching the [structured query expression](concepts-query-expressions.md) for this interpretation. Each object will contain the attributes requested in `attributes` if available.
+
+## Examples
+
+### Interpret natural language query "microsoft machine learning 2019"
+
+#### Request headers
+
+```http
+GET /interpret?query=microsoft%20machine%20learning%202019%22&complete=0&normalize=1&attributes=Id,DN,F.DFN,Y&offset=0&timeout=2000&count=1&entityCount=10 HTTP/1.1
+Host: makesexample.westus.cloudapp.azure.com
+Connection: keep-alive
+Upgrade-Insecure-Requests: 1
+User-Agent: contoso/1.0
+Accept: application/json
+Accept-Encoding: gzip, deflate
+Accept-Language: en-US,en;q=0.9
+```
+
+#### Response header
+
+```http
+HTTP/1.1 200 OK
+Transfer-Encoding: chunked
+Content-Type: application/json; charset=utf-8
+Server: Kestrel
+X-Powered-By: ASP.NET
+Date: Thu, 30 Jan 2020 01:08:52 GMT
+```
+
+#### Response payload
+
+```json
+{
+    "query": "microsoft machine learning 2019",
+    "interpretations": [
+        {
+            "logprob": -17.694,
+            "parse": "<rule name=\"#GetPapers\"><attr name=\"academic#AA.AfN\">microsoft</attr> <attr name=\"academic#F.FN\">machine learning</attr> <attr name=\"academic#Y\">2019</attr><end/></rule>",
+            "rules": [
+                {
+                    "name": "#GetPapers",
+                    "output": {
+                        "type": "query",
+                        "value": "And(And(Composite(AA.AfN='microsoft'),Composite(F.FN='machine learning')),Y=2019)",
+                        "entities": [
+                            {
+                                "logprob": -17.694,
+                                "prob": 2.0682043e-8,
+                                "Id": 2887997457,
+                                "Y": 2019,
+                                "DN": "Learning deep representations by mutual information estimation and maximization",
+                                "F": [
+                                    {
+                                        "DFN": "Mutual information"
+                                    },
+                                    {
+                                        "DFN": "Maximization"
+                                    },
+                                    {
+                                        "DFN": "Machine learning"
+                                    },
+                                    {
+                                        "DFN": "Computer science"
+                                    },
+                                    {
+                                        "DFN": "Artificial intelligence"
+                                    }
+                                ]
+                            },
+                            {
+                                "logprob": -17.815,
+                                "prob": 1.83249925e-8,
+                                "Id": 2619383789,
+                                "Y": 2019,
+                                "DN": "Multimodal Machine Learning: A Survey and Taxonomy",
+                                "F": [
+                                    {
+                                        "DFN": "Visualization"
+                                    },
+                                    {
+                                        "DFN": "Multiple modalities"
+                                    },
+                                    {
+                                        "DFN": "Modalities"
+                                    },
+                                    {
+                                        "DFN": "Machine learning"
+                                    },
+                                    {
+                                        "DFN": "Hidden Markov model"
+                                    },
+                                    {
+                                        "DFN": "Computer vision"
+                                    },
+                                    {
+                                        "DFN": "Computer science"
+                                    },
+                                    {
+                                        "DFN": "Categorization"
+                                    },
+                                    {
+                                        "DFN": "Artificial intelligence"
+                                    }
+                                ]
+                            },
+                            {
+                                "logprob": -17.927,
+                                "prob": 1.63833543e-8,
+                                "Id": 2964098911,
+                                "Y": 2019,
+                                "DN": "A Convergence Theory for Deep Learning via Over-Parameterization",
+                                "F": [
+                                    {
+                                        "DFN": "Symbolic convergence theory"
+                                    },
+                                    {
+                                        "DFN": "Parametrization"
+                                    },
+                                    {
+                                        "DFN": "Machine learning"
+                                    },
+                                    {
+                                        "DFN": "Deep learning"
+                                    },
+                                    {
+                                        "DFN": "Computer science"
+                                    },
+                                    {
+                                        "DFN": "Artificial intelligence"
+                                    }
+                                ]
+                            },
+                            {
+                                "logprob": -18.292,
+                                "prob": 1.13732697e-8,
+                                "Id": 2914526845,
+                                "Y": 2019,
+                                "DN": "Multi-Task Deep Neural Networks for Natural Language Understanding",
+                                "F": [
+                                    {
+                                        "DFN": "Regularization (mathematics)"
+                                    },
+                                    {
+                                        "DFN": "Natural language understanding"
+                                    },
+                                    {
+                                        "DFN": "Machine learning"
+                                    },
+                                    {
+                                        "DFN": "Language model"
+                                    },
+                                    {
+                                        "DFN": "Domain adaptation"
+                                    },
+                                    {
+                                        "DFN": "Deep neural networks"
+                                    },
+                                    {
+                                        "DFN": "Computer science"
+                                    },
+                                    {
+                                        "DFN": "Artificial neural network"
+                                    },
+                                    {
+                                        "DFN": "Artificial intelligence"
+                                    }
+                                ]
+                            },
+                            {
+                                "logprob": -18.39,
+                                "prob": 1.03115625e-8,
+                                "Id": 2963117013,
+                                "Y": 2019,
+                                "DN": "Learning a SAT Solver from Single-Bit Supervision",
+                                "F": [
+                                    {
+                                        "DFN": "Parallel computing"
+                                    },
+                                    {
+                                        "DFN": "Machine learning"
+                                    },
+                                    {
+                                        "DFN": "Computer science"
+                                    },
+                                    {
+                                        "DFN": "Boolean satisfiability problem"
+                                    },
+                                    {
+                                        "DFN": "Artificial intelligence"
+                                    }
+                                ]
+                            },
+                            {
+                                "logprob": -18.483,
+                                "prob": 9.3958287e-9,
+                                "Id": 2903996579,
+                                "Y": 2019,
+                                "DN": "An Empirical Study of Example Forgetting during Deep Neural Network Learning",
+                                "F": [
+                                    {
+                                        "DFN": "Neural network learning"
+                                    },
+                                    {
+                                        "DFN": "Machine learning"
+                                    },
+                                    {
+                                        "DFN": "Forgetting"
+                                    },
+                                    {
+                                        "DFN": "Empirical research"
+                                    },
+                                    {
+                                        "DFN": "Computer science"
+                                    },
+                                    {
+                                        "DFN": "Artificial intelligence"
+                                    }
+                                ]
+                            },
+                            {
+                                "logprob": -18.567,
+                                "prob": 8.6388186e-9,
+                                "Id": 2968917279,
+                                "Y": 2019,
+                                "DN": "On the Variance of the Adaptive Learning Rate and Beyond",
+                                "F": [
+                                    {
+                                        "DFN": "Variance reduction"
+                                    },
+                                    {
+                                        "DFN": "Stochastic optimization"
+                                    },
+                                    {
+                                        "DFN": "Robustness (computer science)"
+                                    },
+                                    {
+                                        "DFN": "Mathematics"
+                                    },
+                                    {
+                                        "DFN": "Machine translation"
+                                    },
+                                    {
+                                        "DFN": "Machine learning"
+                                    },
+                                    {
+                                        "DFN": "Language model"
+                                    },
+                                    {
+                                        "DFN": "Heuristic"
+                                    },
+                                    {
+                                        "DFN": "Convergence (routing)"
+                                    },
+                                    {
+                                        "DFN": "Contextual image classification"
+                                    },
+                                    {
+                                        "DFN": "Artificial intelligence"
+                                    }
+                                ]
+                            },
+                            {
+                                "logprob": -18.59,
+                                "prob": 8.4423933e-9,
+                                "Id": 2971040589,
+                                "Y": 2019,
+                                "DN": "Unsupervised State Representation Learning in Atari",
+                                "F": [
+                                    {
+                                        "DFN": "State representation"
+                                    },
+                                    {
+                                        "DFN": "Open problem"
+                                    },
+                                    {
+                                        "DFN": "Mutual information"
+                                    },
+                                    {
+                                        "DFN": "Machine learning"
+                                    },
+                                    {
+                                        "DFN": "Intelligent agent"
+                                    },
+                                    {
+                                        "DFN": "Ground truth"
+                                    },
+                                    {
+                                        "DFN": "Generative grammar"
+                                    },
+                                    {
+                                        "DFN": "Feature learning"
+                                    },
+                                    {
+                                        "DFN": "Encoder"
+                                    },
+                                    {
+                                        "DFN": "Computer science"
+                                    },
+                                    {
+                                        "DFN": "Artificial intelligence"
+                                    }
+                                ]
+                            },
+                            {
+                                "logprob": -18.742,
+                                "prob": 7.2519169e-9,
+                                "Id": 2949962589,
+                                "Y": 2019,
+                                "DN": "Deep High-Resolution Representation Learning for Human Pose Estimation",
+                                "F": [
+                                    {
+                                        "DFN": "Subnetwork"
+                                    },
+                                    {
+                                        "DFN": "Pose"
+                                    },
+                                    {
+                                        "DFN": "Pattern recognition"
+                                    },
+                                    {
+                                        "DFN": "Machine learning"
+                                    },
+                                    {
+                                        "DFN": "Feature learning"
+                                    },
+                                    {
+                                        "DFN": "Computer science"
+                                    },
+                                    {
+                                        "DFN": "Artificial intelligence"
+                                    }
+                                ]
+                            },
+                            {
+                                "logprob": -18.833,
+                                "prob": 6.6211286e-9,
+                                "Id": 2963928582,
+                                "Y": 2019,
+                                "DN": "Benchmarking Single-Image Dehazing and Beyond",
+                                "F": [
+                                    {
+                                        "DFN": "Task analysis"
+                                    },
+                                    {
+                                        "DFN": "Ranging"
+                                    },
+                                    {
+                                        "DFN": "Mathematics"
+                                    },
+                                    {
+                                        "DFN": "Machine learning"
+                                    },
+                                    {
+                                        "DFN": "Computer vision"
+                                    },
+                                    {
+                                        "DFN": "Benchmarking"
+                                    },
+                                    {
+                                        "DFN": "Benchmark (computing)"
+                                    },
+                                    {
+                                        "DFN": "Artificial intelligence"
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                }
+            ]
+        }
+    ],
+    "timed_out": false
+}
+```
