@@ -65,7 +65,7 @@ value | string | Attribute value
 Name | Type | Description
 --- | --- | ---
 expr | string | The query expression used when generating this response
-histograms | [HistogramAttribute](#histogramattribute)[] | An array of containing each requested attribute histogram
+histograms | [HistogramAttribute](#histogramattribute)[] | An array of each requested attribute histogram
 num_entities | integer | The number of matching entities that were used to generate histograms
 
 ## Examples
