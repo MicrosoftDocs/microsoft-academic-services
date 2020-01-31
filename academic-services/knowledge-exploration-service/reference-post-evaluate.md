@@ -20,10 +20,10 @@ POST http://{serviceName}.{serviceRegion}.cloudapp.azure.com/evaluate
 Name | Required | Type | Description
 --- | --- | --- | ---
 `expr` | Required | string | Structured query expression to evaluate. See [structured query expressions](concepts-query-expressions.md) for documentation.
-`orderby` | Optional | string | The attribute to use for sorting the result set, followed by an optional sort order indicator in the format "asc" for ascending and "desc" for descending. E.g. Year:desc would return entities ordered newest first. <br/><br/>Note that changing the default order of large result sets can take a very long time, so changing sort order should be used cautiously. <br/><br/>The default value is entity log probability score in descending order.
-`attributes` | Optional | string | A list of comma-separated attributes to include for each entity in the result set. See the [entity schema](reference-makes-api-entity-schema.md) for the attributes that can be requested. Returned entities aren't required to have the attributes, which means the list can include attributes from different entity types. This is useful when the query expression potentially matches multiple types of entities. <br/><br/>If no attributes are specified then the each entity will only contain its corresponding score. <br/><br/>If an asterisk (*) is specified, all available attributes will be returned. <br/><br/>Defaults to an empty string.
+`orderby` | Optional | string | The attribute to use for sorting the result set, followed by an optional sort order indicator in the format "asc" for ascending and "desc" for descending. E.g. "Y:desc" would return entities ordered newest first. <br/><br/>Note that changing the default order of large result sets can take a very long time, so changing sort order should be used cautiously. <br/><br/>The default sorting order by descending entity rank.
+`attributes` | Optional | string | A list of comma-separated attribute names to include (if available) for each entity in the result set. See the [entity schema](reference-makes-api-entity-schema.md) for the attributes that can be requested. <br/><br/>If an asterisk (*) is specified, all available attributes will be returned. <br/><br/>Defaults to an empty string.
 `offset` | Optional | integer | The number of matching entities to skip before returning results. <br/><br/>Defaults to 0.
-`count` | Optional | integer | The number of matching entities to retrieve in the result set. The the maximum page size is 1000. <br/><br/>Defaults to 10.
+`count` | Optional | integer | The number of matching entities to retrieve in the result set. <br/><br/>Defaults to 10.
 
 ## Responses
 
