@@ -33,7 +33,7 @@ Name | Required | Type | Description
 `normalize` | Optional | integer | Value of 1 indicates that the query should have normalization rules applied to it before being interpreted. See the [entity schema overview](reference-makes-api-entity-schema.md#normalization-rules) for documentation on the normalization rules that are applied to indexed string fields. <br/><br/>Defaults to 1.
 `offset` | Optional | integer | The number of interpretations to skip in the result set. <br/><br/>Defaults to 0.
 `timeout` | Optional | integer | The maximum amount of time in milliseconds to use when generating interpretations. <br/><br/>If the timeout is hit, all interpretations that have been generated will be returned and a "timedOut" flag will be set in the response indicating that the timeout was hit before the total number of requested interpretations was met. <br/><br/>Defaults to 2000.
-`entityCount` | Optional | integer | The number of entities that should be returned for each interpretation that match the interpreted query expression. <br/><br/>Defaults to 0.
+`entityCount` | Optional | integer | The maximum number of entities that should be returned for each interpretation that match the interpreted query expression. <br/><br/>By default this is set to 0, meaning no entities are returned.
 `attributes` | Optional | string | A list of comma-separated attributes to include for each entity returned for each interpretation. See the [entity schema overview](reference-makes-api-entity-schema.md#entity-types) for the attributes that can be requested. <br/><br/>If an asterisk (*) is specified, all available attributes will be returned. <br/><br/>Defaults to an empty string.
 
 ## Responses
@@ -55,9 +55,9 @@ Name | Type | Description
 
 Name | Type | Description
 --- | --- | ---
+query | string | The natural language query used to generate interpretations.
 interpretations | [Interpretation](#interpretation)[] | Array of interpretations ordered by relevance.
-timed_out_count | integer | The number of index partitions that timed out before returning the requested number of interpretations.
-string | The natural language query used to generate interpretations.
+timed_out | boolean | Set to true if the timeout duration was met before the requested number of interpretations could be generated.
 
 ### Interpretation
 
@@ -453,7 +453,6 @@ Date: Thu, 30 Jan 2020 01:08:52 GMT
             ]
         }
     ],
-    "timed_out_count": 0,
     "timed_out": false
 }
 ```
