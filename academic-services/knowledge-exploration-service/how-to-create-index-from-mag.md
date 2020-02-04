@@ -14,180 +14,1240 @@ ms.date: 0
 - Microsoft Academic Graph(MAG) release
 - Microsoft Academic Knowledge Exploration Service(MAKES) release
 - Azure subscription
+- Azure Data Lake Analytics (ADLA) service instance
 
 ## Generating MAKES entities using USQL
 
 MAKES indexes are generated from specifically formatted MAG data.  In order to create a new index, you will need to generate the entities you would like in the index from MAG.  We will start by running a USQL script on your MAG subscription to generate the data required to build the custom index.  To do this, you will need to go to your Azure Data Lake Analytics (ADLA) service instance and submit a new ALDA job to generate the text files containing academic data.
 
-1. In the Azure portal, go to the Azure Data Lake Analytics (ADLA) service that you create and select **Overview > New Job**.
+1. In the Azure portal, go to the Azure Data Lake Analytics (ADLA) service that you created and under "Settings" on the left hand side, select "Data Sources"
+
+![Add a data source](media/how-to-create-index-datasources.png)
+
+1. Add the storage account you have set up for MAG by clicking "Add data source", select "Account Name" as the selection method and type the storage account name for your MAG deployment.
+
+![Add storage account by name](media/how-to-create-index-add-storage-account.png)
+
+1. select **Overview > New Job**.
 
 1. Copy and past the following code block in the script window.
 
 ```U-SQL
+DECLARE @In_MagBlobAccount string = "isrcmagstore";
+DECLARE @In_MagBlobContainer string = "mag-prod-2019-12-26";
+DECLARE @Out_OutputPath string = "output/pipeline/prod/2019-12-26-prod-order-bugs/GenerateMakesEntities";
+DECLARE @Param_UseSubgraphForInstitution string = "";
+//////////////////////////////////////////////////////////////////////////////////////////////////
+//
+//  Copyright (c) Microsoft Corporation. All rights reserved.
+//  Licensed under the MIT License.
+//
+//////////////////////////////////////////////////////////////////////////////////////////////////
+USE DATABASE [AcademicIndex];
+
 // Enables OUTPUT statements to generate dynamic files using column values
 SET @@FeaturePreviews = "DataPartitionedOutput:on";
 
+///////////////////////////////////////////////////////////////////////////////////////////////////
+// Input Parameters
+//
+// Input parameters that can be overridden by instantiating scripts
+// See: https://docs.microsoft.com/en-us/u-sql/variables/declare-variables for details
+///////////////////////////////////////////////////////////////////////////////////////////////////
+
 // The Azure blob storage account name that contains the Microsoft Academic Graph data to be used by this script
-DECLARE @inputBlobAccount string = "<MagAzureStorageAccount>";
+DECLARE EXTERNAL @In_MagBlobAccount string = "";    // Example: "isrcmagstore"
 
 // The Azure blob storage container name that contains the Microsoft Academic Graph data to be used by this script
-DECLARE @inputBlobContainer string = "<MagContainer>";
+DECLARE EXTERNAL @In_MagBlobContainer string = "";  // Example: "mag-prod-2019-10-03"
+
+// The Azure data lake storage output path where the JSON files will be created
+DECLARE EXTERNAL @Out_OutputPath string = "";  // Example: "output/pipeline/prod/2019-10-03-makes/GenerateIndexJsonEntities/IndexEntities"
+
+// Output files by entity type. Used for debug purposes. Disabled by default.
+DECLARE EXTERNAL @Param_OutputFileByEntityType string = "false"; // Example: "true"
+
+//The name of the institution to create sub-graph for. The full graph is used by default.
+DECLARE EXTERNAL @Param_UseSubgraphForInstitution string = ""; // Example: "microsoft"
+
+// USQL string values have a maximum length of 2^17, which unfortunately this means we need to limit the number of authors for a paper as they
+// are concatenated together into a single JSON array represented by a USQL string.
+//
+// We can somewhat get around this by splitting JSON arrays across multiple columns and having those columns be joined during
+// the final JSON output by a tab delimited (which JSON ignores), however we need each different entity JSON table to have a fixed number
+// of columns otherwise we can't union them, which means we have to have a fixed number of these "paper author" columns.
+//
+// The value below represents the number of paper authors that are generated for each of the two columns we create for this purpose.
+DECLARE EXTERNAL @Param_MaximumPaperAuthorPerBucket int = 250;
+
+// Citation contexts hit a similar issue as the paper author issue describe above, related to the maximum string length USQL allows.
+//
+// Unfortunately citation contexts do not have a maximum length in MAG, so can be quite long. Adding to this problem, MAG does not limit the 
+// number of citation contexts it makes available for each paper.
+//
+// Both of these issues combined means we need to use both a maximum individual citation context length and a maximum number of allowed citation contexts per paper
+// The number of citation context generated for each of the two column buckets
+DECLARE EXTERNAL @Param_MaximumCitationContextPerBucket int = 100;
+
+// The max citation context length for each context
+DECLARE EXTERNAL @Param_MaximumCitationContextLength int = 200;
+
+//The max citation contexts for each cited paper
+DECLARE EXTERNAL @Param_MaximumCitationContextPerCitation int = 5;
+
+// The max number of field of study children to include for a field of study entity
+DECLARE EXTERNAL @Param_MaximumFieldOfStudyChildrenCount int = 200;
+
+// The max number of field of study parent to include for a field of study entity
+DECLARE EXTERNAL @Param_MaximumFieldOfStudyParentCount int = 200;
+
+//The max number of reference to include for a paper entity
+DECLARE EXTERNAL @Param_MaximumReferencesPerPaper int = 500;
+
+// The number of files to partition the data into
+DECLARE EXTERNAL @Param_PartitionCount int = 250;
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+// Local variables
+//
+// Local variables and functions used for the script execution
+////////////////////////////////////////////////////////////////////////////////////////////////////
+DECLARE @outputFileByEntityType = bool.Parse(@Param_OutputFileByEntityType);
+
+// Full output path w/file name pattern reflecting the PartitionNumber column in the table that gets output
+DECLARE @outputFilePattern string = @Out_OutputPath + "/{PartitionNumber}.json";
 
 // The Windows Azure Blob Storage (WASB) URI of the Microsoft Academic Graph data to be used by this script
-DECLARE @inputUri string = "wasb://" + @inputBlobContainer + "@" + @inputBlobAccount + "/";
+DECLARE @inputUri string = "wasb://" + @In_MagBlobContainer + "@" + @In_MagBlobAccount + "/";
 
-// The Azure blob storage account name that output files will be generated in
-DECLARE @outputBlobAccount string = "<OutputAzureStorageAccount>";
+// Inline function for escaping a JSON string
+DECLARE @jsonEscapeString Func<string, string> =
+    (input) => input.Replace("\\", "\\\\").Replace("\"", "\\\"");
 
-// The Azure blob storage container name that output files will be generated in
-// ***IMPORTANT: This container must exist before running this script otherwise the script will fail
-DECLARE @outputBlobContainer string = "<OutputContainer>";
+// Inline function that generates JSON for an JSON object attribute (name + value) w/o any special considersation for the value type
+DECLARE @JsonRawAttribute Func<string, string, string>  =
+    (name, value) => "\"" + name + "\":" + value;
 
-// The Windows Azure Blob Storage (WASB) URI  that output files will be generated in
-DECLARE @outputUri = "wasb://" + @outputBlobContainer + "@" + @outputBlobAccount + "/azure-search-data/{FileNumber}-data.{IndexerNumber}";
+// Inline function that generates JSON for a JSON object string attribute (name + value), doing the additional work of escaping the string
+DECLARE @JsonStringAttribute Func<string, string, string> =
+    (name, value) => @JsonRawAttribute(name, "\"" + @jsonEscapeString(value) + "\"");
 
-// The number of Azure Search indexers that will be used when indexing the documents generated by this script
-DECLARE @maximumIndexerCount int = 1;
+// Inline function that generates appropriate JSON for a JSON object attribute (name + value) by first checking the values type
+DECLARE @JsonAttribute Func<string, object, string> =
+    (name, value) =>
+    {
+        if(value is string)
+        {
+            return @JsonStringAttribute(name, (string)value);
+        }
+        else
+        {
+            return @JsonRawAttribute(name, value.ToString());
+        }
+    };
 
-// The the number of files to generate for each indexer
-DECLARE @maximumFileCountPerIndexer int = 10;
+// Inline function that generates a JSON object by joining a list of JSON attributes
+DECLARE @JsonObjectFromAttributes Func<IEnumerable<string>, string> =
+    (attributes) =>
+    {
+        return "{" + string.Join(",", attributes.Where(attribute => attribute != null)) + "}";
+    };
 
-// The affiliation that should be used to filter the results returned by this script
-// To target a custom affiliation, find its normalized name and enter it below
-DECLARE @affiliationNormalizedNameFilter string = "microsoft";
+// Inline function that returns a JSON string array representing the unique words found in a string
+DECLARE @GenerateUniqueStringWords Func<string, string> = 
+    (input) => "[" + string.Join(",", new HashSet<string>(input.Split(' ')).Select(word => "\"" + word + "\"")) + "]";
 
+// Inline function that returns the enum int value as string for publication doc type
+DECLARE @GetPublicationTypeValueFromString Func<string, string> =
+    (docTypeString) =>
+    {
+        switch (docTypeString)
+        {
+            case "Journal":
+                return "1";
+            case "Patent":
+                return "2";
+            case "Conference":
+                return "3";
+            case "BookChapter":
+                return "4";
+            case "Book":
+                return "5";
+            case "BookReferenceEntry":
+                return "6";
+            case "Dataset":
+                return "7";
+            case "Repository":
+                return "8";
+            default:
+                return "0";
+        }
+    };
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Data Extraction
 //
-// Load academic data
+// Load academic data using official MAG table functions
+// See https://docs.microsoft.com/en-us/academic-services/graph/tutorial-azure-data-lake-hindex#define-functions-to-extract-mag-data for details
 //
-@papers = Papers(@inputUri);
-
-@paperAuthorAffiliations = PaperAuthorAffiliations(@inputUri);
-
-@authors = Authors(@inputUri);
-
-@affiliations = Affiliations(@inputUri);
-
-@paperFieldsOfStudy = PaperFieldsOfStudy(@inputUri);
-
-@fieldsOfStudy = FieldsOfStudy(@inputUri);
-
-//
-// Generate non-null values for optional fields to ensure we can properly join
-//
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+@affiliations =
+    Affiliations
+    (
+        @inputUri
+    );
+@authors =
+    Authors
+    (
+        @inputUri
+    );
+@conferenceInstances =
+    ConferenceInstances
+    (
+        @inputUri
+    );
+@conferenceSeries =
+    ConferenceSeries
+    (
+        @inputUri
+    );
+@fieldOfStudyChildren =
+    FieldOfStudyChildren
+    (
+        @inputUri
+    );
+@fieldsOfStudy =
+    FieldsOfStudy
+    (
+        @inputUri
+    );
+@journals =
+    Journals
+    (
+        @inputUri
+    );
+@paperAbstractsInvertedIndex =
+    PaperAbstractsInvertedIndex
+    (
+        @inputUri
+    );
+@paperAuthorAffiliations =
+    PaperAuthorAffiliations
+    (
+        @inputUri
+    );
+@paperCitationContexts =
+    PaperCitationContexts
+    (
+        @inputUri
+    );
+@paperFieldsOfStudy =
+    PaperFieldsOfStudy
+    (
+        @inputUri
+    );
+@paperReferences =
+    PaperReferences
+    (
+        @inputUri
+    );
+@paperUrls =
+    PaperUrls
+    (
+        @inputUri
+    );
 @papers =
+    Papers
+    (
+        @inputUri
+    );
+
+// Generate additional non-nullable columns for specific columns in the default MAG databases.
+// This is required for table join operations later in this script.
+@authors =
     SELECT *,
-           (JournalId == null? (long) - 1 : JournalId.Value) AS JId,
-           (ConferenceSeriesId == null? (long) - 1 : ConferenceSeriesId.Value) AS CId
-    FROM @papers;
+           (LastKnownAffiliationId == null? (long) - 1 : LastKnownAffiliationId.Value) AS _LastKnownAffiliationId
+    FROM @authors;
 
 @paperAuthorAffiliations =
     SELECT *,
-           (AffiliationId == null? (long) - 1 : AffiliationId.Value) AS AfId
+           (AffiliationId == null? (long) - 1 : AffiliationId.Value) AS _AffiliationId
     FROM @paperAuthorAffiliations;
 
-//
-// Filter academic data to only include patents published in affiliation with Microsoft
-//
 @papers =
-    SELECT DISTINCT P.*
-    FROM @papers AS P
-         INNER JOIN
-             @paperAuthorAffiliations AS Paa
-         ON P.PaperId == Paa.PaperId
-         INNER JOIN
-             @affiliations AS A
-         ON Paa.AfId == A.AffiliationId
-    WHERE A.NormalizedName == @affiliationNormalizedNameFilter AND P.DocType == "Patent";
+    SELECT *,
+           (JournalId == null? (long) - 1 : JournalId.Value) AS _JournalId,
+           (ConferenceSeriesId == null? (long) - 1 : ConferenceSeriesId.Value) AS _ConferenceSeriesId
+    FROM @papers;
 
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Sub-graph Creation
 //
-// Filter and flatten paper author data into a single attribute for each paper
+//To apply filtering logic for only generating data for a subset of the graph, specify the @Param_UseSubgraphForInstitution
+// parameter or modify the @papers table to only include entities from the desired subset.
 //
-@paperAuthorsDistinct =
-    SELECT DISTINCT A.PaperId,
-                    A.AuthorId,
+// The example below illustrates the graph filtering logic based on papers published by an affiliation.
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+IF !string.IsNullOrEmpty(@Param_UseSubgraphForInstitution) THEN
 
-                    // NOTE: Casting AuthorSequenceNumber to nullable as MAP_AGG requires it
-                    ((uint?)A.AuthorSequenceNumber) AS AuthorSequenceNumber
-    FROM @paperAuthorAffiliations AS A
-    INNER JOIN @papers AS P
-        ON A.PaperId == P.PaperId;
+    //Find the paper ids that are published for the input institution
+    @paperAuthorAffiliations =
+        SELECT @paperAuthorAffiliations.*
+        FROM @paperAuthorAffiliations
+            INNER JOIN
+                 @affiliations
+             ON @paperAuthorAffiliations._AffiliationId == @affiliations.AffiliationId
+        WHERE @affiliations.NormalizedName == @Param_UseSubgraphForInstitution;
 
-@paperAuthors =
-    SELECT P.PaperId,
-           A.NormalizedName AS AuthorName,
-           P.AuthorSequenceNumber
-    FROM @paperAuthorsDistinct AS P
-         INNER JOIN
-             @authors AS A
-         ON P.AuthorId == A.AuthorId;
+    //You can create sub-graphs based on other constraints by modifying the @papers table. This particular script will
+    //filter the @papers table to include only papers from the input institution.
+    @papers =
+        SELECT @papers.*
+        FROM @papers
+             LEFT SEMIJOIN
+                @paperAuthorAffiliations
+             ON @papers.PaperId == @paperAuthorAffiliations.PaperId;
 
-@paperAuthorsAggregated =
-    SELECT PaperId,
-           "[" + string.Join(",", MAP_AGG("\"" + AuthorName + "\"", AuthorSequenceNumber).OrderBy(a => a.Value).Select(a => a.Key)) + "]" AS Authors
-    FROM @paperAuthors
+    @paperFieldsOfStudy =
+        SELECT *
+        FROM @paperFieldsOfStudy
+             LEFT SEMIJOIN
+                 @papers
+             ON @paperFieldsOfStudy.PaperId == @papers.PaperId;
+
+    @affiliations =
+        SELECT *
+        FROM @affiliations
+             LEFT SEMIJOIN
+                 @paperAuthorAffiliations
+             ON @affiliations.AffiliationId == @paperAuthorAffiliations._AffiliationId;
+
+    @authors =
+        SELECT *
+        FROM @authors
+             LEFT SEMIJOIN
+                 @paperAuthorAffiliations
+             ON @authors.AuthorId == @paperAuthorAffiliations.AuthorId;
+
+    @conferenceInstances =
+        SELECT *
+        FROM @conferenceInstances
+             LEFT SEMIJOIN
+                 @papers
+             ON @conferenceInstances.ConferenceInstanceId == @papers._ConferenceInstanceId;
+
+    @conferenceSeries =
+        SELECT *
+        FROM @conferenceSeries
+             LEFT SEMIJOIN
+                 @papers
+             ON @conferenceSeries.ConferenceSeriesId == @papers._ConferenceSeriesId;
+
+    @fieldsOfStudy =
+        SELECT *
+        FROM @fieldsOfStudy
+             LEFT SEMIJOIN
+                 @paperFieldsOfStudy
+             ON @fieldsOfStudy.FieldOfStudyId == @paperFieldsOfStudy.FieldOfStudyId;
+
+    @journals =
+        SELECT *
+        FROM @journals
+             LEFT SEMIJOIN
+                 @papers
+             ON @journals.JournalId == @papers._JournalId;
+
+    @paperCitationContexts =
+        SELECT *
+        FROM @paperCitationContexts
+             LEFT SEMIJOIN
+                 @papers AS p1
+             ON @paperCitationContexts.PaperId == p1.PaperId
+             LEFT SEMIJOIN
+                @papers AS p2
+             ON @paperCitationContexts.PaperId == p2.PaperId;
+END;
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Reduce the relational data we want to index in MAKES down to a JSON string stored in a single column
+//
+////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Filter and reduce field of study children data into single attributes (Field Parents/Field Children) for each paper
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+@fieldOfStudyChildren =
+    SELECT
+        Fc.FieldOfStudyId AS ParentId,
+        Fc.ChildFieldOfStudyId AS ChildId,
+
+        //Using display name for backwards compatibility. Not a bug
+        Fr.DisplayName AS ChildName,
+        Fl.DisplayName AS ParentName
+    FROM @fieldOfStudyChildren AS Fc
+        INNER JOIN
+            @fieldsOfStudy AS Fl
+        ON Fc.FieldOfStudyId == Fl.FieldOfStudyId
+        INNER JOIN
+            @fieldsOfStudy AS Fr
+        ON Fc.ChildFieldOfStudyId == Fr.FieldOfStudyId;
+
+// Reduce field of study children table to create field children object json array for each field of study. Field children json object looks like {FId = “Fields of study Id”, FN = “Fields of study name”}
+@reducedFieldOfStudyChildren =
+    SELECT
+        ParentId AS FieldOfStudyId,
+
+        // Reduce the rows into a string representation of a list of fields of study json objects
+        string.Join(
+            ",",
+            ARRAY_AGG(
+            @JsonObjectFromAttributes(new string[]{
+                    @JsonAttribute("FId", ChildId),
+                    @JsonAttribute("FN", ChildName)
+            }))
+        .Take(@Param_MaximumFieldOfStudyChildrenCount)) AS FieldOfStudyChildren
+    FROM @fieldOfStudyChildren
+    GROUP BY ParentId;
+
+// Reduce field of study children data to create field parents per field of study
+@reducedFieldOfStudyParents =
+    SELECT
+        ChildId AS FieldOfStudyId,
+
+        // Reduce the rows into a string representation of a list of fields of study json objects
+        string.Join(
+            ",",
+            ARRAY_AGG(
+            @JsonObjectFromAttributes(new string[]{ 
+                    @JsonAttribute("FId", ParentId),
+                    @JsonAttribute("FN", ParentName)
+            }))
+        .Take(@Param_MaximumFieldOfStudyParentCount)) AS FieldOfStudyParents
+    FROM @fieldOfStudyChildren
+    GROUP BY ChildId;
+
+///////////////////////////////////////////////////////////////////////////////
+// Filter and reduce paper author data into a single attribute for each paper
+///////////////////////////////////////////////////////////////////////////////
+@paperAuthorAffiliations =
+    SELECT
+        @paperAuthorAffiliations.PaperId,
+        @paperAuthorAffiliations.AuthorId,
+        @paperAuthorAffiliations.OriginalAuthor,
+        @paperAuthorAffiliations.AffiliationId,
+        @paperAuthorAffiliations._AffiliationId,
+
+        // NOTE: Casting AuthorSequenceNumber to nullable as MAP_AGG requires it
+        ((uint?) @paperAuthorAffiliations.AuthorSequenceNumber) AS AuthorSequenceNumber
+    FROM @paperAuthorAffiliations;
+
+@paperAuthorAffiliations =
+    SELECT
+        @paperAuthorAffiliations.PaperId,
+        @paperAuthorAffiliations.AuthorId,
+        @authors.NormalizedName AS AuthorName,
+        !String.IsNullOrEmpty(@paperAuthorAffiliations.OriginalAuthor) ? @paperAuthorAffiliations.OriginalAuthor : @authors.DisplayName AS DisplayAuthorName,
+        @paperAuthorAffiliations.AffiliationId,
+        @affiliations.NormalizedName AS AffiliationName,
+        @affiliations.DisplayName AS DisplayAffiliationName,
+        @paperAuthorAffiliations.AuthorSequenceNumber AS Sequence
+    FROM @paperAuthorAffiliations
+        INNER JOIN
+            @authors
+        ON @paperAuthorAffiliations.AuthorId == @authors.AuthorId
+        LEFT OUTER JOIN
+            @affiliations
+        ON @paperAuthorAffiliations._AffiliationId == @affiliations.AffiliationId;
+
+// USQL has a maximum string size limitation of 131072 characters, which causes script errors for attributes that have a lot of values such as this.
+// To get around the issue we split the data into multiple buckets which will be output as separate columns in the final JSON output.
+@reducedPaperAuthorAffiliations =
+    SELECT
+        PaperId,
+
+        // Reduce the rows in paperAuthorAffiliations into a list of key/value pairs, with the key containing the JSON representation of the author/affiliation
+        SqlMap.Create(MAP_AGG(
+            @JsonObjectFromAttributes(new string[]{
+                @JsonAttribute("AuId", AuthorId),
+                @JsonAttribute("AuN", AuthorName),
+                @JsonAttribute("DAuN", DisplayAuthorName),
+                @JsonAttribute("S", Sequence),
+                AffiliationId == null ? null : @JsonAttribute("AfId", AffiliationId),
+                string.IsNullOrEmpty(AffiliationName) ? null : @JsonAttribute("AfN", AffiliationName),
+                string.IsNullOrEmpty(DisplayAffiliationName) ? null : @JsonAttribute("DAfN", DisplayAffiliationName)
+            }),
+        Sequence + "" + AffiliationId)) AS AuthorAffiliations
+    FROM @paperAuthorAffiliations
     GROUP BY PaperId;
 
-//
-// Filter and flatten paper field of study data into a single attribute for each paper
-//
-@paperFieldsOfStudy =
-    SELECT DISTINCT A.PaperId,
-                    A.FieldOfStudyId
-    FROM @paperFieldsOfStudy AS A
-    INNER JOIN @papers AS P
-        ON A.PaperId == P.PaperId;
+///////////////////////////////////////////////////////////////////////////////////////
+// Filter and reduce paper citation contexts into a single attribute for each paper
+///////////////////////////////////////////////////////////////////////////////////////
+@reducedPaperCitationContexts =
+    SELECT
+        PaperId,
+        PaperReferenceId,
 
+        // Reduce and the reference context into a list of reference context for each referenced paper
+        SqlArray.Create(ARRAY_AGG(
+            "\"" +
+            @jsonEscapeString(
+                CitationContext.Length <= @Param_MaximumCitationContextLength ? CitationContext :
+                    CitationContext.Substring(0, @Param_MaximumCitationContextLength) + "..."
+            )  +
+            "\"")
+            .Take(@Param_MaximumCitationContextPerCitation)) AS CitationContexts
+    FROM @paperCitationContexts
+    GROUP BY PaperId, PaperReferenceId;
+
+@reducedPaperCitationContexts =
+    SELECT
+        PaperId,
+
+        //For each paper, create a map of referenced paper to a string representation of a json object.
+        SqlMap.Create(MAP_AGG(PaperReferenceId.ToString(),
+
+            //The json object has the referenced paper id as keys and a list of citation context as values
+            @JsonRawAttribute(PaperReferenceId.ToString(), "[" + string.Join(",", CitationContexts) + "]")
+        )) AS CitationContexts
+    FROM @reducedPaperCitationContexts
+    GROUP BY PaperId;
+
+
+///////////////////////////////////////////////////////////////////////////////////////
+// Filter and reduce paper field of study data into a single attribute for each paper
+///////////////////////////////////////////////////////////////////////////////////////
 @paperFieldsOfStudy =
-    SELECT P.PaperId,
-           F.NormalizedName AS FieldOfStudyName
-    FROM @paperFieldsOfStudy AS P
+    SELECT
+        @paperFieldsOfStudy.PaperId,
+        @paperFieldsOfStudy.FieldOfStudyId,
+        @fieldsOfStudy.NormalizedName AS FieldOfStudyName,
+        @fieldsOfStudy.DisplayName AS DisplayFieldOfStudyName,
+        @paperFieldsOfStudy.Score
+    FROM @paperFieldsOfStudy
          INNER JOIN
-             @fieldsOfStudy AS F
-         ON P.FieldOfStudyId == F.FieldOfStudyId;
+             @fieldsOfStudy
+         ON @paperFieldsOfStudy.FieldOfStudyId == @fieldsOfStudy.FieldOfStudyId;
 
-@paperFieldsOfStudyAggregated =
-    SELECT PaperId,
-           "[" + string.Join(",", ARRAY_AGG("\"" + FieldOfStudyName + "\"")) + "]" AS FieldsOfStudy
+@reducedPaperFieldsOfStudy =
+    SELECT
+        PaperId,
+
+        // Reduce the rows into a string representation of a list fields of study json objects
+        string.Join(",", MAP_AGG(
+            @JsonObjectFromAttributes(new string[]{ 
+                @JsonAttribute("FId", FieldOfStudyId),
+                @JsonAttribute("FN", FieldOfStudyName),
+                @JsonAttribute("DFN", DisplayFieldOfStudyName)
+            }),
+
+            // use these fields as sort key to produce deterministic output
+            DisplayFieldOfStudyName + Score + FieldOfStudyId
+            ).OrderByDescending(fieldOfStudy => fieldOfStudy.Value)
+
+           // Once sorted, return only the reduced JSON string
+           .Select(fieldOfStudy => fieldOfStudy.Key)) AS FieldsOfStudy
     FROM @paperFieldsOfStudy
     GROUP BY PaperId;
 
+//////////////////////////////////////////////////////////////////////////////
+// Filter and reduce paper references into a single attribute for each paper
+//////////////////////////////////////////////////////////////////////////////
+@paperReferences =
+    SELECT
+        @paperReferences.PaperId,
+        @paperReferences.PaperReferenceId,
+        p2.Rank
+    FROM @paperReferences
+        LEFT SEMIJOIN
+            @papers AS p1
+        ON @paperReferences.PaperId == p1.PaperId
+        INNER JOIN
+            @papers AS p2
+        ON @paperReferences.PaperReferenceId == p2.PaperId;
+
+@reducedPaperReferences =
+    SELECT
+        PaperId,
+
+        // Reduce the rows into a list of key/value pairs, with the key containing the JSON representation
+        string.Join(",", MAP_AGG(PaperReferenceId, Rank + "" + PaperReferenceId)
+
+        // Order by score, stored in the value of the key/value pair
+        .OrderBy(referencedPaper => referencedPaper.Value)
+        .Take(@Param_MaximumReferencesPerPaper)
+
+        // Once sorted, return only the reduced JSON string
+        .Select(referencedPaper => referencedPaper.Key)) AS References
+    FROM @paperReferences
+    GROUP BY PaperId;
+
+////////////////////////////////////////////////////////////////////////
+// Filter and reduce paper urls into a single attribute for each paper
+////////////////////////////////////////////////////////////////////////
+@paperUrls =
+    SELECT
+        @paperUrls.PaperId,
+        @paperUrls.SourceType,
+        @paperUrls.SourceUrl
+    FROM @paperUrls
+         LEFT SEMIJOIN
+             @papers
+         ON @paperUrls.PaperId == @papers.PaperId;
+
+@reducedPaperUrls =
+    SELECT
+        PaperId,
+
+        // Reduce the rows into a single JSON string
+        string.Join(",", ARRAY_AGG(
+            @JsonObjectFromAttributes(new string[]{
+                SourceType == null ? null : @JsonAttribute("Ty", SourceType),
+                @JsonAttribute("U", SourceUrl)
+            }))
+            .OrderByDescending( str => str)) AS Urls
+    FROM @paperUrls
+    GROUP BY PaperId;
+
+////////////////////////////////////////////////////////////////////////
+// Aggregate estimated citation counts for each entity
+////////////////////////////////////////////////////////////////////////
+
+//Journal
+@journalEstimatedCitationCount =
+    SELECT
+        (long)@papers.JournalId AS JournalId,
+        (int) SUM(@papers.EstimatedCitation) AS EstimatedCitationCount
+    FROM @papers
+    WHERE JournalId != null
+    GROUP BY @papers.JournalId;
+
+//Affiliation
+@paperAffiliations =
+        SELECT DISTINCT
+            @paperAuthorAffiliations.AffiliationId AS AffiliationId,
+            @paperAuthorAffiliations.PaperId AS PaperId
+        FROM @paperAuthorAffiliations
+        WHERE @paperAuthorAffiliations.AffiliationId != null;
+
+@paperStatsAffiliations =
+    SELECT
+        @paperAffiliations.AffiliationId,
+        @papers.EstimatedCitation
+    FROM @paperAffiliations
+    INNER JOIN
+        @papers
+    ON @paperAffiliations.PaperId == @papers.PaperId;
+
+@affiliationEstimatedCitationCount =
+    SELECT
+        (long)@paperStatsAffiliations.AffiliationId AS AffiliationId,
+        (int) SUM(@paperStatsAffiliations.EstimatedCitation) AS EstimatedCitationCount
+    FROM @paperStatsAffiliations
+    GROUP BY @paperStatsAffiliations.AffiliationId;
+
+//Author
+@paperAuthors =
+    SELECT DISTINCT
+        @paperAuthorAffiliations.AuthorId,
+        @paperAuthorAffiliations.PaperId
+    FROM @paperAuthorAffiliations;
+
+@paperStatsAuthors =
+    SELECT
+        @paperAuthors.AuthorId,
+        @papers.EstimatedCitation AS EstimatedCitationCount
+    FROM @paperAuthors
+    INNER JOIN
+        @papers
+    ON @paperAuthors.PaperId == @papers.PaperId;
+
+@authorEstimatedCitationCount =
+    SELECT
+        AuthorId,
+        (int) SUM(@paperStatsAuthors.EstimatedCitationCount) AS EstimatedCitationCount
+    FROM @paperStatsAuthors
+    GROUP BY AuthorId;
+
+//Conference
+@conferenceEstimatedCitationCount =
+    SELECT
+        (long)@papers.ConferenceSeriesId AS ConferenceSeriesId,
+        (int) SUM(@papers.EstimatedCitation) AS EstimatedCitationCount
+    FROM @papers
+    WHERE @papers.ConferenceSeriesId != null
+    GROUP BY @papers.ConferenceSeriesId;
+
+//Conference Instance
+@conferenceInstanceEstimatedCitationCount =
+    SELECT
+        (long)@papers.ConferenceInstanceId AS ConferenceInstanceId,
+        (int) SUM(@papers.EstimatedCitation) AS EstimatedCitationCount
+    FROM @papers
+    WHERE @papers.ConferenceInstanceId != null
+    GROUP BY @papers.ConferenceInstanceId;  
+
+//Fields of study
+@paperStatsFieldsOfStudy =
+    SELECT
+        @paperFieldsOfStudy.FieldOfStudyId,
+        @papers.EstimatedCitation
+    FROM @paperFieldsOfStudy
+    INNER JOIN
+        @papers
+    ON @paperFieldsOfStudy.PaperId == @papers.PaperId;
+
+@fieldOfStudyEstimatedCitationCount =
+    SELECT FieldOfStudyId,
+            (int) SUM(@paperStatsFieldsOfStudy.EstimatedCitation) AS EstimatedCitationCount
+    FROM @paperStatsFieldsOfStudy
+    GROUP BY FieldOfStudyId;
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Entity json generation
 //
-// Generate tab delimited files containing the partitioned academic data we filtered/flattened above
+// Generate tables for each entity type that we want to index in MAKES. Note that each table must have
+// the exact same number of columns as we union the tables together before generating the final JSON files.
 //
-@paperDocumentFields =
-    SELECT P.PaperId,
-           P.Rank,
-           P.EstimatedCitation,
-           P.Year,
-           A.Authors,
-           P.PaperTitle,
-           F.FieldsOfStudy,
-           (int) (P.PaperId % @maximumIndexerCount) AS IndexerNumber,
-           (int) (P.PaperId % @maximumFileCountPerIndexer) AS FileNumber
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+@paperJson =
+    SELECT
+        (int) (P.PaperId % @Param_PartitionCount) AS PartitionNumber,
+        "{" AS Column001,
+        @JsonAttribute("weight", P.Rank) + "," AS Column002,
+        @JsonAttribute("Id", P.PaperId) + "," AS Column003,
+        (string.IsNullOrEmpty(P.Doi) ? "" : @JsonAttribute("DOI", P.Doi) + ",") AS Column004,
+        @JsonAttribute("Pt", @GetPublicationTypeValueFromString(P.DocType)) + "," AS Column005,
+        @JsonAttribute("Ti", P.PaperTitle) + "," AS Column006,
+        @JsonRawAttribute("W", @GenerateUniqueStringWords(P.PaperTitle)) + "," AS Column007,
+        @JsonAttribute("DN", P.OriginalTitle) + "," AS Column008,
+        (Abs.IndexedAbstract == null ? "" : @JsonRawAttribute("IA", Abs.IndexedAbstract) + ",") AS Column009,
+        (P.Year == null ? "" : @JsonAttribute("Y", P.Year.Value) + ",") AS Column010,
+        (P.Date == null ? "" : @JsonAttribute("D", P.Date.Value.ToString("yyyy-MM-dd")) + ",") AS Column011,
+        @JsonAttribute("CC", P.CitationCount) + "," AS Column012,
+        @JsonAttribute("ECC", P.EstimatedCitation) + "," AS Column013,
+
+        //Advanced information
+        (Urls.Urls == null ? "" : "\"S\":[" + Urls.Urls + "],") AS Column014,
+        (F.FieldsOfStudy == null ? "" : "\"F\":[" + F.FieldsOfStudy + "],") AS Column015,
+
+        //Journal information
+        (P.JournalId == null ? "" : @JsonRawAttribute("J", @JsonObjectFromAttributes(new string[]{ 
+            @JsonAttribute("JId", P.JournalId.Value),
+            @JsonAttribute("JN", J.NormalizedName)
+        })) + ",") AS Column016,
+        (string.IsNullOrEmpty(P.Publisher) ? "" : @JsonAttribute("PB", P.Publisher) + ",") AS Column017,
+        (string.IsNullOrEmpty(P.Volume) ? "" : @JsonAttribute("V", P.Volume) + ",") AS Column018,
+        (string.IsNullOrEmpty(P.Issue) ? "" : @JsonAttribute("I", P.Issue) + ",") AS Column019,
+        (string.IsNullOrEmpty(P.FirstPage) ? "" : @JsonAttribute("FP", P.FirstPage) + ",") AS Column020,
+        (string.IsNullOrEmpty(P.LastPage) ? "" : @JsonAttribute("LP", P.LastPage) + ",") AS Column021,
+
+        //Conference information
+        (P.ConferenceSeriesId == null ? "" : @JsonRawAttribute("C", @JsonObjectFromAttributes(new string[]{ 
+            @JsonAttribute("CId", P.ConferenceSeriesId.Value),
+            @JsonAttribute("CN", Cs.NormalizedName.ToLower())
+        })) + ",") AS Column022,
+
+        //Venue information
+        @JsonAttribute("VFN",
+            Cs.DisplayName != null ? Cs.DisplayName :  
+                J.DisplayName != null ? J.DisplayName :
+                    P.OriginalVenue
+            ) + "," AS Column023,
+        (Cs.DisplayName == null ? "" : @JsonAttribute("VSN", Cs.NormalizedName) + ",") AS Column024,
+
+        (Cs.DisplayName == null ? "" : @JsonAttribute("VSN", Cs.NormalizedName) + ",") AS Column025,
+        (Abs.IndexedAbstract == null?"" : @JsonRawAttribute("IA", Abs.IndexedAbstract) + ",") AS Column026,
+
+        // Author affiliations
+        (A.AuthorAffiliations == null ? "" : "\"AA\":[") AS Column027,
+
+        //There may be too many author affiliations to fit in a single column. Split it into two buckets
+        (A.AuthorAffiliations == null ? "" :
+            string.Join(",", A.AuthorAffiliations
+
+            // Order by author sequence number, stored in the value of the key/value pair
+            .OrderBy(authorAffiliation => authorAffiliation.Value)
+            .Take(@Param_MaximumPaperAuthorPerBucket)
+            .Select(authorAffiliation => authorAffiliation.Key)
+            )) AS Column028,
+
+        //The second bucket for the author affiliations if needed.
+        (A.AuthorAffiliations == null || A.AuthorAffiliations.Count() <= @Param_MaximumPaperAuthorPerBucket ? "" : "," +
+            string.Join(",", A.AuthorAffiliations
+            .OrderBy(authorAffiliation => authorAffiliation.Value)
+            .Skip(@Param_MaximumPaperAuthorPerBucket)
+            .Take(@Param_MaximumPaperAuthorPerBucket)
+            .Select(authorAffiliation => authorAffiliation.Key))) AS Column029,
+        (A.AuthorAffiliations == null ? "" : "],") AS Column030,
+
+        //References
+        (Ref.References == null?"" : "\"RId\":[" + Ref.References + "],") AS Column031,
+
+        //Citation contexts
+        (Con.CitationContexts == null ? "" : "\"CitCon\":{") AS Column032,
+
+        //First bucket
+        (Con.CitationContexts == null ? "" :
+            string.Join(",", Con.CitationContexts
+                .OrderBy(citationContext => citationContext.Key)
+                .Take(@Param_MaximumCitationContextPerBucket)
+                .Select(citationContext => citationContext.Value))) AS Column033,
+
+        //Second bucket
+        (Con.CitationContexts == null || Con.CitationContexts.Count() <= @Param_MaximumCitationContextPerBucket ? "" : "," +
+            string.Join(",", Con.CitationContexts
+                           .OrderBy(citationContext => citationContext.Key)
+                           .Skip(@Param_MaximumCitationContextPerBucket)
+                           .Take(@Param_MaximumCitationContextPerBucket)
+                           .Select(citationContext => citationContext.Value))) AS Column034,
+        (Con.CitationContexts == null ? "" : "},") AS Column035,
+
+        "" AS Column036,
+        "" AS Column037,
+        "" AS Column038,
+        @JsonAttribute("Ty", "0") AS Column039,
+        "}" AS Column040
     FROM @papers AS P
          LEFT OUTER JOIN
-             @paperAuthorsAggregated AS A
+             @conferenceSeries AS Cs
+         ON P._ConferenceSeriesId == Cs.ConferenceSeriesId
+         LEFT OUTER JOIN
+             @journals AS J
+         ON P._JournalId == J.JournalId
+         LEFT OUTER JOIN
+             @paperAbstractsInvertedIndex AS Abs
+         ON P.PaperId == Abs.PaperId
+         LEFT OUTER JOIN
+             @reducedPaperAuthorAffiliations AS A
          ON P.PaperId == A.PaperId
          LEFT OUTER JOIN
-             @paperFieldsOfStudyAggregated AS F
-         ON P.PaperId == F.PaperId;
+             @reducedPaperFieldsOfStudy AS F
+         ON P.PaperId == F.PaperId
+         LEFT OUTER JOIN
+             @reducedPaperReferences AS Ref
+         ON P.PaperId == Ref.PaperId
+         LEFT OUTER JOIN
+             @reducedPaperUrls AS Urls
+         ON P.PaperId == Urls.PaperId
+         LEFT OUTER JOIN
+             @reducedPaperCitationContexts AS Con
+         ON P.PaperId == Con.PaperId;
 
-//
-// Generates partitioned files based on the values in the ForIndexerNumber and PartitionNumber columns
-//
-OUTPUT @paperDocumentFields
-TO @outputUri
+@affiliationJson =
+    SELECT
+           (int) (Af.AffiliationId % @Param_PartitionCount) AS PartitionNumber,
+           "{" AS Column001,
+           @JsonAttribute("weight", Af.Rank) + "," AS Column002,
+           @JsonAttribute("Id", Af.AffiliationId) + "," AS Column003,
+           @JsonAttribute("DAfN", Af.DisplayName) + "," AS Column004,
+           @JsonAttribute("AfN", Af.NormalizedName) + "," AS Column005,
+           @JsonAttribute("PC", Af.PaperCount) + "," AS Column006,
+           @JsonAttribute("CC", Af.CitationCount) + "," AS Column007,
+           @JsonAttribute("ECC", AfEcc.EstimatedCitationCount) + "," AS Column008,
+           "" AS Column009,
+           "" AS Column010,
+           "" AS Column011,
+           "" AS Column012,
+           "" AS Column013,
+           "" AS Column014,
+           "" AS Column015,
+           "" AS Column016,
+           "" AS Column017,
+           "" AS Column018,
+           "" AS Column019,
+           "" AS Column020,
+           "" AS Column021,
+           "" AS Column022,
+           "" AS Column023,
+           "" AS Column024,
+           "" AS Column025,
+           "" AS Column026,
+           "" AS Column027,
+           "" AS Column028,
+           "" AS Column029,
+           "" AS Column030,
+           "" AS Column031,
+           "" AS Column032,
+           "" AS Column033,
+           "" AS Column034,
+           "" AS Column035,
+           "" AS Column036,
+           "" AS Column037,
+           "" AS Column038,
+           @JsonAttribute("Ty", "5") AS Column039,
+           "}" AS Column040
+    FROM @affiliations AS Af
+        LEFT OUTER JOIN
+            @affiliationEstimatedCitationCount AS AfEcc
+        ON Af.AffiliationId == AfEcc.AffiliationId;
+
+@authorJson =
+    SELECT
+           (int) (Au.AuthorId % @Param_PartitionCount) AS PartitionNumber,
+           "{" AS Column001,
+           @JsonAttribute("weight", Au.Rank) + "," AS Column002,
+           @JsonAttribute("Id", Au.AuthorId)+ "," AS Column003,
+           @JsonAttribute("DAuN", Au.DisplayName) + "," AS Column004,
+           @JsonAttribute("AuN", Au.NormalizedName) + "," AS Column005,
+           (Af.AffiliationId == null ? "" :
+               @JsonRawAttribute("LKA", @JsonObjectFromAttributes(new string[]{
+                        @JsonAttribute("AfId", Au.LastKnownAffiliationId),
+                        @JsonAttribute("AfN", Af.NormalizedName)
+                })) + ",") AS Column006,
+           @JsonAttribute("PC", Au.PaperCount) + "," AS Column007,
+           @JsonAttribute("CC", Au.CitationCount) + "," AS Column008,
+           @JsonAttribute("ECC", AuEcc.EstimatedCitationCount) + "," AS Column009,
+           "" AS Column010,
+           "" AS Column011,
+           "" AS Column012,
+           "" AS Column013,
+           "" AS Column014,
+           "" AS Column015,
+           "" AS Column016,
+           "" AS Column017,
+           "" AS Column018,
+           "" AS Column019,
+           "" AS Column020,
+           "" AS Column021,
+           "" AS Column022,
+           "" AS Column023,
+           "" AS Column024,
+           "" AS Column025,
+           "" AS Column026,
+           "" AS Column027,
+           "" AS Column028,
+           "" AS Column029,
+           "" AS Column030,
+           "" AS Column031,
+           "" AS Column032,
+           "" AS Column033,
+           "" AS Column034,
+           "" AS Column035,
+           "" AS Column036,
+           "" AS Column037,
+           "" AS Column038,
+
+           @JsonAttribute("Ty", "1") AS Column039,
+           "}" AS Column040
+    FROM @authors AS Au
+         LEFT OUTER JOIN
+             @affiliations AS Af
+         ON Au._LastKnownAffiliationId == Af.AffiliationId
+         LEFT OUTER JOIN
+            @authorEstimatedCitationCount AS AuEcc
+         ON  Au.AuthorId == AuEcc.AuthorId;
+
+@conferenceInstanceJson =
+    SELECT
+           (int) (Ci.ConferenceInstanceId % @Param_PartitionCount) AS PartitionNumber,
+           "{" AS Column001,
+           @JsonAttribute("weight", Cs.Rank) + "," AS Column002,
+           @JsonAttribute("Id", Ci.ConferenceInstanceId) + "," AS Column003,
+           @JsonAttribute("FN", Ci.DisplayName) + "," AS Column004,
+           @JsonAttribute("DCN", Ci.DisplayName) + "," AS Column005,
+           @JsonAttribute("CIN", Ci.NormalizedName) + "," AS Column006,
+           @JsonAttribute("PC", Ci.PaperCount) + "," AS Column007,
+           @JsonAttribute("CC", Ci.CitationCount) + "," AS Column008,
+           @JsonAttribute("ECC", CiEcc.EstimatedCitationCount == null ? 0 : CiEcc.EstimatedCitationCount) + "," AS Column009,
+           (string.IsNullOrEmpty(Ci.Location) ? "" : @JsonAttribute("CIL", Ci.Location) + ",") AS Column010,
+           (string.IsNullOrEmpty(Ci.OfficialUrl) ? "" : "\"S\":[" + @JsonObjectFromAttributes(new string[]{
+                @JsonAttribute("Ty", 1),
+                @JsonAttribute("U", Ci.OfficialUrl)
+            }) + "],") AS Column011,
+
+           //Parent conference series
+           @JsonRawAttribute("PCS", @JsonObjectFromAttributes(new string[]{
+                @JsonAttribute("CId", Ci.ConferenceSeriesId),
+                @JsonAttribute("CN" , Cs.NormalizedName)
+            })) + "," AS Column012,
+
+           //Individual conference dates as attributes
+           (Ci.StartDate == null ? "" : @JsonAttribute("CISD", Ci.StartDate.Value.ToString("yyyy-MM-dd")) + ",") AS Column013,
+           (Ci.EndDate == null ? "" : @JsonAttribute("CIED", Ci.EndDate.Value.ToString("yyyy-MM-dd")) + ",") AS Column014,
+           (Ci.AbstractRegistrationDate == null ? "" : @JsonAttribute("CIARD", Ci.AbstractRegistrationDate.Value.ToString("yyyy-MM-dd")) + ",") AS Column015,
+           (Ci.SubmissionDeadlineDate == null ? "" : @JsonAttribute("CISDD", Ci.SubmissionDeadlineDate.Value.ToString("yyyy-MM-dd")) + ",") AS Column016,
+           (Ci.NotificationDueDate == null ? "" : @JsonAttribute("CINDD", Ci.NotificationDueDate.Value.ToString("yyyy-MM-dd")) + ",") AS Column017,
+           (Ci.FinalVersionDueDate == null ? "" : @JsonAttribute("CIFVD", Ci.FinalVersionDueDate.Value.ToString("yyyy-MM-dd")) + ",") AS Column018,
+
+           //Conference dates represented as an array of events
+           "\"CD\":[" + string.Join(",", new string[]{
+                @JsonObjectFromAttributes(new string[]{
+                    @JsonAttribute("T", "StartDate"),
+                    Ci.StartDate == null ? null : @JsonAttribute("D", Ci.StartDate.Value.ToString("yyyy-MM-dd"))
+                }),
+                @JsonObjectFromAttributes(new string[]{
+                    @JsonAttribute("T", "EndDate"),
+                    Ci.EndDate == null ? null : @JsonAttribute("D", Ci.EndDate.Value.ToString("yyyy-MM-dd"))
+                }),
+                @JsonObjectFromAttributes(new string[]{
+                    @JsonAttribute("T", "AbstractRegistrationDate"),
+                    Ci.AbstractRegistrationDate == null ? null : @JsonAttribute("D", Ci.AbstractRegistrationDate.Value.ToString("yyyy-MM-dd"))
+                }),
+                @JsonObjectFromAttributes(new string[]{
+                    @JsonAttribute("T", "SubmissionDeadlineDate"),
+                    Ci.SubmissionDeadlineDate == null ? null : @JsonAttribute("D", Ci.SubmissionDeadlineDate.Value.ToString("yyyy-MM-dd"))
+                }),
+                @JsonObjectFromAttributes(new string[]{
+                    @JsonAttribute("T", "NotificationDueDate"),
+                    Ci.NotificationDueDate == null ? null : @JsonAttribute("D", Ci.NotificationDueDate.Value.ToString("yyyy-MM-dd"))
+                }),
+                @JsonObjectFromAttributes(new string[]{
+                    @JsonAttribute("T", "FinalVersionDueDate"),
+                    Ci.FinalVersionDueDate == null ? null : @JsonAttribute("D", Ci.FinalVersionDueDate.Value.ToString("yyyy-MM-dd"))
+                })
+           }) + "]," AS Column019,
+           "" AS Column020,
+           "" AS Column021,
+           "" AS Column022,
+           "" AS Column023,
+           "" AS Column024,
+           "" AS Column025,
+           "" AS Column026,
+           "" AS Column027,
+           "" AS Column028,
+           "" AS Column029,
+           "" AS Column030,
+           "" AS Column031,
+           "" AS Column032,
+           "" AS Column033,
+           "" AS Column034,
+           "" AS Column035,
+           "" AS Column036,
+           "" AS Column037,
+           "" AS Column038,
+           @JsonAttribute("Ty", "4") AS Column039,
+           "}" AS Column040
+    FROM @conferenceInstances AS Ci
+         LEFT OUTER JOIN
+             @conferenceSeries AS Cs
+         ON Ci.ConferenceSeriesId == Cs.ConferenceSeriesId
+         LEFT OUTER JOIN
+             @conferenceInstanceEstimatedCitationCount AS CiEcc
+         ON Ci.ConferenceInstanceId == CiEcc.ConferenceInstanceId;
+
+@conferenceSeriesJson =
+    SELECT
+           (int) (Cs.ConferenceSeriesId % @Param_PartitionCount) AS PartitionNumber,
+           "{" AS Column001,
+           @JsonAttribute("weight", Cs.Rank) + "," AS Column002,
+           @JsonAttribute("Id", Cs.ConferenceSeriesId) + "," AS Column003,
+           @JsonAttribute("DCN", Cs.DisplayName) + "," AS Column004,
+           @JsonAttribute("CN", Cs.NormalizedName.ToLower()) + "," AS Column005,
+           @JsonAttribute("PC", Cs.PaperCount) + "," AS Column006,
+           @JsonAttribute("CC", Cs.CitationCount) + "," AS Column007,
+           @JsonAttribute("ECC", CsEcc.EstimatedCitationCount) + "," AS Column008,
+           "" AS Column009,
+           "" AS Column010,
+           "" AS Column011,
+           "" AS Column012,
+           "" AS Column013,
+           "" AS Column014,
+           "" AS Column015,
+           "" AS Column016,
+           "" AS Column017,
+           "" AS Column018,
+           "" AS Column019,
+           "" AS Column020,
+           "" AS Column021,
+           "" AS Column022,
+           "" AS Column023,
+           "" AS Column024,
+           "" AS Column025,
+           "" AS Column026,
+           "" AS Column027,
+           "" AS Column028,
+           "" AS Column029,
+           "" AS Column030,
+           "" AS Column031,
+           "" AS Column032,
+           "" AS Column033,
+           "" AS Column034,
+           "" AS Column035,
+           "" AS Column036,
+           "" AS Column037,
+           "" AS Column038,
+           @JsonAttribute("Ty", "3") AS Column039,
+           "}" AS Column040
+    FROM @conferenceSeries AS Cs
+         LEFT OUTER JOIN
+            @conferenceEstimatedCitationCount AS CsEcc
+         ON Cs.ConferenceSeriesId == CsEcc.ConferenceSeriesId;
+
+@fieldOfStudyJson =
+    SELECT
+           (int) (Fos.FieldOfStudyId % @Param_PartitionCount) AS PartitionNumber,
+           "{" AS Column001,
+           @JsonAttribute("weight", Fos.Rank) + "," AS Column002,
+           @JsonAttribute("Id", Fos.FieldOfStudyId) + "," AS Column003,
+           @JsonAttribute("DFN", Fos.DisplayName) + "," AS Column004,
+           @JsonAttribute("FN", Fos.NormalizedName) + "," AS Column005,
+           @JsonAttribute("FL", Fos.Level) + "," AS Column006,
+           @JsonAttribute("PC", Fos.PaperCount) + "," AS Column007,
+           @JsonAttribute("CC", Fos.CitationCount) + "," AS Column008,
+           @JsonAttribute("ECC", FosEcc.EstimatedCitationCount == null ? 0 : FosEcc.EstimatedCitationCount) + "," AS Column009, 
+           (Ch.FieldOfStudyChildren == null? "" : "\"FC\":[" + Ch.FieldOfStudyChildren + "],") AS Column010,
+           (Pr.FieldOfStudyParents == null ? "" :  "\"FP\":[" + Pr.FieldOfStudyParents + "],") AS Column011,
+           "" AS Column012,
+           "" AS Column013,
+           "" AS Column014,
+           "" AS Column015,
+           "" AS Column016,
+           "" AS Column017,
+           "" AS Column018,
+           "" AS Column019,
+           "" AS Column020,
+           "" AS Column021,
+           "" AS Column022,
+           "" AS Column023,
+           "" AS Column024,
+           "" AS Column025,
+           "" AS Column026,
+           "" AS Column027,
+           "" AS Column028,
+           "" AS Column029,
+           "" AS Column030,
+           "" AS Column031,
+           "" AS Column032,
+           "" AS Column033,
+           "" AS Column034,
+           "" AS Column035,
+           "" AS Column036,
+           "" AS Column037,
+           "" AS Column038,
+           @JsonAttribute("Ty", "6") AS Column039,
+           "}" AS Column040
+    FROM @fieldsOfStudy AS Fos
+         LEFT OUTER JOIN
+             @reducedFieldOfStudyChildren AS Ch
+         ON Fos.FieldOfStudyId == Ch.FieldOfStudyId
+         LEFT OUTER JOIN
+            @reducedFieldOfStudyParents AS Pr
+         ON Fos.FieldOfStudyId == Pr.FieldOfStudyId
+         LEFT OUTER JOIN
+            @fieldOfStudyEstimatedCitationCount AS FosEcc
+         ON Fos.FieldOfStudyId == FosEcc.FieldOfStudyId;
+
+@journalJson =
+    SELECT
+           (int) (J.JournalId % @Param_PartitionCount) AS PartitionNumber,
+           "{" AS Column001,
+           @JsonAttribute("weight", J.Rank) + "," AS Column002,
+           @JsonAttribute("Id", J.JournalId) + "," AS Column003,
+           @JsonAttribute("DJN", J.DisplayName) + "," AS Column004,
+           @JsonAttribute("JN", J.NormalizedName) + "," AS Column005,
+           @JsonAttribute("PC", J.PaperCount) + "," AS Column006,
+           @JsonAttribute("CC", J.CitationCount) + "," AS Column007,
+           @JsonAttribute("ECC", JEcc.EstimatedCitationCount == null ? 0 : JEcc.EstimatedCitationCount) + "," AS Column008,
+           "" AS Column009,
+           "" AS Column010,
+           "" AS Column011,
+           "" AS Column012,
+           "" AS Column013,
+           "" AS Column014,
+           "" AS Column015,
+           "" AS Column016,
+           "" AS Column017,
+           "" AS Column018,
+           "" AS Column019,
+           "" AS Column020,
+           "" AS Column021,
+           "" AS Column022,
+           "" AS Column023,
+           "" AS Column024,
+           "" AS Column025,
+           "" AS Column026,
+           "" AS Column027,
+           "" AS Column028,
+           "" AS Column029,
+           "" AS Column030,
+           "" AS Column031,
+           "" AS Column032,
+           "" AS Column033,
+           "" AS Column034,
+           "" AS Column035,
+           "" AS Column036,
+           "" AS Column037,
+           "" AS Column038,
+           @JsonAttribute("Ty", "2") AS Column039,
+           "}" AS Column040
+    FROM @journals AS J
+         LEFT OUTER JOIN
+            @journalEstimatedCitationCount AS JEcc
+         ON J.JournalId == JEcc.JournalId;
+
+@merged =
+    SELECT *
+    FROM @paperJson
+    UNION ALL
+    SELECT *
+    FROM @affiliationJson
+    UNION ALL
+    SELECT *
+    FROM @authorJson
+    UNION ALL
+    SELECT *
+    FROM @conferenceInstanceJson
+    UNION ALL
+    SELECT *
+    FROM @conferenceSeriesJson
+    UNION ALL
+    SELECT *
+    FROM @fieldOfStudyJson
+    UNION ALL
+    SELECT *
+    FROM @journalJson;
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////
+//// Generates partitioned files based on the values in the ForIndexerNumber and PartitionNumber columns
+//////////////////////////////////////////////////////////////////////////////////////////////////////////
+OUTPUT @merged
+TO @outputFilePattern
 USING Outputters.Tsv(quoting : false);
+
+
+//////////////////////////////////////////////////////////
+// Output files by entity type. Used for debug purposes.
+//////////////////////////////////////////////////////////
+IF @outputFileByEntityType THEN
+    OUTPUT @paperJson
+    TO @Out_OutputPath + "/papers/{PartitionNumber}.json"
+    USING Outputters.Tsv(quoting : false);
+
+    OUTPUT @affiliationJson
+    TO @Out_OutputPath + "/affiliations/{PartitionNumber}.json"
+    USING Outputters.Tsv(quoting : false);
+
+    OUTPUT @authorJson
+    TO @Out_OutputPath + "/authors/{PartitionNumber}.json"
+    USING Outputters.Tsv(quoting : false);
+
+    OUTPUT @conferenceInstanceJson
+    TO @Out_OutputPath + "/conferenceInstances/{PartitionNumber}.json"
+    USING Outputters.Tsv(quoting : false);
+
+    OUTPUT @conferenceSeriesJson
+    TO @Out_OutputPath + "/conferenceSeries/{PartitionNumber}.json"
+    USING Outputters.Tsv(quoting : false);
+
+    OUTPUT @fieldOfStudyJson
+    TO @Out_OutputPath + "/fieldsOfStudy/{PartitionNumber}.json"
+    USING Outputters.Tsv(quoting : false);
+
+    OUTPUT @journalJson
+    TO @Out_OutputPath + "/journals/{PartitionNumber}.json"
+    USING Outputters.Tsv(quoting : false);
+END;
 ```
 
 1. Replace placeholder values in the script using the table below
 
    |Value  |Description  |
    |---------|---------|
-   |**`<MagAzureStorageAccount>`** | The name of your Azure Storage account containing the Microsoft Academic Graph data set. |
-   |**`<MagContainer>`** | The container name in your Azure Storage account containing the Microsoft Academic graph data set, usually in the form of **mag-yyyy-mm-dd**. |
-   |**`<OutputAzureStorageAccount>`** | The name of your Azure Storage account where you'd like the text documents to go. |
-   |**`<OutputContainer>`** | The container name in your Azure Storage account where you'd like the text documents to go. |
+   |**`@In_MagBlobAccount`** | The name of your Azure Storage account containing the Microsoft Academic Graph data set. |
+   |**`@In_MagBlobContainer`** | The container name in your Azure Storage account containing the Microsoft Academic graph data set, usually in the form of **mag-yyyy-mm-dd**. |
+   |**`@Out_OutputPath string`** | The name of your Azure Storage account where you'd like the text documents to go. |
+   |**`@Param_UseSubgraphForInstitution`** | The container name in your Azure Storage account where you'd like the text documents to go.|
 
     > [!TIP]
     > This tutorial uses Microsoft as an organization by default. You can target any organization by finding its NormalizedName in the Microsoft Academic Graph and then changing the value of the affiliationNormalizedNameFilter variable to said name.
@@ -196,11 +1256,9 @@ USING Outputters.Tsv(quoting : false);
 
 1. Provide a **Job name**, change **AUs** to 50, and select **Submit**
 
-   ![Submit GenerateAzureSearchData job](../graph/media/tutorial-search-submit-usql.png)
+   ![Submit GenerateAzureSearchData job](media/how-to-create-index-create-job.png)
 
 1. The job should finish successfully in about 5 minutes
-
-   ![GenerateAzureSearchData job status](../graph/media/tutorial-search-usql-status.png)
 
 
 ## Build index using MAKES command line tool
@@ -225,9 +1283,9 @@ kesm CreateIndexResources --IndexResourceName <IndexResourceName> --MakesPackage
 
 | Values | Description |
 |---------|---------|
-|**`<IndexResourceName>`** | The name of the indexing resources you created above |
-|**`<MakesPackageLocation>`** | The location of the MAKES package that you created above |
-|**`<MakesIndexResourceConfigFilePath>`** | The file path and name of the file that will hold the configuration information to build your index |
+|**`<IndexResourceName>`** | The name of the indexing resources you created above. |
+|**`<MakesPackageLocation>`** | The location of the MAKES package that you created above. |
+|**`<MakesIndexResourceConfigFilePath>`** | The file path and name of the file that will hold the configuration information to build your index. <br/> **makesIndexResConfig.json** is the name that you would generally use here.|
 
 ### Submit index build job
 
@@ -240,4 +1298,12 @@ The final step to generate your index is to submit a job to ADLA via the kesm to
 
 ## Next steps
 
-Now that you have successfullly generated an index, you can deploy this index to a new or existing MAKES deployment.  See [Create an API instance](get-started-create-api-instances.md).
+Now that you have successfullly generated an index, you can deploy this index to a new or existing MAKES deployment.  You will follow the same proceedures as deploying an index from your MAKES subscription, but replacing the **--MakesIndex** parameter with the path to the output of this example.
+
+```cmd
+
+--MakesIndex "https://yourstorageaccount.blob.core.windows.net/makes/2019-01-23/subgraph/microsoft/index"
+
+````
+
+See [Create an API instance](get-started-create-api-instances.md).
