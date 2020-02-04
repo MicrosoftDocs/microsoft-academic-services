@@ -6,7 +6,7 @@ ms.date: 02/05/2020
 ---
 # About Microsoft Academic Knowledge Exploration Service
 
-Microsoft Academic Knowledge Exploration Service (MAKES) was created to unlock the power of the [Microsoft Academic Graph (MAG)](../graph/index.yml) for realtime applications.  It enables users to build interactive solutions for knowledge based applications that can scale and deliver high quality results.  MAKES is a turn-key solution; running a single script will provision in Azure private instances of an interactive academic search API, powered by [Knowledge Exploration Service (KES) APIs](#knowledge-exploration-service).  For an example of what can be built using MAKES, see the [Microsoft Academic Website](https://academic.microsoft.com/).
+Microsoft Academic Knowledge Exploration Service (MAKES) was created to unlock the power of the [Microsoft Academic Graph (MAG)](../graph/index.yml) for realtime applications.  It enables users to build interactive solutions for knowledge based applications that can scale and deliver high quality results.  MAKES is a turn-key solution; running a single script will provision in Azure private instances of an interactive academic search API, powered by [Knowledge Exploration Service (KES)](#knowledge-exploration-service) APIs.  For an example of what can be built using MAKES, see the [Microsoft Academic Website](https://academic.microsoft.com/).
 
 Once signed up for MAKES, new versions of the service and indexes will be delivered to you every 1-2 weeks.  Users have the option of using the default index supplied by the service, which includes all the entities and meta data included in MAG, or using a sub-graph of MAG to create their own custom indexes to power MAKES.  Users are also able to combine private data with the data from MAG to create custom indexes and search experiences for MAKES.
 
@@ -18,13 +18,13 @@ Here are some key features of the Microsoft Academic Knowledge Exploration Servi
 
 - *Create knowledge applications* - MAKES enables users to build dynamic knowledge applications that can analyze the state of research in particular areas, compare individuals and institutions and find objective connections between entities.  Check out our tutorials and samples for useful examples!
 
-- *Add a large corpus of academic entities to an existing search solution* - Integrating MAKES can help enhance existing search solutions by giving users access to a large corpus of academic research.
+- *Add a large corpus of academic entities to an existing search solution* - Integrating MAKES can help enhance existing search solutions by giving users access to a large corpus of academic knowledge.
 
-- *Customization using the MAKES build tool* - In some cases you may not need all of the data in MAG, or you would like combine your own private data with MAG.  With the MAKES build tool you can easily create their own custom indexes using subsets or super-sets of the Microsoft Academic Graph.  As an example, you could build an index specific to certain Journals or Institutions while including publications from your own organization.
+- *Customize using the Knowledge Exploration Service Management tool* -In some cases you may not need all of the data in MAG, or you would like combine your own private data with MAG. With the Knowledge Exploration Service Management tool(kesm.exe) you can easily create custom indexes and hosting options. using subsets or super-sets of the Microsoft Academic Graph. As an example, you could build an index specific to certain Journals or Institutions while including publications from your own organization.
 
 ## What is MAKES?
 
-The Microsoft Academic knowledge Exploration Service (MAKES) in its' basic form is a self hosted [REST API](reference-makes-api.md) leveraging an index of all the entities in the Microsoft Academic Graph (MAG).  By subscribing to MAKES, the required components are delivered to your Azure subscription when new versions of MAG are created; typically once every 1 to 2 weeks.  A provided script can then be run and MAKES instances are automatically provisioned to your Azure account.
+The Microsoft Academic knowledge Exploration Service (MAKES) in its' basic form is a self hosted [REST API](reference-makes-api.md) leveraging an index of all the entities in the Microsoft Academic Graph (MAG).  By subscribing to MAKES, the required components are delivered to your Azure subscription when new versions of MAG are created; typically once every 1 to 2 weeks.  A provided tool can then be run and MAKES instances are automatically provisioned to your Azure account.
 
 The components shipped to a MAKES subscription include:
 
@@ -34,7 +34,7 @@ The components shipped to a MAKES subscription include:
 
 - *Language model* - A binary grammar file built to support academic related queries using [KES](#knowledge-exploration-service). The grammar file is a SRGS based language model to support the natural language query processing provided by the MAKES Interpret method.
 
-- *Management tools* - Includes tools that help users customize MAKES and deploy instances to Azure.
+- *Management tools* - Includes tools that help users customize MAKES and deploy instances to Azure. See the [Command Line Tool documentation](reference-makes-command-line-tool.md) for more details.
 
 ## MAKES Architecture
 
