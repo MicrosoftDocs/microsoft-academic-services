@@ -24,13 +24,13 @@ MAKES indexes are generated from specifically formatted MAG data.  In order to c
 
 ![Add a data source](media/how-to-create-index-datasources.png)
 
-1. Add the storage account you have set up for MAG by clicking "Add data source", select "Account Name" as the selection method and type the storage account name for your MAG deployment.
+2. Add the storage account you have set up for MAG by clicking "Add data source", select "Account Name" as the selection method and type the storage account name for your MAG deployment.
 
 ![Add storage account by name](media/how-to-create-index-add-storage-account.png)
 
-1. select **Overview > New Job**.
+3. Select **Overview > New Job**.
 
-1. Copy and past the following code block in the script window.
+4. Copy and paste the following code block in the script window.
 
 ```U-SQL
 DECLARE @In_MagBlobAccount string = "isrcmagstore";
@@ -1254,12 +1254,11 @@ END;
     >
     > Please note that doing this may impact time estimates for script execution and index generation later on in this tutorial.
 
-1. Provide a **Job name**, change **AUs** to 50, and select **Submit**
+5. Provide a **Job name**, change **AUs** to 50, and select **Submit**
 
    ![Submit GenerateAzureSearchData job](media/how-to-create-index-create-job.png)
 
-1. The job should finish successfully in about 5 minutes
-
+The job should finish successfully in about 5 minutes
 
 ## Build index using MAKES command line tool
 
@@ -1281,6 +1280,7 @@ kesm CreateIndexResources --IndexResourceName <IndexResourceName> --MakesPackage
 
 1. Replace the default values with the values from the table below:
 
+
 | Values | Description |
 |---------|---------|
 |**`<IndexResourceName>`** | The name of the indexing resources you created above. |
@@ -1291,10 +1291,10 @@ kesm CreateIndexResources --IndexResourceName <IndexResourceName> --MakesPackage
 
 The final step to generate your index is to submit a job to ADLA via the kesm tool.  The kesm tool uses Azure resources to generate index and when finished will place the new index in your storage account to deploy.
 
-> [!IMPORTANT]
-    > Generating indexes can cost money.
-    >
-    > Time to create an index can be up to 3 hours.
+  > [!IMPORTANT]
+  > Generating indexes can cost money.
+  >
+  > Time to create an index can be up to 3 hours.
 
 ## Next steps
 
