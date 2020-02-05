@@ -20,7 +20,7 @@ Here are some key features of the Microsoft Academic Knowledge Exploration Servi
 
 - *Add a large corpus of academic entities to an existing search solution* - Integrating MAKES can help enhance existing search solutions by giving users access to a large corpus of academic knowledge.
 
-- *Customize using the Knowledge Exploration Service Management tool* -In some cases you may not need all of the data in MAG, or you would like combine your own private data with MAG. With the Knowledge Exploration Service Management tool(kesm.exe) you can easily create custom indexes and hosting options. using subsets or super-sets of the Microsoft Academic Graph. As an example, you could build an index specific to certain Journals or Institutions while including publications from your own organization.
+- *Customize using the Knowledge Exploration Service Management tool* -In some cases you may not need all of the data in MAG, or you would like combine your own private data with MAG. With the Knowledge Exploration Service Management tool(kesm.exe) you can easily create custom indexes and hosting options, using subsets or super-sets of the Microsoft Academic Graph. As an example, you could build an index specific to certain Journals or Institutions while including publications from your own organization.
 
 ## What is MAKES?
 

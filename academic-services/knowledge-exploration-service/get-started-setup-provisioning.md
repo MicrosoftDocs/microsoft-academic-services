@@ -15,7 +15,7 @@ When using Microsoft Academic data (MAG, MAKES, etc.) in a product or service, o
 > [!NOTE]
 > Arnab Sinha, Zhihong Shen, Yang Song, Hao Ma, Darrin Eide, Bo-June (Paul) Hsu, and Kuansan Wang. 2015. An Overview of Microsoft Academic Service (MA) and Applications. In Proceedings of the 24th International Conference on World Wide Web (WWW '15 Companion). ACM, New York, NY, USA, 243-246. DOI=http://dx.doi.org/10.1145/2740908.2742839
 
-## Create Azure subscription and storage account to receive MAKES API builds
+## Create an Azure subscription and storage account to receive MAKES API builds
 
 ### [Create an Azure Subscription](https://azure.microsoft.com/get-started)
 
