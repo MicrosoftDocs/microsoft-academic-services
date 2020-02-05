@@ -19,6 +19,13 @@
     href: how-to-create-index-from-mag.md
   - name: Integrate with Existing Search
     href: how-to-integrate-with-existing-search.md
+- name: Concepts
+  expanded: true
+  items:
+  - name: Natural Language Queries
+    href: concepts-queries.md
+  - name: Structured Query Expressions
+    href: concepts-query-expressions.md
 - name: Samples
   expanded: true
   items:
