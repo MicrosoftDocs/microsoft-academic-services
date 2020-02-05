@@ -25,7 +25,7 @@ Please create a new Azure subscription for the distribution previews. If your or
 
 1. Home > Create a resource > Storage > Storage account
 
-    ![Create new azure storage account](../media/create-azure-storage-account.png "Create new azure storage account")
+    ![Create new azure storage account](media/create-azure-storage-account.png "Create new azure storage account")
 
 2. Specify “makesas<org_name>” for the account name, “StorageV2" for account kind, “LRS” for replication, “standard” for performance and “makes” for the resource group
 
