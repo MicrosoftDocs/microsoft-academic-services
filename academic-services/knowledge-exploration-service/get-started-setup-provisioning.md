@@ -15,12 +15,7 @@ When using Microsoft Academic data (MAG, MAKES, etc.) in a product or service, o
 > [!NOTE]
 > Arnab Sinha, Zhihong Shen, Yang Song, Hao Ma, Darrin Eide, Bo-June (Paul) Hsu, and Kuansan Wang. 2015. An Overview of Microsoft Academic Service (MA) and Applications. In Proceedings of the 24th International Conference on World Wide Web (WWW '15 Companion). ACM, New York, NY, USA, 243-246. DOI=http://dx.doi.org/10.1145/2740908.2742839
 
-## Pre-requisites
-
-- [Azure account + subscription](https://azure.microsoft.com/get-started)
-- [Azure Storage account](https://docs.microsoft.com/azure/storage/)
-
-## Setup storage account to receive MAKES API builds
+## Create an Azure subscription and storage account to receive MAKES API builds
 
 ### [Create an Azure Subscription](https://azure.microsoft.com/get-started)
 
@@ -30,7 +25,7 @@ Please create a new Azure subscription for the distribution previews. If your or
 
 1. Home > Create a resource > Storage > Storage account
 
-    ![Create new azure storage account](../media/create-azure-storage-account.png "Create new azure storage account")
+    ![Create new azure storage account](media/create-azure-storage-account.png "Create new azure storage account")
 
 2. Specify “makesas<org_name>” for the account name, “StorageV2" for account kind, “LRS” for replication, “standard” for performance and “makes” for the resource group
 
@@ -66,22 +61,11 @@ Please create a new Azure subscription for the distribution previews. If your or
 
 ## API release process
 
-MAKES API builds are deployed approximately once a week to all Azure storage accounts that are signed up for the distribution preview.
+MAKES API builds are deployed approximately once a week to the Azure storage account that were used to signed up for the distribution preview.
 
-Each API build has a unique name reflecting the date it was created, and is placed in the following location:
+Each API build has a unique name reflecting the date it was created, and is placed in the following location inside the storage account:
 
-- MAKES tools only version
-  - YYYY-MM-DD (release date)
-    - tools
-      - makes.zip
-      - indexer.zip
-      - preprocessor.zip
-      - jobManager.zip
-      - GenerateMakesEntitiesFromMag.usql
-    - webhost
-        -makes-service-host.zip
-
-- MAKES deluxe version
+makes(storage account container)
   - YYYY-MM-DD (release date)
     - indexes
       - makes-YYYY-MM-DD-prod-index#.kes
@@ -92,7 +76,7 @@ Each API build has a unique name reflecting the date it was created, and is plac
       - indexer.zip
       - preprocessor.zip
       - jobManager.zip
-      - GenerateMakesEntitiesFromMag.usql
+      - generateMakesEntitiesFromMag.usql
     - webhost
       - makes-service-host.zip
 
