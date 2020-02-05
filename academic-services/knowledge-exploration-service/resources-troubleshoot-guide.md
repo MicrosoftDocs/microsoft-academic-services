@@ -1,4 +1,4 @@
-# Troubleshoot MAKES command line tool issues
+# Troubleshoot Common MAKES command line tool issues
 
 ## Azure login failure due to multiple subscriptions being tied to a single Azure account
 
