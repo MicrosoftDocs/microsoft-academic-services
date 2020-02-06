@@ -15,15 +15,15 @@ Step-by-step guide for deploying a new index to an existing Microsoft Academic K
 
 - [An existing deployment of the Microsoft Academic Knowledge Service (MAKES)](get-started-create-api-instances.md)
 
-## Goals
+## Goals / Assumptions
 
-In this example we will walk you through the steps to deploy new MAKES indexes to a live service.  For this example we assume the following goals:
+In this example we will walk you through the steps to deploy new MAKES indexes to a live service.  This example has the following goals and assumptions:
 
-- Create a live MAKES service that can be updated with no downtime
+- You would like to create a live MAKES service that can be updated with no downtime (production environment).
 
-- Easily update the MAKES service when new indexes are published to your account
+- You would like to easily update the MAKES service when new indexes are published to your account.
 
-- You have existing MAKES instances in one or many Azure Regions
+- You have existing MAKES instances in one or many Azure Regions.
 
 ## Architecture overview
 
@@ -41,7 +41,7 @@ In this example, we will be using the Azure Traffic Manager product to act as th
 
 ## Create a Traffic Manager profile
 
-Create a Traffic Manager profile that directs user traffic based on endpoint priority.
+Create a Traffic Manager profile that directs user traffic based on endpoint priority.  Open your browser and navigate to the [Azure portal](https://portal.azure.com).
 
 1. On the upper-left side of the screen, select **Create a resource** > **Networking** > **Traffic Manager profile**.
 2. In the **Create Traffic Manager profile**, enter, or select these settings:
@@ -64,29 +64,36 @@ Create a Traffic Manager profile that directs user traffic based on endpoint pri
     | Port | 80 |
     | Path | /alive |
 
-## Add your current MAKES deployment as an endpoint.
+## Add your current MAKES deployment as an endpoint
 
-1. In your Traffic manager profile, click on "Endpoints"
+1. In your Traffic manager profile, click on "Endpoints":
 
 ![Click on the "Endpoints" item on the left hand side](media/how-to-deploy-new-indexes-to-makes-select-endpoints.png)
 
-2. Click "Add" at the top of the screen to add a new endpoint.
+2. Click "Add" at the top of the screen to add a new endpoint:
 
 ![Click Add to create an endpoint](media/how-to-deploy-new-indexes-to-makes-click-add-endpoint.png)
 
-3. Select "Azure endpoint" as your type.
+3. Apply the following settings:
 
-4. Type a descriptive name for the endpoint.
+    | Setting | Value |
+    | --------| ----- |
+    | Type | Azure endpoint |
+    | Name | *Add a descriptive name of your choosing here* |
+    | Target resource type | Public IP Address |
+    | Target resource | Select the name of the public IP address that was created for you MAKES deployment |
+    | Custom Header settings | **Leave Blank**  |
+    | Add as disabled | *un-checked*  |
 
-5. Select the public IP from the list that matches the public IP for the current MAKES instance.
+4. Click "Ok" to create your new endpoint.
 
-6. Click "Ok"
+Repeat the following steps for each MAKES deployment you currently have 'live'.
 
 ## Verify your service is working as expected
 
 In the list of enpoints, watch the "Monitor Status" of the new endpoint you created.  In the beginning it will say "Checking Endpoint".  Click the Refresh button on the top every 30 secs or so until the status changes to "Online"; this could take a few minutes.
 
-Once the new endpoint monitor is in the "Online" status, verify the API is up and running.  In the "Overview" section of your Traffic Manager Profile, there will be a URL next to the "DNS Name" property.  Copy this value and paste it into a browser of your choice and append "/details" to the end of the url.  Ex: http://contosoMAKES.trafficmanager.net/details.  The response that comes back will have the date the index was built in the description field.  This date should match the date of the folder in your MAKES subscription that you created the new instance from.  
+Once the new endpoint monitor is in the "Online" status, verify the API is up and running.  In the "Overview" section of your Traffic Manager Profile, there will be a URL next to the "DNS Name" property.  Copy this value and paste it into a browser of your choice and append "/details" to the end of the url.  Ex: http://contosoMAKES.trafficmanager.net/details.  The response that comes back will have the date the index was built in the description field.  This date should match the date of the folder in your MAKES subscription that you created this instance from.  
 
 Now go to your base URL.  Ex: http://contosoMAKES.trafficmanager.net/.  Use your favorite tool to execute queries against the API endpoints and verify the responses and response codes.
 
@@ -110,15 +117,16 @@ Follow the deployment instructions for deploying the new version of the MAKES in
 
 ![Click Add to create an endpoint](media/how-to-deploy-new-indexes-to-makes-click-add-endpoint.png)
 
-5. Select "Azure endpoint" as your type.
+3. Apply the following settings:
 
-6. Type a descriptive name for the endpoint.
-
-7. Select the public IP from the list that matches the public IP for the new MAKES instance you created.
-
-8. Check the "Add as disabled" box.  This will keep users from accessing this endpoint until you are ready.
-
-![Your entries should look like this](media/how-to-deploy-new-indexes-to-makes-new-endpoint.png)
+    | Setting | Value |
+    | --------| ----- |
+    | Type | Azure endpoint |
+    | Name | *Add a descriptive name of your choosing here* |
+    | Target resource type | Public IP Address |
+    | Target resource | Select the name of the public IP address that was created for you MAKES deployment |
+    | Custom Header settings | **Leave Blank**  |
+    | Add as disabled | *un-checked*  |
 
 9. Click "Ok" to create your new endpoint.
 
