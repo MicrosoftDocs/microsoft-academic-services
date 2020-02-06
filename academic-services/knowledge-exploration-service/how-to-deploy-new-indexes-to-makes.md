@@ -1,13 +1,13 @@
 ---
-title: Deploy new index versions to MAKES
-description: Step-by-step guide for deploying new indexes to MAKES from your MAKES subscription.
+title: Continuous MAKES deployments
+description: Step-by-step guide for deploying new releases of MAKES from your MAKES subscription.
 ms.topic: tutorial
 ms.date: 02/05/2020
 ---
 
-# Deploying a new index from your subscription to an existing MAKES deployment for uninterrupted service
+# Deploying a MAKES release for uninterrupted service
 
-Step-by-step guide for deploying a new index to an existing Microsoft Academic Knowledge Explorarion Service (MAKES) deployment.  For more information about deploying an instance of MAKES from your subscription, visit [Create an API Instance](get-started-create-api-instances.md).
+Step-by-step guide for deploying a new Microsoft Academic Knowledge Explorarion Service (MAKES) release to an existing MAKES deployment.  For more information about deploying an instance of MAKES from your subscription, visit [Create an API Instance](get-started-create-api-instances.md).
 
 ## Prerequisites
 
@@ -17,11 +17,11 @@ Step-by-step guide for deploying a new index to an existing Microsoft Academic K
 
 ## Goals / Assumptions
 
-In this example we will walk you through the steps to deploy new MAKES indexes to a live service.  This example has the following goals and assumptions:
+In this example we will walk you through the steps to deploy new MAKES releases to a live service.  This example has the following goals and assumptions:
 
 - You would like to create a live MAKES service that can be updated with no downtime (production environment).
 
-- You would like to easily update the MAKES service when new indexes are published to your account.
+- You would like to easily update the MAKES service when new releases are published to your account.
 
 - You have existing MAKES instances in one or many Azure Regions.
 
@@ -30,7 +30,7 @@ In this example we will walk you through the steps to deploy new MAKES indexes t
 
 ## Architecture overview
 
-Given the design and nature of MAKES, "hot-swapping" indexes on the MAKES instances is not a viable option for always-on solutions.  The indexes that power MAKES are large and need to be mounted when the service is started.  This would require downtime if you were to only have a single instance of MAKES in production.  To support the goals above, you will need to establish a single entry point for your MAKES service and swap active instances when you deploy.  Azure provides a couple ways of doing this as of this writing.  Below are two of the Azure products that we use on our team:
+Given the design and nature of MAKES, "hot-swapping" resources on the MAKES instances is not a viable option for always-on solutions.  The indexes that power MAKES are large and need to be mounted when the service is started.  This would require downtime if you were to only have a single instance of MAKES in production.  To support the goals above, you will need to establish a single entry point for your MAKES service and swap active instances when you deploy.  Azure provides a couple ways of doing this as of this writing.  Below are two of the Azure products that we use on our team:
 
 | Azure Service | Benefits |
 |_________|_________|
@@ -95,16 +95,24 @@ Repeat the following steps for each MAKES deployment you currently have 'live'.
 
 In the list of enpoints, watch the "Monitor Status" of the new endpoint you created.  In the beginning it will say "Checking Endpoint".  Click the Refresh button on the top every 30 secs or so until the status changes to "Online"; this could take a few minutes.
 
-Once the new endpoint monitor is in the "Online" status, verify the API is up and running.  In the "Overview" section of your Traffic Manager Profile, there will be a URL next to the "DNS Name" property.  Copy this value and paste it into a browser of your choice and append "/details" to the end of the url.  Ex: http://contosoMAKES.trafficmanager.net/details.  The response that comes back will have the date the index was built in the description field.  This date should match the date of the folder in your MAKES subscription that you created this instance from.  
+Once the new endpoint monitor is in the "Online" status, verify the API is up and running.  In the "Overview" section of your Traffic Manager Profile, there will be a URL next to the "DNS Name" property.  Copy this value and paste it into a browser of your choice and append "/details" to the end of the url.  Ex: **http://<your_traffic_manager_profile_name>.trafficmanager.net/details**.  The response that comes back will have the date the index was built in the description field.  This date should match the date of the folder in your MAKES subscription that you created this instance from.  
 
-Now go to your base URL.  Ex: http://contosoMAKES.trafficmanager.net/.  Use your favorite tool to execute queries against the API endpoints and verify the responses and response codes.
+Now go to your base URL.  Ex: **http://<your_traffic_manager_profile_name>.trafficmanager.net**.  Use your favorite tool to execute queries against the API endpoints and verify the responses and response codes.
 
 > [!NOTE]
 > Traffic Manager by default uses http, not https
 
 ## Deploy the new version of MAKES
 
-Follow the deployment instructions for deploying the new version of the MAKES index, see [Create in API instance](get-started-create-api-instances.md).
+Follow the deployment instructions for deploying the new version of a MAKES release, see [Create in API instance](get-started-create-api-instances.md).
+
+## Verify your new instance of MAKES
+
+1. Open a browser and go to the status URL for your new MAKES instance.  Ex: **http://<your_makes_public_IP_DNS>.<azure_region>.cloudapp.azure.com/status**. The "readyToServeRequest" property should be true.
+
+2. Go to the details URL for your new MAKES instance and verify the version of the API. Ex: **http://<your_makes_public_IP_DNS>.<azure_region>.cloudapp.azure.com/details**.  In the description the created time should match the date of your release. _
+
+3. Go to the base URL for your new MAKES instance and verify the API's are working as expected.  Ex: **http://<your_makes_public_IP_DNS>.<azure_region>.cloudapp.azure.com**
 
 ## Add the new instance of MAKES to your Traffic Manager Profile
 
@@ -157,9 +165,7 @@ When you are ready to bring new traffic to your new MAKES instance you must enab
 
 In the list of enpoints, watch the "Monitor Status" of the new endpoint you created.  In the beginning it will say "Checking Endpoint".  Click the Refresh button on the top every 30 secs or so until the status changes to "Online"; this could take a few minutes.
 
-Once the new endpoint monitor is in the "Online" status, verify the API is up and running.  In the "Overview" section of your Traffic Manager Profile, there will be a URL next to the "DNS Name" property.  Copy this value and paste it into a browser of your choice and append "/details" to the end of the url.  Ex: http://contosoMAKES.trafficmanager.net/details.  The response that comes back will have the date the index was built in the description field.  This date should match the date of the folder in your MAKES subscription that you created the new instance from.  
-
-Now go to your base URL.  Ex: http://contosoMAKES.trafficmanager.net/.  Use your favorite tool to execute queries against the API endpoints and verify the responses and response codes.  If anything is not working as expected, reverse the steps above to enable the old version of the API.
+Once the new endpoint monitor is in the "Online" status, verify the API is up and running.  In the "Overview" section of your Traffic Manager Profile, there will be a URL next to the "DNS Name" property.  Copy this value and paste it into a browser of your choice.  Ex: **http://<your_traffic_manager_profile_name>.trafficmanager.net**.  Verify the instance is working by running some queries or use your favorite tool to execute queries against the API endpoints and verify the responses and response codes.  If anything is not working as expected, reverse the steps above to enable the old version of the API.
 
 > [!NOTE]
 > Traffic Manager by default uses http, not https
