@@ -35,7 +35,7 @@ Please create a new Azure subscription for the distribution previews. If your or
     | Account kind | Select **StorageV2** |
     | Replication | Select **LRS** |
     | Performance | Select **Standard** |
-    | Resource Group | Enter **makes** without quotes |
+    | Resource Group | Enter **makes** |
 
     ![Configure azure storage account details](media/create-azure-storage-account-configure.png "Configure azure storage account details")
 
