@@ -19,7 +19,7 @@ When using Microsoft Academic data (MAG, MAKES, etc.) in a product or service, o
 
 ### [Create an Azure Subscription](https://azure.microsoft.com/get-started)
 
-Please create a new Azure subscription for the distribution previews. If your organization already using Azure, this could be a separate subscription under the same tenant id. If you start from scratch, for example “create Azure free account”, the subscription will be created under a new tenant id.
+Please create a new Azure subscription for the distribution previews. If your organization already has an Azure account, this can be a separate subscription under the same tenant id. If you start from scratch, for example “create Azure free account”, the subscription will be created under a new tenant id.
 
 ### [Create an Azure Storage Account](https://docs.microsoft.com/azure/storage/common/storage-quickstart-create-account?tabs=portal)
 
@@ -27,7 +27,15 @@ Please create a new Azure subscription for the distribution previews. If your or
 
     ![Create new azure storage account](media/create-azure-storage-account.png "Create new azure storage account")
 
-2. Specify “makesas<org_name>” for the account name, “StorageV2" for account kind, “LRS” for replication, “standard” for performance and “makes” for the resource group
+2. Specify the following settings:
+
+    | Setting | Value |
+    | --------| ----- |
+    | Account Name | makesas<org_name> |
+    | Account kind | Select "StorageV2" |
+    | Replication | Select "LRS" |
+    | Performance | Select "Standard" |
+    | Resource Group | Enter "makes" without quotes |
 
     ![Configure azure storage account details](media/create-azure-storage-account-configure.png "Configure azure storage account details")
 
