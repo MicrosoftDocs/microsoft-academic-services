@@ -19,7 +19,7 @@
     href: how-to-create-index-from-mag.md
   - name: Integrate with Existing Search
     href: how-to-integrate-with-existing-search.md
-  - name: Delete the a MAKES deployment 
+  - name: Delete a MAKES deployment 
     href: how-to-delete-api-instances.md
 - name: Reference
   expanded: true
