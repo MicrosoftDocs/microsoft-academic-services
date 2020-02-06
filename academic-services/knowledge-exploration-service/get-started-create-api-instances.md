@@ -96,7 +96,7 @@ kesm.exe --help
 kesm.exe DeployHost --help
 ```
 
-Or, you can visit the [kesm.exe Command Line Reference](reference-makes-command-line-tool.md).
+Or, you can visit the [Command Line Tool(kesm.exe) Reference](reference-makes-command-line-tool.md).
 
 ## Next steps
 
