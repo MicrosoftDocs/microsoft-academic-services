@@ -25,17 +25,19 @@ In this example we will walk you through the steps to deploy new MAKES indexes t
 
 - You have existing MAKES instances in one or many Azure Regions.
 
+> [!NOTE]
+> This is a basic example setting up an active / passive topology for deploying your MAKES solution.  Your needs may dictate a different solution.  Consult the Azure documentation for addition infomation about Traffic Manager, Azure DNS, Azure Front Door and other offerings to create a solution that works for you.
+
 ## Architecture overview
 
-Given the design and nature of MAKES, hot-swapping indexes on the MAKES instances is not a viable option.  The indexes that power MAKES are large and need to be mounted when the service is started.  This would require downtime if you were to only have a single instance of MAKES in production.  To support the goals above, you will need to establish a single entry point for your MAKES service.  Azure provides three ways of doing this as of this writing:
+Given the design and nature of MAKES, "hot-swapping" indexes on the MAKES instances is not a viable option for always-on solutions.  The indexes that power MAKES are large and need to be mounted when the service is started.  This would require downtime if you were to only have a single instance of MAKES in production.  To support the goals above, you will need to establish a single entry point for your MAKES service and swap active instances when you deploy.  Azure provides a couple ways of doing this as of this writing.  Below are two of the Azure products that we use on our team:
 
 | Azure Service | Benefits |
 |_________|_________|
 |[Azure Traffic Manager](https://azure.microsoft.com/services/traffic-manager/) |Operates at the DNS level to direct incoming traffic in the method you choose (closest instance, most performant instance). |
 |[Azure Front Door](https://azure.microsoft.com/services/frontdoor/) |Similar to traffic manager, this option directs incoming traffic in the method you choose to the appropriate instances.  Azure Front Door aslo includes WAF protection, caching and other features not included with Azure Traffic Manager. |
-|[Azure Public IP Address](https://docs.microsoft.com/azure/virtual-network/associate-public-ip-address-vm) |A public IP for your MAKES VM instance.  This is a simple solution for single instances of MAKES and allows you to change the VM instance backing the public IP. |
 
-In this example, we will be using the Azure Traffic Manager product to act as the traffic cop for our production MAKES instance(s).  We have chosen this solution as it is inexpensive and easy to manage for most scenarios.  The Microsoft Academic team uses both Azure Traffic Manager and Azure Front Door in our MAKES deployments.  The architecture you choose depends on the requirements of your system.  Below is a diagram of the architecture we will use in our example.
+In this example, we will be using the Azure Traffic Manager product to act as the traffic cop for our production MAKES instance(s).  We have chosen this solution as it is inexpensive and easy to manage for most scenarios.  The Microsoft Academic team uses both Azure Traffic Manager and Azure Front Door in our MAKES API and Website deployments.  The services you choose depends on the requirements of your system.  Below is a diagram of the architecture we will use in our example.
 
 ![MAKES reference Architecture](media/how-to-deploy-new-indexes-to-makes-ref-arch.png)
 
@@ -97,6 +99,9 @@ Once the new endpoint monitor is in the "Online" status, verify the API is up an
 
 Now go to your base URL.  Ex: http://contosoMAKES.trafficmanager.net/.  Use your favorite tool to execute queries against the API endpoints and verify the responses and response codes.
 
+> [!NOTE]
+> Traffic Manager by default uses http, not https
+
 ## Deploy the new version of MAKES
 
 Follow the deployment instructions for deploying the new version of the MAKES index, see [Create in API instance](get-started-create-api-instances.md).
@@ -126,7 +131,7 @@ Follow the deployment instructions for deploying the new version of the MAKES in
     | Target resource type | Public IP Address |
     | Target resource | Select the name of the public IP address that was created for you MAKES deployment |
     | Custom Header settings | **Leave Blank**  |
-    | Add as disabled | *un-checked*  |
+    | Add as disabled | *checked*  |
 
 9. Click "Ok" to create your new endpoint.
 
@@ -155,6 +160,9 @@ In the list of enpoints, watch the "Monitor Status" of the new endpoint you crea
 Once the new endpoint monitor is in the "Online" status, verify the API is up and running.  In the "Overview" section of your Traffic Manager Profile, there will be a URL next to the "DNS Name" property.  Copy this value and paste it into a browser of your choice and append "/details" to the end of the url.  Ex: http://contosoMAKES.trafficmanager.net/details.  The response that comes back will have the date the index was built in the description field.  This date should match the date of the folder in your MAKES subscription that you created the new instance from.  
 
 Now go to your base URL.  Ex: http://contosoMAKES.trafficmanager.net/.  Use your favorite tool to execute queries against the API endpoints and verify the responses and response codes.  If anything is not working as expected, reverse the steps above to enable the old version of the API.
+
+> [!NOTE]
+> Traffic Manager by default uses http, not https
 
 ## Clean up resources 
 
