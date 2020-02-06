@@ -68,11 +68,11 @@ Create a Traffic Manager profile that directs user traffic based on endpoint pri
 
 ## Add your current MAKES deployment as an endpoint
 
-1. In your Traffic manager profile, click on "Endpoints":
+1. In your Traffic manager profile, select **Endpoints**:
 
 ![Click on the "Endpoints" item on the left hand side](media/how-to-deploy-new-indexes-to-makes-select-endpoints.png)
 
-2. Click "Add" at the top of the screen to add a new endpoint:
+2. Click **Add** at the top of the screen to add a new endpoint:
 
 ![Click Add to create an endpoint](media/how-to-deploy-new-indexes-to-makes-click-add-endpoint.png)
 
@@ -85,15 +85,15 @@ Create a Traffic Manager profile that directs user traffic based on endpoint pri
     | Target resource type | Public IP Address |
     | Target resource | Select the name of the public IP address that was created for you MAKES deployment |
     | Custom Header settings | **Leave Blank**  |
-    | Add as disabled | *un-checked*  |
+    | Add as disabled | **un-checked**  |
 
-4. Click "Ok" to create your new endpoint.
+4. Select **Ok** to create your new endpoint.
 
 Repeat the following steps for each MAKES deployment you currently have 'live'.
 
 ## Verify your service is working as expected
 
-In the list of enpoints, watch the "Monitor Status" of the new endpoint you created.  In the beginning it will say "Checking Endpoint".  Click the Refresh button on the top every 30 secs or so until the status changes to "Online"; this could take a few minutes.
+In the list of enpoints, watch the "Monitor Status" of the new endpoint you created.  In the beginning it will say "Checking Endpoint".  Select the Refresh button on the top every 30 secs or so until the status changes to "Online"; this could take a few minutes.
 
 Once the new endpoint monitor is in the "Online" status, verify the API is up and running.  In the "Overview" section of your Traffic Manager Profile, there will be a URL next to the "DNS Name" property.  Copy this value and paste it into a browser of your choice and append "/details" to the end of the url.  Ex: **http://<your_traffic_manager_profile_name>.trafficmanager.net/details**.  The response that comes back will have the date the index was built in the description field.  This date should match the date of the folder in your MAKES subscription that you created this instance from.  
 
@@ -116,19 +116,19 @@ Follow the deployment instructions for deploying the new version of a MAKES rele
 
 ## Add the new instance of MAKES to your Traffic Manager Profile
 
-1. Open the Azure Portal and search for the Azure Traffic Manager Profiles.
+1. Open the Azure Portal and search for **Azure Traffic Manager Profiles**.
 
 ![Search for Traffic Manager profiles in the Azure portal](media/how-to-deploy-new-indexes-to-makes-search-tm-profile.png)
 
-2. Click on the "Traffic Manager Profiles" suggestion from the list.  When the page opens, click on the profile that you have previously created.
+2. Select the **Traffic Manager Profiles** suggestion from the list.  When the page opens, select the profile that you have previously created.
 
-3. Click "Endpoints" on the left hand side of the page to open the list of endpoints for this traffic manager profile.
+3. Select **Endpoints** on the left hand side of the page to open the list of endpoints for this traffic manager profile.
 
-![Click on the "Endpoints" item on the left hand side](media/how-to-deploy-new-indexes-to-makes-select-endpoints.png)
+![Select the "Endpoints" item on the left hand side](media/how-to-deploy-new-indexes-to-makes-select-endpoints.png)
 
-4. Click "Add" at the top of the screen to add a new endpoint.
+4. Select **Add** at the top of the screen to add a new endpoint.
 
-![Click Add to create an endpoint](media/how-to-deploy-new-indexes-to-makes-click-add-endpoint.png)
+![Select Add to create an endpoint](media/how-to-deploy-new-indexes-to-makes-click-add-endpoint.png)
 
 3. Apply the following settings:
 
@@ -139,9 +139,9 @@ Follow the deployment instructions for deploying the new version of a MAKES rele
     | Target resource type | Public IP Address |
     | Target resource | Select the name of the public IP address that was created for you MAKES deployment |
     | Custom Header settings | **Leave Blank**  |
-    | Add as disabled | *checked*  |
+    | Add as disabled | **checked** |
 
-9. Click "Ok" to create your new endpoint.
+9. Select **Ok** to create your new endpoint.
 
 It will take Azure a moment to create your new endpoint, but once completed it will be added to the list of endpoints available in your Traffic Manager Profile.
 
@@ -149,23 +149,23 @@ It will take Azure a moment to create your new endpoint, but once completed it w
 
 When you are ready to bring new traffic to your new MAKES instance you must enable the new instance and disable the old.
 
-1. From the endpoints section of your Traffic Manager Profile, click on the endpoint that you just created above.
+1. From the endpoints section of your Traffic Manager Profile, select the endpoint that you just created above.
 
-2. Move the status toggle from "Disabled" to "Enabled" by clicking on it.
+2. Move the status toggle from **Disabled** to **Enabled** by clicking on it.
 
-3. Click "Save" at the top.
+3. Select **Save** at the top to save your changes.
 
-4. Click on the old endpoint that was serving production traffic.
+4. Select on the old endpoint that was serving production traffic.
 
-5. Move the status toggle from "Enabled" to "Disabled" by clicking on it.
+5. Move the status toggle from **Enabled** to **Disabled** by clicking on it.
 
-6. Click "Save" at the top.
+6. Select **Save** at the top to save your changes.
 
 ## Verify your service is working as expected
 
-In the list of enpoints, watch the "Monitor Status" of the new endpoint you created.  In the beginning it will say "Checking Endpoint".  Click the Refresh button on the top every 30 secs or so until the status changes to "Online"; this could take a few minutes.
+In the list of enpoints, watch the **Monitor Status** of the new endpoint you created.  In the beginning it will say **Checking Endpoint**.  Click the Refresh button on the top every 30 secs or so until the status changes to **Online**; this could take a few minutes.
 
-Once the new endpoint monitor is in the "Online" status, verify the API is up and running.  In the "Overview" section of your Traffic Manager Profile, there will be a URL next to the "DNS Name" property.  Copy this value and paste it into a browser of your choice.  Ex: **http://<your_traffic_manager_profile_name>.trafficmanager.net**.  Verify the instance is working by running some queries or use your favorite tool to execute queries against the API endpoints and verify the responses and response codes.  If anything is not working as expected, reverse the steps above to enable the old version of the API.
+Once the new endpoint monitor is in the **Online** status, verify the API is up and running.  In the **Overview** section of your Traffic Manager Profile, there will be a URL next to the **DNS Name** property.  Copy this value and paste it into a browser of your choice.  Ex: **http://<your_traffic_manager_profile_name>.trafficmanager.net**.  Verify the instance is working by running some queries or use your favorite tool to execute queries against the API endpoints and verify the responses and response codes.  If anything is not working as expected, reverse the steps above to enable the old version of the API.
 
 > [!NOTE]
 > Traffic Manager by default uses http, not https
