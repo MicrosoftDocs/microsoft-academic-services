@@ -65,21 +65,44 @@ Once the file has been downloaded you will need to extract the contents.  Right 
 
 At this point to are ready to deploy an instance of MAKES to your Azure account.  Open a command prompt (Windows) or terminal window (Mac) and navigate to the folder that you extracted the kesm.exe file to.
 
-Execute the following command to deploy hosting resources
+1. Execute the following command to create your hosting resources:
 
-```cmd
-kesm.exe DeployHost --HostName [makes_instance_host_name] --MakesPackage "https://[makes_storage_account_name].blob.core.windows.net/makes/[makes_release_version]/"
-```
+    ```cmd
+    kesm.exe CreateHostResources --HostResourceName <makes_host_resource_group_name> --MakesPackage "https://<makes_storage_account_name>.blob.core.windows.net/makes/<makes_release_version>/"
+    ```
 
-1. Replace "[makes_instance_host_name]" with the host name for your service.  The hostname will be the host name of the server where your MAKES deployment will be hosted.  Ex: If you used 'testmakes01102020', your MAKES API will be hosted at http://testmakes10012020.westus.cloudapp.azure.net
+    Example: **kesm.exe CreateHostResources --HostResourceName "contosorgmakesone" --MakesPackage "https://makesascontoso.blob.core.windows.net/makes/2020-01-30/"**
 
-2. Replace "[makes_storage_account_name]" with the name of the storage account you downloaded the scripts from above.
+Replace the following tokens in the above command with the appropriate value:
 
-3. Replace "[makes_release_version"] with the MAKES release you would like to deploy.
+| Token to relpace | Value |
+| --------| ----- |
+| <makes_host_resource_group_name> | The name of the Resource Group that will be created for this deployment. |
+| <makes_storage_account_name> | The name of the storage account you downloaded the scripts from above. |
+| <makes_release_version> | The MAKES release you would like to deploy. |
 
-```cmd
-kesm.exe DeployHost --HostName testmakes01102020 --MakesPackage "https://fooaccount.blob.core.windows.net/makes/2020-01-10-prod/"
-```
+2. Copy the **Host Image Id** from the last line of output from the script, you will use it in the next command.  Ex:  **/subscriptions/<your_subscription_id>/resourceGroups/<makes_host_rource_group_name>/profiders/Microsoft.Compute/Images/<makes_host_rource_group_name>** 
+
+![Copy the Host Image Id](media/get-started-copy-makes-image-id.png)
+
+3. Execute the following command to deploy your hosting resources:
+
+    ```cmd
+    kesm.exe DeployHost --HostName [makes_instance_host_name] --MakesPackage "https://<makes_storage_account_name>.blob.core.windows.net/makes/<makes_release_version>/"  --MakesHostImageId "<id_from_previous_command_output>"
+    ```
+
+    Example: **kesm.exe DeployHost --HostName contosomakes --MakesPackage "https://makesascontoso.blob.core.windows.net/makes/2020-01-30/" --MakesHostImageId "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/contosorgmakesone/profiders/Microsoft.Compute/Images/contosoImageName"**
+
+Replace the following tokens in the above command with the appropriate value:
+
+| Token to relpace | Value |
+| --------| ----- |
+| <makes_instance_host_name> | The host name for your service.  The hostname will be the host name of the server where your MAKES deployment will be hosted.  Ex: If you used 'contosomakes', your MAKES API will be hosted at http://contosomakes.westus.cloudapp.azure.net. |
+| <makes_storage_account_name> | The name of the storage account you downloaded the scripts from above. |
+| <makes_release_version> | The MAKES release you would like to deploy. |
+| <id_from_previous_command_output> | The id you copied from the output of the previous command. |
+
+
 
 At this point the tool will take care of creating all of the required resources and deploying MAKES.  During the initial run it can take up to 3 hours to complete this task.  On first run the script generates resources that you only need to create once.  Subsequent deployments to the same host will not take as long and should be much quicker, approximately 30 minutes->1 hour.  See the [Command line Reference](reference-makes-command-line-tool.md) for more details.  
 
