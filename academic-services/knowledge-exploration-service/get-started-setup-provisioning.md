@@ -32,10 +32,10 @@ Please create a new Azure subscription for the distribution previews. If your or
     | Setting | Value |
     | --------| ----- |
     | Account Name | makesas<org_name> |
-    | Account kind | Select "StorageV2" |
-    | Replication | Select "LRS" |
-    | Performance | Select "Standard" |
-    | Resource Group | Enter "makes" without quotes |
+    | Account kind | Select **StorageV2** |
+    | Replication | Select **LRS** |
+    | Performance | Select **Standard** |
+    | Resource Group | Enter **makes** without quotes |
 
     ![Configure azure storage account details](media/create-azure-storage-account-configure.png "Configure azure storage account details")
 

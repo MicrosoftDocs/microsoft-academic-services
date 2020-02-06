@@ -25,14 +25,13 @@ sections:
     items:
     - html: <a href="get-started-setup-provisioning">Sign up for Microsoft Academic Knowledge Exploration Service(MAKES)</a>
     - html: <a href="get-started-create-api-instances">Deploy a basic MAKES instance using the provided scripts</a>
-- title: Samples
+- title: How-To Guides
   items:
   - type: paragraph
-    text: Sample applications leveraging MAKES
+    text: Learn how to upgrade and manage MAKES
   - type: list
     style: unordered
     items:
-    - html: <a href="sample-academic-search">Academic Search Sample</a>
-    - html: <a href="sample-expert-finder">Expert Finder</a>
-    - html: <a href="sample-top-authors-analytics">Top Authors Analytics</a>
+    - html: <a href="how-to-deploy-new-indexes-to-makes">How to deploy new releases to an existing instance of MAKES</a>
+    
     
