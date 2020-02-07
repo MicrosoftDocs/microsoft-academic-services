@@ -17,10 +17,17 @@
   items:
   - name: Deploy new MAKES releases to existing MAKES instances
     href: how-to-deploy-new-indexes-to-makes.md
+- name: Concepts
+  expanded: true
+  items:
+  - name: Natural language queries
+    href: concepts-queries.md
+  - name: Structured query expressions
+    href: concepts-query-expressions.md
 - name: Reference
   expanded: true
   items:
-  - name: Entity Schema
+  - name: Entity schema
     href: reference-makes-api-entity-schema.md   
   - name: REST API
     expanded: false
@@ -37,7 +44,7 @@
         href: reference-post-histogram.md
       - name: POST Interpret
         href: reference-post-interpret.md
-  - name: Command Line Tool
+  - name: Command line tool
     href: reference-makes-command-line-tool.md
 - name: Resources
   expanded: true
