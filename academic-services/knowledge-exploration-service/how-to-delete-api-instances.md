@@ -21,11 +21,16 @@ There should be two resource groups associated with a MAKES API instance, a reso
 
 2. Find the MAKES API instance resource groups by searching for the "HostName" parameter used for host deployment(DeployHost command).  
 
+    You should the following MAKES API instance resources in your API instance resource group:
+    ![makes deployment resources](media/makes-deployment-resources.png)
+
 3. Find the hosting image resource group by searching for "HostResourceName" parameter used for hosting resource deployment(CreateHostResources command).  
+    You should the MAKES hosting image resource in your hosting image resource group:
+    ![makes hosting resources](media/makes-hosting-resources.png)
 
 ## Delete the resource group associated with the MAKES API instance
 
-Delete both resources groups.
+Delete both resources groups starting with the MAKES API instance resource group.
 
 1. Click and open the resource group associated for the API instance.
 

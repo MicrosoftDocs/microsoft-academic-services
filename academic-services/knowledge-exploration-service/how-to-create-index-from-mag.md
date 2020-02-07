@@ -21,6 +21,11 @@ ms.date: 0
 
 ### Create indexing resources
 
+```CMD
+
+kesm.exe CreateIndexResources --IndexResourceName "alchmakesindexres" --MakesPackage "https://alchmakesstore.blob.core.windows.net/makes/2020-01-30/" --MakesIndexResourceConfigFilePath "makesIndexResConfig" --Region westus2 --AzureCredentialsFilePath "my.azureauth"
+
+``
 ### Submit index build job
 
 ## Next steps
