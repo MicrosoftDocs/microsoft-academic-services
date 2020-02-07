@@ -22,7 +22,7 @@
 - name: Concepts
   expanded: true
   items:
-  - name: Natural Language Queries
+  - name: Semantic Search
     href: concepts-queries.md
   - name: Structured Query Expressions
     href: concepts-query-expressions.md
