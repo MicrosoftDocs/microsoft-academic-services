@@ -49,19 +49,22 @@ There should be four (4) folders and a licence:
 
 ![Verify tools folder](media/get-started-tools-folder.png)
 
-## Download the deployment script from your Azure Storage Account
+## Download the deployment command from your Azure Storage Account
 
-Each MAKES deployment includes the scripts required to provision an instance of MAKES in Azure.  These tools are located in the **tools** folder that you verified above.  To download the scripts, open the **tools** folder, then open the **kesm** folder.  Select the **kesm.zip** file located in this folder from Storage Explorer and click **Download** from the top ribbon:
+Each MAKES deployment includes the scripts required to provision an instance of MAKES in Azure.  Open the **tools** folder.  To download the scripts, select the **kesm.zip** file and select **Download** from the top ribbon:
 
 ![Download kesm.zip](media/get-started-download-kesm.png)
 
 Save this file to a local folder.
 
-## Unzip the script package
+## Unzip the kesm.zip package
 
-Once the file has been downloaded you will need to extract the contents.  Right click on the **kesm.zip** file.  If you are using the Windows operating system select **Extract All** from the context menu.  If you are using a Mac, double-click the zip file and it will decompress into the same folder.  When extracted, you will see two folders, one for each environment we support.  Select **win-x86** if you are using a Windows machine or **osx-x64** if you will be running the script on a Mac and open the folder.  In this folder are two files: **kesm.exe** and **kesm.pdb**.  The **kesm.exe** file is script that we will be running to deploy MAKES.
+Once the file has been downloaded you will need to extract the contents.  Right click on the **kesm.zip** file.  If you are using the Windows operating system select **Extract All** from the context menu.  If you are using a Mac, double-click the zip file and it will decompress into the same folder. You will now see two folders, one for each environment we support.  Select **win-x86** if you are using a Windows machine or **osx-x64** if you will be running the command on a Mac and open the folder.  In this folder there is another folder, **Kesm**.  Open this folder. In this folder there are two files: **kesm.exe** and **kesm.pdb**.  The **kesm.exe** file is the executable that we will be running to deploy MAKES.
 
-## Run the script
+## Run the command
+
+>!IMPORTANT
+>This command will run under your Azure credentials, have your Azure login credentials ready.
 
 At this point to are ready to deploy an instance of MAKES to your Azure account.  The first step creates an Azure Host VM Image.  This image can be reused to generate more instances of MAKES if you would like more than a single instance in your VM Scale Set.  Open a command prompt (Windows) or terminal window (Mac) and navigate to the folder that you extracted the **kesm.exe** file to.
 
@@ -81,17 +84,27 @@ Replace the following tokens in the command above with the appropriate value:
 | <makes_storage_account_name> | The name of the storage account you downloaded the scripts from above. |
 | <makes_release_version> | The MAKES release you would like to deploy. |
 
->!NOTE 
->This command will take around 20-30 minutes to complete.  Once this script has been run, you can reuse the Host Image Id to deploy more instances of MAKES.
+The command will then prompt you to go to a secure website to authenticate.
 
-2. Copy the **Host Image Id** from the last line of output from the script, you will use it in the next command.  Ex:  **/subscriptions/<your_subscription_id>/resourceGroups/<makes_host_rource_group_name>/profiders/Microsoft.Compute/Images/<makes_host_rource_group_name>** 
+1. Open a new browser window and copy the URL from the command.  Ex: **https://microsoft.com/devicelogin**
+
+2. Enter the authentication code given to you from the command.
+
+3. Use your id or email address to sign into your azure account.
+
+Once you have authenticated, you may close your browser window and the command will continue to run.  This command will take 20-30 mins to complete.
+
+>!NOTE 
+>This command will take around 20-30 minutes to complete.  Once this command has been run, you can reuse the Host Image Id to deploy more instances of MAKES.
+
+2. Copy the **Host Image Id** from the last line of output from the command, you will use it in the next command.  Ex:  **/subscriptions/<your_subscription_id>/resourceGroups/<makes_host_rource_group_name>/profiders/Microsoft.Compute/Images/<makes_host_rource_group_name>** 
 
 ![Copy the Host Image Id](media/get-started-copy-makes-image-id.png)
 
 3. Execute the following command to deploy your hosting resources:
 
     ```cmd
-    kesm.exe DeployHost --HostName [makes_instance_host_name] --MakesPackage "https://<makes_storage_account_name>.blob.core.windows.net/makes/<makes_release_version>/"  --MakesHostImageId "<id_from_previous_command_output>"
+    kesm.exe DeployHost --HostName "<makes_instance_host_name>" --MakesPackage "https://<makes_storage_account_name>.blob.core.windows.net/makes/<makes_release_version>/"  --MakesHostImageId "<id_from_previous_command_output>"
     ```
 
     Example: **kesm.exe DeployHost --HostName contosomakes --MakesPackage "https://makesascontoso.blob.core.windows.net/makes/2020-01-30/" --MakesHostImageId "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/contosorgmakesone/profiders/Microsoft.Compute/Images/contosoImageName"**
@@ -104,6 +117,11 @@ Replace the following tokens in the command above with the appropriate value:
 | <makes_storage_account_name> | The name of the storage account you downloaded the scripts from above. |
 | <makes_release_version> | The MAKES release you would like to deploy. |
 | <id_from_previous_command_output> | The id you copied from the output of the previous command. |
+
+If necessary, authenticate the command in the same way as you did above for the first command.
+
+>!IMPORTANT
+>While this script is running, the admin name and password will be shown on the screen for the VM being created.  Make note of this for logging into the VM at a later time for any reason or if logging the output of this command, be sure to remove this information.
 
 >!NOTE
 >This command will take approximately 45 mins to complete if the VM image created by the first command is co-located (in the same Azure region) as your Azure storage account and you are using the standard ds14_v2 VM (this is the default).
