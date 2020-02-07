@@ -2,7 +2,7 @@
 title: Continuous MAKES deployments
 description: Step-by-step guide for deploying new releases of MAKES from your MAKES subscription.
 ms.topic: tutorial
-ms.date: 02/05/2020
+ms.date: 2020-02-10
 ---
 
 # Deploying a MAKES release for uninterrupted service
@@ -15,7 +15,7 @@ Step-by-step guide for deploying a new Microsoft Academic Knowledge Explorarion 
 
 - [An existing deployment of the Microsoft Academic Knowledge Service (MAKES)](get-started-create-api-instances.md)
 
-## Goals / Assumptions
+## Goals and assumptions
 
 In this example we will walk you through the steps to deploy new MAKES releases to a live service.  This example has the following goals and assumptions:
 

@@ -2,7 +2,7 @@
 title: Sign up for Microsoft Academic Knowledge Exploration Service(MAKES) distribution
 description: Step-by-step instructions for setting up one-time or automatic provisioning of MAKES to an Azure blob storage account
 ms.topic: get-started-article
-ms.date: 03/18/2018
+ms.date: 2020-02-10
 ---
 # Get started with Microsoft Academic Knowledge Exploration Service
 
@@ -23,7 +23,7 @@ Please create a new Azure subscription for the distribution previews. If your or
 
 ### [Create an Azure Storage Account](https://docs.microsoft.com/azure/storage/common/storage-quickstart-create-account?tabs=portal)
 
-1. Home > Create a resource > Storage > Storage account
+1. **Home > Create a resource > Storage > Storage account**
 
     ![Create new azure storage account](media/create-azure-storage-account.png "Create new azure storage account")
 
@@ -75,18 +75,18 @@ Each API build has a unique name reflecting the date it was created, and is plac
 
 makes(storage account container)
   - YYYY-MM-DD (release date)
-    - indexes
+    - index
       - makes-YYYY-MM-DD-prod-index#.kes
     - grammar
-      - makes-default-grammar.kesg
+      - makes-default-grammar
     - tools
-      - makes.zip
       - indexer.zip
       - preprocessor.zip
       - jobManager.zip
-      - generateMakesEntitiesFromMag.usql
+      - kesm.zip
     - webhost
       - makes-service-host.zip
+    - License.docx
 
 Example:
 
