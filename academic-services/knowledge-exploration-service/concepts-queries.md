@@ -11,70 +11,103 @@ This article describes how MAKES generates semantic interpretations of a natural
 
 ## Architecture overview and diagram
 
-Processing a natural language query starts with a lexical analysis of the query, with an Academic Language Analyzer component rewriting the query to ensure optimal matching against indexed attribute values. The rewritten query is then parsed using a Context Sensitive Grammar (CSG), with query segmentation 
-
-## Comparison with full text search
-
-An important part of what differentiates MAKES from traditional full text search engines (i.e. Lucene) is how it approaches query analysis and parsing.
-
-Traditional full text search is broken into four stages:
-
-1. Query parsing
-1. Lexical analysis
-1. Document retrieval
-1. Scoring
-
-MAKES requires the use of a Speech Recognition Langage
+Processing a natural language query is a multi-stage process that starts with lexical analysis of the query, allowing the query to be rewritten for optimal search performance. The rewritten query is then parsed and interpretations hypothesized using a Context Sensitive Grammar (CSG). Valid hypothesis are resolved into full semantic query expressions which are in turn used to generate the complete interpretation response.
 
 :::image type="content" source="media/concept-semantic-interpretation-flow.png" alt-text="MAKES Semantic Interpretation Generation Architecture":::
 
-"John Platt Nature 2019"
-
 ## Stage 1: Lexical analysis
 
-"john platt nature 2019"
+:::image type="content" source="media/concept-semantic-interpretation-lexical.png" alt-text="MAKES Semantic Interpretation Generation Architecture - Lexical Analysis":::
 
-## Stage 2: Context sensitive grammar
+Lexical analysis of the user query is done to help ensure that valid interpretation hypothesis can be generated.
 
-To generate semantic interpretations of natural language queries, MAKES leverages 
+This is broke in to a number of different components.
 
-Hypothesis round #1:
-""
+### Normalization
 
-Score | Attribute | Query terms
---- | --- | ---
--15.6 | Author name | john platt
--18.5 | Author last name | john
--20.5 | Title keyword | john
+Normalization transforms the query based on specific rules:
 
-Hypotheis 
+* Removing non-essential words (stopwords, such as "the", "and", etc.)
+* Lower casing word letters to ensure uniformity with indeded data
+* Encoding specific types of academic concepts (i.e. equations, formulas, chemical compounds, etc.) to ensure they match the indexed data
 
-* ~~[journal] john~~
-* ~~[institution] john~~
-* ...
+### Query operators
 
-MAKES uses best first
-"john platt" =>
-* Author name "john platt" =>
-  * Journal name "nature" =>
-    * Year "2019"
-  * Title word "nature"
-* Author name "john r platt"
-* Author name "john d platt"
-* Title word "john" and title word "platt"
+MAKES supports a small handful of query operators that tell the grammar parser to perform a specific way when generating hypothesis:
 
-"john platt
+* '+' before a term indicates the term is required in any valid hypothesis
+* 'attributeName:' before a term indicate indicates the term can only be interpreted using values of that type, for example 'authorName:john platt' indicates that the terms 'john' and 'platt' can only be hypothesized as an author name(s)
 
-Execute query using language grammar
+## Stage 2: Generate valid interpretation hypotheses
 
+:::image type="content" source="media/concept-semantic-interpretation-hypothesis.png" alt-text="MAKES Semantic Interpretation Generation Architecture - Generate interpretation hypothesis":::
 
-"wei wang microsoft ai gps trajectories"
+Semantic interpretation generation is broken into two important stages. The first of these is generating interpretation hypotheses using a [Context Sensitive Grammar (CSG)](https://en.wikipedia.org/wiki/Context-sensitive_grammar) conforming to the [Speech Recognition Grammar Specification (SRGS)](https://www.w3.org/TR/speech-grammar/).
 
-- Step 1: Generate semantic interpretations
+Generally SRGS grammars are context-free, meaning grammar rules can be matched lacking any additional context of previously matched rules. MAKES changes this behavior by including a *grammar context* that enables rules to reference metadata from previously matched rules.
 
-Parsed | Interpretation | Expression | Documents
---- | --- | --- | ---
-"" | * | All() | ~220 million
-"wei wang" | Composite(AA.AuN='wei wang')
-- Step 2: Evaluate structured query expressions
-natural language query
+The default SRGS grammar used by MAKES is very simple, with a single top-level rule which is allowed to repeat until all query terms have been processed.
+
+* GetPapers
+  * For current term(s) do *one* of the following:
+    * Match term to paper title words available in the current grammar context
+    * Match terms to paper authors available in the current grammar context
+    * ...
+  * If match found, add new match to the grammar context, then either move to the next query segment and repeat top level rule or if at end of query move to resolve the hypothesis
+  * If no match found, terminate current grammar context
+
+It's important to understand that each hypothesis generates *sub-hypotheses* in the form of an expansion-tree, and each tree branch *gets its own unique copy of the grammar context*. This allows MAKES to generate many potential hypothesis that fully explore the search space for a given query.
+
+## Stage 3: Resolve valid interpretation hypothesis
+
+:::image type="content" source="media/concept-semantic-interpretation-resolve.png" alt-text="MAKES Semantic Interpretation Generation Architecture - Resolve valid hypothesis":::
+
+Once a valid hypothesis has been found, MAKES *resolves* the hypothesis into an interpretation by generating and storing the following:
+
+* Probability score for the hypothesis, which is generally the static rank of the top-most entity returned by the hypothesis plus any alternative [weight penalties imposed by the SRGS grammar](https://www.w3.org/TR/speech-grammar/#S2.4)
+* XML parse which includes the grammar rules and attributes matched to generate the hypothesis
+* [Structured query expression](concepts-query-expressions.md) that can be used to find all entity results matching the hypothesis
+* Optionally the top matching entities themselves can be also be returned
+
+## Stage 4: Generate interpretation response
+
+The final stage of semantic interpretation generation is aggregating all found valid hypotheses and generating a final JSON response.
+
+What is included (i.e. how many results, starting offset, etc.) is controlled by the request parameters, but an example response for the example query "john platt nature 2019" would look like the following:
+
+```JSON
+{
+    "query": "john platt nature 2019",
+    "interpretations": [
+        {
+            "logprob": -17.722,
+            "parse": "<rule name=\"#GetPapers\"><attr name=\"academic#AA.AuN\">john platt</attr> <attr name=\"academic#J.JN\">nature</attr> <attr name=\"academic#Y\">2019</attr><end/></rule>",
+            "rules": [
+                {
+                    "name": "#GetPapers",
+                    "output": {
+                        "type": "query",
+                        "value": "And(And(Composite(AA.AuN=='john platt'),Composite(J.JN=='nature')),Y=2019)",
+                        "entities": [
+                            {
+                                "logprob": -17.722,
+                                "Ti": "quantum supremacy using a programmable superconducting processor"
+                            }
+                        ]
+                    }
+                }
+            ]
+        }
+    ],
+    "timed_out_count": 0,
+    "timed_out": false
+}
+```
+
+For information about the format of the response see the [Interpret method](reference-get-interpret.md).
+
+## See also
+
+[Interpret API method documentation](reference-get-interpret.md)
+
+[Semantic query expressions](concept-query-expressions.md)
