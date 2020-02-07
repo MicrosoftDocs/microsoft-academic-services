@@ -15,26 +15,8 @@
 - name: How to
   expanded: true
   items:
-  - name: Create Index from MAG
-    href: how-to-create-index-from-mag.md
-  - name: Integrate with Existing Search
-    href: how-to-integrate-with-existing-search.md
-- name: Concepts
-  expanded: true
-  items:
-  - name: Semantic Search
-    href: concepts-queries.md
-  - name: Structured Query Expressions
-    href: concepts-query-expressions.md
-- name: Samples
-  expanded: true
-  items:
-  - name: Expert Finder
-    href: sample-expert-finder.md
-  - name: Academic Search
-    href: sample-academic-search.md
-  - name: Top Author Analytics
-    href: sample-top-authors-analytics.md    
+  - name: Deploy new MAKES releases to existing MAKES instances
+    href: how-to-deploy-new-indexes-to-makes.md
 - name: Reference
   expanded: true
   items:
@@ -64,5 +46,7 @@
     href: resources-faq.md
   - name: Pricing
     href: resources-pricing.md
+  - name: Troubleshoot Guide
+    href: resources-troubleshoot-guide.md
   - name: Stack Overflow
     href: http://stackoverflow.com/questions/tagged/microsoft-academic-knowledge-exploration-service
