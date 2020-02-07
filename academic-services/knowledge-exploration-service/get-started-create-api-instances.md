@@ -121,6 +121,15 @@ kesm.exe DeployHost --help
 
 Or, you can visit the [Command Line Tool(kesm.exe) Reference](reference-makes-command-line-tool.md).
 
+## Verify your new instance of MAKES
+
+1. Open a browser and go to the status URL for your new MAKES instance.  Ex: **http://<your_makes_public_IP_DNS>.<azure_region>.cloudapp.azure.com/status**. The "readyToServeRequest" property should be true.
+
+2. Go to the details URL for your new MAKES instance and verify the version of the API. Ex: **http://<your_makes_public_IP_DNS>.<azure_region>.cloudapp.azure.com/details**.  In the description the created time should match the date of your release. _
+
+3. Go to the base URL for your new MAKES instance and verify the API's are working as expected.  Ex: **http://<your_makes_public_IP_DNS>.<azure_region>.cloudapp.azure.com**
+
+
 ## Next steps
 
 Check out the sample projects that leverages MAKES API.

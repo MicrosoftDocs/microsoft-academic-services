@@ -4,11 +4,12 @@ _site/
 .optemp/
 _themes*/
 _repo.*/
+academic-services/.vs
+microsoft-academic-services/.vs
 
 .openpublishing.buildcore.ps1
 
 *.suo
 *.manifest
 *.testlog
-=======
-.vs/
+
