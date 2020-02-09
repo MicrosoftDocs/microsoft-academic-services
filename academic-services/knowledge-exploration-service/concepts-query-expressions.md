@@ -7,9 +7,11 @@ ms.date: 2020-02-10
 
 # Structured query expressions
 
-A structured query expression specifies a set of operations to evaluate against the index for the purpose of retrieving entities.  It consists of both attribute query expressions and higher-level functions.  Use the [Evaluate method](reference-get-evaluate.md) to retrieve matching entities for a query expression.  
+A structured query expression specifies a set of operations to evaluate against the index for the purpose of retrieving entities.  It consists of both attribute query expressions and higher-level functions.  
 
-Structured query expressions can either be [*automatically* generated for natural language queries](concepts-queries.md) using the [Interpret method](reference-get-interpret.md) or manually created. To learn more about their structure and syntax please see below.
+Structured query expressions can either be [*automatically* generated for natural language queries](concepts-queries.md) using the [Interpret method](reference-get-interpret.md) or manually created. They are used by the [Evaluate method](reference-get-evaluate.md) to retrieve matching entities and by the [CalcHistogram method](reference-get-histogram.md) to calculate the distribution of attribute values for matching entities.
+
+To learn more about their structure and syntax please see below.
 
 ## Attribute query expression
 
@@ -68,19 +70,44 @@ And(Y=2000, Or(Composite(F.FN='information retrieval'), Composite(F.FN='user mod
 Composite(expr)
 ```
 
-Returns an expression that encapsulates an inner expression composed of queries against sub-attributes of a common composite attribute.  The encapsulation requires the composite attribute of any matching data object to have at least one value that individually satisfies the inner expression.  Note that a query expression on sub-attributes of a composite attribute has to be encapsulated using the Composite() function before it can be combined with other query expressions.
+The Composite function evaluates the enclosed expression against individual composite attribute values of an entity, meaning that for an entity to match an expression it must contain a *single composite attribute value* that matches the entire enclosed expression.
 
-For example, the following expression returns academic publications by "harry shum" while he was at "microsoft":
+For example, given the following entity:
+
+```JSON
+{
+  "Ti": "linguistic regularities in continuous space word representations",
+  "AA": [
+    {
+      "AuN": "tomas mikolov",
+      "AfN": "google"
+    },
+    {
+      "AuN": "wen tau yih",
+      "AfN": "microsoft"
+    },
+    {
+      "AuN": "geoffrey zweig",
+      "AfN": "microsoft"
+    }
+  ]
+}
+```
+
+Remembering that the Composite function evaluates the enclosed expression against *individual composite attributes*, the following expression would *not* match the above paper as it requires an individual AA attribute value that matches *both* "geoffrey zweig" and "google":
 
 ```
-Composite(And(AA.AuN="harry shum",AA.AfN="microsoft"))
+Composite(And(AA.AuN='geoffrey zweig',AA.AfN='google'))
 ```
 
-In contrast, the following expression returns academic publications where one of the authors is "harry shum" and one of the affiliations is "microsoft" (meaning one author must be "harry shum" and one author must be affiliated with "microsoft"):
+Changing the expression so that the And function is enclosing *two separate Composite functions* would successfully retrieve the paper:
 
 ```
-And(Composite(AA.AuN="harry shum"),Composite(AA.AfN="microsoft"))
+And(Composite(AA.AuN='geoffrey zweig'),Composite(AA.AfN'='google'))
 ```
+
+>![IMPORTANT]
+>MAKES requires that all attribute expressions referencing a composite attribute **must be enclosed by a Composite function**, therefore it is important to understand how the function behaves.
 
 ## See also
 
