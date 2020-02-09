@@ -106,7 +106,7 @@ Changing the expression so that the And function is enclosing *two separate Comp
 And(Composite(AA.AuN='geoffrey zweig'),Composite(AA.AfN'='google'))
 ```
 
->![IMPORTANT]
+>[!IMPORTANT]
 >MAKES requires that all attribute expressions referencing a composite attribute **must be enclosed by a Composite function**, therefore it is important to understand how the function behaves.
 
 ## See also
