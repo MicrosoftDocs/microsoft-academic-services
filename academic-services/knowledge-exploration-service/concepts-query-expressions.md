@@ -11,7 +11,7 @@ A structured query expression specifies a set of operations to evaluate against 
 
 Structured query expressions can either be [*automatically* generated for natural language queries](concepts-queries.md) using the [Interpret method](reference-get-interpret.md) or manually created. They are used by the [Evaluate method](reference-get-evaluate.md) to retrieve matching entities and by the [CalcHistogram method](reference-get-histogram.md) to calculate the distribution of attribute values for matching entities.
 
-To learn more about their structure and syntax please see below.
+See below for more information.
 
 ## Attribute query expression
 
