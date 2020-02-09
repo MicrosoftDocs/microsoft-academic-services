@@ -44,10 +44,10 @@ And(expr1, expr2)
 
 Returns the intersection of the two input query expressions.
 
-The following example returns academic publications published in the year 2000 about information retrieval:
+The following example returns academic publications published in the year 2000 containing the words 'information' and 'retrieval' in their title:
 
 ```
-And(Y=2000, Composite(F.FN=='information retrieval'))
+And(Y=2000, W='information', W='retrieval')
 ```
 
 ### Or function
@@ -58,10 +58,10 @@ Or(expr1, expr2)
 
 Returns the union of the two input query expressions.
 
-The following example returns academic publications published in the year 2000 about information retrieval or user modeling:
+The following example returns academic publications published in the year 2000 with both 'information' and 'retrieval' in their title *or* or both 'user' and 'modeling' in their title:
 
 ```
-And(Y=2000, Or(Composite(F.FN='information retrieval'), Composite(F.FN='user modeling')))
+And(Y=2000, Or(And(W='information', W='retrieval'), And(W='user', W='modeling')))
 ```
 
 ### Composite function
