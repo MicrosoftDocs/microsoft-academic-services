@@ -62,7 +62,7 @@ Please create a new Azure subscription for the distribution previews. If your or
     - Name of your Microsoft sales representative, if you have one
     - Azure storage account name
     - Azure storage account primary access key
-    - Which MAKES APIs you want to receive (semantic interpretation API, entity API, or both)
+    - Do you want a single, one-time provision of the most recent release, or recurring provisions whenever a new release is available?
 
     > [!NOTE]
     > MAKES is currently in a free preview period, so there are no charges associated with the provisioning or use of data/service itself. However Azure requires you to cover all costs associated with standard resource creation, usage, etc. For cost estimates associated with MAKES please see the [Pricing](resources-pricing.md) page. <br/><br/>Most research institutions have an "Enterprise Account" with Microsoft including Azure subscription. The pricing for Enterprise Accounts differ from the individual account shown in Azure's price calculator. <br/><br/>If you have an Enterprise Account, please check with your individual institution's Information Technology/Computer Center resource on the process of setting up Azure to get MAKES. You might need to obtain a "Master Agreement #" and involve MLSP (Microsoft Licensed Solution Provider) for help.
