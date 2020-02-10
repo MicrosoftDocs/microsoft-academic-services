@@ -19,8 +19,8 @@ Attribute query expressions are lookup operations for indexed attributes. Differ
 
 Type | Operation | Example
 --- | --- | ---
-String | equals | Ti='latent semantic analysis'  (canonical + synonyms)
-String | equals | Composite(AA.AuN=='susan t dumais')  (canonical only)
+String | equals | Composite(AA.AuN='susan dumais')  (match either canonical or synonyms)
+String | equals | Ti=='latent semantic analysis'  (only match canonical)
 String | starts_with | Composite(AA.AuN='susan t'...)
 Int32/Int64/Double | equals | Y=2000
 Int32/Int64/Double | starts_with | Y='20'... (any decimal value starting with "20")
