@@ -1,13 +1,13 @@
 ---
-title: GET Histogram
+title: GET CalcHistogram
 description: Computes attribute value distribution for a structured query expression
 ms.topic: reference
 ms.date: 2020-02-10
 ---
 
-# Histogram REST API
+# CalcHistogram REST API
 
-The **Histogram** method computes the entities matching a [structured query expressions](concepts-query-expressions.md) and then calculates the distribution of the requested attributes values in the matched entities.
+The **CalcHistogram** method computes the entities matching a [structured query expressions](concepts-query-expressions.md) and then calculates the distribution of the requested attributes values in the matched entities.
 
 This method is useful for determining the most dominant attribute values in a result set, e.g. finding the most dominant conference Microsoft publishes in (see [examples](#examples) section below).
 
