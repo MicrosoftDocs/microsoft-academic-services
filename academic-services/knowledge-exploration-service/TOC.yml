@@ -1,4 +1,4 @@
-- name: Microsoft Academic Knowledge Exploration Service Documentation
+- name: Microsoft Academic Knowledge Exploration Service documentation
   href: index.yml
 - name: Overview
   expanded: true
@@ -10,7 +10,7 @@
   items:
   - name: Sign up for MAKES
     href: get-started-setup-provisioning.md
-  - name: Create an API Instance
+  - name: Create an API instance
     href: get-started-create-api-instances.md
 - name: How to
   expanded: true
@@ -20,7 +20,7 @@
 - name: Reference
   expanded: true
   items:
-  - name: Entity Schema
+  - name: Entity schema
     href: reference-makes-api-entity-schema.md   
   - name: REST API
     expanded: false
@@ -37,7 +37,7 @@
         href: reference-post-histogram.md
       - name: POST Interpret
         href: reference-post-interpret.md
-  - name: Command Line Tool
+  - name: Command line tool
     href: reference-makes-command-line-tool.md
 - name: Resources
   expanded: true
@@ -46,7 +46,7 @@
     href: resources-faq.md
   - name: Pricing
     href: resources-pricing.md
-  - name: Troubleshoot Guide
+  - name: Troubleshooting guide
     href: resources-troubleshoot-guide.md
   - name: Stack Overflow
     href: http://stackoverflow.com/questions/tagged/microsoft-academic-knowledge-exploration-service
