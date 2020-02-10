@@ -17,6 +17,8 @@
   items:
   - name: Deploy new MAKES releases to existing MAKES instances
     href: how-to-deploy-new-indexes-to-makes.md
+  - name: Delete a MAKES deployment 
+    href: how-to-delete-api-instances.md
 - name: Concepts
   expanded: true
   items:
@@ -24,6 +26,7 @@
     href: concepts-queries.md
   - name: Structured query expressions
     href: concepts-query-expressions.md
+
 - name: Reference
   expanded: true
   items:
