@@ -2,7 +2,7 @@
 title: POST Interpret
 description: Generates semantic interpretations of a natural language query
 ms.topic: reference
-ms.date: 2020-02-07
+ms.date: 2020-02-10
 ---
 
 # Interpret REST API

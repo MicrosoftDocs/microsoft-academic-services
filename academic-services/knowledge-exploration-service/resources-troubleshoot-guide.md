@@ -1,3 +1,10 @@
+---
+title: MAKES troubleshooting guide
+description: Addresses common problems found with MAKES
+ms.topic: reference
+ms.date: 2020-02-10
+---
+
 # Troubleshoot Common MAKES command line tool issues
 
 ## Azure login failure due to multiple subscriptions being tied to a single Azure account

@@ -2,7 +2,7 @@
 title: GET Evaluate
 description: Returns entities that match constraints specified in a structured query expression
 ms.topic: reference
-ms.date: 2020-02-07
+ms.date: 2020-02-10
 ---
 
 # Evaluate REST API

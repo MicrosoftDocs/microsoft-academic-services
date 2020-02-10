@@ -1,3 +1,10 @@
+---
+title: MAKES API reference
+description: Reference documentation for the MAKES API
+ms.topic: reference
+ms.date: 2020-02-10
+---
+
 # MAKES API REFERENCE
 
 Method | Description

@@ -1,4 +1,4 @@
-- name: Microsoft Academic Knowledge Exploration Service Documentation
+- name: Microsoft Academic Knowledge Exploration Service documentation
   href: index.yml
 - name: Overview
   expanded: true
@@ -10,34 +10,44 @@
   items:
   - name: Sign up for MAKES
     href: get-started-setup-provisioning.md
-  - name: Create an API Instance
+  - name: Create an API instance
     href: get-started-create-api-instances.md
 - name: How to
   expanded: true
   items:
+  - name: Deploy new MAKES releases to existing MAKES instances
+    href: how-to-deploy-new-indexes-to-makes.md
   - name: Delete a MAKES deployment 
     href: how-to-delete-api-instances.md
+- name: Concepts
+  expanded: true
+  items:
+  - name: Natural language queries
+    href: concepts-queries.md
+  - name: Structured query expressions
+    href: concepts-query-expressions.md
+
 - name: Reference
   expanded: true
   items:
-  - name: Entity Schema
+  - name: Entity schema
     href: reference-makes-api-entity-schema.md   
   - name: REST API
     expanded: false
     items:
+      - name: GET CalcHistogram
+        href: reference-get-histogram.md
       - name: GET Evaluate
         href: reference-get-evaluate.md
-      - name: GET Histogram
-        href: reference-get-histogram.md
       - name: GET Interpret
         href: reference-get-interpret.md
+      - name: POST CalcHistogram
+        href: reference-post-histogram.md
       - name: POST Evaluate
         href: reference-post-evaluate.md
-      - name: POST Histogram
-        href: reference-post-histogram.md
       - name: POST Interpret
         href: reference-post-interpret.md
-  - name: Command Line Tool
+  - name: Command line tool
     href: reference-makes-command-line-tool.md
 - name: Resources
   expanded: true
@@ -46,7 +56,7 @@
     href: resources-faq.md
   - name: Pricing
     href: resources-pricing.md
-  - name: Troubleshoot Guide
+  - name: Troubleshooting guide
     href: resources-troubleshoot-guide.md
   - name: Stack Overflow
     href: http://stackoverflow.com/questions/tagged/microsoft-academic-knowledge-exploration-service
