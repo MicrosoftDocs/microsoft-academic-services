@@ -12,7 +12,7 @@ API Purpose | Description |Host Machine Sku | Cost estimate
 --- | --- | --- | ---
 Development | For fast iterative development over all knowledge in Microsoft Academic Graph(MAG). |  Stanadard_DS14_v2 | [Pricing calculator](https://azure.com/e/9bfe795705424b26a118639a198adfbd)
 Production small | For enterprise or domain specific solutions| Stanadard_DS4_v3  | [Pricing calculator](https://azure.com/e/c04290edd8bf4db08ba23db8392430c4)
-Production large | For large scale service for all knowledge in Microsoft Academic Graph(MAG).  | [Pricing calculator](https://azure.com/e/e7080864e099442c999eff5f867a8441)
+Production large | For large scale service for all knowledge in Microsoft Academic Graph(MAG).  | Standard_E32s_v3 |[Pricing calculator](https://azure.com/e/2c1ee1b19db84b7dbb6d3eb7b5492d6c)
 
 
 > [!IMPORTANT]
