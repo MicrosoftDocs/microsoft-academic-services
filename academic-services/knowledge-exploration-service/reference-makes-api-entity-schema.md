@@ -20,13 +20,13 @@ Ty      |Entity type    |enum    |Equals
 
 Name    |value
 --------|-------
-[Paper](#Paper-Entity) |0
-[Author](#Author-Entity) |1
-[Journal](#Journal-Entity) |2
-[Conference Series](#Conference-Series-Entity) |3
-[Conference Instance](#Conference-Instance-Entity) |4
-[Affiliation](#Affiliation-Entity) |5
-[Field Of Study](#Field-Of-Study-Entity) |6
+[Paper](#paper-entity) |0
+[Author](#author-entity) |1
+[Journal](#journal-entity) |2
+[Conference Series](#conference-series-entity) |3
+[Conference Instance](#conference-instance-entity) |4
+[Affiliation](#affiliation-entity) |5
+[Field Of Study](#field-of-study-entity) |6
 
 ## Paper Entity
 
@@ -51,7 +51,7 @@ CitCon | Citation contexts</br></br>List of referenced paper ID’s and the corr
 D | Date published in YYYY-MM-DD format | Date | Equals, IsBetween
 DN | Original paper title | String | None
 DOI | Digital Object Identifier | String | Equals, StartsWith
-E | Extended metadata</br></br>**IMPORTANT**: This attribute has been deprecated and is only supported for legacy applications. Requesting this attribute individually (i.e. attributes=Id,Ti,E) will result in all extended metadata attributes being returned in a *serialized JSON string*</br></br>All attributes contained in the extended metadata are now available as a top-level attribute and can be requested as such (i.e. attributes=Id,Ti,DOI,IA) | [Extended](#Paper-Entity-Extended) | None
+E | Extended metadata</br></br>**IMPORTANT**: This attribute has been deprecated and is only supported for legacy applications. Requesting this attribute individually (i.e. attributes=Id,Ti,E) will result in all extended metadata attributes being returned in a *serialized JSON string*</br></br>All attributes contained in the extended metadata are now available as a top-level attribute and can be requested as such (i.e. attributes=Id,Ti,DOI,IA) | [Extended](#paper-entity-extended) | None
 ECC | Estimated citation count | Int32 | None
 F.DFN | Original field of study name | String | None
 F.FId | Field of study ID | Int64 | Equals
@@ -130,7 +130,7 @@ Id		| Entity ID								|Int64		|Equals
 AuN		| Author normalized name					|String		|Equals
 CC		| Author total citation count			|Int32		|None  
 DAuN	| Author display name					|String		|None
-E | Extended metadata</br></br>**IMPORTANT**: This attribute has been deprecated and is only supported for legacy applications. Requesting this attribute individually (i.e. attributes=Id,Ti,E) will result in all extended metadata attributes being returned in a *serialized JSON string*</br></br>All attributes contained in the extended metadata are now available as a top-level attribute and can be requested as such (i.e. attributes=Id,Ti,DOI,IA) | [Extended](#Author-Entity-Extended) | None
+E | Extended metadata</br></br>**IMPORTANT**: This attribute has been deprecated and is only supported for legacy applications. Requesting this attribute individually (i.e. attributes=Id,Ti,E) will result in all extended metadata attributes being returned in a *serialized JSON string*</br></br>All attributes contained in the extended metadata are now available as a top-level attribute and can be requested as such (i.e. attributes=Id,Ti,DOI,IA) | [Extended](#author-entity-extended) | None
 ECC		| Author total estimated citation count	|Int32		|None
 LKA.AfId | Entity ID of the last known affiliation found for the author | Int64 | None
 LKA.AfN | Normalized name of the last known affiliation found for the author | String | None
@@ -199,7 +199,7 @@ CINDD	|Notification date of the conference instance 	|Date		|Equals, IsBetween
 CISD	|Start date of the conference instance 	|Date		|Equals, IsBetween
 CISDD	|Submission due date of the conference instance 	|Date		|Equals, IsBetween
 DCN		|Conference instance display name  |String		|None
-E | Extended metadata</br></br>**IMPORTANT**: This attribute has been deprecated and is only supported for legacy applications. Requesting this attribute individually (i.e. attributes=Id,Ti,E) will result in all extended metadata attributes being returned in a *serialized JSON string*</br></br>All attributes contained in the extended metadata are now available as a top-level attribute and can be requested as such (i.e. attributes=Id,Ti,DOI,IA) | [Extended](#Conference-Instance-Extended) | None
+E | Extended metadata</br></br>**IMPORTANT**: This attribute has been deprecated and is only supported for legacy applications. Requesting this attribute individually (i.e. attributes=Id,Ti,E) will result in all extended metadata attributes being returned in a *serialized JSON string*</br></br>All attributes contained in the extended metadata are now available as a top-level attribute and can be requested as such (i.e. attributes=Id,Ti,DOI,IA) | [Extended](#conference-instance-extended) | None
 ECC		|Conference instance total estimated citation count	|Int32		|None
 FN | Conference instance full name | String | None
 Id		|Entity ID								|Int64		|Equals
@@ -230,7 +230,7 @@ Name | Description | Type | Operations
 AfN | Affiliation normalized name |String |Equals
 CC | Affiliation total citation count |Int32		|none  
 DAfN | Affiliation display name |String |none
-E | Extended metadata</br></br>**IMPORTANT**: This attribute has been deprecated and is only supported for legacy applications. Requesting this attribute individually (i.e. attributes=Id,Ti,E) will result in all extended metadata attributes being returned in a *serialized JSON string*</br></br>All attributes contained in the extended metadata are now available as a top-level attribute and can be requested as such (i.e. attributes=Id,Ti,DOI,IA) | [Extended](#Affiliation-Entity-Extended) | None
+E | Extended metadata</br></br>**IMPORTANT**: This attribute has been deprecated and is only supported for legacy applications. Requesting this attribute individually (i.e. attributes=Id,Ti,E) will result in all extended metadata attributes being returned in a *serialized JSON string*</br></br>All attributes contained in the extended metadata are now available as a top-level attribute and can be requested as such (i.e. attributes=Id,Ti,DOI,IA) | [Extended](#affiliation-entity-extended) | None
 ECC | Affiliation total estimated citation count |Int32 |none
 Id | Entity ID |Int64 |Equals
 PC | Total number of publications written in affiliation with this entity | Int32 | None

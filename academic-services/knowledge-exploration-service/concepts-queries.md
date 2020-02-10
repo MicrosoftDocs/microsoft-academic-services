@@ -114,4 +114,4 @@ What is included (i.e. how many results, starting offset, etc.) is controlled by
 
 [Interpret API method documentation](reference-get-interpret.md)
 
-[Semantic query expressions](concept-query-expressions.md)
+[Semantic query expressions](concepts-query-expressions.md)

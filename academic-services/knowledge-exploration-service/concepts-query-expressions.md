@@ -117,4 +117,4 @@ And(Composite(AA.AuN='geoffrey zweig'),Composite(AA.AfN'='google'))
 
 [CalcHistogram API method documentation](reference-get-histogram.md)
 
-[Natural language queries](concept-queries.md)
+[Natural language queries](concepts-queries.md)
