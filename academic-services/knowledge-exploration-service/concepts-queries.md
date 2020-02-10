@@ -77,7 +77,7 @@ Once a valid hypothesis has been found, MAKES *resolves* the hypothesis into an 
 
 The final stage of semantic interpretation generation aggregates all the hypotheses that were found and generates a JSON response.
 
-What is included (i.e. how many results, starting offset, etc.) is controlled by the request parameters, but an example response for the example query "john platt nature 2019" would look like the following:
+An example response for the example query "john platt nature 2019" would look like the following:
 
 ```JSON
 {
@@ -108,7 +108,7 @@ What is included (i.e. how many results, starting offset, etc.) is controlled by
 }
 ```
 
-For information about the format of the response, see the [Interpret method](reference-get-interpret.md).
+What is included (i.e. how many results, starting offset, etc.) is controlled by the request parameters. For information about the format of the response, see the [Interpret method](reference-get-interpret.md).
 
 ## See also
 
