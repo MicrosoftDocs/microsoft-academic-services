@@ -2,28 +2,28 @@
     "redirections": [
         {
             "source_path": "academic-services/knowledge-exploration-service/how-to-deploy-makes-azure-management-portal.md",
-            "redirect_url": "introduction.md",
-            "redirect_document_id": true
+            "redirect_url": "/academic-services/knowledge-exploration-service/introduction.md",
+            "redirect_document_id": false
         },
         {
             "source_path": "academic-services/knowledge-exploration-service/reference-entity-api.md",
-            "redirect_url": "introduction.md",
-            "redirect_document_id": true
+            "redirect_url": "/academic-services/knowledge-exploration-service/introduction.md",
+            "redirect_document_id": false
         },
         {
             "source_path": "academic-services/knowledge-exploration-service/reference-semantic-interpretation-api.md",
-            "redirect_url": "introduction.md",
-            "redirect_document_id": true
+            "redirect_url": "/academic-services/knowledge-exploration-service/introduction.md",
+            "redirect_document_id": false
         },
         {
             "source_path": "academic-services/knowledge-exploration-service/reference-entity-engine.md",
-            "redirect_url": "introduction.md",
-            "redirect_document_id": true
+            "redirect_url": "/academic-services/knowledge-exploration-service/introduction.md",
+            "redirect_document_id": false
         },
         {
             "source_path": "academic-services/knowledge-exploration-service/reference-semantic-interpretation-engine.md",
-            "redirect_url": "introduction.md",
-            "redirect_document_id": true
+            "redirect_url": "/academic-services/knowledge-exploration-service/introduction.md",
+            "redirect_document_id": false
         }
     ]
 }
