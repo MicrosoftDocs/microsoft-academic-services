@@ -2,7 +2,7 @@
 title: Natural Language Queries
 description: 
 ms.topic: reference
-ms.date: 2020-02-07
+ms.date: 2020-02-10
 ---
 
 # How MAKES generates semantic interpretations of natural language queries

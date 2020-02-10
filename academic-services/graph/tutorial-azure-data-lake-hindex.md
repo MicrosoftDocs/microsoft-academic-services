@@ -162,7 +162,7 @@ In this section, you submit an ADLA job to compute author h-index and save outpu
    |Value  |Description  |
    |---------|---------|
    |**`<AzureStorageAccount>`** | The name of your Azure Storage (AS) account containing MAG dataset. |
-   |**`<MagContainer>`** | The container name in Azure Storage (AS) account containing MAG dataset, Usually in the form of **mag-yyyy-mm-dd**. |
+   |**`<MagContainer>`** | The container name in Azure Storage (AS) account containing MAG dataset, usually in the form of **mag-yyyy-mm-dd**. |
 
 1. Provide a **Job name**, change **AUs** to 5, and select **Submit**.
 
@@ -174,7 +174,7 @@ In this section, you submit an ADLA job to compute author h-index and save outpu
 
 ## View output data
 
-The output of the ADLA job in previous section goes to "/Output/AuthorHIndex.tsv" in the Azure Data Lake Storage (ADLS). In this section, you use [Azure portal](http://portal.azure.com/) to view output content.
+The output of the ADLA job in previous section goes to "/Output/AuthorHIndex.tsv" in the Azure Data Lake Storage (ADLS). In this section, you use [Azure portal](https://portal.azure.com/) to view output content.
 
 1. In the [Azure portal](https://portal.azure.com), go to the Azure Data Lake Storage (ADLS) service that you created, and select **Data Explorer**.
 
