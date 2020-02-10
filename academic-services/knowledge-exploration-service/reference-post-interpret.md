@@ -28,7 +28,7 @@ Name | Required | Type | Description
 `offset` | Optional | integer | The number of interpretations to skip in the result set. <br/><br/>Defaults to 0.
 `timeout` | Optional | integer | The maximum amount of time in milliseconds to use when generating interpretations. <br/><br/>If the timeout is hit, all interpretations that have been generated will be returned and a "timedOut" flag will be set in the response indicating that the timeout was hit before the total number of requested interpretations was met. <br/><br/>Defaults to 2000.
 `entityCount` | Optional | integer | The maximum number of entities that should be returned for each interpretation that match the interpreted query expression. <br/><br/>By default this is set to 0, meaning no entities are returned.
-`attributes` | Optional | string | A list of comma-separated attributes to include for each entity returned for each interpretation. See the [entity schema overview](reference-makes-api-entity-schema.md#entity-types) for the attributes that can be requested. <br/><br/>If an asterisk (*) is specified, all available attributes will be returned. <br/><br/>Defaults to an empty string.
+`attributes` | Optional | string | A list of comma-separated attributes to include for each entity returned for each interpretation. See the [entity schema overview](reference-makes-api-entity-schema.md#entity-schema) for the attributes that can be requested. <br/><br/>If an asterisk (*) is specified, all available attributes will be returned. <br/><br/>Defaults to an empty string.
 
 ## Responses
 
