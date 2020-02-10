@@ -2,7 +2,7 @@
 title: How to delete a MAKES API deployment
 description: Step-by-step guide for deleting a Microsoft Academic Knowledge Exploration Service(MAKES) deployment using azure portal.
 ms.topic: tutorial
-ms.date: 02/06/2020
+ms.date: 2020-02-10
 ---
 
 # How to delete a MAKES deployment
