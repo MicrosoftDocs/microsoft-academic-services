@@ -1,11 +1,11 @@
 ---
 title: MAKES API entity schema
-description: Learn about the entity attributes that MAKES API/Index contains.
+description: Learn about the entity schema that MAKES API/Index contains.
 ms.topic: conceptual
-ms.date: 03/27/2017
+ms.date: 2020-02-10
 ---
 
-# Entity Attributes
+# Entity schema
 
 The academic graph is composed of 7 types of entity. All entities will have an Entity ID and an Entity type.
 

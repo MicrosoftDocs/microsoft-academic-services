@@ -1,4 +1,4 @@
-- name: Microsoft Academic Knowledge Exploration Service Documentation
+- name: Microsoft Academic Knowledge Exploration Service documentation
   href: index.yml
 - name: Overview
   expanded: true
@@ -10,7 +10,7 @@
   items:
   - name: Sign up for MAKES
     href: get-started-setup-provisioning.md
-  - name: Create an API Instance
+  - name: Create an API instance
     href: get-started-create-api-instances.md
 - name: How to
   expanded: true
@@ -53,7 +53,7 @@
     href: resources-faq.md
   - name: Pricing
     href: resources-pricing.md
-  - name: Troubleshoot Guide
+  - name: Troubleshooting guide
     href: resources-troubleshoot-guide.md
   - name: Stack Overflow
     href: http://stackoverflow.com/questions/tagged/microsoft-academic-knowledge-exploration-service

@@ -1,8 +1,15 @@
+---
+title: MAKES command line tool reference
+description: Documentation for the MAKES command line tool
+ms.topic: reference
+ms.date: 2020-02-10
+---
+
 # MAKES command line tool
 
 Makes command line tool is designed to help users create and host MAKES indexes.
 
-## CreateHostResources Command
+## CreateHostResources command
 
 Creates the MAKES index hosting resources. E.g. MAKES web host image
 
@@ -13,7 +20,7 @@ kesm CreateHostResources --HostResourceName
             --[MakesWebHost]
 ```
 
-### Required Parameters
+### Required parameters
 
 `--HostResourceName`
 
@@ -23,7 +30,7 @@ The name of the host resource.
 
 The base URL to a MAKES release package.
 
-### Optional Parameters
+### Optional parameters
 
 `--Region`
 
@@ -33,7 +40,7 @@ The region to deploy the host resources to. Defaults to WestUs
 
 The URL to MAKES web host zip file that will be used to create the MAKES virtual machine hosting image.
 
-## DeployHost Command
+## DeployHost command
 
 Hosts the specified indexes to power an instance of MAKES API.
 
@@ -49,7 +56,7 @@ kesm DeployHost --HostName
                 --[KeepResourcesOnFailure]
 ```
 
-### Required Parameters
+### Required parameters
 
 `--HostName`
 
@@ -63,7 +70,7 @@ The base URL to a MAKES release package.
 
 The MAKES host virtual machine image resource Id. Run CreateHostResource command to generate one.
 
-### Optional Parameters
+### Optional parameters
 
 `--MakesIndex`
 
