@@ -193,7 +193,7 @@ Column # | Name | Type | Note
 Column # | Name | Type | Note
 --- | --- | --- | ---
 1 | PaperId | long | PRIMARY KEY <br> FOREIGN KEY REFERENCES Papers(PaperId)
-2 | IndexedAbstract | string | See [FAQ](resources-faq.md#what-format-are-paper-abstracts-published-in)
+2 | IndexedAbstract | string | See [FAQ](resources-faq.md#what-format-are-paper-abstracts-published-in) for format
 
 > [!NOTE]
 > Paper Abstracts Inverted Index is split to multiple files. Use `nlp/PaperAbstractsInvertedIndex.txt.{*}` as the path for the combined file.
