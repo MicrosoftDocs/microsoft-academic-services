@@ -32,7 +32,7 @@ The Network Similarity package is distributed in a separate folder (ns) in MAG.
 
 * Files with py extension are Python script for Azure Databricks. Files with usql extension are U-SQL scripts for Azure Data Lake Analytics.
 
-  |Sample File|Description|
+  |File Name|Description|
   |---------|---------|
   |**PySparkNetworkSimilarityClass.py**|PySpark utility functions for computing network similarity.|
   |**NetworkSimilaritySample.py**|PySpark sample script for computing network similarity.|
@@ -41,7 +41,7 @@ The Network Similarity package is distributed in a separate folder (ns) in MAG.
 
 * Files with txt extension are network similarity resource files for different type of entities. Here are the description of the resource files.
  
-  |Resource File|Description|
+  |File Name|Description|
   |---------|---------|
   |**AffiliationCopaper.txt**|Two affiliations are similar if they are closed connected with each other in the weighted affiliation collaboration graph.|
   |**AffiliationCovenue.txt**|Two affiliations are similar if they publish in similar venues (journals and conferences).|
