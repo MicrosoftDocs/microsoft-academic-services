@@ -4,7 +4,7 @@ description: Using Network Similarity Package
 services: microsoft-academic-services
 ms.topic: extra
 ms.service: microsoft-academic-services
-ms.date: 11/26/2019
+ms.date: 2/13/2020
 ---
 # Network Similarity Package
 
@@ -28,7 +28,19 @@ Before running these examples, you need to complete the following setups:
 
 ## Contents
 
-The Network Similarity package is distributed in a separate folder (ns) in MAG. Files with usql extension are U-SQL scripts for Azure Data Lake Analytics. Files with py extension are Python script for Azure Databricks. Files with txt extension are network similarity resource files for different type of entities.
+The Network Similarity package is distributed in a separate folder (ns) in MAG. Files with usql extension are U-SQL scripts for Azure Data Lake Analytics. Files with py extension are Python script for Azure Databricks. Files with txt extension are network similarity resource files for different type of entities. Here are the description of the resource files.
+
+  |File Name|Description|
+  |---------|---------|
+  |**AffiliationCopaper.txt**|Two affiliations are similar if they are closed connected with each other in the weighted affiliation collaboration graph.
+  |**AffiliationCovenue.txt**|Two affiliations are similar if they publish in similar venues (journals and conferences).
+  |**AffiliationMetapath.txt**|Two affiliations are similar if they co-occur with common affiliations, venues, and fields of study.
+  |**FosCopaper.txt**|Two fields of study are similar if they appear in the same paper.
+  |**FosCovenue.txt**|Two fields of study are similar if they have papers from similar venues.
+  |**FosMetapath.txt**|Two fields of study are similar if they co-occur with common affiliations, venues, and fields of study.
+  |**VenueCoauthor.txt**|Two venues are similar if they publish papers with common authors.
+  |**VenueCofos.txt**|Two venues are similar if they publish papers with similar fields of study.
+  |**VenueMetapath.txt**|Two venues are similar if they co-occur with common affiliations, venues, and fields of study.
 
   ![Network Similarity folder](media/network-similarity/folder.png "Network Similarity folder")
 
