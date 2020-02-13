@@ -32,8 +32,8 @@ The Network Similarity package is distributed in a separate folder (ns) in MAG. 
 
   |Sample File|Description|
   |---------|---------|
-  |**PySparkNetworkSimilarityClass.py**|PySpark utility function for computing network similarity.|
-  |**NetworkSimilaritySample.py**|PySpark  sample script for computing network similarity.|
+  |**PySparkNetworkSimilarityClass.py**|PySpark utility functions for computing network similarity.|
+  |**NetworkSimilaritySample.py**|PySpark sample script for computing network similarity.|
   |**NetworkSimilarityFunction.usql**|U-SQL utility functions for computing network similarity.|
   |**NetworkSimilaritySample.usql**|U-SQL sample script for computing network similarity.|
 
