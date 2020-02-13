@@ -51,8 +51,6 @@ The Network Similarity package is distributed in a separate folder (ns) in MAG. 
   |**VenueCofos.txt**|Two venues are similar if they publish papers with similar fields of study.|
   |**VenueMetapath.txt**|Two venues are similar if they co-occur with common affiliations, venues, and fields of study.|
 
-  ![Network Similarity folder](media/network-similarity/folder.png "Network Similarity folder")
-
 ## Samples
 
 * [Network Similarity Sample (U-SQL)](network-similarity-analytics.md)
