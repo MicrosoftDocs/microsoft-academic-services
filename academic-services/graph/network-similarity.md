@@ -34,9 +34,9 @@ The Network Similarity package is distributed in a separate folder (ns) in MAG.
 
   |File Name|Description|
   |---------|---------|
-  |**NetworkSimilarityFunction.usql**|U-SQL utility functions for computing network similarity.|
-  |**NetworkSimilaritySample.usql**|U-SQL sample script for computing network similarity.|
-
+  |**PySparkNetworkSimilarityClass.py**|PySpark utility functions for computing network similarity.|
+  |**NetworkSimilaritySample.py**|PySpark sample script for computing network similarity.|
+  
 * Files with usql extension are U-SQL scripts for Azure Data Lake Analytics.
 
   |File Name|Description|
