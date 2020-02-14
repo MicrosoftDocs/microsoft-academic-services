@@ -2,7 +2,7 @@
 title: Microsoft Academic Graph data schema
 description: Documents the complete, most recent Microsoft Academic Graph entity data schema, including the name and type of each attribute
 ms.topic: reference
-ms.date: 12/2/2019
+ms.date: 2/13/2020
 ---
 # Microsoft Academic Graph data schema
 
@@ -186,14 +186,17 @@ Column # | Name | Type | Note
 
 ## Paper Abstracts Inverted Index
 
-**Path** `nlp/PaperAbstractsInvertedIndex.txt`
+**Path** `nlp/PaperAbstractsInvertedIndex.txt.{*}`
 
 **Schema**
 
 Column # | Name | Type | Note
 --- | --- | --- | ---
 1 | PaperId | long | PRIMARY KEY <br> FOREIGN KEY REFERENCES Papers(PaperId)
-2 | IndexedAbstract | string | See [FAQ](resources-faq.md#what-format-are-paper-abstracts-published-in)
+2 | IndexedAbstract | string | See [FAQ](resources-faq.md#what-format-are-paper-abstracts-published-in) for format
+
+> [!NOTE]
+> Paper Abstracts Inverted Index is split to multiple files. Use `nlp/PaperAbstractsInvertedIndex.txt.{*}` as the path for the combined file.
 
 ## Paper Author Affiliations
 
