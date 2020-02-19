@@ -58,7 +58,7 @@ The underlying worker node for a BuildIndex job may have gone into an error stat
     1. Select the node that's in an unhealthy state to view the error
         ![node-error-detail-page](media/node-error-detail-page.png)
 
-If the error shows "There is not enough disk space on the node..." re-submit the job with a higher worker count. Otherwise, select **reboot** to restart the failed node.  
+If the error shows "There is not enough disk space on the node..." re-submit the job with a higher worker count and partition count by using the --WorkerCount and --IndexPartitionCount command. Otherwise, select **reboot** to restart the failed node.  
 
 ## MAKES BuildIndex job hangs with task failures due to data transfer
 
