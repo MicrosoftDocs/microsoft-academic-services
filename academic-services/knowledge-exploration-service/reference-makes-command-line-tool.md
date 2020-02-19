@@ -1,8 +1,15 @@
+---
+title: MAKES command line tool reference
+description: Documentation for the MAKES command line tool
+ms.topic: reference
+ms.date: 2020-02-10
+---
+
 # MAKES command line tool
 
 Makes command line tool is designed to help users create and host MAKES indexes.
 
-## CreateHostResources Command
+## CreateHostResources command
 
 Creates the MAKES index hosting resources. E.g. MAKES web host image
 
@@ -13,7 +20,7 @@ kesm CreateHostResources --HostResourceName
             --[MakesWebHost]
 ```
 
-### Required Parameters
+### Required parameters
 
 `--HostResourceName`
 
@@ -23,7 +30,7 @@ The name of the host resource.
 
 The base URL to a MAKES release package.
 
-### Optional Parameters
+### Optional parameters
 
 `--Region`
 
@@ -33,7 +40,7 @@ The region to deploy the host resources to. Defaults to WestUs
 
 The URL to MAKES web host zip file that will be used to create the MAKES virtual machine hosting image.
 
-## DeployHost Command
+## DeployHost command
 
 Hosts the specified indexes to power an instance of MAKES API.
 
@@ -49,7 +56,7 @@ kesm DeployHost --HostName
                 --[KeepResourcesOnFailure]
 ```
 
-### Required Parameters
+### Required parameters
 
 `--HostName`
 
@@ -63,7 +70,7 @@ The base URL to a MAKES release package.
 
 The MAKES host virtual machine image resource Id. Run CreateHostResource command to generate one.
 
-### Optional Parameters
+### Optional parameters
 
 `--MakesIndex`
 
@@ -88,108 +95,6 @@ The sku for MAKES API host machines.
 `--KeepResourcesOnFailure`
 
 Whether to clean up resources if deployment failed for any reason. Used for debugging MAKES host deployment failures.
-
-## CreateIndexResources Command
-
-Creates the MAKES index building resources. E.g. MAKES index build batch account, storage account.
-
-```cmd
-kesm CreateIndexResources --IndexResourceName
-                        --MakesPackage
-                        --MakesIndexResourceConfigFilePath
-                        --[Region]
-                        --[MakesPreprocessor]
-                        --[MakesIndexer]
-                        --[MakesJobManager]
-
-```
-
-### Required Parameters
-
-`--IndexResourceName`
-
-The name for the indexing resources. Indexing resources name should be less than 64 characters with only numbers and lower case letters.
-
-`--MakesPackage`
-
-The base URL to a MAKES release package.
-
-`--MakesIndexResourceConfigFilePath`
-
-Outputs the MAKES indexing resources config file for BuildIndex command. The command won't write a config file unless a path is provided.
-
-### Optional Parameters
-
-`--Region`
-
-The region to create the indexing resources in.
-
-`--MakesPreprocessor`
-
-The MAKES preprocessor zip url.
-
-`--MakesIndexer`
-
-The MAKES indexer zip url.
-
-`--MakesJobManager`
-
-The MAKES JobManager zip url.
-
-## BuildIndex Command
-
-Builds MAKES index(es) from json entities.
-
-```cmd
-kesm BuildIndex --EntitiesUrlPrefix
-                --OutputUrlPrefix
-                --[IndexPartitionCount]
-                --[IntersectionMinCount]
-                --[MakesPreprocessor]
-                --[MakesIndexer]
-                --[MakesJobManager]
-                --[MaxStringLength]
-                --[RemoveEmptyValues]
-                --[WorkerCount]
-                --[WorkerMachineSku]
-
-```
-
-### Required Parameters
-
-`--EntitiesUrlPrefix`
-
-The input entities file Url prefix.
-
-`--OutputUrlPrefix`
-
-The output url prefix for writing built index.
-
-### Optional Parameters
-
-`--IndexPartitionCount`
-
-The number of index partitions to create.
-
-`--IntersectionMinCount`
-
-The minimum intersections between indexed attribute that indexer should generate pre-calculated results. The higher the count, the more process will be required at run time. The lower the count, the larger index will be generated.
-
-`--MaxStringLength`
-
-The maximum string length for string type attributes.
-
-`--RemoveEmptyValues`
-
-Whether to remove empty attribute values to reduce index size.
-
-`--WorkerCount`
-
-The number of virtual machines(workers) used to build the index. Warning, assigning a number larger than IndexPartitionCount won't result in performance gain.
-
-`--WorkerMachineSku`
-
-The virtual machine(worker) sku. Use https://docs.microsoft.com/en-us/rest/api/compute/virtualmachines/listavailablesizes to get the most recent options
 
 ## Common authentication parameters
 

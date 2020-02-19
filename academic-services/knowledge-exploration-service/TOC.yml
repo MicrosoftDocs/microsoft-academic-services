@@ -1,4 +1,4 @@
-- name: Microsoft Academic Knowledge Exploration Service Documentation
+- name: Microsoft Academic Knowledge Exploration Service documentation
   href: index.yml
 - name: Overview
   expanded: true
@@ -10,32 +10,44 @@
   items:
   - name: Sign up for MAKES
     href: get-started-setup-provisioning.md
-  - name: Create an API Instance
+  - name: Create an API instance
     href: get-started-create-api-instances.md
 - name: How to
   expanded: true
   items:
-  - name: Create Index from MAG
-    href: how-to-create-index-from-mag.md
-  - name: Integrate with Existing Search
-    href: how-to-integrate-with-existing-search.md
-- name: Samples
+  - name: Deploy new MAKES releases to existing MAKES instances
+    href: how-to-deploy-new-indexes-to-makes.md
+  - name: Delete a MAKES deployment 
+    href: how-to-delete-api-instances.md
+- name: Concepts
   expanded: true
   items:
-  - name: Expert Finder
-    href: sample-expert-finder.md
-  - name: Academic Search
-    href: sample-academic-search.md
-  - name: Top Author Analytics
-    href: sample-top-authors-analytics.md    
+  - name: Natural language queries
+    href: concepts-queries.md
+  - name: Structured query expressions
+    href: concepts-query-expressions.md
+
 - name: Reference
   expanded: true
   items:
-  - name: API
-    href: reference-makes-api.md      
-  - name: API Entity Schema
+  - name: Entity schema
     href: reference-makes-api-entity-schema.md   
-  - name: Command Line Tool
+  - name: REST API
+    expanded: false
+    items:
+      - name: GET CalcHistogram
+        href: reference-get-histogram.md
+      - name: GET Evaluate
+        href: reference-get-evaluate.md
+      - name: GET Interpret
+        href: reference-get-interpret.md
+      - name: POST CalcHistogram
+        href: reference-post-histogram.md
+      - name: POST Evaluate
+        href: reference-post-evaluate.md
+      - name: POST Interpret
+        href: reference-post-interpret.md
+  - name: Command line tool
     href: reference-makes-command-line-tool.md
 - name: Resources
   expanded: true
@@ -44,5 +56,7 @@
     href: resources-faq.md
   - name: Pricing
     href: resources-pricing.md
+  - name: Troubleshooting guide
+    href: resources-troubleshoot-guide.md
   - name: Stack Overflow
     href: http://stackoverflow.com/questions/tagged/microsoft-academic-knowledge-exploration-service

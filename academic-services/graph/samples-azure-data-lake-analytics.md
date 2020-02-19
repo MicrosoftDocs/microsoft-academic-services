@@ -40,6 +40,13 @@ In prerequisite [Set up Azure Data Lake Analytics](get-started-setup-azure-data-
    ![Azure Data Lake Analytics - New job](media/samples-azure-data-lake-hindex/new-job.png "Azure Data Lake Analytics - New job")
 
 1. Copy code in samples/CreateDatabase.usql and paste into the code block.
+
+1. Replace `##YourBlobAccount##`, and `mag-##DatasetVersion##` placeholder values with the values that you collected while completing the prerequisites of this sample.
+
+   |Value  |Description  |
+   |---------|---------|
+   |**`##YourBlobAccount##`** | The name of your Azure Storage (AS) account containing MAG dataset. |
+   |**`mag-##DatasetVersion##`** | The container name in Azure Storage (AS) account containing MAG dataset, usually in the form of **mag-yyyy-mm-dd**. |
    
 1. Provide a **Job name** and select **Submit**.
 
@@ -104,10 +111,10 @@ In prerequisite [Set up Azure Data Lake Analytics](get-started-setup-azure-data-
 
 ## Resources
 
-* [Get started with Azure Data Lake Analytics using Azure portal](https://docs.microsoft.com/en-us/azure/data-lake-analytics/data-lake-analytics-get-started-portal)
-* [Develop U-SQL scripts by using Data Lake Tools for Visual Studio](https://docs.microsoft.com/en-us/azure/data-lake-analytics/data-lake-analytics-data-lake-tools-get-started)
-* [Get started with U-SQL](https://docs.microsoft.com/en-us/azure/data-lake-analytics/data-lake-analytics-u-sql-get-started)
-* [Deep Dive into Query Parameters and Power BI Templates](https://powerbi.microsoft.com/en-us/blog/deep-dive-into-query-parameters-and-power-bi-templates/)
-* [Manage Azure Data Lake Store resources by using Storage Explorer](https://docs.microsoft.com/en-us/azure/data-lake-store/data-lake-store-in-storage-explorer)
-* [Scalable Data Science with Azure Data Lake: An end-to-end walk-through](https://docs.microsoft.com/en-us/azure/machine-learning/team-data-science-process/data-lake-walkthrough)
+* [Get started with Azure Data Lake Analytics using Azure portal](https://docs.microsoft.com/azure/data-lake-analytics/data-lake-analytics-get-started-portal)
+* [Develop U-SQL scripts by using Data Lake Tools for Visual Studio](https://docs.microsoft.com/azure/data-lake-analytics/data-lake-analytics-data-lake-tools-get-started)
+* [Get started with U-SQL](https://docs.microsoft.com/azure/data-lake-analytics/data-lake-analytics-u-sql-get-started)
+* [Deep Dive into Query Parameters and Power BI Templates](https://powerbi.microsoft.com/blog/deep-dive-into-query-parameters-and-power-bi-templates/)
+* [Manage Azure Data Lake Store resources by using Storage Explorer](https://docs.microsoft.com/azure/data-lake-store/data-lake-store-in-storage-explorer)
+* [Scalable Data Science with Azure Data Lake: An end-to-end walk-through](https://docs.microsoft.com/azure/machine-learning/team-data-science-process/data-lake-walkthrough)
 * [Microsoft Academic Website](https://academic.microsoft.com/)

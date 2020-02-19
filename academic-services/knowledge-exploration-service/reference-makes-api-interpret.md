@@ -1,3 +1,10 @@
+---
+title: MAKES Interpret API 
+description: Reference documentation for the MAKES Interpret API.
+ms.topic: reference
+ms.date: 2020-02-10
+---
+
 # Interpret
 
 The interpret REST API takes an end user query string (i.e., a query entered by a user of your application) and returns formatted interpretations of user intent based on the MAKES index data and the MAKES Grammar.

@@ -2,7 +2,7 @@
 title: Create index from Microsoft Academic Graph(MAG)
 description: Step-by-step guide for generating MAKES indexes from a MAG release.
 ms.topic: tutorial
-ms.date: 0
+ms.date: 2020-02-10
 ---
 
 # Generating MAKES indexes from a MAG release
