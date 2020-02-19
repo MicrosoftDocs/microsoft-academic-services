@@ -39,7 +39,7 @@ Use the command line tool that is contained in each release to customize and dep
 
 MAKES hosting image creation may fail due to Azure outages or failures. If you cannot reach your MAKES status endpoint (http://<deploymentName>.<deploymentRegion>.cloudapp.azure.net/status), please try creating the MAKES hosting image again using the command line tool(kesm.exe).
 
-## BuildIndex job stuck with no task failures
+## MAKES BuildIndex job hangs with no task failures
 
 The underlying worker node for a BuildIndex job may have gone into an error state. Check the node status using the following steps:  
 
@@ -59,3 +59,7 @@ The underlying worker node for a BuildIndex job may have gone into an error stat
         ![node-error-detail-page](media/node-error-detail-page.png)
 
 If the error shows "There is not enough disk space on the node..." re-submit the job with a higher worker count. Otherwise, select **reboot** to restart the failed node.  
+
+## MAKES BuildIndex job hangs with task failures due to data transfer
+
+If your have large input entities data, BuildIndex job may encounter data transfer failure due to latency or throttling by Azure. To prevent failures due to data transfer, co-locate the input/output data storage account in the same region as the index build resources.
