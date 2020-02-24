@@ -1,6 +1,6 @@
 ---
 title: Natural Language Queries
-description: 
+description: Learn how natural language queries are processed in Project Academic Knowledge
 ms.topic: reference
 ms.date: 2020-02-10
 ---

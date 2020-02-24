@@ -52,6 +52,7 @@ W | Unique words in title | String[] | Equals
 Y | Year published | Int32 | Equals, IsBetween
 
 ## Extended
+
 > [!IMPORTANT]
 > This attribute has been deprecated and is only supported for legacy applications. Requesting this attribute individually (i.e. attributes=Id,Ti,E) will result in all extended metadata attributes being returned in a *serialized JSON string*</br></br>All attributes contained in the extended metadata are now available as a top-level attribute and can be requested as such (i.e. attributes=Id,Ti,DOI,IA)
 

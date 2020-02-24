@@ -12,12 +12,12 @@ ms.date: 2020-02-24
 
 Name | Description | Type | Operations
 --- | --- | --- | ---
-Id		| Entity ID								|Int64		|Equals
-AuN		| Author normalized name					|String		|Equals
-CC		| Author total citation count			|Int32		|None  
-DAuN	| Author display name					|String		|None
+Id | Entity ID | Int64 | Equals
+AuN | Author normalized name | String | Equals
+CC | Author total citation count | Int32 | None 
+DAuN | Author display name | String | None
 E | Extended metadata</br></br>**IMPORTANT**: This attribute has been deprecated and is only supported for legacy applications. Requesting this attribute individually (i.e. attributes=Id,Ti,E) will result in all extended metadata attributes being returned in a *serialized JSON string*</br></br>All attributes contained in the extended metadata are now available as a top-level attribute and can be requested as such (i.e. attributes=Id,Ti,DOI,IA) | [Extended](#extended) | None
-ECC		| Author total estimated citation count	|Int32		|None
+ECC | Author total estimated citation count | Int32 | None
 LKA.AfId | Entity ID of the last known affiliation found for the author | Int64 | None
 LKA.AfN | Normalized name of the last known affiliation found for the author | String | None
 PC | Author total publication count | Int32 | None

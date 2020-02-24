@@ -1,17 +1,8 @@
 ---
-title: Query expression syntax - Academic Knowledge API
-titlesuffix: Azure Cognitive Services
-description: Learn how to use query expression syntax in the Academic Knowledge API.
-services: cognitive-services
-author: alch-msft
-manager: nitinme
-
-ms.service: cognitive-services
-ms.subservice: academic-knowledge
-ms.topic: conceptual
-ms.date: 03/27/2017
-ms.author: alch
-ROBOTS: NOINDEX
+title: Query expression syntax
+description: Learn how to use structured query expressions
+ms.topic: reference
+ms.date: 2020-02-24
 ---
 
 # Query Expression Syntax
@@ -20,7 +11,7 @@ We have seen that the response to an **interpret** request includes a query expr
 
 You can also construct your own query expressions and use them in an **evaluate** request. This can be useful if you are building your own user interface which creates a query expression in response to the user’s actions. To do this, you need to know the syntax for query expressions.  
 
-Each entity attribute that can be included in a query expression has a specific data type and a set of possible query operators. The set of entity attributes and supported operators for each attribute is specified in [Entity Attributes](EntityAttributes.md). A single-value query requires the attribute to support the *Equals* operation. A prefix query requires the attribute to support the *StartsWith* operation. Numeric range queries requires the attribute to support the *IsBetween* operation.
+Each entity attribute that can be included in a query expression has a specific data type and a set of possible query operators. The set of entity attributes and supported operators for each attribute is specified in [Entity Attributes](reference-entity-attributes.md). A single-value query requires the attribute to support the *Equals* operation. A prefix query requires the attribute to support the *StartsWith* operation. Numeric range queries requires the attribute to support the *IsBetween* operation.
 
 Some of the entity data are stored as composite attributes, as indicated by a dot '.' in the attribute name. For example, Author/Affiliation information is represented as a composite attribute. It contains 4 components: AuN, AuId, AfN, AfId. These components are separate pieces of data that form a single entity attribute value.
 

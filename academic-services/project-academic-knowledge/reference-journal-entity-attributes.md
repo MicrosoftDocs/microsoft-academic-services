@@ -12,9 +12,9 @@ ms.date: 2020-02-24
 
 Name | Description | Type | Operations
 --- | --- | --- | ---
-CC		|Journal total citation count			|Int32		|None  
-DJN		|Journal display name				|String		|None
-ECC		|Journal total estimated citation count	|Int32		|None
-JN		|Journal normalized name					|String		|Equals
-Id		|Entity ID								|Int64		|Equals
-PC    |Journal total publication count | Int32 | None
+CC | Journal total citation count | Int32 | None  
+DJN | Journal display name | String | None
+ECC | Journal total estimated citation | Int32 | None
+JN | Journal normalized name | String | Equals
+Id | Entity ID | Int64 | Equals
+PC | Journal total publication count | Int32 | None

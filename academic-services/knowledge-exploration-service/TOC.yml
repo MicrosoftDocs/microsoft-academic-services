@@ -26,7 +26,6 @@
     href: concepts-queries.md
   - name: Structured query expressions
     href: concepts-query-expressions.md
-
 - name: Reference
   expanded: true
   items:

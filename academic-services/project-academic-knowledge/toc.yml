@@ -1,5 +1,5 @@
 - name: Project Academic Knowledge documentation
-  href: index.yml
+  href: introduction.md
 - name: Overview
   items:
   - name: Learn about Project Academic Knowledge
@@ -35,21 +35,23 @@
     expanded: false
     items:
       - name: GET CalcHistogram
-        href: reference-get-histogram.md
+        href: https://msr-apis.portal.azure-api.net/docs/services/academic-search-api/operations/565d9001ca73072048922d97?
       - name: GET Evaluate
-        href: reference-get-evaluate.md
+        href: https://msr-apis.portal.azure-api.net/docs/services/academic-search-api/operations/565d753be597ed16ac3ffc03?
       - name: GET Interpret
-        href: reference-get-interpret.md
+        href: https://msr-apis.portal.azure-api.net/docs/services/academic-search-api/operations/56332331778daf06340c9666?
+      - name: GET Similarity
+        href: https://msr-apis.portal.azure-api.net/docs/services/academic-search-api/operations/58076bdadcf4c40708f83791?
       - name: POST CalcHistogram
-        href: reference-post-histogram.md
+        href: https://msr-apis.portal.azure-api.net/docs/services/academic-search-api/operations/5951f894d2864531c0129ba2?
       - name: POST Evaluate
-        href: reference-post-evaluate.md
+        href: https://msr-apis.portal.azure-api.net/docs/services/academic-search-api/operations/5951f78363b4fb31286b8ef4?
       - name: POST Interpret
-        href: reference-post-interpret.md
-      - name: Similarity
-        href: reference-similarity-method.md
-  - name: Labs API reference
-    href: https://dev.labs.cognitive.microsoft.com/docs/services/56332331778daf02acc0a50b/operations/565d9001ca73072048922d97
+        href: https://msr-apis.portal.azure-api.net/docs/services/academic-search-api/operations/5951f6260ecf2621902c89e4?
+      - name: POST Similarity
+        href: https://msr-apis.portal.azure-api.net/docs/services/academic-search-api/operations/58172b97dbe2d91538cc000b?
+  - name: Microsoft Research APIs
+    href: https://msr-apis.portal.azure-api.net/
 - name: Resources
   expanded: true
   items:
