@@ -68,58 +68,58 @@ The histogram for *Field of Study* shows that there are 34 distinct fields of st
 
 ``` JSON
 {
- "expr": "And(Composite(AA.AuN=='jaime teevan'),Y>2012)",
- "num_entities": 37,
- "histograms": [
- {
- "attribute": "Y",
- "distinct_values": 3,
- "total_count": 37,
- "histogram": [
- {
- "value": 2014,
- "logprob": -15.753,
- "count": 15
- },
- {
- "value": 2013,
- "logprob": -15.805,
- "count": 12
- },
- {
- "value": 2015,
- "logprob": -16.035,
- "count": 10
- }
- ]
- },
- {
- "attribute": "F.FN",
- "distinct_values": 34,
- "total_count": 53,
- "histogram": [
- {
- "value": "crowdsourcing",
- "logprob": -15.258,
- "count": 9
- },
- {
- "value": "information retrieval",
- "logprob": -16.002,
- "count": 4
- },
- {
- "value": "personalization",
- "logprob": -16.226,
- "count": 3
- },
- {
- "value": "mobile search",
- "logprob": -17.228,
- "count": 2
- }
- ]
- }
- ]
+  "expr": "And(Composite(AA.AuN=='jaime teevan'),Y>2012)",
+  "num_entities": 37,
+  "histograms": [
+    {
+      "attribute": "Y",
+      "distinct_values": 3,
+      "total_count": 37,
+      "histogram": [
+        {
+          "value": 2014,
+          "logprob": -15.753,
+          "count": 15
+        },
+        {
+          "value": 2013,
+          "logprob": -15.805,
+          "count": 12
+        },
+        {
+          "value": 2015,
+          "logprob": -16.035,
+          "count": 10
+        }
+      ]
+    },
+    {
+      "attribute": "F.FN",
+      "distinct_values": 34,
+      "total_count": 53,
+      "histogram": [
+        {
+          "value": "crowdsourcing",
+          "logprob": -15.258,
+          "count": 9
+        },
+        {
+          "value": "information retrieval",
+          "logprob": -16.002,
+          "count": 4
+        },
+        {
+          "value": "personalization",
+          "logprob": -16.226,
+          "count": 3
+        },
+        {
+          "value": "mobile search",
+          "logprob": -17.228,
+          "count": 2
+        }
+      ]
+    }
+  ]
 }
 ```

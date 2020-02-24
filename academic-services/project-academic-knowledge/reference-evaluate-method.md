@@ -14,7 +14,6 @@ The **evaluate** REST API is used to return a set of academic entities based on 
 ``` HTTP
 https://api.labs.cognitive.microsoft.com/academic/v1.0/evaluate? 
 ```   
-<br>
 
 ## Request Parameters  
 

@@ -1,6 +1,7 @@
 - name: Project Academic Knowledge documentation
   href: introduction.md
 - name: Overview
+  expanded: true
   items:
   - name: Learn about Project Academic Knowledge
     href: introduction.md
@@ -12,20 +13,20 @@
   - name: Entity attributes
     href: reference-entity-attributes.md
     items: 
-      - name: Paper
-        href: reference-paper-entity-attributes.md
-      - name: Author
-        href: reference-author-entity-attributes.md
       - name: Affiliation
         href: reference-affiliation-entity-attributes.md
-      - name: Field of study
-        href: reference-field-of-study-entity-attributes.md
-      - name: Conference series
-        href: reference-conference-series-entity-attributes.md
+      - name: Author
+        href: reference-author-entity-attributes.md
       - name: Conference instance
         href: reference-conference-instance-entity-attributes.md
+      - name: Conference series
+        href: reference-conference-series-entity-attributes.md
+      - name: Field of study
+        href: reference-field-of-study-entity-attributes.md
       - name: Journal
         href: reference-journal-entity-attributes.md
+      - name: Paper
+        href: reference-paper-entity-attributes.md
   - name: REST API
     expanded: false
     items:
