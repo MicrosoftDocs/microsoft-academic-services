@@ -4,16 +4,11 @@
   items:
   - name: Learn about Project Academic Knowledge
     href: introduction.md
-- name: Concepts 
-  expanded: true
-  items:
-  - name: Natural language queries
-    href: concepts-queries.md
-  - name: Structured query expressions
-    href: concepts-query-expressions.md
 - name: Reference
   expanded: true
   items:
+  - name: Query expression syntax
+    href: reference-query-expression-syntax.md
   - name: Entity attributes
     href: reference-entity-attributes.md
     items: 
@@ -34,22 +29,14 @@
   - name: REST API
     expanded: false
     items:
-      - name: GET CalcHistogram
-        href: https://msr-apis.portal.azure-api.net/docs/services/academic-search-api/operations/565d9001ca73072048922d97?
-      - name: GET Evaluate
-        href: https://msr-apis.portal.azure-api.net/docs/services/academic-search-api/operations/565d753be597ed16ac3ffc03?
-      - name: GET Interpret
-        href: https://msr-apis.portal.azure-api.net/docs/services/academic-search-api/operations/56332331778daf06340c9666?
-      - name: GET Similarity
-        href: https://msr-apis.portal.azure-api.net/docs/services/academic-search-api/operations/58076bdadcf4c40708f83791?
-      - name: POST CalcHistogram
-        href: https://msr-apis.portal.azure-api.net/docs/services/academic-search-api/operations/5951f894d2864531c0129ba2?
-      - name: POST Evaluate
-        href: https://msr-apis.portal.azure-api.net/docs/services/academic-search-api/operations/5951f78363b4fb31286b8ef4?
-      - name: POST Interpret
-        href: https://msr-apis.portal.azure-api.net/docs/services/academic-search-api/operations/5951f6260ecf2621902c89e4?
-      - name: POST Similarity
-        href: https://msr-apis.portal.azure-api.net/docs/services/academic-search-api/operations/58172b97dbe2d91538cc000b?
+      - name: CalcHistogram
+        href: reference-calchistogram-method.md
+      - name: Evaluate
+        href: reference-evaluate-method.md
+      - name: Interpret
+        href: reference-interpret-method.md
+      - name: Similarity
+        href: reference-similarity-method.md
   - name: Microsoft Research APIs
     href: https://msr-apis.portal.azure-api.net/
 - name: Resources
