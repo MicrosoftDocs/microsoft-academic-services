@@ -12,6 +12,7 @@
   - name: Structured query expressions
     href: concepts-query-expressions.md
 - name: Reference
+  expanded: true
   items:
   - name: Entity attributes
     href: reference-entity-attributes.md
@@ -47,10 +48,8 @@
         href: reference-post-interpret.md
       - name: Similarity
         href: reference-similarity-method.md
-  - name: Query expression syntax
-    href: QueryExpressionSyntax.md
-    - name: Labs API reference
-      href: https://dev.labs.cognitive.microsoft.com/docs/services/56332331778daf02acc0a50b/operations/565d9001ca73072048922d97
+  - name: Labs API reference
+    href: https://dev.labs.cognitive.microsoft.com/docs/services/56332331778daf02acc0a50b/operations/565d9001ca73072048922d97
 - name: Resources
   expanded: true
   items:
