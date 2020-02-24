@@ -38,10 +38,10 @@
         href: reference-interpret-method.md
       - name: Similarity
         href: reference-similarity-method.md
-  - name: Microsoft Research APIs
-    href: https://msr-apis.portal.azure-api.net/
 - name: Resources
   expanded: true
   items:
+  - name: Microsoft Research APIs
+    href: https://msr-apis.portal.azure-api.net/
   - name: Stack Overflow
     href: http://stackoverflow.com/questions/tagged/project-academic-knowledge
