@@ -56,6 +56,25 @@ hide_bc: true
                                         </div>
                                     </a>
                                 </li>
+                                <li>
+                                    <a href="project-academic-knowledge/">
+                                        <div class="cardSize">
+                                            <div class="cardPadding">
+                                                <div class="card">
+                                                    <div class="cardImageOuter">
+                                                        <div class="cardImage bgdAccent1"> 
+                                                            <img src="media/project-academic-knowledge-banner.png" alt="Learn about Project Academic Knowledge" />
+                                                        </div>
+                                                    </div>
+                                                    <div class="cardText">
+                                                        <h3>Project Academic Knowledge</h3>
+                                                        <p>Learn all about Project Academic Knowledge, including how to access it, entity schema and API method documentation.</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </li>
                             </ul>
                     </ul>
                 </li>

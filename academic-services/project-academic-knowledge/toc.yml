@@ -1,0 +1,58 @@
+- name: Project Academic Knowledge documentation
+  href: index.yml
+- name: Overview
+  items:
+  - name: Learn about Project Academic Knowledge
+    href: introduction.md
+- name: Concepts 
+  expanded: true
+  items:
+  - name: Natural language queries
+    href: concepts-queries.md
+  - name: Structured query expressions
+    href: concepts-query-expressions.md
+- name: Reference
+  items:
+  - name: Entity attributes
+    href: reference-entity-attributes.md
+    items: 
+      - name: Paper
+        href: reference-paper-entity-attributes.md
+      - name: Author
+        href: reference-author-entity-attributes.md
+      - name: Affiliation
+        href: reference-affiliation-entity-attributes.md
+      - name: Field of study
+        href: reference-field-of-study-entity-attributes.md
+      - name: Conference series
+        href: reference-conference-series-entity-attributes.md
+      - name: Conference instance
+        href: reference-conference-instance-entity-attributes.md
+      - name: Journal
+        href: reference-journal-entity-attributes.md
+  - name: REST API
+    expanded: false
+    items:
+      - name: GET CalcHistogram
+        href: reference-get-histogram.md
+      - name: GET Evaluate
+        href: reference-get-evaluate.md
+      - name: GET Interpret
+        href: reference-get-interpret.md
+      - name: POST CalcHistogram
+        href: reference-post-histogram.md
+      - name: POST Evaluate
+        href: reference-post-evaluate.md
+      - name: POST Interpret
+        href: reference-post-interpret.md
+      - name: Similarity
+        href: reference-similarity-method.md
+  - name: Query expression syntax
+    href: QueryExpressionSyntax.md
+    - name: Labs API reference
+      href: https://dev.labs.cognitive.microsoft.com/docs/services/56332331778daf02acc0a50b/operations/565d9001ca73072048922d97
+- name: Resources
+  expanded: true
+  items:
+  - name: Stack Overflow
+    href: http://stackoverflow.com/questions/tagged/project-academic-knowledge
