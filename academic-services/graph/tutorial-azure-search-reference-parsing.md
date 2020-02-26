@@ -70,7 +70,7 @@ In prerequisite [Set up Azure Data Lake Analytics](get-started-setup-azure-data-
 
 ## Generate text documents for academic papers
 
-In prerequisite [Set up Azure Data Lake Analytics](get-started-setup-azure-data-lake-analytics.md), you added the Azure Storage (AS) created for MAG provision as a data source for the Azure Data Lake Analytics service (ADLA). In this section, you submit an ADLA job to generate text files containing academic data that will be used to create an Azure Search service.
+In this section, you submit an ADLA job to generate text files containing academic data that will be used to create an Azure Search service.
 
 1. In the [Azure portal](https://portal.azure.com), go to the Azure Data Lake Analytics (ADLA) service that you created, and select **Overview** > **New Job**.
 
