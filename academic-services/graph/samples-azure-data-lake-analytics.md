@@ -72,10 +72,12 @@ In prerequisite [Set up Azure Data Lake Analytics](get-started-setup-azure-data-
 1. Open the solution /src/AcademicAnalytics.sln
 1. For each tutorial there should be: A U-SQL script(.usql), a Power BI report (.pbix), a Power BI template (.pbit) and a README explaining the tutorial.
 1. In the U-SQL script, replace `<AzureStorageAccount>`, and `<MagContainer>` placeholder values with the values that you collected while completing the prerequisites of this sample.
+
    |Value  |Description  |
    |---------|---------|
    |**`<AzureStorageAccount>`** | The name of your Azure Storage (AS) account containing MAG dataset. |
    |**`<MagContainer>`** | The container name in Azure Storage (AS) account containing MAG dataset, usually in the form of **mag-yyyy-mm-dd**. |
+
 1. Although each tutorial is different, running the U-SQL script as is and filling out the Power BI template using the same U-SQL parameters should give you a Power BI report with visualizations that match the Power BI report example included in the tutorial. Since the Microsoft Academic graph is contently improving, different graph versions may give you slightly different results.
 
 ## Working with U-SQL scripts
