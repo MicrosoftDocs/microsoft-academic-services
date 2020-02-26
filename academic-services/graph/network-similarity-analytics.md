@@ -63,9 +63,9 @@ In this section, you submit an ADLA job to Define network similarity functions.
 
 ## Run Sample script
 
-1. In the [Azure portal](https://portal.azure.com), go to the Azure Data Lake Analytics (ADLA) service that you created, and select **Overview** > **New Job**.
+1. Download `ns/NetworkSimilaritySample.usql` to local drive. <br> From [Azure portal](https://portal.azure.com), go to the Azure Storage account > **Containers > [mag-yyyy-mm-dd] > ns > NetworkSimilaritySample.usql > Download**.
 
-1. Copy code in **`ns/NetworkSimilaritySample.usql`** and paste into the code block.
+1. Go to the Azure Data Lake Analytics (ADLA) service that you created, and select **Overview > New job > Open file**. Select `NetworkSimilaritySample.usql` in your local drive.
 
 1. Replace `<AzureStorageAccount>`, and `<MagContainer>` placeholder values with the values that you collected while completing the prerequisites of this sample.
 
@@ -74,7 +74,7 @@ In this section, you submit an ADLA job to Define network similarity functions.
    |**`<AzureStorageAccount>`** | The name of your Azure Storage (AS) account containing MAG dataset. |
    |**`<MagContainer>`** | The container name in Azure Storage (AS) account containing MAG dataset, usually in the form of **mag-yyyy-mm-dd**. |
 
-1. Provide a **Job name** and select **Submit**.
+1. Select **Submit**.
 
 1. The job should finish successfully.
 
