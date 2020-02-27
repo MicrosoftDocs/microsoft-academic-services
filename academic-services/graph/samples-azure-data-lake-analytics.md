@@ -4,7 +4,7 @@ description: Perform analytics and visualization for Microsoft Academic Graph us
 services: microsoft-academic-services
 ms.topic: tutorial
 ms.service: microsoft-academic-services
-ms.date: 5/3/2019
+ms.date: 2/25/2020
 ---
 # Analytics and visualization samples for Microsoft Academic Graph
 
@@ -12,10 +12,10 @@ Illustrates how to perform analytics and visualization for Microsoft Academic Gr
 
 ## Prerequisites
 
-Complete these tasks before you begin this tutorial:
+Complete these tasks before beginning this tutorial:
 
-* Setting up provisioning of Microsoft Academic Graph to an Azure blob storage account. See [Get Microsoft Academic Graph on Azure storage](get-started-setup-provisioning.md).
-* Setting up Azure Data Lake Analytics. See [Set up Azure Data Lake Analytics](get-started-setup-azure-data-lake-analytics.md).
+* [Set up provisioning of Microsoft Academic Graph to an Azure blob storage account](get-started-setup-provisioning.md)
+* [Set up Azure Data Lake Analytics for Microsoft Academic Graph](get-started-setup-azure-data-lake-analytics.md)
 * [Microsoft Power BI Desktop client](https://powerbi.microsoft.com/en-us/desktop/)
 * Visual Studio 2017 or Visual Studio 2015 with [Data Lake tools](https://www.microsoft.com/en-us/download/details.aspx?id=49504)
 
@@ -31,28 +31,25 @@ Complete these tasks before you begin this tutorial:
 
    :heavy_check_mark:  The name of the container in your Azure Storage (AS) account containing MAG dataset.
 
-## Create database from MAG data
+## Define functions to extract MAG data
 
-In prerequisite [Set up Azure Data Lake Analytics](get-started-setup-azure-data-lake-analytics.md), you added the Azure Storage  (AS) created for MAG provision as a data source for the Azure Data Lake Analytics service (ADLA). In this section, you submit an ADLA job to create database from MAG data.
+In prerequisite [Set up Azure Data Lake Analytics](get-started-setup-azure-data-lake-analytics.md), you added the Azure Storage (AS) created for MAG provision as a data source for the Azure Data Lake Analytics service (ADLA). In this section, you submit an ADLA job to create functions extracting MAG data from Azure Storage (AS).
 
-1. In the [Azure portal](https://portal.azure.com), go to the Azure Data Lake Analytics (ADLA) service that you created, and select **Overview** > **New Job**.
+1. Download `samples/CreateFunctions.usql` to your local drive. <br> From [Azure portal](https://portal.azure.com), go to the Azure Storage account > **Containers > [mag-yyyy-mm-dd] > samples > CreateFunctions.usql > Download**.
 
-   ![Azure Data Lake Analytics - New job](media/samples-azure-data-lake-hindex/new-job.png "Azure Data Lake Analytics - New job")
+   ![Download CreateFunctions.usql](media/samples-azure-data-lake-hindex/create-functions-download.png "Download CreateFunctions.usql")
 
-1. Copy code in samples/CreateDatabase.usql and paste into the code block.
+1. Go to the Azure Data Lake Analytics (ADLA) service that you created, and select **Overview > New job > Open file**. Select `CreateFunctions.usql` in your local drive.
 
-1. Replace `##YourBlobAccount##`, and `mag-##DatasetVersion##` placeholder values with the values that you collected while completing the prerequisites of this sample.
+   ![New job - Open CreateFunctions.usql](media/samples-azure-data-lake-hindex/create-functions-open.png "New job - Open CreateFunctions.usql")
 
-   |Value  |Description  |
-   |---------|---------|
-   |**`##YourBlobAccount##`** | The name of your Azure Storage (AS) account containing MAG dataset. |
-   |**`mag-##DatasetVersion##`** | The container name in Azure Storage (AS) account containing MAG dataset, usually in the form of **mag-yyyy-mm-dd**. |
-   
-1. Provide a **Job name** and select **Submit**.
+1. Select **Submit**.
 
-   ![Submit CreateFunctions job](media/samples-azure-data-lake-analytics/create-database-submit.png "Submit CreateDatabase job")
+   ![Submit CreateFunctions job](media/samples-azure-data-lake-hindex/create-functions-submit.png "Submit CreateFunctions job")
 
 1. The job should finish successfully.
+
+   ![CreateFunctions job status](media/samples-azure-data-lake-hindex/create-functions-status.png "CreateFunctions job status")
 
 ## Sample projects
 
@@ -74,6 +71,13 @@ In prerequisite [Set up Azure Data Lake Analytics](get-started-setup-azure-data-
 1. Download or clone the [samples repository](https://github.com/Azure-Samples/academic-knowledge-analytics-visualization/)
 1. Open the solution /src/AcademicAnalytics.sln
 1. For each tutorial there should be: A U-SQL script(.usql), a Power BI report (.pbix), a Power BI template (.pbit) and a README explaining the tutorial.
+1. In the U-SQL script, replace `<AzureStorageAccount>`, and `<MagContainer>` placeholder values with the values that you collected while completing the prerequisites of this sample.
+
+   |Value  |Description  |
+   |---------|---------|
+   |**`<AzureStorageAccount>`** | The name of your Azure Storage (AS) account containing MAG dataset. |
+   |**`<MagContainer>`** | The container name in Azure Storage (AS) account containing MAG dataset, usually in the form of **mag-yyyy-mm-dd**. |
+
 1. Although each tutorial is different, running the U-SQL script as is and filling out the Power BI template using the same U-SQL parameters should give you a Power BI report with visualizations that match the Power BI report example included in the tutorial. Since the Microsoft Academic graph is contently improving, different graph versions may give you slightly different results.
 
 ## Working with U-SQL scripts
