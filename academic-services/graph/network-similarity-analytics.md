@@ -2,7 +2,7 @@
 title: Network Similarity Sample (U-SQL)
 description: Network Similarity Sample (U-SQL)
 services: microsoft-academic-services
-ms.topic: extra
+ms.topic: tutorial
 ms.service: microsoft-academic-services
 ms.date: 2/25/2020
 ---
@@ -51,7 +51,7 @@ In prerequisite [Set up Azure Data Lake Analytics](get-started-setup-azure-data-
 
 ## Define network similarity functions
 
-In this section, you submit an ADLA job to Define network similarity functions.
+In this section, you submit an ADLA job to define network similarity functions.
 
 1. Download `ns/NetworkSimilarityFunction.usql` to local drive. <br> From [Azure portal](https://portal.azure.com), go to the Azure Storage account > **Containers > [mag-yyyy-mm-dd] > ns > NetworkSimilarityFunction.usql > Download**.
 
