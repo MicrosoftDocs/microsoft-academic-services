@@ -57,7 +57,7 @@ hide_bc: true
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="project-academic-knowledge/">
+                                    <a href="project-academic-knowledge/introduction">
                                         <div class="cardSize">
                                             <div class="cardPadding">
                                                 <div class="card">
