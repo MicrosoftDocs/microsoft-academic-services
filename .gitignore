@@ -13,3 +13,4 @@ microsoft-academic-services/.vs
 *.manifest
 *.testlog
 
+/.vs/*
