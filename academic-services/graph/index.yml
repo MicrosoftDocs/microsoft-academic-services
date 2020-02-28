@@ -29,7 +29,7 @@ sections:
     - html: <a href="tutorial-azure-data-lake-hindex">Compute author h-index using Azure Data Lake Analytics (U-SQL)</a>
     - html: <a href="tutorial-azure-databricks-hindex">Compute author h-index using Azure Databricks (PySpark)</a>
     - html: <a href="tutorial-azure-search-org-patents">Organizational patent search using Azure Search service</a>
-    - html: <a href="tutorial-azure-search-org-patents">Academic reference parsing using Azure Search service</a>
+    - html: <a href="tutorial-azure-search-reference-parsing">Academic reference parsing using Azure Search service</a>
 - title: Samples
   items:
   - type: list
