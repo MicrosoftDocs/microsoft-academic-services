@@ -11,7 +11,8 @@ ms.date: 2020-02-10
 
 ## Prerequisites
 
-- A MAKES API instance deployment
+- [Microsoft Academic Knowledge Service (MAKES) subscription](get-started-setup-provisioning.md)
+- [An existing deployment of the Microsoft Academic Knowledge Service (MAKES)](get-started-create-api-instances.md)
 
 ## Delete the resource group associated with the MAKES API instance
 
