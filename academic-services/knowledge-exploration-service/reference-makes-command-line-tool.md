@@ -173,7 +173,7 @@ The input entities file Url prefix.
 
 `--OutputUrlPrefix`
 
-The output url prefix for writing built index.
+The output url prefix for writing the built index.
 
 ### Optional Parameters
 

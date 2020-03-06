@@ -1,5 +1,5 @@
 ---
-title: Create index from Microsoft Academic Graph(MAG)
+title: Create index from Microsoft Academic Graph
 description: Step-by-step guide for generating MAKES indexes from a MAG release.
 ms.topic: tutorial
 ms.date: 2020-02-19
@@ -7,17 +7,17 @@ ms.date: 2020-02-19
 
 # Generating MAKES indexes from a MAG release
 
- Step-by-step guide for generating MAKES indexes from a Microsoft Academic Graph(MAG) release. For more information on obtaining a MAG release, visit [Get Microsoft Academic Graph on Azure storage](../graph/get-started-setup-provisioning.md).  In this example we will be building a custom index of all Microsoft publications and associated entities.
+ Step-by-step guide for generating MAKES indexes from a Microsoft Academic Graph (MAG) release. For more information on obtaining a MAG release, visit [Get Microsoft Academic Graph on Azure storage](../graph/get-started-setup-provisioning.md).  In this example we will be building a custom index of all Microsoft publications and associated entities.
 
 ## Prerequisites
 
-- [Microsoft Academic Graph(MAG) subscription](../graph/get-started-setup-provisioning.md)
+- [Microsoft Academic Graph (MAG) subscription](../graph/get-started-setup-provisioning.md)
 - [Azure Data Lake Analytics (ADLA) setup with MAG](../graph/get-started-setup-azure-data-lake-analytics.md)
-- [Microsoft Academic Knowledge Service (MAKES) subscription](get-started-setup-provisioning.md)
+- [Microsoft Academic Knowledge Exploration Service (MAKES) subscription](get-started-setup-provisioning.md)
 
-## Generating MAKES entities using USQL
+## Generating MAKES entities using U-SQL
 
-MAKES indexes are generated from specifically formatted MAG data.  In order to create a new index, you will need to generate the entities you would like in the index from MAG.  We will start by running a USQL script on your MAG subscription to generate the data required to build the custom index.  To do this, you will need to go to your Azure Data Lake Analytics (ADLA) service instance and submit a new ALDA job to generate the text files containing academic data.
+MAKES requires data it indexes to be placed in a single JSON file, with each line representing an individual entity. For this example, we will use a U-SQL script to filter and transform MAG data into JSON data which will then be used to create a custom index. To do this, you will need to go to your Azure Data Lake Analytics (ADLA) service instance and submit a new ALDA job to generate the text files containing academic data.
 
 ### Define functions to extract MAG data
 
@@ -25,7 +25,7 @@ MAKES indexes are generated from specifically formatted MAG data.  In order to c
 
    ![Azure Data Lake Analytics - New job](../graph/media/samples-azure-data-lake-hindex/new-job.png "Azure Data Lake Analytics - New job")
 
-1. Copy code in samples/CreateFunctions.usql under the MAG release and paste into the code block.
+1. Copy the code contained in samples/CreateFunctions.usql under the MAG release and paste it into the script window.
 
 1. Provide a **Job name** and select **Submit**.
 
@@ -77,8 +77,8 @@ MAKES indexes are generated from specifically formatted MAG data.  In order to c
     //The name of the institution to create subgraph for. The full graph is used by default.
     DECLARE EXTERNAL @Param_UseSubgraphForInstitution string = "microsoft"; // Example: "microsoft"
     
-    // USQL string values have a maximum length of 2^17, which unfortunately this means we need to limit the number of authors for a paper as they
-    // are concatenated together into a single JSON array represented by a USQL string.
+    // U-SQL string values have a maximum length of 2^17, which unfortunately this means we need to limit the number of authors for a paper as they
+    // are concatenated together into a single JSON array represented by a U-SQL string.
     //
     // We can somewhat get around this by splitting JSON arrays across multiple columns and having those columns be joined during
     // the final JSON output by a tab delimited (which JSON ignores), however we need each different entity JSON table to have a fixed number
@@ -87,7 +87,7 @@ MAKES indexes are generated from specifically formatted MAG data.  In order to c
     // The value below represents the number of paper authors that are generated for each of the two columns we create for this purpose.
     DECLARE EXTERNAL @Param_MaximumPaperAuthorPerBucket int = 250;
     
-    // Citation contexts hit a similar issue as the paper author issue describe above, related to the maximum string length USQL allows.
+    // Citation contexts hit a similar issue as the paper author issue describe above, related to the maximum string length U-SQL allows.
     //
     // Unfortunately citation contexts do not have a maximum length in MAG, so can be quite long. Adding to this problem, MAG does not limit the 
     // number of citation contexts it makes available for each paper.
@@ -524,7 +524,7 @@ MAKES indexes are generated from specifically formatted MAG data.  In order to c
                 @affiliations
             ON @paperAuthorAffiliations._AffiliationId == @affiliations.AffiliationId;
     
-    // USQL has a maximum string size limitation of 131072 characters, which causes script errors for attributes that have a lot of values such as this.
+    // U-SQL has a maximum string size limitation of 131072 characters, which causes script errors for attributes that have a lot of values such as this.
     // To get around the issue we split the data into multiple buckets which will be output as separate columns in the final JSON output.
     @reducedPaperAuthorAffiliations =
         SELECT 
@@ -1372,7 +1372,7 @@ The final step to generate your index is to submit a job to ADLA via the kesm to
 
     | Values | Description | Example |
     |---------|---------|-------|
-    |**`<InputEntitiesUrl>`** | The URL to the MAKES entities generated from running the USQL script above. | **https://mymakesstore.blob.core.windows.net/makessubgraph/2020-02-07/microsoft/entities/** |
+    |**`<InputEntitiesUrl>`** | The URL to the MAKES entities generated from running the U-SQL script above. | **https://mymakesstore.blob.core.windows.net/makessubgraph/2020-02-07/microsoft/entities/** |
     |**`<OutputUrlPrefix>`** | The base URL for writing the index.| **https://mymakesstore.blob.core.windows.net/makessubgraph/2020-02-07/microsoft/index/**
     |**`<MakesIndexResourceConfigFilePath>`** | The file path to the configuration file generated from running CreateIndexResources above. | **makesIndexResConfig.json** |
 
