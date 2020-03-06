@@ -96,6 +96,111 @@ The sku for MAKES API host machines.
 
 Whether to clean up resources if deployment failed for any reason. Used for debugging MAKES host deployment failures.
 
+## CreateIndexResources Command
+
+Creates the MAKES index building resources. E.g. MAKES index build batch account, storage account.
+
+```cmd
+kesm CreateIndexResources --IndexResourceName
+                        --MakesPackage
+                        --MakesIndexResourceConfigFilePath
+                        --[Region]
+                        --[MakesPreprocessor]
+                        --[MakesIndexer]
+                        --[MakesJobManager]
+```
+
+### Required Parameters
+
+`--IndexResourceName`
+
+The name for the indexing resources. Indexing resources name should be less than 64 characters with only numbers and lower case letters.
+
+`--MakesPackage`
+
+The base URL to a MAKES release package.
+
+`--MakesIndexResourceConfigFilePath`
+
+Outputs the MAKES indexing resources config file for BuildIndex command. The command won't write a config file unless a path is provided.
+
+### Optional Parameters
+
+`--Region`
+
+The region to create the indexing resources in.
+
+`--MakesPreprocessor`
+
+The MAKES preprocessor zip url.
+
+`--MakesIndexer`
+
+The MAKES indexer zip url.
+
+`--MakesJobManager`
+
+The MAKES JobManager zip url.
+
+## BuildIndex Command
+
+Builds MAKES index(es) from json entities.
+
+```cmd
+kesm BuildIndex --MakesIndexBuildResourceConfigFilePath
+                --EntitiesUrlPrefix
+                --OutputUrlPrefix
+                --[IndexPartitionCount]
+                --[IntersectionMinCount]
+                --[MakesPreprocessor]
+                --[MakesIndexer]
+                --[MakesJobManager]
+                --[MaxStringLength]
+                --[RemoveEmptyValues]
+                --[WorkerCount]
+                --[WorkerMachineSku]
+```
+
+### Required Parameters
+
+`--MakesIndexBuildResourceConfigFilePath`
+
+The MAKES indexing resource configuration file path. Run CreateIndexResource command to generate one.
+
+`--EntitiesUrlPrefix`
+
+The input entities file Url prefix.
+
+`--OutputUrlPrefix`
+
+The output url prefix for writing built index.
+
+### Optional Parameters
+
+`--IndexPartitionCount`
+
+The number of index partitions to create.
+
+`--IntersectionMinCount`
+
+The minimum intersections between indexed attribute that indexer should generate pre-calculated results. The higher the count, the more process will be required at run time. The lower the count, the larger index will be generated.
+
+`--MaxStringLength`
+
+The maximum string length for string type attributes.
+
+`--RemoveEmptyValues`
+
+Whether to remove empty attribute values to reduce index size.
+
+`--WorkerCount`
+
+The number of virtual machines(workers) used to build the index. Warning, assigning a number larger than IndexPartitionCount won't result in performance gain.
+
+`--WorkerMachineSku`
+
+The virtual machine(worker) sku. Use https://docs.microsoft.com/en-us/rest/api/compute/virtualmachines/listavailablesizes to get the most recent options
+
 ## Common authentication parameters
 
 MAKES command line tool leverages device login to access azure subscriptions by default. You can specify AzureActiveDirectoryDomainName and AzureCredentialsFilePath parameter to change the authentication behavior.
