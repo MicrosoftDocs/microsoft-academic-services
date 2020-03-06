@@ -1332,7 +1332,7 @@ MAKES requires data it indexes to be placed in a single JSON file, with each lin
 
    ![Submit GenerateAzureSearchData job](media/how-to-create-index-create-job.png)
 
-The job should finish successfully in about 50 minutes
+The job should take approximately 50 minutes to run.
 
 ## Build index using MAKES command line tool
 
