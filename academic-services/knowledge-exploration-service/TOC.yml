@@ -19,6 +19,8 @@
     href: how-to-deploy-new-indexes-to-makes.md
   - name: Delete a MAKES deployment 
     href: how-to-delete-api-instances.md
+  - name: Create custom index from MAG
+    href: how-to-create-index-from-mag.md
 - name: Concepts
   expanded: true
   items:
