@@ -19,6 +19,7 @@ AA.AuN | Normalized author name | String | Equals, StartsWith
 AA.DAuN | Original author name | String | None
 AA.DAfN | Original affiliation name | String | None
 AA.S | Numeric position in author list | Int32 | Equals
+AW | Unique, normalized words in abstract, excluding common/stopwords | String | Equals
 BT | BibTex document type ('a':Journal article, 'b':Book, 'c':Book chapter, 'p':Conference paper) | String | None
 BV | BibTex venue name | String | None
 C.CId | Conference series ID | Int64 | Equals
@@ -33,6 +34,7 @@ ECC | Estimated citation count | Int32 | None
 F.DFN | Original field of study name | String | None
 F.FId | Field of study ID | Int64 | Equals
 F.FN | Normalized field of study name | String | Equals, StartsWith
+FamId | If paper is published in multiple venues (e.g. pre-print and conference) with different paper IDs, this ID represents the main/primary paper ID of the family. The field can be used to find all papers in the family group, i.e. FamId=<paper_id> | Int64 | Equals
 FP | First page of paper in publication | String | Equals
 I | Publication issue | String | Equals
 IA | Inverted abstract | [InvertedAbstract](#invertedabstract) | None
@@ -48,7 +50,7 @@ Ti | Normalized title | String | Equals, StartsWith
 V | Publication volume | String | Equals
 VFN | Full name of the Journal or Conference venue | String | None
 VSN | Short name of the Journal or Conference venue | String | None
-W | Unique words in title | String[] | Equals
+W | Unique, normalized words in title | String[] | Equals
 Y | Year published | Int32 | Equals, IsBetween
 
 ## Extended
