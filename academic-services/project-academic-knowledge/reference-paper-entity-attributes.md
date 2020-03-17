@@ -19,13 +19,13 @@ AA.AuN | Normalized author name | String | Equals, StartsWith
 AA.DAuN | Original author name | String | None
 AA.DAfN | Original affiliation name | String | None
 AA.S | Numeric position in author list | Int32 | Equals
-AW | Unique, normalized words in abstract, excluding common/stopwords | String | Equals
+AW | Unique, normalized words in abstract, excluding common/stopwords | String[] | Equals
 BT | BibTex document type ('a':Journal article, 'b':Book, 'c':Book chapter, 'p':Conference paper) | String | None
 BV | BibTex venue name | String | None
 C.CId | Conference series ID | Int64 | Equals
 C.CN | Conference series name | String | Equals, StartsWith
 CC | Citation count | Int32 | None  
-CitCon | Citation contexts</br></br>List of referenced paper ID’s and the corresponding context in the paper (e.g. [{123:["brown foxes are known for jumping as referenced in paper 123", "the lazy dogs are a historical misnomer as shown in paper 123"]}) | Custom | None
+CitCon | Citation contexts</br></br>List of referenced paper ID's and the corresponding context in the paper (e.g. [{123:["brown foxes are known for jumping as referenced in paper 123", "the lazy dogs are a historical misnomer as shown in paper 123"]}) | Custom | None
 D | Date published in YYYY-MM-DD format | Date | Equals, IsBetween
 DN | Original paper title | String | None
 DOI | Digital Object Identifier | String | Equals, StartsWith
@@ -65,7 +65,7 @@ Name | Description | Type | Operations
 --- | --- | --- | ---
 BT | BibTex document type ('a':Journal article, 'b':Book, 'c':Book chapter, 'p':Conference paper) | String | None
 BV | BibTex venue name | String | None
-CC | Citation contexts</br></br>List of referenced paper ID’s and the corresponding context in the paper (e.g. [{123:["brown foxes are known for jumping as referenced in paper 123", "the lazy dogs are a historical misnomer as shown in paper 123"]}) | Custom | None
+CC | Citation contexts</br></br>List of referenced paper ID's and the corresponding context in the paper (e.g. [{123:["brown foxes are known for jumping as referenced in paper 123", "the lazy dogs are a historical misnomer as shown in paper 123"]}) | Custom | None
 DN | Original paper title | String | None
 DOI | Digital Object Identifier | String | None
 FP | First page of paper in publication | String | None
