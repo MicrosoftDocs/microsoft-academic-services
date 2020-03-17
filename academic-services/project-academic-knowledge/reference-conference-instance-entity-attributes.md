@@ -13,8 +13,8 @@ ms.date: 2020-02-24
 Name | Description | Type | Operations
 --- | --- | --- | ---
 CC | Conference instance total citation count | Int32 | None 
-CD.D | Date of a conference instance event | Date | Equals, IsBetween
-CD.T | Name of a conference instance event, e.g. "StartDate", "SubmissionDeadlineDate" | String | Equals, IsBetween
+CD.D | Date of conference instance event | Date | Equals, IsBetween
+CD.T | Name (or type) of a conference instance event Date, e.g. "StartDate", "SubmissionDeadlineDate" | String | Equals, IsBetween
 CIARD | Abstract registration due date of the conference instance | Date | Equals, IsBetween
 CIED | End date of the conference instance | Date | Equals, IsBetween
 CIFVD | Final version due date of the conference instance | Date | Equals, IsBetween

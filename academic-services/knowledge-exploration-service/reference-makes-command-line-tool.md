@@ -179,11 +179,11 @@ The output url prefix for writing the built index.
 
 `--IndexPartitionCount`
 
-The number of index partitions to create.
+The number of index partitions to create. A index job can finish quicker when there are more partitions; however, the more partitions, the less accurate the interpret results will be. Maximize build performance by creating 1 partition per worker.
 
 `--IntersectionMinCount`
 
-The minimum intersections between indexed attribute that indexer should generate pre-calculated results. The higher the count, the more process will be required at run time. The lower the count, the larger index will be generated.
+The minimum intersections between indexed attribute for which the indexer should generate pre-calculated results. The higher the count, the more process will be required at run time. The lower the count, the larger the generated index will be.
 
 `--MaxStringLength`
 

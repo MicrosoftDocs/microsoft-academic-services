@@ -1400,7 +1400,7 @@ You can check the build index job progress using Azure Management Portal. Each j
 
 ## Next steps
 
-Now that you have successfully generated an index, you can deploy this index to a new or existing MAKES deployment.  You will follow the same procedures as deploying an index from your MAKES subscription, but replacing the **--MakesIndex** parameter with the path to the output of this example.
+Now that the JSON data has been generated to build the custom index, we use the kesm tool to execute the build. You will follow the same procedures as deploying an index from your MAKES subscription, but replacing the **--MakesIndex** parameter with the path to the output of this example.
 
 ```cmd
 kesm.exe DeployHost --HostName "<makes_instance_host_name>" --MakesPackage "https://<makes_storage_account_name>.blob.core.windows.net/makes/<makes_release_version>/"  --MakesHostImageId "<id_from_create_host_resources_command>"
