@@ -23,7 +23,7 @@ When new versions of MAKES are released, a new folder will be created in the "ma
 
 1. Open the Storage Account in **Storage Explorer**.  This might require you to download and install the tool if you have not installed it already.
 
-    ![Open in Explorer](media/get-started-open-storage-account.png) 
+    ![Open in Explorer](media/get-started-open-storage-account.png)
 
     Once Storage Explorer has opened, verify that there is a blob container called **makes**.
 
@@ -41,7 +41,7 @@ There should be four (4) folders and a licence:
 
 - **index** - This folder holds the index files.
 
-- **tools** - This folder holds the scripts required to customize MAKES and deploy MAKES to Azure.
+- **tools** - This folder holds the command line tool and worker packages required to customize MAKES and deploy MAKES to Azure.
 
 - **webhost** - This folder holds the files required to create the VM instance of MAKES.
 
