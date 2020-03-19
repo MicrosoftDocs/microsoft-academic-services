@@ -11,9 +11,9 @@ ms.date: 2020-02-19
 
 ## Prerequisites
 
-- [Microsoft Academic Graph (MAG) subscription](../graph/get-started-setup-provisioning.md)
-- [Azure Data Lake Analytics (ADLA) setup with MAG](../graph/get-started-setup-azure-data-lake-analytics.md)
-- [Microsoft Academic Knowledge Exploration Service (MAKES) subscription](get-started-setup-provisioning.md)
+- Microsoft Academic Graph (MAG) subscription. See [Get Microsoft Academic Graph on an Azure Storage](../graph/get-started-setup-provisioning.md) to obtain one.
+- [Set up Azure Data Lake Analytics for MAG](../graph/get-started-setup-azure-data-lake-analytics.md)
+- Microsoft Academic Knowledge Exploration Service (MAKES) subscription. See [Get started with Microsoft Academic Knowledge Exploration Service](get-started-setup-provisioning.md) to obtain one.
 
 ## Transform MAG data to MAKES json entities
 
@@ -25,7 +25,7 @@ MAKES requires data it indexes to be placed in a single JSON file, with each lin
 
    ![Azure Data Lake Analytics - New job](../graph/media/samples-azure-data-lake-hindex/new-job.png "Azure Data Lake Analytics - New job")
 
-1. Copy the code contained in samples/CreateFunctions.usql under the MAG release and paste it into the script window.
+1. Copy the code from in samples/CreateFunctions.usql under the MAG release and paste it into the script window.
 
 1. Provide a **Job name** and select **Submit**.
 
@@ -69,7 +69,7 @@ The job should take approximately 50 minutes to run.
 
 We will now use kesm.exe to create the necessary resources in Azure that will be used for generating MAKES indexes. kesm.exe will create and configure a Azure Batch account for spinning up workers(virtual machines) to process MAKES json entities and build MAKES indexes. Once the indexing resources are created, a indexing resource configuration file will be written to you local machine. We'll be using this configuration file with kesm.exe to build indexes in the next step.
 
-If you have not done so already, download the kesm.exe tool from your MAKES subscription.  See the [Create an API Instance](get-started-create-api-instances.md) for instructions on downloading the tool.
+If you have not done so already, download the kesm.exe tool from your MAKES subscription. See the [Create an API Instance](get-started-create-api-instances.md) for instructions on downloading the tool.
 
 1. Open a command prompt or terminal window and navigate to the folder where you have extracted the kesm.exe tool.
 
@@ -114,7 +114,7 @@ The final step to generate your index is to submit a build index job to Azure Ba
 
 ## Monitor the build index job progress
 
-You can check the build index job progress using Azure Management Portal. Each job should start with running a jobManager task, then preprocessor tasks, and finally indexer tasks. The number of preprocessor tasks should match the number of input entities file. The number of indexer tasks should match the **--IndexPartitionCount** parameter used for the BuildIndex command.
+You can check the build index job progress using Azure Management Portal. Each job should start with running a jobManager task, then preprocessor tasks, and finally indexer tasks. The number of preprocessor tasks should match the number of input entities file. The number of indexer tasks should match the **--IndexPartitionCount** parameter used for the BuildIndex command. 
 
 1. In [Azure Management Portal](https://portal.azure.com), find the Azure Batch Account associated with the indexing resources created above. The batch account name should be the same as the **--IndexResourceName** parameter used for CreateIndexResources command above.
 

@@ -11,7 +11,7 @@ ms.date: 2020-02-10
 
 ## Prerequisites
 
-- [Microsoft Academic Knowledge Exploration Service (MAKES) subscription](get-started-setup-provisioning.md)
+- Microsoft Academic Knowledge Exploration Service (MAKES) subscription. See [Get started with Microsoft Academic Knowledge Exploration Service](get-started-setup-provisioning.md) to obtain one.
 
 ## Verify the folders and content of the current release
 
@@ -40,7 +40,7 @@ When new versions of MAKES are released, a new folder will be created in the "ma
     - **License.docx** - Microsoft Word file with the license to use this data and software.
     ![Verify tools folder](media/get-started-tools-folder.png)
 
-## Download the deployment command from your Azure Storage Account
+## Download the command line tool (kesm.exe) from your Azure Storage Account
 
 Each MAKES deployment includes a command line tool (kesm.exe) required to provision an instance of MAKES in Azure.  To download the command line tool, open the **tools** folder. Select the **kesm.zip** file. Then, select **Download** from the top ribbon:
 
