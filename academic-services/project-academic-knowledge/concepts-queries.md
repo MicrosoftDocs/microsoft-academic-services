@@ -7,11 +7,14 @@ ms.date: 2020-03-19
 
 # How Interpret generates semantic interpretations of natural language queries
 
-This article describes how the [Interpret method](reference-interpret-method.md) generates semantic interpretations of a natural language query that enable entities to be retrieved. It is intended for developers who require a deeper understanding of the architecture and techniques used.
+This article describes how the [Interpret method](reference-interpret-method.md) generates semantic interpretations of a natural language query that enable entities to be retrieved.
+It is intended for developers who require a deeper understanding of the architecture and techniques used.
 
 ## Architecture overview and diagram
 
-Processing a natural language query is a multi-stage process that starts with lexical analysis of the query, allowing the query to be rewritten for optimal search performance. The rewritten query is then parsed and interpretations hypothesized using a [Context Sensitive Grammar (CSG)](https://en.wikipedia.org/wiki/Context-sensitive_grammar). Valid hypotheses are resolved into full semantic query expressions which are in turn used to generate the complete interpretation response.
+Processing a natural language query is a multi-stage process that starts with lexical analysis of the query, allowing the query to be rewritten for optimal search performance.
+The rewritten query is then parsed and interpretations hypothesized using a [Context Sensitive Grammar (CSG)](https://en.wikipedia.org/wiki/Context-sensitive_grammar).
+Valid hypotheses are resolved into full semantic query expressions which are in turn used to generate the complete interpretation response.
 
 :::image type="content" source="media/concept-semantic-interpretation-flow.png" alt-text="Semantic Interpretation Generation Architecture":::
 
@@ -57,7 +60,8 @@ The supported attributes include:
 
 Semantic interpretation generation is broken into two important steps. The first of these is generating interpretation hypotheses using a [Context Sensitive Grammar (CSG)](https://en.wikipedia.org/wiki/Context-sensitive_grammar) conforming to the [Speech Recognition Grammar Specification (SRGS)](https://www.w3.org/TR/speech-grammar/).
 
-Generally SRGS grammars are context-free, meaning grammar rules can be matched lacking any additional context of previously matched rules. The Interpret method changes this behavior by including a *grammar context* that enables rules to reference metadata from previously matched rules.
+Generally, SRGS grammars are context-free, meaning grammar rules can be matched lacking any additional context of previously matched rules.
+The Interpret method changes this behavior by including a *grammar context* that enables rules to reference metadata from previously matched rules.
 
 The default SRGS grammar is very simple, with a single top-level rule which is allowed to repeat until all query terms have been processed:
 
@@ -75,7 +79,8 @@ The default SRGS grammar is very simple, with a single top-level rule which is a
     * Match term to special "garbage" attribute which matches *any value* (this allows grammar to ignore query terms that might be misspelled/malformed/filler)
     * If no more terms are present, generate interpretation hypothesis
 
-It's important to understand that each hypothesis generates *sub-hypotheses* in the form of an expansion-tree, and each tree branch *gets its own unique copy of the grammar context*. This allows us to generate many potential hypothesis that fully explore the search space for a given query.
+It's important to understand that each hypothesis generates *sub-hypotheses* in the form of an expansion-tree, and each tree branch *gets its own unique copy of the grammar context*.
+This allows us to generate many potential hypothesis that fully explore the search space for a given query.
 
 ## Stage 3: Resolve valid interpretation hypotheses
 
@@ -83,9 +88,10 @@ It's important to understand that each hypothesis generates *sub-hypotheses* in 
 
 Once a valid hypothesis has been found, the Interpret method *resolves* the hypothesis into an interpretation by generating and storing the following:
 
-* A probability score for the hypothesis. This is the static rank of the top-most entity returned by the hypothesis plus any alternative [weight penalties imposed by the SRGS grammar](https://www.w3.org/TR/speech-grammar/#S2.4)
+* A probability score for the hypothesis.
+This is the static rank of the top-most entity (as defined by [MAG](../graph/reference-data-schema.md)) returned by the hypothesis plus any alternative [weight penalties imposed by the SRGS grammar](https://www.w3.org/TR/speech-grammar/#S2.4)
 * XML containing the grammar rules and attributes matched to generate the hypothesis
-* A [structured query expression](concepts-query-expressions.md) that can be used to find all entity results matching the hypothesis
+* A [structured query expression](reference-query-expression-syntax.md) that can be used to find all entity results matching the hypothesis
 * Optionally the top matching entities themselves can be also be returned
 
 ## Stage 4: Generate interpretation response
@@ -123,7 +129,8 @@ An example response for the example query "john platt nature 2019" would look li
 }
 ```
 
-What is included (i.e. how many results, starting offset, etc.) is controlled by the request parameters. For information about the format of the response, see the [Interpret method](reference-interpret-method.md).
+What is included (i.e. how many results, starting offset, etc.) is controlled by the request parameters.
+For information about the format of the response, see the [Interpret method](reference-interpret-method.md).
 
 ## See also
 

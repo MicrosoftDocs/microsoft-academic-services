@@ -69,7 +69,8 @@ As you can see from the response below, the most likely interpretations that com
 * *author: jaime teevan*
 * *author: john r teerlink*
 
-The service generated query completions instead of considering only exact matches for the author *j tee*. Note that the canonical value *j l green* matched via the synonym *jamie green*, as indicated in the parse.
+The service generated query completions instead of considering only exact matches for the author *j tee*.
+SNote that the canonical value *j l green* matched via the synonym *jamie green*, as indicated in the parse.
 
 ``` JSON
 {
@@ -102,7 +103,7 @@ The service generated query completions instead of considering only exact matche
 
 ### Map academic reference to paper
 
-This example maps a raw academic reference string to the academic paper that most closely maps to the metadata present in the reference string. 
+This example maps a raw academic reference string to the academic paper that most closely maps to the metadata present in the reference string.
 
 The reference string we will be using:
 
@@ -124,7 +125,9 @@ The important parts of the request:
 
 As you can see from the response below, based on the top entities metadata it is highly likely that the interpretation maps to the correct paper ["An Overview of Microsoft Academic Service (MAS) and Applications"](https://academic.microsoft.com/paper/1932742904).
 
-What's also important to notice about the response is how it only *partially interpretted* the query. If you look at the "parse" field in the response it shows what parts of the query were mapped to different entity fields. In this case it was not able to match anything after the title in reference string, but was still able to generate an accurate mapping based on what it *could* match.
+What's also important to notice about the response is how it only *partially interpretted* the query.
+If you look at the "parse" field in the response it shows what parts of the query were mapped to different entity fields.
+In this case it was not able to match anything after the title in reference string, but was still able to generate an accurate mapping based on what it *could* match.
 
 ``` JSON
 {
