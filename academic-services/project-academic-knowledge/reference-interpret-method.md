@@ -46,7 +46,7 @@ Name | Description
 **interpretations[x].rules[y].output.type** | The data type of the output of the rule.  For the Academic Knowledge API, this will always be "query".
 **interpretations[x].rules[y].output.value** | The output of the rule. For the Academic Knowledge API, this is a query expression string that can be passed to the evaluate and calchistogram methods.
 **interpretations[x].rules[y].output.entities** | Optional array of top entities matching the interpretation.
-**timed_out_count** | The number of underlying index partitions that timed out when generating interpretations. 
+**timed_out_count** | Internal service metric.
 **timed_out** | True if the full timeout elapsed while generating results.
 
 ## Examples
@@ -56,7 +56,7 @@ Name | Description
 This example generates the most likely query suggestions (completions) for a partial author query "author: j tee".
 
 ``` HTTP
-https://api.labs.cognitive.microsoft.com/academic/v1.0/interpret?query=author:%20jaime%20t&complete=1&count=2
+https://api.labs.cognitive.microsoft.com/academic/v1.0/interpret?query=author:%20j%20tee&complete=1&count=2
 ```
 
 The important parts of the request:
@@ -70,7 +70,7 @@ As you can see from the response below, the most likely interpretations that com
 * *author: john r teerlink*
 
 The service generated query completions instead of considering only exact matches for the author *j tee*.
-SNote that the canonical value *j l green* matched via the synonym *jamie green*, as indicated in the parse.
+Note that the canonical value *jaime teevan* matched via the synonym *j teevan*, and *john r teerlink* matched via *j teerlink*, as indicated in the "parse" string value.
 
 ``` JSON
 {
