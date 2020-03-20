@@ -48,7 +48,7 @@ The Network Similarity package is distributed in a separate folder (ns) in MAG.
 
 * Files with .txt extension are network similarity resource files for different type of entities. Here are the description of the resource files.
  
-  |File Name|Entity type|Description|
+  |File Name|Entity Type|Description|
   |---|---|---|
   |AffiliationCopaper.txt|Affiliation|Two affiliations are similar if they are closed connected with each other in the weighted affiliation collaboration graph.|
   |AffiliationCovenue.txt|Affiliation|Two affiliations are similar if they publish in similar venues (journals and conferences).|
