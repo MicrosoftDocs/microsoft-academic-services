@@ -4,11 +4,13 @@ description: Using Network Similarity Package
 services: microsoft-academic-services
 ms.topic: extra
 ms.service: microsoft-academic-services
-ms.date: 2/13/2020
+ms.date: 3/20/2020
 ---
 # Network Similarity Package
 
-The Microsoft Academic Network Similarity Package provides supplementary processing functionality for use with the Microsoft Academic Graph (MAG). This package includes network embedding resources for academic entities. It also includes U-SQL functions to be used in Azure Data Lake Analytics and Python classes for Azure Databricks.
+The Microsoft Academic Network Similarity Package provides supplementary processing functionality for use with the Microsoft Academic Graph (MAG). For detail description of the technology, please see [Multi-Sense Network Representation Learning in Microsoft Academic Graph](https://www.microsoft.com/research/project/academic/articles/multi-sense-network-representation-learning-in-microsoft-academic-graph/).
+
+This package includes network embedding resources for academic entities. It also includes Python classes for use in Azure Databricks and U-SQL functions for Azure Data Lake Analytics.
 
 The functions/classes perform the following tasks.
 
@@ -57,6 +59,7 @@ The Network Similarity package is distributed in a separate folder (ns) in MAG.
   |VenueCoauthor.txt|Two venues are similar if they publish papers with common authors.|
   |VenueCofos.txt|Two venues are similar if they publish papers with similar fields of study.|
   |VenueMetapath.txt|Two venues are similar if they co-occur with common affiliations, venues, and fields of study.|
+  |AuthorCopaper.txt|Two authors are similar if they are closed connected with each other in the weighted author collaboration graph.|
 
 ## Samples
 
