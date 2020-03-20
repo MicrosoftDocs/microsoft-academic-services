@@ -48,18 +48,18 @@ The Network Similarity package is distributed in a separate folder (ns) in MAG.
 
 * Files with .txt extension are network similarity resource files for different type of entities. Here are the description of the resource files.
  
-  |File Name|Description|
-  |---------|---------|
-  |AffiliationCopaper.txt|Two affiliations are similar if they are closed connected with each other in the weighted affiliation collaboration graph.|
-  |AffiliationCovenue.txt|Two affiliations are similar if they publish in similar venues (journals and conferences).|
-  |AffiliationMetapath.txt|Two affiliations are similar if they co-occur with common affiliations, venues, and fields of study.|
-  |FosCopaper.txt|Two fields of study are similar if they appear in the same paper.|
-  |FosCovenue.txt|Two fields of study are similar if they have papers from similar venues.|
-  |FosMetapath.txt|Two fields of study are similar if they co-occur with common affiliations, venues, and fields of study.|
-  |VenueCoauthor.txt|Two venues are similar if they publish papers with common authors.|
-  |VenueCofos.txt|Two venues are similar if they publish papers with similar fields of study.|
-  |VenueMetapath.txt|Two venues are similar if they co-occur with common affiliations, venues, and fields of study.|
-  |AuthorCopaper.txt|Two authors are similar if they are closed connected with each other in the weighted author collaboration graph.|
+  |File Name|Entity type|Description|
+  |---|---|---|
+  |AffiliationCopaper.txt|Affiliation|Two affiliations are similar if they are closed connected with each other in the weighted affiliation collaboration graph.|
+  |AffiliationCovenue.txt|Affiliation|Two affiliations are similar if they publish in similar venues (journals and conferences).|
+  |AffiliationMetapath.txt|Affiliation|Two affiliations are similar if they co-occur with common affiliations, venues, and fields of study.|
+  |FosCopaper.txt|Field of study|Two fields of study are similar if they appear in the same paper.|
+  |FosCovenue.txt|Field of study|Two fields of study are similar if they have papers from similar venues.|
+  |FosMetapath.txt|Field of study|Two fields of study are similar if they co-occur with common affiliations, venues, and fields of study.|
+  |VenueCoauthor.txt|Venue|Two venues are similar if they publish papers with common authors.|
+  |VenueCofos.txt|Venue|Two venues are similar if they publish papers with similar fields of study.|
+  |VenueMetapath.txt|Venue|Two venues are similar if they co-occur with common affiliations, venues, and fields of study.|
+  |AuthorCopaper.txt|Author|Two authors are similar if they are closed connected with each other in the weighted author collaboration graph.|
 
 ## Samples
 
