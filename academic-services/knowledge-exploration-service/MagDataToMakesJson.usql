@@ -21,7 +21,8 @@
     // The Azure blob storage container name that contains the Microsoft Academic Graph data to be used by this script
     DECLARE EXTERNAL @In_MagBlobContainer string = "";  // Example: "mag-2020-02-07"
     
-    // The Azure data lake storage output path where the JSON files will be created
+    // The storage output path where the JSON files will be created
+    // The if the output destination type is Azure storage (output path starts with "wasb"), the container for the output location needs to be created before running the script
     DECLARE EXTERNAL @Out_OutputPath string = "";  // Example: "wasb://subgraphs@mymakesstore/mag-2020-02-07/microsoft"
     
     // U-SQL string values have a maximum length of 2^17, which unfortunately this means we need to limit the number of authors for a paper as they
@@ -86,7 +87,7 @@
     DECLARE @GetNullableUintItem Func<string, int, uint?>  = 
         (str, itemIndex) => {
             string[] items = str.Split(@DEFAULT_STRING_ARRAY_SEPERATOR, StringSplitOptions.None);
-            if (items[itemIndex].Length == 0)
+            if (itemIndex < 0 || items[itemIndex].Length == 0)
             {
                 return null;
             }
@@ -100,7 +101,7 @@
     DECLARE @GetNullableLongItem Func<string, int, long?>  = 
         (str, itemIndex) => {
             string[] items = str.Split(@DEFAULT_STRING_ARRAY_SEPERATOR, StringSplitOptions.None);
-            if (items[itemIndex].Length == 0)
+            if (itemIndex < 0 || items[itemIndex].Length == 0)
             {
                 return null;
             } 
@@ -114,7 +115,7 @@
     DECLARE @GetNullableFloatItem Func<string, int, float?> =
         (str, itemIndex) => {
             string[] items = str.Split(@DEFAULT_STRING_ARRAY_SEPERATOR, StringSplitOptions.None);
-            if (items[itemIndex].Length == 0)
+            if (itemIndex < 0 || items[itemIndex].Length == 0)
             {
                 return null;
             } 
@@ -127,6 +128,10 @@
     // Utility function to get a string item from a item array joined by DEFAULT_STRING_ARRAY_SEPERATOR as string
     DECLARE @GetStringItem Func<string, int, string> =
         (str, itemIndex) => {
+            if (itemIndex < 0)
+            {
+                return null;
+            } 
             string[] items = str.Split(@DEFAULT_STRING_ARRAY_SEPERATOR, StringSplitOptions.None);
             return items[itemIndex];
         };
