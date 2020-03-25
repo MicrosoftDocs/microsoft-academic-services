@@ -91,7 +91,7 @@ If you have not done so already, download the Kesm.exe tool from your MAKES subs
 
     | Values | Description | Example |
     |---------|---------|------|
-    |**`<IndexResourceName>`** | The name of the indexing resources. This step will create a Resource Group, Azure Batch account, and a Azure Storage Account using this name. | **makesindexres** |
+    |**`<IndexResourceName>`** | The name of the indexing resources. This step will create a Resource Group, Azure Batch account, and an Azure Storage Account using this name. | **makesindexres** |
     |**`<MakesPackageLocation>`** | The base URL to a MAKES release. The indexer, preprocessor, and jobManager package inside the release will be used to set up the Azure Batch account|  **https://mymakesstore.blob.core.windows.net/makes/2020-02-07/** |
     |**`<MakesIndexResourceConfigFilePath>`** | The local output file for saving the indexing resource configuration information to build your index. | **makesIndexResConfig.json** |
 
