@@ -57,7 +57,7 @@ MAKES requires data it indexes to be placed in a single JSON file, with each lin
    |**`@Param_UseSubgraphForInstitution`** | Generates a subgraph containing data related to the specified institution. | **microsoft**|
 
     > [!IMPORTANT]
-    > If you use the example output path. Make sure to create the **makessubgraph** container. Follow [Create a container](https://docs.microsoft.com/azure/storage/blobs/storage-quickstart-blobs-portal#create-a-container) guide for how to do this.
+    > If you use the example output path. Make sure to create the **makessubgraph** container before running this script. Follow [Create a container](https://docs.microsoft.com/azure/storage/blobs/storage-quickstart-blobs-portal#create-a-container) guide for how to do this.
     >
 
     > [!TIP]
