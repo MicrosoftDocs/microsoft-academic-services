@@ -52,7 +52,7 @@ Name | Type | Description
 [InterpretationRuleMatchOutput](#interpretationrulematchoutput) | Output generated for a grammar rule match.
 
 ### InterpretResponse
-          
+                      
 Name | Type | Description
 --- | --- | ---
 query | string | The natural language query used to generate interpretations.
@@ -131,7 +131,7 @@ Date: Thu, 30 Jan 2020 01:08:52 GMT
                                 "prob": 2.0682043e-8,
                                 "Id": 2887997457,
                                 "Y": 2019,
-                                                                    "DN": "Learning deep representations by mutual information estimation and maximization",
+                                                                                "DN": "Learning deep representations by mutual information estimation and maximization",
                                 "F": [
                                     {
                                         "DFN": "Mutual information"
@@ -173,7 +173,7 @@ Date: Thu, 30 Jan 2020 01:08:52 GMT
                                         "DFN": "Hidden Markov model"
                                     },
                                     {
-                                                                            "DFN": "Computer vision"
+                                                                                        "DFN": "Computer vision"
                                     },
                                     {
                                         "DFN": "Computer science"
@@ -253,7 +253,7 @@ Date: Thu, 30 Jan 2020 01:08:52 GMT
                                 "logprob": -18.39,
                                 "prob": 1.03115625e-8,
                                 "Id": 2963117013,
-                                                                    "Y": 2019,
+                                                                                "Y": 2019,
                                 "DN": "Learning a SAT Solver from Single-Bit Supervision",
                                 "F": [
                                     {
@@ -458,6 +458,9 @@ Date: Thu, 30 Jan 2020 01:08:52 GMT
 ```
 
 ### Map academic reference to paper
+
+> [!NOTE]
+> This example will only work starting with MAKES release 2020-03-13
 
 This example maps a raw academic reference string to the academic paper that most closely maps to the metadata present in the reference string.
 

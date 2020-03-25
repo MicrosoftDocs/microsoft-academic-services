@@ -52,7 +52,7 @@ Name | Type | Description
 query | string | The natural language query used to generate interpretations.
 interpretations | [Interpretation](#interpretation)[] | Array of interpretations ordered by relevance.
 timed_out | boolean | Set to true if the timeout duration was met before the requested number of interpretations could be generated.
-                                                                                                                                                                      
+                                              
 ### Interpretation
 
 Name | Type | Description
@@ -131,7 +131,7 @@ Date: Thu, 30 Jan 2020 01:00:29 GMT
     "query": "microsoft machine learning 2019",
     "interpretations": [
         {
-                                                                                                                                                                                 "logprob": -17.694,
+                                                                                                                                                                                                                                                                                             "logprob": -17.694,
             "parse": "<rule name=\"#GetPapers\"><attr name=\"academic#AA.AfN\">microsoft</attr> <attr name=\"academic#F.FN\">machine learning</attr> <attr name=\"academic#Y\">2019</attr><end/></rule>",
             "rules": [
                 {
@@ -173,7 +173,7 @@ Date: Thu, 30 Jan 2020 01:00:29 GMT
                                 "F": [
                                     {
                                         "DFN": "Visualization"
-                                                                                                                                                                                                         },
+                                                                                                                                                                                                                                                                                                                     },
                                     {
                                         "DFN": "Multiple modalities"
                                     },
@@ -253,7 +253,7 @@ Date: Thu, 30 Jan 2020 01:00:29 GMT
                                         "DFN": "Deep neural networks"
                                     },
                                     {
-                                                                                                                                                                                                             "DFN": "Computer science"
+                                                                                                                                                                                                                                                                                                                         "DFN": "Computer science"
                                     },
                                     {
                                         "DFN": "Artificial neural network"
@@ -472,6 +472,9 @@ Date: Thu, 30 Jan 2020 01:00:29 GMT
 ```
 
 ### Map academic reference to paper
+
+> [!NOTE]
+> This example will only work starting with MAKES release 2020-03-13
 
 This example maps a raw academic reference string to the academic paper that most closely maps to the metadata present in the reference string.
 
