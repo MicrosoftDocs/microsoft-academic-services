@@ -2,7 +2,7 @@
 title: POST Interpret
 description: Generates semantic interpretations of a natural language query
 ms.topic: reference
-ms.date: 2020-02-10
+ms.date: 03/25/2020
 ---
 
 # Interpret REST API
@@ -52,7 +52,7 @@ Name | Type | Description
 query | string | The natural language query used to generate interpretations.
 interpretations | [Interpretation](#interpretation)[] | Array of interpretations ordered by relevance.
 timed_out | boolean | Set to true if the timeout duration was met before the requested number of interpretations could be generated.
-
+                                                                                                          
 ### Interpretation
 
 Name | Type | Description
@@ -131,7 +131,7 @@ Date: Thu, 30 Jan 2020 01:00:29 GMT
     "query": "microsoft machine learning 2019",
     "interpretations": [
         {
-            "logprob": -17.694,
+                                                                                                                                                                                                                                                                                                                                                         "logprob": -17.694,
             "parse": "<rule name=\"#GetPapers\"><attr name=\"academic#AA.AfN\">microsoft</attr> <attr name=\"academic#F.FN\">machine learning</attr> <attr name=\"academic#Y\">2019</attr><end/></rule>",
             "rules": [
                 {
@@ -173,7 +173,7 @@ Date: Thu, 30 Jan 2020 01:00:29 GMT
                                 "F": [
                                     {
                                         "DFN": "Visualization"
-                                    },
+                                                                                                                                                                                                                                                                                                                                                                                 },
                                     {
                                         "DFN": "Multiple modalities"
                                     },
@@ -253,7 +253,7 @@ Date: Thu, 30 Jan 2020 01:00:29 GMT
                                         "DFN": "Deep neural networks"
                                     },
                                     {
-                                        "DFN": "Computer science"
+                                                                                                                                                                                                                                                                                                                                                                                     "DFN": "Computer science"
                                     },
                                     {
                                         "DFN": "Artificial neural network"
@@ -470,3 +470,106 @@ Date: Thu, 30 Jan 2020 01:00:29 GMT
     "timed_out": false
 }
 ```
+
+### Map academic reference to paper
+
+> [!NOTE]
+> This example will only work starting with MAKES release 2020-03-13
+
+This example maps a raw academic reference string to the academic paper that most closely maps to the metadata present in the reference string.
+
+The reference string we will be using:
+
+```
+Sinha, Arnab, et al. "An Overview of Microsoft Academic Service (MAS) and Applications." Proceedings of the 24th International Conference on World Wide Web, 2015, pp. 243–246.
+```
+
+#### Request headers
+
+```http
+POST /interpret HTTP/1.1
+Host: makesexample.westus.cloudapp.azure.com
+Connection: keep-alive
+Content-Length: 184
+Accept: */*
+Origin: http://makesexample.westus.cloudapp.azure.com
+X-Requested-With: XMLHttpRequest
+User-Agent: contoso/1.0
+Content-Type: application/json
+Referer: http://makesexample.westus.cloudapp.azure.com/
+Accept-Encoding: gzip, deflate
+Accept-Language: en-US,en;q=0.9
+```
+
+#### Request payload
+
+```json
+{
+    "query": "Sinha, Arnab, et al. \"An Overview of Microsoft Academic Service (MAS) and Applications.\" Proceedings of the 24th International Conference on World Wide Web, 2015, pp. 243–246.",
+    "complete": 0,
+    "normalize": 1,
+    "attributes": "Id,DN,Y,AA.DAuN,VFN",
+    "offset": 0,
+    "timeout": 2000,
+    "count": 1,
+    "entityCount": 1
+}
+```
+
+The important parts of the request payload:
+
+* **count**: Indicates that only 1 interpretation should be generated
+* **entityCount**: Indicates that each interpretation should return the top-most matching entity
+* **attributes**: Indicates which [paper entity attributes](reference-makes-api-entity-schema.md) should be returned for each matching entity
+
+#### Response payload
+
+```json
+{
+       "query": "sinha arnab et al an overview of microsoft academic service mas and applications proceedings of the 24th international conference on world wide web 2015 pp 243 246",
+    "interpretations": [{
+        "logprob": -420.683,
+        "parse": "<rule name=\"#GetPapers\"><attr name=\"academic#AA.AuN\" canonical=\"arnab sinha\">sinha arnab</attr> et al <attr name=\"academic#Ti\">an overview of microsoft academic service mas and applications</attr> proceedings of the 24th international conference on world wide web 2015 pp 243 246</rule>",
+        "rules": [{
+            "name": "#GetPapers",
+            "output": {
+                "type": "query",
+                "value": "And(Composite(AA.AuN=='arnab sinha'),Ti='an overview of microsoft academic service mas and applications')",
+                "entities": [{
+                    "logprob": -17.683,
+                    "prob": 2.09108014e-8,
+                    "Id": 1932742904,
+                    "Ti": "an overview of microsoft academic service mas and applications",
+                    "Y": 2015,
+                    "AA": [{
+                        "AuN": "arnab sinha"
+                    }, {
+                        "AuN": "zhihong shen"
+                    }, {
+                        "AuN": "yang song"
+                    }, {
+                        "AuN": "hao ma"
+                    }, {
+                        "AuN": "darrin eide"
+                    }, {
+                        "AuN": "bojune hsu"
+                    }, {
+                        "AuN": "kuansan wang"
+                    }],
+                    "C": {
+                        "CN": "www"
+                    }
+                }]
+            }
+        }]
+    }],
+    "timed_out_count": 0,
+    "timed_out": false
+}
+```
+
+As you can see from the response above, based on the top entities metadata it is highly likely that the interpretation maps to the correct paper ["An Overview of Microsoft Academic Service (MAS) and Applications"](https://academic.microsoft.com/paper/1932742904).
+
+What's also important to notice about the response is how it only *partially interpretted* the query.
+If you look at the "parse" field in the response it shows what parts of the query were mapped to different entity fields.
+In this case it was not able to match anything after the title in reference string, but was still able to generate an accurate mapping based on what it *could* match.
