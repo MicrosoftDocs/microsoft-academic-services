@@ -2,7 +2,7 @@
 title: Interpret method
 description: Generates semantic interpretations of a natural language query
 ms.topic: reference
-ms.date: 2020-03-19
+ms.date: 2020-03-25
 ---
 
 # Interpret Method
@@ -52,7 +52,7 @@ Name | Description
 ## Examples
 
 ### Generate academic query suggestions
-
+                                                    
 This example generates the most likely query suggestions (completions) for a partial author query "author: j tee".
 
 ``` HTTP
@@ -131,7 +131,7 @@ In this case it was not able to match anything after the title in reference stri
 
 ``` JSON
 {
-    "query": "sinha arnab et al an overview of microsoft academic service mas and applications proceedings of the 24th international conference on world wide web 2015 pp 243 246",
+                                                       "query": "sinha arnab et al an overview of microsoft academic service mas and applications proceedings of the 24th international conference on world wide web 2015 pp 243 246",
     "interpretations": [{
         "logprob": -420.683,
         "parse": "<rule name=\"#GetPapers\"><attr name=\"academic#AA.AuN\" canonical=\"arnab sinha\">sinha arnab</attr> et al <attr name=\"academic#Ti\">an overview of microsoft academic service mas and applications</attr> proceedings of the 24th international conference on world wide web 2015 pp 243 246</rule>",
@@ -171,4 +171,4 @@ In this case it was not able to match anything after the title in reference stri
     "timed_out_count": 0,
     "timed_out": false
 }
-```
+```                                                                        
