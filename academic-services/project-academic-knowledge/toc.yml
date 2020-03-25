@@ -5,11 +5,6 @@
   items:
   - name: Learn about Project Academic Knowledge
     href: introduction.md
-- name: Concepts
-  expanded: true
-  items:
-  - name: Natural language queries
-    href: concepts-queries.md
 - name: Reference
   expanded: true
   items:
