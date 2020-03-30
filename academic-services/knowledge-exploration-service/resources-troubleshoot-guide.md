@@ -7,11 +7,15 @@ ms.date: 2020-02-10
 
 # Troubleshoot Common MAKES command line tool issues
 
-## Azure login failure due to multiple subscriptions being tied to a single Azure account
+## Azure login failure due to multiple subscriptions or multiple tenants being tied to a single Azure account
 
-If you have multiple azure subscriptions associated with a single azure account, you'll need to specify the azure active directory domain name associated with the azure subscription that you would like to use to execute the command. (e.g. "--AzureActiveDirectoryDomainName constco.onmicrosoft.com").  
+If you have multiple azure tenants associated with a single azure account, you'll need to specify the Azure Active Directory directory domain name associated with the Azure Subscription that you would like to use to execute the command. (e.g. "--AzureActiveDirectoryDomainName constco.onmicrosoft.com").  
 
-You can find this information by logging into azure portal, searching for "Azure Active Directory" and viewing resource detail page.  The domain name to use will be in the "Overview" section at the top left.
+You can find this information by logging into azure portal, searching for "Azure Active Directory" and viewing resource detail page. The domain name to use will be in the "Overview" section at the top left.
+
+If you have multiple subscriptions associated with the same Azure Active Directory doamin and want to use the non-default subscription, you'll need to specify the subscription Id associated with the subscription to execute the command. (e.g. "--AzureSubscriptionId XXXXXXX-XXXX-XXX-XXXX-XXXXXXX")
+
+You can find this information by logging into azure portal, searching for "Subscriptions" and viewing resource detail page. The subscription Id will be listed in the table.
 
 ## Azure subscription limit
 

@@ -63,13 +63,11 @@ MAKES requires data it indexes to be placed in a single JSON file, with each lin
     > [!TIP]
     > This tutorial uses Microsoft as an organization by default. You can target any organization by finding its NormalizedName in the Microsoft Academic Graph and then changing the value of the affiliationNormalizedNameFilter variable to said name.
     >
-    > You can also modify the script to create different subgraphs. See script comments in the Subgraph Creation section.
+    > You can also modify the script to create different subgraphs. See script comments in the **Subgraph Creation** section.
     >
     > Please note that doing this may impact time estimates for script execution and index generation later on in this tutorial.
 
 1. Provide a **Job name**, change **AUs** to 20, and select **Submit**
-
-   ![Submit GenerateAzureSearchData job](media/how-to-create-index-create-job.png)
 
 The job should take approximately 50 minutes to run and cost $4. This estimation assumes the Azure Data Lake Analytics, MAG storage, and MAKES storage accounts are in the same region.
 
@@ -96,10 +94,13 @@ If you have not done so already, download the Kesm.exe tool from your MAKES subs
     |**`<MakesIndexResourceConfigFilePath>`** | The local output file for saving the indexing resource configuration information to build your index. | **makesIndexResConfig.json** |
 
 1. Run the command
+    > [!NOTE]
+    > If have multiple Azure Subscriptions and/or Tenants, you'll specify additional parameters.
+    > See [Azure login failure due to multiple subscriptions or multiple tenants being tied to a single Azure account](resources-troubleshoot-guide.md#Azure-login-failure-due-to-multiple-subscriptions-or-multiple-tenants-being-tied-to-a-single-Azure-account) for more details.
 
 ## Submit a build index job to the indexing resources created
 
-The final step to generate your index is to submit a build index job to Azure Batch account via the kesm tool. The Azure Batch account will spin up workers(virtual machines) to process MAKES json entities and build the index. The build index job will handled by three types of workers: jobManager, preprocessor, and indexer. The jobManager will take a build index job and create preprocessor and indexers tasks and monitor preprocessor(s) and indexer(s) till they finish their tasks. Preprocessor will validate, partition, and format the MAKES json entities. Indexer will then build indexes using the preprocessed entities.
+The final step to generate your index is to submit a build index job to Azure Batch account via the kesm tool. The Azure Batch account will spin up workers (virtual machines) to process MAKES json entities and build the index. The build index job will handled by three types of workers: jobManager, preprocessor, and indexer. The jobManager will take a build index job and create preprocessor and indexers tasks and monitor preprocessor(s) and indexer(s) till they finish their tasks. Preprocessor will validate, partition, and format the MAKES json entities. Indexer will then build indexes using the preprocessed entities.
 
 1. Copy the following command to your command /terminal window:
 
@@ -116,13 +117,16 @@ The final step to generate your index is to submit a build index job to Azure Ba
     |**`<MakesIndexResourceConfigFilePath>`** | The configuration file generated from running CreateIndexResources above. | **makesIndexResConfig.json** |
 
 1. Run the command
+    > [!NOTE]
+    > If have multiple Azure Subscriptions and/or Tenants, you'll specify additional parameters.
+    > See [Azure login failure due to multiple subscriptions or multiple tenants being tied to a single Azure account](resources-troubleshoot-guide.md#Azure-login-failure-due-to-multiple-subscriptions-or-multiple-tenants-being-tied-to-a-single-Azure-account) for more details.
 
 1. The command should return a build index job ID for you monitor the job progress
 
-  > [!IMPORTANT]
-  > Generating indexes can cost money.
-  >
-  > Time to create an index can be up to 3 hours.
+> [!IMPORTANT]
+> Generating indexes can cost money.
+>
+> Time to create an index can be up to 3 hours.
 
 ## Monitor the build index job progress
 
