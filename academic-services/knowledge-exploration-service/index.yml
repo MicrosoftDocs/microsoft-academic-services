@@ -33,5 +33,7 @@ sections:
     style: unordered
     items:
     - html: <a href="how-to-deploy-new-indexes-to-makes">How to deploy new releases to an existing instance of MAKES</a>
+    - html: <a href="how-to-delete-api-instances">How to delete a MAKES deployment</a>
+    - html: <a href="how-to-create-index-from-mag">Create custom MAKES index from a MAG release</a>
     
     
