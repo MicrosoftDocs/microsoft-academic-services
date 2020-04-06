@@ -11,8 +11,8 @@ ms.date: 2020-02-10
 
 ## Prerequisites
 
-- [Microsoft Academic Knowledge Service (MAKES) subscription](get-started-setup-provisioning.md)
-- [An existing deployment of the Microsoft Academic Knowledge Service (MAKES)](get-started-create-api-instances.md)
+- Microsoft Academic Knowledge Exploration Service (MAKES) subscription. See [Get started with Microsoft Academic Knowledge Exploration Service](get-started-setup-provisioning.md) to obtain one.
+- An existing deployment of the Microsoft Academic Knowledge Service (MAKES) See [Deploying a basic MAKES instance to Azure from your Subscription](get-started-create-api-instances.md) to create one.
 
 ## Delete the resource group associated with the MAKES API instance
 

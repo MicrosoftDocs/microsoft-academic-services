@@ -50,7 +50,7 @@ kesm DeployHost --HostName
                 --MakesHostImageId
                 --[MakesIndex]
                 --[MakesGrammar]
-                --[Instances]
+                --[InstanceCount]
                 --[HostMachineSku]
                 --[Region]
                 --[KeepResourcesOnFailure]
@@ -84,17 +84,13 @@ The MAKES grammar file URL reference.
 
 The region where the MAKES API host should be deployed to.
 
-`--Instances`
+`--InstanceCount`
 
-The default number of MAKES API host instances.
+The default number of MAKES API host instances (virtual machines).
 
 `--HostMachineSku`
 
 The sku for MAKES API host machines.
-
-`--KeepResourcesOnFailure`
-
-Whether to clean up resources if deployment failed for any reason. Used for debugging MAKES host deployment failures.
 
 ## CreateIndexResources Command
 
@@ -201,17 +197,24 @@ The number of virtual machines(workers) used to build the index. Warning, assign
 
 The virtual machine(worker) sku. Use https://docs.microsoft.com/en-us/rest/api/compute/virtualmachines/listavailablesizes to get the most recent options
 
-## Common authentication parameters
+## Common parameters
 
-MAKES command line tool leverages device login to access azure subscriptions by default. You can specify AzureActiveDirectoryDomainName and AzureCredentialsFilePath parameter to change the authentication behavior.
+Below are common parameters that can be applied to more than one commands.
 
-### AzureActiveDirectoryDomainName
+### Common authentication parameters
 
-The azure active directory domain name associated with the azure subscription that user would like to use to execute the command. (e.g. "constco.onmicrosoft.com"). This is not required if the user's azure account has only one azure subscription.
+Applies to all commands. MAKES command line tool leverages device login to access Azure Subscriptions by default. You can specify AzureActiveDirectoryDomainName, AzureSubscriptionId, and AzureCredentialsFilePath parameter to change the authentication behavior.
 
-You can find this information by logging into azure portal and go to your Azure Active Directory resource detail page.
+`--AzureActiveDirectoryDomainName`
 
-### AzureCredentialsFilePath
+The azure active directory domain name associated with the Azure Subscription that user would like to use to execute the command. (e.g. "constco.onmicrosoft.com"). This is not required if the user's azure account is linked to only one Azure Active Directory.
+
+`--AzureSubscriptionId`
+The Azure Subscription Id associated with the Azure Subscription that user would ike to use to execute the command. This only required if the user wants to use an Azure Subscription that's not being set as the default Azure Subscription for the account.
+
+You can find this information by logging into Azure Management Portal and go to your Azure Active Directory resource detail page.
+
+`--AzureCredentialsFilePath`
 
 The path to the azure credential file to use for authentication. If you're using the command line tool frequently or want to automate. You can generated an Azure credential file to avoid inputting your azure credentials each time you run an command.
 
@@ -222,3 +225,10 @@ az ad sp create-for-rbac --sdk-auth > my.azureauth
 ```
 
 If you don't have Azure CLI installed, you can also do this in the [cloud shell](https://docs.microsoft.com/azure/cloud-shell/quickstart).
+
+### Common resource group parameter
+
+Applies to Azure resource creation commands (CreateHostResources, CreateIndexResources, and DeployHost.) MAKES command line tool may create Azure resources for the user. You can use the common resource group parameter to ensure the resources created will be in the specified group.
+
+`--ResourceGroupName`
+The name of the resource group to deploy the Azure resources to. If the resource group does not exist, a new resource group will be created using the name specified. If new resource group creation is needed, the location of the new resource group will be the same as the `--Region` specified for the command.
