@@ -2,7 +2,7 @@
 title: Paper entity attributes
 description: Learn the attributes you can use with paper entities in the Project Academic Knowledge API.
 ms.topic: reference
-ms.date: 2020-02-24
+ms.date: 2020-04-10
 ---
 
 # Paper Entity
@@ -28,7 +28,7 @@ CC | Citation count | Int32 | None
 CitCon | Citation contexts</br></br>List of referenced paper ID's and the corresponding context in the paper (e.g. [{123:["brown foxes are known for jumping as referenced in paper 123", "the lazy dogs are a historical misnomer as shown in paper 123"]}) | Custom | None
 D | Date published in YYYY-MM-DD format | Date | Equals, IsBetween
 DN | Original paper title | String | None
-DOI | Digital Object Identifier | String | Equals, StartsWith
+DOI | Digital Object Identifier</br></br>**IMPORTANT**: The DOI is normalized to uppercase letters, so if querying the field via evaluate/histogram ensure that the DOI value is using all uppercase letters | String | Equals, StartsWith
 E | Extended metadata</br></br>**IMPORTANT**: This attribute has been deprecated and is only supported for legacy applications. Requesting this attribute individually (i.e. attributes=Id,Ti,E) will result in all extended metadata attributes being returned in a *serialized JSON string*</br></br>All attributes contained in the extended metadata are now available as a top-level attribute and can be requested as such (i.e. attributes=Id,Ti,DOI,IA) | [Extended](#extended) | None
 ECC | Estimated citation count | Int32 | None
 F.DFN | Original field of study name | String | None
