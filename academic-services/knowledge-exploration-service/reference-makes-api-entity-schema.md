@@ -2,7 +2,7 @@
 title: MAKES API entity schema
 description: Learn about the entity schema that MAKES API/Index contains.
 ms.topic: conceptual
-ms.date: 2020-02-10
+ms.date: 2020-04-10
 ---
 
 # Entity schema
@@ -47,10 +47,10 @@ BV | BibTex venue name | String | None
 C.CId | Conference series ID | Int64 | Equals
 C.CN | Conference series name | String | Equals, StartsWith
 CC | Citation count | Int32 | None  
-CitCon | Citation contexts</br></br>List of referenced paper ID’s and the corresponding context in the paper (e.g. [{123:["brown foxes are known for jumping as referenced in paper 123", "the lazy dogs are a historical misnomer as shown in paper 123"]}) | Custom | None
+CitCon | Citation contexts</br></br>List of referenced paper ID's and the corresponding context in the paper (e.g. [{123:["brown foxes are known for jumping as referenced in paper 123", "the lazy dogs are a historical misnomer as shown in paper 123"]}) | Custom | None
 D | Date published in YYYY-MM-DD format | Date | Equals, IsBetween
 DN | Original paper title | String | None
-DOI | Digital Object Identifier | String | Equals, StartsWith
+DOI | Digital Object Identifier</br></br>**IMPORTANT**: The DOI is normalized to uppercase letters, so if querying the field via evaluate/histogram ensure that the DOI value is using all uppercase letters | String | Equals, StartsWith
 E | Extended metadata</br></br>**IMPORTANT**: This attribute has been deprecated and is only supported for legacy applications. Requesting this attribute individually (i.e. attributes=Id,Ti,E) will result in all extended metadata attributes being returned in a *serialized JSON string*</br></br>All attributes contained in the extended metadata are now available as a top-level attribute and can be requested as such (i.e. attributes=Id,Ti,DOI,IA) | [Extended](#paper-entity-extended) | None
 ECC | Estimated citation count | Int32 | None
 F.DFN | Original field of study name | String | None
@@ -86,7 +86,7 @@ Name | Description | Type | Operations
 --- | --- | --- | ---
 BT | BibTex document type ('a':Journal article, 'b':Book, 'c':Book chapter, 'p':Conference paper) | String | None
 BV | BibTex venue name | String | None
-CC | Citation contexts</br></br>List of referenced paper ID’s and the corresponding context in the paper (e.g. [{123:["brown foxes are known for jumping as referenced in paper 123", "the lazy dogs are a historical misnomer as shown in paper 123"]}) | Custom | None
+CC | Citation contexts</br></br>List of referenced paper ID's and the corresponding context in the paper (e.g. [{123:["brown foxes are known for jumping as referenced in paper 123", "the lazy dogs are a historical misnomer as shown in paper 123"]}) | Custom | None
 DN | Original paper title | String | None
 DOI | Digital Object Identifier | String | None
 FP | First page of paper in publication | String | None
@@ -126,12 +126,12 @@ U | Source URL | String | None
 
 Name | Description | Type | Operations
 --- | --- | --- | ---
-Id		| Entity ID								|Int64		|Equals
-AuN		| Author normalized name					|String		|Equals
-CC		| Author total citation count			|Int32		|None  
-DAuN	| Author display name					|String		|None
+Id        | Entity ID                                |Int64        |Equals
+AuN        | Author normalized name                    |String        |Equals
+CC        | Author total citation count            |Int32        |None  
+DAuN    | Author display name                    |String        |None
 E | Extended metadata</br></br>**IMPORTANT**: This attribute has been deprecated and is only supported for legacy applications. Requesting this attribute individually (i.e. attributes=Id,Ti,E) will result in all extended metadata attributes being returned in a *serialized JSON string*</br></br>All attributes contained in the extended metadata are now available as a top-level attribute and can be requested as such (i.e. attributes=Id,Ti,DOI,IA) | [Extended](#author-entity-extended) | None
-ECC		| Author total estimated citation count	|Int32		|None
+ECC        | Author total estimated citation count    |Int32        |None
 LKA.AfId | Entity ID of the last known affiliation found for the author | Int64 | None
 LKA.AfN | Normalized name of the last known affiliation found for the author | String | None
 PC | Author total publication count | Int32 | None
@@ -157,11 +157,11 @@ PC | Author total publication count | Int32 | None
 
 Name | Description | Type | Operations
 --- | --- | --- | ---
-CC		|Journal total citation count			|Int32		|None  
-DJN		|Journal display name				|String		|None
-ECC		|Journal total estimated citation count	|Int32		|None
-JN		|Journal normalized name					|String		|Equals
-Id		|Entity ID								|Int64		|Equals
+CC        |Journal total citation count            |Int32        |None  
+DJN        |Journal display name                |String        |None
+ECC        |Journal total estimated citation count    |Int32        |None
+JN        |Journal normalized name                    |String        |Equals
+Id        |Entity ID                                |Int64        |Equals
 PC    |Journal total publication count | Int32 | None
 
 ## Conference Series Entity
@@ -171,13 +171,13 @@ PC    |Journal total publication count | Int32 | None
 
 Name | Description | Type | Operations
 --- | --- | --- | ---
-CC		|Conference series total citation count			|Int32		|None  
-CN		|Conference series normalized name		|String		|Equals
-DCN		|Conference series display name 		|String		|None
-ECC		|Conference series total estimated citation count	|Int32		|None
-F.FId	|Field of study entity ID associated with the conference series |Int64 	| Equals
-F.FN	|Field of study name associated with the conference series 	| Equals,<br/>StartsWith
-Id		|Entity ID								|Int64		|Equals
+CC        |Conference series total citation count            |Int32        |None  
+CN        |Conference series normalized name        |String        |Equals
+DCN        |Conference series display name         |String        |None
+ECC        |Conference series total estimated citation count    |Int32        |None
+F.FId    |Field of study entity ID associated with the conference series |Int64     | Equals
+F.FN    |Field of study name associated with the conference series     | Equals,<br/>StartsWith
+Id        |Entity ID                                |Int64        |Equals
 PC    |Conference series total publication count |Int32 | None
 
 ## Conference Instance Entity
@@ -187,25 +187,25 @@ PC    |Conference series total publication count |Int32 | None
 
 Name | Description | Type | Operations
 --- | --- | --- | ---
-CC		|Conference instance total citation count			|Int32		|None  
-CD.D	|Date of a conference instance event 	|Date		|Equals, IsBetween
-CD.T	|Title of a conference instance event 	|Date		|Equals, IsBetween
-CIARD	|Abstract registration due date of the conference instance 	|Date		|Equals, IsBetween
-CIED	|End date of the conference instance 	|Date		|Equals, IsBetween
-CIFVD	|Final version due date of the conference instance 	|Date		|Equals, IsBetween
-CIL		|Location of the conference instance 	|String		|Equals, StartsWith
-CIN		|Conference instance normalized name |String		|Equals
-CINDD	|Notification date of the conference instance 	|Date		|Equals, IsBetween
-CISD	|Start date of the conference instance 	|Date		|Equals, IsBetween
-CISDD	|Submission due date of the conference instance 	|Date		|Equals, IsBetween
-DCN		|Conference instance display name  |String		|None
+CC        |Conference instance total citation count            |Int32        |None  
+CD.D    |Date of a conference instance event     |Date        |Equals, IsBetween
+CD.T    |Title of a conference instance event     |Date        |Equals, IsBetween
+CIARD    |Abstract registration due date of the conference instance     |Date        |Equals, IsBetween
+CIED    |End date of the conference instance     |Date        |Equals, IsBetween
+CIFVD    |Final version due date of the conference instance     |Date        |Equals, IsBetween
+CIL        |Location of the conference instance     |String        |Equals, StartsWith
+CIN        |Conference instance normalized name |String        |Equals
+CINDD    |Notification date of the conference instance     |Date        |Equals, IsBetween
+CISD    |Start date of the conference instance     |Date        |Equals, IsBetween
+CISDD    |Submission due date of the conference instance     |Date        |Equals, IsBetween
+DCN        |Conference instance display name  |String        |None
 E | Extended metadata</br></br>**IMPORTANT**: This attribute has been deprecated and is only supported for legacy applications. Requesting this attribute individually (i.e. attributes=Id,Ti,E) will result in all extended metadata attributes being returned in a *serialized JSON string*</br></br>All attributes contained in the extended metadata are now available as a top-level attribute and can be requested as such (i.e. attributes=Id,Ti,DOI,IA) | [Extended](#conference-instance-extended) | None
-ECC		|Conference instance total estimated citation count	|Int32		|None
+ECC        |Conference instance total estimated citation count    |Int32        |None
 FN | Conference instance full name | String | None
-Id		|Entity ID								|Int64		|Equals
+Id        |Entity ID                                |Int64        |Equals
 PC | Conference instance total publication count | Int32 | None
-PCS.CN	|Parent conference series name of the instance |String 	|Equals
-PCS.CId	|Parent conference series ID of the instance |Int64 	|Equals
+PCS.CN    |Parent conference series name of the instance |String     |Equals
+PCS.CId    |Parent conference series ID of the instance |Int64     |Equals
 
 ### Conference Instance Extended
 
@@ -228,7 +228,7 @@ PC | Conference instance total publication count | Int32 | None
 Name | Description | Type | Operations
 --- | --- | --- | ---
 AfN | Affiliation normalized name |String |Equals
-CC | Affiliation total citation count |Int32		|none  
+CC | Affiliation total citation count |Int32        |none  
 DAfN | Affiliation display name |String |none
 E | Extended metadata</br></br>**IMPORTANT**: This attribute has been deprecated and is only supported for legacy applications. Requesting this attribute individually (i.e. attributes=Id,Ti,E) will result in all extended metadata attributes being returned in a *serialized JSON string*</br></br>All attributes contained in the extended metadata are now available as a top-level attribute and can be requested as such (i.e. attributes=Id,Ti,DOI,IA) | [Extended](#affiliation-entity-extended) | None
 ECC | Affiliation total estimated citation count |Int32 |none
@@ -254,14 +254,14 @@ PC | Total number of publications written in affiliation with this entity | Int3
 
 Name | Description | Type | Operations
 --- | --- | --- | ---
-CC		|Field of study total citation count	|Int32		|None  
-DFN 	|Field of study display name			|String		|None
-ECC		|Field of total estimated citation count|Int32		|None
-FL		|Level in fields of study hierarchy 	|Int32		|Equals, IsBetween
-FN		|Field of study normalized name			|String		|Equals
-FC.FId 	|Child field of study ID 				|Int64 		|Equals
-FC.FN	|Child field of study name 		    	|String		|Equals
-FP.FId 	|Parent field of study ID 				|Int64 		|Equals
-FP.FN	|Parent field of study name 			|String		|Equals
-Id		|Entity ID								|Int64		|Equals
+CC        |Field of study total citation count    |Int32        |None  
+DFN     |Field of study display name            |String        |None
+ECC        |Field of total estimated citation count|Int32        |None
+FL        |Level in fields of study hierarchy     |Int32        |Equals, IsBetween
+FN        |Field of study normalized name            |String        |Equals
+FC.FId     |Child field of study ID                 |Int64         |Equals
+FC.FN    |Child field of study name                 |String        |Equals
+FP.FId     |Parent field of study ID                 |Int64         |Equals
+FP.FN    |Parent field of study name             |String        |Equals
+Id        |Entity ID                                |Int64        |Equals
 PC    | Field of study total publication count | Int32 | None
