@@ -4,6 +4,8 @@
     //  Licensed under the MIT License.                                                               
     //                                                                                                
     //////////////////////////////////////////////////////////////////////////////////////////////////
+    // Last Updated: 2020-04-17
+    //////////////////////////////////////////////////////////////////////////////////////////////////
 
     // Enables OUTPUT statements to generate dynamic files using column values
     SET @@FeaturePreviews = "DataPartitionedOutput:on"; 

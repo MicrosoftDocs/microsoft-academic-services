@@ -11,11 +11,11 @@ ms.date: 2020-04-15
 
 If you have multiple Azure tenants associated with a single Azure account, you'll need to specify the Azure Active Directory directory domain name associated with the Azure Subscription that you would like to use to execute the command. (e.g. "--AzureActiveDirectoryDomainName constco.onmicrosoft.com").  
 
-You can find this information by logging into Azure Portal, searching for "Azure Active Directory" and viewing resource detail page. The domain name to use will be in the "Overview" section at the top left.
+You can find this information by logging into the Azure Management Portal, searching for "Azure Active Directory" and viewing the resource detail page. The domain name to use will be in the "Overview" section at the top left.
 
 If you have multiple subscriptions associated with the same Azure Active Directory doamin and want to use the non-default subscription, you'll need to specify the subscription Id associated with the subscription to execute the command. (e.g. "--AzureSubscriptionId XXXXXXX-XXXX-XXX-XXXX-XXXXXXX")
 
-You can find this information by logging into Azure Portal, searching for **Subscriptions** and viewing resource detail page. The subscription Id will be listed in the table.
+You can find this information by logging into the Azure Management Portal, searching for **Subscriptions** and viewing the resource detail page. The subscription Id will be listed in the table.
 
 ## Azure Subscription quota limit reached
 
@@ -23,9 +23,9 @@ If you encounter errors such as "operation could not be completed as it results 
 
 ## Azure Batch service not registered
 
-If you encouter errors such as "The subscription registration is in 'Unregistered' state. The subscription must be registered to use namespace 'Microsoft.Batch'....", you'll need to register your subscription to use Azure Batch service.
+If you encounter errors such as "The subscription registration is in 'Unregistered' state. The subscription must be registered to use namespace 'Microsoft.Batch'....", you'll need to register your subscription to use Azure Batch service.
 
-You can use Azure Portal to register Azure Batch service for your subscription. To do this, log into Azure Portal, search for **Subscriptions** and select the subscription you want to register Azure Batch service for. Then, select **Resource providers** and search for **Microsoft.Batch**. Finally, select **Microsoft.Batch** from the provider list and select **register**. This should only take a few minutes.
+You can use the Azure Management Portal to register Azure Batch service for your subscription. To do this, log into the [Azure Management Portal](https://portal.azure.com)), search for **Subscriptions** and select the subscription you want to register Azure Batch service under. Then, select **Resource providers** and search for **Microsoft.Batch**. Finally, select **Microsoft.Batch** from the provider list and select **register**. This should only take a few minutes.
 
 ## Incomplete MAKES release transfer
 

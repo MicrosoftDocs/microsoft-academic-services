@@ -90,7 +90,7 @@ If you have not done so already, download the Kesm.exe tool from your MAKES subs
     | Values | Description | Example |
     |---------|---------|------|
     |**`<IndexResourceName>`** | The name of the indexing resources. This step will create a Resource Group, Azure Batch account, and an Azure Storage Account using this name. | **makesindexres** |
-    |**`<MakesPackageLocation>`** | The base URL to a MAKES release. The indexer, preprocessor, and jobManager package inside the release will be used to set up the Azure Batch account|  **https&#58;//mymakesstore.blob.core.windows.net/makes/2020-02-07/** |
+    |**`<MakesPackageLocation>`** | The base URL to a MAKES release. The indexer, preprocessor, and jobManager packages inside the release will be used to set up the Azure Batch account|  **https&#58;//mymakesstore.blob.core.windows.net/makes/2020-02-07/** |
     |**`<MakesIndexResourceConfigFilePath>`** | The local output file for saving the indexing resource configuration information to build your index. | **makesIndexResConfig.json** |
 
 1. Run the command
@@ -98,7 +98,7 @@ If you have not done so already, download the Kesm.exe tool from your MAKES subs
     > If have multiple Azure Subscriptions and/or Tenants, you'll specify additional parameters.
     > See [Azure login failure due to multiple subscriptions or multiple tenants being tied to a single Azure account](resources-troubleshoot-guide.md#Azure-login-failure-due-to-multiple-subscriptions-or-multiple-tenants-being-tied-to-a-single-Azure-account) for more details.
     >
-    > If your azure subscription hasn't register for Azure Batch service, you'll need to do so.
+    > If your Azure Subscription hasn't been registered for Azure Batch service, you'll need to do so.
     See [Azure Batch service not registered](resources-troubleshoot-guide.md#Azure-Batch-service-not-registered) for more details.
 
 ## Submit a build index job to the indexing resources created
@@ -131,7 +131,7 @@ The final step to generate your index is to submit a build index job to Azure Ba
 >
 > Time to create an index can be up to 3 hours.
 >
-> Due to COVID-19, new Azure Batch Accounts in many region will have 0 vCore limit. This will cause index jobs to get stuck.
+> Due to regional restrictions, new Azure Batch Accounts in many region will have 0 vCore limit. This will cause index jobs to get stuck.
 > See [Azure Subscription quota limit reached](resources-troubleshoot-guide.md#Azure-Subscription-quota-limit-reached) for more details.
 
 ## Monitor the build index job progress
