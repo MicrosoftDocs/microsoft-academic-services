@@ -53,7 +53,7 @@ MAKES requires data it indexes to be placed in a single JSON file, with each lin
    |---------|---------|------|
    |**`@In_MagBlobAccount`** | The name of your Azure Storage account containing the Microsoft Academic Graph data set. | **mymagstore**
    |**`@In_MagBlobContainer`** | The container name in your Azure Storage account containing the Microsoft Academic graph data set, usually in the form of **mag-YYYY-MM-DD**. | **mag-2020-02-07**
-   |**`@Out_OutputPath string`** | The entity output storage path to where you'd like the formatted entities documents to go. The container for the azure output storage location must exist before running the script.| **wasb&#58;//makessubgraph@mymakesstore/2020-02-07/microsoft/entities**  |
+   |**`@Out_OutputPath string`** | The entity output storage path to where you'd like the formatted entities documents to go. The container for the azure output storage location must exist before running the script.| <strong>wasb&#58;//makessubgraph@mymakesstore/2020-02-07/microsoft/entities</strong>  |
    |**`@Param_UseSubgraphForInstitution`** | Generates a subgraph containing data related to the specified institution. | **microsoft**|
 
     > [!IMPORTANT]
@@ -115,8 +115,8 @@ The final step to generate your index is to submit a build index job to Azure Ba
 
     | Values | Description | Example |
     |---------|---------|-------|
-    |**`<InputEntitiesUrl>`** | The input URL to the MAKES entities generated from running the U-SQL script above. | **https://mymakesstore.blob.core.windows.net/makessubgraph/2020-02-07/microsoft/entities/** |
-    |**`<OutputUrlPrefix>`** | The output base URL for writing the built MAKES index.| **https://mymakesstore.blob.core.windows.net/makessubgraph/2020-02-07/microsoft/index/**
+    |**`<InputEntitiesUrl>`** | The input URL to the MAKES entities generated from running the U-SQL script above. | **https&#58;//mymakesstore.blob.core.windows.net/makessubgraph/2020-02-07/microsoft/entities/** |
+    |**`<OutputUrlPrefix>`** | The output base URL for writing the built MAKES index.| **https&#58;//mymakesstore.blob.core.windows.net/makessubgraph/2020-02-07/microsoft/index/**
     |**`<MakesIndexResourceConfigFilePath>`** | The configuration file generated from running CreateIndexResources above. | **makesIndexResConfig.json** |
 
 1. Run the command
