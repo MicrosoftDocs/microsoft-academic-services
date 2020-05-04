@@ -19,7 +19,9 @@ You can find this information by logging into the Azure Management Portal, searc
 
 ## Azure Subscription quota limit reached
 
-If you encounter errors such as "operation could not be completed as it results in exceeding approved XXXXXX quota", you'll need to contact Azure support to increase your account quota, try a different region where you have more Azure quota, or change the MAKES host machine sku/worker machine sku settings. For most Microsoft Academic sub-graph index builds, you can scale down to **Standard_D8_v3** sku to build and host the indexes.
+If you encounter errors such as "operation could not be completed as it results in exceeding approved XXXXXX quota", you'll need to contact Azure support to increase your account quota, try a different region where you have more Azure quota, or change the MAKES host machine sku/worker machine sku settings. 
+
+For most Microsoft Academic sub-graph index builds, you can scale down to **Standard_D8_v3** sku to build and host the indexes. MAKES indexing resources will scale using Azure Batch's "Dedicated Cores". Make sure you're requesting for the correct quota increase for the correct resource and region.
 
 ## Azure Batch service not registered
 
