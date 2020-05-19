@@ -45,7 +45,7 @@ Column # | Name | Type | Note
 6 | OfficialPage | string |
 7 | WikiPage | string |
 8 | PaperCount | long |
-9 | PaperFamilyCount | long |
+9 | PaperFamilyCount | long | See [FAQ](resources-faq.md#papercount-vs-paperfamilycount)
 10 | CitationCount | long |
 11 | Latitude | float? |
 12 | Longitude | float? |
@@ -65,7 +65,7 @@ Column # | Name | Type | Note
 4 | DisplayName | string |
 5 | LastKnownAffiliationId | long? |
 6 | PaperCount | long |
-7 | PaperFamilyCount | long |
+7 | PaperFamilyCount | long | See [FAQ](resources-faq.md#papercount-vs-paperfamilycount)
 8 | CitationCount | long |
 9 | CreatedDate | DateTime |
 
@@ -90,7 +90,7 @@ Column # | Name | Type | Note
 11 | NotificationDueDate | DateTime? |
 12 | FinalVersionDueDate | DateTime? |
 13 | PaperCount | long |
-14 | PaperFamilyCount | long |
+14 | PaperFamilyCount | long | See [FAQ](resources-faq.md#papercount-vs-paperfamilycount)
 15 | CitationCount | long |
 16 | Latitude | float? |
 17 | Longitude | float? |
@@ -109,7 +109,7 @@ Column # | Name | Type | Note
 3 | NormalizedName | string |
 4 | DisplayName | string |
 5 | PaperCount | long |
-6 | PaperFamilyCount | long |
+6 | PaperFamilyCount | long | See [FAQ](resources-faq.md#papercount-vs-paperfamilycount)
 7 | CitationCount | long |
 8 | CreatedDate | DateTime |
 
@@ -166,7 +166,7 @@ Column # | Name | Type | Note
 5 | MainType | string |
 6 | Level | Int | 0 - 5
 7 | PaperCount | long |
-8 | PaperFamilyCount | long |
+8 | PaperFamilyCount | long | See [FAQ](resources-faq.md#papercount-vs-paperfamilycount)
 9 | CitationCount | long |
 10 | CreatedDate | DateTime |
 
@@ -186,7 +186,7 @@ Column # | Name | Type | Note
 6 | Publisher | string |
 7 | Webpage | string |
 8 | PaperCount | long |
-9 | PaperFamilyCount | long |
+9 | PaperFamilyCount | long | See [FAQ](resources-faq.md#papercount-vs-paperfamilycount)
 10 | CitationCount | long |
 11 | CreatedDate | DateTime |
 
