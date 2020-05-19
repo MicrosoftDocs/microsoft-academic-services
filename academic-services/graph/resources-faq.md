@@ -2,7 +2,7 @@
 title: FAQ about Microsoft Academic Graph
 description: Answers some of the most frequently asked questions about the Microsoft Academic Graph
 ms.topic: reference
-ms.date: 12/2/2019
+ms.date: 5/19/2020
 ---
 # Frequently Asked Questions about Microsoft Academic Graph
 
@@ -59,4 +59,10 @@ It is relatively easy and inexpensive to compute citation counts and h-index usi
 
 ## What is FamilyId in Papers.txt
 
-Some papers were published in multiple venues, e.g. in archive and a conference. These papers share same FamilyId where the value  being the PaperId of the main paper.
+Some papers were published in multiple venues, e.g. in archive and a conference. These papers share same FamilyId where the value being the PaperId of the main paper.
+
+## What is the difference between PaperCount and PaperFamilyCount
+
+PaperCount is the number of papers associated with the entity.
+
+PaperFamilyCount is similar as PaperCount where multiple papers with same FamilyId are only counted as one.
