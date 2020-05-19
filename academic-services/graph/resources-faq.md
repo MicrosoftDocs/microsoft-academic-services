@@ -61,7 +61,7 @@ It is relatively easy and inexpensive to compute citation counts and h-index usi
 
 Some papers were published in multiple venues, e.g. in archive and a conference. These papers share same FamilyId where the value being the PaperId of the main paper.
 
-## What is the difference between PaperCount and PaperFamilyCount
+## PaperCount vs. PaperFamilyCount
 
 PaperCount is the number of papers associated with the entity.
 
