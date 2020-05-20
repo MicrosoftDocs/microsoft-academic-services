@@ -59,10 +59,12 @@ It is relatively easy and inexpensive to compute citation counts and h-index usi
 
 ## What is FamilyId in Papers.txt
 
-Some papers were published in multiple venues, e.g. in archive and a conference. These papers share same FamilyId where the value being the PaperId of the main paper.
+A paper "family" is defined as a group of papers that have been determined to be the same fundamental paper, but published in different venues (e.g. pre-print and conference). In this case only one of the papers will be determined to be the "primary" paper, and each paper in the family group will have its "FamilyId" value set to the primary papers ID.
+
+If the "FamilyId" value is not defined for a paper it means that the paper is not part of a larger family group, however it is still considered to be the primary paper of a single-paper family."
 
 ## PaperCount vs. PaperFamilyCount
 
 PaperCount is the number of papers associated with the entity.
 
-PaperFamilyCount is similar as PaperCount where multiple papers with same FamilyId are only counted as one.
+PaperFamilyCount is the number of primary family papers associated with the entity.
