@@ -2,7 +2,7 @@
 title: MAKES command line tool reference
 description: Documentation for the MAKES command line tool
 ms.topic: reference
-ms.date: 2020-02-10
+ms.date: 2020-04-15
 ---
 
 # MAKES command line tool
@@ -143,7 +143,7 @@ The MAKES JobManager zip url.
 Builds MAKES index(es) from json entities.
 
 ```cmd
-kesm BuildIndex --MakesIndexBuildResourceConfigFilePath
+kesm BuildIndex --MakesIndexResourceConfigFilePath
                 --EntitiesUrlPrefix
                 --OutputUrlPrefix
                 --[IndexPartitionCount]
@@ -159,7 +159,7 @@ kesm BuildIndex --MakesIndexBuildResourceConfigFilePath
 
 ### Required Parameters
 
-`--MakesIndexBuildResourceConfigFilePath`
+`--MakesIndexResourceConfigFilePath`
 
 The MAKES indexing resource configuration file path. Run CreateIndexResource command to generate one.
 

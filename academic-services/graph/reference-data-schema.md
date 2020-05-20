@@ -2,7 +2,7 @@
 title: Microsoft Academic Graph data schema
 description: Documents the complete, most recent Microsoft Academic Graph entity data schema, including the name and type of each attribute
 ms.topic: reference
-ms.date: 2/13/2020
+ms.date: 5/19/2020
 ---
 # Microsoft Academic Graph data schema
 
@@ -45,10 +45,11 @@ Column # | Name | Type | Note
 6 | OfficialPage | string |
 7 | WikiPage | string |
 8 | PaperCount | long |
-9 | CitationCount | long |
-10 | Latitude | float? |
-11 | Longitude | float? |
-12 | CreatedDate | DateTime |
+9 | PaperFamilyCount | long | See [FAQ](resources-faq.md#papercount-vs-paperfamilycount)
+10 | CitationCount | long |
+11 | Latitude | float? |
+12 | Longitude | float? |
+13 | CreatedDate | DateTime |
 
 ## Authors
 
@@ -64,8 +65,9 @@ Column # | Name | Type | Note
 4 | DisplayName | string |
 5 | LastKnownAffiliationId | long? |
 6 | PaperCount | long |
-7 | CitationCount | long |
-8 | CreatedDate | DateTime |
+7 | PaperFamilyCount | long | See [FAQ](resources-faq.md#papercount-vs-paperfamilycount)
+8 | CitationCount | long |
+9 | CreatedDate | DateTime |
 
 ## Conference Instances
 
@@ -88,10 +90,11 @@ Column # | Name | Type | Note
 11 | NotificationDueDate | DateTime? |
 12 | FinalVersionDueDate | DateTime? |
 13 | PaperCount | long |
-14 | CitationCount | long |
-15 | Latitude | float? |
-16 | Longitude | float? |
-17 | CreatedDate | DateTime |
+14 | PaperFamilyCount | long | See [FAQ](resources-faq.md#papercount-vs-paperfamilycount)
+15 | CitationCount | long |
+16 | Latitude | float? |
+17 | Longitude | float? |
+18 | CreatedDate | DateTime |
 
 ## Conference Series
 
@@ -106,8 +109,9 @@ Column # | Name | Type | Note
 3 | NormalizedName | string |
 4 | DisplayName | string |
 5 | PaperCount | long |
-6 | CitationCount | long |
-7 | CreatedDate | DateTime |
+6 | PaperFamilyCount | long | See [FAQ](resources-faq.md#papercount-vs-paperfamilycount)
+7 | CitationCount | long |
+8 | CreatedDate | DateTime |
 
 ## Entity Related Entities
 
@@ -162,8 +166,9 @@ Column # | Name | Type | Note
 5 | MainType | string |
 6 | Level | Int | 0 - 5
 7 | PaperCount | long |
-8 | CitationCount | long |
-9 | CreatedDate | DateTime |
+8 | PaperFamilyCount | long | See [FAQ](resources-faq.md#papercount-vs-paperfamilycount)
+9 | CitationCount | long |
+10 | CreatedDate | DateTime |
 
 ## Journals
 
@@ -181,8 +186,9 @@ Column # | Name | Type | Note
 6 | Publisher | string |
 7 | Webpage | string |
 8 | PaperCount | long |
-9 | CitationCount | long |
-10 | CreatedDate | DateTime |
+9 | PaperFamilyCount | long | See [FAQ](resources-faq.md#papercount-vs-paperfamilycount)
+10 | CitationCount | long |
+11 | CreatedDate | DateTime |
 
 ## Paper Abstracts Inverted Index
 

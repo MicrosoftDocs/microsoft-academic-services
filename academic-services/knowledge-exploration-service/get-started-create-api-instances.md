@@ -2,7 +2,7 @@
 title: Get started with create MAKES API instances
 description: Step-by-step guide for deploying Microsoft Academic Knowledge Exploration Service(MAKES) APIs using MAKES management tool.
 ms.topic: tutorial
-ms.date: 2020-02-10
+ms.date: 2020-04-15
 ---
 
 # Deploying a basic MAKES instance to Azure from your Subscription
@@ -101,15 +101,13 @@ Now that the MAKES hosting Virtual Machine Image is created, you are ready to us
 
     ![Copy the Host Image Id](media/get-started-copy-makes-image-id.png)
 
-1. Execute the following command to deploy your hosting resources:
+1. Copy the following command to your command / terminal window to deploy your hosting resources:
 
     ```cmd
     kesm.exe DeployHost --HostName "<makes_instance_host_name>" --MakesPackage "https://<makes_storage_account_name>.blob.core.windows.net/makes/<makes_release_version>/"  --MakesHostImageId "<id_from_previous_command_output>"
     ```
 
-    Example: **kesm.exe DeployHost --HostName contosomakes --MakesPackage "https://makesascontoso.blob.core.windows.net/makes/2020-01-30/" --MakesHostImageId "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/contosorgmakesone/profiders/Microsoft.Compute/Images/contosoImageName"**
-
-    Replace the following tokens in the command above with the appropriate value:
+    Replace the tokens in the command above with the appropriate value:
 
     | Token to relpace | Value |
     | --------| ----- |
@@ -117,6 +115,12 @@ Now that the MAKES hosting Virtual Machine Image is created, you are ready to us
     | <makes_storage_account_name> | The name of the storage account you downloaded the scripts from above. |
     | <makes_release_version> | The MAKES release you would like to deploy. |
     | <id_from_previous_command_output> | The id you copied from the output of the previous command. |
+
+    Example:
+
+    ```cmd
+    kesm.exe DeployHost --HostName contosomakes --MakesPackage "https://makesascontoso.blob.core.windows.net/makes/2020-01-30/" --MakesHostImageId "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/contosorgmakesone/profiders/Microsoft.Compute/Images/contosoImageName"
+    ```
 
 If necessary, authenticate the command in the same way as you did above for the first command.
 

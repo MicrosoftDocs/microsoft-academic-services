@@ -2,7 +2,7 @@
 title: Create Microsoft Academic Knowlege Exploration Service (MAKES) index from Microsoft Academic Graph (MAG)
 description: Step-by-step guide for generating MAKES indexes from a MAG release.
 ms.topic: tutorial
-ms.date: 2020-02-19
+ms.date: 2020-04-15
 ---
 
 # Create custom MAKES index from a MAG release
@@ -53,7 +53,7 @@ MAKES requires data it indexes to be placed in a single JSON file, with each lin
    |---------|---------|------|
    |**`@In_MagBlobAccount`** | The name of your Azure Storage account containing the Microsoft Academic Graph data set. | **mymagstore**
    |**`@In_MagBlobContainer`** | The container name in your Azure Storage account containing the Microsoft Academic graph data set, usually in the form of **mag-YYYY-MM-DD**. | **mag-2020-02-07**
-   |**`@Out_OutputPath string`** | The entity output storage path to where you'd like the formatted entities documents to go. The container for the azure output storage location must exist before running the script.| **wasb://makessubgraph@mymakesstore/2020-02-07/microsoft/entities**  |
+   |**`@Out_OutputPath string`** | The entity output storage path to where you'd like the formatted entities documents to go. The container for the azure output storage location must exist before running the script.| <strong>wasb&#58;//makessubgraph@mymakesstore/2020-02-07/microsoft/entities</strong>  |
    |**`@Param_UseSubgraphForInstitution`** | Generates a subgraph containing data related to the specified institution. | **microsoft**|
 
     > [!IMPORTANT]
@@ -90,13 +90,16 @@ If you have not done so already, download the Kesm.exe tool from your MAKES subs
     | Values | Description | Example |
     |---------|---------|------|
     |**`<IndexResourceName>`** | The name of the indexing resources. This step will create a Resource Group, Azure Batch account, and an Azure Storage Account using this name. | **makesindexres** |
-    |**`<MakesPackageLocation>`** | The base URL to a MAKES release. The indexer, preprocessor, and jobManager package inside the release will be used to set up the Azure Batch account|  **https://mymakesstore.blob.core.windows.net/makes/2020-02-07/** |
+    |**`<MakesPackageLocation>`** | The base URL to a MAKES release. The indexer, preprocessor, and jobManager packages inside the release will be used to set up the Azure Batch account|  **https&#58;//mymakesstore.blob.core.windows.net/makes/2020-02-07/** |
     |**`<MakesIndexResourceConfigFilePath>`** | The local output file for saving the indexing resource configuration information to build your index. | **makesIndexResConfig.json** |
 
 1. Run the command
     > [!NOTE]
     > If have multiple Azure Subscriptions and/or Tenants, you'll specify additional parameters.
     > See [Azure login failure due to multiple subscriptions or multiple tenants being tied to a single Azure account](resources-troubleshoot-guide.md#Azure-login-failure-due-to-multiple-subscriptions-or-multiple-tenants-being-tied-to-a-single-Azure-account) for more details.
+    >
+    > If your Azure Subscription hasn't been registered for Azure Batch service, you'll need to do so.
+    See [Azure Batch service not registered](resources-troubleshoot-guide.md#Azure-Batch-service-not-registered) for more details.
 
 ## Submit a build index job to the indexing resources created
 
@@ -105,15 +108,15 @@ The final step to generate your index is to submit a build index job to Azure Ba
 1. Copy the following command to your command /terminal window:
 
     ```cmd
-    kesm BuildIndex --EntitiesUrlPrefix "<InputEntitiesUrl>" --OutputUrlPrefix "<OutputIndexUrl>" --MakesIndexBuildResourceConfigFilePath "<MakesIndexResourceConfigFilePath>"
+    kesm BuildIndex --EntitiesUrlPrefix "<InputEntitiesUrl>" --OutputUrlPrefix "<OutputIndexUrl>" --MakesIndexResourceConfigFilePath "<MakesIndexResourceConfigFilePath>"
     ```
 
 1. Replace the command parameters with the values from the table below:
 
     | Values | Description | Example |
     |---------|---------|-------|
-    |**`<InputEntitiesUrl>`** | The input URL to the MAKES entities generated from running the U-SQL script above. | **https://mymakesstore.blob.core.windows.net/makessubgraph/2020-02-07/microsoft/entities/** |
-    |**`<OutputUrlPrefix>`** | The output base URL for writing the built MAKES index.| **https://mymakesstore.blob.core.windows.net/makessubgraph/2020-02-07/microsoft/index/**
+    |**`<InputEntitiesUrl>`** | The input URL to the MAKES entities generated from running the U-SQL script above. | **https&#58;//mymakesstore.blob.core.windows.net/makessubgraph/2020-02-07/microsoft/entities/** |
+    |**`<OutputUrlPrefix>`** | The output base URL for writing the built MAKES index.| **https&#58;//mymakesstore.blob.core.windows.net/makessubgraph/2020-02-07/microsoft/index/**
     |**`<MakesIndexResourceConfigFilePath>`** | The configuration file generated from running CreateIndexResources above. | **makesIndexResConfig.json** |
 
 1. Run the command
@@ -127,6 +130,9 @@ The final step to generate your index is to submit a build index job to Azure Ba
 > Generating indexes can cost money.
 >
 > Time to create an index can be up to 3 hours.
+>
+> Due to regional restrictions, new Azure Batch Accounts in many region will have 0 vCore limit. This will cause index jobs to get stuck.
+> See [Azure Subscription quota limit reached](resources-troubleshoot-guide.md#Azure-Subscription-quota-limit-reached) for more details.
 
 ## Monitor the build index job progress
 

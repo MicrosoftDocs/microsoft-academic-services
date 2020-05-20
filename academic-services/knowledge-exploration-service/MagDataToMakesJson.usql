@@ -4,6 +4,8 @@
     //  Licensed under the MIT License.                                                               
     //                                                                                                
     //////////////////////////////////////////////////////////////////////////////////////////////////
+    // Last Updated: 2020-04-17
+    //////////////////////////////////////////////////////////////////////////////////////////////////
 
     // Enables OUTPUT statements to generate dynamic files using column values
     SET @@FeaturePreviews = "DataPartitionedOutput:on"; 
@@ -23,7 +25,10 @@
     
     // The storage output path where the JSON files will be created
     // The if the output destination type is Azure storage (output path starts with "wasb"), the container for the output location needs to be created before running the script
-    DECLARE EXTERNAL @Out_OutputPath string = "";  // Example: "wasb://makessubgraph@mymakesstore/mag-2020-02-07/microsoft"
+    DECLARE EXTERNAL @Out_OutputPath string = "";  // Example: "wasb://makessubgraph@mymakesstore/2020-02-07/microsoft/entities"
+    
+    //The name of the institution to create subgraph for. The full graph is used by default.
+    DECLARE EXTERNAL @Param_UseSubgraphForInstitution string = "microsoft"; // Example: "microsoft"
     
     // U-SQL string values have a maximum length of 2^17, which unfortunately this means we need to limit the number of authors for a paper as they
     // are concatenated together into a single JSON array represented by a U-SQL string.
@@ -61,9 +66,6 @@
     
     // The number of files to partition the data into
     DECLARE EXTERNAL @Param_PartitionCount int = 16;
-    
-    //The name of the institution to create subgraph for. The full graph is used by default.
-    DECLARE EXTERNAL @Param_UseSubgraphForInstitution string = "microsoft"; // Example: "microsoft"
     
     ////////////////////////////////////////////////////////////////////////////////////////////////////
     // Local variables
