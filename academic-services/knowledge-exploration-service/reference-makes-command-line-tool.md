@@ -2,25 +2,25 @@
 title: MAKES command line tool reference
 description: Documentation for the MAKES command line tool
 ms.topic: reference
-ms.date: 2020-04-15
+ms.date: 2020-05-27
 ---
 
 # MAKES command line tool
 
 Makes command line tool is designed to help users create and host MAKES indexes.
 
-## CreateHostResources command
+## CreateHostResources Command
 
 Creates the MAKES index hosting resources. E.g. MAKES web host image
 
 ```cmd
 kesm CreateHostResources --HostResourceName
             --MakesPackage
-            --[Region]
-            --[MakesWebHost]
+            [--Region]
+            [--MakesWebHost]
 ```
 
-### Required parameters
+### CreateHostResources Required Parameters
 
 `--HostResourceName`
 
@@ -30,7 +30,7 @@ The name of the host resource.
 
 The base URL to a MAKES release package.
 
-### Optional parameters
+### CreateHostResources Optional Parameters
 
 `--Region`
 
@@ -40,7 +40,7 @@ The region to deploy the host resources to. Defaults to WestUs
 
 The URL to MAKES web host zip file that will be used to create the MAKES virtual machine hosting image.
 
-## DeployHost command
+## DeployHost Command
 
 Hosts the specified indexes to power an instance of MAKES API.
 
@@ -48,15 +48,19 @@ Hosts the specified indexes to power an instance of MAKES API.
 kesm DeployHost --HostName
                 --MakesPackage
                 --MakesHostImageId
-                --[MakesIndex]
-                --[MakesGrammar]
-                --[InstanceCount]
-                --[HostMachineSku]
-                --[Region]
-                --[KeepResourcesOnFailure]
+                [--MakesIndex]
+                [--MakesGrammar]
+                [--InstanceCount]
+                [--Region]
+                [--HostMachineSku]
+                [--HostMachineDataDiskSizeInGb]
+                [--WebHostAppSettingsOverride]
+                [--WebHostOverrideUrl]
+                [--ApplicationInsightsInstrumentationKey]
+                [--LogWebHostRequestsAndResponses]
 ```
 
-### Required parameters
+### DeployHost Required Parameters
 
 `--HostName`
 
@@ -70,7 +74,7 @@ The base URL to a MAKES release package.
 
 The MAKES host virtual machine image resource Id. Run CreateHostResource command to generate one.
 
-### Optional parameters
+### DeployHost Optional Parameters
 
 `--MakesIndex`
 
@@ -90,23 +94,43 @@ The default number of MAKES API host instances (virtual machines).
 
 `--HostMachineSku`
 
-The sku for MAKES API host machines.
+The Sku for MAKES API host machines. Use [List available VM Sizes](https://docs.microsoft.com/rest/api/compute/virtualmachines/listavailablesizes) to get the available options.
+
+`--HostMachineDataDiskSizeInGb`
+
+The size of the data disk (Managed Disk:Premium SSD) that the host should have. See [Azure Managed Disks](https://azure.microsoft.com/pricing/details/managed-disks/) for detailed pricing information. If the size is set to 0 (the default), no additional data disk will be attached to the host Virtual Machine and index/grammar data will be stored on the temp drive (D:\\) that comes with the Virtual Machine. If the size is great than 0, then we'll add a managed disk with the specified size, intialize as data disk drive (F:\\) and download the index/grammar data to it. Note: Using data disk instead of the default attached temp drive on the Virtual Machine may lead to decrease performance due to IOPS differences.
+
+`--WebHostAppSettingsOverride`
+
+The application settings used by the web host represented as a list of \"<ApplicationSettingJsonPath>=< ApplicationSettingValue>\" separated by ';'
+
+`--WebHostOverrideUrl`
+
+The host web app package file url reference for overriding default MAKES web host. E.g. https://mymakesstore.blob.core.windows.net/makes/2019-12-26/webhost/my-custom-makes-web-service-host.zip
+
+`--ApplicationInsightsInstrumentationKey`
+
+The Application Insights instrumentation key for sending MAKES web host logs to. E.g. 14f81de7-f9b7-4997-9cd9-d91651fe53df. By default, the logs are only stored on box as windows application events.
+
+`--LogWebHostRequestsAndResponses`
+
+Whether to log every http request that MAKES web host receives.
 
 ## CreateIndexResources Command
 
-Creates the MAKES index building resources. E.g. MAKES index build batch account, storage account.
+Creates the MAKES index building resources such as MAKES index build batch account and storage account.
 
 ```cmd
 kesm CreateIndexResources --IndexResourceName
                         --MakesPackage
                         --MakesIndexResourceConfigFilePath
-                        --[Region]
-                        --[MakesPreprocessor]
-                        --[MakesIndexer]
-                        --[MakesJobManager]
+                        [--Region]
+                        [--MakesPreprocessor]
+                        [--MakesIndexer]
+                        [--MakesJobManager]
 ```
 
-### Required Parameters
+### CreateIndexResources Required Parameters
 
 `--IndexResourceName`
 
@@ -118,9 +142,9 @@ The base URL to a MAKES release package.
 
 `--MakesIndexResourceConfigFilePath`
 
-Outputs the MAKES indexing resources config file for BuildIndex command. The command won't write a config file unless a path is provided.
+Outputs the MAKES indexing resources config file for BuildIndex command. E.g myIndexResConfig.json
 
-### Optional Parameters
+### CreateIndexResources Optional Parameters
 
 `--Region`
 
@@ -146,18 +170,17 @@ Builds MAKES index(es) from json entities.
 kesm BuildIndex --MakesIndexResourceConfigFilePath
                 --EntitiesUrlPrefix
                 --OutputUrlPrefix
-                --[IndexPartitionCount]
-                --[IntersectionMinCount]
-                --[MakesPreprocessor]
-                --[MakesIndexer]
-                --[MakesJobManager]
-                --[MaxStringLength]
-                --[RemoveEmptyValues]
-                --[WorkerCount]
-                --[WorkerMachineSku]
+                [--IndexPartitionCount]
+                [--IntersectionCountThresholdForPreCompute]
+                [--MakesPreprocessor]
+                [--MakesIndexer]
+                [--MakesJobManager]
+                [--MaxStringLength]
+                [--WorkerCount]
+                [--WorkerSku]
 ```
 
-### Required Parameters
+### BuildIndex Required Parameters
 
 `--MakesIndexResourceConfigFilePath`
 
@@ -171,37 +194,74 @@ The input entities file Url prefix.
 
 The output url prefix for writing the built index.
 
-### Optional Parameters
+### BuildIndex Optional Parameters
 
 `--IndexPartitionCount`
 
 The number of index partitions to create. A index job can finish quicker when there are more partitions; however, the more partitions, the less accurate the interpret results will be. Maximize build performance by creating 1 partition per worker.
 
-`--IntersectionMinCount`
+`--IntersectionCountThresholdForPreCompute`
 
-The minimum intersections between indexed attribute for which the indexer should generate pre-calculated results. The higher the count, the more process will be required at run time. The lower the count, the larger the generated index will be.
+The attribute value intersections threshold for pre-computing look up tables. Use this value to tune index build time performance, run time performance, and index size. The higher the value, the smaller index size and slower run-time performance will be. The lower the value, the larger index size and faster run-time performance will be.
 
 `--MaxStringLength`
 
-The maximum string length for string type attributes.
-
-`--RemoveEmptyValues`
-
-Whether to remove empty attribute values to reduce index size.
+The maximum string length for all entity attributes. All strings over the maximum string length will be truncated
 
 `--WorkerCount`
 
 The number of virtual machines(workers) used to build the index. Warning, assigning a number larger than IndexPartitionCount won't result in performance gain.
 
-`--WorkerMachineSku`
+`--WorkerSku`
 
-The virtual machine(worker) sku. Use https://docs.microsoft.com/en-us/rest/api/compute/virtualmachines/listavailablesizes to get the most recent options
+The virtual machine(worker) sku. Use [List available VM Sizes](https://docs.microsoft.com/rest/api/compute/virtualmachines/listavailablesizes) to get the available options.
 
-## Common parameters
+## BuildIndexLocal Command
+
+Builds a MAKES index locally from MAKES entities file and MAKES schema file. Can only be run on win-x64 platform.
+
+```cmd
+kesm BuildIndex --SchemaFilePath
+                --EntitiesFilePath
+                --OutputIndexFilePath
+                [--IndexDescription]
+                [--MaxStringLength]
+                [--IntersectionCountThresholdForPreCompute]
+```
+
+### BuildIndexLocal Required Parameters
+
+`--SchemaFilePath`
+
+The input schema json file path. E.g. indexSchema.json.
+
+`--EntitiesFilePath`
+
+The input entities json file path. E.g. indexEntities.json
+
+`--OutputIndexFilePath`
+
+The output MAKES index binary file path. E.g. index.kes
+
+### BuildIndexLocal Optional Parameters
+
+`--IndexDescription`
+
+A description to include in the index. E.g. My custom MAKES index build.
+
+`--MaxStringLength`
+
+The input entities json file path. E.g. indexEntities.json
+
+`--IntersectionCountThresholdForPreCompute`
+
+The attribute value intersections threshold for pre-computing look up tables. Use this value to tune index build time performance, run time performance, and index size. The higher the value, the smaller index size and slower run-time performance will be. The lower the value, the larger index size and faster run-time performance will be.
+
+## Common Command Parameters
 
 Below are common parameters that can be applied to more than one commands.
 
-### Common authentication parameters
+### Common Authentication Parameters
 
 Applies to all commands. MAKES command line tool leverages device login to access Azure Subscriptions by default. You can specify AzureActiveDirectoryDomainName, AzureSubscriptionId, and AzureCredentialsFilePath parameter to change the authentication behavior.
 
@@ -226,7 +286,7 @@ az ad sp create-for-rbac --sdk-auth > my.azureauth
 
 If you don't have Azure CLI installed, you can also do this in the [cloud shell](https://docs.microsoft.com/azure/cloud-shell/quickstart).
 
-### Common resource group parameter
+### Common Resource Group Parameter
 
 Applies to Azure resource creation commands (CreateHostResources, CreateIndexResources, and DeployHost.) MAKES command line tool may create Azure resources for the user. You can use the common resource group parameter to ensure the resources created will be in the specified group.
 
