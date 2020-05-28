@@ -94,7 +94,7 @@ The default number of MAKES API host instances (virtual machines).
 
 `--HostMachineSku`
 
-The Sku for MAKES API host machines. Use [List available VM Sizes](https://docs.microsoft.com/rest/api/compute/virtualmachines/listavailablesizes) to get the available options.
+The Sku for MAKES API host machines. Check [Azure Virtual Machine Sizes](https://docs.microsoft.com/en-us/azure/virtual-machines/windows/sizes) to get the avaliable options
 
 `--HostMachineDataDiskSizeInGb`
 
@@ -214,7 +214,7 @@ The number of virtual machines(workers) used to build the index. Warning, assign
 
 `--WorkerSku`
 
-The virtual machine(worker) sku. Use [List available VM Sizes](https://docs.microsoft.com/rest/api/compute/virtualmachines/listavailablesizes) to get the available options.
+The virtual machine(worker) sku. Check [Azure Virtual Machine Sizes](https://docs.microsoft.com/en-us/azure/virtual-machines/windows/sizes) to get the avaliable options
 
 ## BuildIndexLocal Command
 
