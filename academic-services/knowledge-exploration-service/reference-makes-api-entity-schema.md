@@ -42,6 +42,7 @@ AA.AuN | Normalized author name | String | Equals, StartsWith
 AA.DAuN | Original author name | String | None
 AA.DAfN | Original affiliation name | String | None
 AA.S | Numeric position in author list | Int32 | Equals
+AW | Unique, normalized words in abstract, excluding common/stopwords | String[] | Equals
 BT | BibTex document type ('a':Journal article, 'b':Book, 'c':Book chapter, 'p':Conference paper) | String | None
 BV | BibTex venue name | String | None
 C.CId | Conference series ID | Int64 | Equals
@@ -71,7 +72,7 @@ Ti | Normalized title | String | Equals, StartsWith
 V | Publication volume | String | Equals
 VFN | Full name of the Journal or Conference venue | String | None
 VSN | Short name of the Journal or Conference venue | String | None
-W | Unique words in title | String[] | Equals
+W | Unique words in title, excluding common/stopwords | String[] | Equals
 Y | Year published | Int32 | Equals, IsBetween
 
 ### Paper Entity Extended
