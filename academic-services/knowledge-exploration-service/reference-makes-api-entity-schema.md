@@ -42,7 +42,7 @@ AA.AuN | Normalized author name | String | Equals, StartsWith
 AA.DAuN | Original author name | String | None
 AA.DAfN | Original affiliation name | String | None
 AA.S | Numeric position in author list | Int32 | Equals
-AW | Unique, normalized words in abstract, excluding common/stopwords | String[] | Equals
+AW | Unique, normalized words in abstract, excluding [stop words](#stop-words) | String[] | Equals
 BT | BibTex document type ('a':Journal article, 'b':Book, 'c':Book chapter, 'p':Conference paper) | String | None
 BV | BibTex venue name | String | None
 C.CId | Conference series ID | Int64 | Equals
@@ -72,7 +72,7 @@ Ti | Normalized title | String | Equals, StartsWith
 V | Publication volume | String | Equals
 VFN | Full name of the Journal or Conference venue | String | None
 VSN | Short name of the Journal or Conference venue | String | None
-W | Unique words in title, excluding common/stopwords | String[] | Equals
+W | Unique words in title, excluding  [stop words](#stop-words) | String[] | Equals
 Y | Year published | Int32 | Equals, IsBetween
 
 ### Paper Entity Extended
@@ -266,3 +266,15 @@ FP.FId     |Parent field of study ID                 |Int64         |Equals
 FP.FN    |Parent field of study name             |String        |Equals
 Id        |Entity ID                                |Int64        |Equals
 PC    | Field of study total publication count | Int32 | None
+
+## Stop Words
+
+The following words are excluded (not indexed) from the keyword attributes "W" (paper title words) and "AW" (abstract title words):
+
+```
+a, about, abstract, after, all, along, also, although, among, an, analysis, analyzed, and, any, are, as, associated, available, based, be, because, been, before, being, between, but, by, can, cases, compared, considered, could, de, del, demonstrate, demonstrated, der, des, described, did, discussed, do, does, due, during, e, each, either, el, en, et, evaluated, findings, for, from, further, given, had, has, have, having, here, how, however, i, ii, iii, improve, improved, in, including, increased, into, is, it, its, known, la, las, les, like, los, made, making, many, method, most, much, near, need, new, no, non, not, obtained, of, often, on, only, or, other, our, out, particular, possible, present, presents, produced, proposed, provided, provides, recent, related, report, reported, required, result, results, s, se, should, since, some, study, such, suggest, than, that, the, their, them, then, there, therefore, these, they, this, those, through, thus, to, un, una, und, under, une, up, use, used, using, various, very, von, was, we, well, were, what, when, where, whether, which, while, who, will, with, within, would
+```
+
+[Stop words](https://academic.microsoft.com/topic/188338183) are an [Information Retrieval](https://academic.microsoft.com/topic/23123220) concept where words that are common to a given corpus are removed from consideration for activities such as search. 
+
+The list of stop words used by MAKES is based off the [Inverse Document Frequency](https://academic.microsoft.com/topic/81758059) of words across the academic corpus.
