@@ -15,9 +15,9 @@ Creates the MAKES index hosting resources. E.g. MAKES web host image
 
 ```cmd
 kesm CreateHostResources --HostResourceName
-            --MakesPackage
-            [--Region]
-            [--MakesWebHost]
+                         --MakesPackage
+                         [--Region]
+                         [--MakesWebHost]
 ```
 
 ### CreateHostResources Required Parameters
@@ -122,12 +122,12 @@ Creates the MAKES index building resources such as MAKES index build batch accou
 
 ```cmd
 kesm CreateIndexResources --IndexResourceName
-                        --MakesPackage
-                        --MakesIndexResourceConfigFilePath
-                        [--Region]
-                        [--MakesPreprocessor]
-                        [--MakesIndexer]
-                        [--MakesJobManager]
+                          --MakesPackage
+                          --MakesIndexResourceConfigFilePath
+                          [--Region]
+                          [--MakesPreprocessor]
+                          [--MakesIndexer]
+                          [--MakesJobManager]
 ```
 
 ### CreateIndexResources Required Parameters
@@ -257,22 +257,21 @@ The input entities json file path. E.g. indexEntities.json
 
 The attribute value intersections threshold for pre-computing look up tables. Use this value to tune index build time performance, run time performance, and index size. The higher the value, the smaller index size and slower run-time performance will be. The lower the value, the larger index size and faster run-time performance will be.
 
-
 ## Interpret Command
 
 Interprets a natural language query using specified indexes and grammar.
 
 ```cmd
 kesm Interpret --Query
-                --IndexFilePaths
-                --GrammarFilePath
-                [--NormalizeQuery]
-                [--AllowCompletions]
-                [--Skip]
-                [--Take]
-                [--SelectInterpretationEntities]
-                [--TakeInterpretionEntities]
-                [--Timeout]
+               --IndexFilePaths
+               --GrammarFilePath
+               [--NormalizeQuery]
+               [--AllowCompletions]
+               [--Skip]
+               [--Take]
+               [--SelectInterpretationEntities]
+               [--TakeInterpretionEntities]
+               [--Timeout]
 ```
 
 ### Interpret Required Parameters
@@ -319,6 +318,56 @@ The number of top matching entities to be included for each interpretation. Each
 
 Maximum amount of time in milliseconds allowed for command to complete before aborting the command. The interpret command will return the top interptations found in the allowed timedout.
 
+## Evaluate Command
+
+Evaluates a KES structure query and returns the top matching entities in the index(es).
+
+```cmd
+kesm Evaluate --KesQuery
+              --IndexFilePaths
+              [--Select]
+              [--Skip]
+              [--Take]
+              [--OrderBy]
+              [--OrderByDescending]
+              [--Timeout]
+```
+
+### Evaluate Required Parameters
+
+`--KesQuery`
+
+The KES query expression that specifies entities in the index(es).
+
+`--IndexFilePaths`
+
+The list of index file paths, seperated by ';'. Evaluate requires at least one index.
+
+### Evaluate Optional Parameters
+
+`--Select`
+
+A list of entity attributes to be included in the result set, seperated by ','. Use '*' for all attributes.
+
+`--Skip`
+
+The number of top entities to be skipped/excluded in the result set.
+
+`--Take`
+
+The number of top interpretations to be included in the result set.
+
+`--OrderBy`
+
+Name of the entity attribute to use for sorting/ordering the entities in the result set. By default, entities are sorted by descending entity weight (static rank).
+
+`--OrderByDescending`
+
+The direction for sorting entities. By default, entities are sorted by descending entity weight (static rank).
+
+`--Timeout`
+
+Maximum amount of time in milliseconds allowed for the command to complete before aborting the command.
 
 ## Common Command Parameters
 
