@@ -16,9 +16,9 @@ ms.date: 2020-04-15
 - Microsoft Academic Knowledge Exploration Service (MAKES) subscription. See [Get started with Microsoft Academic Knowledge Exploration Service](get-started-setup-provisioning.md) to obtain one.
 - Azure Subscription with access to appropriate Azure Services, Virtual Machine SKU, and enough vCPU quota. See [Azure Subscription quota limit reached](resources-troubleshoot-guide.md#Azure-Subscription-quota-limit-reached) for more information.
 
-## Transform MAG data to MAKES json entities
+## Transform MAG to MAKES entity files
 
-MAKES requires data it indexes to be placed in a single JSON file, with each line representing an individual entity. For this example, we will use a U-SQL script to filter and transform MAG data into JSON data which will then be used to create a custom index. To do this, you will need to go to your Azure Data Lake Analytics (ADLA) service instance and submit a new ALDA job to generate the text files containing academic data.
+To create MAKES index, you will need to format your data into MAKES entity files. MAKES entity file are text files, with each line containing a JSON string representing an individual entity. For this example, we will use a U-SQL script to filter and transform MAG data into JSON data which will then be used to create a custom index. To do this, you will need to go to your Azure Data Lake Analytics (ADLA) service instance and submit a new ALDA job to generate the text files containing academic data.
 
 ### Define functions to extract MAG data
 
@@ -54,7 +54,7 @@ MAKES requires data it indexes to be placed in a single JSON file, with each lin
    |---------|---------|------|
    |**`@In_MagBlobAccount`** | The name of your Azure Storage account containing the Microsoft Academic Graph data set. | **mymagstore**
    |**`@In_MagBlobContainer`** | The container name in your Azure Storage account containing the Microsoft Academic graph data set, usually in the form of **mag-YYYY-MM-DD**. | **mag-2020-02-07**
-   |**`@Out_OutputPath string`** | The entity output storage path to where you'd like the formatted entities documents to go. The container for the azure output storage location must exist before running the script.| <strong>wasb&#58;//makessubgraph@mymakesstore/2020-02-07/microsoft/entities</strong>  |
+   |**`@Out_OutputPath string`** | The entity output storage path to where you'd like the formatted entities documents to go. The container for the azure output storage location must exist before running the script.| **wasb&#58;//makessubgraph@mymakesstore/2020-02-07/microsoft/entities**  |
    |**`@Param_UseSubgraphForInstitution`** | Generates a subgraph containing data related to the specified institution. | **microsoft**|
 
     > [!IMPORTANT]
@@ -102,9 +102,9 @@ If you have not done so already, download the Kesm.exe tool from your MAKES subs
     > If your Azure Subscription hasn't been registered for Azure Batch service, you'll need to do so.
     See [Azure Batch service not registered](resources-troubleshoot-guide.md#Azure-Batch-service-not-registered) for more details.
 
-## Submit a build index job to the indexing resources created
+## Generate MAKES index files from MAKES entity files
 
-The final step to generate your index is to submit a build index job to Azure Batch account via the kesm tool. The Azure Batch account will spin up workers (virtual machines) to process MAKES json entities and build the index. The build index job will handled by three types of workers: jobManager, preprocessor, and indexer. The jobManager will take a build index job and create preprocessor and indexers tasks and monitor preprocessor(s) and indexer(s) till they finish their tasks. Preprocessor will validate, partition, and format the MAKES json entities. Indexer will then build indexes using the preprocessed entities.
+The next step is generating MAKES index file from MAKES entity file. You'll submit a build index job to Azure Batch account via the kesm tool. The Azure Batch account will spin up workers (virtual machines) to process MAKES json entities and build the index. The build index job will handled by three types of workers: jobManager, preprocessor, and indexer. The jobManager will take a build index job and create preprocessor and indexers tasks and monitor preprocessor(s) and indexer(s) till they finish their tasks. Preprocessor will validate, partition, and format the MAKES json entities. Indexer will then build indexes using the preprocessed entities.
 
 1. Copy the following command to your command /terminal window:
 
@@ -116,8 +116,8 @@ The final step to generate your index is to submit a build index job to Azure Ba
 
     | Values | Description | Example |
     |---------|---------|-------|
-    |**`<InputEntitiesUrl>`** | The input URL to the MAKES entities generated from running the U-SQL script above. | **https&#58;//mymakesstore.blob.core.windows.net/makessubgraph/2020-02-07/microsoft/entities/** |
-    |**`<OutputUrlPrefix>`** | The output base URL for writing the built MAKES index.| **https&#58;//mymakesstore.blob.core.windows.net/makessubgraph/2020-02-07/microsoft/index/**
+    |**`<InputEntitiesUrl>`** | The input URL to the MAKES entities generated from running the U-SQL script above. If the Url ends with ".../\<**FolderName**\>/" all files under \<**FolderName**\> will be used. If the urls ends with ".../\<**FolderName**\>/\<**FilePrefix**\>" all files under \<**FolderName**\> with file prefix \<**FilePrefix**\> will be used.| **https://mymakesstore.blob.core.windows.net/makessubgraph/2020-02-07/microsoft/index/**| **https://mymakesstore.blob.core.windows.net/makessubgraph/2020-02-07/microsoft/entities/** |
+    |**`<OutputUrlPrefix>`** | The output base URL for writing the built MAKES index. If the Url ends with ".../\<**FolderName**\>/" all files will be written under \<**FolderName**\>. If the urls ends with ".../\<**FolderName**\>/\<**FilePrefix**\>" all files will be written under \<**FolderName**\> with file prefix \<**FilePrefix**\>| **https://mymakesstore.blob.core.windows.net/makessubgraph/2020-02-07/microsoft/index/**
     |**`<MakesIndexResourceConfigFilePath>`** | The configuration file generated from running CreateIndexResources above. | **makesIndexResConfig.json** |
 
 1. Run the command
@@ -150,14 +150,12 @@ You can check the build index job progress using Azure Management Portal. Each j
 >[!NOTE]
 > Preprocessor and indexer tasks are created in batches to avoid overwhelming the virtual machine workers. See jobManager task's output for more details.
 
-## Next steps
+## Deploy custom MAKES Index
 
-Now that the JSON data has been generated to build the custom index, we use the kesm tool to execute the build. You will follow the same procedures as deploying an index from your MAKES subscription, but replacing the **--MakesIndex** parameter with the path to the output of this example.
+Now that the custom MAKES index files has been generated. You can follow the same procedures as deploying an index from your MAKES subscription, but replacing the **--MakesIndex** parameter with the path to the output of this example.
 
 ```cmd
-Kesm.exe DeployHost --HostName "<makes_instance_host_name>" --MakesPackage "https://<makes_storage_account_name>.blob.core.windows.net/makes/<makes_release_version>/"  --MakesHostImageId "<id_from_create_host_resources_command>"
---MakesIndex "https://yourstorageaccount.blob.core.windows.net/makes/2020-02-07/subgraph/microsoft/index"
-
+Kesm.exe DeployHost --HostName "<makes_instance_host_name>" --MakesPackage "https://<makes_storage_account_name>.blob.core.windows.net/makes/<makes_release_version>/"  --MakesHostImageId "<id_from_create_host_resources_command>" --MakesIndex "https://mymakesstore.blob.core.windows.net/makessubgraph/2020-02-07/subgraph/microsoft/index/"
 ````
 
 See [Create an API instance](get-started-create-api-instances.md) for more information.
