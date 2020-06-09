@@ -367,7 +367,54 @@ The direction for sorting entities. By default, entities are sorted by descendin
 
 `--Timeout`
 
-Maximum amount of time in milliseconds allowed for the command to complete before aborting the command.
+Maximum amount of time in milliseconds allowed for the command to complete before aborting the command. Use 0 to disable timeout.
+
+## Histogram Command
+
+Calculates distinct/total entity attribute counts and top attribute values for entities specified by a KES query.
+
+```cmd
+kesm Histogram --KesQuery
+              --IndexFilePaths
+              [--Select]
+              [--Skip]
+              [--Take]
+              [--OrderBy]
+              [--OrderByDescending]
+              [--Timeout]
+```
+
+### Histogram Required Parameters
+
+`--KesQuery`
+
+The KES query expression that specifies entities in the index(es).
+
+`--IndexFilePaths`
+
+The list of index file paths, seperated by ';'. Histogram requires at least one index.
+
+### Histogram Optional Parameters
+
+`--Select`
+
+A list of entity attributes, seperated by ','. Use '*' for all attributes. Histogram will generate total count, distinct count, and top values for the select attributes for entities specified in the KesQuery.
+
+`--Skip`
+
+The number of top entity attribute values to be skipped/excluded in the result set.
+
+`--Take`
+
+The number of top entity attribute values to be included in the result set.
+
+`--MaxSampleSize`
+
+The maxium number of entities to consider for generating histogram. If this number is smaller than the number of entities in index(es), the histogram will be generated based on the top entnties specified by the number. If this number is 0, all entities specified by the KES query will be used.
+
+`--Timeout`
+
+Maximum amount of time in milliseconds allowed for the command to complete before aborting the command. Use 0 to disable timeout.
 
 ## Common Command Parameters
 
