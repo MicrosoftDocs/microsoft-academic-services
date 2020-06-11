@@ -311,7 +311,7 @@ Column # | Name | Type | Note
 --- | --- | --- | ---
 1 | PaperId | long | PRIMARY KEY
 2 | Rank | uint | See [FAQ](resources-faq.md#what-is-the-rank-value-on-entities)
-3 | Doi | string |
+3 | Doi | string | Doi values are uppercased
 4 | DocType | string | Book, BookChapter, Conference, Dataset, Journal, Patent, Repository, NULL : unknown
 5 | PaperTitle | string |
 6 | OriginalTitle | string |
