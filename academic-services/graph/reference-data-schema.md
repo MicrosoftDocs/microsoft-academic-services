@@ -38,7 +38,7 @@ When using Microsoft Academic data (MAG, MAKES, etc.) in a product or service, o
 Column # | Name | Type | Note
 --- | --- | --- | ---
 1 | AffiliationId | long | PRIMARY KEY
-2 | Rank | uint |
+2 | Rank | uint | See [FAQ](resources-faq.md#what-is-the-rank-value-on-entities)
 3 | NormalizedName | string |
 4 | DisplayName | string |
 5 | GridId | string |
@@ -60,7 +60,7 @@ Column # | Name | Type | Note
 Column # | Name | Type | Note
 --- | --- | --- | ---
 1 | AuthorId | long | PRIMARY KEY
-2 | Rank | uint |
+2 | Rank | uint | See [FAQ](resources-faq.md#what-is-the-rank-value-on-entities)
 3 | NormalizedName | string |
 4 | DisplayName | string |
 5 | LastKnownAffiliationId | long? |
@@ -105,7 +105,7 @@ Column # | Name | Type | Note
 Column # | Name | Type | Note
 --- | --- | --- | ---
 1 | ConferenceSeriesId | long | PRIMARY KEY
-2 | Rank | uint |
+2 | Rank | uint | See [FAQ](resources-faq.md#what-is-the-rank-value-on-entities)
 3 | NormalizedName | string |
 4 | DisplayName | string |
 5 | PaperCount | long |
@@ -160,7 +160,7 @@ Column # | Name | Type | Note
 Column # | Name | Type | Note
 --- | --- | --- | ---
 1 | FieldOfStudyId | long | PRIMARY KEY
-2 | Rank | uint |
+2 | Rank | uint | See [FAQ](resources-faq.md#what-is-the-rank-value-on-entities)
 3 | NormalizedName | string |
 4 | DisplayName | string |
 5 | MainType | string |
@@ -179,7 +179,7 @@ Column # | Name | Type | Note
 Column # | Name | Type | Note
 --- | --- | --- | ---
 1 | JournalId| long | PRIMARY KEY
-2 | Rank | uint |
+2 | Rank | uint | See [FAQ](resources-faq.md#what-is-the-rank-value-on-entities)
 3 | NormalizedName | string |
 4 | DisplayName | string |
 5 | Issn | string |
@@ -317,7 +317,7 @@ Column # | Name | Type | Note
 Column # | Name | Type | Note
 --- | --- | --- | ---
 1 | PaperId | long | PRIMARY KEY
-2 | Rank | uint |
+2 | Rank | uint | See [FAQ](resources-faq.md#what-is-the-rank-value-on-entities)
 3 | Doi | string |
 4 | DocType | string | Book, BookChapter, Conference, Dataset, Journal, Patent, Repository, NULL : unknown
 5 | PaperTitle | string |
