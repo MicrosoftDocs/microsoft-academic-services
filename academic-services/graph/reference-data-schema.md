@@ -311,7 +311,7 @@ Column # | Name | Type | Note
 --- | --- | --- | ---
 1 | PaperId | long | PRIMARY KEY
 2 | Rank | uint | See [FAQ](resources-faq.md#what-is-the-rank-value-on-entities)
-3 | Doi | string | Doi values are upper-cased
+3 | Doi | string | Doi values are upper-cased per [DOI standard](https://www.doi.org/doi_handbook/2_Numbering.html#2.4)
 4 | DocType | string | Book, BookChapter, Conference, Dataset, Journal, Patent, Repository, NULL : unknown
 5 | PaperTitle | string |
 6 | OriginalTitle | string |
