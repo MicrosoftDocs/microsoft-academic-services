@@ -2,7 +2,7 @@
 title: Create Microsoft Academic Knowlege Exploration Service (MAKES) index from Microsoft Academic Graph (MAG)
 description: Step-by-step guide for generating MAKES indexes from a MAG release.
 ms.topic: tutorial
-ms.date: 2020-04-15
+ms.date: 2020-06-12
 ---
 
 # Create custom MAKES index from a MAG release

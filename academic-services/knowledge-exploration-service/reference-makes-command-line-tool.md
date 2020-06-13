@@ -2,7 +2,7 @@
 title: MAKES command line tool reference
 description: Documentation for the MAKES command line tool
 ms.topic: reference
-ms.date: 2020-04-15
+ms.date: 2020-06-12
 ---
 
 # MAKES command line tool
@@ -90,7 +90,7 @@ The default number of MAKES API host instances (virtual machines).
 
 `--HostMachineSku`
 
-The sku for MAKES API host machines.
+The Azure Virtual Machine SKU for MAKES API host machines.
 
 ## CreateIndexResources Command
 
@@ -195,7 +195,7 @@ The number of virtual machines(workers) used to build the index. Warning, assign
 
 `--WorkerMachineSku`
 
-The virtual machine(worker) sku. Use https://docs.microsoft.com/en-us/rest/api/compute/virtualmachines/listavailablesizes to get the most recent options
+The virtual machine(worker) SKU. Use https://docs.microsoft.com/en-us/rest/api/compute/virtualmachines/listavailablesizes to get the most recent options
 
 ## Common parameters
 
