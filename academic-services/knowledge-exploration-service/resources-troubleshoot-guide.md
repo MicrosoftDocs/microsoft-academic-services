@@ -2,10 +2,10 @@
 title: MAKES troubleshooting guide
 description: Addresses common problems found with MAKES
 ms.topic: reference
-ms.date: 2020-04-15
+ms.date: 2020-06-12
 ---
 
-# Troubleshoot Common MAKES command line tool issues
+# Troubleshoot Common MAKES Command Line Tool Issues
 
 ## Azure login failure due to multiple subscriptions or multiple tenants being tied to a single Azure account
 
@@ -19,13 +19,25 @@ You can find this information by logging into the Azure Management Portal, searc
 
 ## Azure Subscription quota limit reached
 
-If you encounter errors such as "operation could not be completed as it results in exceeding approved XXXXXX quota", you'll need to contact Azure support to increase your account quota, try a different region where you have more Azure quota, or change the MAKES host machine sku/worker machine sku settings. 
+If you encounter errors such as "operation could not be completed as it results in exceeding approved XXXXXX quota", you can to contact Azure support to increase your account quota, try a different region where you have more Azure quota, or change the MAKES host machine SKU/worker machine SKU parameter. 
 
-For most Microsoft Academic sub-graph index builds, you can scale down to **Standard_D8_v3** sku to build and host the indexes. MAKES indexing resources will scale using Azure Batch's "Dedicated Cores". Make sure you're requesting for the correct quota increase for the correct resource and region.
+When running **CreateHostResources** command:
+
+    Requires your subscription to have at least 4 avaliable vCPU cores and ability to create **Standard_DS4_v2** Virtual Machines. 
+
+When running **DeployHost** command:
+
+    By default, uses Virtual Machine SKU **Standard_D14_v2**. (Running the command by default requires your subscription to have access to at least 16 vCPU and the ability to create Virtual Machine with **Standard_D14_v2** SKU in West US region.) For most sub-graph indexes, you can scale down to use **Standard_D8_v3** SKU to host the indexes. 
+
+When running **BuildIndex** command:
+
+    You can use the default Virtual Machine SKU **Standard_D8_v3** for most Microsoft Academic sub-graph index builds. If you're able to sucessfully deploy MAKES indexes, you can try changing the WorkerSku configuration use the same configuration as your host machine SKU. As long as you have enough vCPU quota, you should be able to build.
+
+You can contact Azure support to increase Subscription limits by submitting a request on Azure Management Portal. For more information, see [How to Create Azure Support Request](https://docs.microsoft.com/azure/azure-portal/supportability/how-to-create-azure-support-request)
 
 ## Azure Batch service not registered
 
-If you encounter errors such as "The subscription registration is in 'Unregistered' state. The subscription must be registered to use namespace 'Microsoft.Batch'....", you'll need to register your subscription to use Azure Batch service.
+When running **CreateIndexResources** command, if you encounter an error message containg "The subscription registration is in 'Unregistered' state. The subscription must be registered to use namespace 'Microsoft.Batch'....", you'll need to register your subscription to use Azure Batch service.
 
 You can use the Azure Management Portal to register Azure Batch service for your subscription. To do this, log into the [Azure Management Portal](https://portal.azure.com)), search for **Subscriptions** and select the subscription you want to register Azure Batch service under. Then, select **Resource providers** and search for **Microsoft.Batch**. Finally, select **Microsoft.Batch** from the provider list and select **register**. This should only take a few minutes.
 
@@ -35,15 +47,17 @@ A release may not be completed when you see a new folder in your storage account
 
 ## MAKES hosting resource/deployment region mismatch
 
-MAKES can only be deployed to the same region as the MAKES hosting image. If you see an error message containing "...The Image '/subscriptions/XXXXXXX-XXXX-XXX-XXXX-XXXXXXX/resourceGroups/xxxxmakeshostres/providers/Microsoft.Compute/images/xxxxmakeshostres' cannot be found in 'xxxx' region..." Make sure to create MAKES deployments and hosting images in the same region.
+When running **DeployHost** command, If you encounter an error messages containing "...The Image '/subscriptions/XXXXXXX-XXXX-XXX-XXXX-XXXXXXX/resourceGroups/xxxxmakeshostres/providers/Microsoft.Compute/images/xxxxmakeshostres' cannot be found in 'xxxx' region...", make sure that both your MAKES hosting image resources and deployments are in the same region.
 
-## Wrong MAKES path parameters
+MAKES host can only be deployed the same region as the MAKES hosting image. Use the same --Region parameter as you did when running **CreateHostResources** command.
 
-Special characters in parameters need to be escaped. You can also escape the whole parameter string by using quotes. E.g. --MakesPackage "https://consto.blob.core.windows.net/makes/2020-01-23/"
+## Malformed path parameters
+
+Special characters in parameters need to be escaped when using the Command Line Tool (kesm.exe). You can escape the whole parameter string by using quotes. E.g. --MakesPackage "https://consto.blob.core.windows.net/makes/2020-01-23/"
 
 *Quotation charactors need to be straight. Ex: "ParamValue". Using any other qutotation charactor is will result in an error.  Ex: “ParamValue”
 
-## Command line tool(kesm.exe) version mismatch
+## Command Line Tool (kesm.exe) version mismatch
 
 Use the command line tool that is contained in each release to customize and deploy MAKES. Previous versions of the kesm.exe tool are unsupported for new releases.  
 

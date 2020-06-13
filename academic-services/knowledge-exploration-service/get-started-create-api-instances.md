@@ -2,7 +2,7 @@
 title: Get started with create MAKES API instances
 description: Step-by-step guide for deploying Microsoft Academic Knowledge Exploration Service(MAKES) APIs using MAKES management tool.
 ms.topic: tutorial
-ms.date: 2020-04-15
+ms.date: 2020-06-12
 ---
 
 # Deploying a basic MAKES instance to Azure from your Subscription
@@ -12,6 +12,7 @@ ms.date: 2020-04-15
 ## Prerequisites
 
 - Microsoft Academic Knowledge Exploration Service (MAKES) subscription. See [Get started with Microsoft Academic Knowledge Exploration Service](get-started-setup-provisioning.md) to obtain one.
+- Azure Subscription. The Azure Subscription must be able to create virtual machine with "Standard_DS4_v2" SKU. See [Azure Subscription quota limit reached](resources-troubleshoot-guide.md#Azure-Subscription-quota-limit-reached) for more information.
 
 ## Verify the folders and content of the current release
 
@@ -56,8 +57,9 @@ Once the file has been downloaded you will need to extract the contents.  Right 
 
 > [!IMPORTANT]
 > This command will run under your Azure credentials, have your Azure login credentials ready.
+> The Azure Subscription used for the command must be able to create a virtual machine with "Standard_DS4_v2" SKU. See [Azure Subscription quota limit reached](resources-troubleshoot-guide.md#Azure-Subscription-quota-limit-reached) for more details.
 
-At this point you are ready to deploy an instance of MAKES to your Azure account. We will start by creating an Azure VM Image that MAKES can use to deploy MAKES hosts. This image contains the necessary environment resources and configuration for MAKES to run inside Azure Machine Scale Sets and can be reused to generate more instances of MAKES.
+At this point you are ready to deploy an instance of MAKES to your Azure account. We will start by creating an Azure VM Image that MAKES can use to deploy MAKES hosts. Kesm.exe will create the VM Image by spinning up a virtual machine with "Standard_DS4_v2" SKU. This image contains the necessary environment resources and configuration for MAKES to run inside Azure Machine Scale Sets and can be reused to generate more instances of MAKES.
 
 1. Open a command prompt (Windows) or terminal window (Mac) and navigate to the folder that you extracted the **kesm.exe** file to.
 
@@ -94,6 +96,10 @@ At this point you are ready to deploy an instance of MAKES to your Azure account
   >This command will take around 20-30 minutes to complete.  Once this command has been run, you can reuse the Host Image Id to deploy more instances of MAKES.
 
 ## Deploy a MAKES host instance to Azure
+
+> [!IMPORTANT]
+> This command will run under your Azure credentials, have your Azure login credentials ready.
+> The Azure Subscription used for the command must be able to create a virtual machine with "Standard_D14_v2" SKU. See [Azure Subscription quota limit reached](resources-troubleshoot-guide.md#Azure-Subscription-quota-limit-reached) for more details.
 
 Now that the MAKES hosting Virtual Machine Image is created, you are ready to use it to deploy MAKES hosts to a Virtual Machine Scale Set.
 
