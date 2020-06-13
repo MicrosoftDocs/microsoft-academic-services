@@ -2,7 +2,7 @@
 title: Microsoft Academic Graph data schema
 description: Documents the complete, most recent Microsoft Academic Graph entity data schema, including the name and type of each attribute
 ms.topic: reference
-ms.date: 5/19/2020
+ms.date: 6/11/2020
 ---
 # Microsoft Academic Graph data schema
 
@@ -14,20 +14,13 @@ When using Microsoft Academic data (MAG, MAKES, etc.) in a product or service, o
 
 > [!NOTE]
 >
-> - Arnab Sinha, Zhihong Shen, Yang Song, Hao Ma, Darrin Eide, Bo-June (Paul) Hsu, and Kuansan Wang. 2015. An Overview of Microsoft Academic Service (MA) and Applications. In Proceedings of the 24th International Conference on World Wide Web (WWW '15 Companion). ACM, New York, NY, USA, 243-246. DOI=http://dx.doi.org/10.1145/2740908.2742839
+> - Arnab Sinha, Zhihong Shen, Yang Song, Hao Ma, Darrin Eide, Bo-June (Paul) Hsu, and Kuansan Wang. 2015. An Overview of Microsoft Academic Service (MA) and Applications. In Proceedings of the 24th International Conference on World Wide Web (WWW '15 Companion). ACM, New York, NY, USA, 243-246, doi: 10.1145/2740908.2742839
 >
-> - K. Wang et al., “A Review of Microsoft Academic Services for Science of Science Studies”, Frontiers in Big Data, 2019, doi: 10.3389/fdata.2019.00045
+> - K. Wang et al., “A Review of Microsoft Academic Services for Science of Science Studies”, Frontiers in Big Data, 2019, doi: 10.3389/FDATA.2019.00045
 
 ## Entity Relationship Diagram
 
  [![Entity Relationship Diagram](media/erd/entity-relationship-diagram-thumbnail.png)](media/erd/entity-relationship-diagram.png)
-
-## Note on "Rank"
-
-“Rank” values in the entity files are the log probability of an entity being important multiplied by a constant(-1000), i.e.:
-
-> [!NOTE]
-> Rank = -1000 * Ln( probability of an entity being important )
 
 ## Affiliations
 
@@ -38,7 +31,7 @@ When using Microsoft Academic data (MAG, MAKES, etc.) in a product or service, o
 Column # | Name | Type | Note
 --- | --- | --- | ---
 1 | AffiliationId | long | PRIMARY KEY
-2 | Rank | uint |
+2 | Rank | uint | See [FAQ](resources-faq.md#what-is-the-rank-value-on-entities)
 3 | NormalizedName | string |
 4 | DisplayName | string |
 5 | GridId | string |
@@ -60,7 +53,7 @@ Column # | Name | Type | Note
 Column # | Name | Type | Note
 --- | --- | --- | ---
 1 | AuthorId | long | PRIMARY KEY
-2 | Rank | uint |
+2 | Rank | uint | See [FAQ](resources-faq.md#what-is-the-rank-value-on-entities)
 3 | NormalizedName | string |
 4 | DisplayName | string |
 5 | LastKnownAffiliationId | long? |
@@ -105,7 +98,7 @@ Column # | Name | Type | Note
 Column # | Name | Type | Note
 --- | --- | --- | ---
 1 | ConferenceSeriesId | long | PRIMARY KEY
-2 | Rank | uint |
+2 | Rank | uint | See [FAQ](resources-faq.md#what-is-the-rank-value-on-entities)
 3 | NormalizedName | string |
 4 | DisplayName | string |
 5 | PaperCount | long |
@@ -160,7 +153,7 @@ Column # | Name | Type | Note
 Column # | Name | Type | Note
 --- | --- | --- | ---
 1 | FieldOfStudyId | long | PRIMARY KEY
-2 | Rank | uint |
+2 | Rank | uint | See [FAQ](resources-faq.md#what-is-the-rank-value-on-entities)
 3 | NormalizedName | string |
 4 | DisplayName | string |
 5 | MainType | string |
@@ -179,7 +172,7 @@ Column # | Name | Type | Note
 Column # | Name | Type | Note
 --- | --- | --- | ---
 1 | JournalId| long | PRIMARY KEY
-2 | Rank | uint |
+2 | Rank | uint | See [FAQ](resources-faq.md#what-is-the-rank-value-on-entities)
 3 | NormalizedName | string |
 4 | DisplayName | string |
 5 | Issn | string |
@@ -317,28 +310,29 @@ Column # | Name | Type | Note
 Column # | Name | Type | Note
 --- | --- | --- | ---
 1 | PaperId | long | PRIMARY KEY
-2 | Rank | uint |
-3 | Doi | string |
+2 | Rank | uint | See [FAQ](resources-faq.md#what-is-the-rank-value-on-entities)
+3 | Doi | string | Doi values are upper-cased per [DOI standard](https://www.doi.org/doi_handbook/2_Numbering.html#2.4)
 4 | DocType | string | Book, BookChapter, Conference, Dataset, Journal, Patent, Repository, NULL : unknown
 5 | PaperTitle | string |
 6 | OriginalTitle | string |
 7 | BookTitle | string |
 8 | Year | int? |
 9 | Date | DateTime? |
-10 | Publisher | string |
-11 | JournalId | long? | FOREIGN KEY REFERENCES Journals(JournalId)
-12 | ConferenceSeriesId | long? | FOREIGN KEY REFERENCES ConferenceSeries(ConferenceSeriesId)
-13 | ConferenceInstanceId | long? | FOREIGN KEY REFERENCES ConferenceInstances(ConferenceInstanceId)
-14 | Volume | string |
-15 | Issue | string |
-16 | FirstPage | string |
-17 | LastPage | string |
-18 | ReferenceCount | long |
-19 | CitationCount | long |
-20 | EstimatedCitation | long |
-21 | OriginalVenue | string |
-22 | FamilyId | long? | See [FAQ](resources-faq.md#what-is-familyid-in-paperstxt)
-23 | CreatedDate | DateTime |
+10 | OnlineDate | DateTime? |
+11 | Publisher | string |
+12 | JournalId | long? | FOREIGN KEY REFERENCES Journals(JournalId)
+13 | ConferenceSeriesId | long? | FOREIGN KEY REFERENCES ConferenceSeries(ConferenceSeriesId)
+14 | ConferenceInstanceId | long? | FOREIGN KEY REFERENCES ConferenceInstances(ConferenceInstanceId)
+15 | Volume | string |
+16 | Issue | string |
+17 | FirstPage | string |
+18 | LastPage | string |
+19 | ReferenceCount | long |
+20 | CitationCount | long |
+21 | EstimatedCitation | long |
+22 | OriginalVenue | string |
+23 | FamilyId | long? | See [FAQ](resources-faq.md#what-is-familyid-in-paperstxt)
+24 | CreatedDate | DateTime |
 
 ## Related Field of Study
 
