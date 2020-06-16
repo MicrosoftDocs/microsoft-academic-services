@@ -4,7 +4,7 @@ description: Set up Azure Search service to enable reference parsing using the M
 services: microsoft-academic-services
 ms.topic: tutorial
 ms.service: microsoft-academic-services
-ms.date: 2/25/2020
+ms.date: 06/15/2020
 ---
 
 # Tutorial: Set up academic reference parsing with Azure Search
@@ -464,16 +464,16 @@ The Microsoft Academic Graph has well over 200 million papers, which can take a 
 
 In addition to creating multiple indexers, we also need to scale up the services search units (SU) so ensure that each indexer can be run concurrently and that there is sufficient space to store the index.
 
-To do this, navigate to the scale section of the service and change the number of partitions to 6 and number of replicas to 4, then click the "save" button
+For a Standard S1 search service where partitions are limited to 25GB of data, you will need at least 6 partitions to store 150GB. Navigate to the scale section of the service and change the number of partitions to 6 and number of replicas to 1, then click the "save" button.
 
-![Scale up service](media/tutorial-search-scale-up-service.png)
+Note that if the dataset grows larger than 150GB (MAG is constantly growing), consider either creating more partitions or choosing a higher service tier (S2).
 
 > [!IMPORTANT]
 > The scale operation may take **an hour or more to complete** and the service may be unavailable while the operation is completing.
 
 ## Waiting for indexers to complete
 
-The indexing operation can take a long time to complete, likely between 16-24 hours.
+The indexing operation can take a long time to complete, likely between 24-48 hours.
 
 The indexers will each show a "success" status once they have completed indexing their respective sections, and the index should show a document count roughly equal to the total number of papers in the graph (you can see the most current count by visiting [Microsoft Academic](https://academic.microsoft.com/)).
 
