@@ -267,10 +267,10 @@ kesm Interpret --Query
                --GrammarFilePath
                [--NormalizeQuery]
                [--AllowCompletions]
-               [--Skip]
-               [--Take]
-               [--SelectInterpretationEntities]
-               [--TakeInterpretionEntities]
+               [--Offset]
+               [--Count]
+               [--InterpretationEntityAttributes]
+               [--InterpretationEntityCount]
                [--Timeout]
 ```
 
@@ -282,11 +282,11 @@ The natural lanugage query string to interpret.
 
 `--IndexFilePaths`
 
-The list of index file paths, seperated by ';'. Interpret requires at least one index.
+The file path expression for specifying which index file(s) to use. Use wild card to specify multiple indexes e.g. './index.*.kes'.
 
 `--GrammarFilePath`
 
-The grammar file path. Interpret requires a grammar.
+The compiled grammar binary file path. Interpret requires a compiled grammar binary
 
 ### Interpret Optional Parameters
 
@@ -298,11 +298,11 @@ Whether normalization rules should be applied to the query before making interpr
 
 Whether to generate interpretations assuming the query is a partial query that's not yet fully formulated. When set to true, better interpretations can be generated for scenarios such as auto-suggest. 
 
-`--Skip`
+`--Offset`
 
 The number of top interpretations to be skipped/excluded in the result set.
 
-`--Take`
+`--Count`
 
 The number of top interpretations to be included in the result set.
 
@@ -320,12 +320,12 @@ Maximum amount of time in milliseconds allowed for command to complete before ab
 
 ## Evaluate Command
 
-Evaluates a KES structure query and returns the top matching entities in the index(es).
+Evaluates a KES query expression and returns the top matching entities in the index(es).
 
 ```cmd
-kesm Evaluate --KesQuery
+kesm Evaluate --KesQueryExpression
               --IndexFilePaths
-              [--Select]
+              [--Attributes]
               [--Skip]
               [--Take]
               [--OrderBy]
@@ -335,25 +335,25 @@ kesm Evaluate --KesQuery
 
 ### Evaluate Required Parameters
 
-`--KesQuery`
+`--KesQueryExpression`
 
 The KES query expression that specifies entities in the index(es).
 
 `--IndexFilePaths`
 
-The list of index file paths, seperated by ';'. Evaluate requires at least one index.
+The file path expression for specifying which index file(s) to use. Use wild card to specify multiple indexes e.g. './index.*.kes'
 
 ### Evaluate Optional Parameters
 
-`--Select`
+`--Attributes`
 
 A list of entity attributes to be included in the result set, seperated by ','. Use '*' for all attributes.
 
-`--Skip`
+`--Offset`
 
 The number of top entities to be skipped/excluded in the result set.
 
-`--Take`
+`--Count`
 
 The number of top interpretations to be included in the result set.
 
@@ -371,17 +371,17 @@ Maximum amount of time in milliseconds allowed for the command to complete befor
 
 ## Histogram Command
 
-Calculates distinct/total entity attribute counts and top attribute values for entities specified by a KES query.
+Calculates distinct/total entity attribute counts and top attribute values for entities specified by a KES query expression.
 
 ```cmd
-kesm Histogram --KesQuery
-              --IndexFilePaths
-              [--Select]
-              [--Skip]
-              [--Take]
-              [--OrderBy]
-              [--OrderByDescending]
-              [--Timeout]
+kesm Histogram --KesQueryExpression
+               --IndexFilePaths
+               [--Attributes]
+               [--Skip]
+               [--Take]
+               [--OrderBy]
+               [--OrderByDescending]
+               [--Timeout]
 ```
 
 ### Histogram Required Parameters
@@ -392,25 +392,25 @@ The KES query expression that specifies entities in the index(es).
 
 `--IndexFilePaths`
 
-The list of index file paths, seperated by ';'. Histogram requires at least one index.
+The file path expression for specifying which index file(s) to use. Use wild card to specify multiple indexes e.g. './index.*.kes' Histogram requires at least one index.
 
 ### Histogram Optional Parameters
 
-`--Select`
+`--Attributes`
 
-A list of entity attributes, seperated by ','. Use '*' for all attributes. Histogram will generate total count, distinct count, and top values for the select attributes for entities specified in the KesQuery.
+A list of entity attributes, seperated by ','. Use '*' for all attributes. Histogram will generate total count, distinct count, and top values for the select attributes for entities specified in the KesQueryExpression.
 
-`--Skip`
+`--Offset`
 
 The number of top entity attribute values to be skipped/excluded in the result set.
 
-`--Take`
+`--Count`
 
 The number of top entity attribute values to be included in the result set.
 
-`--MaxSampleSize`
+`--SampleSize`
 
-The maxium number of entities to consider for generating histogram. If this number is smaller than the number of entities in index(es), the histogram will be generated based on the top entnties specified by the number. If this number is 0, all entities specified by the KES query will be used.
+The maxium number of entities to consider for generating histogram. If this number is smaller than the number of entities in index(es), the histogram will be generated based on the top entities specified by the number. If this number is 0, all entities specified by the KES query will be used.
 
 `--Timeout`
 
