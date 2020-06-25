@@ -15,9 +15,9 @@ Creates the MAKES index hosting resources. E.g. MAKES web host image
 
 ```cmd
 kesm CreateHostResources --HostResourceName
-            --MakesPackage
-            [--Region]
-            [--MakesWebHost]
+                         --MakesPackage
+                         [--Region]
+                         [--MakesWebHost]
 ```
 
 ### CreateHostResources Required Parameters
@@ -122,12 +122,12 @@ Creates the MAKES index building resources such as MAKES index build batch accou
 
 ```cmd
 kesm CreateIndexResources --IndexResourceName
-                        --MakesPackage
-                        --MakesIndexResourceConfigFilePath
-                        [--Region]
-                        [--MakesPreprocessor]
-                        [--MakesIndexer]
-                        [--MakesJobManager]
+                          --MakesPackage
+                          --MakesIndexResourceConfigFilePath
+                          [--Region]
+                          [--MakesPreprocessor]
+                          [--MakesIndexer]
+                          [--MakesJobManager]
 ```
 
 ### CreateIndexResources Required Parameters
@@ -257,55 +257,166 @@ The input entities json file path. E.g. indexEntities.json
 
 The attribute value intersections threshold for pre-computing look up tables. Use this value to tune index build time performance, run time performance, and index size. The higher the value, the smaller index size and slower run-time performance will be. The lower the value, the larger index size and faster run-time performance will be.
 
-## CompileGrammarLocal Command
+## Interpret Command
 
-Compiles a grammar definition file into a compiled grammar binary file.
-
-```cmd
-kesm CompileGrammarLocal --GrammarDefinitionFilePath
-                         --OutputGrammarBinaryFilePath
-```
-
-### CompileGrammarLocal Required Parameters
-
-`--GrammarDefinitionFilePath`
-
-The input grammar definition xml file. E.g. grammar.xml
-
-`--OutputGrammarBinaryFilePath`
-
-The output compiled grammar binary. E.g. grammar.kesg
-
-## DescribeIndex Command
-
-Shows metadata for the index binary file.
+Interprets a natural language query using specified indexes and grammar.
 
 ```cmd
-kesm DescribeIndex --IndexFilePath
+kesm Interpret --Query
+               --IndexFilePaths
+               --GrammarFilePath
+               [--NormalizeQuery]
+               [--AllowCompletions]
+               [--Skip]
+               [--Take]
+               [--SelectInterpretationEntities]
+               [--TakeInterpretionEntities]
+               [--Timeout]
 ```
 
-### DescribeIndex Required Parameters
+### Interpret Required Parameters
 
-`--IndexFilePath`
+`--Query`
 
-The file path to the index binary file. E.g. index.kes
+The natural lanugage query string to interpret.
 
-## DescribeGrammar Command
+`--IndexFilePaths`
 
-Shows grammar definition xml from the compiled grammar binary file
+The list of index file paths, seperated by ';'. Interpret requires at least one index.
+
+`--GrammarFilePath`
+
+The grammar file path. Interpret requires a grammar.
+
+### Interpret Optional Parameters
+
+`--NormalizeQuery`
+
+Whether normalization rules should be applied to the query before making interpretations.
+
+`--AllowCompletions`
+
+Whether to generate interpretations assuming the query is a partial query that's not yet fully formulated. When set to true, better interpretations can be generated for scenarios such as auto-suggest. 
+
+`--Skip`
+
+The number of top interpretations to be skipped/excluded in the result set.
+
+`--Take`
+
+The number of top interpretations to be included in the result set.
+
+`--SelectInterpretationEntities`
+
+A list of entity attributes, seperated by ','. Use '*' for all entity attributes. Each interpretation in the result set can include the top matching entities used for generating the interpretation. SelectInterpretationEntities specifies which attributes of the top matching entities should be included in the result set.
+
+`--TakeInterpretionEntities`
+
+The number of top matching entities to be included for each interpretation. Each interpretation in the result set can include the top matching entities used for generating the interpretation. TakeInterpretionEntities specifies how many top matching entnties should be included in the result set
+
+`--Timeout`
+
+Maximum amount of time in milliseconds allowed for command to complete before aborting the command. The interpret command will return the top interptations found in the allowed timedout.
+
+## Evaluate Command
+
+Evaluates a KES structure query and returns the top matching entities in the index(es).
 
 ```cmd
-kesm DescribeGrammar --GrammarBinaryFilePath
+kesm Evaluate --KesQuery
+              --IndexFilePaths
+              [--Select]
+              [--Skip]
+              [--Take]
+              [--OrderBy]
+              [--OrderByDescending]
+              [--Timeout]
 ```
 
-### DescribeGrammar Required Parameters
+### Evaluate Required Parameters
 
-`--GrammarBinaryFilePath`
+`--KesQuery`
 
-The file path to the index binary file. E.g. index.kes
+The KES query expression that specifies entities in the index(es).
 
+`--IndexFilePaths`
 
-## Common Azure Command Parameters
+The list of index file paths, seperated by ';'. Evaluate requires at least one index.
+
+### Evaluate Optional Parameters
+
+`--Select`
+
+A list of entity attributes to be included in the result set, seperated by ','. Use '*' for all attributes.
+
+`--Skip`
+
+The number of top entities to be skipped/excluded in the result set.
+
+`--Take`
+
+The number of top interpretations to be included in the result set.
+
+`--OrderBy`
+
+Name of the entity attribute to use for sorting/ordering the entities in the result set. By default, entities are sorted by descending entity weight (static rank).
+
+`--OrderByDescending`
+
+The direction for sorting entities. By default, entities are sorted by descending entity weight (static rank).
+
+`--Timeout`
+
+Maximum amount of time in milliseconds allowed for the command to complete before aborting the command. Use 0 to disable timeout.
+
+## Histogram Command
+
+Calculates distinct/total entity attribute counts and top attribute values for entities specified by a KES query.
+
+```cmd
+kesm Histogram --KesQuery
+              --IndexFilePaths
+              [--Select]
+              [--Skip]
+              [--Take]
+              [--OrderBy]
+              [--OrderByDescending]
+              [--Timeout]
+```
+
+### Histogram Required Parameters
+
+`--KesQuery`
+
+The KES query expression that specifies entities in the index(es).
+
+`--IndexFilePaths`
+
+The list of index file paths, seperated by ';'. Histogram requires at least one index.
+
+### Histogram Optional Parameters
+
+`--Select`
+
+A list of entity attributes, seperated by ','. Use '*' for all attributes. Histogram will generate total count, distinct count, and top values for the select attributes for entities specified in the KesQuery.
+
+`--Skip`
+
+The number of top entity attribute values to be skipped/excluded in the result set.
+
+`--Take`
+
+The number of top entity attribute values to be included in the result set.
+
+`--MaxSampleSize`
+
+The maxium number of entities to consider for generating histogram. If this number is smaller than the number of entities in index(es), the histogram will be generated based on the top entnties specified by the number. If this number is 0, all entities specified by the KES query will be used.
+
+`--Timeout`
+
+Maximum amount of time in milliseconds allowed for the command to complete before aborting the command. Use 0 to disable timeout.
+
+## Common Command Parameters
 
 Below are common parameters that can be applied to more than one commands.
 
