@@ -218,7 +218,7 @@ The virtual machine(worker) sku. Check [Azure Virtual Machine Sizes](https://doc
 
 ## BuildIndexLocal Command
 
-Builds a MAKES index locally from MAKES entities file and MAKES schema file. Can only be run on win-x64 platform.
+Build an index locally using entity data and schema definition files. Can only be run on win-x64 platform.
 
 ```cmd
 kesm BuildIndex --SchemaFilePath
@@ -233,7 +233,7 @@ kesm BuildIndex --SchemaFilePath
 
 `--SchemaFilePath`
 
-The input schema json file path. E.g. indexSchema.json.
+The input schema json file path. E.g. indexSchema.json
 
 `--EntitiesFilePath`
 
@@ -257,11 +257,59 @@ The input entities json file path. E.g. indexEntities.json
 
 The attribute value intersections threshold for pre-computing look up tables. Use this value to tune index build time performance, run time performance, and index size. The higher the value, the smaller index size and slower run-time performance will be. The lower the value, the larger index size and faster run-time performance will be.
 
-## Common Command Parameters
+## CompileGrammarLocal Command
+
+Compiles a grammar definition file into a compiled grammar binary file.
+
+```cmd
+kesm CompileGrammarLocal --GrammarDefinitionFilePath
+                         --OutputGrammarBinaryFilePath
+```
+
+### CompileGrammarLocal Required Parameters
+
+`--GrammarDefinitionFilePath`
+
+The input grammar definition xml file. E.g. grammar.xml
+
+`--OutputGrammarBinaryFilePath`
+
+The output compiled grammar binary. E.g. grammar.kesg
+
+## DescribeIndex Command
+
+Shows metadata for the index binary file.
+
+```cmd
+kesm DescribeIndex --IndexFilePath
+```
+
+### DescribeIndex Required Parameters
+
+`--IndexFilePath`
+
+The file path to the index binary file. E.g. index.kes
+
+## DescribeGrammar Command
+
+Shows grammar definition xml from the compiled grammar binary file
+
+```cmd
+kesm DescribeGrammar --GrammarBinaryFilePath
+```
+
+### DescribeGrammar Required Parameters
+
+`--GrammarBinaryFilePath`
+
+The file path to the index binary file. E.g. index.kes
+
+
+## Common Azure Command Parameters
 
 Below are common parameters that can be applied to more than one commands.
 
-### Common Authentication Parameters
+### Common Azure Authentication Parameters
 
 Applies to all commands. MAKES command line tool leverages device login to access Azure Subscriptions by default. You can specify AzureActiveDirectoryDomainName, AzureSubscriptionId, and AzureCredentialsFilePath parameter to change the authentication behavior.
 
@@ -286,7 +334,7 @@ az ad sp create-for-rbac --sdk-auth > my.azureauth
 
 If you don't have Azure CLI installed, you can also do this in the [cloud shell](https://docs.microsoft.com/azure/cloud-shell/quickstart).
 
-### Common Resource Group Parameter
+### Common Azure Resource Group Parameter
 
 Applies to Azure resource creation commands (CreateHostResources, CreateIndexResources, and DeployHost.) MAKES command line tool may create Azure resources for the user. You can use the common resource group parameter to ensure the resources created will be in the specified group.
 
