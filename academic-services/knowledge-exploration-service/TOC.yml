@@ -31,9 +31,9 @@
 - name: Reference
   expanded: true
   items:
-  - name: Entity schema
-    href: reference-makes-api-entity-schema.md   
-  - name: REST API
+  - name: KESM command line tool
+    href: reference-makes-command-line-tool.md
+  - name: Self-hosted REST API
     expanded: false
     items:
       - name: GET CalcHistogram
@@ -48,8 +48,19 @@
         href: reference-post-evaluate.md
       - name: POST Interpret
         href: reference-post-interpret.md
-  - name: Command line tool
-    href: reference-makes-command-line-tool.md
+  - name: Default schema
+    href: reference-makes-api-entity-schema.md   
+  - name: Index creation
+    expanded: false
+    items:
+    - name: Schema files
+      href: reference-index-schema.md
+    - name: Data files
+      href: reference-index-data.md
+    - name: Synonym files
+      href: reference-index-synonym.md
+    - name: Build index
+      href: reference-index-build.md
 - name: Resources
   expanded: true
   items:
