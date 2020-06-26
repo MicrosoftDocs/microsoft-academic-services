@@ -251,11 +251,58 @@ A description to include in the index. E.g. My custom MAKES index build.
 
 `--MaxStringLength`
 
-The input entities json file path. E.g. indexEntities.json
+The maximum string length for all entity attributes. All strings over the maximum string length will be truncated
 
 `--IntersectionCountThresholdForPreCompute`
 
 The attribute value intersections threshold for pre-computing look up tables. Use this value to tune index build time performance, run time performance, and index size. The higher the value, the smaller index size and slower run-time performance will be. The lower the value, the larger index size and faster run-time performance will be.
+
+## CompileGrammarLocal Command
+
+Compiles a grammar definition xml file into compiled grammar file.
+
+```cmd
+kesm CompileGrammarLocal --GrammarDefinitionFilePath
+                         --OutputCompiledGrammarFilePath
+```
+
+### CompileGrammarLocal Required Parameters
+
+`--GrammarDefinitionFilePath`
+
+The input grammar definition xml file path. E.g. grammar.xml
+
+`--OutputCompiledGrammarFilePath`
+
+The output compiled grammar binary file path. E.g. grammar.kesg
+
+## DescribeIndex Command
+
+Retrieves the description, schema, build time and number of entities for the index binary.
+
+```cmd
+kesm DescribeIndex --IndexFilePath
+```
+
+### DescribeIndex Required Parameters
+
+`--IndexFilePath`
+
+The file path to the index binary. E.g. index.kes
+
+## DescribeGrammar Command
+
+Retrieves original grammar definition XML from the compiled grammar binary
+
+```cmd
+kesm DescribeGrammar --CompiledGrammarFilePath
+```
+
+### DescribeGrammar Required Parameters
+
+`--CompiledGrammarFilePath`
+
+The file path to the compiled grammar binary. E.g. grammar.kesg
 
 ## Interpret Command
 
