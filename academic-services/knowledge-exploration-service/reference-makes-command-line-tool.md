@@ -218,7 +218,7 @@ The virtual machine(worker) sku. Check [Azure Virtual Machine Sizes](https://doc
 
 ## BuildIndexLocal Command
 
-Builds a MAKES index locally from MAKES entities file and MAKES schema file. Can only be run on win-x64 platform.
+Build an index locally using entity data and schema definition files. Can only be run on win-x64 platform.
 
 ```cmd
 kesm BuildIndex --SchemaFilePath
@@ -233,7 +233,7 @@ kesm BuildIndex --SchemaFilePath
 
 `--SchemaFilePath`
 
-The input schema json file path. E.g. indexSchema.json.
+The input schema json file path. E.g. indexSchema.json
 
 `--EntitiesFilePath`
 
@@ -251,11 +251,58 @@ A description to include in the index. E.g. My custom MAKES index build.
 
 `--MaxStringLength`
 
-The input entities json file path. E.g. indexEntities.json
+The maximum string length for all entity attributes. All strings over the maximum string length will be truncated
 
 `--IntersectionCountThresholdForPreCompute`
 
 The attribute value intersections threshold for pre-computing look up tables. Use this value to tune index build time performance, run time performance, and index size. The higher the value, the smaller index size and slower run-time performance will be. The lower the value, the larger index size and faster run-time performance will be.
+
+## CompileGrammarLocal Command
+
+Compiles a grammar definition xml file into compiled grammar file.
+
+```cmd
+kesm CompileGrammarLocal --GrammarDefinitionFilePath
+                         --OutputCompiledGrammarFilePath
+```
+
+### CompileGrammarLocal Required Parameters
+
+`--GrammarDefinitionFilePath`
+
+The input grammar definition xml file path. E.g. grammar.xml
+
+`--OutputCompiledGrammarFilePath`
+
+The output compiled grammar binary file path. E.g. grammar.kesg
+
+## DescribeIndex Command
+
+Retrieves the description, schema, build time and number of entities for the index binary.
+
+```cmd
+kesm DescribeIndex --IndexFilePath
+```
+
+### DescribeIndex Required Parameters
+
+`--IndexFilePath`
+
+The file path to the index binary. E.g. index.kes
+
+## DescribeGrammar Command
+
+Retrieves original grammar definition XML from the compiled grammar binary
+
+```cmd
+kesm DescribeGrammar --CompiledGrammarFilePath
+```
+
+### DescribeGrammar Required Parameters
+
+`--CompiledGrammarFilePath`
+
+The file path to the compiled grammar binary. E.g. grammar.kesg
 
 ## Interpret Command
 
@@ -267,10 +314,10 @@ kesm Interpret --Query
                --GrammarFilePath
                [--NormalizeQuery]
                [--AllowCompletions]
-               [--Skip]
-               [--Take]
-               [--SelectInterpretationEntities]
-               [--TakeInterpretionEntities]
+               [--Offset]
+               [--Count]
+               [--InterpretationEntityAttributes]
+               [--InterpretationEntityCount]
                [--Timeout]
 ```
 
@@ -282,11 +329,11 @@ The natural lanugage query string to interpret.
 
 `--IndexFilePaths`
 
-The list of index file paths, seperated by ';'. Interpret requires at least one index.
+The file path expression for specifying which index file(s) to use. Use wild card to specify multiple indexes e.g. './index.*.kes'.
 
 `--GrammarFilePath`
 
-The grammar file path. Interpret requires a grammar.
+The compiled grammar binary file path. Interpret requires a compiled grammar binary
 
 ### Interpret Optional Parameters
 
@@ -298,11 +345,11 @@ Whether normalization rules should be applied to the query before making interpr
 
 Whether to generate interpretations assuming the query is a partial query that's not yet fully formulated. When set to true, better interpretations can be generated for scenarios such as auto-suggest. 
 
-`--Skip`
+`--Offset`
 
 The number of top interpretations to be skipped/excluded in the result set.
 
-`--Take`
+`--Count`
 
 The number of top interpretations to be included in the result set.
 
@@ -320,12 +367,12 @@ Maximum amount of time in milliseconds allowed for command to complete before ab
 
 ## Evaluate Command
 
-Evaluates a KES structure query and returns the top matching entities in the index(es).
+Evaluates a KES query expression and returns the top matching entities in the index(es).
 
 ```cmd
-kesm Evaluate --KesQuery
+kesm Evaluate --KesQueryExpression
               --IndexFilePaths
-              [--Select]
+              [--Attributes]
               [--Skip]
               [--Take]
               [--OrderBy]
@@ -335,25 +382,25 @@ kesm Evaluate --KesQuery
 
 ### Evaluate Required Parameters
 
-`--KesQuery`
+`--KesQueryExpression`
 
 The KES query expression that specifies entities in the index(es).
 
 `--IndexFilePaths`
 
-The list of index file paths, seperated by ';'. Evaluate requires at least one index.
+The file path expression for specifying which index file(s) to use. Use wild card to specify multiple indexes e.g. './index.*.kes'
 
 ### Evaluate Optional Parameters
 
-`--Select`
+`--Attributes`
 
 A list of entity attributes to be included in the result set, seperated by ','. Use '*' for all attributes.
 
-`--Skip`
+`--Offset`
 
 The number of top entities to be skipped/excluded in the result set.
 
-`--Take`
+`--Count`
 
 The number of top interpretations to be included in the result set.
 
@@ -371,17 +418,17 @@ Maximum amount of time in milliseconds allowed for the command to complete befor
 
 ## Histogram Command
 
-Calculates distinct/total entity attribute counts and top attribute values for entities specified by a KES query.
+Calculates distinct/total entity attribute counts and top attribute values for entities specified by a KES query expression.
 
 ```cmd
-kesm Histogram --KesQuery
-              --IndexFilePaths
-              [--Select]
-              [--Skip]
-              [--Take]
-              [--OrderBy]
-              [--OrderByDescending]
-              [--Timeout]
+kesm Histogram --KesQueryExpression
+               --IndexFilePaths
+               [--Attributes]
+               [--Skip]
+               [--Take]
+               [--OrderBy]
+               [--OrderByDescending]
+               [--Timeout]
 ```
 
 ### Histogram Required Parameters
@@ -392,25 +439,25 @@ The KES query expression that specifies entities in the index(es).
 
 `--IndexFilePaths`
 
-The list of index file paths, seperated by ';'. Histogram requires at least one index.
+The file path expression for specifying which index file(s) to use. Use wild card to specify multiple indexes e.g. './index.*.kes' Histogram requires at least one index.
 
 ### Histogram Optional Parameters
 
-`--Select`
+`--Attributes`
 
-A list of entity attributes, seperated by ','. Use '*' for all attributes. Histogram will generate total count, distinct count, and top values for the select attributes for entities specified in the KesQuery.
+A list of entity attributes, seperated by ','. Use '*' for all attributes. Histogram will generate total count, distinct count, and top values for the select attributes for entities specified in the KesQueryExpression.
 
-`--Skip`
+`--Offset`
 
 The number of top entity attribute values to be skipped/excluded in the result set.
 
-`--Take`
+`--Count`
 
 The number of top entity attribute values to be included in the result set.
 
-`--MaxSampleSize`
+`--SampleSize`
 
-The maxium number of entities to consider for generating histogram. If this number is smaller than the number of entities in index(es), the histogram will be generated based on the top entnties specified by the number. If this number is 0, all entities specified by the KES query will be used.
+The maxium number of entities to consider for generating histogram. If this number is smaller than the number of entities in index(es), the histogram will be generated based on the top entities specified by the number. If this number is 0, all entities specified by the KES query will be used.
 
 `--Timeout`
 
@@ -420,7 +467,7 @@ Maximum amount of time in milliseconds allowed for the command to complete befor
 
 Below are common parameters that can be applied to more than one commands.
 
-### Common Authentication Parameters
+### Common Azure Authentication Parameters
 
 Applies to all commands. MAKES command line tool leverages device login to access Azure Subscriptions by default. You can specify AzureActiveDirectoryDomainName, AzureSubscriptionId, and AzureCredentialsFilePath parameter to change the authentication behavior.
 
@@ -445,7 +492,7 @@ az ad sp create-for-rbac --sdk-auth > my.azureauth
 
 If you don't have Azure CLI installed, you can also do this in the [cloud shell](https://docs.microsoft.com/azure/cloud-shell/quickstart).
 
-### Common Resource Group Parameter
+### Common Azure Resource Group Parameter
 
 Applies to Azure resource creation commands (CreateHostResources, CreateIndexResources, and DeployHost.) MAKES command line tool may create Azure resources for the user. You can use the common resource group parameter to ensure the resources created will be in the specified group.
 
