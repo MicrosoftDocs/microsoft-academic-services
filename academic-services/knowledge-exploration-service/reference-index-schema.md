@@ -7,6 +7,14 @@ ms.date: 7/1/2020
 
 # Index schema files
 
+Index schema files define the attribute structure of entities in an index, including their [name](#attribute-name), [data type](#attribute-types), [supported operations](#attribute-operations) and [synonyms](#attribute-synonyms).
+
+They are a critical part of the design of a [MAKES API](reference-makes-api.md):
+
+* They serve as the blueprint for defining entity data in [data files](reference-index-data.md) used to build an index
+* Supported [attribute query expressions](concepts-query-expressions.md) are completely dependent on what [operations](#attribute-operations) are enabled for each attribute
+* How [natural language queries](concepts-queries.md) are interpreted relies on the [type](#attribute-types) and [supported operations](#attribute-operations) of each attribute
+
 ## Components of an index schema
 
 ``` JSON
@@ -19,16 +27,31 @@ ms.date: 7/1/2020
             "synonyms": "synonym_file"
         },
         ...
-    ],
-    "intersections-exclude": [ "attribute1", "attribute2", ... ]
+    ]
 }
 ```
 
-## Attribute collection
-
-The attributes collection ("attributes") is typically the largest (and most important) part of an index schema. It is where each attribute is named, typed, and has its indexing operations defined which determine how it is used.
-
 ## Attribute name
+
+Attribute names must be composed of alphanumeric characters (a-z, A-Z,  0-9) or underscores, with the first character required to be an alpha character or underscore.
+
+Examples of valid names:
+
+* attributeName
+* attribute_name
+* _attr
+* _012
+
+Examples of invalid names:
+
+* 0attr
+* $attributeName
+* attribute-name
+
+In addition names can also contain a [composite group](#composite-attributes) name scoping prefix in the form of "composite_group_name.", which indicates the attribute is a sub-attribute of the composite group. Both the composite group name and the sub-attribute name must follow the same naming rules defined above, i.e.:
+
+* Valid: composite_group_name.subAttributeName
+* Invalid: composite-group-name.5thAttribute
 
 ## Attribute types
 
@@ -69,19 +92,32 @@ Composite attributes are used to represent a grouping of attributes and their co
 ]
 ```
 
-> [!IMPORTANT]
-> Composite values cannot be nested, hence sub-attributes cannot have the type "composite"
+> [!IMPORTANT] Composite values **can not** be nested, hence sub-attributes can not have the type "composite"
 
-## Indexing operations
+## Attribute operations
 
 Name | Description | Supported types | Example
 --- | --- | --- | ---
-equals | Enables exact matching of attribute values (including synonyms if defined) | string, int32, int64, double, date, guid | string_attribute == "canonical value", string_attribute = "synonym value", numeric_attribute == 10
+equals | Enables exact matching of attribute values (including synonyms if defined) | string, int32, int64, double, date, guid | string_attribute == "canonical value", string_attribute = "canonical or synonym value", numeric_attribute == 10
 starts_with | Enables prefix matching of attribute values (including synonyms if defined) | string, int32, int64, double | string_attribute == "beginning of value"...
 is_between | Enables inequality matching (<, <=, >=, >) of attribute values | int32, int64, double, date | numeric_attribute >= 10, date_attribute > "2020-01-01"
 
-## Synonym definition
+## Attribute synonyms
 
-## Excluding attribute intersections
+Synonyms map equivalent terms that implicitly expand the scope of a query, without users having to know canonical terms. For example, given an entity with a string attribute "pet_type" having the canonical value of "canine" we could define the synonyms "dog" and "puppy" which would allow queries containing any of the terms "canine", "dog" or "puppy" to match the entity.
+
+Synonym maps are defined on a per-attribute basis, with the "synonyms" value representing a separate mapping file. The mapping file is simply a list of string tuples, with the first item representing a canonical value the second item a synonymous value:
+
+``` JSON
+["canonical_value1", "synonymous_value1"]
+["canonical_value2", "synonymous_value1"]
+["canonical_value2", "synonymous_value2"]
+["canonical_value3", "synonymous_value3"]
+```
+
+> [!NOTE] Mappings are many-to-many, meaning a single canonical value can have multiple synonymous values and conversely a single synonymous value can have multiple canonical values.
+
+> [!NOTE] Synonym maps can be used for multiple different attributes. A common use case for this is generating word stems as canonical values and providing the [lemmatized forms](https://en.wikipedia.org/wiki/Lemmatisation) in a synonym map.
 
 ## Example
+
