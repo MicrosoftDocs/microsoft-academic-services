@@ -57,8 +57,6 @@
       href: reference-index-schema.md
     - name: Data files
       href: reference-index-data.md
-    - name: Synonym files
-      href: reference-index-synonym.md
     - name: Build index
       href: reference-index-build.md
 - name: Resources

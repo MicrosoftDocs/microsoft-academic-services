@@ -92,9 +92,12 @@ Composite attributes are used to represent a grouping of attributes and their co
 ]
 ```
 
-> [!IMPORTANT] Composite values **can not** be nested, hence sub-attributes can not have the type "composite"
+> [!IMPORTANT]
+> Composite values **can not** be nested, hence sub-attributes can not have the type "composite"
 
 ## Attribute operations
+
+Operations define the different ways that an attribute can be queried  using [structured query expressions](concepts-query-expressions.md).
 
 Name | Description | Supported types | Example
 --- | --- | --- | ---
@@ -115,9 +118,11 @@ Synonym maps are defined on a per-attribute basis, with the "synonyms" value rep
 ["canonical_value3", "synonymous_value3"]
 ```
 
-> [!NOTE] Mappings are many-to-many, meaning a single canonical value can have multiple synonymous values and conversely a single synonymous value can have multiple canonical values.
+> [!NOTE] 
+> Mappings are many-to-many, meaning a single canonical value can have multiple synonymous values and conversely a single synonymous value can have multiple canonical values.
 
-> [!NOTE] Synonym maps can be used for multiple different attributes. A common use case for this is generating word stems as canonical values and providing the [lemmatized forms](https://en.wikipedia.org/wiki/Lemmatisation) in a synonym map.
+> [!NOTE] 
+> Synonym maps can be used for multiple different attributes. A common use case for this is generating word stems as canonical values and providing the [lemmatized forms](https://en.wikipedia.org/wiki/Lemmatisation) in a synonym map.
 
 ## Example
 
