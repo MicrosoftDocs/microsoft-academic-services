@@ -112,9 +112,9 @@ is_between | Enables inequality matching (<, <=, >=, >) of attribute values | in
 
 ## Example
 
-### Academic paper entity
+### Academic paper entity schema
 
-This example shows the schema definition for an academic paper entity, and is part of the larger [MAKES customization tutorial](tutorial.md).
+The following schema definition is for an index that supports academic paper entities, and is part of the larger [MAKES customization tutorial](tutorial.md). It is meant to be a subset of the full [MAKES academic entity schema](reference-makes-api-entity-schema.md).
 
 ``` JSON
 {

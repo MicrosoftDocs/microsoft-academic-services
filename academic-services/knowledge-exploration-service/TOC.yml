@@ -55,6 +55,8 @@
     items:
     - name: Schema files
       href: reference-index-schema.md
+    - name: Synonym files
+      href: reference-index-synonym.md
     - name: Data files
       href: reference-index-data.md
     - name: Build index

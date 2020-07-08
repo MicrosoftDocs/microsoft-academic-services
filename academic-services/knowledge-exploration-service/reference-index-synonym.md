@@ -26,3 +26,17 @@ Synonym maps are defined on a per-attribute basis, with the "synonyms" value rep
 
 ## Example
 
+### Academic author name synonyms
+
+Person names are a great use case for synonyms, as they can have a variety of transformations (i.e. abbreviation, reversal, truncation, etc.) applied to them.
+
+This is especially true for the academic space, where different bibliographic styles can use significantly different author naming schemes. The following is an example of synonyms for the author "David S Rosenblum", who is part of the dataset used in the larger [MAKES customization tutorial](tutorial.md).
+
+``` JSON
+["david s rosenblum", "david rosenblum"]
+["david s rosenblum", "rosnblum david"]
+["david s rosenblum", "d rosenblum"]
+["david s rosenblum", "rosenblum d"]
+["david s rosenblum", "d s rosenblum"]
+["david s rosenblum", "rosenblum d s"]
+```
