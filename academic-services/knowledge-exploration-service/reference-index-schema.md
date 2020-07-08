@@ -1,13 +1,13 @@
 ---
 title: Index schema
-description: Defines the 
+description: Defines the file format and structure for MAKES index schema
 ms.topic: reference
 ms.date: 7/1/2020
 ---
 
 # Index schema files
 
-Index schema files define the attribute structure of entities in an index, including their [name](#attribute-name), [data type](#attribute-types), [supported operations](#attribute-operations) and [synonyms](#attribute-synonyms).
+Index schema files define the attribute structure of entities in an index, including their [name](#attribute-name), [data type](#attribute-types), [supported operations](#attribute-operations) and [synonyms](reference-index-synonym.md).
 
 They are a critical part of the design of a [MAKES API](reference-makes-api.md):
 
@@ -22,6 +22,7 @@ They are a critical part of the design of a [MAKES API](reference-makes-api.md):
     "attributes": [
         {
             "name": "name_of_attribute",
+            "description": "description of attribute",
             "type": "string | int32 | int64 | double | date | guid | blob | composite",
             "operations": ["operation1", "operation2", ... ],
             "synonyms": "synonym_file"
@@ -52,6 +53,10 @@ In addition names can also contain a [composite group](#composite-attributes) na
 
 * Valid: composite_group_name.subAttributeName
 * Invalid: composite-group-name.5thAttribute
+
+## Attribute description
+
+Attribute descriptions are optional and solely for documentation. They have no functional role in the index, though they are stored in the binary index once it is built and can be retrieved when requesting information about the index.
 
 ## Attribute types
 
@@ -105,24 +110,249 @@ equals | Enables exact matching of attribute values (including synonyms if defin
 starts_with | Enables prefix matching of attribute values (including synonyms if defined) | string, int32, int64, double | string_attribute == "beginning of value"...
 is_between | Enables inequality matching (<, <=, >=, >) of attribute values | int32, int64, double, date | numeric_attribute >= 10, date_attribute > "2020-01-01"
 
-## Attribute synonyms
-
-Synonyms map equivalent terms that implicitly expand the scope of a query, without users having to know canonical terms. For example, given an entity with a string attribute "pet_type" having the canonical value of "canine" we could define the synonyms "dog" and "puppy" which would allow queries containing any of the terms "canine", "dog" or "puppy" to match the entity.
-
-Synonym maps are defined on a per-attribute basis, with the "synonyms" value representing a separate mapping file. The mapping file is simply a list of string tuples, with the first item representing a canonical value the second item a synonymous value:
-
-``` JSON
-["canonical_value1", "synonymous_value1"]
-["canonical_value2", "synonymous_value1"]
-["canonical_value2", "synonymous_value2"]
-["canonical_value3", "synonymous_value3"]
-```
-
-> [!NOTE] 
-> Mappings are many-to-many, meaning a single canonical value can have multiple synonymous values and conversely a single synonymous value can have multiple canonical values.
-
-> [!NOTE] 
-> Synonym maps can be used for multiple different attributes. A common use case for this is generating word stems as canonical values and providing the [lemmatized forms](https://en.wikipedia.org/wiki/Lemmatisation) in a synonym map.
-
 ## Example
 
+### Academic paper entity
+
+This example shows the schema definition for an academic paper entity, and is part of the larger [MAKES customization tutorial](tutorial.md).
+
+``` JSON
+{
+  "attributes": [
+    {
+      "name": "AA",
+      "description": "Author-affiliation composite type",
+      "type": "Composite*"
+    },
+    {
+      "name": "AA.AfId",
+      "description": "Affiliation ID",
+      "type": "int64",
+      "operations": [
+        "equals"
+      ]
+    },
+    {
+      "name": "AA.AfN",
+      "description": "Normalized affiliation name",
+      "type": "string?",
+      "operations": [
+        "equals",
+        "starts_with"
+      ],
+      "synonyms": "AffiliationSynonyms.txt"
+    },
+    {
+      "name": "AA.AuId",
+      "description": "Author ID",
+      "type": "int64",
+      "operations": [
+        "equals"
+      ]
+    },
+    {
+      "name": "AA.AuN",
+      "description": "Normalized author name",
+      "type": "string?",
+      "operations": [
+        "equals",
+        "starts_with"
+      ],
+      "synonyms": "AuthorSynonyms.txt"
+    },
+    {
+      "name": "AA.DAfN",
+      "description": "Original affiliation name",
+      "type": "blob?"
+    },
+    {
+      "name": "AA.DAuN",
+      "description": "Original author name",
+      "type": "blob?"
+    },
+    {
+      "name": "AA.S",
+      "description": "Numeric position in author list",
+      "type": "int32?",
+      "operations": [
+        "equals"
+      ]
+    },
+    {
+      "name": "AW",
+      "description": "Unique, normalized words in abstract, excluding stop words",
+      "type": "string*",
+      "operations": [
+        "equals"
+      ]
+    },
+    {
+      "name": "C",
+      "description": "Conference series composite type",
+      "type": "Composite?"
+    },
+    {
+      "name": "C.CId",
+      "description": "Conference series ID",
+      "type": "int64",
+      "operations": [
+        "equals"
+      ]
+    },
+    {
+      "name": "C.CN",
+      "description": "Normalized conference series name",
+      "type": "string?",
+      "operations": [
+        "equals",
+        "starts_with"
+      ],
+      "synonyms": "ConferenceSynonyms.txt"
+    },
+    {
+      "name": "CC",
+      "description": "Citation count",
+      "type": "int32?"
+    },
+    {
+      "name": "CI",
+      "description": "Conference instance composite type",
+      "type": "Composite?"
+    },
+    {
+      "name": "CI.CIId",
+      "description": "Conference instance ID",
+      "type": "int64",
+      "operations": [
+        "equals"
+      ]
+    },
+    {
+      "name": "CI.CIN",
+      "description": "Normalized conference instance name",
+      "type": "string?",
+      "operations": [
+        "equals"
+      ]
+    },
+    {
+      "name": "D",
+      "description": "Publication date in YYYY-MM-DD format",
+      "type": "date?",
+      "operations": [
+        "equals",
+        "is_between"
+      ]
+    },
+    {
+      "name": "DN",
+      "description": "Original paper title",
+      "type": "blob?"
+    },
+    {
+      "name": "DOI",
+      "description": "Digital Object Identifier",
+      "type": "string?",
+      "operations": [
+        "equals",
+        "starts_with"
+      ]
+    },
+    {
+      "name": "F",
+      "description": "Field of study composite type",
+      "type": "Composite*"
+    },
+    {
+      "name": "F.DFN",
+      "description": "Original field of study name",
+      "type": "blob?"
+    },
+    {
+      "name": "F.FId",
+      "description": "Field of study ID",
+      "type": "int64",
+      "operations": [
+        "equals"
+      ]
+    },
+    {
+      "name": "F.FN",
+      "description": "Normalized field of study name",
+      "type": "string?",
+      "operations": [
+        "equals",
+        "starts_with"
+      ],
+      "synonyms": "FieldOfStudySynonyms.txt"
+    },
+    {
+      "name": "FP",
+      "description": "First page of paper in publication",
+      "type": "string?",
+      "operations": [
+        "equals"
+      ]
+    },
+    {
+      "name": "IA",
+      "description": "Inverted abstract",
+      "type": "blob?"
+    },
+    {
+      "name": "Id",
+      "description": "Entity ID",
+      "type": "int64!",
+      "operations": [
+        "equals"
+      ]
+    },
+    {
+      "name": "LP",
+      "description": "Last page of paper in publication",
+      "type": "string?",
+      "operations": [
+        "equals"
+      ]
+    },
+    {
+      "name": "RId",
+      "description": "List of referenced paper IDs",
+      "type": "int64*",
+      "operations": [
+        "equals"
+      ]
+    },
+    {
+      "name": "S",
+      "description": "List of source URLs of the paper, sorted by relevance",
+      "type": "blob?"
+    },
+    {
+      "name": "Ti",
+      "description": "Normalized paper title",
+      "type": "string?",
+      "operations": [
+        "equals"
+      ]
+    },
+    {
+      "name": "W",
+      "description": "Unique, normalized words in title, excluding stop words",
+      "type": "string*",
+      "operations": [
+        "equals"
+      ]
+    },
+    {
+      "name": "Y",
+      "description": "Publication year",
+      "type": "int32?",
+      "operations": [
+        "equals",
+        "is_between"
+      ]
+    }
+  ]
+}
+```
