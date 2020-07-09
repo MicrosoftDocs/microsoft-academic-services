@@ -44,6 +44,18 @@ Column # | Name | Type | Note
 12 | Longitude | float? |
 13 | CreatedDate | DateTime |
 
+## AuthorExtendedAttributes
+
+**Path** `mag/AuthorExtendedAttributes.txt`
+
+**Schema**
+
+Column # | Name | Type | Note
+--- | --- | --- | ---
+1 | AuthorId | long | FOREIGN KEY REFERENCES Authors(AuthorId)
+2 | AttributeType | int | 1: Alternative Name
+3 | AttributeValue | string |
+
 ## Authors
 
 **Path** `mag/Authors.txt`
