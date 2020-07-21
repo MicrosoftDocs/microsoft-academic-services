@@ -1,17 +1,17 @@
 ---
 title: Index schema
 description: Defines the file format and structure for MAKES index schema
-ms.topic: reference
+ms.topic: tutorial
 ms.date: 7/1/2020
 ---
 
 # Index schema files
 
-Index schema files define the attribute structure of entities in an index, including their [name](#attribute-name), [data type](#attribute-types), [supported operations](#attribute-operations) and [synonyms](reference-index-synonym.md).
+Index schema files define the attribute structure of entities in an index, including their [name](#attribute-name), [data type](#attribute-types), [supported operations](#attribute-operations) and [synonyms](how-to-index-synonym.md).
 
-They are a critical part of the design of a [MAKES API](reference-makes-api.md):
+They play a critical part in the design of a [MAKES API](reference-makes-api.md):
 
-* They serve as the blueprint for defining entity data in [data files](reference-index-data.md) used to build an index
+* They serve as the blueprint for defining entity structure in [entity data files](how-to-index-data.md) used to build an index
 * Supported [attribute query expressions](concepts-query-expressions.md) are completely dependent on what [operations](#attribute-operations) are enabled for each attribute
 * How [natural language queries](concepts-queries.md) are interpreted relies on the [type](#attribute-types) and [supported operations](#attribute-operations) of each attribute
 

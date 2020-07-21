@@ -1,13 +1,13 @@
 ---
 title: Entity data files
 description: Describes the format for defining entity data to be indexed
-ms.topic: reference
+ms.topic: tutorial
 ms.date: 7/1/2020
 ---
 
 # Entity data files
 
-Entity data files define the entity data to be indexed. Each row contains information for a single entity, defined in [JSON format](https://json.org/) and conforming to a specific [schema](reference-index-schema.md) with optional information about its relative probability among other entities.
+Entity data files define the entity data to be indexed. Each row contains information for a single entity, defined in [JSON format](https://json.org/) and conforming to a specific [schema](how-to-index-schema.md) with optional information about its relative probability among other entities.
 
 ## Entity data JSON format
 
@@ -44,11 +44,11 @@ Or use JSON arrays, e.g.:
 
 An important component of the KES top-N retrieval algorithm is the concept of entity probability, which informs KES of each entities relative importance. Entity probability can be understood as the likelihood of it being named the most important in a survey conducted on all members its network/graph ([see "Saliency: An Eigencentrality Measure for Heterogeneous Dynamic Network" in "A Review of Microsoft Academic Services for Science of Science Studies"](https://www.frontiersin.org/articles/10.3389/fdata.2019.00045/pdf)).
 
-KES allows this to be defined for an entity as a relative log probability using the optional "logprob" attribute, which is an additional attribute that is always available and not defined in the [schema](reference-index-schema.md). Given a probability *p* between 0 and 1, the corresponding log probability can be computed as log(*p*), where log() is the natural log function. When no value is specified for logprob, the default value 0 is used.
+KES allows this to be defined for an entity as a relative log probability using the optional "logprob" attribute, which is an additional attribute that is always available and not defined in the [schema](how-to-index-schema.md). Given a probability *p* between 0 and 1, the corresponding log probability can be computed as log(*p*), where log() is the natural log function. When no value is specified for logprob, the default value 0 is used.
 
 ## Entity data file format
 
-An entity data file contains one or more rows/lines of [entity data](#entity-data-json-format), and is used as the "data file" when [building an index](reference-index-build.md).
+An entity data file contains one or more rows/lines of [entity data](#entity-data-json-format), and is used as the "data file" when [building an index](how-to-index-build.md).
 
 > [!IMPORTANT]
 > While each **row** in an entity data file must be a valid JSON object, the overall file itself is not JSON but simply a *rows/lines of JSON objects*. The file contents are **NOT** meant to be an array of JSON objects.
@@ -60,7 +60,7 @@ An entity data file contains one or more rows/lines of [entity data](#entity-dat
 
 ### Academic paper entity
 
-The following entity JSON data is for an index that supports academic paper entities, and is part of the larger [MAKES customization tutorial](tutorial.md) and uses a subset ([defined in the schema reference](reference-index-schema.md#example)) of the full [MAKES academic entity schema](reference-makes-api-entity-schema.md).
+The following entity JSON data is for an index that supports academic paper entities, and is part of the larger [MAKES customization tutorial](tutorial.md) and uses a subset ([defined in the schema reference](how-to-index-schema.md#example)) of the full [MAKES academic entity schema](reference-makes-api-entity-schema.md).
 
 > [!IMPORTANT]
 > The following example is purposefully using tabular formatting of the JSON data to make it easy to understand. However in practice **this data would have no such formatting and be contained on a *single* line**.

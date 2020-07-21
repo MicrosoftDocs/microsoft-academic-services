@@ -21,6 +21,19 @@
     href: how-to-delete-api-instances.md
   - name: Create custom index from MAG
     href: how-to-create-index-from-mag.md
+  - name: Create custom MAKES index
+    expanded: false
+    items:
+    - name: Define schema
+      href: how-to-index-schema.md
+    - name: Define synonyms
+      href: how-to-index-synonym.md
+    - name: Define data
+      href: how-to-index-data.md
+    - name: Build index
+      href: how-to-index-build.md
+    - name: Host index
+      href: how-to-host-index.md
 - name: Concepts
   expanded: true
   items:
@@ -50,19 +63,6 @@
         href: reference-post-evaluate.md
       - name: POST Interpret
         href: reference-post-interpret.md
-  - name: Create custom MAKES index
-    expanded: false
-    items:
-    - name: Define schema
-      href: reference-index-schema.md
-    - name: Define synonyms
-      href: reference-index-synonym.md
-    - name: Define data
-      href: reference-index-data.md
-    - name: Build index
-      href: reference-index-build.md
-    - name: Host index
-      href: reference-host-index.md
 - name: Resources
   expanded: true
   items:
