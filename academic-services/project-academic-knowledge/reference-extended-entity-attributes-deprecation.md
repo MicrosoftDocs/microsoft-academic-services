@@ -1,6 +1,11 @@
+title: Deprecation of Extended Entity Attribute
+description: Information about the deprecation of the Extended Entity Attribute and guidance for migration
+ms.topic: reference
+ms.date: 7/22/2020
+
 # Deprecation of Entity Extended Attributes
 
-The Extended Entity Attributes is being deprecated and Evaluate/Histogram API will start return attribute not found error when requested on December 21, 2020. The Extended Entity Attributes provides extended entity information such as paper BibTex venue name, citation contexts, original paper title, and DOI are being deprecated. Equivalent information can be found from other available attributes. The other equivalent attributes can also perform more operations. Please transition your API usage to leverage the equivalent available attributes.
+The Extended Entity Attributes is deprecated and legecy application support will end on December 21, 2020. Evaluate and Histogram API will return "attribute not found error" if Extended Entity Attributes is a part of the request. The Extended Entity Attributes provides extended entity information such as paper BibTex venue name, citation contexts, original paper title, and DOI. You can migrate your application to leverage other attributes that provides equivalent information. The other equivalent attributes can also perform more operations. Please transition your API usage to leverage the equivalent available attributes.
 
 ## Migration Considerations
 
