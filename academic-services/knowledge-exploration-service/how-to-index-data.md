@@ -26,14 +26,7 @@ string | string | `"Ti": "an overview of microsoft academic service mas and appl
 
 ### Multiple attribute values
 
-To define more than one value for an attribute you can either specify the attribute multiple times, e.g.:
-
-``` JSON
-{ "RId": 123, "RId": 456 }
-{ "F": { "FN": "machine learning", "FId": 119857082 }, "F": { "FN": "artificial intelligence", "FId": 154945302 } }
-```
-
-Or use JSON arrays, e.g.:
+To define more than one value for an attribute use JSON arrays, e.g.:
 
 ``` JSON
 { "RId": [ 123, 456 ] }
