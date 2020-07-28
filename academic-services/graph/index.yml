@@ -20,21 +20,21 @@ landingContent:
       - linkListType: get-started
         links:
           - text: Get Microsoft Academic Graph on Azure storage
-            url: get-started-setup-provisioning
+            url: /get-started-setup-provisioning
       - linkListType: tutorial
         links:
           - text: Set up Azure Data Lake Analytics for Microsoft Academic Graph
-            url: get-started-setup-azure-data-lake-analytics
+            url: /get-started-setup-azure-data-lake-analytics
           - text: Set up Azure Databricks for Microsoft Academic Graph
-            url: get-started-setup-databricks
+            url: /get-started-setup-databricks
       - linkListType: reference
         links:
           - text: Microsoft Academic Graph data schema
-            url: reference-data-schema
+            url: /reference-data-schema
           - text: Language Similarity Package
-            url: language-similarity
+            url: /language-similarity
           - text: Network Similarity Package
-            url: network-similarity
+            url: /network-similarity
 
   # Card
   - title: Tutorials
@@ -42,13 +42,13 @@ landingContent:
       - linkListType: tutorial
         links:
           - text: Compute author h-index using Azure Data Lake Analytics (U-SQL)
-            url: tutorial-azure-data-lake-hindex
+            url: /tutorial-azure-data-lake-hindex
           - text: Compute author h-index using Azure Databricks (PySpark)
-            url: tutorial-azure-databricks-hindex
+            url: /tutorial-azure-databricks-hindex
           - text: Organizational patent search using Azure Search service
-            url: tutorial-azure-search-org-patents
+            url: /tutorial-azure-search-org-patents
           - text: Academic reference parsing using Azure Search service
-            url: tutorial-azure-search-reference-parsing
+            url: /tutorial-azure-search-reference-parsing
 
   # Card
   - title: Samples
@@ -56,12 +56,12 @@ landingContent:
       - linkListType: sample
         links:
           - text: Analytics and visualization samples (U-SQL/PowerBI)
-            url: samples-azure-data-lake-analytics
+            url: /samples-azure-data-lake-analytics
           - text: Analytics samples (PySpark)
-            url: samples-azure-databricks
+            url: /samples-azure-databricks
           - text: Language similarity sample (C#)
-            url: language-similarity-example
+            url: /language-similarity-example
           - text: Network similarity sample (U-SQL)
-            url: network-similarity-analytics
+            url: /network-similarity-analytics
           - text: Network similarity sample (PySpark)
-            url: network-similarity-databricks
+            url: /network-similarity-databricks
