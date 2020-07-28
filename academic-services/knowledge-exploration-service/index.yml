@@ -1,39 +1,66 @@
-### YamlMime:YamlDocument
-documentType: LandingData
-title: Microsoft Academic Knowledge Exploration Service (MAKES) documentation
+### YamlMime:Landing
+
+title: MAKES documentation
+summary: Microsoft Academic Knowledge Exploration Service (MAKES) offers a fast and effective way to add interactive academic search and refinement to applications. Learn about Microsoft Academic Knowledge Exploration Service, including technology overviews, API references, how-to guides, tutorials and more.
+
 metadata:
-  title: MAKES documentation
-  description: Learn about Microsoft Academic Knowledge Exporation Service, including technology overviews, API references, how-to guides, tutorials and more.
-  meta.description: Learn about Microsoft Academic Knowledge Exporation Service, including technology overviews, API references, how-to guides, tutorials and more.
+  title: Microsoft Academic Knowledge Exploration Service
+  description: Learn about Microsoft Academic Knowledge Exploration Service, including technology overviews, API references, how-to guides, tutorials and more.
+  meta.description: Learn about Microsoft Academic Knowledge Exploration Service, including technology overviews, API references, how-to guides, tutorials and more.
   ms.topic: landing-page
-  ms.date: 2020-02-10
-abstract:
-  description: Microsoft Academic Knowledge Exploration Service offers a fast and effective way to add interactive academic search and refinement to applications. Learn about Microsoft Academic Knowledge Exporation Service, including technology overviews, API references, how-to guides, tutorials and more.
-sections:
-- title: Technology overview
-  items: 
-  - type: list
-    style: unordered
-    items:
-    - html: <a href="introduction">About Microsoft Academic Knowledge Exploration Service (MAKES)</a>
-- title: Get started
-  items:
-  - type: paragraph
-    text: Learn how to deploy, manage, and use MAKES.
-  - type: list
-    style: unordered
-    items:
-    - html: <a href="get-started-setup-provisioning">Sign up for Microsoft Academic Knowledge Exploration Service (MAKES)</a>
-    - html: <a href="get-started-create-api-instances">Deploy a basic MAKES instance using the provided scripts</a>
-- title: How to
-  items:
-  - type: paragraph
-    text: Learn how to upgrade and manage MAKES
-  - type: list
-    style: unordered
-    items:
-    - html: <a href="how-to-deploy-new-indexes-to-makes">How to deploy new releases to an existing instance of MAKES</a>
-    - html: <a href="how-to-delete-api-instances">How to delete a MAKES deployment</a>
-    - html: <a href="how-to-create-index-from-mag">Create custom MAKES index from a MAG release</a>
-    
-    
+  author: DarrinEide
+  ms.author: darrine
+  ms.date: 07/28/2020
+
+landingContent:
+  - title: About MAKES
+    linkLists:
+      - linkListType: overview
+        links:
+          - text: What is MAKES?
+            url: introduction.md
+      - linkListType: concept
+        links:
+          - text: How MAKES understands natural language queries
+            url: concept-queries.md
+
+  - title: Get started
+    linkLists:
+      - linkListType: get-started
+        links:
+          - text: Sign up for MAKES
+            url: get-started-setup-provisioning.md
+      - linkListType: how-to-guide
+        links:
+          - text: Deploy new MAKES instance
+            url: get-started-create-api-instances.md
+      - linkListType: reference
+        links:
+          - text: MAKES API
+            url: reference-makes-api.md
+          - text: Entity schema
+            url: reference-makes-api-entity-schema.md
+      - linkListType: concept
+        links:
+          - text: Structured query expressions
+            url: concept-query-expressions.md
+            
+  - title: Manage instances
+    linkLists:
+      - linkListType: how-to-guide
+        links:
+          - text: Update existing instance with new release
+            url: how-to-deploy-new-indexes-to-makes.md
+          - text: Delete instance
+            url: how-to-delete-api-instances.md
+      - linkListType: reference
+        links:
+          - text: Command line tool
+            url: reference-makes-command-line-tool.md
+
+  - title: Customize MAKES
+    linkLists:
+      - linkListType: tutorial
+        links:
+          - text: Create a custom index from MAG
+            url: how-to-create-index-from-mag.md
