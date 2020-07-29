@@ -26,7 +26,7 @@ In this example we will walk you through the steps to deploy new MAKES releases 
 - You have existing MAKES instances in one or many Azure Regions.
 
 > [!NOTE]
-> This is a basic example setting up an active / passive topology for deploying your MAKES solution.  Your needs may dictate a different solution.  Consult the Azure documentation for addition infomation about Traffic Manager, Azure DNS, Azure Front Door and other offerings to create a solution that works for you.
+> This is a basic example setting up an active / passive topology for deploying your MAKES solution.  Your needs may dictate a different solution.  Consult the Azure documentation for addition information about Traffic Manager, Azure DNS, Azure Front Door and other offerings to create a solution that works for you.
 
 ## Architecture overview
 

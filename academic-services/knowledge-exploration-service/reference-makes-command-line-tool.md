@@ -2,7 +2,7 @@
 title: MAKES command line tool reference
 description: Documentation for the MAKES command line tool
 ms.topic: reference
-ms.date: 2020-05-27
+ms.date: 2020-06-12
 ---
 
 # MAKES command line tool

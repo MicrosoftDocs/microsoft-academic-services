@@ -1,0 +1,40 @@
+### YamlMime:Hub
+
+title: Microsoft Academic Services documentation # < 60 chars
+summary: Explore how to use Azure to interact with the Microsoft Academic Graph, a comprehensive, heterogeneous graph of the worlds scientific publications.  # < 160 chars
+# brand: aspnet | azure | dotnet | dynamics | m365 | ms-graph | office | power-bi | power-platform | sql | sql-server | vs | visual-studio | windows | xamarin
+brand: azure
+
+metadata:
+  title: Azure Data Box documentation # Required; page title displayed in search results. Include the brand. < 60 chars.
+  description: Explore how to use Azure to interact with the Microsoft Academic Graph, a comprehensive, heterogeneous graph of the worlds scientific publications. # Required; article description that is displayed in search results. < 160 chars.
+  ms.service: azure #Required; service per approved list. service slug assigned to your service by ACOM.
+  ms.topic: hub-page # Required
+  author: wingtofree #Required; your GitHub user alias, with correct capitalization.
+  ms.author: v-qingao #Required; microsoft alias of author; optional team alias.
+  ms.date: 5/20/2020 #Required; mm/dd/yyyy format.
+
+# productDirectory section (optional)
+productDirectory:
+  items:
+    # Card
+    - title: Microsoft Academic Graph (MAG)
+      # imageSrc should be square in ratio with no whitespace
+      imageSrc: ./media/microsoft-academic-graph-banner.svg
+      links:
+        - url: /academic-services/graph
+          text: Learn all about MAG, including how to receive it, schema documentation and sample analytics.
+
+    # Card
+    - title: Microsoft Academic Knowledge Exploration Service (MAKES)
+      imageSrc: ./media/microsoft-academic-knowledge-exploration-service-banner.svg
+      links:
+        - url: /academic-services/knowledge-exploration-service/
+          text: Learn all about MAKES, including how to access, deploy, manage and use the MAKES APIs, and documentation on the available versions.
+
+    # Card
+    - title: Project Academic Knowledge
+      imageSrc: ./media/project-academic-knowledge-banner.svg
+      links:
+        - url: /academic-services/project-academic-knowledge/introduction
+          text: Learn all about Project Academic Knowledge, including how to access it, entity schema and API method documentation.
