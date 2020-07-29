@@ -1,39 +1,48 @@
-### YamlMime:YamlDocument
-documentType: LandingData
-title: Microsoft Academic Knowledge Exploration Service (MAKES) documentation
+### YamlMime:Landing
+
+title: Microsoft Academic Knowledge Exploration Service (MAKES) documentation # < 60 chars
+summary: Learn about Microsoft Academic Knowledge Exporation Service, including technology overviews, API references, how-to guides, tutorials and more. # < 160 chars
+
 metadata:
-  title: MAKES documentation
-  description: Learn about Microsoft Academic Knowledge Exporation Service, including technology overviews, API references, how-to guides, tutorials and more.
-  meta.description: Learn about Microsoft Academic Knowledge Exporation Service, including technology overviews, API references, how-to guides, tutorials and more.
-  ms.topic: landing-page
-  ms.date: 2020-02-10
-abstract:
-  description: Microsoft Academic Knowledge Exploration Service offers a fast and effective way to add interactive academic search and refinement to applications. Learn about Microsoft Academic Knowledge Exporation Service, including technology overviews, API references, how-to guides, tutorials and more.
-sections:
-- title: Technology overview
-  items: 
-  - type: list
-    style: unordered
-    items:
-    - html: <a href="introduction">About Microsoft Academic Knowledge Exploration Service (MAKES)</a>
-- title: Get started
-  items:
-  - type: paragraph
-    text: Learn how to deploy, manage, and use MAKES.
-  - type: list
-    style: unordered
-    items:
-    - html: <a href="get-started-setup-provisioning">Sign up for Microsoft Academic Knowledge Exploration Service (MAKES)</a>
-    - html: <a href="get-started-create-api-instances">Deploy a basic MAKES instance using the provided scripts</a>
-- title: How to
-  items:
-  - type: paragraph
-    text: Learn how to upgrade and manage MAKES
-  - type: list
-    style: unordered
-    items:
-    - html: <a href="how-to-deploy-new-indexes-to-makes">How to deploy new releases to an existing instance of MAKES</a>
-    - html: <a href="how-to-delete-api-instances">How to delete a MAKES deployment</a>
-    - html: <a href="how-to-create-index-from-mag">Create custom MAKES index from a MAG release</a>
-    
-    
+  title: Microsoft Academic Knowledge Exploration Service (MAKES) documentation # Required; page title displayed in search results. Include the brand. < 60 chars.
+  description: Learn about Microsoft Academic Knowledge Exporation Service, including technology overviews, API references, how-to guides, tutorials and more. # Required; article description that is displayed in search results. < 160 chars.
+  ms.service: help #Required; service per approved list. service slug assigned to your service by ACOM.
+  ms.topic: landing-page # Required
+  author: DarrinEide #Required; your GitHub user alias, with correct capitalization.
+  ms.author: darrine #Required; microsoft alias of author; optional team alias.
+  ms.date: 07/29/2020 #Required; mm/dd/yyyy format.
+
+# linkListType: architecture | concept | deploy | download | get-started | how-to-guide | learn | overview | quickstart | reference | sample | tutorial | video | whats-new
+
+landingContent:
+# Cards and links should be based on top customer tasks or top subjects
+# Start card title with a verb
+  # Card (optional)
+  - title: Technology overview
+    linkLists:
+      - linkListType: overview
+        links:
+          - text: About Microsoft Academic Knowledge Exploration Service (MAKES)
+            url: /academic-services/knowledge-exploration-service/introduction
+
+  # Card (optional)
+  - title: Get started
+    linkLists:
+      - linkListType: get-started 
+        links:
+          - text: Sign up for Microsoft Academic Knowledge Exploration Service (MAKES)
+            url: /academic-services/knowledge-exploration-service/get-started-setup-provisioning
+          - text: Deploy a basic MAKES instance using the provided scripts
+            url: /academic-services/knowledge-exploration-service/get-started-create-api-instances
+  
+  # Card (optional)
+  - title: How to
+    linkLists:
+      - linkListType: how-to-guide
+        links:
+          - text: Deploy new releases to an existing instance of MAKES
+            url: /academic-services/knowledge-exploration-service/how-to-deploy-new-indexes-to-makes
+          - text: Delete a MAKES deployment
+            url: /academic-services/knowledge-exploration-service/how-to-delete-api-instances
+          - text: Create custom MAKES index from a MAG release
+            url: /academic-services/knowledge-exploration-service/how-to-create-index-from-mag
