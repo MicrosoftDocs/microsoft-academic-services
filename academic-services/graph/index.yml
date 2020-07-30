@@ -27,7 +27,7 @@ landingContent:
           - text: FAQ
             url: resources-faq.md
 
-  - title: Get started
+  - title: Get started with MAG
     linkLists:
       - linkListType: get-started
         links:
