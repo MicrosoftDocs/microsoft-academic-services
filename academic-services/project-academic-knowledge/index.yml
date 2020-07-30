@@ -33,13 +33,13 @@ landingContent:
       - linkListType: reference
         links:
           - text: CalcHistogram API
-            url: reference-interpret-method.md
+            url: reference-calchistogram-method.md
           - text: Evaluate API
             url: reference-evaluate-method.md
           - text: Interpret API
-            url: reference-calchistogram-method.md
+            url: reference-interpret-method.md
           - text: Similarity API
-            url: reference-calchistogram-method.md
+            url: reference-similarity-method.md
           - text: Entity schema
             url: reference-entity-attributes.md
           - text: Query expression syntax
