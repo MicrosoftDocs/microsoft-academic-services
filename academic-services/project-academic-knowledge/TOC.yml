@@ -1,5 +1,5 @@
 - name: Project Academic Knowledge documentation
-  href: introduction.md
+  href: index.yml
 - name: Overview
   expanded: true
   items:
