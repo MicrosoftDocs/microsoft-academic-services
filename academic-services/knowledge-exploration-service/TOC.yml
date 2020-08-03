@@ -10,7 +10,7 @@
   items:
   - name: Sign up for MAKES
     href: get-started-setup-provisioning.md
-  - name: Create an API instance
+  - name: Deploy new MAKES instance
     href: get-started-create-api-instances.md
 - name: How to
   expanded: true

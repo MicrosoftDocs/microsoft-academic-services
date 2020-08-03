@@ -12,7 +12,7 @@ metadata:
   ms.topic: hub-page # Required
   author: wingtofree #Required; your GitHub user alias, with correct capitalization.
   ms.author: v-qingao #Required; microsoft alias of author; optional team alias.
-  ms.date: 5/20/2020 #Required; mm/dd/yyyy format.
+  ms.date: 7/31/2020 #Required; mm/dd/yyyy format.
 
 # productDirectory section (optional)
 productDirectory:
@@ -22,7 +22,7 @@ productDirectory:
       # imageSrc should be square in ratio with no whitespace
       imageSrc: ./media/microsoft-academic-graph-banner.svg
       links:
-        - url: /academic-services/graph
+        - url: /academic-services/graph/
           text: Learn all about MAG, including how to receive it, schema documentation and sample analytics.
 
     # Card
@@ -36,5 +36,5 @@ productDirectory:
     - title: Project Academic Knowledge
       imageSrc: ./media/project-academic-knowledge-banner.svg
       links:
-        - url: /academic-services/project-academic-knowledge/introduction
+        - url: /academic-services/project-academic-knowledge/
           text: Learn all about Project Academic Knowledge, including how to access it, entity schema and API method documentation.

@@ -1,0 +1,45 @@
+### YamlMime:Landing
+
+title: Project Academic Knowledge (PAK) documentation
+summary: Project Academic Knowledge (PAK) offers a fast and effective way to add interactive academic search and refinement to applications. Learn about PAK, including technology overviews, API references, how-to guides, tutorials and more.
+
+metadata:
+  title: Project Academic Knowledge (PAK) documentation
+  description: Learn about Microsoft Academic Knowledge Exploration Service, including technology overviews, API references, how-to guides, tutorials and more.
+  ms.topic: landing-page
+  author: DarrinEide
+  ms.author: darrine
+  ms.date: 7/31/2020
+
+landingContent:
+  - title: About PAK
+    linkLists:
+      - linkListType: overview
+        links:
+          - text: What is PAK?
+            url: introduction.md
+      - linkListType: concept
+        links:
+          - text: How PAK understands natural language queries
+            url: concept-queries.md
+
+  - title: Get started
+    linkLists:
+      - linkListType: get-started
+        links:
+          - text: Sign up for PAK
+            url: https://msr-apis.portal.azure-api.net/signin?ReturnUrl=%2Fproducts%2Fproject-academic-knowledge%2Fsubscribe
+      - linkListType: reference
+        links:
+          - text: CalcHistogram API
+            url: reference-calchistogram-method.md
+          - text: Evaluate API
+            url: reference-evaluate-method.md
+          - text: Interpret API
+            url: reference-interpret-method.md
+          - text: Similarity API
+            url: reference-similarity-method.md
+          - text: Entity schema
+            url: reference-entity-attributes.md
+          - text: Query expression syntax
+            url: reference-query-expression-syntax.md
