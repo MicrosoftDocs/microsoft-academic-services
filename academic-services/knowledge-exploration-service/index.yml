@@ -23,7 +23,7 @@ landingContent:
           - text: How MAKES understands natural language queries
             url: concept-queries.md
 
-  - title: Get started
+  - title: Top tasks
     linkLists:
       - linkListType: get-started
         links:
