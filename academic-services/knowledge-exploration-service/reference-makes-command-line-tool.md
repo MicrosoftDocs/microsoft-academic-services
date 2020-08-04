@@ -171,6 +171,8 @@ Builds MAKES index(es) from json entities.
 kesm BuildIndex --MakesIndexResourceConfigFilePath
                 --EntitiesUrlPrefix
                 --OutputUrlPrefix
+                [--SynonymResourceFolderUrl]
+                [--SchemaUrl]
                 [--IndexPartitionCount]
                 [--IntersectionCountThresholdForPreCompute]
                 [--MakesPreprocessor]
@@ -196,6 +198,14 @@ The input entities file Url prefix.
 The output url prefix for writing the built index.
 
 ### BuildIndex optional parameters
+
+`--SchemaUrl`
+
+The url to the input index schema definition file. By default, the url is set to the schema describing the latest MAKES index release.
+
+`--SynonymResourceFolderUrl`
+
+The url to a resource folder containing all synonym data files required by the input index schema.
 
 `--IndexPartitionCount`
 
