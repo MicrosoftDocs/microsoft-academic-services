@@ -2,7 +2,8 @@
 title: MAKES command line tool reference
 description: Documentation for the MAKES command line tool
 ms.topic: reference
-ms.date: 2020-06-12
+ms.date: 08/04/2020
+ms.author: alch
 ---
 
 # MAKES command line tool
@@ -94,7 +95,7 @@ The default number of MAKES API host instances (virtual machines).
 
 `--HostMachineSku`
 
-The Sku for MAKES API host machines. Check [Azure Virtual Machine Sizes](https://docs.microsoft.com/en-us/azure/virtual-machines/windows/sizes) to get the avaliable options
+The Sku for MAKES API host machines. Check [Azure Virtual Machine Sizes](https://docs.microsoft.com/azure/virtual-machines/windows/sizes) to get the avaliable options
 
 `--HostMachineDataDiskSizeInGb`
 
@@ -214,7 +215,7 @@ The number of virtual machines(workers) used to build the index. Warning, assign
 
 `--WorkerSku`
 
-The virtual machine(worker) sku. Check [Azure Virtual Machine Sizes](https://docs.microsoft.com/en-us/azure/virtual-machines/windows/sizes) to get the avaliable options
+The virtual machine(worker) sku. Check [Azure Virtual Machine Sizes](https://docs.microsoft.com/azure/virtual-machines/windows/sizes) to get the avaliable options
 
 ## BuildIndexLocal command
 
