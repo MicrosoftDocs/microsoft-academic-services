@@ -1,42 +1,68 @@
-### YamlMime:YamlDocument
-documentType: LandingData
-title: Microsoft Academic Graph documentation
+### YamlMime:Landing
+
+title: Microsoft Academic Graph (MAG) documentation
+summary: Learn about Microsoft Academic Graph (MAG), including getting started guide, data schema reference, sample analytics.
+
 metadata:
-  title: MAG documentation
-  description: Learn about Microsoft Academic Graph, including getting started guides, data schema reference, sample analytics
-  meta.description: Learn about Microsoft Academic Graph, including getting started guides, data schema reference, sample analytics
+  title: Project Academic Knowledge (PAK) documentation
+  description: Learn about Microsoft Academic Graph (MAG), including getting started guides, data schema reference, sample analytics
   ms.topic: landing-page
-  ms.date: 12/2/2019
-abstract:
-  description: Learn about Microsoft Academic Graph, including getting started guide, data schema reference, sample analytics.
-sections:
-- title: Get started
-  items:
-  - type: list
-    style: unordered
-    items:
-    - html: <a href="get-started-setup-provisioning">Get Microsoft Academic Graph on Azure storage</a>
-    - html: <a href="get-started-setup-azure-data-lake-analytics">Set up Azure Data Lake Analytics for Microsoft Academic Graph</a>
-    - html: <a href="get-started-setup-databricks">Set up Azure Databricks for Microsoft Academic Graph</a>
-    - html: <a href="reference-data-schema">Microsoft Academic Graph data schema</a>
-    - html: <a href="language-similarity">Language Similarity Package</a>
-    - html: <a href="network-similarity">Network Similarity Package</a>
-- title: Tutorials
-  items:
-  - type: list
-    style: unordered
-    items:
-    - html: <a href="tutorial-azure-data-lake-hindex">Compute author h-index using Azure Data Lake Analytics (U-SQL)</a>
-    - html: <a href="tutorial-azure-databricks-hindex">Compute author h-index using Azure Databricks (PySpark)</a>
-    - html: <a href="tutorial-azure-search-org-patents">Organizational patent search using Azure Search service</a>
-    - html: <a href="tutorial-azure-search-reference-parsing">Academic reference parsing using Azure Search service</a>
-- title: Samples
-  items:
-  - type: list
-    style: unordered
-    items:
-    - html: <a href="samples-azure-data-lake-analytics">Analytics and visualization samples (U-SQL/PowerBI)</a>
-    - html: <a href="samples-azure-databricks">Analytics samples (PySpark)</a>
-    - html: <a href="language-similarity-example">Language similarity sample (C#)</a>
-    - html: <a href="network-similarity-analytics">Network similarity sample (U-SQL)</a>
-    - html: <a href="network-similarity-databricks">Network similarity sample (PySpark)</a>
+  author: DarrinEide
+  ms.author: darrine
+  ms.date: 7/31/2020
+
+landingContent:
+  - title: About MAG
+    linkLists:
+      - linkListType: overview
+        links:
+          - text: Microsoft Academic Graph
+            url: https://aka.ms/academicgraph
+          - text: Language Similarity Package
+            url: language-similarity.md
+          - text: Network Similarity Package
+            url: network-similarity.md
+      - linkListType: reference
+        links:
+          - text: FAQ
+            url: resources-faq.md
+
+  - title: Get started with MAG
+    linkLists:
+      - linkListType: get-started
+        links:
+          - text: Sign up for MAG
+            url: get-started-setup-provisioning.md
+      - linkListType: how-to-guide
+        links:
+          - text: Set up Azure Data Lake Analytics for MAG
+            url: get-started-setup-azure-data-lake-analytics.md
+          - text: Set up Azure Databricks for MAG
+            url: get-started-setup-databricks.md
+      - linkListType: reference
+        links:
+          - text: Microsoft Academic Graph data schema
+            url: reference-data-schema.md
+            
+  - title: Tutorials and samples
+    linkLists:
+      - linkListType: tutorial
+        links:
+          - text: Generate author h-index - U-SQL
+            url: tutorial-azure-data-lake-hindex.md
+          - text: Generate author h-index - PySpark
+            url: tutorial-azure-databricks-hindex.md
+          - text: Academic refrence parsing - Azure Search
+            url: tutorial-azure-search-reference-parsing.md
+      - linkListType: sample
+        links:
+          - text: MAG - U-SQL + PowerBI
+            url: samples-azure-data-lake-analytics.md
+          - text: MAG - PySpark
+            url: samples-azure-databricks.md
+          - text: Language Similarity - C#
+            url: language-similarity-example.md
+          - text: Network Similarity - U-SQL
+            url: network-similarity-analytics.md
+          - text: Network Similarity - PySpark
+            url: network-similarity-databricks.md
