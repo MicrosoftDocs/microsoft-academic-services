@@ -35,11 +35,11 @@ The base URL to a MAKES release package.
 
 `--Region`
 
-The region to deploy the host resources to. Defaults to WestUs
+The region to deploy the host resources to. Defaults to "westus".
 
 `--MakesWebHost`
 
-The URL to MAKES web host zip file that will be used to create the MAKES virtual machine hosting image.
+The URL to MAKES web host zip file that will be used to create the MAKES virtual machine hosting image. Defaults to "<MakesPackage/webhost/makes-service-host.zip>"
 
 ## DeployHost command
 
