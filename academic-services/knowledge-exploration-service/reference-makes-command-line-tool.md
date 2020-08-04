@@ -79,31 +79,31 @@ The MAKES host virtual machine image resource Id. Run CreateHostResource command
 
 `--MakesIndex`
 
-The MAKES index files URL reference.
+The MAKES index files URL reference. Defaults to "<MakesPackage>/index".
 
 `--MakesGrammar`
 
-The MAKES grammar file URL reference.
+The MAKES grammar file URL reference. Defaults to "<MakesPackage>/grammar/makes-default-grammar".
 
 `--Region`
 
-The region where the MAKES API host should be deployed to.
+The region where the MAKES API host should be deployed to. Defaults to "westus"
 
 `--InstanceCount`
 
-The default number of MAKES API host instances (virtual machines).
+The default number of MAKES API host instances (virtual machines). Defaults to 1.
 
 `--HostMachineSku`
 
-The Sku for MAKES API host machines. Check [Azure Virtual Machine Sizes](https://docs.microsoft.com/azure/virtual-machines/windows/sizes) to get the avaliable options
+The Sku for MAKES API host machines. Check [Azure Virtual Machine Sizes](https://docs.microsoft.com/azure/virtual-machines/windows/sizes) to get the avaliable options. Defaults to "Standard_D14_v2".
 
 `--HostMachineDataDiskSizeInGb`
 
-The size of the data disk (Managed Disk:Premium SSD) that the host should have. See [Azure Managed Disks](https://azure.microsoft.com/pricing/details/managed-disks/) for detailed pricing information. If the size is set to 0 (the default), no additional data disk will be attached to the host Virtual Machine and index/grammar data will be stored on the temp drive (D:\\) that comes with the Virtual Machine. If the size is great than 0, then we'll add a managed disk with the specified size, intialize as data disk drive (F:\\) and download the index/grammar data to it. Note: Using data disk instead of the default attached temp drive on the Virtual Machine may lead to decrease performance due to IOPS differences.
+The size of the data disk (Managed Disk:Premium SSD) that the host should have. See [Azure Managed Disks](https://azure.microsoft.com/pricing/details/managed-disks/) for detailed pricing information. If the size is set to 0, no additional data disk will be attached to the host Virtual Machine and index/grammar data will be stored on the temp drive (D:\\) that comes with the Virtual Machine. If the size is great than 0, then we'll add a managed disk with the specified size, intialize as data disk drive (F:\\) and download the index/grammar data to it. Note: Using data disk instead of the default attached temp drive on the Virtual Machine may lead to decrease performance due to IOPS differences. Defaults to 0.
 
 `--WebHostAppSettingsOverride`
 
-The application settings used by the web host represented as a list of \"<ApplicationSettingJsonPath>=< ApplicationSettingValue>\" separated by ';'
+The application settings used by the web host represented as a list of \"<ApplicationSettingJsonPath>=< ApplicationSettingValue>\" separated by ';'. Defaults to null. 
 
 `--WebHostOverrideUrl`
 
@@ -111,11 +111,11 @@ The host web app package file url reference for overriding default MAKES web hos
 
 `--ApplicationInsightsInstrumentationKey`
 
-The Application Insights instrumentation key for sending MAKES web host logs to. E.g. 14f81de7-f9b7-4997-9cd9-d91651fe53df. By default, the logs are only stored on box as windows application events.
+The Application Insights instrumentation key for sending MAKES web host logs to. E.g. 14f81de7-f9b7-4997-9cd9-d91651fe53df. By default, the logs are only stored on box as windows application events. Defaults to null.
 
 `--LogWebHostRequestsAndResponses`
 
-Whether to log every http request that MAKES web host receives.
+Whether to log every http request that MAKES web host receives. Defaults to false.
 
 ## CreateIndexResources command
 
@@ -149,19 +149,19 @@ Outputs the MAKES indexing resources config file for BuildIndex command. E.g myI
 
 `--Region`
 
-The region to create the indexing resources in.
+The region to create the indexing resources in. Defaults to "westus".
 
 `--MakesPreprocessor`
 
-The MAKES preprocessor zip url.
+The MAKES preprocessor zip url. Defaults to "<MakesPackage>/tools/preprocessor.zip"
 
 `--MakesIndexer`
 
-The MAKES indexer zip url.
+The MAKES indexer zip url. Defaults to "<MakesPackage>/tools/indexer.zip"
 
 `--MakesJobManager`
 
-The MAKES JobManager zip url.
+The MAKES JobManager zip url. Defaults to "<MakesPackage>/tools/jobManager.zip"
 
 ## BuildIndex command
 
@@ -205,27 +205,27 @@ The url to the input index schema definition file. By default, the url is set to
 
 `--SynonymResourceFolderUrl`
 
-The url to a resource folder containing all synonym data files required by the input index schema.
+The url to a resource folder containing all synonym data files required by the input index schema. Defaults to null.
 
 `--IndexPartitionCount`
 
-The number of index partitions to create. A index job can finish quicker when there are more partitions; however, the more partitions, the less accurate the interpret results will be. Maximize build performance by creating 1 partition per worker.
+The number of index partitions to create. A index job can finish quicker when there are more partitions; however, the more partitions, the less accurate the interpret results will be. Maximize build performance by creating 1 partition per worker. Defaults to 1.
 
 `--IntersectionCountThresholdForPreCompute`
 
-The attribute value intersections threshold for pre-computing look up tables. Use this value to tune index build time performance, run time performance, and index size. The higher the value, the smaller index size and slower run-time performance will be. The lower the value, the larger index size and faster run-time performance will be.
+The attribute value intersections threshold for pre-computing look up tables. Use this value to tune index build time performance, run time performance, and index size. The higher the value, the smaller index size and slower run-time performance will be. The lower the value, the larger index size and faster run-time performance will be. Defaults to 100,000.
 
 `--MaxStringLength`
 
-The maximum string length for all entity attributes. All strings over the maximum string length will be truncated
+The maximum string length for all entity attributes. All strings over the maximum string length will be truncated. Defaults to 500.
 
 `--WorkerCount`
 
-The number of virtual machines(workers) used to build the index. Warning, assigning a number larger than IndexPartitionCount won't result in performance gain.
+The number of virtual machines(workers) used to build the index. Warning, assigning a number larger than IndexPartitionCount won't result in performance gain. Defaults to 1.
 
 `--WorkerSku`
 
-The virtual machine(worker) sku. Check [Azure Virtual Machine Sizes](https://docs.microsoft.com/azure/virtual-machines/windows/sizes) to get the avaliable options
+The virtual machine(worker) sku. Check [Azure Virtual Machine Sizes](https://docs.microsoft.com/azure/virtual-machines/windows/sizes) to get the avaliable options. Defaults to "Standard_D8_v3"
 
 ## BuildIndexLocal command
 
@@ -258,15 +258,15 @@ The output MAKES index binary file path. E.g. index.kes
 
 `--IndexDescription`
 
-A description to include in the index. E.g. My custom MAKES index build.
+A description to include in the index. E.g. My custom MAKES index build. Defaults to null.
 
 `--MaxStringLength`
 
-The maximum string length for all entity attributes. All strings over the maximum string length will be truncated
+The maximum string length for all entity attributes. All strings over the maximum string length will be truncated. Defaults to 2,147,483,647.
 
 `--IntersectionCountThresholdForPreCompute`
 
-The attribute value intersections threshold for pre-computing look up tables. Use this value to tune index build time performance, run time performance, and index size. The higher the value, the smaller index size and slower run-time performance will be. The lower the value, the larger index size and faster run-time performance will be.
+The attribute value intersections threshold for pre-computing look up tables. Use this value to tune index build time performance, run time performance, and index size. The higher the value, the smaller index size and slower run-time performance will be. The lower the value, the larger index size and faster run-time performance will be. Defaults to 100,000
 
 ## CompileGrammarLocal command
 
@@ -350,31 +350,31 @@ The compiled grammar binary file path. Interpret requires a compiled grammar bin
 
 `--NormalizeQuery`
 
-Whether normalization rules should be applied to the query before making interpretations.
+Whether normalization rules should be applied to the query before making interpretations. Defaults to true.
 
 `--AllowCompletions`
 
-Whether to generate interpretations assuming the query is a partial query that's not yet fully formulated. When set to true, better interpretations can be generated for scenarios such as auto-suggest. 
+Whether to generate interpretations assuming the query is a partial query that's not yet fully formulated. When set to true, better interpretations can be generated for scenarios such as auto-suggest. Defaults to false.
 
 `--Offset`
 
-The number of top interpretations to be skipped/excluded in the result set.
+The number of top interpretations to be skipped/excluded in the result set. Defaults to 0.
 
 `--Count`
 
-The number of top interpretations to be included in the result set.
+The number of top interpretations to be included in the result set. Defaults to 5.
 
 `--InterpretationEntityAttributes`
 
-A list of entity attributes, seperated by ','. Use '*' for all entity attributes. Each interpretation in the result set can include the top matching entities used for generating the interpretation. InterpretationEntityAttributes specifies which attributes of the top matching entities should be included in the result set.
+A list of entity attributes, seperated by ','. Use '*' for all entity attributes. Each interpretation in the result set can include the top matching entities used for generating the interpretation. InterpretationEntityAttributes specifies which attributes of the top matching entities should be included in the result set. Defaults to "*".
 
 `--InterpretationEntityCount`
 
-The number of top matching entities to be included for each interpretation. Each interpretation in the result set can include the top matching entities used for generating the interpretation. InterpretationEntityCount specifies how many top matching entnties should be included in the result set
+The number of top matching entities to be included for each interpretation. Each interpretation in the result set can include the top matching entities used for generating the interpretation. InterpretationEntityCount specifies how many top matching entnties should be included in the result set. Defaults to 10.
 
 `--Timeout`
 
-Maximum amount of time in milliseconds allowed for command to complete before aborting the command. The interpret command will return the top interptations found in the allowed timedout.
+Maximum amount of time in milliseconds allowed for command to complete before aborting the command. The interpret command will return the top interptations found in the allowed timedout. Defaults to 2000.
 
 ## Evaluate command
 
@@ -405,27 +405,27 @@ The file path expression for specifying which index file(s) to use. Use wild car
 
 `--Attributes`
 
-A list of entity attributes to be included in the result set, seperated by ','. Use '*' for all attributes.
+A list of entity attributes to be included in the result set, seperated by ','. Use '*' for all attributes. Defaults to 0.
 
 `--Offset`
 
-The number of top entities to be skipped/excluded in the result set.
+The number of top entities to be skipped/excluded in the result set. Defaults to 0.
 
 `--Count`
 
-The number of top interpretations to be included in the result set.
+The number of top interpretations to be included in the result set. Defaults to 5.
 
 `--OrderBy`
 
-Name of the entity attribute to use for sorting/ordering the entities in the result set. By default, entities are sorted by descending entity weight (static rank).
+Name of the entity attribute to use for sorting/ordering the entities in the result set. By default, entities are sorted by descending entity weight (static rank). Defaults to "weight"
 
 `--OrderByDescending`
 
-The direction for sorting entities. By default, entities are sorted by descending entity weight (static rank).
+The direction for sorting entities. By default, entities are sorted by descending entity weight (static rank). Defaults to true.
 
 `--Timeout`
 
-Maximum amount of time in milliseconds allowed for the command to complete before aborting the command. Use 0 to disable timeout.
+Maximum amount of time in milliseconds allowed for the command to complete before aborting the command. Use 0 to disable timeout. Defaults to 0.
 
 ## Histogram command
 
@@ -456,23 +456,23 @@ The file path expression for specifying which index file(s) to use. Use wild car
 
 `--Attributes`
 
-A list of entity attributes, seperated by ','. Use '*' for all attributes. Histogram will generate total count, distinct count, and top values for the select attributes for entities specified in the KesQueryExpression.
+A list of entity attributes, seperated by ','. Use '*' for all attributes. Histogram will generate total count, distinct count, and top values for the select attributes for entities specified in the KesQueryExpression. Defaults to "*".
 
 `--Offset`
 
-The number of top entity attribute values to be skipped/excluded in the result set.
+The number of top entity attribute values to be skipped/excluded in the result set. Defaults to 0.
 
 `--Count`
 
-The number of top entity attribute values to be included in the result set.
+The number of top entity attribute values to be included in the result set. Defaults to 5.
 
 `--SampleSize`
 
-The maxium number of entities to consider for generating histogram. If this number is smaller than the number of entities in index(es), the histogram will be generated based on the top entities specified by the number. If this number is 0, all entities specified by the KES query will be used.
+The maxium number of entities to consider for generating histogram. If this number is smaller than the number of entities in index(es), the histogram will be generated based on the top entities specified by the number. If this number is 0, all entities specified by the KES query will be used. Defaults to 0.
 
 `--Timeout`
 
-Maximum amount of time in milliseconds allowed for the command to complete before aborting the command. Use 0 to disable timeout.
+Maximum amount of time in milliseconds allowed for the command to complete before aborting the command. Use 0 to disable timeout. Defaults to 0.
 
 ## Common command parameters
 
