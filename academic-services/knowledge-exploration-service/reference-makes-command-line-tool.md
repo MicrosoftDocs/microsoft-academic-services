@@ -205,7 +205,7 @@ The url to the input index schema definition file. By default, the url is set to
 
 `--SynonymResourceFolderUrl`
 
-The url to a resource folder containing all synonym data files required by the input index schema. Defaults to null.
+The url to a resource folder containing all synonym data files required by the input index schema. The parameter can be null if the input index schema doesn't specify any synonyms. Defaults to null.
 
 `--IndexPartitionCount`
 
@@ -350,7 +350,7 @@ The compiled grammar binary file path. Interpret requires a compiled grammar bin
 
 `--NormalizeQuery`
 
-Whether normalization rules should be applied to the query before making interpretations. Defaults to true.
+Whether [normalization rules](concepts-queries.md#stage-1-lexical-analysis) should be applied to the query before making interpretations. Defaults to true.
 
 `--AllowCompletions`
 
@@ -399,13 +399,13 @@ The KES [query expression](.\concepts-query-expressions.md) to use for selecting
 
 `--IndexFilePaths`
 
-The file path expression for specifying which index file(s) to use. Use wild card to specify multiple indexes e.g. './index.*.kes'
+The file path expression for specifying which index file(s) to use. If multiple index files are specified, the command will automatically merge the response from all indexes. Use wild card '*' to specify multiple indexes e.g. './index.*.kes'.
 
 ### Evaluate optional parameters
 
 `--Attributes`
 
-A list of entity attributes to be included in the result set, seperated by ','. Use '*' for all attributes. Defaults to 0.
+A list of entity attributes to be included in the result set, seperated by ','. Use '*' for all attributes. Defaults to '*'.
 
 `--Offset`
 
@@ -417,7 +417,7 @@ The number of top interpretations to be included in the result set. Defaults to 
 
 `--OrderBy`
 
-Name of the entity attribute to use for sorting/ordering the entities in the result set. By default, entities are sorted by descending entity weight (static rank). Defaults to "weight"
+Name of the entity attribute to use for sorting/ordering the entities in the result set. By default, entities are sorted by descending entity weight (static rank).
 
 `--OrderByDescending`
 
@@ -450,13 +450,13 @@ The KES [query expression](.\concepts-query-expressions.md) to use for selecting
 
 `--IndexFilePaths`
 
-The file path expression for specifying which index file(s) to use. Use wild card to specify multiple indexes e.g. './index.*.kes' Histogram requires at least one index.
+The file path expression for specifying which index file(s) to use. If multiple index files are specified, the command will automatically merge the response from all indexes. Use wild card '*' to specify multiple indexes e.g. './index.*.kes'.
 
 ### Histogram optional parameters
 
 `--Attributes`
 
-A list of entity attributes, seperated by ','. Use '*' for all attributes. Histogram will generate total count, distinct count, and top values for the select attributes for entities specified in the KesQueryExpression. Defaults to "*".
+A list of entity attributes, seperated by ','. Use '*' for all attributes. Histogram will generate total count, distinct count, and top values for the select attributes for entities specified in the KesQueryExpression. Defaults to '*'.
 
 `--Offset`
 
