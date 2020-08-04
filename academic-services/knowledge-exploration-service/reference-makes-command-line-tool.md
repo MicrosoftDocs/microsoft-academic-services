@@ -9,7 +9,7 @@ ms.date: 2020-06-12
 
 Makes command line tool is designed to help users create and host MAKES indexes.
 
-## CreateHostResources Command
+## CreateHostResources command
 
 Creates the MAKES index hosting resources. E.g. MAKES web host image
 
@@ -20,7 +20,7 @@ kesm CreateHostResources --HostResourceName
                          [--MakesWebHost]
 ```
 
-### CreateHostResources Required Parameters
+### CreateHostResources required parameters
 
 `--HostResourceName`
 
@@ -30,7 +30,7 @@ The name of the host resource.
 
 The base URL to a MAKES release package.
 
-### CreateHostResources Optional Parameters
+### CreateHostResources optional parameters
 
 `--Region`
 
@@ -40,7 +40,7 @@ The region to deploy the host resources to. Defaults to WestUs
 
 The URL to MAKES web host zip file that will be used to create the MAKES virtual machine hosting image.
 
-## DeployHost Command
+## DeployHost command
 
 Hosts the specified indexes to power an instance of MAKES API.
 
@@ -60,7 +60,7 @@ kesm DeployHost --HostName
                 [--LogWebHostRequestsAndResponses]
 ```
 
-### DeployHost Required Parameters
+### DeployHost required parameters
 
 `--HostName`
 
@@ -74,7 +74,7 @@ The base URL to a MAKES release package.
 
 The MAKES host virtual machine image resource Id. Run CreateHostResource command to generate one.
 
-### DeployHost Optional Parameters
+### DeployHost optional parameters
 
 `--MakesIndex`
 
@@ -116,7 +116,7 @@ The Application Insights instrumentation key for sending MAKES web host logs to.
 
 Whether to log every http request that MAKES web host receives.
 
-## CreateIndexResources Command
+## CreateIndexResources command
 
 Creates the MAKES index building resources such as MAKES index build batch account and storage account.
 
@@ -130,7 +130,7 @@ kesm CreateIndexResources --IndexResourceName
                           [--MakesJobManager]
 ```
 
-### CreateIndexResources Required Parameters
+### CreateIndexResources required parameters
 
 `--IndexResourceName`
 
@@ -144,7 +144,7 @@ The base URL to a MAKES release package.
 
 Outputs the MAKES indexing resources config file for BuildIndex command. E.g myIndexResConfig.json
 
-### CreateIndexResources Optional Parameters
+### CreateIndexResources optional parameters
 
 `--Region`
 
@@ -162,7 +162,7 @@ The MAKES indexer zip url.
 
 The MAKES JobManager zip url.
 
-## BuildIndex Command
+## BuildIndex command
 
 Builds MAKES index(es) from json entities.
 
@@ -180,7 +180,7 @@ kesm BuildIndex --MakesIndexResourceConfigFilePath
                 [--WorkerSku]
 ```
 
-### BuildIndex Required Parameters
+### BuildIndex required parameters
 
 `--MakesIndexResourceConfigFilePath`
 
@@ -194,7 +194,7 @@ The input entities file Url prefix.
 
 The output url prefix for writing the built index.
 
-### BuildIndex Optional Parameters
+### BuildIndex optional parameters
 
 `--IndexPartitionCount`
 
@@ -216,7 +216,7 @@ The number of virtual machines(workers) used to build the index. Warning, assign
 
 The virtual machine(worker) sku. Check [Azure Virtual Machine Sizes](https://docs.microsoft.com/en-us/azure/virtual-machines/windows/sizes) to get the avaliable options
 
-## BuildIndexLocal Command
+## BuildIndexLocal command
 
 Build an index locally using entity data and schema definition files. Can only be run on win-x64 platform.
 
@@ -229,7 +229,7 @@ kesm BuildIndex --SchemaFilePath
                 [--IntersectionCountThresholdForPreCompute]
 ```
 
-### BuildIndexLocal Required Parameters
+### BuildIndexLocal required parameters
 
 `--SchemaFilePath`
 
@@ -243,7 +243,7 @@ The input entities json file path. E.g. indexEntities.json
 
 The output MAKES index binary file path. E.g. index.kes
 
-### BuildIndexLocal Optional Parameters
+### BuildIndexLocal optional parameters
 
 `--IndexDescription`
 
@@ -257,7 +257,7 @@ The maximum string length for all entity attributes. All strings over the maximu
 
 The attribute value intersections threshold for pre-computing look up tables. Use this value to tune index build time performance, run time performance, and index size. The higher the value, the smaller index size and slower run-time performance will be. The lower the value, the larger index size and faster run-time performance will be.
 
-## CompileGrammarLocal Command
+## CompileGrammarLocal command
 
 Compiles a grammar definition xml file into compiled grammar file.
 
@@ -266,7 +266,7 @@ kesm CompileGrammarLocal --GrammarDefinitionFilePath
                          --OutputCompiledGrammarFilePath
 ```
 
-### CompileGrammarLocal Required Parameters
+### CompileGrammarLocal required parameters
 
 `--GrammarDefinitionFilePath`
 
@@ -276,7 +276,7 @@ The input grammar definition xml file path. E.g. grammar.xml
 
 The output compiled grammar binary file path. E.g. grammar.kesg
 
-## DescribeIndex Command
+## DescribeIndex command
 
 Retrieves the description, schema, build time and number of entities for the index binary.
 
@@ -284,13 +284,13 @@ Retrieves the description, schema, build time and number of entities for the ind
 kesm DescribeIndex --IndexFilePath
 ```
 
-### DescribeIndex Required Parameters
+### DescribeIndex required parameters
 
 `--IndexFilePath`
 
 The file path to the index binary. E.g. index.kes
 
-## DescribeGrammar Command
+## DescribeGrammar command
 
 Retrieves original grammar definition XML from the compiled grammar binary
 
@@ -298,13 +298,13 @@ Retrieves original grammar definition XML from the compiled grammar binary
 kesm DescribeGrammar --CompiledGrammarFilePath
 ```
 
-### DescribeGrammar Required Parameters
+### DescribeGrammar required parameters
 
 `--CompiledGrammarFilePath`
 
 The file path to the compiled grammar binary. E.g. grammar.kesg
 
-## Interpret Command
+## Interpret command
 
 Interprets a natural language query using specified indexes and grammar.
 
@@ -321,7 +321,7 @@ kesm Interpret --Query
                [--Timeout]
 ```
 
-### Interpret Required Parameters
+### Interpret required parameters
 
 `--Query`
 
@@ -335,7 +335,7 @@ The file path expression for specifying which index file(s) to use. Use wild car
 
 The compiled grammar binary file path. Interpret requires a compiled grammar binary
 
-### Interpret Optional Parameters
+### Interpret optional parameters
 
 `--NormalizeQuery`
 
@@ -353,19 +353,19 @@ The number of top interpretations to be skipped/excluded in the result set.
 
 The number of top interpretations to be included in the result set.
 
-`--SelectInterpretationEntities`
+`--InterpretationEntityAttributes`
 
-A list of entity attributes, seperated by ','. Use '*' for all entity attributes. Each interpretation in the result set can include the top matching entities used for generating the interpretation. SelectInterpretationEntities specifies which attributes of the top matching entities should be included in the result set.
+A list of entity attributes, seperated by ','. Use '*' for all entity attributes. Each interpretation in the result set can include the top matching entities used for generating the interpretation. InterpretationEntityAttributes specifies which attributes of the top matching entities should be included in the result set.
 
-`--TakeInterpretionEntities`
+`--InterpretationEntityCount`
 
-The number of top matching entities to be included for each interpretation. Each interpretation in the result set can include the top matching entities used for generating the interpretation. TakeInterpretionEntities specifies how many top matching entnties should be included in the result set
+The number of top matching entities to be included for each interpretation. Each interpretation in the result set can include the top matching entities used for generating the interpretation. InterpretationEntityCount specifies how many top matching entnties should be included in the result set
 
 `--Timeout`
 
 Maximum amount of time in milliseconds allowed for command to complete before aborting the command. The interpret command will return the top interptations found in the allowed timedout.
 
-## Evaluate Command
+## Evaluate command
 
 Evaluates a KES query expression and returns the top matching entities in the index(es).
 
@@ -380,17 +380,17 @@ kesm Evaluate --KesQueryExpression
               [--Timeout]
 ```
 
-### Evaluate Required Parameters
+### Evaluate required parameters
 
 `--KesQueryExpression`
 
-The KES query expression that specifies entities in the index(es).
+The KES [query expression](.\concepts-query-expressions.md) to use for selecting entities from the index(es).
 
 `--IndexFilePaths`
 
 The file path expression for specifying which index file(s) to use. Use wild card to specify multiple indexes e.g. './index.*.kes'
 
-### Evaluate Optional Parameters
+### Evaluate optional parameters
 
 `--Attributes`
 
@@ -416,9 +416,9 @@ The direction for sorting entities. By default, entities are sorted by descendin
 
 Maximum amount of time in milliseconds allowed for the command to complete before aborting the command. Use 0 to disable timeout.
 
-## Histogram Command
+## Histogram command
 
-Calculates distinct/total entity attribute counts and top attribute values for entities specified by a KES query expression.
+Calculates distinct/total entity attribute counts and top attribute values for entities matching a query expression.
 
 ```cmd
 kesm Histogram --KesQueryExpression
@@ -431,17 +431,17 @@ kesm Histogram --KesQueryExpression
                [--Timeout]
 ```
 
-### Histogram Required Parameters
+### Histogram required parameters
 
-`--KesQuery`
+`--KesQueryExpression`
 
-The KES query expression that specifies entities in the index(es).
+The KES [query expression](.\concepts-query-expressions.md) to use for selecting entities from the index(es).
 
 `--IndexFilePaths`
 
 The file path expression for specifying which index file(s) to use. Use wild card to specify multiple indexes e.g. './index.*.kes' Histogram requires at least one index.
 
-### Histogram Optional Parameters
+### Histogram optional parameters
 
 `--Attributes`
 
@@ -463,11 +463,11 @@ The maxium number of entities to consider for generating histogram. If this numb
 
 Maximum amount of time in milliseconds allowed for the command to complete before aborting the command. Use 0 to disable timeout.
 
-## Common Command Parameters
+## Common command parameters
 
 Below are common parameters that can be applied to more than one commands.
 
-### Common Azure Authentication Parameters
+### Common Azure Authentication parameters
 
 Applies to all commands. MAKES command line tool leverages device login to access Azure Subscriptions by default. You can specify AzureActiveDirectoryDomainName, AzureSubscriptionId, and AzureCredentialsFilePath parameter to change the authentication behavior.
 
@@ -492,7 +492,7 @@ az ad sp create-for-rbac --sdk-auth > my.azureauth
 
 If you don't have Azure CLI installed, you can also do this in the [cloud shell](https://docs.microsoft.com/azure/cloud-shell/quickstart).
 
-### Common Azure Resource Group Parameter
+### Common Azure Resource Group parameter
 
 Applies to Azure resource creation commands (CreateHostResources, CreateIndexResources, and DeployHost.) MAKES command line tool may create Azure resources for the user. You can use the common resource group parameter to ensure the resources created will be in the specified group.
 
