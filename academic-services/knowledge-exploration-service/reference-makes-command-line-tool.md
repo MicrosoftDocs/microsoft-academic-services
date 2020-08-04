@@ -221,7 +221,7 @@ The maximum string length for all entity attributes. All strings over the maximu
 
 `--WorkerCount`
 
-The number of virtual machines(workers) used to build the index. Warning, assigning a number larger than IndexPartitionCount won't result in performance gain. Defaults to 1.
+The number of virtual machines(workers) used to build the index. If you're building a index with multitple index partitions, you can increase the number of workers up to the number of index partitions to increase build performance. Warning, assigning a number larger than IndexPartitionCount won't result in performance gain. Defaults to 1.
 
 `--WorkerSku`
 
