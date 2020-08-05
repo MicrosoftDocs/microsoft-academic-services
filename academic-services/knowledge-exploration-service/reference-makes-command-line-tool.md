@@ -6,9 +6,9 @@ ms.date: 08/04/2020
 ms.author: alch
 ---
 
-# MAKES command line tool
+# MAKES command line tool (KESM)
 
-Makes command line tool is designed to help users create and host MAKES indexes.
+Makes command line tool (KESM) is designed to help users create and host MAKES indexes.
 
 ## CreateHostResources command
 
@@ -85,21 +85,24 @@ The MAKES index files URL reference. Defaults to "<MakesPackage>/index".
 
 The MAKES grammar file URL reference. Defaults to "<MakesPackage>/grammar/makes-default-grammar".
 
-`--Region`
-
-The region where the MAKES API host should be deployed to. Defaults to "westus"
-
 `--InstanceCount`
 
 The default number of MAKES API host instances (virtual machines). Defaults to 1.
 
+`--Region`
+
+The region where the MAKES API host should be deployed to. Defaults to "westus"
+
 `--HostMachineSku`
 
-The Sku for MAKES API host machines. Check [Azure Virtual Machine Sizes](https://docs.microsoft.com/azure/virtual-machines/windows/sizes) to get the avaliable options. Defaults to "Standard_D14_v2".
+The SKU for MAKES API host machines. Check [Azure Virtual Machine Sizes](https://docs.microsoft.com/azure/virtual-machines/windows/sizes) to get the avaliable options. Defaults to "Standard_D14_v2".
 
 `--HostMachineDataDiskSizeInGb`
 
-The size of the data disk (Managed Disk:Premium SSD) that the host should have. See [Azure Managed Disks](https://azure.microsoft.com/pricing/details/managed-disks/) for detailed pricing information. If the size is set to 0, no additional data disk will be attached to the host Virtual Machine and index/grammar data will be stored on the temp drive (D:\\) that comes with the Virtual Machine. If the size is great than 0, then we'll add a managed disk with the specified size, intialize as data disk drive (F:\\) and download the index/grammar data to it. Note: Using data disk instead of the default attached temp drive on the Virtual Machine may lead to decrease performance due to IOPS differences. Defaults to 0.
+The size of the data disk (Managed Disk:Premium SSD) that the host should have. See [Azure Managed Disks](https://azure.microsoft.com/pricing/details/managed-disks/) for detailed pricing information. If the size is set to 0, no additional data disk will be attached to the host Virtual Machine and index/grammar data will be stored on the temp drive (D:\\) that comes with the Virtual Machine. If the size is great than 0, then we'll add a managed disk with the specified size, intialize as data disk drive (F:\\) and download the index/grammar data to it. Defaults to 0.
+ 
+ >[!NOTE]
+ > Using data disk instead of the default attached temp drive on the Virtual Machine may lead to decrease performance due to IOPS differences.
 
 `--WebHostAppSettingsOverride`
 
@@ -171,13 +174,10 @@ Builds MAKES index(es) from json entities.
 kesm BuildIndex --MakesIndexResourceConfigFilePath
                 --EntitiesUrlPrefix
                 --OutputUrlPrefix
-                [--SynonymResourceFolderUrl]
                 [--SchemaUrl]
+                [--SynonymResourceFolderUrl]
                 [--IndexPartitionCount]
                 [--IntersectionCountThresholdForPreCompute]
-                [--MakesPreprocessor]
-                [--MakesIndexer]
-                [--MakesJobManager]
                 [--MaxStringLength]
                 [--WorkerCount]
                 [--WorkerSku]
@@ -225,7 +225,7 @@ The number of virtual machines(workers) used to build the index. If you're build
 
 `--WorkerSku`
 
-The virtual machine(worker) sku. Check [Azure Virtual Machine Sizes](https://docs.microsoft.com/azure/virtual-machines/windows/sizes) to get the avaliable options. Defaults to "Standard_D8_v3"
+The virtual machine(worker) SKU. Check [Azure Virtual Machine Sizes](https://docs.microsoft.com/azure/virtual-machines/windows/sizes) to get the avaliable options. Defaults to "Standard_D8_v3"
 
 ## BuildIndexLocal command
 
@@ -366,7 +366,7 @@ The number of top interpretations to be included in the result set. Defaults to 
 
 `--InterpretationEntityAttributes`
 
-A list of entity attributes, seperated by ','. Use '*' for all entity attributes. Each interpretation in the result set can include the top matching entities used for generating the interpretation. InterpretationEntityAttributes specifies which attributes of the top matching entities should be included in the result set. Defaults to "*".
+A list of entity attributes, seperated by ','. Use '\*' for all entity attributes. Each interpretation in the result set can include the top matching entities used for generating the interpretation. InterpretationEntityAttributes specifies which attributes of the top matching entities should be included in the result set. If not specified, only the "logprob" and "probability" values for each entity will be returned.
 
 `--InterpretationEntityCount`
 
@@ -384,8 +384,8 @@ Evaluates a KES query expression and returns the top matching entities in the in
 kesm Evaluate --KesQueryExpression
               --IndexFilePaths
               [--Attributes]
-              [--Skip]
-              [--Take]
+              [--Offset]
+              [--Count]
               [--OrderBy]
               [--OrderByDescending]
               [--Timeout]
@@ -399,13 +399,13 @@ The KES [query expression](.\concepts-query-expressions.md) to use for selecting
 
 `--IndexFilePaths`
 
-The file path expression for specifying which index file(s) to use. If multiple index files are specified, the command will automatically merge the response from all indexes. Use wild card '*' to specify multiple indexes e.g. './index.*.kes'.
+The file path expression for specifying which index file(s) to use. If multiple index files are specified, the command will automatically merge the response from all indexes. Use wild card '\*' to specify multiple indexes e.g. './index.*.kes'.
 
 ### Evaluate optional parameters
 
 `--Attributes`
 
-A list of entity attributes to be included in the result set, seperated by ','. Use '*' for all attributes. Defaults to '*'.
+A list of entity attributes to be included in the result set, seperated by ','. Use '\*' for all attributes. If not specified, only the "logprob" and "probability" values for each entity will be returned.
 
 `--Offset`
 
@@ -435,10 +435,9 @@ Calculates distinct/total entity attribute counts and top attribute values for e
 kesm Histogram --KesQueryExpression
                --IndexFilePaths
                [--Attributes]
-               [--Skip]
-               [--Take]
-               [--OrderBy]
-               [--OrderByDescending]
+               [--Offset]
+               [--Count]
+               [--SampleSize]
                [--Timeout]
 ```
 
@@ -450,13 +449,13 @@ The KES [query expression](.\concepts-query-expressions.md) to use for selecting
 
 `--IndexFilePaths`
 
-The file path expression for specifying which index file(s) to use. If multiple index files are specified, the command will automatically merge the response from all indexes. Use wild card '*' to specify multiple indexes e.g. './index.*.kes'.
+The file path expression for specifying which index file(s) to use. If multiple index files are specified, the command will automatically merge the response from all indexes. Use wild card '\*' to specify multiple indexes e.g. './index.*.kes'.
 
 ### Histogram optional parameters
 
 `--Attributes`
 
-A list of entity attributes, seperated by ','. Use '*' for all attributes. Histogram will generate total count, distinct count, and top values for the select attributes for entities specified in the KesQueryExpression. Defaults to '*'.
+A list of entity attributes, seperated by ','. Use '\*' for all attributes. Histogram will generate total count, distinct count, and top values for the select attributes for entities specified in the KesQueryExpression. If no attributes are provided, Histogram will return the number of enitites that is specified by the QueryExpression.
 
 `--Offset`
 
