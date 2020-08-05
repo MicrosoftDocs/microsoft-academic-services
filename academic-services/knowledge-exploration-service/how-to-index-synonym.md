@@ -2,7 +2,7 @@
 title: Synonyms
 description: Defines the file format and structure for synonym data in MAKES
 ms.topic: reference
-ms.date: 7/1/2020
+ms.date: 8/5/2020
 ---
 
 # Synonym files
@@ -32,7 +32,7 @@ Synonyms are defined on a per-entity attribute basis, with the schema attribute 
 
 Person names are a great use case for synonyms, as they can have a variety of transformations (i.e. abbreviation, reversal, truncation, etc.) applied to them.
 
-This is especially true for the academic space, where different bibliographic styles can use significantly different author naming schemes. The following is an example of synonyms for the author "David S Rosenblum", who is part of the dataset used in the larger [MAKES customization tutorial](tutorial.md).
+This is especially true for the academic space, where different bibliographic styles can use significantly different author naming schemes. The following is an example of synonyms for the [academic author "David S Rosenblum"](https://academic.microsoft.com/search?q=David%20S%20Rosenblum&f=&orderBy=0&skip=0&take=10).
 
 ``` JSON
 ["david s rosenblum", "david rosenblum"]

@@ -2,7 +2,7 @@
 title: Entity data files
 description: Describes the format for defining entity data to be indexed
 ms.topic: tutorial
-ms.date: 7/1/2020
+ms.date: 8/5/2020
 ---
 
 # Entity data files
@@ -53,7 +53,7 @@ An entity data file contains one or more rows/lines of [entity data](#entity-dat
 
 ### Academic paper entity
 
-The following entity JSON data is for an index that supports academic paper entities, and is part of the larger [MAKES customization tutorial](tutorial.md) and uses a subset ([defined in the schema reference](how-to-index-schema.md#example)) of the full [MAKES academic entity schema](reference-makes-api-entity-schema.md).
+The following entity JSON data is for an index that supports academic paper entities and uses a subset ([defined in the schema how-to](how-to-index-schema.md#example)) of the full [MAKES academic entity schema](reference-makes-api-entity-schema.md).
 
 > [!IMPORTANT]
 > The following example is purposefully using tabular formatting of the JSON data to make it easy to understand. However in practice **this data would have no such formatting and be contained on a *single* line**.

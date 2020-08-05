@@ -30,10 +30,6 @@
       href: how-to-index-synonym.md
     - name: Define data
       href: how-to-index-data.md
-    - name: Build index
-      href: how-to-index-build.md
-    - name: Host index
-      href: how-to-host-index.md
 - name: Concepts
   expanded: true
   items:

@@ -2,7 +2,7 @@
 title: Index schema
 description: Defines the file format and structure for MAKES index schema
 ms.topic: tutorial
-ms.date: 7/1/2020
+ms.date: 8/5/2020
 ---
 
 # Index schema files
@@ -22,7 +22,6 @@ They play a critical part in the design of a [MAKES API](reference-makes-api.md)
     "attributes": [
         {
             "name": "name_of_attribute",
-            "description": "description of attribute",
             "type": "string | int32 | int64 | double | date | guid | blob | composite",
             "operations": ["operation1", "operation2", ... ],
             "synonyms": "synonym_file"
@@ -53,10 +52,6 @@ In addition names can also contain a [composite group](#composite-attributes) na
 
 * Valid: composite_group_name.subAttributeName
 * Invalid: composite-group-name.5thAttribute
-
-## Attribute description
-
-Attribute descriptions are optional and solely for documentation. They have no functional role in the index, though they are stored in the binary index once it is built and can be retrieved when requesting information about the index.
 
 ## Attribute types
 
@@ -114,19 +109,17 @@ is_between | Enables inequality matching (<, <=, >=, >) of attribute values | in
 
 ### Academic paper entity schema
 
-The following schema definition is for an index that supports academic paper entities, and is part of the larger [MAKES customization tutorial](tutorial.md). It is meant to be a subset of the full [MAKES academic entity schema](reference-makes-api-entity-schema.md).
+The following schema definition is for an index that supports academic paper entities, and is meant to be a subset of the full [MAKES academic entity schema](reference-makes-api-entity-schema.md).
 
 ``` JSON
 {
   "attributes": [
     {
       "name": "AA",
-      "description": "Author-affiliation composite type",
       "type": "Composite*"
     },
     {
       "name": "AA.AfId",
-      "description": "Affiliation ID",
       "type": "int64",
       "operations": [
         "equals"
@@ -134,7 +127,6 @@ The following schema definition is for an index that supports academic paper ent
     },
     {
       "name": "AA.AfN",
-      "description": "Normalized affiliation name",
       "type": "string?",
       "operations": [
         "equals",
@@ -144,7 +136,6 @@ The following schema definition is for an index that supports academic paper ent
     },
     {
       "name": "AA.AuId",
-      "description": "Author ID",
       "type": "int64",
       "operations": [
         "equals"
@@ -152,7 +143,6 @@ The following schema definition is for an index that supports academic paper ent
     },
     {
       "name": "AA.AuN",
-      "description": "Normalized author name",
       "type": "string?",
       "operations": [
         "equals",
@@ -162,17 +152,14 @@ The following schema definition is for an index that supports academic paper ent
     },
     {
       "name": "AA.DAfN",
-      "description": "Original affiliation name",
       "type": "blob?"
     },
     {
       "name": "AA.DAuN",
-      "description": "Original author name",
       "type": "blob?"
     },
     {
       "name": "AA.S",
-      "description": "Numeric position in author list",
       "type": "int32?",
       "operations": [
         "equals"
@@ -180,7 +167,6 @@ The following schema definition is for an index that supports academic paper ent
     },
     {
       "name": "AW",
-      "description": "Unique, normalized words in abstract, excluding stop words",
       "type": "string*",
       "operations": [
         "equals"
@@ -188,12 +174,10 @@ The following schema definition is for an index that supports academic paper ent
     },
     {
       "name": "C",
-      "description": "Conference series composite type",
       "type": "Composite?"
     },
     {
       "name": "C.CId",
-      "description": "Conference series ID",
       "type": "int64",
       "operations": [
         "equals"
@@ -201,7 +185,6 @@ The following schema definition is for an index that supports academic paper ent
     },
     {
       "name": "C.CN",
-      "description": "Normalized conference series name",
       "type": "string?",
       "operations": [
         "equals",
@@ -211,17 +194,14 @@ The following schema definition is for an index that supports academic paper ent
     },
     {
       "name": "CC",
-      "description": "Citation count",
       "type": "int32?"
     },
     {
       "name": "CI",
-      "description": "Conference instance composite type",
       "type": "Composite?"
     },
     {
       "name": "CI.CIId",
-      "description": "Conference instance ID",
       "type": "int64",
       "operations": [
         "equals"
@@ -229,7 +209,6 @@ The following schema definition is for an index that supports academic paper ent
     },
     {
       "name": "CI.CIN",
-      "description": "Normalized conference instance name",
       "type": "string?",
       "operations": [
         "equals"
@@ -237,7 +216,6 @@ The following schema definition is for an index that supports academic paper ent
     },
     {
       "name": "D",
-      "description": "Publication date in YYYY-MM-DD format",
       "type": "date?",
       "operations": [
         "equals",
@@ -246,12 +224,10 @@ The following schema definition is for an index that supports academic paper ent
     },
     {
       "name": "DN",
-      "description": "Original paper title",
       "type": "blob?"
     },
     {
       "name": "DOI",
-      "description": "Digital Object Identifier",
       "type": "string?",
       "operations": [
         "equals",
@@ -260,17 +236,14 @@ The following schema definition is for an index that supports academic paper ent
     },
     {
       "name": "F",
-      "description": "Field of study composite type",
       "type": "Composite*"
     },
     {
       "name": "F.DFN",
-      "description": "Original field of study name",
       "type": "blob?"
     },
     {
       "name": "F.FId",
-      "description": "Field of study ID",
       "type": "int64",
       "operations": [
         "equals"
@@ -278,7 +251,6 @@ The following schema definition is for an index that supports academic paper ent
     },
     {
       "name": "F.FN",
-      "description": "Normalized field of study name",
       "type": "string?",
       "operations": [
         "equals",
@@ -288,7 +260,6 @@ The following schema definition is for an index that supports academic paper ent
     },
     {
       "name": "FP",
-      "description": "First page of paper in publication",
       "type": "string?",
       "operations": [
         "equals"
@@ -296,12 +267,10 @@ The following schema definition is for an index that supports academic paper ent
     },
     {
       "name": "IA",
-      "description": "Inverted abstract",
       "type": "blob?"
     },
     {
       "name": "Id",
-      "description": "Entity ID",
       "type": "int64!",
       "operations": [
         "equals"
@@ -309,7 +278,6 @@ The following schema definition is for an index that supports academic paper ent
     },
     {
       "name": "LP",
-      "description": "Last page of paper in publication",
       "type": "string?",
       "operations": [
         "equals"
@@ -317,7 +285,6 @@ The following schema definition is for an index that supports academic paper ent
     },
     {
       "name": "RId",
-      "description": "List of referenced paper IDs",
       "type": "int64*",
       "operations": [
         "equals"
@@ -325,12 +292,10 @@ The following schema definition is for an index that supports academic paper ent
     },
     {
       "name": "S",
-      "description": "List of source URLs of the paper, sorted by relevance",
       "type": "blob?"
     },
     {
       "name": "Ti",
-      "description": "Normalized paper title",
       "type": "string?",
       "operations": [
         "equals"
@@ -338,7 +303,6 @@ The following schema definition is for an index that supports academic paper ent
     },
     {
       "name": "W",
-      "description": "Unique, normalized words in title, excluding stop words",
       "type": "string*",
       "operations": [
         "equals"
@@ -346,7 +310,6 @@ The following schema definition is for an index that supports academic paper ent
     },
     {
       "name": "Y",
-      "description": "Publication year",
       "type": "int32?",
       "operations": [
         "equals",
