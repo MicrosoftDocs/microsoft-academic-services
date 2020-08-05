@@ -2,12 +2,15 @@
 title: MAKES command line tool reference
 description: Documentation for the MAKES command line tool
 ms.topic: reference
-ms.date: 2020-06-12
+ms.date: 08/04/2020
+ms.author: alch
 ---
 
-# MAKES command line tool
+# MAKES command line tool (KESM)
 
-Makes command line tool is designed to help users create and host MAKES indexes.
+Makes command line tool (KESM) is designed to help users create and host MAKES indexes. 
+
+This reference document is reflecting KESM version 3.0.1
 
 ## CreateHostResources command
 
@@ -15,12 +18,12 @@ Creates the MAKES index hosting resources. E.g. MAKES web host image
 
 ```cmd
 kesm CreateHostResources --HostResourceName
-            --MakesPackage
-            --[Region]
-            --[MakesWebHost]
+                         --MakesPackage
+                         [--Region]
+                         [--MakesWebHost]
 ```
 
-### Required parameters
+### CreateHostResources required parameters
 
 `--HostResourceName`
 
@@ -30,15 +33,15 @@ The name of the host resource.
 
 The base URL to a MAKES release package.
 
-### Optional parameters
+### CreateHostResources optional parameters
 
 `--Region`
 
-The region to deploy the host resources to. Defaults to WestUs
+The region to deploy the host resources to. Defaults to "westus".
 
 `--MakesWebHost`
 
-The URL to MAKES web host zip file that will be used to create the MAKES virtual machine hosting image.
+The URL to MAKES web host zip file that will be used to create the MAKES virtual machine hosting image. Defaults to "<MakesPackage/webhost/makes-service-host.zip>"
 
 ## DeployHost command
 
@@ -48,15 +51,19 @@ Hosts the specified indexes to power an instance of MAKES API.
 kesm DeployHost --HostName
                 --MakesPackage
                 --MakesHostImageId
-                --[MakesIndex]
-                --[MakesGrammar]
-                --[InstanceCount]
-                --[HostMachineSku]
-                --[Region]
-                --[KeepResourcesOnFailure]
+                [--MakesIndex]
+                [--MakesGrammar]
+                [--InstanceCount]
+                [--Region]
+                [--HostMachineSku]
+                [--HostMachineDataDiskSizeInGb]
+                [--WebHostAppSettingsOverride]
+                [--WebHostOverrideUrl]
+                [--ApplicationInsightsInstrumentationKey]
+                [--LogWebHostRequestsAndResponses]
 ```
 
-### Required parameters
+### DeployHost required parameters
 
 `--HostName`
 
@@ -70,43 +77,66 @@ The base URL to a MAKES release package.
 
 The MAKES host virtual machine image resource Id. Run CreateHostResource command to generate one.
 
-### Optional parameters
+### DeployHost optional parameters
 
 `--MakesIndex`
 
-The MAKES index files URL reference.
+The MAKES index files URL reference. Defaults to "<MakesPackage>/index".
 
 `--MakesGrammar`
 
-The MAKES grammar file URL reference.
-
-`--Region`
-
-The region where the MAKES API host should be deployed to.
+The MAKES grammar file URL reference. Defaults to "<MakesPackage>/grammar/makes-default-grammar".
 
 `--InstanceCount`
 
-The default number of MAKES API host instances (virtual machines).
+The default number of MAKES API host instances (virtual machines). Defaults to 1.
+
+`--Region`
+
+The region where the MAKES API host should be deployed to. Defaults to "westus"
 
 `--HostMachineSku`
 
-The Azure Virtual Machine SKU for MAKES API host machines.
+The SKU for MAKES API host machines. Check [Azure Virtual Machine Sizes](https://docs.microsoft.com/azure/virtual-machines/windows/sizes) to get the avaliable options. Defaults to "Standard_D14_v2".
 
-## CreateIndexResources Command
+`--HostMachineDataDiskSizeInGb`
 
-Creates the MAKES index building resources. E.g. MAKES index build batch account, storage account.
+The size of the data disk (Managed Disk:Premium SSD) that the host should have. See [Azure Managed Disks](https://azure.microsoft.com/pricing/details/managed-disks/) for detailed pricing information. If the size is set to 0, no additional data disk will be attached to the host Virtual Machine and index/grammar data will be stored on the temp drive (D:\\) that comes with the Virtual Machine. If the size is great than 0, then we'll add a managed disk with the specified size, intialize as data disk drive (F:\\) and download the index/grammar data to it. Defaults to 0.
+ 
+ >[!NOTE]
+ > Using data disk instead of the default attached temp drive on the Virtual Machine may lead to decrease performance due to IOPS differences.
+
+`--WebHostAppSettingsOverride`
+
+The application settings used by the web host represented as a list of \"<ApplicationSettingJsonPath>=< ApplicationSettingValue>\" separated by ';'. Defaults to null. 
+
+`--WebHostOverrideUrl`
+
+The host web app package file url reference for overriding default MAKES web host. E.g. https://mymakesstore.blob.core.windows.net/makes/2019-12-26/webhost/my-custom-makes-web-service-host.zip
+
+`--ApplicationInsightsInstrumentationKey`
+
+The Application Insights instrumentation key for sending MAKES web host logs to. E.g. 14f81de7-f9b7-4997-9cd9-d91651fe53df. By default, the logs are only stored on box as windows application events. Defaults to null.
+
+`--LogWebHostRequestsAndResponses`
+
+Whether to log every http request that MAKES web host receives. Defaults to false.
+
+## CreateIndexResources command
+
+Creates the MAKES index building resources such as MAKES index build batch account and storage account.
 
 ```cmd
 kesm CreateIndexResources --IndexResourceName
-                        --MakesPackage
-                        --MakesIndexResourceConfigFilePath
-                        --[Region]
-                        --[MakesPreprocessor]
-                        --[MakesIndexer]
-                        --[MakesJobManager]
+                          --MakesPackage
+                          --MakesIndexResourceConfigFilePath
+                          [--Region]
+                          [--MakesPreprocessor]
+                          [--MakesIndexer]
+                          [--MakesJobManager]
 ```
 
-### Required Parameters
+### CreateIndexResources required parameters
 
 `--IndexResourceName`
 
@@ -118,27 +148,27 @@ The base URL to a MAKES release package.
 
 `--MakesIndexResourceConfigFilePath`
 
-Outputs the MAKES indexing resources config file for BuildIndex command. The command won't write a config file unless a path is provided.
+Outputs the MAKES indexing resources config file for BuildIndex command. E.g myIndexResConfig.json
 
-### Optional Parameters
+### CreateIndexResources optional parameters
 
 `--Region`
 
-The region to create the indexing resources in.
+The region to create the indexing resources in. Defaults to "westus".
 
 `--MakesPreprocessor`
 
-The MAKES preprocessor zip url.
+The MAKES preprocessor zip url. Defaults to "<MakesPackage>/tools/preprocessor.zip"
 
 `--MakesIndexer`
 
-The MAKES indexer zip url.
+The MAKES indexer zip url. Defaults to "<MakesPackage>/tools/indexer.zip"
 
 `--MakesJobManager`
 
-The MAKES JobManager zip url.
+The MAKES JobManager zip url. Defaults to "<MakesPackage>/tools/jobManager.zip"
 
-## BuildIndex Command
+## BuildIndex command
 
 Builds MAKES index(es) from json entities.
 
@@ -146,18 +176,16 @@ Builds MAKES index(es) from json entities.
 kesm BuildIndex --MakesIndexResourceConfigFilePath
                 --EntitiesUrlPrefix
                 --OutputUrlPrefix
-                --[IndexPartitionCount]
-                --[IntersectionMinCount]
-                --[MakesPreprocessor]
-                --[MakesIndexer]
-                --[MakesJobManager]
-                --[MaxStringLength]
-                --[RemoveEmptyValues]
-                --[WorkerCount]
-                --[WorkerMachineSku]
+                [--SchemaUrl]
+                [--SynonymResourceFolderUrl]
+                [--IndexPartitionCount]
+                [--IntersectionCountThresholdForPreCompute]
+                [--MaxStringLength]
+                [--WorkerCount]
+                [--WorkerSku]
 ```
 
-### Required Parameters
+### BuildIndex required parameters
 
 `--MakesIndexResourceConfigFilePath`
 
@@ -171,37 +199,287 @@ The input entities file Url prefix.
 
 The output url prefix for writing the built index.
 
-### Optional Parameters
+### BuildIndex optional parameters
+
+`--SchemaUrl`
+
+The url to the input index schema definition file. By default, the url is set to the schema describing the latest MAKES index release.
+
+`--SynonymResourceFolderUrl`
+
+The url to a resource folder containing all synonym data files required by the input index schema. The parameter can be null if the input index schema doesn't specify any synonyms. Defaults to null.
 
 `--IndexPartitionCount`
 
-The number of index partitions to create. A index job can finish quicker when there are more partitions; however, the more partitions, the less accurate the interpret results will be. Maximize build performance by creating 1 partition per worker.
+The number of index partitions to create. A index job can finish quicker when there are more partitions; however, the more partitions, the less accurate the interpret results will be. Maximize build performance by creating 1 partition per worker. Defaults to 1.
 
-`--IntersectionMinCount`
+`--IntersectionCountThresholdForPreCompute`
 
-The minimum intersections between indexed attribute for which the indexer should generate pre-calculated results. The higher the count, the more process will be required at run time. The lower the count, the larger the generated index will be.
+The attribute value intersections threshold for pre-computing look up tables. Use this value to tune index build time performance, run time performance, and index size. The higher the value, the smaller index size and slower run-time performance will be. The lower the value, the larger index size and faster run-time performance will be. Defaults to 100,000.
 
 `--MaxStringLength`
 
-The maximum string length for string type attributes.
-
-`--RemoveEmptyValues`
-
-Whether to remove empty attribute values to reduce index size.
+The maximum string length for all entity attributes. All strings over the maximum string length will be truncated. Defaults to 500.
 
 `--WorkerCount`
 
-The number of virtual machines(workers) used to build the index. Warning, assigning a number larger than IndexPartitionCount won't result in performance gain.
+The number of virtual machines(workers) used to build the index. If you're building a index with multitple index partitions, you can increase the number of workers up to the number of index partitions to increase build performance. Warning, assigning a number larger than IndexPartitionCount won't result in performance gain. Defaults to 1.
 
-`--WorkerMachineSku`
+`--WorkerSku`
 
-The virtual machine(worker) SKU. Use https://docs.microsoft.com/en-us/rest/api/compute/virtualmachines/listavailablesizes to get the most recent options
+The virtual machine(worker) SKU. Check [Azure Virtual Machine Sizes](https://docs.microsoft.com/azure/virtual-machines/windows/sizes) to get the avaliable options. Defaults to "Standard_D8_v3"
 
-## Common parameters
+## BuildIndexLocal command
+
+Build an index locally using entity data and schema definition files. Can only be run on win-x64 platform.
+
+```cmd
+kesm BuildIndex --SchemaFilePath
+                --EntitiesFilePath
+                --OutputIndexFilePath
+                [--IndexDescription]
+                [--MaxStringLength]
+                [--IntersectionCountThresholdForPreCompute]
+```
+
+### BuildIndexLocal required parameters
+
+`--SchemaFilePath`
+
+The input schema json file path. E.g. indexSchema.json
+
+`--EntitiesFilePath`
+
+The input entities json file path. E.g. indexEntities.json
+
+`--OutputIndexFilePath`
+
+The output MAKES index binary file path. E.g. index.kes
+
+### BuildIndexLocal optional parameters
+
+`--IndexDescription`
+
+A description to include in the index. E.g. My custom MAKES index build. Defaults to null.
+
+`--MaxStringLength`
+
+The maximum string length for all entity attributes. All strings over the maximum string length will be truncated. Defaults to 2,147,483,647.
+
+`--IntersectionCountThresholdForPreCompute`
+
+The attribute value intersections threshold for pre-computing look up tables. Use this value to tune index build time performance, run time performance, and index size. The higher the value, the smaller index size and slower run-time performance will be. The lower the value, the larger index size and faster run-time performance will be. Defaults to 100,000
+
+## CompileGrammarLocal command
+
+Compiles a grammar definition xml file into compiled grammar file.
+
+```cmd
+kesm CompileGrammarLocal --GrammarDefinitionFilePath
+                         --OutputCompiledGrammarFilePath
+```
+
+### CompileGrammarLocal required parameters
+
+`--GrammarDefinitionFilePath`
+
+The input grammar definition xml file path. E.g. grammar.xml
+
+`--OutputCompiledGrammarFilePath`
+
+The output compiled grammar binary file path. E.g. grammar.kesg
+
+## DescribeIndex command
+
+Retrieves the description, schema, build time and number of entities for the index binary.
+
+```cmd
+kesm DescribeIndex --IndexFilePath
+```
+
+### DescribeIndex required parameters
+
+`--IndexFilePath`
+
+The file path to the index binary. E.g. index.kes
+
+## DescribeGrammar command
+
+Retrieves original grammar definition XML from the compiled grammar binary
+
+```cmd
+kesm DescribeGrammar --CompiledGrammarFilePath
+```
+
+### DescribeGrammar required parameters
+
+`--CompiledGrammarFilePath`
+
+The file path to the compiled grammar binary. E.g. grammar.kesg
+
+## Interpret command
+
+Interprets a natural language query using specified indexes and grammar.
+
+```cmd
+kesm Interpret --Query
+               --IndexFilePaths
+               --GrammarFilePath
+               [--NormalizeQuery]
+               [--AllowCompletions]
+               [--Offset]
+               [--Count]
+               [--InterpretationEntityAttributes]
+               [--InterpretationEntityCount]
+               [--Timeout]
+```
+
+### Interpret required parameters
+
+`--Query`
+
+The natural lanugage query string to interpret.
+
+`--IndexFilePaths`
+
+The file path expression for specifying which index file(s) to use. Use wild card to specify multiple indexes e.g. './index.*.kes'.
+
+`--GrammarFilePath`
+
+The compiled grammar binary file path. Interpret requires a compiled grammar binary
+
+### Interpret optional parameters
+
+`--NormalizeQuery`
+
+Whether [normalization rules](concepts-queries.md#stage-1-lexical-analysis) should be applied to the query before making interpretations. Defaults to true.
+
+`--AllowCompletions`
+
+Whether to generate interpretations assuming the query is a partial query that's not yet fully formulated. When set to true, better interpretations can be generated for scenarios such as auto-suggest. Defaults to false.
+
+`--Offset`
+
+The number of top interpretations to be skipped/excluded in the result set. Defaults to 0.
+
+`--Count`
+
+The number of top interpretations to be included in the result set. Defaults to 5.
+
+`--InterpretationEntityAttributes`
+
+A list of entity attributes, seperated by ','. Use '\*' for all entity attributes. Each interpretation in the result set can include the top matching entities used for generating the interpretation. InterpretationEntityAttributes specifies which attributes of the top matching entities should be included in the result set. If not specified, only the "logprob" and "probability" values for each entity will be returned.
+
+`--InterpretationEntityCount`
+
+The number of top matching entities to be included for each interpretation. Each interpretation in the result set can include the top matching entities used for generating the interpretation. InterpretationEntityCount specifies how many top matching entnties should be included in the result set. Defaults to 0.
+
+`--Timeout`
+
+Maximum amount of time in milliseconds allowed for command to complete before aborting the command. The interpret command will return the top interptations found in the allowed timedout. Defaults to 2000.
+
+## Evaluate command
+
+Evaluates a KES query expression and returns the top matching entities in the index(es).
+
+```cmd
+kesm Evaluate --KesQueryExpression
+              --IndexFilePaths
+              [--Attributes]
+              [--Offset]
+              [--Count]
+              [--OrderBy]
+              [--OrderByDescending]
+              [--Timeout]
+```
+
+### Evaluate required parameters
+
+`--KesQueryExpression`
+
+The KES [query expression](.\concepts-query-expressions.md) to use for selecting entities from the index(es).
+
+`--IndexFilePaths`
+
+The file path expression for specifying which index file(s) to use. If multiple index files are specified, the command will automatically merge the response from all indexes. Use wild card '\*' to specify multiple indexes e.g. './index.*.kes'.
+
+### Evaluate optional parameters
+
+`--Attributes`
+
+A list of entity attributes to be included in the result set, seperated by ','. Use '\*' for all attributes. If not specified, only the "logprob" and "probability" values for each entity will be returned.
+
+`--Offset`
+
+The number of top entities to be skipped/excluded in the result set. Defaults to 0.
+
+`--Count`
+
+The number of top interpretations to be included in the result set. Defaults to 10.
+
+`--OrderBy`
+
+Name of the entity attribute to use for sorting/ordering the entities in the result set. By default, entities are sorted by descending entity weight (static rank).
+
+`--OrderByDescending`
+
+The direction for sorting entities. By default, entities are sorted by descending entity weight (static rank). Defaults to true.
+
+`--Timeout`
+
+Maximum amount of time in milliseconds allowed for the command to complete before aborting the command. Use 0 to disable timeout. Defaults to 0.
+
+## Histogram command
+
+Calculates distinct/total entity attribute counts and top attribute values for entities matching a query expression.
+
+```cmd
+kesm Histogram --KesQueryExpression
+               --IndexFilePaths
+               [--Attributes]
+               [--Offset]
+               [--Count]
+               [--SampleSize]
+               [--Timeout]
+```
+
+### Histogram required parameters
+
+`--KesQueryExpression`
+
+The KES [query expression](.\concepts-query-expressions.md) to use for selecting entities from the index(es).
+
+`--IndexFilePaths`
+
+The file path expression for specifying which index file(s) to use. If multiple index files are specified, the command will automatically merge the response from all indexes. Use wild card '\*' to specify multiple indexes e.g. './index.*.kes'.
+
+### Histogram optional parameters
+
+`--Attributes`
+
+A list of entity attributes, seperated by ','. Use '\*' for all attributes. Histogram will generate total count, distinct count, and top values for the select attributes for entities specified in the KesQueryExpression. If no attributes are provided, Histogram will return the number of enitites that is specified by the QueryExpression.
+
+`--Offset`
+
+The number of top entity attribute values to be skipped/excluded in the result set. Defaults to 0.
+
+`--Count`
+
+The number of top entity attribute values to be included in the result set. Defaults to 20.
+
+`--SampleSize`
+
+The maxium number of entities to consider for generating histogram. If this number is smaller than the number of entities in index(es), the histogram will be generated based on the top entities specified by the number. If this number is 0, all entities specified by the KES query will be used. Defaults to 0.
+
+`--Timeout`
+
+Maximum amount of time in milliseconds allowed for the command to complete before aborting the command. Use 0 to disable timeout. Defaults to 0.
+
+## Common command parameters
 
 Below are common parameters that can be applied to more than one commands.
 
-### Common authentication parameters
+### Common Azure Authentication parameters
 
 Applies to all commands. MAKES command line tool leverages device login to access Azure Subscriptions by default. You can specify AzureActiveDirectoryDomainName, AzureSubscriptionId, and AzureCredentialsFilePath parameter to change the authentication behavior.
 
@@ -226,7 +504,7 @@ az ad sp create-for-rbac --sdk-auth > my.azureauth
 
 If you don't have Azure CLI installed, you can also do this in the [cloud shell](https://docs.microsoft.com/azure/cloud-shell/quickstart).
 
-### Common resource group parameter
+### Common Azure Resource Group parameter
 
 Applies to Azure resource creation commands (CreateHostResources, CreateIndexResources, and DeployHost.) MAKES command line tool may create Azure resources for the user. You can use the common resource group parameter to ensure the resources created will be in the specified group.
 
