@@ -8,7 +8,9 @@ ms.author: alch
 
 # MAKES command line tool (KESM)
 
-Makes command line tool (KESM) is designed to help users create and host MAKES indexes.
+Makes command line tool (KESM) is designed to help users create and host MAKES indexes. 
+
+This reference document is reflecting KESM version 3.0.1
 
 ## CreateHostResources command
 
@@ -370,7 +372,7 @@ A list of entity attributes, seperated by ','. Use '\*' for all entity attribute
 
 `--InterpretationEntityCount`
 
-The number of top matching entities to be included for each interpretation. Each interpretation in the result set can include the top matching entities used for generating the interpretation. InterpretationEntityCount specifies how many top matching entnties should be included in the result set. Defaults to 10.
+The number of top matching entities to be included for each interpretation. Each interpretation in the result set can include the top matching entities used for generating the interpretation. InterpretationEntityCount specifies how many top matching entnties should be included in the result set. Defaults to 0.
 
 `--Timeout`
 
@@ -413,7 +415,7 @@ The number of top entities to be skipped/excluded in the result set. Defaults to
 
 `--Count`
 
-The number of top interpretations to be included in the result set. Defaults to 5.
+The number of top interpretations to be included in the result set. Defaults to 10.
 
 `--OrderBy`
 
@@ -463,7 +465,7 @@ The number of top entity attribute values to be skipped/excluded in the result s
 
 `--Count`
 
-The number of top entity attribute values to be included in the result set. Defaults to 5.
+The number of top entity attribute values to be included in the result set. Defaults to 20.
 
 `--SampleSize`
 
