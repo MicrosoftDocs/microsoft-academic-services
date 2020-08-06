@@ -21,6 +21,15 @@
     href: how-to-delete-api-instances.md
   - name: Create custom index from MAG
     href: how-to-create-index-from-mag.md
+  - name: Create custom MAKES index
+    expanded: false
+    items:
+    - name: Define schema
+      href: how-to-index-schema.md
+    - name: Define synonyms
+      href: how-to-index-synonym.md
+    - name: Define data
+      href: how-to-index-data.md
 - name: Concepts
   expanded: true
   items:
@@ -31,9 +40,11 @@
 - name: Reference
   expanded: true
   items:
-  - name: Entity schema
+  - name: KESM command line tool
+    href: reference-makes-command-line-tool.md
+  - name: MAKES entity schema
     href: reference-makes-api-entity-schema.md   
-  - name: REST API
+  - name: MAKES REST API
     expanded: false
     items:
       - name: GET CalcHistogram
@@ -48,8 +59,6 @@
         href: reference-post-evaluate.md
       - name: POST Interpret
         href: reference-post-interpret.md
-  - name: Command line tool
-    href: reference-makes-command-line-tool.md
 - name: Resources
   expanded: true
   items:
