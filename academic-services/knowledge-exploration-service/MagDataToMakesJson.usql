@@ -828,11 +828,9 @@ END;
 					P.OriginalVenue
 			) + "," AS Column023,
 		(Cs.DisplayName == null ? "" : @JsonAttribute("VSN", Cs.NormalizedName.ToUpper()) + ",") AS Column024,
-			
-		(Abs.IndexedAbstract == null?"" : @JsonRawAttribute("IA", Abs.IndexedAbstract) + ",") AS Column025,
 
 		// Author affiliations
-		(A.AuthorAffiliations == null ? "" : "\"AA\":[") AS Column026,
+		(A.AuthorAffiliations == null ? "" : "\"AA\":[") AS Column025,
 		
 		//There may be too many author affiliations to fit in a single column. Split it into two buckets
 		(A.AuthorAffiliations == null ? "" :
@@ -843,7 +841,7 @@ END;
 			.ThenBy(authorAffiliation => @GetNullableLongItem(authorAffiliation.Value, 1))
 			.Take(@Param_MaximumPaperAuthorPerBucket)
 			.Select(authorAffiliation => authorAffiliation.Key)
-			)) AS Column027,
+			)) AS Column026,
 
 		//The second bucket for the author affiliations if needed. 
 		(A.AuthorAffiliations == null || A.AuthorAffiliations.Count() <= @Param_MaximumPaperAuthorPerBucket ? "" : "," +
@@ -852,21 +850,21 @@ END;
 			.ThenBy(authorAffiliation => @GetNullableLongItem(authorAffiliation.Value, 1))
 			.Skip(@Param_MaximumPaperAuthorPerBucket)
 			.Take(@Param_MaximumPaperAuthorPerBucket)
-			.Select(authorAffiliation => authorAffiliation.Key))) AS Column028,
-		(A.AuthorAffiliations == null ? "" : "],") AS Column029,
+			.Select(authorAffiliation => authorAffiliation.Key))) AS Column027,
+		(A.AuthorAffiliations == null ? "" : "],") AS Column028,
 		
 		//References
-		(Ref.References == null?"" : "\"RId\":[" + Ref.References + "],") AS Column030,
+		(Ref.References == null?"" : "\"RId\":[" + Ref.References + "],") AS Column029,
 		
 		//Citation contexts
-		(Con.CitationContexts == null ? "" : "\"CitCon\":{") AS Column031,
+		(Con.CitationContexts == null ? "" : "\"CitCon\":{") AS Column030,
 		
 		//First bucket
 		(Con.CitationContexts == null ? "" : 
 			string.Join(",", Con.CitationContexts
 				.OrderBy(citationContext => citationContext.Key)
 				.Take(@Param_MaximumCitationContextPerBucket)
-				.Select(citationContext => citationContext.Value))) AS Column032,
+				.Select(citationContext => citationContext.Value))) AS Column031,
 		
 		//Second bucket
 		(Con.CitationContexts == null || Con.CitationContexts.Count() <= @Param_MaximumCitationContextPerBucket ? "" : "," +
@@ -874,15 +872,16 @@ END;
 							.OrderBy(citationContext => citationContext.Key)
 							.Skip(@Param_MaximumCitationContextPerBucket)
 							.Take(@Param_MaximumCitationContextPerBucket)
-							.Select(citationContext => citationContext.Value))) AS Column033,
-		(Con.CitationContexts == null ? "" : "},") AS Column034,
+							.Select(citationContext => citationContext.Value))) AS Column032,
+		(Con.CitationContexts == null ? "" : "},") AS Column033,
 
-		(P.FamilyId == null) ? "" : (@JsonAttribute("FamId", P.FamilyId) + ",") AS Column035,        
-        (string.IsNullOrEmpty(Abs.AbstractWords) || Abs.AbstractWords == "[]"? "" : @JsonRawAttribute("AW", Abs.AbstractWords) + ",") AS Column036,
+		(P.FamilyId == null) ? "" : (@JsonAttribute("FamId", P.FamilyId) + ",") AS Column034,
+        (string.IsNullOrEmpty(Abs.AbstractWords) || Abs.AbstractWords == "[]"? "" : @JsonRawAttribute("AW", Abs.AbstractWords) + ",") AS Column035,
+		"" AS Column036,
 		"" AS Column037,
-		"" AS Column038,
-		@JsonAttribute("Ty", "0") AS Column039,
-		"}" AS Column040
+		@JsonAttribute("Ty", "0") AS Column038,
+		"}" AS Column039,
+        "" AS Column040
 	FROM @papers AS P
 			LEFT OUTER JOIN
 				@conferenceSeries AS Cs
