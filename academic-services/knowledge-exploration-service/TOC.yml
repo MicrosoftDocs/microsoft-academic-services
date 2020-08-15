@@ -30,13 +30,15 @@
       href: how-to-index-synonym.md
     - name: Define data
       href: how-to-index-data.md
+  - name: Create custom MAKES grammar
+    href: how-to-grammar.md
 - name: Concepts
   expanded: true
   items:
-  - name: Natural language queries
-    href: concepts-queries.md
   - name: Structured query expressions
     href: concepts-query-expressions.md
+  - name: Natural language queries
+    href: concepts-queries.md
 - name: Reference
   expanded: true
   items:
