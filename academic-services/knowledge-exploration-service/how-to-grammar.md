@@ -18,22 +18,42 @@ To best understand this document we strongly suggest reading the [SRGS section r
 ## Components of a grammar
 
 ```xml
+<!-- Root grammar definition must define a root rule which is where rule expansion starts -->
 <grammar root="name_of_root_rule">
+
+    <!--  -->
     <import schema="index_schema.json" name="schema_reference_name" />
 
     <!-- Root grammar rule represents the first rule expansion -->
     <rule id="name_of_root_rule">
 
-        <item repeat="1-" repeat-logprob="-1">
-    
-            <one-of>
-    
-                <item logprob="-1">
-    
-            </one-of>
-    
-        </item>
+        <!-- Token which must be matched for further expansion -->
+        token
 
+        <!-- Tag -->
+        <tag>
+            queryExpression = All();
+        </tag>
+
+        <!-- Set of alternative expansions -->
+        <one-of>
+    
+            <!-- Alternative -->
+            <item logprob="-1">
+
+                <!-- Weighted repetition -->
+                <item repeat="1-" repeat-logprob="-1">
+            
+                </item>
+            
+            </item>
+    
+            <!-- Weighted alternative -->
+            <item logprob="-2">
+            </item>
+    
+        </one-of>
+    
     </rule>
 
 </grammar>
