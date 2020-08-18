@@ -7,7 +7,7 @@ ms.date: 9/1/2020
 
 # Grammar
 
-The role of a MAKES grammar is to interpret natural language queries into [semantic query expressions](concept-query-expressions.md) using the[Interpret API](reference-get-interpret.md). These query expressions can be used to retrieve entities from an index using the [Evaluate API](reference-get-evaluate.md) or generate histograms with the [CalcHistogram API](reference-get-histogram.md).
+The role of a MAKES grammar is to interpret natural language queries into [semantic query expressions](concept-query-expressions.md) using the [Interpret API](reference-get-interpret.md). These query expressions can be used to retrieve entities from an index using the [Evaluate API](reference-get-evaluate.md) or generate histograms with the [CalcHistogram API](reference-get-histogram.md).
 
 This document details the composition of a MAKES grammar, how to compile it, and how to load it into a MAKES instance.
 
@@ -28,6 +28,115 @@ In the context of SRGS, MAKES plays the role of a [user agent](https://www.w3.or
 ## Components of a grammar
 
 ```xml
+<grammar root="rootRule">
+
+    <import schema="index_schema.json" name="entitySchema" />
+
+    <rule id="rootRule">
+
+        <one-of>
+
+            <item>
+                <ruleref uri="#matchEntityAttributes" name="out" />
+            </item>
+
+            <item>
+                <ruleref uri="#createSampleQueries" name="out" />
+            </item>
+
+        </one-of>
+
+    </rule>
+
+    <rule id="matchEntityAttributes">
+
+    </rule>
+
+    <rule id="createSampleQueries">
+
+        <one-of>
+
+            <item>
+                <tag>
+                    
+
+        </one-of>
+
+    </rule>
+
+
+        <ruleref uri="#match_numeric_attribute" name="numericAttributeQuery" />
+
+        <!--
+            MAKES uses the <tag> element to control the semantic interpretation of user 
+            input into structured query expressions. It accomplishes this by processing
+            a sequence of semicolon delimited statements.
+
+            Each statement must consist of one of the following:
+                - Variable assignment to literal value or another variable, e.g.:
+                    - bar = "foo";
+                    - foo = bar;
+                - Variable assignment to semantic function output, e.g.:
+                    - foobar = Query("attribute_name", foo, "eq");
+
+            MAKES defines a collection of different semantic functions that facilitate
+            constructing structured query expressions. See the "semantic functions"
+            section below for a complete list.
+
+            In the <tag> example below we are constructing a structured query expression 
+            using the outputs of the ruleref's above and assigning it to a special 
+            "out" variable. The "out" variable is required to contain a structured query 
+            expression of the semantic output of the rule.
+        -->
+        <tag>
+            <!-- 
+                The All() function returns a query expression that matches *all* 
+                indexed entities. 
+            -->
+            queryExpression = All();
+
+            <!-- 
+                The And() function returns a query expression that matches entities from
+                the intersection of two query expressions. 
+
+                In this example, we are intersecting the "all entities" query expression
+                with the string attribute match query expression (in effect just matching 
+                the string attribute query).
+            -->
+            queryExpression = And(queryExpression, stringAttributeQuery);
+
+            <!-- 
+                Intersect the entities matching the string attribute query and the 
+                numeric attribute query.
+            -->
+            queryExpression = And(queryExpression, numericAttributeQuery);
+
+            <!-- 
+                Finally return the structured query expression we generated as output 
+                for the root rule. 
+            -->
+            out = queryExpression;
+        </tag>
+
+    </rule>
+
+    <rule id="match_string_attribute">
+
+        <!--
+            
+        -->
+        <attrref uri="schema_reference_name#string_attribute_name" name="out" />
+
+    </rule>
+
+    <rule id="match_numeric_attribute">
+
+        <attrref uri="schema_reference_name#numeric_attribute_name" name="out" />
+
+    </rule>
+
+</grammar>
+
 <!-- 
     The grammar element represents a grammar definition, which in the 
     context of MAKES is a sequence of legal rule expansions that transform 
