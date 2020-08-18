@@ -18,42 +18,125 @@ To best understand this document we strongly suggest reading the [SRGS section r
 ## Components of a grammar
 
 ```xml
-<!-- Root grammar definition must define a root rule which is where rule expansion starts -->
+<!-- 
+    The grammar element represents a grammar definition, which in the context of MAKES is a sequence of legal rule expansions that transform user input 
+    in the form of tokens into a structured query expression.
+
+    Each grammar file can only contain a single <grammar> element, and each <grammar> element must define a root rule which is where rule expansion starts.
+-->
 <grammar root="name_of_root_rule">
 
-    <!--  -->
+    <!-- 
+        The import element imports a JSON schema from a local file and associates it with a named scope.
+
+        If the grammar is then used in tangent with an index w/matching schema, it allows user input to be matched against indexed entity attributes using the scope,
+        attribute name and optional comparator via a <attrref> element tag. See below for an example of this. 
+
+        MAKES only allows a single index schema to be used, which means only a single entity scope (<import> element) is allowed.
+    -->
     <import schema="index_schema.json" name="schema_reference_name" />
 
-    <!-- Root grammar rule represents the first rule expansion -->
+    <!-- 
+        Rule elements represent a rule definition, which associates a legal rule expansion with a rule name defined by "id".
+
+        A legal rule expansion is any legal token, rule reference, tag, or any logical combination of legal rule expansions as sequence, alternatives or repeated
+        expansion. See below for examples of these rule expansions.
+
+        A grammar definition can have any number of rule definitions, but each much have a unique (in the context of the grammar) name.
+
+        MAKES requires every rule definition to return a semantic interpretation of all user input it parsed in the form of a structured query expression. See
+        below for how this is accomplished.
+    -->
     <rule id="name_of_root_rule">
 
-        <!-- Token which must be matched for further expansion -->
+        <!-- A token element is a literal string which must be matched in the user input for further expansion -->
         token
 
-        <!-- Tag -->
+        <!-- 
+            A <ruleref> element is a reference to a legal rule defined by a <rule> element. The "uri" attribute defines the name of the rule, prefaced by the 
+            local scope designator "#".
+
+            Each ruleref may also define an optional output variable to capture the semantic output of a rule.
+
+            The following two rulerefs each encapsulate expansions that match user input to indexed attribute values with structured query expressions, with 
+            the first returning a string attribute equality match and the second a numeric attribute inequality match
+        -->
+        <ruleref uri="#match_string_attribute" name="stringAttributeQuery" />
+
+        <ruleref uri="#match_numeric_attribute" name="numericAttributeQuery" />
+
+        <!--
+            MAKES uses the <tag> element to control the semantic interpretation of user input into structured query expressions. It accomplishes this by 
+            processing a sequence of semicolon delimited statements.
+
+            Each statement must consist of one of the following:
+                - Variable assignment to literal value or another variable, e.g.:
+                    - bar = "foo";
+                    - foo = bar;
+                - Variable assignment to semantic function output, e.g.:
+                    - foobar = Query("attribute_name", foo, "eq");
+
+            MAKES defines a collection of different semantic functions that facilitate constructing structured query expressions. See the "Semantic functions" 
+            section below for a complete list.
+
+            In the example below we are constructing a structured query expression using the outputs of the ruleref's above and assigning it to a special "out" 
+            variable. The "out" variable is required to contain a structured query expression of the semantic output of the rule.
+        -->
+        <tag>
+            <!-- The All() function returns a query expression that matches *all* indexed entities -->
+            queryExpression = All();
+
+            <!-- Intersect the entities matching all entities and the string attribute query (in effect just matching the string attribute query)  -->
+            queryExpression = And(queryExpression, stringAttributeQuery);
+
+            <!-- Intersect the entities matching the string attribute query and the numeric attribute query -->
+            queryExpression = And(queryExpression, numericAttributeQuery);
+
+            <!-- Finally return the structured query expression we generated as output for the root rule -->
+            out = queryExpression;
+        </tag>
+
+    </rule>
+
+    <rule id="match_string_attribute">
+
+        <attrref uri="schema_reference_name#string_attribute_name" name="out" />
+
+    </rule>
+
+    <rule id="match_numeric_attribute">
+
+        <attrref uri=">
+
+    </rule>
+
+        <!-- Tag  -->
         <tag>
             queryExpression = All();
         </tag>
 
         <!-- Set of alternative expansions -->
         <one-of>
-    
+
             <!-- Alternative -->
-            <item logprob="-1">
+            <item>
 
                 <!-- Weighted repetition -->
                 <item repeat="1-" repeat-logprob="-1">
-            
+
+
                 </item>
-            
+
             </item>
-    
+
             <!-- Weighted alternative -->
-            <item logprob="-2">
+            <item logprob="-1">
+
+
             </item>
-    
+
         </one-of>
-    
+
     </rule>
 
 </grammar>
