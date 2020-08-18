@@ -7,13 +7,23 @@ ms.date: 9/1/2020
 
 # Grammar
 
-MAKES supports natural language processing through [SRGS](https://www.w3.org/TR/speech-grammar/) grammars, a W3C standard for speech recognition grammars, with extensions to support [index integration](how-to-index-schema.md) and [semantic functions](reference-grammar-semantic-functions.md). 
+The role of a MAKES grammar is to interpret natural language queries into [semantic query expressions](concept-query-expressions.md) using the[Interpret API](reference-get-interpret.md). These query expressions can be used to retrieve entities from an index using the [Evaluate API](reference-get-evaluate.md) or generate histograms with the [CalcHistogram API](reference-get-histogram.md).
 
-In the context of SRGS, MAKES is a [user agent](https://www.w3.org/TR/speech-grammar/#S1.1) that takes user input in the form of a natural language search query and matches it against a grammar to produce [semantic query expressions](concept-query-expressions.md), e.g.:
+This document details the composition of a MAKES grammar, how to compile it, and how to load it into a MAKES instance.
 
-``` papers about machine learning written during 2020 ``` => ``` And(Composite(F.FN=='machine learning'), Y=2020) ```
+## Grammar format
 
-To best understand this document we strongly suggest reading the [SRGS section regarding rule expansions](https://www.w3.org/TR/speech-grammar/#S2) as it defines what legal rule expansions are possible. Pay special attention to sequences, alternatives and repeats as they are used extensively by MAKES.
+MAKES supports natural language processing through grammars defined using a variation of the [Speech Recognition Grammar Specification (SRGS)](https://www.w3.org/TR/speech-grammar/) XML format. SRGS is a W3C standard for speech recognition grammars, with extensions that support [index integration](how-to-index-schema.md) and [semantic functions](reference-grammar-semantic-functions.md).
+
+In the context of SRGS, MAKES plays the role of a [user agent](https://www.w3.org/TR/speech-grammar/#S1.1), which is the *grammar processor* that takes user input and matches that input against a grammar to produce [semantic query expressions](concept-query-expressions.md), e.g.:
+
+``` machine learning written after 2015 ``` =>
+
+* ``` And(Composite(F.FN=='machine learning'), Y>2015) ```
+* ``` And(Composite(J.JN=='machine learning'), Y>2015) ```
+
+> [!IMPORTANT]
+> We strongly encourage reading the [SRGS section regarding rule expansions](https://www.w3.org/TR/speech-grammar/#S2) as the terminology used below to describe concepts assumes understanding of SRGS concepts such as legal rule expansions, tokens, sequences, alternatives, repeats, etc.
 
 ## Components of a grammar
 
@@ -62,7 +72,7 @@ To best understand this document we strongly suggest reading the [SRGS section r
 
         <!-- 
             A token element is a literal string which must be matched in the user input 
-            for further expansion 
+            for further expansion. 
         -->
         token
 
@@ -77,7 +87,7 @@ To best understand this document we strongly suggest reading the [SRGS section r
             The following two rulerefs each encapsulate expansions that match user input 
             to indexed attribute values with structured query expressions, with
             the first returning a string attribute equality match and the second a numeric 
-            attribute inequality match
+            attribute inequality match.
         -->
         <ruleref uri="#match_string_attribute" name="stringAttributeQuery" />
 
@@ -96,36 +106,40 @@ To best understand this document we strongly suggest reading the [SRGS section r
                     - foobar = Query("attribute_name", foo, "eq");
 
             MAKES defines a collection of different semantic functions that facilitate
-            constructing structured query expressions. See the "Semantic functions"
+            constructing structured query expressions. See the "semantic functions"
             section below for a complete list.
 
-            In the example below we are constructing a structured query expression using 
-            the outputs of the ruleref's above and assigning it to a special "out"             
-            variable. The "out" variable is required to contain a structured query 
+            In the <tag> example below we are constructing a structured query expression 
+            using the outputs of the ruleref's above and assigning it to a special 
+            "out" variable. The "out" variable is required to contain a structured query 
             expression of the semantic output of the rule.
         -->
         <tag>
             <!-- 
                 The All() function returns a query expression that matches *all* 
-                indexed entities 
+                indexed entities. 
             -->
             queryExpression = All();
 
             <!-- 
-                Intersect the entities matching all entities and the string attribute 
-                query (in effect just matching the string attribute query)  
+                The And() function returns a query expression that matches entities from
+                the intersection of two query expressions. 
+
+                In this example, we are intersecting the "all entities" query expression
+                with the string attribute match query expression (in effect just matching 
+                the string attribute query).
             -->
             queryExpression = And(queryExpression, stringAttributeQuery);
 
             <!-- 
                 Intersect the entities matching the string attribute query and the 
-                numeric attribute query 
+                numeric attribute query.
             -->
             queryExpression = And(queryExpression, numericAttributeQuery);
 
             <!-- 
                 Finally return the structured query expression we generated as output 
-                for the root rule 
+                for the root rule. 
             -->
             out = queryExpression;
         </tag>
@@ -134,42 +148,16 @@ To best understand this document we strongly suggest reading the [SRGS section r
 
     <rule id="match_string_attribute">
 
+        <!--
+            
+        -->
         <attrref uri="schema_reference_name#string_attribute_name" name="out" />
 
     </rule>
 
     <rule id="match_numeric_attribute">
 
-        <attrref uri=">
-
-    </rule>
-
-        <!-- Tag  -->
-        <tag>
-            queryExpression = All();
-        </tag>
-
-        <!-- Set of alternative expansions -->
-        <one-of>
-
-            <!-- Alternative -->
-            <item>
-
-                <!-- Weighted repetition -->
-                <item repeat="1-" repeat-logprob="-1">
-
-
-                </item>
-
-            </item>
-
-            <!-- Weighted alternative -->
-            <item logprob="-1">
-
-
-            </item>
-
-        </one-of>
+        <attrref uri="schema_reference_name#numeric_attribute_name" name="out" />
 
     </rule>
 
