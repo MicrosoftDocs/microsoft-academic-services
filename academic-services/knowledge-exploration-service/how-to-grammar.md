@@ -37,7 +37,8 @@ For example, here is a very simple grammar that allows for matching a small subs
         <!-- Variable containing final structured query expression -->
         <tag>outputQueryExpression = All();</tag>
 
-        <!-- The following enclosure is repeated indefinitely (one to infinity), with each repeat incurring a weight penalty of -1 -->
+        <!-- The following enclosure is repeated indefinitely (one to infinity), 
+             with each repeat incurring a weight penalty of -1 -->
         <item repeat="1-" repeat-logprob="-1">
 
             <one-of>
