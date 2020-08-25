@@ -9,119 +9,106 @@ ms.date: 9/1/2020
 
 The role of a MAKES grammar is to interpret natural language queries into [semantic query expressions](concept-query-expressions.md) using the [Interpret API](reference-get-interpret.md). These query expressions can be used to retrieve entities from an index using the [Evaluate API](reference-get-evaluate.md) or generate histograms with the [CalcHistogram API](reference-get-histogram.md).
 
-This document details the composition of a MAKES grammar, how to compile it, and how to load it into a MAKES instance.
+This document details how natural language processing occurs, the composition of a MAKES grammar, how to compile it, and how to load it into a MAKES instance.
 
 ## Natural language processing with grammars
 
-> [!NOTE]
-> We strongly encourage reading the [SRGS section regarding rule expansions](https://www.w3.org/TR/speech-grammar/#S2) as the terminology used below to describe concepts assumes understanding of SRGS concepts such as legal rule expansions, tokens, sequences, alternatives, repeats, etc.
+MAKES supports natural language processing through a [Context Free Grammar (CFG)](https://academic.microsoft.com/topic/97212296) adhering to the [Speech Recognition Grammar Specification (SRGS)](https://www.w3.org/TR/speech-grammar/) format, a W3C standard for speech recognition grammars with support for generating semantic interpretations.
 
-MAKES supports natural language processing using a [Context Free Grammar (CFG)](https://academic.microsoft.com/topic/97212296) adhering to the [Speech Recognition Grammar Specification (SRGS)](https://www.w3.org/TR/speech-grammar/) format, a W3C standard for speech recognition grammars with support for generating semantic interpretations. Natural language processing is accomplished by matching each part of the natural language query against *legal rule expansions*, with a *legal rule expansion* being defined as one of the following:
+The role of the grammar is as a *speech recognizer*, taking an input stream (natural language query) and trying to match it to a series of *legal rule expansions*, defined as one or more of the following:
 
-* A [token](https://www.w3.org/TR/speech-grammar/#S2.1), or plaintext words that must be exactly matched in the natural language for further expansion
-* A [rule reference](#ruleref-element)
-* An [indexed attribute reference](#attrref-element)
-* A [tag](#tag-element)
-* A [sequence enclosure](#item-element)
+* [Text nodes](https://www.w3.org/TR/REC-DOM-Level-1/level-one-core.html#ID-1312295772) (the text inside of an element), or "tokens" are text that must be exactly matched in the natural language query for further expansion
+* [Indexed attribute references](#attrref-element) (```<attrref>```) allow the natural language query terms to be matched with [indexed data](how-to-index-schema.md), storing the match in variables
+* [Rule references](#ruleref-element) (```<ruleref>```), as the name implies, expand rules defined using the [```rule```](#rule-element) element
+* [Tags](#tag-element) (```<tag>```) specify how a path through the grammar is interpreted using [semantic functions](#semantic-functions)
+* [Sequence enclosures](#item-element) (```<item>```)
 * An [alternatives enclosure](#one-of-element)
-* Any logical combination of the above rule expansions (see [Sequences and Encapsulation](https://www.w3.org/TR/speech-grammar/#S2.3))
 
-The act of *rule expansion* is the progressive matching of the natural language query with different sequences of valid rules. These expansions generate a parse tree, with alternative expansions (i.e. a given query term matching two or more different attributes) creating branches in the tree.
+The act of *rule expansion* is the progressive matching of the natural language query with different sequences of valid rules, starting from the [root grammar rule](#grammar-element). These expansions generate a parse tree, with alternative expansions (i.e. a given query term matching two or more different attributes) creating branches in the tree.
 
-Each leaf node in the completed parse tree represents a different interpretation of the natural language query, with interpretations being ranked by the total [weight](https://www.w3.org/TR/speech-grammar/#S2.4.1) of the path taken.
-
-For example, given the query "www 2019 microsoft" a potential parse tree might be:
-
-``` parse tree
-- "www" => topic named "world wide web"
-    - "2019" => publication year "2019"
-        - "microsoft" => affiliation named "microsoft"
-        - "microsoft" => title/abstract term "microsoft"
-- "www" => conference named "the web conference"
-    - "2019" => publication year "2019"
-        - "microsoft" => affiliation named "microsoft"
-        - "microsoft" => title/abstract term "microsoft"
-- "www 2019" => conference instance named "the web conference 2019"
-    - "microsoft" => affiliation named "microsoft"
-    - "microsoft" => title/abstract term "microsoft"
-```
-
-> [!IMPORTANT]
-> One of the key differentiating features of MAKES is how it handles matching natural language query terms to [index attribute references](#attrref-element). Once an index attribute has been matched in a given rule expansion (parse tree branch), *all subsequent index attribute matches are implicitly constrained by the previous attribute match(es)*.
->
-> This means that all interpretations reflect the *intersection* (logical AND) of all matched index attributes.
-
-## Components of a grammar
+For example, here is a very simple grammar that allows for matching a small subset of attributes from the [example academic paper entity schema](how-to-index-schema.md#academic-paper-entity-schema):
 
 ```xml
-<grammar root="rootRule">
+<grammar root="paperQuery">
+    <import schema="paper_entity_schema.json" name="paperEntity" />
 
-    <import schema="index_schema.json" name="entitySchema" />
+    <rule id="paperQuery">
 
-    <rule id="rootRule">
+        <!-- Variable containing final structured query expression -->
+        <tag>outputQueryExpression = All();</tag>
 
-        <tag>
-            finalQueryExpression = All();
-        </tag>
-
-        <item repeat="1-" repeat-logprob="-1.0">
+        <!-- The following enclosure is repeated indefinitely (one to infinity), with each repeat incurring a weight penalty of -1 -->
+        <item repeat="1-" repeat-logprob"-1">
 
             <one-of>
 
-                <item logprob="-1">
-
-                    <ruleref uri="#matchEntityAttributeOne" name="matchedQueryExpression" />
-
+                <!-- Match paper conference series attribute -->
+                <item>
+                    <attrref uri="paperEntity#C.CN" name="matchedAttribute" />
+                    <tag>matchedAttribute = Composite(matchedAttribute);</tag>
                 </item>
 
-                <item logprob="-2">
+                <!-- Match paper conference instance attribute -->
+                <item>
+                    <attrref uri="paperEntity#CI.CIN" name="matchedAttribute" />
+                    <tag>matchedAttribute = Composite(matchedAttribute);</tag>
+                </item>
 
-                    <ruleref uri="#matchEntityAttributeTwo" name="matchedQueryExpression" />
+                <!-- Match paper field of study attribute -->
+                <item>
+                    <attrref uri="paperEntity#F.FN" name="matchedAttribute" />
+                    <tag>matchedAttribute = Composite(matchedAttribute);</tag>
+                </item>
 
+                <!-- Match paper title word attribute -->
+                <item>
+                    <attrref uri="paperEntity#W" name="matchedAttribute" />
+                </item>
+
+                <!-- Match paper publication year attribute -->
+                <item>
+                    <attrref uri="paperEntity#Y" name="matchedAttribute" />
                 </item>
 
             </one-of>
 
-            <tag>
-                finalQueryExpression = And(finalQueryExpression, matchedQueryExpression);
-            </tag>
+            <!-- Add matched attribute to existing query expression as a new constraint -->
+            <tag>outputQueryExpression = And(outputQueryExpression, matchedAttribute);</tag>
 
+            <!-- Stop further expansion if all user input has been matched -->
+            <tag>
+                isEndOfQuery = GetVariable("IsAtEndOfQuery", "system");
+                AssertEquals(isEndOfQuery, true);
+            </tag>
         </item>
 
-        <tag>
-            out = finalQueryExpression;
-        </tag>
+        <!-- Set output of rule to the query expression we constructed above -->
+        <tag>out = outputQueryExpression;</tag>
 
     </rule>
-
-    <rule id="matchEntityAttributeOne">
-
-        <item repeat="0-1">attribute one equals</item> <attrref uri="entitySchema#attributeOne" name="out" />
-
-    </rule>
-
-    <rule id="matchEntityAttributeTwo">
-
-        <one-of>
-
-            <item>
-                <item repeat="0-1">attribute two equals</item> <attrref uri="entitySchema#attributeTwo" name="out" />
-            </item>
-
-            <item>
-                attribute two is less than <attrref uri="entitySchema#attributeTwo" name="out" op="lt" />
-            </item>
-
-            <item>
-                attribute two is greater than <attrref uri="entitySchema#attributeTwo" name="out" op="gt" />
-            </item>
-
-        </one-of>
-
-    </rule>
-
 </grammar>
 ```
+
+Given that example grammar, [example schema](how-to-index-schema.md#academic-paper-entity-schema), and an index containing only the [example academic paper entity](how-to-index-data.md#academic-paper-entity), the parse tree for the query "kdd 2019 machine learning" would look something like the following:
+
+* "kdd" => conference series named "knowledge data and discovery", weight -1
+  * "2019" => publication year "2019", weight -2
+    * "machine learning" => field of study "machine learning", weight -3
+    * "machine" => title word "machine", weight -3
+      * "learning" => title word "learning", weight -4
+* "kdd 2019" => conference instance named "knowledge data and discovery 2019", weight -1
+  * "machine learning" => field of study "machine learning", weight -2
+  * "machine" => title word "machine", weight -2
+    * "learning" => title word "learning", weight -3
+
+Each leaf node in the completed parse tree represents a different interpretation of the natural language query, with interpretations being ranked by the total [weight](https://www.w3.org/TR/speech-grammar/#S2.4.1) of the path. The above example would result in the following ranked interpretations:
+
+* conference instance named "knowledge data and discovery 2019" field of study "machine learning" (weight -2)
+* conference series named "knowledge data and discovery" publication year "2019" field of study "machine learning" (weight -3)
+* conference instance named "knowledge data and discovery 2019" title word "machine" title word "learning" (weight -3)
+* conference series named "knowledge data and discovery" publication year "2019" title word "machine" title word "learning" (weight -4)
+
+## Components of a grammar
 
 The following describes each of the syntactic elements that can be used in a grammar.  See [this example](#example) for a complete grammar that demonstrates the use of these elements in context.
 
@@ -267,91 +254,87 @@ Given a probability *p* between 0 and 1, the corresponding log probability can b
 
 ## Example
 
-The following is an example XML from the academic publications domain that demonstrates the various elements of a grammar:
+The following grammar is intended to generate natural language query interpretations for the example [entity schema](how-to-index-schema.md#academic-paper-entity-schema) and [entity data](how-to-index-data.md#academic-paper-entity) defined in the previous MAKES index how-to guides:
 
 ```xml
-<grammar root="GetPapers">
+<grammar root="paperQuery">
+    <import schema="paper_entity_schema.json" name="paperEntity" />
 
-  <!-- Import academic data schema-->
-  <import schema="academic.schema" name="academic"/>
-  
-  <!-- Define root rule-->
-  <rule id="GetPapers">
-    <example>papers about machine learning by michael jordan</example>
-    
-    papers
-    <tag>
-      yearOnce = false;
-      isBeyondEndOfQuery = false;
-      query = All();
-    </tag>
-  
-    <item repeat="1-" repeat-logprob="-10">
-      <!-- Do not complete additional attributes beyond end of query -->
-      <tag>AssertEquals(isBeyondEndOfQuery, false);</tag>
-		
-      <one-of>
-        <!-- about <keyword> -->
-        <item logprob="-0.5">
-          about <attrref uri="academic#Keyword" name="keyword"/>
-          <tag>query = And(query, keyword);</tag>
-        </item>
-        
-        <!-- by <authorName> [while at <authorAffiliation>] -->
-        <item logprob="-1">
-          by <attrref uri="academic#Author.Name" name="authorName"/>
-          <tag>authorQuery = authorName;</tag>
-          <item repeat="0-1" repeat-logprob="-1.5">
-            while at <attrref uri="academic#Author.Affiliation" name="authorAffiliation"/>
-            <tag>authorQuery = And(authorQuery, authorAffiliation);</tag>
-          </item>
-          <tag>
-            authorQuery = Composite(authorQuery);
-            query = And(query, authorQuery);
-          </tag>
-        </item>
-        
-        <!-- written (in|before|after) <year> -->
-        <item logprob="-1.5">
-          <!-- Allow this grammar path to be traversed only once -->
-          <tag>
-            AssertEquals(yearOnce, false);
-            yearOnce = true;
-          </tag>
-          <ruleref uri="#GetPaperYear" name="year"/>
-          <tag>query = And(query, year);</tag>
-        </item>
-      </one-of>
+    <rule id="paperQuery">
 
-      <!-- Determine if current parse position is beyond end of query -->
-      <tag>isBeyondEndOfQuery = GetVariable("IsBeyondEndOfQuery", "system");</tag>
-    </item>
-    <tag>out = query;</tag>
-  </rule>
-  
-  <rule id="GetPaperYear">
-    <tag>year = All();</tag>
-    written
-    <one-of>
-      <item>
-        in <attrref uri="academic#Year" name="year"/>
-      </item>
-      <item>
-        before
-        <one-of>
-          <item>[year]</item>
-          <item><attrref uri="academic#Year" op="lt" name="year"/></item>
-        </one-of>
-      </item>
-      <item>
-        after
-        <one-of>
-          <item>[year]</item>
-          <item><attrref uri="academic#Year" op="gt" name="year"/></item>
-        </one-of>
-      </item>
-    </one-of>
-    <tag>out = year;</tag>
-  </rule>
+        <!-- Variable containing final structured query expression -->
+        <tag>outputQueryExpression = All();</tag>
+
+        <!-- The following enclosure is repeated indefinitely (one to infinity), with each repeat incurring a weight penalty of -1 -->
+        <item repeat="1-" repeat-logprob"-1">
+
+            <one-of>
+
+                <!-- Match paper affiliation name attribute -->
+                <item>
+                    <attrref uri="paperEntity#AA.AfN" name="matchedAttribute" />
+                    <tag>matchedAttribute = Composite(matchedAttribute);</tag>
+                </item>
+
+                <!-- Match paper author name attribute -->
+                <item>
+                    <attrref uri="paperEntity#AA.AuN" name="matchedAttribute" />
+                    <tag>matchedAttribute = Composite(matchedAttribute);</tag>
+                </item>
+
+                <!-- Match paper abstract word attribute -->
+                <item>
+                    <attrref uri="paperEntity#AW" name="matchedAttribute" />
+                </item>
+
+                <!-- Match paper conference series attribute -->
+                <item>
+                    <attrref uri="paperEntity#C.CN" name="matchedAttribute" />
+                    <tag>matchedAttribute = Composite(matchedAttribute);</tag>
+                </item>
+
+                <!-- Match paper conference instance attribute -->
+                <item>
+                    <attrref uri="paperEntity#CI.CIN" name="matchedAttribute" />
+                    <tag>matchedAttribute = Composite(matchedAttribute);</tag>
+                </item>
+
+                <!-- Match paper field of study attribute -->
+                <item>
+                    <attrref uri="paperEntity#F.FN" name="matchedAttribute" />
+                    <tag>matchedAttribute = Composite(matchedAttribute);</tag>
+                </item>
+
+                <!-- Match paper title attribute -->
+                <item>
+                    <attrref uri="paperEntity#Ti" name="matchedAttribute" />
+                </item>
+
+                <!-- Match paper title word attribute -->
+                <item>
+                    <attrref uri="paperEntity#W" name="matchedAttribute" />
+                </item>
+
+                <!-- Match paper publication year attribute -->
+                <item>
+                    <attrref uri="paperEntity#Y" name="matchedAttribute" />
+                </item>
+
+            </one-of>
+
+            <!-- Add matched attribute to existing query expression as a new constraint -->
+            <tag>outputQueryExpression = And(outputQueryExpression, matchedAttribute);</tag>
+
+            <!-- Stop further expansion if all user input has been matched -->
+            <tag>
+                isEndOfQuery = GetVariable("IsAtEndOfQuery", "system");
+                AssertEquals(isEndOfQuery, true);
+            </tag>
+        </item>
+
+        <!-- Set output of rule to the query expression we constructed above -->
+        <tag>out = outputQueryExpression;</tag>
+
+    </rule>
 </grammar>
 ```
