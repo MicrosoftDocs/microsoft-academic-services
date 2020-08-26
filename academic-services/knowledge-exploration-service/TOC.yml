@@ -61,6 +61,13 @@
         href: reference-post-evaluate.md
       - name: POST Interpret
         href: reference-post-interpret.md
+  - name: MAKES grammar
+    expanded: false
+    items:
+      - name: Syntax
+        href: reference-grammar-syntax.md
+      - name: Semantic functions
+        href: reference-semantic-functions.md
 - name: Resources
   expanded: true
   items:
