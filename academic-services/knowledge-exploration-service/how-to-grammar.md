@@ -7,15 +7,13 @@ ms.date: 9/1/2020
 
 # Grammar
 
-The role of a MAKES grammar is to interpret natural language queries into [semantic query expressions](concept-query-expressions.md) using the [Interpret API](reference-get-interpret.md). These query expressions can be used to retrieve entities from an index using the [Evaluate API](reference-get-evaluate.md) or generate histograms with the [CalcHistogram API](reference-get-histogram.md).
-
-This document details how natural language processing occurs, the composition of a MAKES grammar, how to compile it, and how to load it into a MAKES instance.
+This document details the role of a grammar in natural language processing, the composition of a MAKES grammar, how to compile it, and how to load it into a MAKES instance.
 
 ## Natural language processing with grammars
 
-MAKES supports natural language processing through a [Context Free Grammar (CFG)](https://academic.microsoft.com/topic/97212296) adhering to the [Speech Recognition Grammar Specification (SRGS)](https://www.w3.org/TR/speech-grammar/) format, a W3C standard for speech recognition grammars with support for generating semantic interpretations.
+MAKES supports natural language query interpretation through the [Interpret API](reference-get-interpret.md), which requires a [Context Free Grammar (CFG)](https://academic.microsoft.com/topic/97212296) adhering to the [Speech Recognition Grammar Specification (SRGS)](https://www.w3.org/TR/speech-grammar/) format, a W3C standard for speech recognition grammars with support for generating semantic interpretations.
 
-The role of the grammar is as a *speech recognizer*, taking an input stream (natural language query) and trying to match it to a series of *legal rule expansions*, defined as one or more of the following:
+The role of the MAKES grammar is as a *speech recognizer*. MAKES takes an input stream (natural language query) and tries to match it to a series of *legal rule expansions* defined in the grammar, which in turn generate [structured query expressions](concept-query-expressions.md) as their output. Legal rule expansions are defined as one or more of the following:
 
 * [Text nodes](https://www.w3.org/TR/REC-DOM-Level-1/level-one-core.html#ID-1312295772) (the text inside of an element), or "tokens" are text that must be exactly matched in the natural language query for further expansion
 * [Indexed attribute references](#attrref-element) (```<attrref>```) allow the natural language query terms to be matched with [indexed data](how-to-index-schema.md), storing the match in variables
@@ -24,7 +22,7 @@ The role of the grammar is as a *speech recognizer*, taking an input stream (nat
 * [Sequence enclosures](#item-element) (```<item>```)
 * An [alternatives enclosure](#one-of-element)
 
-The act of *rule expansion* is the progressive matching of the natural language query with different sequences of valid rules, starting from the [root grammar rule](#grammar-element). These expansions generate a parse tree, with alternative expansions (i.e. a given query term matching two or more different attributes) creating branches in the tree.
+*Rule expansion* is the progressive matching of the natural language query with different sequences of valid rules, starting from the [root grammar rule](#grammar-element). These expansions generate a parse tree, with alternative expansions (i.e. a given query term matching two or more different attributes) creating branches in the tree.
 
 For example, here is a very simple grammar that allows for matching a small subset of attributes from the [example academic paper entity schema](how-to-index-schema.md#academic-paper-entity-schema):
 
@@ -90,24 +88,28 @@ For example, here is a very simple grammar that allows for matching a small subs
 </grammar>
 ```
 
-Given that example grammar, [example schema](how-to-index-schema.md#academic-paper-entity-schema), and an index containing only the [example academic paper entity](how-to-index-data.md#academic-paper-entity), the parse tree for the query "kdd 2019 machine learning" would look something like the following:
+Given that example grammar, [example schema](how-to-index-schema.md#academic-paper-entity-schema), and an index containing only the [example academic paper entity](how-to-index-data.md#academic-paper-entity), the parse tree for the query "kdd 2019 deep learning" would look something like the following:
 
 * "kdd" => conference series named "knowledge data and discovery", weight -1
-  * "2019" => publication year "2019", weight -2
-    * "machine learning" => field of study "machine learning", weight -3
-    * "machine" => title word "machine", weight -3
-      * "learning" => title word "learning", weight -4
+  * "2019" => publication year "2019", weight -1
+    * "deep learning" => field of study "deep learning", weight -1
+      * END OF QUERY, top matching paper "Cluster-GCN: An Efficient Algorithm for Training Deep and Large Graph Convolutional Networks", weight -18.942
+    * "deep" => title word "deep", weight -1
+      * "learning" => title word "learning", weight -1
+        * END OF QUERY, top matching paper "Sherlock: A Deep Learning Approach to Semantic Data Type Detection", weight -19.03
 * "kdd 2019" => conference instance named "knowledge data and discovery 2019", weight -1
-  * "machine learning" => field of study "machine learning", weight -2
-  * "machine" => title word "machine", weight -2
-    * "learning" => title word "learning", weight -3
+  * "deep learning" => field of study "deep learning", weight -1
+    * END OF QUERY, top matching paper "Cluster-GCN: An Efficient Algorithm for Training Deep and Large Graph Convolutional Networks", weight -18.942
+  * "deep" => title word "deep", weight -1
+    * "learning" => title word "learning", weight -1
+      * END OF QUERY, top matching paper "Sherlock: A Deep Learning Approach to Semantic Data Type Detection", weight -19.03
 
-Each leaf node in the completed parse tree represents a different interpretation of the natural language query, with interpretations being ranked by the total [weight](https://www.w3.org/TR/speech-grammar/#S2.4.1) of the path. The above example would result in the following ranked interpretations:
+Each leaf node (END OF QUERY) in the completed parse tree represents a different interpretation of the natural language query, with interpretations being ranked by the total [weight](https://www.w3.org/TR/speech-grammar/#S2.4.1) of the path. The above example would result in the following ranked interpretations:
 
-* conference instance named "knowledge data and discovery 2019" field of study "machine learning" (weight -2)
-* conference series named "knowledge data and discovery" publication year "2019" field of study "machine learning" (weight -3)
-* conference instance named "knowledge data and discovery 2019" title word "machine" title word "learning" (weight -3)
-* conference series named "knowledge data and discovery" publication year "2019" title word "machine" title word "learning" (weight -4)
+* conference instance named "knowledge data and discovery 2019" field of study "deep learning" (total weight -20.942 (-1 + -1 + -18.942) )
+* conference series named "knowledge data and discovery" publication year "2019" field of study "deep learning" (total weight -21.942 (-1 + -1 + -1 + -18.942) )
+* conference instance named "knowledge data and discovery 2019" title word "deep" title word "learning" (total weight -22.03 (-1 + -1 + -1 + -19.03) )
+* conference series named "knowledge data and discovery" publication year "2019" title word "deep" title word "learning" (total weight -23.03 (-1 + -1 + -1 + -1 + -19.03) )
 
 ## Components of a grammar
 

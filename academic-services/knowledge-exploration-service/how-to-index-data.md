@@ -44,7 +44,7 @@ KES allows this to be defined for an entity as a relative log probability using 
 An entity data file contains one or more rows/lines of [entity data](#entity-data-json-format), and is used as the "data file" when [building an index](how-to-index-build.md).
 
 > [!IMPORTANT]
-> While each **row** in an entity data file must be a valid JSON object, the overall file itself is not JSON but simply a *rows/lines of JSON objects*. The file contents are **NOT** meant to be an array of JSON objects.
+> Each **row** in an entity data file must be a valid JSON object, however the overall file content itself is not valid JSON object. The file contents are **NOT** meant to be an array of JSON objects, meaning files should not start/end with square brackets (```[]```) and lines should not end with a comma (```,```).
 
 > [!TIP]
 > If your entities use a log probability score, you can significantly increase the performance of indexing by pre-sorting the entity data by the log probability score in descending order (entity with highest log probability in first row, entity with lowest log probability in last row).
@@ -56,7 +56,7 @@ An entity data file contains one or more rows/lines of [entity data](#entity-dat
 The following entity JSON data is for an index that supports academic paper entities and uses a subset ([defined in the schema how-to](how-to-index-schema.md#example)) of the full [MAKES academic entity schema](reference-makes-api-entity-schema.md).
 
 > [!IMPORTANT]
-> The following example is purposefully using tabular formatting of the JSON data to make it easy to understand. However in practice **this data would have no such formatting and be contained on a *single* line**.
+> The following example shows each JSON attribute on a separate line to make it easier to read and understand for **documentation purposes only**. In the actual JSON data files to be used for indexing, MAKES requires each entities JSON to be contained **in a single line**.
 
 ``` JSON
 {
