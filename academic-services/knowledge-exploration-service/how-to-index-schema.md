@@ -1,8 +1,8 @@
 ---
 title: Index schema
 description: Defines the file format and structure for MAKES index schema
-ms.topic: tutorial
-ms.date: 8/5/2020
+ms.topic: how-to
+ms.date: 9/1/2020
 ---
 
 # Index schema files
@@ -109,7 +109,7 @@ is_between | Enables inequality matching (<, <=, >=, >) of attribute values | in
 
 ### Academic paper entity schema
 
-The following schema definition is for an index that supports academic paper entities, and is meant to be a subset of the full [MAKES academic entity schema](reference-makes-api-entity-schema.md).
+The following schema definition is for an index that supports academic paper entities, and is meant to be a subset of the full [MAKES academic entity schema](reference-makes-api-entity-schema.md). It also includes references to [example synonym files detailed on the synonym how-to page](how-to-index-synonym.md#example).
 
 ``` JSON
 {
@@ -131,8 +131,7 @@ The following schema definition is for an index that supports academic paper ent
       "operations": [
         "equals",
         "starts_with"
-      ],
-      "synonyms": "AffiliationSynonyms.txt"
+      ]
     },
     {
       "name": "AA.AuId",
@@ -147,8 +146,7 @@ The following schema definition is for an index that supports academic paper ent
       "operations": [
         "equals",
         "starts_with"
-      ],
-      "synonyms": "AuthorSynonyms.txt"
+      ]
     },
     {
       "name": "AA.DAfN",
@@ -190,7 +188,7 @@ The following schema definition is for an index that supports academic paper ent
         "equals",
         "starts_with"
       ],
-      "synonyms": "ConferenceSynonyms.txt"
+      "synonyms": "conference-series-synonyms.txt"
     },
     {
       "name": "CC",
@@ -211,8 +209,10 @@ The following schema definition is for an index that supports academic paper ent
       "name": "CI.CIN",
       "type": "string?",
       "operations": [
-        "equals"
-      ]
+        "equals",
+        "starts_with"
+      ],
+      "synonyms": "conference-instance-synonyms.txt"
     },
     {
       "name": "D",
@@ -255,8 +255,7 @@ The following schema definition is for an index that supports academic paper ent
       "operations": [
         "equals",
         "starts_with"
-      ],
-      "synonyms": "FieldOfStudySynonyms.txt"
+      ]
     },
     {
       "name": "FP",

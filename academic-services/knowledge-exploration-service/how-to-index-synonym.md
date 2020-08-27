@@ -1,8 +1,8 @@
 ---
 title: Synonyms
 description: Defines the file format and structure for synonym data in MAKES
-ms.topic: reference
-ms.date: 8/5/2020
+ms.topic: how-to
+ms.date: 9/1/2020
 ---
 
 # Synonym files
@@ -28,17 +28,27 @@ Synonyms are defined on a per-entity attribute basis, with the schema attribute 
 
 ## Example
 
-### Academic author name synonyms
+### Academic conference synonyms
 
-Person names are a great use case for synonyms, as they can have a variety of transformations (i.e. abbreviation, reversal, truncation, etc.) applied to them.
+Academic conference names are a great use case for synonyms, as they can have a variety of transformations (i.e. abbreviation, truncation, etc.) applied to them.
 
-This is especially true for the academic space, where different bibliographic styles can use significantly different author naming schemes. The following is an example of synonyms for the [academic author "David S Rosenblum"](https://academic.microsoft.com/search?q=David%20S%20Rosenblum&f=&orderBy=0&skip=0&take=10).
+For this example we generate synonyms for the ["Knowledge Discovery and Data Mining" conference](https://academic.microsoft.com/conference/1130985203).
+
+Conference series synonyms:
 
 ``` JSON
-["david s rosenblum", "david rosenblum"]
-["david s rosenblum", "rosnblum david"]
-["david s rosenblum", "d rosenblum"]
-["david s rosenblum", "rosenblum d"]
-["david s rosenblum", "d s rosenblum"]
-["david s rosenblum", "rosenblum d s"]
+["kdd", "knowledge discovery and data mining"]
+["kdd", "kdd knowledge discovery and data mining"]
+["kdd", "acm sigkdd"]
+["kdd", "sigkdd"]
+```
+
+Conference instance synonyms:
+
+``` JSON
+["kdd 2019", "25th sigkdd conference on knowledge discovery and data mining"]
+["kdd 2019", "knowledge discovery and data mining 2019"]
+["kdd 2019", "kdd knowledge discovery and data mining 2019"]
+["kdd 2019", "acm sigkdd 2019"]
+["kdd 2019", "sigkdd 2019"]
 ```

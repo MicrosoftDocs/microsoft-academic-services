@@ -13,7 +13,7 @@ This document details the role of a grammar in natural language processing, the 
 
 MAKES supports natural language query interpretation through the [Interpret API](reference-get-interpret.md), which requires a [Context Free Grammar (CFG)](https://academic.microsoft.com/topic/97212296) adhering to the [Speech Recognition Grammar Specification (SRGS)](https://www.w3.org/TR/speech-grammar/) format, a W3C standard for speech recognition grammars with support for generating semantic interpretations.
 
-The role of the MAKES grammar is as a *speech recognizer*. MAKES takes an input stream (natural language query) and tries to match it to a series of *legal rule expansions* defined in the grammar, which in turn generate [structured query expressions](concept-query-expressions.md) as their output. Legal rule expansions are defined as one or more of the following:
+In the context of the SRGS, the role of the MAKES grammar is as a *speech recognizer*. MAKES takes an input stream (natural language query) and tries to match it to a series of *rule expansions* defined in the grammar, which in turn generate [structured query expressions](concept-query-expressions.md) as their output. Rule expansions are defined as one or more of the following:
 
 * [Text nodes](https://www.w3.org/TR/REC-DOM-Level-1/level-one-core.html#ID-1312295772) (the text inside of an element), or "tokens" are text that must be exactly matched in the natural language query for further expansion
 * [Indexed attribute references](#attrref-element) (```<attrref>```) allow the natural language query terms to be matched with [indexed data](how-to-index-schema.md), storing the match in variables
@@ -24,7 +24,9 @@ The role of the MAKES grammar is as a *speech recognizer*. MAKES takes an input 
 
 *Rule expansion* is the progressive matching of the natural language query with different sequences of valid rules, starting from the [root grammar rule](#grammar-element). These expansions generate a parse tree, with alternative expansions (i.e. a given query term matching two or more different attributes) creating branches in the tree.
 
-For example, here is a very simple grammar that allows for matching a small subset of attributes from the [example academic paper entity schema](how-to-index-schema.md#academic-paper-entity-schema):
+### Example grammar
+
+See below for a simple grammar that allows for matching a small subset of attributes from the [example academic paper entity schema](how-to-index-schema.md#academic-paper-entity-schema):
 
 ```xml
 <grammar root="paperQuery">
@@ -88,28 +90,137 @@ For example, here is a very simple grammar that allows for matching a small subs
 </grammar>
 ```
 
-Given that example grammar, [example schema](how-to-index-schema.md#academic-paper-entity-schema), and an index containing only the [example academic paper entity](how-to-index-data.md#academic-paper-entity), the parse tree for the query "kdd 2019 deep learning" would look something like the following:
+### Example rule expansion
 
-* "kdd" => conference series named "knowledge data and discovery", weight -1
+Using the above grammar, [example schema](how-to-index-schema.md#academic-paper-entity-schema), [example synonyms](how-to-index-synonym.md#example) and an index containing the two [example academic paper entities](how-to-index-data.md#academic-paper-entity), the MAKES Interpret API would generate the following response for the query "knowledge discovery and data mining 2019 deep learning":
+
+```json
+{
+    "query": "",
+    "interpretations": [
+        {
+            "logprob": -20.942,
+            "parse": "<rule name=\"#paperQuery\"><attr name=\"paperEntity#CI.CIN\" canonical=\"kdd 2019\">knowledge discovery and data mining 2019</attr> <attr name=\"paperEntity#F.FN\">deep learning</attr></rule>",
+            "rules": [
+                {
+                    "name": "#paperQuery",
+                    "output": {
+                        "type": "query",
+                        "value": "",
+                        "entities": [
+                            {
+                                "logprob": -18.942,
+                                "DN": "Cluster-GCN: An Efficient Algorithm for Training Deep and Large Graph Convolutional Networks"
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
+        {
+            "logprob": -21.942,
+            "parse": "<rule name=\"#paperQuery\"><attr name=\"paperEntity#C.CN\" canonical=\"kdd\">knowledge discovery and data mining</attr> <attr name=\"paperEntity#Y\">2019</attr> <attr name=\"paperEntity#F.FN\">deep learning</attr></rule>",
+            "rules": [
+                {
+                    "name": "#paperQuery",
+                    "output": {
+                        "type": "query",
+                        "value": "",
+                        "entities": [
+                            {
+                                "logprob": -18.942,
+                                "DN": "Cluster-GCN: An Efficient Algorithm for Training Deep and Large Graph Convolutional Networks"
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
+        {
+            "logprob": -22.03,
+            "parse": "<rule name=\"#paperQuery\"><attr name=\"paperEntity#CI.CIN\" canonical=\"kdd 2019\">knowledge discovery and data mining 2019</attr> <attr name=\"paperEntity#W\">deep</attr> <attr name=\"paperEntity#W\">learning</attr></rule>",
+            "rules": [
+                {
+                    "name": "#paperQuery",
+                    "output": {
+                        "type": "query",
+                        "value": "",
+                        "entities": [
+                            {
+                                "logprob": -19.03,
+                                "DN": "Sherlock: A Deep Learning Approach to Semantic Data Type Detection"
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
+        {
+            "logprob": -23.03,
+            "parse": "<rule name=\"#paperQuery\"><attr name=\"paperEntity#C.CN\" canonical=\"kdd\">knowledge discovery and data mining</attr> <attr name=\"paperEntity#Y\">2019</attr> <attr name=\"paperEntity#W\">deep</attr> <attr name=\"paperEntity#W\">learning</attr></rule>",
+            "rules": [
+                {
+                    "name": "#paperQuery",
+                    "output": {
+                        "type": "query",
+                        "value": "",
+                        "entities": [
+                            {
+                                "logprob": -19.03,
+                                "DN": "Sherlock: A Deep Learning Approach to Semantic Data Type Detection"
+                            }
+                        ]
+                    }
+                }
+            ]
+        }
+    ]
+}
+```
+
+
+
+
+
+
+
+
+```
+
+* "knowledge discovery and data mining" => synonym of conference series named "kdd", weight -1
   * "2019" => publication year "2019", weight -1
     * "deep learning" => field of study "deep learning", weight -1
       * END OF QUERY, top matching paper "Cluster-GCN: An Efficient Algorithm for Training Deep and Large Graph Convolutional Networks", weight -18.942
     * "deep" => title word "deep", weight -1
       * "learning" => title word "learning", weight -1
         * END OF QUERY, top matching paper "Sherlock: A Deep Learning Approach to Semantic Data Type Detection", weight -19.03
-* "kdd 2019" => conference instance named "knowledge data and discovery 2019", weight -1
+* "knowledge discovery and data mining 2019" => synonym of conference instance named "kdd 2019", weight -1
   * "deep learning" => field of study "deep learning", weight -1
     * END OF QUERY, top matching paper "Cluster-GCN: An Efficient Algorithm for Training Deep and Large Graph Convolutional Networks", weight -18.942
   * "deep" => title word "deep", weight -1
     * "learning" => title word "learning", weight -1
       * END OF QUERY, top matching paper "Sherlock: A Deep Learning Approach to Semantic Data Type Detection", weight -19.03
 
-Each leaf node (END OF QUERY) in the completed parse tree represents a different interpretation of the natural language query, with interpretations being ranked by the total [weight](https://www.w3.org/TR/speech-grammar/#S2.4.1) of the path. The above example would result in the following ranked interpretations:
 
-* conference instance named "knowledge data and discovery 2019" field of study "deep learning" (total weight -20.942 (-1 + -1 + -18.942) )
-* conference series named "knowledge data and discovery" publication year "2019" field of study "deep learning" (total weight -21.942 (-1 + -1 + -1 + -18.942) )
-* conference instance named "knowledge data and discovery 2019" title word "deep" title word "learning" (total weight -22.03 (-1 + -1 + -1 + -19.03) )
-* conference series named "knowledge data and discovery" publication year "2019" title word "deep" title word "learning" (total weight -23.03 (-1 + -1 + -1 + -1 + -19.03) )
+
+Each leaf node (END OF QUERY) in the completed parse tree represents a different semantic interpretation of the natural language query, ranked by the total [weight](https://www.w3.org/TR/speech-grammar/#S2.4.1) of the path *plus the weight of the top-ranked entity matching the interpretation*.
+
+The above example would result in the following ranked interpretations:
+
+* conference instance named "kdd 2019" field of study "deep learning"
+  * Total weight: -20.942 (-1 + -1 + -18.942)
+* conference series named "kdd" publication year "2019" field of study "deep learning"
+  * Total weight: -21.942 (-1 + -1 + -1 + -18.942)
+* conference instance named "kdd 2019" title word "deep" title word "learning"
+  * Total weight: -22.03 (-1 + -1 + -1 + -19.03)
+* conference series named "kdd" publication year "2019" title word "deep" title word "learning"
+  * Total weight: -23.03 (-1 + -1 + -1 + -1 + -19.03)
+
+The MAKES [Interpret API returns information](reference-get-interpret.md#interpretation) about the parse tree generated for each interpretation, including:
+
+* "logprob": The total weight of the grammar path plus the weight of the top-ranked entity matching the interpretation
+* "parse": XML string showing how each part of the user query was matched to the grammar
+* "rules": Array of 
 
 ## Components of a grammar
 
