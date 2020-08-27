@@ -344,8 +344,8 @@ Column # | Name | Type | Note
 20 | CitationCount | long |
 21 | EstimatedCitation | long |
 22 | OriginalVenue | string |
-23 | FamilyId | long? | See [FAQ](resources-faq.md#what-is-familyid-in-paperstxt)
-24 | FamilyRank | uint? | See [FAQ](resources-faq.md#what-is-familyrank-in-paperstxt)
+23 | FamilyId | long? | See [FAQ](resources-faq.md#what-is-familyid-and-familyrank-in-paperstxt)
+24 | FamilyRank | uint? | See [FAQ](resources-faq.md#what-is-familyid-and-familyrank-in-paperstxt)
 25 | CreatedDate | DateTime |
 
 ## Related Field of Study
