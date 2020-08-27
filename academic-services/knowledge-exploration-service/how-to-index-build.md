@@ -440,3 +440,10 @@ Output:
     "timed_out": false
 }
 ```
+
+## Next steps
+
+Advance to the next section to learn how to create a MAKES grammar, used for interpreting natural language queries with the [Interpret API](reference-get-interpret.md).
+
+> [!div class="nextstepaction"]
+>[Define synonyms](how-to-grammar.md)

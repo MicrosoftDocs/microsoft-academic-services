@@ -318,3 +318,10 @@ The following schema definition is for an index that supports academic paper ent
   ]
 }
 ```
+
+## Next steps
+
+Advance to the next sections to learn about defining synonym data.
+
+> [!div class="nextstepaction"]
+>[Define synonyms](how-to-index-synonym.md)

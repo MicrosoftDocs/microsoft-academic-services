@@ -52,3 +52,10 @@ Conference instance synonyms:
 ["kdd 2019", "acm sigkdd 2019"]
 ["kdd 2019", "sigkdd 2019"]
 ```
+
+## Next steps
+
+Advance to the next sections to learn about defining index data.
+
+> [!div class="nextstepaction"]
+>[Define synonyms](how-to-index-data.md)

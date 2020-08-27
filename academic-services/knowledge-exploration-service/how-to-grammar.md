@@ -30,162 +30,69 @@ See below for a simple grammar that allows for matching a small subset of attrib
 
 ```xml
 <grammar root="paperQuery">
-    <import schema="paper_entity_schema.json" name="paperEntity" />
+  <import schema="paper_entity_schema.json" name="paperEntity" />
 
-    <rule id="paperQuery">
+  <rule id="paperQuery">
 
-        <!-- Variable containing final structured query expression -->
-        <tag>outputQueryExpression = All();</tag>
+    <!-- Variable containing final structured query expression -->
+    <tag>outputQueryExpression = All();</tag>
 
-        <!-- The following enclosure is repeated indefinitely (one to infinity), 
-             with each repeat incurring a weight penalty of -1 -->
-        <item repeat="1-" repeat-logprob="-1">
+    <!-- The following enclosure is repeated indefinitely (one to infinity), 
+       with each repeat incurring a weight penalty of -1 -->
+    <item repeat="1-" repeat-logprob="-1">
 
-            <one-of>
+      <one-of>
 
-                <!-- Match paper conference series attribute -->
-                <item>
-                    <attrref uri="paperEntity#C.CN" name="matchedAttribute" />
-                    <tag>matchedAttribute = Composite(matchedAttribute);</tag>
-                </item>
-
-                <!-- Match paper conference instance attribute -->
-                <item>
-                    <attrref uri="paperEntity#CI.CIN" name="matchedAttribute" />
-                    <tag>matchedAttribute = Composite(matchedAttribute);</tag>
-                </item>
-
-                <!-- Match paper field of study attribute -->
-                <item>
-                    <attrref uri="paperEntity#F.FN" name="matchedAttribute" />
-                    <tag>matchedAttribute = Composite(matchedAttribute);</tag>
-                </item>
-
-                <!-- Match paper title word attribute -->
-                <item>
-                    <attrref uri="paperEntity#W" name="matchedAttribute" />
-                </item>
-
-                <!-- Match paper publication year attribute -->
-                <item>
-                    <attrref uri="paperEntity#Y" name="matchedAttribute" />
-                </item>
-
-            </one-of>
-
-            <!-- Add matched attribute to existing query expression as a new constraint -->
-            <tag>outputQueryExpression = And(outputQueryExpression, matchedAttribute);</tag>
-
-            <!-- Stop further expansion if all user input has been matched -->
-            <tag>
-                isEndOfQuery = GetVariable("IsAtEndOfQuery", "system");
-                AssertEquals(isEndOfQuery, true);
-            </tag>
+        <!-- Match paper conference series attribute -->
+        <item>
+          <attrref uri="paperEntity#C.CN" name="matchedAttribute" />
+          <tag>matchedAttribute = Composite(matchedAttribute);</tag>
         </item>
 
-        <!-- Set output of rule to the query expression we constructed above -->
-        <tag>out = outputQueryExpression;</tag>
+        <!-- Match paper conference instance attribute -->
+        <item>
+          <attrref uri="paperEntity#CI.CIN" name="matchedAttribute" />
+          <tag>matchedAttribute = Composite(matchedAttribute);</tag>
+        </item>
 
-    </rule>
+        <!-- Match paper field of study attribute -->
+        <item>
+          <attrref uri="paperEntity#F.FN" name="matchedAttribute" />
+          <tag>matchedAttribute = Composite(matchedAttribute);</tag>
+        </item>
+
+        <!-- Match paper title word attribute -->
+        <item>
+          <attrref uri="paperEntity#W" name="matchedAttribute" />
+        </item>
+
+        <!-- Match paper publication year attribute -->
+        <item>
+          <attrref uri="paperEntity#Y" name="matchedAttribute" />
+        </item>
+
+      </one-of>
+
+      <!-- Add matched attribute to existing query expression as a new constraint -->
+      <tag>outputQueryExpression = And(outputQueryExpression, matchedAttribute);</tag>
+
+      <!-- Stop further expansion if all user input has been matched -->
+      <tag>
+        isEndOfQuery = GetVariable("IsAtEndOfQuery", "system");
+        AssertEquals(isEndOfQuery, true);
+      </tag>
+    </item>
+
+    <!-- Set output of rule to the query expression we constructed above -->
+    <tag>out = outputQueryExpression;</tag>
+
+  </rule>
 </grammar>
 ```
 
 ### Example rule expansion
 
-Using the above grammar, [example schema](how-to-index-schema.md#academic-paper-entity-schema), [example synonyms](how-to-index-synonym.md#example) and an index containing the two [example academic paper entities](how-to-index-data.md#academic-paper-entity), the MAKES Interpret API would generate the following response for the query "knowledge discovery and data mining 2019 deep learning":
-
-```json
-{
-    "query": "",
-    "interpretations": [
-        {
-            "logprob": -20.942,
-            "parse": "<rule name=\"#paperQuery\"><attr name=\"paperEntity#CI.CIN\" canonical=\"kdd 2019\">knowledge discovery and data mining 2019</attr> <attr name=\"paperEntity#F.FN\">deep learning</attr></rule>",
-            "rules": [
-                {
-                    "name": "#paperQuery",
-                    "output": {
-                        "type": "query",
-                        "value": "",
-                        "entities": [
-                            {
-                                "logprob": -18.942,
-                                "DN": "Cluster-GCN: An Efficient Algorithm for Training Deep and Large Graph Convolutional Networks"
-                            }
-                        ]
-                    }
-                }
-            ]
-        },
-        {
-            "logprob": -21.942,
-            "parse": "<rule name=\"#paperQuery\"><attr name=\"paperEntity#C.CN\" canonical=\"kdd\">knowledge discovery and data mining</attr> <attr name=\"paperEntity#Y\">2019</attr> <attr name=\"paperEntity#F.FN\">deep learning</attr></rule>",
-            "rules": [
-                {
-                    "name": "#paperQuery",
-                    "output": {
-                        "type": "query",
-                        "value": "",
-                        "entities": [
-                            {
-                                "logprob": -18.942,
-                                "DN": "Cluster-GCN: An Efficient Algorithm for Training Deep and Large Graph Convolutional Networks"
-                            }
-                        ]
-                    }
-                }
-            ]
-        },
-        {
-            "logprob": -22.03,
-            "parse": "<rule name=\"#paperQuery\"><attr name=\"paperEntity#CI.CIN\" canonical=\"kdd 2019\">knowledge discovery and data mining 2019</attr> <attr name=\"paperEntity#W\">deep</attr> <attr name=\"paperEntity#W\">learning</attr></rule>",
-            "rules": [
-                {
-                    "name": "#paperQuery",
-                    "output": {
-                        "type": "query",
-                        "value": "",
-                        "entities": [
-                            {
-                                "logprob": -19.03,
-                                "DN": "Sherlock: A Deep Learning Approach to Semantic Data Type Detection"
-                            }
-                        ]
-                    }
-                }
-            ]
-        },
-        {
-            "logprob": -23.03,
-            "parse": "<rule name=\"#paperQuery\"><attr name=\"paperEntity#C.CN\" canonical=\"kdd\">knowledge discovery and data mining</attr> <attr name=\"paperEntity#Y\">2019</attr> <attr name=\"paperEntity#W\">deep</attr> <attr name=\"paperEntity#W\">learning</attr></rule>",
-            "rules": [
-                {
-                    "name": "#paperQuery",
-                    "output": {
-                        "type": "query",
-                        "value": "",
-                        "entities": [
-                            {
-                                "logprob": -19.03,
-                                "DN": "Sherlock: A Deep Learning Approach to Semantic Data Type Detection"
-                            }
-                        ]
-                    }
-                }
-            ]
-        }
-    ]
-}
-```
-
-
-
-
-
-
-
-
-```
+We can illustrate how rule expansion happens using the sample query "knowledge discovery and data mining 2019 deep learning", the above grammar, [example schema](how-to-index-schema.md#academic-paper-entity-schema), [example synonyms](how-to-index-synonym.md#example) and an index containing two [example academic paper entities](how-to-index-data.md#academic-paper-entity):
 
 * "knowledge discovery and data mining" => synonym of conference series named "kdd", weight -1
   * "2019" => publication year "2019", weight -1
@@ -201,26 +108,93 @@ Using the above grammar, [example schema](how-to-index-schema.md#academic-paper-
     * "learning" => title word "learning", weight -1
       * END OF QUERY, top matching paper "Sherlock: A Deep Learning Approach to Semantic Data Type Detection", weight -19.03
 
+The MAKES Interpret API would generate the following response for the same query:
 
+```json
+{
+  "query": "",
+  "interpretations": [
+    {
+      "logprob": -20.942,
+      "parse": "<rule name=\"#paperQuery\"><attr name=\"paperEntity#CI.CIN\" canonical=\"kdd 2019\">knowledge discovery and data mining 2019</attr> <attr name=\"paperEntity#F.FN\">deep learning</attr></rule>",
+      "rules": [
+        {
+          "name": "#paperQuery",
+          "output": {
+            "type": "query",
+            "value": "",
+            "entities": [
+              {
+                "logprob": -18.942,
+                "DN": "Cluster-GCN: An Efficient Algorithm for Training Deep and Large Graph Convolutional Networks"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "logprob": -21.942,
+      "parse": "<rule name=\"#paperQuery\"><attr name=\"paperEntity#C.CN\" canonical=\"kdd\">knowledge discovery and data mining</attr> <attr name=\"paperEntity#Y\">2019</attr> <attr name=\"paperEntity#F.FN\">deep learning</attr></rule>",
+      "rules": [
+        {
+          "name": "#paperQuery",
+          "output": {
+            "type": "query",
+            "value": "",
+            "entities": [
+              {
+                "logprob": -18.942,
+                "DN": "Cluster-GCN: An Efficient Algorithm for Training Deep and Large Graph Convolutional Networks"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "logprob": -22.03,
+      "parse": "<rule name=\"#paperQuery\"><attr name=\"paperEntity#CI.CIN\" canonical=\"kdd 2019\">knowledge discovery and data mining 2019</attr> <attr name=\"paperEntity#W\">deep</attr> <attr name=\"paperEntity#W\">learning</attr></rule>",
+      "rules": [
+        {
+          "name": "#paperQuery",
+          "output": {
+            "type": "query",
+            "value": "",
+            "entities": [
+              {
+                "logprob": -19.03,
+                "DN": "Sherlock: A Deep Learning Approach to Semantic Data Type Detection"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "logprob": -23.03,
+      "parse": "<rule name=\"#paperQuery\"><attr name=\"paperEntity#C.CN\" canonical=\"kdd\">knowledge discovery and data mining</attr> <attr name=\"paperEntity#Y\">2019</attr> <attr name=\"paperEntity#W\">deep</attr> <attr name=\"paperEntity#W\">learning</attr></rule>",
+      "rules": [
+        {
+          "name": "#paperQuery",
+          "output": {
+            "type": "query",
+            "value": "",
+            "entities": [
+              {
+                "logprob": -19.03,
+                "DN": "Sherlock: A Deep Learning Approach to Semantic Data Type Detection"
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}
+```
 
-Each leaf node (END OF QUERY) in the completed parse tree represents a different semantic interpretation of the natural language query, ranked by the total [weight](https://www.w3.org/TR/speech-grammar/#S2.4.1) of the path *plus the weight of the top-ranked entity matching the interpretation*.
-
-The above example would result in the following ranked interpretations:
-
-* conference instance named "kdd 2019" field of study "deep learning"
-  * Total weight: -20.942 (-1 + -1 + -18.942)
-* conference series named "kdd" publication year "2019" field of study "deep learning"
-  * Total weight: -21.942 (-1 + -1 + -1 + -18.942)
-* conference instance named "kdd 2019" title word "deep" title word "learning"
-  * Total weight: -22.03 (-1 + -1 + -1 + -19.03)
-* conference series named "kdd" publication year "2019" title word "deep" title word "learning"
-  * Total weight: -23.03 (-1 + -1 + -1 + -1 + -19.03)
-
-The MAKES [Interpret API returns information](reference-get-interpret.md#interpretation) about the parse tree generated for each interpretation, including:
-
-* "logprob": The total weight of the grammar path plus the weight of the top-ranked entity matching the interpretation
-* "parse": XML string showing how each part of the user query was matched to the grammar
-* "rules": Array of 
+Each of the interpretations reflect an 
 
 ## Components of a grammar
 

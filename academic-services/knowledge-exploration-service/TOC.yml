@@ -30,7 +30,7 @@
       href: how-to-index-synonym.md
     - name: Define data
       href: how-to-index-data.md
-    - name: Create index
+    - name: Create and test index
       href: how-to-index-build.md
   - name: Create custom MAKES grammar
     href: how-to-grammar.md

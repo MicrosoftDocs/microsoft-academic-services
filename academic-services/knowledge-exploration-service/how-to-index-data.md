@@ -358,3 +358,10 @@ The following entity JSON data is for an index that supports academic paper enti
   }
 }
 ```
+
+## Next steps
+
+Advance to the next section to learn how to build and test a custom MAKES index using the example data presented in the previous sections.
+
+> [!div class="nextstepaction"]
+>[Define synonyms](how-to-index-build.md)
