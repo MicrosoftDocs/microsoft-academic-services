@@ -40,7 +40,7 @@ Column # | Name | Type | Note
 8 | PaperCount | long |
 9 | PaperFamilyCount | long | See [FAQ](resources-faq.md#papercount-vs-paperfamilycount)
 10 | CitationCount | long |
-11 | Iso3166Code | string | See [Wiki ISO_3166](https://en.wikipedia.org/wiki/ISO_3166)
+11 | Iso3166Code | string | Two-letter country codes (alpha-2) defined in [ISO_3166 Code](https://www.iso.org/iso-3166-country-codes.html)
 12 | Latitude | float? | 
 13 | Longitude | float? |
 14 | CreatedDate | DateTime |
