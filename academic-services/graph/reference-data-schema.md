@@ -2,7 +2,7 @@
 title: Microsoft Academic Graph data schema
 description: Documents the complete, most recent Microsoft Academic Graph entity data schema, including the name and type of each attribute
 ms.topic: reference
-ms.date: 7/9/2020
+ms.date: 8/27/2020
 ---
 # Microsoft Academic Graph data schema
 
@@ -40,9 +40,10 @@ Column # | Name | Type | Note
 8 | PaperCount | long |
 9 | PaperFamilyCount | long | See [FAQ](resources-faq.md#papercount-vs-paperfamilycount)
 10 | CitationCount | long |
-11 | Latitude | float? |
-12 | Longitude | float? |
-13 | CreatedDate | DateTime |
+11 | Iso3166Code | string | See [Wiki ISO_3166](https://en.wikipedia.org/wiki/ISO_3166)
+12 | Latitude | float? | 
+13 | Longitude | float? |
+14 | CreatedDate | DateTime |
 
 ## AuthorExtendedAttributes
 
@@ -344,7 +345,8 @@ Column # | Name | Type | Note
 21 | EstimatedCitation | long |
 22 | OriginalVenue | string |
 23 | FamilyId | long? | See [FAQ](resources-faq.md#what-is-familyid-in-paperstxt)
-24 | CreatedDate | DateTime |
+24 | FamilyRank | uint? | See [FAQ](resources-faq.md#what-is-familyrank-in-paperstxt)
+25 | CreatedDate | DateTime |
 
 ## Related Field of Study
 
