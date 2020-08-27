@@ -30,7 +30,7 @@ See below for a simple grammar that allows for matching a small subset of attrib
 
 ```xml
 <grammar root="paperQuery">
-  <import schema="paper_entity_schema.json" name="paperEntity" />
+  <import schema="schema.json" name="paperEntity" />
 
   <rule id="paperQuery">
 
@@ -75,12 +75,6 @@ See below for a simple grammar that allows for matching a small subset of attrib
 
       <!-- Add matched attribute to existing query expression as a new constraint -->
       <tag>outputQueryExpression = And(outputQueryExpression, matchedAttribute);</tag>
-
-      <!-- Stop further expansion if all user input has been matched -->
-      <tag>
-        isEndOfQuery = GetVariable("IsAtEndOfQuery", "system");
-        AssertEquals(isEndOfQuery, true);
-      </tag>
     </item>
 
     <!-- Set output of rule to the query expression we constructed above -->
@@ -92,7 +86,7 @@ See below for a simple grammar that allows for matching a small subset of attrib
 
 ### Example rule expansion
 
-We can illustrate how rule expansion happens using the sample query "knowledge discovery and data mining 2019 deep learning", the above grammar, [example schema](how-to-index-schema.md#academic-paper-entity-schema), [example synonyms](how-to-index-synonym.md#example) and an index containing two [example academic paper entities](how-to-index-data.md#academic-paper-entity):
+We can illustrate how rule expansion happens with the above grammar using the sample query "knowledge discovery and data mining 2019 deep learning" and the example index created in the ["create custom MAKES index" how-to guide](how-to-index-build.md)
 
 * "knowledge discovery and data mining" => synonym of conference series named "kdd", weight -1
   * "2019" => publication year "2019", weight -1

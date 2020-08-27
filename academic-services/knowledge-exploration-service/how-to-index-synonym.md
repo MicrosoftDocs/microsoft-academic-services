@@ -58,4 +58,4 @@ Conference instance synonyms:
 Advance to the next sections to learn about defining index data.
 
 > [!div class="nextstepaction"]
->[Define synonyms](how-to-index-data.md)
+>[Define data](how-to-index-data.md)

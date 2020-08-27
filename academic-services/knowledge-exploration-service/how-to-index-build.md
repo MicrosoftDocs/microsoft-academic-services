@@ -98,7 +98,7 @@ Navigate to the win-x64/kesm sub-folder of the directory where you unzipped the 
         "equals",
         "starts_with"
       ],
-      "synonyms": "ConferenceSeriesSynonyms.txt"
+      "synonyms": "conference-series-synonyms.txt"
     },
     {
       "name": "CC",
@@ -122,7 +122,7 @@ Navigate to the win-x64/kesm sub-folder of the directory where you unzipped the 
         "equals",
         "starts_with"
       ],
-      "synonyms": "ConferenceInstanceSynonyms.txt"
+      "synonyms": "conference-instance-synonyms.txt"
     },
     {
       "name": "D",
