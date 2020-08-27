@@ -220,11 +220,7 @@ The MAKES Interpret API would generate the following response for the same query
 }
 ```
 
-Each of the interpretations reflect an 
-
 ## Components of a grammar
-
-The following describes each of the syntactic elements that can be used in a grammar.  See [this example](#example) for a complete grammar that demonstrates the use of these elements in context.
 
 ### grammar element
 
@@ -293,13 +289,25 @@ In addition to matching user input, the `attrref` element also returns a structu
 <attrref uri="paperEntity#C.CN" name="matchedAttribute" />
 ```
 
+### tag Element
+
+The `tag` element specifies how a path through the grammar is to be interpreted.  It contains a sequence of semicolon-terminated statements.  A statement may be an assignment of a literal or a variable to another variable.  It may also assign the output of a function with 0 or more parameters to a variable.  Each function parameter may be specified using a literal or a variable.  If the function does not return any output, the assignment is omitted.  Variable scope is local to the containing rule.
+
+```xml
+<tag>x = 1; y = x;</tag>
+<tag>q = All(); q = And(q, q2);</tag>
+<tag>AssertEquals(x, 1);</tag>
+```
+
+Each `rule` in the grammar has a predefined variable named "out", representing the semantic output of the rule.  Its value is computed by evaluating each of the semantic statements traversed by the path through the `rule` matching the user query input.  The value assigned to the "out" variable at the end of the evaluation is the semantic output of the rule.  The semantic output of interpreting a user query against the grammar is the semantic output of the root rule.
+
+Some statements may alter the probability of an interpretation path by introducing an additive log probability offset.  Some statements may reject the interpretation altogether if specified conditions are not satisfied.
+
+For a list of supported semantic functions, see [semantic functions](reference-semantic-functions.md).
+
 ## Query completions
 
 To support query completions when interpreting partial user queries, each referenced attribute must include "starts_with" as an operation in the schema definition.  Given a user query prefix, `attrref` will match all values in the index that complete the prefix, and yield each complete value as a separate interpretation of the grammar.  
-
-Examples:
-* Matching `<attrref uri=" paperEntity#Keyword" name="keyword"/>` against the query prefix "dat" generates one interpretation for papers about "database", one interpretation for papers about "data mining", etc.
-* Matching `<attrref uri=" paperEntity#Year" name="year"/>` against the query prefix "200" generates one interpretation for papers in "2000", one interpretation for papers in "2001", etc.
 
 ## Matching operations
 
@@ -330,22 +338,6 @@ The following table lists the supported `op` values for each attribute type.  Th
 | Int32, Int64, Double | eq |  Numeric equality match | equals |
 | Int32, Int64, Double | lt, le, gt, ge | Numeric inequality match (<, <=, >, >=) | is_between |
 | Int32, Int64, Double | starts_with | Prefix match of value in decimal notation | starts_with |
-
-### tag Element
-
-The `tag` element specifies how a path through the grammar is to be interpreted.  It contains a sequence of semicolon-terminated statements.  A statement may be an assignment of a literal or a variable to another variable.  It may also assign the output of a function with 0 or more parameters to a variable.  Each function parameter may be specified using a literal or a variable.  If the function does not return any output, the assignment is omitted.  Variable scope is local to the containing rule.
-
-```xml
-<tag>x = 1; y = x;</tag>
-<tag>q = All(); q = And(q, q2);</tag>
-<tag>AssertEquals(x, 1);</tag>
-```
-
-Each `rule` in the grammar has a predefined variable named "out", representing the semantic output of the rule.  Its value is computed by evaluating each of the semantic statements traversed by the path through the `rule` matching the user query input.  The value assigned to the "out" variable at the end of the evaluation is the semantic output of the rule.  The semantic output of interpreting a user query against the grammar is the semantic output of the root rule.
-
-Some statements may alter the probability of an interpretation path by introducing an additive log probability offset.  Some statements may reject the interpretation altogether if specified conditions are not satisfied.
-
-For a list of supported semantic functions, see [Semantic Functions](SemanticInterpretation.md#semantic-functions).
 
 ## Interpretation Probability
 
