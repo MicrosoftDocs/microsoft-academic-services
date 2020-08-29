@@ -13,7 +13,7 @@ In this tutorial, we'll focus on designing the approrpiate KES schema such that 
 
 Download tutorial resources from [here](https://makesstore.blob.core.windows.net/makes-tutorial-resource/latest.zip).
 
-Download MAKES managment tool (kesm.exe) from your latest MAKES release 
+Download MAKES managment tool (kesm.exe) from your latest MAKES release.
 
 ## Design a KES schema
 
@@ -87,6 +87,7 @@ Run DeployHost command and use the "--MakesIndex" parameter to load the custom K
 
 >
 > ![NOTE]
+> You can reduce Azure consumption for this tutorial by using the "--HostMachineSku" parameter and set the SKU to "Standard_D2_V2".
 > For more detailed deployment instruction, see (Create API Instances)[get-started-create-api-instances.md#create-makes-hosting-resources]
 
 ## Create Filterable Paper List UX using Evaluate and Histogram API
@@ -95,17 +96,17 @@ We now have a backend API to server our conference paper data. We can now create
 
 ### Paper list KES Query Expression
 
-We start with crafting a KES query expression that will represent the paper list. Since the inital list of papers we want to see is "all papers", the corresponding KES query expression would be "All()"
+We start with crafting a KES query expression that will represent the paper list. Since the inital list of papers we want to see is "all papers", the corresponding KES query expression would be "All()". For more information on KES Query Expressions, see [Structured query expressions](concepts-query-expressions.md)
 
 ### Retrieve top papers 
 
-We can then call Evaluate API with the paper list expression "All()" to retrieve all the paper entities. After retrieiving the paper entities from Evaluate API, all is left is to translate the entity data to UI elements. See **async GetPapers(paperExpression)** method in **<tutorial_resource_root>/ConferenceWebsite/makesInteractor.js** for more details.
+We can then call Evaluate API with the paper list expression "All()" to retrieve all the paper entities. After retrieiving the paper entities from Evaluate API, all is left is to translate the entity data to UI elements. See **async GetPapers(paperExpression)** method in **<tutorial_resource_root>/ConferenceWebsite/makesInteractor.js** for more details. For more information on Evaluate API, see [Evaluate REST API](reference-post-evaluate.md)
 
 ### Generate filters  
 
 We can also call Histogram API with the paper list expression "All()" to get filter attribute histograms and transform them into filters. 
 
-Histogram returns the most probalistic attribute values for each attributes. We can use these values for each filter attribute as suggested filter values. See **async GetFilters(paperExpression)** method in **<tutorial_resource_root>/ConferenceWebsite/makesInteractor.js** for more details.
+Histogram returns the most probalistic attribute values for each attributes. We can use these values for each filter attribute as suggested filter values. See **async GetFilters(paperExpression)** method in **<tutorial_resource_root>/ConferenceWebsite/makesInteractor.js** for more details. For more information on Histogram API, see [Histogram REST API](reference-post-histogram.md)
 
 ### Handle filter event
 
@@ -115,7 +116,6 @@ For example, to apply a filter to constraint the paper publication year to 2013,
 
 See **async updatePaperList()** method in **<tutorial_resource_root>/ConferenceWebsite/filterablePaperList.js** for more details.
 
-For more information on KES Query Expressions, see [Structured query expressions](concepts-query-expressions.md)
 
 ### Use sample UI code to see them in action
 
