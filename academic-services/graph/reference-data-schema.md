@@ -2,7 +2,7 @@
 title: Microsoft Academic Graph data schema
 description: Documents the complete, most recent Microsoft Academic Graph entity data schema, including the name and type of each attribute
 ms.topic: reference
-ms.date: 7/9/2020
+ms.date: 8/27/2020
 ---
 # Microsoft Academic Graph data schema
 
@@ -20,7 +20,7 @@ When using Microsoft Academic data (MAG, MAKES, etc.) in a product or service, o
 
 ## Entity Relationship Diagram
 
- [![Entity Relationship Diagram](media/erd/entity-relationship-diagram-thumbnail.png)](media/erd/entity-relationship-diagram.png)
+ [![Entity Relationship Diagram](media/erd/entity-relationship-diagram.png)](media/erd/entity-relationship-diagram.png)
 
 ## Affiliations
 
@@ -40,9 +40,10 @@ Column # | Name | Type | Note
 8 | PaperCount | long |
 9 | PaperFamilyCount | long | See [FAQ](resources-faq.md#papercount-vs-paperfamilycount)
 10 | CitationCount | long |
-11 | Latitude | float? |
-12 | Longitude | float? |
-13 | CreatedDate | DateTime |
+11 | Iso3166Code | string | Two-letter codes (alpha-2) defined in [ISO_3166 Code](https://www.iso.org/iso-3166-country-codes.html) (ISO.org) and [ISO 3166-2](https://en.wikipedia.org/wiki/ISO_3166-2) (Wiki)
+12 | Latitude | float? | 
+13 | Longitude | float? |
+14 | CreatedDate | DateTime |
 
 ## AuthorExtendedAttributes
 
@@ -52,7 +53,7 @@ Column # | Name | Type | Note
 
 Column # | Name | Type | Note
 --- | --- | --- | ---
-1 | AuthorId | long | FOREIGN KEY REFERENCES Authors(AuthorId)
+1 | AuthorId | long | FOREIGN KEY REFERENCES Authors.AuthorId
 2 | AttributeType | int | 1: Alternative Name
 3 | AttributeValue | string |
 
@@ -85,7 +86,7 @@ Column # | Name | Type | Note
 1 | ConferenceInstanceId | long | PRIMARY KEY
 2 | NormalizedName | string |
 3 | DisplayName | string |
-4 | ConferenceSeriesId | long | FOREIGN KEY REFERENCES ConferenceSeries(ConferenceSeriesId)
+4 | ConferenceSeriesId | long | FOREIGN KEY REFERENCES ConferenceSeries.ConferenceSeriesId
 5 | Location | string |
 6 | OfficialUrl | string |
 7 | StartDate | DateTime? |
@@ -141,8 +142,8 @@ Column # | Name | Type | Note
 
 Column # | Name | Type | Note
 --- | --- | --- | ---
-1 | FieldOfStudyId | long | PRIMARY KEY <br> FOREIGN KEY REFERENCES FieldsOfStudy(FieldOfStudyId)
-2 | ChildFieldOfStudyId | long | PRIMARY KEY <br> FOREIGN KEY REFERENCES FieldsOfStudy(FieldOfStudyId)
+1 | FieldOfStudyId | long | PRIMARY KEY <br> FOREIGN KEY REFERENCES FieldsOfStudy.FieldOfStudyId
+2 | ChildFieldOfStudyId | long | PRIMARY KEY <br> FOREIGN KEY REFERENCES FieldsOfStudy.FieldOfStudyId
 
 ## Field of Study Extended Attributes
 
@@ -152,7 +153,7 @@ Column # | Name | Type | Note
 
 Column # | Name | Type | Note
 --- | --- | --- | ---
-1 | FieldOfStudyId | long | FOREIGN KEY REFERENCES FieldsOfStudy(FieldOfStudyId)
+1 | FieldOfStudyId | long | FOREIGN KEY REFERENCES FieldsOfStudy.FieldOfStudyId
 2 | AttributeType | int | 1: UMLSId <br> 2: SourceUrl
 3 | AttributeValue | string |
 
@@ -203,7 +204,7 @@ Column # | Name | Type | Note
 
 Column # | Name | Type | Note
 --- | --- | --- | ---
-1 | PaperId | long | PRIMARY KEY <br> FOREIGN KEY REFERENCES Papers(PaperId)
+1 | PaperId | long | PRIMARY KEY <br> FOREIGN KEY REFERENCES Papers.PaperId
 2 | IndexedAbstract | string | See [FAQ](resources-faq.md#what-format-are-paper-abstracts-published-in) for format
 
 > [!NOTE]
@@ -217,9 +218,9 @@ Column # | Name | Type | Note
 
 Column # | Name | Type | Note
 --- | --- | --- | ---
-1 | PaperId | long | FOREIGN KEY REFERENCES Papers(PaperId)
-2 | AuthorId | long | FOREIGN KEY REFERENCES Authors(AuthorId)
-3 | AffiliationId | long? | FOREIGN KEY REFERENCES Affiliations(AffiliationId)
+1 | PaperId | long | FOREIGN KEY REFERENCES Papers.PaperId
+2 | AuthorId | long | FOREIGN KEY REFERENCES Authors.AuthorId
+3 | AffiliationId | long? | FOREIGN KEY REFERENCES Affiliations.AffiliationId
 4 | AuthorSequenceNumber | uint | 1-based author sequence number. 1: the 1st author listed on paper, 2: the 2nd author listed on paper, etc.
 5 | OriginalAuthor | string |
 6 | OriginalAffiliation | string |
@@ -235,8 +236,8 @@ Column # | Name | Type | Note
 
 Column # | Name | Type | Note
 --- | --- | --- | ---
-1 | PaperId | long | FOREIGN KEY REFERENCES Papers(PaperId)
-2 | PaperReferenceId | long | FOREIGN KEY REFERENCES Papers(PaperId)
+1 | PaperId | long | FOREIGN KEY REFERENCES Papers.PaperId
+2 | PaperReferenceId | long | FOREIGN KEY REFERENCES Papers.PaperId
 3 | CitationContext | string |
 
 ## Paper Extended Attributes
@@ -247,7 +248,7 @@ Column # | Name | Type | Note
 
 Column # | Name | Type | Note
 --- | --- | --- | ---
-1 | PaperId | long | FOREIGN KEY REFERENCES Papers(PaperId)
+1 | PaperId | long | FOREIGN KEY REFERENCES Papers.PaperId
 2 | AttributeType | int | 1: PatentId <br> 2: PubMedId <br> 3: PmcId
 3 | AttributeValue | string |
 
@@ -259,8 +260,8 @@ Column # | Name | Type | Note
 
 Column # | Name | Type | Note
 --- | --- | --- | ---
-1 | PaperId | long | PRIMARY KEY <br> FOREIGN KEY REFERENCES Papers(PaperId)
-2 | FieldOfStudyId | long | PRIMARY KEY <br> FOREIGN KEY REFERENCES FieldsOfStudy(FieldOfStudyId)
+1 | PaperId | long | PRIMARY KEY <br> FOREIGN KEY REFERENCES Papers.PaperId
+2 | FieldOfStudyId | long | PRIMARY KEY <br> FOREIGN KEY REFERENCES FieldsOfStudy.FieldOfStudyId
 3 | Score | float | Confidence range between 0 and 1. Bigger number representing higher confidence.
 
 ## Paper Recommendations
@@ -271,8 +272,8 @@ Column # | Name | Type | Note
 
 Column # | Name | Type | Note
 --- | --- | --- | ---
-1 | PaperId | long | PRIMARY KEY <br> FOREIGN KEY REFERENCES Papers(PaperId)
-2 | RecommendedPaperId | long | PRIMARY KEY <br> FOREIGN KEY REFERENCES Papers(PaperId)
+1 | PaperId | long | PRIMARY KEY <br> FOREIGN KEY REFERENCES Papers.PaperId
+2 | RecommendedPaperId | long | PRIMARY KEY <br> FOREIGN KEY REFERENCES Papers.PaperId
 3 | Score | float | Confidence range between 0 and 1. Bigger number representing higher confidence.
 
 ## Paper References
@@ -283,8 +284,8 @@ Column # | Name | Type | Note
 
 Column # | Name | Type | Note
 --- | --- | --- | ---
-1 | PaperId | long | PRIMARY KEY <br> FOREIGN KEY REFERENCES Papers(PaperId)
-2 | PaperReferenceId | long | PRIMARY KEY <br> FOREIGN KEY REFERENCES Papers(PaperId)
+1 | PaperId | long | PRIMARY KEY <br> FOREIGN KEY REFERENCES Papers.PaperId
+2 | PaperReferenceId | long | PRIMARY KEY <br> FOREIGN KEY REFERENCES Papers.PaperId
 
 ## Paper Resources
 
@@ -294,7 +295,7 @@ Column # | Name | Type | Note
 
 Column # | Name | Type | Note
 --- | --- | --- | ---
-1 | PaperId | long | FOREIGN KEY REFERENCES Papers(PaperId)
+1 | PaperId | long | FOREIGN KEY REFERENCES Papers.PaperId
 2 | ResourceType | int | Bit flags. 1 = Project, 2 = Data, 4 = Code
 3 | ResourceUrl | string |
 4 | SourceUrl | string |
@@ -308,7 +309,7 @@ Column # | Name | Type | Note
 
 Column # | Name | Type | Note
 --- | --- | --- | ---
-1 | PaperId | long | PRIMARY KEY <br> FOREIGN KEY REFERENCES Papers(PaperId)
+1 | PaperId | long | PRIMARY KEY <br> FOREIGN KEY REFERENCES Papers.PaperId
 2 | SourceType | int? | 1 = Html, 2 = Text, 3 = Pdf, 4 = Doc, 5 = Ppt, 6 = Xls, 8 = Rtf, 12 = Xml, 13 = Rss, 20 = Swf, 27 = Ics, 31 = Pub, 33 = Ods, 34 = Odp, 35 = Odt, 36 = Zip, 40 = Mp3, 0/999/NULL = unknown
 3 | SourceUrl | string | PRIMARY KEY
 4 | LanguageCode | string |
@@ -332,9 +333,9 @@ Column # | Name | Type | Note
 9 | Date | DateTime? |
 10 | OnlineDate | DateTime? |
 11 | Publisher | string |
-12 | JournalId | long? | FOREIGN KEY REFERENCES Journals(JournalId)
-13 | ConferenceSeriesId | long? | FOREIGN KEY REFERENCES ConferenceSeries(ConferenceSeriesId)
-14 | ConferenceInstanceId | long? | FOREIGN KEY REFERENCES ConferenceInstances(ConferenceInstanceId)
+12 | JournalId | long? | FOREIGN KEY REFERENCES Journals.JournalId
+13 | ConferenceSeriesId | long? | FOREIGN KEY REFERENCES ConferenceSeries.ConferenceSeriesId
+14 | ConferenceInstanceId | long? | FOREIGN KEY REFERENCES ConferenceInstances.ConferenceInstanceId
 15 | Volume | string |
 16 | Issue | string |
 17 | FirstPage | string |
@@ -343,8 +344,9 @@ Column # | Name | Type | Note
 20 | CitationCount | long |
 21 | EstimatedCitation | long |
 22 | OriginalVenue | string |
-23 | FamilyId | long? | See [FAQ](resources-faq.md#what-is-familyid-in-paperstxt)
-24 | CreatedDate | DateTime |
+23 | FamilyId | long? | See [FAQ](resources-faq.md#what-is-familyid-in-papers)
+24 | FamilyRank | uint? | See [FAQ](resources-faq.md#rank-vs-familyrank-in-papers)
+25 | CreatedDate | DateTime |
 
 ## Related Field of Study
 
@@ -354,8 +356,8 @@ Column # | Name | Type | Note
 
 Column # | Name | Type | Note
 --- | --- | --- | ---
-1 | FieldOfStudyId1 | long | FOREIGN KEY REFERENCES FieldsOfStudy(FieldOfStudyId)
+1 | FieldOfStudyId1 | long | FOREIGN KEY REFERENCES FieldsOfStudy.FieldOfStudyId
 2 | Type1 | string | general, disease, disease_cause, medical_treatment, symptom
-3 | FieldOfStudyId2 | long | FOREIGN KEY REFERENCES FieldsOfStudy(FieldOfStudyId)
+3 | FieldOfStudyId2 | long | FOREIGN KEY REFERENCES FieldsOfStudy.FieldOfStudyId
 4 | Type2 | string | general, disease, disease_cause, medical_treatment, symptom
 5 | Rank | float | Confidence. Bigger number representing higher confidence.
