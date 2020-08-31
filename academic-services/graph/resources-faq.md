@@ -67,7 +67,7 @@ If the "FamilyId" value is not defined for a paper it means that the paper is no
 
 Rank of a paper is the static rank associated with the individual paper.
 
-For papers belong to paper families, all papers of the same family have same FamilyRank value, which represents the aggrgated rank of all papers in the family.
+For papers belonging to paper families, all papers of the same family have the same FamilyRank value, which represents the aggregated rank of all papers in the family.
 
 For papers not having a FamilyId, the FamilyRank is null.
 
