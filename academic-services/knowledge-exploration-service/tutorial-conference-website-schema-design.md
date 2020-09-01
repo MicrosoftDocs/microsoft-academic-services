@@ -20,7 +20,7 @@ In this tutorial, we'll focus on designing the appropriate KES schema such that 
 
 ## Design a KES schema for KDD data
 
-We start by determining what attributes do we want to include in the index, what are appropriate types to store them, and what operations should they support. The conference paper entity data **kddData.json** can be found at in the tutorial resource folder. The data is dervieved from MAG. 
+We start by determining what attributes to include in the index, what are the appropriate types to store the attributes, and what operations should the attributes support. In this tutorial, we provided sample KDD data derived from MAG. The conference paper entity data can be found in **<tutorial_resource_root>/kddData.json**.
 
 Here's an example entity from **kddData.json**
 
