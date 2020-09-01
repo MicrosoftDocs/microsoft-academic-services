@@ -295,6 +295,7 @@ The following schema elements reflects the filterable numeric attributes:
     {"name": "AuthorAffiliations.Sequence","type": "int32?","operations": [ "equals" ]}
   ]
 }
+```
  
 For string attributes, we want to select attributes that common values such as journal name, conference name. For attribute values that may be too noisy, you may opt for the normalized version such as using **AuthorName** instead of **OriginalAuthorName**. we should add **equals** operation to these attributes.
 
