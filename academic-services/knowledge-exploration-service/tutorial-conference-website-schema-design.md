@@ -19,7 +19,232 @@ We start by determining what attributes do we want to include in the index, what
 
 Here's an example entity from **kddData.json**
 ```JSON
-{	"logprob":-21.407,	"Id":20513064,			"Title":"proceedings of the 4th multiclust workshop on multiple clusterings multi view data and multi source knowledge driven clustering",	"TitleWords":["proceedings","of","the","4th","multiclust","workshop","on","multiple","clusterings","multi","view","data","and","source","knowledge","driven","clustering"],	"OriginalTitle":"Proceedings of the 4th MultiClust Workshop on Multiple Clusterings, Multi-view Data, and Multi-source Knowledge-driven Clustering",	"Abstract":"Cluster detection is a very traditional data analysis task with several decades of research. However, it also includes a large variety of different subtopics investigated by different communities such as data mining, machine learning, statistics, and database systems. \"Multiple Clusterings, Multi-view Data, and Multi-source Knowledge-driven Clustering\" names several challenges around clustering: making sense or even making use of many, possibly redundant clustering results, of different representations and properties of data, of different sources of knowledge. Approaches such as ensemble clustering, semi-supervised clustering, subspace clustering meet around these problems. Yet they tackle these problems with different backgrounds, focus on different details, and include ideas from different research communities. This diversity is a major potential for this emerging field and should be highlighted by this workshop. A core motivation for this workshop series is our believe that these approaches are not just tackling different parts of the problem but that they should benefit from each other and, ultimately, combine the different perspectives and techniques to tackle the clustering problem more effectively. In paper presentations and discussions, we therefore would like to encourage the workshop participants to look at their own research problems from multiple perspectives.",	"Year":2013,	"Date":"2013-08-11",	"CitationCount":1,	"EstimatedCitationCount":1,	"FieldsOfStudy":[{"Name":"subspace clustering","OriginalName":"Subspace clustering"},{"Name":"multi source","OriginalName":"Multi-source"},{"Name":"data science","OriginalName":"Data science"},{"Name":"conceptual clustering","OriginalName":"Conceptual clustering"},{"Name":"computer science","OriginalName":"Computer science"},{"Name":"cluster analysis","OriginalName":"Cluster analysis"}],		"AbstractWords":["cluster","detection","is","a","very","traditional","data","analysis","task","with","several","decades","of","research","however","it","also","includes","large","variety","different","subtopics","investigated","by","communities","such","as","mining","machine","learning","statistics","and","database","systems","38","39","40","41","43","44","names","challenges","around","clustering","making","sense","or","even","use","many","possibly","redundant","results","representations","properties","sources","knowledge","approaches","ensemble","semi","supervised","subspace","meet","these","problems","yet","they","tackle","backgrounds","focus","on","details","include","ideas","from","this","diversity","major","potential","for","emerging","field","should","be","highlighted","workshop","core","motivation","series","our","believe","that","are","not","just","tackling","parts","the","problem","but","benefit","each","other","ultimately","combine","perspectives","techniques","to","more","effectively","in","paper","presentations","discussions","we","therefore","would","like","encourage","participants","look","at","their","own","multiple",""],					"Conference":{"Name":"kdd"},	"VenueFullName":"Knowledge Discovery and Data Mining",	"VenueShortName":"KDD",	"AuthorAffiliations":[	{"AuthorName":"ira assent","OriginalAuthorName":"Ira Assent","Sequence":1,"AffiliationName":"aarhus university","OriginalAffiliationName":"aarhus university, denmark"},{"AuthorName":"carlotta domeniconi","OriginalAuthorName":"Carlotta Domeniconi","Sequence":2,"AffiliationName":"george mason university","OriginalAffiliationName":"George Mason University"},{"AuthorName":"francesco gullo","OriginalAuthorName":"Francesco Gullo","Sequence":3,"AffiliationName":"yahoo","OriginalAffiliationName":"Yahoo! Res., Spain"},{"AuthorName":"andrea tagarelli","OriginalAuthorName":"Andrea Tagarelli","Sequence":4,"AffiliationName":"university of calabria","OriginalAffiliationName":"[University of Calabria, Italy]"},{"AuthorName":"arthur zimek","OriginalAuthorName":"Arthur Zimek","Sequence":5,"AffiliationName":"ludwig maximilian university of munich","OriginalAffiliationName":"Ludwig Maximilians Universität München Germany"}		]		}
+{
+    "logprob": -21.407,
+    "Id": 20513064,
+    "Title": "proceedings of the 4th multiclust workshop on multiple clusterings multi view data and multi source knowledge driven clustering",
+    "TitleWords": [
+        "proceedings",
+        "of",
+        "the",
+        "4th",
+        "multiclust",
+        "workshop",
+        "on",
+        "multiple",
+        "clusterings",
+        "multi",
+        "view",
+        "data",
+        "and",
+        "source",
+        "knowledge",
+        "driven",
+        "clustering"
+    ],
+    "OriginalTitle": "Proceedings of the 4th MultiClust Workshop on Multiple Clusterings, Multi-view Data, and Multi-source Knowledge-driven Clustering",
+    "Abstract": "Cluster detection is a very traditional data analysis task with several decades of research. However, it also includes a large variety of different subtopics investigated by different communities such as data mining, machine learning, statistics, and database systems. \"Multiple Clusterings, Multi-view Data, and Multi-source Knowledge-driven Clustering\" names several challenges around clustering: making sense or even making use of many, possibly redundant clustering results, of different representations and properties of data, of different sources of knowledge. Approaches such as ensemble clustering, semi-supervised clustering, subspace clustering meet around these problems. Yet they tackle these problems with different backgrounds, focus on different details, and include ideas from different research communities. This diversity is a major potential for this emerging field and should be highlighted by this workshop. A core motivation for this workshop series is our believe that these approaches are not just tackling different parts of the problem but that they should benefit from each other and, ultimately, combine the different perspectives and techniques to tackle the clustering problem more effectively. In paper presentations and discussions, we therefore would like to encourage the workshop participants to look at their own research problems from multiple perspectives.",
+    "Year": 2013,
+    "Date": "2013-08-11",
+    "CitationCount": 1,
+    "EstimatedCitationCount": 1,
+    "FieldsOfStudy": [
+        {
+            "Name": "subspace clustering",
+            "OriginalName": "Subspace clustering"
+        },
+        {
+            "Name": "multi source",
+            "OriginalName": "Multi-source"
+        },
+        {
+            "Name": "data science",
+            "OriginalName": "Data science"
+        },
+        {
+            "Name": "conceptual clustering",
+            "OriginalName": "Conceptual clustering"
+        },
+        {
+            "Name": "computer science",
+            "OriginalName": "Computer science"
+        },
+        {
+            "Name": "cluster analysis",
+            "OriginalName": "Cluster analysis"
+        }
+    ],
+    "AbstractWords": [
+        "cluster",
+        "detection",
+        "is",
+        "a",
+        "very",
+        "traditional",
+        "data",
+        "analysis",
+        "task",
+        "with",
+        "several",
+        "decades",
+        "of",
+        "research",
+        "however",
+        "it",
+        "also",
+        "includes",
+        "large",
+        "variety",
+        "different",
+        "subtopics",
+        "investigated",
+        "by",
+        "communities",
+        "such",
+        "as",
+        "mining",
+        "machine",
+        "learning",
+        "statistics",
+        "and",
+        "database",
+        "systems",
+        "38",
+        "39",
+        "40",
+        "41",
+        "43",
+        "44",
+        "names",
+        "challenges",
+        "around",
+        "clustering",
+        "making",
+        "sense",
+        "or",
+        "even",
+        "use",
+        "many",
+        "possibly",
+        "redundant",
+        "results",
+        "representations",
+        "properties",
+        "sources",
+        "knowledge",
+        "approaches",
+        "ensemble",
+        "semi",
+        "supervised",
+        "subspace",
+        "meet",
+        "these",
+        "problems",
+        "yet",
+        "they",
+        "tackle",
+        "backgrounds",
+        "focus",
+        "on",
+        "details",
+        "include",
+        "ideas",
+        "from",
+        "this",
+        "diversity",
+        "major",
+        "potential",
+        "for",
+        "emerging",
+        "field",
+        "should",
+        "be",
+        "highlighted",
+        "workshop",
+        "core",
+        "motivation",
+        "series",
+        "our",
+        "believe",
+        "that",
+        "are",
+        "not",
+        "just",
+        "tackling",
+        "parts",
+        "the",
+        "problem",
+        "but",
+        "benefit",
+        "each",
+        "other",
+        "ultimately",
+        "combine",
+        "perspectives",
+        "techniques",
+        "to",
+        "more",
+        "effectively",
+        "in",
+        "paper",
+        "presentations",
+        "discussions",
+        "we",
+        "therefore",
+        "would",
+        "like",
+        "encourage",
+        "participants",
+        "look",
+        "at",
+        "their",
+        "own",
+        "multiple",
+        ""
+    ],
+    "Conference": {
+        "Name": "kdd"
+    },
+    "VenueFullName": "Knowledge Discovery and Data Mining",
+    "VenueShortName": "KDD",
+    "AuthorAffiliations": [
+        {
+            "AuthorName": "ira assent",
+            "OriginalAuthorName": "Ira Assent",
+            "Sequence": 1,
+            "AffiliationName": "aarhus university",
+            "OriginalAffiliationName": "aarhus university, denmark"
+        },
+        {
+            "AuthorName": "carlotta domeniconi",
+            "OriginalAuthorName": "Carlotta Domeniconi",
+            "Sequence": 2,
+            "AffiliationName": "george mason university",
+            "OriginalAffiliationName": "George Mason University"
+        },
+        {
+            "AuthorName": "francesco gullo",
+            "OriginalAuthorName": "Francesco Gullo",
+            "Sequence": 3,
+            "AffiliationName": "yahoo",
+            "OriginalAffiliationName": "Yahoo! Res., Spain"
+        },
+        {
+            "AuthorName": "andrea tagarelli",
+            "OriginalAuthorName": "Andrea Tagarelli",
+            "Sequence": 4,
+            "AffiliationName": "university of calabria",
+            "OriginalAffiliationName": "[University of Calabria, Italy]"
+        },
+        {
+            "AuthorName": "arthur zimek",
+            "OriginalAuthorName": "Arthur Zimek",
+            "Sequence": 5,
+            "AffiliationName": "ludwig maximilian university of munich",
+            "OriginalAffiliationName": "Ludwig Maximilians Universität München Germany"
+        }
+    ]
+}
 ```
 After inspecting the data, we can now create the schema for it. 
 
@@ -270,8 +495,6 @@ To handle filter event, see **async appendFilter(attributeName, attributeValue)*
         await this.updatePaperListExpression(paperExpression);
     }
 ```
-
-
 
 ### Use sample UI code to see them in action
 
