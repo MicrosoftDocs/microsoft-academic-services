@@ -1,11 +1,10 @@
-# Introduction 
+# Introduction
 
 This is the first part of building an knowledge application for KDD conference. 
 
-The application will have all the knowledge of papers published in **Interationial Conference on Knowlege Discovery and Data Mining**. It will help users find KDD papers and Oral presentations through Natural Language Processing and smart fitlers. 
+The application will have all the knowledge of papers published in **Internationial Conference on Knowledge Discovery and Data Mining**. It will help users find KDD papers and Oral presentations through Natural Language Processing and smart filters.
 
-In this tutorial, we'll focus on designing the approrpiate KES schema such that KDD papers can be retriable and filterabl. We will start by designing a KES schema for the conference papers, build/host the index, and leverage MAKES REST API (Evaluate and Histogram) to create the Filterable Paper List UI.
-
+In this tutorial, we'll focus on designing the appropriate KES schema such that KDD papers can be retrievable and filterable. We will start by designing a KES schema for the conference papers, build/host the index, and leverage MAKES REST API (Evaluate and Histogram) to create the Filterable Paper List UI.
 
 ## Prerequisites
 
@@ -15,7 +14,7 @@ In this tutorial, we'll focus on designing the approrpiate KES schema such that 
 
 1. Download and unzip tutorial resources from [here](https://makesstore.blob.core.windows.net/makes-tutorial-resource/latest.zip).
 
-1. Download and unzip MAKES managment tool (kesm.exe) from your latest MAKES release. 
+1. Download and unzip MAKES managment tool (kesm.exe) from your latest MAKES release.
     **https://<makes_storage_account>.blob.core.windows.net/makes/<makes_release>/tools/kesm.zip**
 
 ## Design a KES schema for KDD data
@@ -23,7 +22,8 @@ In this tutorial, we'll focus on designing the approrpiate KES schema such that 
 We start by determining what attributes do we want to include in the index, what are appropriate types to store them, and what operations should they support. The conference paper entity data **kddData.json** can be found at in the tutorial resource folder. The data is dervieved from MAG. 
 
 Here's an example entity from **kddData.json**
-```JSON
+
+```json
 {
     "logprob": -21.407,
     "Id": 20513064,
@@ -99,12 +99,13 @@ Here's an example entity from **kddData.json**
             "OriginalAuthorName": "Arthur Zimek",
             "Sequence": 5,
             "AffiliationName": "ludwig maximilian university of munich",
-            "OriginalAffiliationName": "Ludwig Maximilians Universität München Germany"
+            "OriginalAffiliationName": "Ludwig Maximilians Universitï¿½t Mï¿½nchen Germany"
         }
     ]
 }
 ```
-After inspecting the data, we can now create the schema for it. 
+
+After inspecting the data, we can now create the schema for it.
 
 ### Display only attributes
 
@@ -117,14 +118,14 @@ The following schema elements reflects the display attributes:
   "attributes": [
     {"name": "OriginalTitle","type": "blob?"},
     {"name": "Abstract","type": "blob?"},
-    
+
     {"name": "AuthorAffiliations","type": "Composite*"},
     {"name": "AuthorAffiliations.OriginalAuthorName","type": "blob?"},
     {"name": "AuthorAffiliations.OriginalAffiliationName","type": "blob?"},
 
     {"name": "FieldsOfStudy","type": "Composite*"},
     {"name": "FieldsOfStudy.OriginalName","type": "blob?"},
-    
+
     {"name": "VenueFullName","type": "blob?"},
     {"name": "VenueShortName","type": "blob?"}
   ]
@@ -135,9 +136,9 @@ The following schema elements reflects the display attributes:
 
 Filter attributes are attributes that can be used to filter entity data.
 
-The numeric attributes that we want to filter by would be the conference paper's **Year, CitationCount, EstimatedCitationCount**. Depending on the filter UX we want to provide, we can add **equals** and/or **is_between** operations to the filterable numeric attributes. 
+The numeric attributes that we want to filter by would be the conference paper's **Year, CitationCount, EstimatedCitationCount**. Depending on the filter UX we want to provide, we can add **equals** and/or **is_between** operations to the filterable numeric attributes.
 
->[!NOTE] 
+>[!NOTE]
 >Try adding **is_between** to numeric filter attributes and extend the sample code to enables publication year range filter.
 
 The following schema elements reflects the filterable numeric attributes:
@@ -153,9 +154,8 @@ The following schema elements reflects the filterable numeric attributes:
   ]
 }
 ```
- 
-For string attributes, we want to select attributes that common values such as journal name, conference name. For attribute values that may be too noisy, you may opt for the normalized version such as using **AuthorName** instead of **OriginalAuthorName**. we should add **equals** operation to these attributes.
 
+For string attributes, we want to select attributes that common values such as journal name, conference name. For attribute values that may be too noisy, you may opt for the normalized version such as using **AuthorName** instead of **OriginalAuthorName**. we should add **equals** operation to these attributes.
 
 The following schema elements reflects the filterable string attributes:
 
@@ -170,7 +170,7 @@ The following schema elements reflects the filterable string attributes:
     {"name": "AuthorAffiliations","type": "Composite*"},
     {"name": "AuthorAffiliations.AuthorName","type": "string?","operations": [ "equals", "starts_with" ]},
     {"name": "AuthorAffiliations.AffiliationName","type": "string?","operations": [ "equals", "starts_with" ]},
-    
+
     {"name": "FieldsOfStudy","type": "Composite*"},
     {"name": "FieldsOfStudy.Name","type": "string?","operations": [ "equals", "starts_with" ]},
 
@@ -182,11 +182,11 @@ The following schema elements reflects the filterable string attributes:
 
 We've include a complete schema for you to compare against. See **<tutorial_resource_root>/kddSchema.josn** for the complete schema.
 
-## Build a custom paper index 
+## Build a custom paper index
 
-Once you're ready with your schema. We can start building a MAKES index for the KDD data. 
+Once you're ready with your schema. We can start building a MAKES index for the KDD data.
 
-Since the index we're building is relatively small and simple, we can build this locally on a dev machine. If the index you're building is large or contains more complex operations, use cloud index build to leverage high performing machines in Azure. 
+Since the index we're building is relatively small and simple, we can build this locally on a dev machine. If the index you're building is large or contains more complex operations, use cloud index build to leverage high performing machines in Azure.
 
 >[!NOTE]
 >Regardless of what you decide to use for production index builds, you should always use local index build to validate schema correctness during development to avoid long running failures.
@@ -221,7 +221,7 @@ The index we're creating for this tutorial is relatively small and can be built 
 
 We are now ready to set up a MAKES API instance with custom index.
 
-1. Upload built custom index to your MAKES storage account. You can do so by using following [Blob Upload from Azure Portal](https://docs.microsoft.com/en-us/azure/storage/blobs/storage-quickstart-blobs-portal). If you use cloud index build, you may skip this step. 
+1. Upload built custom index to your MAKES storage account. You can do so by using following [Blob Upload from Azure Portal](https://docs.microsoft.com/en-us/azure/storage/blobs/storage-quickstart-blobs-portal). If you use cloud index build, you may skip this step.
 
 1. Run CreateHostResources to create MAKES hosting virtual machine image.
 
@@ -235,22 +235,23 @@ We are now ready to set up a MAKES API instance with custom index.
      kesm.exe DeployHost --HostName "<makes_host_instance_name>" --MakesPackage "https://<makes_storage_account_name>.blob.core.windows.net/makes/<makes_release_version>/"  --MakesHostImageId "<id_from_previous_command_output>" --MakesIndex "<custom_index_url>"
     ```
 
+For more detailed deployment instruction, See [Create API Instances](get-started-create-api-instances.md#create-makes-hosting-resources)
+
 > [!NOTE]
 > Since the index we're hosting is relatively small, you can reduce Azure consumption for the tutorial MAKES host instance by using the "--HostMachineSku" parameter and set the SKU to "Standard_D2_V2".
-> For more detailed deployment instruction, see (Create API Instances)[get-started-create-api-instances.md#create-makes-hosting-resources]
 
 ## Create Client Application with MAKES REST APIs
 
-We now have a backend API to server our conference paper data. The last step is to create the client application to showcase the filterable paper list. The client application will retrieve data and generate filters via Evaluate and Histgoram APIs.
+We now have a backend API to server our conference paper data. The last step is to create the client application to showcase the filterable paper list. The client application will retrieve data and generate filters via Evaluate and Histogram APIs.
 
 ### Paper list KES Query Expression
 
-We start with crafting a KES query expression that represents the paper list shown on the UI. Since the inital list of papers we want to see is "all papers", the corresponding KES query expression would be "**All()**". 
+We start building our client by crafting a KES query expression to represent the paper list shown on the UI. Since the initial list of papers we want to see is "all papers", the corresponding KES query expression would be "**All()**".
 
 This corresponds to the following code in **<tutorial_resource_root>/ConferenceWebsite/index.js**
 
 ```javascript
-/* 
+/*
  * Client app entry point/ main.
  */
 var app = new FilterablePaperList();
@@ -258,19 +259,20 @@ app.setOriginalPaperListExpression("All()");
 mount(document.body, app);
 ```
 
+We will use this expression to fetch paper data in the next step. When filters are applied, we will modify this expression to get the corresponding data.
+
 For more information on KES Query Expressions, see [Structured query expressions](concepts-query-expressions.md)
 
+### Retrieve top papers
 
-### Retrieve top papers 
-
-We can call Evaluate API with the paper list expression (Initially set to "**All()**") to retrieve all the paper entities. After retrieiving the paper entities from Evaluate API, all is left to do is to translate the entity data to UI elements.
+We can call Evaluate API with the paper list expression ( Initially set to "**All()**" ) to retrieve paper entities for display.
 
 To get papers using Evaluate API, see **MakesInteractor.GetPapers(paperExpression)** method in **<tutorial_resource_root>/ConferenceWebsite/makesInteractor.js**:
 
 ```javascript
 /*
-    * Gets a list of papers using a KES expression
-    */ 
+* Gets a list of papers using a KES expression
+*/
 async GetPapers(paperExpression)
 {
     let requestBody = {
@@ -279,25 +281,25 @@ async GetPapers(paperExpression)
             count: this.paperListItemCount
         }
 
-    let response = await Promise.resolve($.post(this.GetEvaluateApiEndpoint(), requestBody));      
+    let response = await Promise.resolve($.post(this.GetEvaluateApiEndpoint(), requestBody));
     return response?.entities;
 }
 ```
 
 For more information on Evaluate API, see [Evaluate REST API](reference-post-evaluate.md)
 
-The corresponding data transformation logic for paper UI elements can be found in:
+ After retrieving the paper entities from Evaluate API, all is left to do is to translate the entity data to UI elements. The corresponding data transformation logic for paper UI elements can be found in:
 
-    1. **<tutorial_resource_root>/ConferenceWebsite/paperListItem.js**
-    1. **<tutorial_resource_root>/ConferenceWebsite/paperFieldsOfStudyListItem.js**
+- **<tutorial_resource_root>/ConferenceWebsite/paperListItem.js**
+- **<tutorial_resource_root>/ConferenceWebsite/paperFieldsOfStudyListItem.js**
 
 ### Generate filters  
 
-We can also call Histogram API with the paper list expression "All()" to get filter attribute histograms and transform them into filters. 
+We can also call Histogram API with the paper list expression to get filter attribute histograms and transform them into filters.
 
-Histogram returns the most probalistic attribute values for each attributes. We can use these values for each filter attribute as suggested filter values.
+Histogram returns the most probabilistic attribute values for each attributes. We can use these values for each filter attribute as suggested filter values.
 
-To generate filters using Histogram API, see **async GetFilters(paperExpression)** method in **<tutorial_resource_root>/ConferenceWebsite/makesInteractor.js**:
+To generate filters using Histogram API, see **MakesInteractor.GetFilters(paperExpression)** method in **<tutorial_resource_root>/ConferenceWebsite/makesInteractor.js**:
 
 ```javascript
     /*
@@ -319,17 +321,16 @@ For more information on Histogram API, see [Histogram REST API](reference-post-h
 
 The corresponding data transformation logic for filter UI elements can be found in:
 
-    1. **<tutorial_resource_root>/ConferenceWebsite/filterSectionListItem.js**
-    1. **<tutorial_resource_root>/ConferenceWebsite/filterAttributeListItem.js**
-
+- **<tutorial_resource_root>/ConferenceWebsite/filterSectionListItem.js**
+- **<tutorial_resource_root>/ConferenceWebsite/filterAttributeListItem.js**
 
 ### Handle filter event
 
-We can apply filter by modifying the paper list expression. To apply a filter, we combine the current paper expression and the target filter expression with a "And" operator. 
+We can apply filter by modifying the paper list expression. To apply a filter, we combine the current paper expression and the target filter expression with a "And" operator.
 
-For example, to apply a filter to constraint the paper publication year to 2013, the filter expression will be **Y=2019**, and the paper list expession will be **And(All(),Y=2019)**.
+For example, with a *initial paper expression** being **All()**, to apply a publication year filter to constraint the publication to 2013, the *filter expression* will be **Y=2019**, and the final paper list expression will become **And(All(),Y=2019)**.
 
-To handle filter event, see **async appendFilter(attributeName, attributeValue)** and **async updatePaperList()** method in **<tutorial_resource_root>/ConferenceWebsite/filterablePaperList.js** for more details.
+To handle filter event, see **FilterablePaperList.appendFilter(attributeName, attributeValue)** and **FilterablePaperList.updatePaperList()** method in **<tutorial_resource_root>/ConferenceWebsite/filterablePaperList.js** for more details.
 
 ```javascript
     /*
@@ -351,7 +352,6 @@ To handle filter event, see **async appendFilter(attributeName, attributeValue)*
         this.pageData.appliedFilterListData.push(new Filter(attributeName, attributeValue));
         await this.updatePaperList();
     }
-    
 
     /*
      * refreshes the paper list.
