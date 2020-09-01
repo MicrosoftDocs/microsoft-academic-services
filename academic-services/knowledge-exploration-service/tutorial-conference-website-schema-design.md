@@ -189,17 +189,17 @@ Once you're ready with your schema. We can start building a MAKES index for the 
 Since the index we're building is relatively small and simple, we can build this locally on a dev machine. If the index you're building is large or contains more complex operations, use cloud index build to leverage high performing machines in Azure. 
 
 >[!NOTE]
->Regardless of what you decide to use for production index builds, you should always use local index build with test data to validate the schema correctness during development to avoid long running failures.
+>Regardless of what you decide to use for production index builds, you should always use local index build to validate schema correctness during development to avoid long running failures.
 
 ### Validate schema using local index build
 
-Copy win-x64 version of kesm.exe to <tutorial_resource_root> or include it in your commandline path. 
+1. Copy win-x64 version of kesm.exe to **<tutorial_resource_root>\kesm.exe** or include it in your command line PATH variable. 
 
-Open up a commandline console, change directory to the root of the conference tutorial resource folder, and build the index with the following command:
+1. Open up a commandline console, change directory to the root of the conference tutorial resource folder, and build the index with the following command:
 
-```cmd
-kesm.exe BuildIndexLocal --SchemaFilePath <tutorial_resource_root>/kddSchema.json --EntitiesFilePath kddData.json --OutputIndexFilePath <tutorial_resource_root>/kddpapers.kes --IndexDescription "Papers from KDD conference"
-```
+    ```cmd
+    kesm.exe BuildIndexLocal --SchemaFilePath <tutorial_resource_root>/kddSchema.json --EntitiesFilePath kddData.json --OutputIndexFilePath <tutorial_resource_root>/kddpapers.kes --IndexDescription "Papers from KDD conference"
+    ```
 
 >[!NOTE]
 > BuildIndexLocal command is only avaliable on win-x64 version of kesm
@@ -221,32 +221,31 @@ The index we're creating for this tutorial is relatively small and can be built 
 
 We are now ready to set up a MAKES API instance with custom index.
 
-Upload built custom index to your MAKES storage account. You can do so by using following [Blob Upload from Azure Portal](https://docs.microsoft.com/en-us/azure/storage/blobs/storage-quickstart-blobs-portal). If you use cloud index build, you may skip this step. 
+1. Upload built custom index to your MAKES storage account. You can do so by using following [Blob Upload from Azure Portal](https://docs.microsoft.com/en-us/azure/storage/blobs/storage-quickstart-blobs-portal). If you use cloud index build, you may skip this step. 
 
-Run CreateHostResources to create MAKES hosting virtual machine image.
+1. Run CreateHostResources to create MAKES hosting virtual machine image.
 
-```cmd
-kesm.exe CreateHostResources --MakesPackage https://<makes_storage_account_name>.blob.core.windows.net/makes/<makes_release_version> --HostResourceName <makes_host_resource_name>
-```
+    ```cmd
+    kesm.exe CreateHostResources --MakesPackage https://<makes_storage_account_name>.blob.core.windows.net/makes/<makes_release_version> --HostResourceName <makes_host_resource_name>
+    ```
 
-Run DeployHost command and use the "--MakesIndex" parameter to load the custom KDD paper index we've built.
+1. Run DeployHost command and use the "--MakesIndex" parameter to load the custom KDD paper index we've built.
 
-```cmd
- kesm.exe DeployHost --HostName "<makes_host_instance_name>" --MakesPackage "https://<makes_storage_account_name>.blob.core.windows.net/makes/<makes_release_version>/"  --MakesHostImageId "<id_from_previous_command_output>" --MakesIndex "<custom_index_url>"
-```
-
+    ```cmd
+     kesm.exe DeployHost --HostName "<makes_host_instance_name>" --MakesPackage "https://<makes_storage_account_name>.blob.core.windows.net/makes/<makes_release_version>/"  --MakesHostImageId "<id_from_previous_command_output>" --MakesIndex "<custom_index_url>"
+    ```
 
 > [!NOTE]
-> You can reduce Azure consumption for this tutorial by using the "--HostMachineSku" parameter and set the SKU to "Standard_D2_V2".
+> Since the index we're hosting is relatively small, you can reduce Azure consumption for the tutorial MAKES host instance by using the "--HostMachineSku" parameter and set the SKU to "Standard_D2_V2".
 > For more detailed deployment instruction, see (Create API Instances)[get-started-create-api-instances.md#create-makes-hosting-resources]
 
-## Create Filterable Paper List UX using Evaluate and Histogram API
+## Create Client Application with MAKES REST APIs
 
-We now have a backend API to server our conference paper data. We can now create the client application to showcase the filterable paper list. 
+We now have a backend API to server our conference paper data. The last step is to create the client application to showcase the filterable paper list. The client application will retrieve data and generate filters via Evaluate and Histgoram APIs.
 
 ### Paper list KES Query Expression
 
-We start with crafting a KES query expression that will represent the paper list shown on the UI. Since the inital list of papers we want to see is "all papers", the corresponding KES query expression would be "All()". For more information on KES Query Expressions, see [Structured query expressions](concepts-query-expressions.md)
+We start with crafting a KES query expression that represents the paper list shown on the UI. Since the inital list of papers we want to see is "all papers", the corresponding KES query expression would be "**All()**". 
 
 This corresponds to the following code in **<tutorial_resource_root>/ConferenceWebsite/index.js**
 
@@ -259,11 +258,14 @@ app.setOriginalPaperListExpression("All()");
 mount(document.body, app);
 ```
 
+For more information on KES Query Expressions, see [Structured query expressions](concepts-query-expressions.md)
+
+
 ### Retrieve top papers 
 
-We can then call Evaluate API with the paper list expression "All()" to retrieve all the paper entities. After retrieiving the paper entities from Evaluate API, all is left is to translate the entity data to UI elements.
+We can call Evaluate API with the paper list expression (Initially set to "**All()**") to retrieve all the paper entities. After retrieiving the paper entities from Evaluate API, all is left to do is to translate the entity data to UI elements.
 
-To get papers using Evaluate API, see **async GetPapers(paperExpression)** method in **<tutorial_resource_root>/ConferenceWebsite/makesInteractor.js**:
+To get papers using Evaluate API, see **MakesInteractor.GetPapers(paperExpression)** method in **<tutorial_resource_root>/ConferenceWebsite/makesInteractor.js**:
 
 ```javascript
 /*
@@ -284,7 +286,8 @@ async GetPapers(paperExpression)
 
 For more information on Evaluate API, see [Evaluate REST API](reference-post-evaluate.md)
 
-The corresponding data transformation logic for paper UI elements can be found in 
+The corresponding data transformation logic for paper UI elements can be found in:
+
     1. **<tutorial_resource_root>/ConferenceWebsite/paperListItem.js**
     1. **<tutorial_resource_root>/ConferenceWebsite/paperFieldsOfStudyListItem.js**
 
@@ -314,7 +317,8 @@ To generate filters using Histogram API, see **async GetFilters(paperExpression)
 
 For more information on Histogram API, see [Histogram REST API](reference-post-histogram.md)
 
-The corresponding data transformation logic for filter UI elements can be found in 
+The corresponding data transformation logic for filter UI elements can be found in:
+
     1. **<tutorial_resource_root>/ConferenceWebsite/filterSectionListItem.js**
     1. **<tutorial_resource_root>/ConferenceWebsite/filterAttributeListItem.js**
 
