@@ -7,13 +7,18 @@ The application will have all the knowledge of papers published in **Interationi
 In this tutorial, we'll focus on designing the approrpiate KES schema such that KDD papers can be retriable and filterabl. We will start by designing a KES schema for the conference papers, build/host the index, and leverage MAKES REST API (Evaluate and Histogram) to create the Filterable Paper List UI.
 
 
-## Get started 
+## Prerequisites
+
+- [Microsoft Academic Knowledge Service (MAKES) subscription](get-started-setup-provisioning.md)
+
+## Download and unzip tutorial resources
 
 1. Download and unzip tutorial resources from [here](https://makesstore.blob.core.windows.net/makes-tutorial-resource/latest.zip).
 
-1. Download and unzip MAKES managment tool (kesm.exe) from your latest MAKES release. **https://<makes_storage_account>.blob.core.windows.net/makes/<makes_release>/tools/kesm.zip**
+1. Download and unzip MAKES managment tool (kesm.exe) from your latest MAKES release. 
+    **https://<makes_storage_account>.blob.core.windows.net/makes/<makes_release>/tools/kesm.zip**
 
-## Design a KES schema
+## Design a KES schema for KDD data
 
 We start by determining what attributes do we want to include in the index, what are appropriate types to store them, and what operations should they support. The conference paper entity data **kddData.json** can be found at in the tutorial resource folder. The data is dervieved from MAG. 
 
@@ -56,8 +61,7 @@ Here's an example entity from **kddData.json**
             "OriginalName": "Cluster analysis"
         }
     ],
-    "AbstractWords": ["cluster", "detection", "is", "a", "very", "traditional", "data", "analysis", "task", "with", "several", "decades", "of", "research", "however", "it", "also", "includes", "large", "variety", "different", "subtopics", "investigated", "by", "communities", "such", "as", "mining", "machine", "learning", "statistics", "and", "database", "systems", "38", "39", "40", "41", "43", "44", "names", "challenges", "around", "clustering", "making", "sense", "or", "even", "use", "many", "possibly", "redundant", "results", "representations", "properties", "sources", "knowledge", "approaches", "ensemble", "semi", "supervised", "subspace", "meet", "these", "problems", "yet", "they", "tackle", "backgrounds", "focus", "on", "details", "include", "ideas", "from", "this", "diversity", "major", "potential", "for", "emerging", "field", "should", "be", "highlighted", "workshop", "core", "motivation", "series", "our", "believe", "that", "are", "not", "just", "tackling", "parts", "the", "problem", "but", "benefit", "each", "other", "ultimately", "combine", "perspectives", "techniques", "to", "more", "effectively", "in", "paper", "presentations", "discussions", "we", "therefore", "would", "like", "encourage", "participants", "look", "at", "their", "own", "multiple"
-    ],
+    "AbstractWords": ["cluster", "detection", "is", "a", "very", "traditional", "data", "analysis", "task", "with", "several", "decades", "of", "research", "however", "it", "also", "includes", "large", "variety", "different", "subtopics", "investigated", "by", "communities", "such", "as", "mining", "machine", "learning", "statistics", "and", "database", "systems", "38", "39", "40", "41", "43", "44", "names", "challenges", "around", "clustering", "making", "sense", "or", "even", "use", "many", "possibly", "redundant", "results", "representations", "properties", "sources", "knowledge", "approaches", "ensemble", "semi", "supervised", "subspace", "meet", "these", "problems", "yet", "they", "tackle", "backgrounds", "focus", "on", "details", "include", "ideas", "from", "this", "diversity", "major", "potential", "for", "emerging", "field", "should", "be", "highlighted", "workshop", "core", "motivation", "series", "our", "believe", "that", "are", "not", "just", "tackling", "parts", "the", "problem", "but", "benefit", "each", "other", "ultimately", "combine", "perspectives", "techniques", "to", "more", "effectively", "in", "paper", "presentations", "discussions", "we", "therefore", "would", "like", "encourage", "participants", "look", "at", "their", "own", "multiple"],
     "Conference": { "Name": "kdd"},
     "VenueFullName": "Knowledge Discovery and Data Mining",
     "VenueShortName": "KDD",
@@ -133,7 +137,6 @@ Filter attributes are attributes that can be used to filter entity data.
 
 The numeric attributes that we want to filter by would be the conference paper's **Year, CitationCount, EstimatedCitationCount**. Depending on the filter UX we want to provide, we can add **equals** and/or **is_between** operations to the filterable numeric attributes. 
 
->
 >[!NOTE] 
 >Try adding **is_between** to numeric filter attributes and extend the sample code to enables publication year range filter.
 
@@ -177,13 +180,20 @@ The following schema elements reflects the filterable string attributes:
 }
 ```
 
-We've include a complete schema for you to compare against. See **<tutorial_resource_root>/kddSchema.josn**
+We've include a complete schema for you to compare against. See **<tutorial_resource_root>/kddSchema.josn** for the complete schema.
 
 ## Build a custom paper index 
 
-Once you're ready with your schema. We can start building the index. Since the index we're building is relatively small, we can build this locally on a windows machine. If the index you're building is large, you can use cloud index build to leverage high performing machines in Azure.  Nevertheless, we should use local index build with test data to validate the schema correctness during development.
+Once you're ready with your schema. We can start building a MAKES index for the KDD data. 
+
+Since the index we're building is relatively small and simple, we can build this locally on a dev machine. If the index you're building is large or contains more complex operations, use cloud index build to leverage high performing machines in Azure. 
+
+>[!NOTE]
+>Regardless of what you decide to use for production index builds, you should always use local index build with test data to validate the schema correctness during development to avoid long running failures.
 
 ### Validate schema using local index build
+
+Copy win-x64 version of kesm.exe to <tutorial_resource_root> or include it in your commandline path. 
 
 Open up a commandline console, change directory to the root of the conference tutorial resource folder, and build the index with the following command:
 
@@ -191,11 +201,11 @@ Open up a commandline console, change directory to the root of the conference tu
 kesm.exe BuildIndexLocal --SchemaFilePath <tutorial_resource_root>/kddSchema.json --EntitiesFilePath kddData.json --OutputIndexFilePath <tutorial_resource_root>/kddpapers.kes --IndexDescription "Papers from KDD conference"
 ```
 
->![NOTE]
+>[!NOTE]
 > BuildIndexLocal command is only avaliable on win-x64 version of kesm
->
 
-Validate the index is built correctly by inspecting the index meta data by using the following command:
+
+Validate the index is built according to schema by inspecting the index meta data using the following command:
 
 ```cmd
 kesm.exe DescribeIndex --IndexFilePath <tutorial_resource_root>/kddpapers.kes
@@ -205,7 +215,7 @@ kesm.exe DescribeIndex --IndexFilePath <tutorial_resource_root>/kddpapers.kes
 
 ### Submit a index job for production workflow
 
-The index we're creating for this tutorial is relatively small and can be built locally. For larger size index (containing more than 1M entities), we can use cloud builds to leverage high performing machines in Azure to build. To learn more, follow [How to create index from MAG](how-to-create-index-from-mag.md)
+The index we're creating for this tutorial is relatively small and can be built locally. For larger and more complex index, use cloud builds to leverage high performing machines in Azure to build. To learn more, follow [How to create index from MAG](how-to-create-index-from-mag.md)
 
 ## Deploy MAKES API Host with custom index
 
@@ -225,8 +235,8 @@ Run DeployHost command and use the "--MakesIndex" parameter to load the custom K
  kesm.exe DeployHost --HostName "<makes_host_instance_name>" --MakesPackage "https://<makes_storage_account_name>.blob.core.windows.net/makes/<makes_release_version>/"  --MakesHostImageId "<id_from_previous_command_output>" --MakesIndex "<custom_index_url>"
 ```
 
->
-> ![NOTE]
+
+> [!NOTE]
 > You can reduce Azure consumption for this tutorial by using the "--HostMachineSku" parameter and set the SKU to "Standard_D2_V2".
 > For more detailed deployment instruction, see (Create API Instances)[get-started-create-api-instances.md#create-makes-hosting-resources]
 
