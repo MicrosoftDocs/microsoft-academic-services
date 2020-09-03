@@ -24,7 +24,7 @@ A *rule* is defined as one or more of the following:
 * [Sequence enclosures](reference-grammar-syntax.md#item-element) (```<item>```) expand rules defined inside the enclosing element
 * [Alternative enclosures](reference-grammar-syntax.md#one-of-element) (```<one-of>```) allow for different interpretations to be generated based on "alternate" matching criteria
 
-The act of *rule expansion* is the progressive matching of the natural language query with different sequences of rules. These expansions generate a parse tree, with indexed attribute references and alternative expansions creating branches in the tree. Rule expansion starts with the [root grammar rule](reference-grammar-syntax.md#grammar-element) and ends once there are either no more rules to be matched (end of grammar) *or* no more rules can be matched (end of query).
+The act of *rule expansion* is the progressive matching of the natural language query with different sequences of rules. These expansions generate a parse tree, with indexed attribute references and alternative expansions creating branches in the tree. Rule expansion starts with the [root grammar rule](reference-grammar-syntax.md#grammar-element) and for each branch ends once there are either no more rules to be matched (end of grammar) *or* no more rules can be matched (end of query).
 
 Each leaf node in the parse tree that matches *both* criteria (end of grammar *and* end of query) will result in a valid interpretation of the natural language query.
 
