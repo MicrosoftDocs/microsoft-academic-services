@@ -56,8 +56,8 @@ In the following example, we use the All() function to iteratively build up a qu
 ```
 <tag>query = All();</tag>
 <item repeat="1-">
-  <attrref uri="academic#Keyword" name="keyword">
-  <tag>query = And(query, keyword);</tag>
+  <attrref uri="paperEntity#W" name="titleWord">
+  <tag>query = And(query, titleWord);</tag>
 </item>
 ```
 
@@ -72,8 +72,8 @@ In the following example, we use the None() function to iteratively build up a q
 ```
 <tag>query = None();</tag>
 <item repeat="1-">
-  <attrref uri="academic#Keyword" name="keyword">
-  <tag>query = Or(query, keyword);</tag>
+  <attrref uri="paperEntity#W" name="titleWord">
+  <tag>query = Or(query, titleWord);</tag>
 </item>
 ```
 
@@ -91,8 +91,8 @@ In the following example, we use the Query() function to implement support for s
 ```xml
 written in the 90s
 <tag>
-  beginYear = Query("academic#Year", 1990, "ge");
-  endYear = Query("academic#Year", 2000, "lt");
+  beginYear = Query(" paperEntity#Y", 1990, "ge");
+  endYear = Query(" paperEntity#Y", 2000, "lt");
   year = And(beginYear, endYear);
 </tag>
 ```
@@ -105,14 +105,14 @@ Returns a query that encapsulates an *innerQuery* composed of matches against su
 
 For example, the following query returns academic publications by "harry shum" while he was at "microsoft":
 ```
-Composite(And(Query("academic#Author.Name", "harry shum"), 
-              Query("academic#Author.Affiliation", "microsoft")));
+Composite(And(Query(" paperEntity#AA.AuN", "harry shum"),
+              Query(" paperEntity#AA.AfN", "microsoft")));
 ```
 
 On the other hand, the following query returns academic publications where one of the authors is "harry shum" and one of the affiliations is "microsoft":
 ```
-And(Composite(Query("academic#Author.Name", "harry shum"), 
-    Composite(Query("academic#Author.Affiliation", "microsoft")));
+And(Composite(Query(" paperEntity#AA.AuN", "harry shum"), 
+    Composite(Query(" paperEntity#AA.AfN", "microsoft")));
 ```
 
 ## GetVariable Function
