@@ -33,7 +33,12 @@
     - name: Build and test index
       href: how-to-index-build.md
   - name: Create custom MAKES grammar
-    href: how-to-grammar.md
+    expanded: false
+    items:
+    - name: Define grammar
+      href: how-to-grammar.md
+    - name: Build and test grammar
+      href: how-to-grammar-build.md
 - name: Concepts
   expanded: true
   items:
