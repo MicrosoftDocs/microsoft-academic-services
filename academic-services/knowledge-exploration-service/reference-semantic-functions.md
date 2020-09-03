@@ -5,9 +5,9 @@ ms.topic: reference
 ms.date: 9/1/2020
 ---
 
-# Semantic Interpretation
+# Semantic functions
 
-Semantic interpretation associates semantic output with each interpreted path through the grammar.  In particular, the service evaluates the sequence of statements in the `tag` elements traversed by the interpretation to compute the final output.  
+Semantic functions associates semantic output with each interpreted path through the grammar.  In particular, the service evaluates the sequence of statements in the `tag` elements traversed by the interpretation to compute the final output.  
 
 A statement may be an assignment of a literal or a variable to another variable.  It may also assign the output of a function with 0 or more parameters to a variable.  Each function parameter may be specified using a literal or a variable.  If the function does not return any output, the assignment is omitted.
 
@@ -17,7 +17,7 @@ A statement may be an assignment of a literal or a variable to another variable.
 <tag>AssertEquals(x, 1);</tag>
 ```
 
-A variable is specified using a name identifier that starts with a letter and consists only of letters (A-Z), numbers (0-9), and the underscore (\_).  Its type is implicitly inferred from the literal or function output value assigned to it. 
+A variable is specified using a name identifier that starts with a letter and consists only of letters (A-Z), numbers (0-9), and the underscore (\_).  Its type is implicitly inferred from the literal or function output value assigned to it.
 
 Below is a list of currently supported data types:
 
@@ -31,23 +31,21 @@ Below is a list of currently supported data types:
 |Guid|Globally unique identifier|"602DD052-CC47-4B23-A16A-26B52D30C05B"|
 |Query|Query expression that specifies a subset of data objects in the index|All()<br/>And(*q1*, *q2*)|
 
-## Semantic Functions
+In addition there are a set of built-in semantic functions.  They allow the construction of sophisticated queries, and provide context sensitive control over grammar interpretations.
 
-There is a built-in set of semantic functions.  They allow the construction of sophisticated queries, and provide context sensitive control over grammar interpretations.
-
-### And Function
+## And Function
 
 `query = And(query1, query2);`
 
 Returns a query composed from the intersection of two input queries.
 
-### Or Function
+## Or Function
 
 `query = Or(query1, query2);`
 
 Returns a query composed from the union of two input queries.
 
-### All Function
+## All Function
 
 `query = All();`
 
@@ -63,7 +61,7 @@ In the following example, we use the All() function to iteratively build up a qu
 </item>
 ```
 
-### None Function
+## None Function
 
 `query = None();`
 
@@ -79,7 +77,7 @@ In the following example, we use the None() function to iteratively build up a q
 </item>
 ```
 
-### Query Function
+## Query Function
 
 ```
 query = Query(attrName, value)
@@ -99,7 +97,7 @@ written in the 90s
 </tag>
 ```
 
-### Composite Function
+## Composite Function
 
 `query = Composite(innerQuery);`
 
@@ -117,7 +115,7 @@ And(Composite(Query("academic#Author.Name", "harry shum"),
     Composite(Query("academic#Author.Affiliation", "microsoft")));
 ```
 
-### GetVariable Function
+## GetVariable Function
 
 `value = GetVariable(name, scope);`
 
@@ -132,7 +130,7 @@ System variables are predefined by the service and can be used to retrieve vario
 |IsAtEndOfQuery|Bool|true if the current interpretation has matched all input query text|
 |IsBeyondEndOfQuery|Bool|true if the current interpretation has suggested completions beyond the input query text|
 
-### SetVariable Function
+## SetVariable Function
 
 `SetVariable(name, value, scope);`
 
@@ -140,16 +138,14 @@ Assigns *value* to variable *name* under the specified *scope*.  *name* is an id
 
 Request scope variables are shared across all interpretations within the current interpret request.  They can be used to control the search for interpretations over the grammar.
 
-### AssertEquals Function
+## AssertEquals Function
 
 `AssertEquals(value1, value2);`
 
 If *value1* and *value2* are equivalent, the function succeeds and has no side effects.  Otherwise, the function fails and rejects the interpretation.
 
-### AssertNotEquals Function
+## AssertNotEquals Function
 
 `AssertNotEquals(value1, value2);`
 
 If *value1* and *value2* are not equivalent, the function succeeds and has no side effects.  Otherwise, the function fails and rejects the interpretation.
-
-
