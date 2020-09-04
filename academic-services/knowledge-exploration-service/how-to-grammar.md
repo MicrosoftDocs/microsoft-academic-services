@@ -13,7 +13,7 @@ This document details the role of a grammar in allowing natural language process
 
 MAKES supports natural language query interpretation through the [Interpret API](reference-get-interpret.md), which requires a [Context Free Grammar (CFG)](https://academic.microsoft.com/topic/97212296) adhering to the [Speech Recognition Grammar Specification (SRGS)](https://www.w3.org/TR/speech-grammar/) format, a W3C standard for speech recognition grammars with support for generating semantic interpretations.
 
-In the context of the SRGS, the role of the MAKES grammar is as a *speech recognizer*. MAKES takes an input stream (natural language query) and tries to match it to a series of *rules* defined in the grammar, which in turn generate [structured query expressions](concept-query-expressions.md) as their output. Structured query expressions are what MAKES uses to retrieve entities matching a specific set of constraints.
+In the context of the SRGS, the role of the MAKES grammar is as a *speech recognizer*. MAKES takes an input stream (natural language query) and tries to match it to a series of *rules* defined in the grammar, which in turn generate [structured query expressions](concepts-query-expressions.md) as their output. Structured query expressions are what MAKES uses to retrieve entities matching a specific set of constraints.
 
 A *rule* is defined as one or more of the following:
 
@@ -282,7 +282,7 @@ We can map the example rule expansion in the previous section to this response i
 * "parse tree path" => "parse"
 * "top matching paper" => "rules"."output"."entities"[0]
 
-This response also highlights an important concept mentioned in the first part of this section, the generation of [structured query expressions](concept-query-expressions.md) as the output of each interpretation. These are shown in "rules"."output"."value".
+This response also highlights an important concept mentioned in the first part of this section, the generation of [structured query expressions](concepts-query-expressions.md) as the output of each interpretation. These are shown in "rules"."output"."value".
 
 ## Next steps
 

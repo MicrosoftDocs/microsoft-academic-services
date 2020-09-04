@@ -78,7 +78,7 @@ In addition to matching user input, the `attrref` element also returns a structu
 
 ### tag element
 
-The `tag` element specifies how a path through the grammar is to be interpreted.  It contains a sequence of semicolon-terminated statements.  A statement may be an assignment of a literal or a variable to another variable.  It may also assign the output of a function with 0 or more parameters to a variable.  Each function parameter may be specified using a literal or a variable.  If the function does not return any output, the assignment is omitted.  Variable scope is local to the containing rule.
+The `tag` element specifies how a path through the grammar is to be interpreted.  It contains a sequence of semicolon-terminated statements.  A statement may be an assignment of a literal or a variable to another variable.  It may also assign the output of a semantic function with 0 or more parameters to a variable.  Each semantic function parameter may be specified using a literal or a variable.  If the semantic function does not return any output, the assignment is omitted.  Variable scope is local to the containing rule.
 
 ```xml
 <tag>x = 1; y = x;</tag>
@@ -86,11 +86,15 @@ The `tag` element specifies how a path through the grammar is to be interpreted.
 <tag>AssertEquals(x, 1);</tag>
 ```
 
-Each `rule` in the grammar has a predefined variable named "out", representing the semantic output of the rule.  Its value is computed by evaluating each of the semantic statements traversed by the path through the `rule` matching the user query input.  The value assigned to the "out" variable at the end of the evaluation is the semantic output of the rule.  The semantic output of interpreting a user query against the grammar is the semantic output of the root rule.
-
 Some statements may alter the probability of an interpretation path by introducing an additive log probability offset.  Some statements may reject the interpretation altogether if specified conditions are not satisfied.
 
-For a list of supported semantic functions, see [semantic functions](reference-semantic-functions.md).
+For a full list of supported semantic functions, see [semantic functions](reference-semantic-functions.md).
+
+### out variable
+
+Each `rule` defined in the grammar is required to generate semantic output, represented by a predefined variable named `out`.
+
+Its value is computed by evaluating each of the semantic statements traversed by the path through the `rule` matching the user query input.  The value assigned to the `out` variable at the end of the evaluation is the semantic output of the rule.  The semantic output of interpreting a user query against the grammar is the semantic output of the root rule.
 
 ## Query completions
 
