@@ -279,65 +279,92 @@ Output:
 
 ```json
 {
-    "expr": "Composite(F.FN='deep learning')",
-    "entities": [{
-        "logprob": -18.942,
-        "prob": 5.9373674E-09,
-        "Id": 2945827377,
-        "Ti": "cluster gcn an efficient algorithm for training deep and large graph convolutional networks",
-        "F": [{
-            "FN": "theoretical computer science"
-        }, {
-            "FN": "semi supervised learning"
-        }, {
-            "FN": "scalability"
-        }, {
-            "FN": "graph"
-        }, {
-            "FN": "f1 score"
-        }, {
-            "FN": "embedding"
-        }, {
-            "FN": "deep learning"
-        }, {
-            "FN": "computer science"
-        }, {
-            "FN": "clustering coefficient"
-        }, {
-            "FN": "cluster analysis"
-        }, {
-            "FN": "artificial intelligence"
-        }]
-    }, {
-        "logprob": -19.03,
-        "prob": 5.4372088E-09,
-        "Id": 2951621897,
-        "Ti": "sherlock a deep learning approach to semantic data type detection",
-        "F": [{
-            "FN": "semantic data model"
-        }, {
-            "FN": "schema matching"
-        }, {
-            "FN": "regular expression"
-        }, {
-            "FN": "paragraph"
-        }, {
-            "FN": "natural language processing"
-        }, {
-            "FN": "dirty data"
-        }, {
-            "FN": "deep learning"
-        }, {
-            "FN": "data discovery"
-        }, {
-            "FN": "computer science"
-        }, {
-            "FN": "artificial neural network"
-        }, {
-            "FN": "artificial intelligence"
-        }]
-    }],
-    "timed_out": false
+  "expr": "Composite(F.FN='deep learning')",
+  "entities": [
+    {
+      "logprob": -18.942,
+      "prob": 5.9373674E-09,
+      "Id": 2945827377,
+      "Ti": "cluster gcn an efficient algorithm for training deep and large graph convolutional networks",
+      "F": [
+        {
+          "FN": "theoretical computer science"
+        },
+        {
+          "FN": "semi supervised learning"
+        },
+        {
+          "FN": "scalability"
+        },
+        {
+          "FN": "graph"
+        },
+        {
+          "FN": "f1 score"
+        },
+        {
+          "FN": "embedding"
+        },
+        {
+          "FN": "deep learning"
+        },
+        {
+          "FN": "computer science"
+        },
+        {
+          "FN": "clustering coefficient"
+        },
+        {
+          "FN": "cluster analysis"
+        },
+        {
+          "FN": "artificial intelligence"
+        }
+      ]
+    },
+    {
+      "logprob": -19.03,
+      "prob": 5.4372088E-09,
+      "Id": 2951621897,
+      "Ti": "sherlock a deep learning approach to semantic data type detection",
+      "F": [
+        {
+          "FN": "semantic data model"
+        },
+        {
+          "FN": "schema matching"
+        },
+        {
+          "FN": "regular expression"
+        },
+        {
+          "FN": "paragraph"
+        },
+        {
+          "FN": "natural language processing"
+        },
+        {
+          "FN": "dirty data"
+        },
+        {
+          "FN": "deep learning"
+        },
+        {
+          "FN": "data discovery"
+        },
+        {
+          "FN": "computer science"
+        },
+        {
+          "FN": "artificial neural network"
+        },
+        {
+          "FN": "artificial intelligence"
+        }
+      ]
+    }
+  ],
+  "timed_out": false
 }
 ```
 
@@ -353,91 +380,113 @@ Output:
 
 ```json
 {
-    "expr": "Composite(F.FN='deep learning')",
-    "num_entities": 2,
-    "histograms": [{
-        "attribute": "F.FN",
-        "distinct_values": 19,
-        "total_count": 22,
-        "histogram": [{
-            "value": "artificial intelligence",
-            "logprob": -18.2918851316,
-            "count": 2
-        }, {
-            "value": "computer science",
-            "logprob": -18.2918851316,
-            "count": 2
-        }, {
-            "value": "deep learning",
-            "logprob": -18.2918851316,
-            "count": 2
-        }, {
-            "value": "graph",
-            "logprob": -18.942,
-            "count": 1
-        }, {
-            "value": "cluster analysis",
-            "logprob": -18.942,
-            "count": 1
-        }, {
-            "value": "clustering coefficient",
-            "logprob": -18.942,
-            "count": 1
-        }, {
-            "value": "embedding",
-            "logprob": -18.942,
-            "count": 1
-        }, {
-            "value": "f1 score",
-            "logprob": -18.942,
-            "count": 1
-        }, {
-            "value": "scalability",
-            "logprob": -18.942,
-            "count": 1
-        }, {
-            "value": "semi supervised learning",
-            "logprob": -18.942,
-            "count": 1
-        }, {
-            "value": "theoretical computer science",
-            "logprob": -18.942,
-            "count": 1
-        }, {
-            "value": "artificial neural network",
-            "logprob": -19.03,
-            "count": 1
-        }, {
-            "value": "data discovery",
-            "logprob": -19.03,
-            "count": 1
-        }, {
-            "value": "dirty data",
-            "logprob": -19.03,
-            "count": 1
-        }, {
-            "value": "natural language processing",
-            "logprob": -19.03,
-            "count": 1
-        }, {
-            "value": "paragraph",
-            "logprob": -19.03,
-            "count": 1
-        }, {
-            "value": "regular expression",
-            "logprob": -19.03,
-            "count": 1
-        }, {
-            "value": "schema matching",
-            "logprob": -19.03,
-            "count": 1
-        }, {
-            "value": "semantic data model",
-            "logprob": -19.03,
-            "count": 1
-        }]
-    }],
-    "timed_out": false
+  "expr": "Composite(F.FN='deep learning')",
+  "num_entities": 2,
+  "histograms": [
+    {
+      "attribute": "F.FN",
+      "distinct_values": 19,
+      "total_count": 22,
+      "histogram": [
+        {
+          "value": "artificial intelligence",
+          "logprob": -18.2918851316,
+          "count": 2
+        },
+        {
+          "value": "computer science",
+          "logprob": -18.2918851316,
+          "count": 2
+        },
+        {
+          "value": "deep learning",
+          "logprob": -18.2918851316,
+          "count": 2
+        },
+        {
+          "value": "graph",
+          "logprob": -18.942,
+          "count": 1
+        },
+        {
+          "value": "cluster analysis",
+          "logprob": -18.942,
+          "count": 1
+        },
+        {
+          "value": "clustering coefficient",
+          "logprob": -18.942,
+          "count": 1
+        },
+        {
+          "value": "embedding",
+          "logprob": -18.942,
+          "count": 1
+        },
+        {
+          "value": "f1 score",
+          "logprob": -18.942,
+          "count": 1
+        },
+        {
+          "value": "scalability",
+          "logprob": -18.942,
+          "count": 1
+        },
+        {
+          "value": "semi supervised learning",
+          "logprob": -18.942,
+          "count": 1
+        },
+        {
+          "value": "theoretical computer science",
+          "logprob": -18.942,
+          "count": 1
+        },
+        {
+          "value": "artificial neural network",
+          "logprob": -19.03,
+          "count": 1
+        },
+        {
+          "value": "data discovery",
+          "logprob": -19.03,
+          "count": 1
+        },
+        {
+          "value": "dirty data",
+          "logprob": -19.03,
+          "count": 1
+        },
+        {
+          "value": "natural language processing",
+          "logprob": -19.03,
+          "count": 1
+        },
+        {
+          "value": "paragraph",
+          "logprob": -19.03,
+          "count": 1
+        },
+        {
+          "value": "regular expression",
+          "logprob": -19.03,
+          "count": 1
+        },
+        {
+          "value": "schema matching",
+          "logprob": -19.03,
+          "count": 1
+        },
+        {
+          "value": "semantic data model",
+          "logprob": -19.03,
+          "count": 1
+        }
+      ]
+    }
+  ],
+  "timed_out": false
 }
 ```
 
