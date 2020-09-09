@@ -2,7 +2,7 @@
 title: Microsoft Academic Graph data schema
 description: Documents the complete, most recent Microsoft Academic Graph entity data schema, including the name and type of each attribute
 ms.topic: reference
-ms.date: 8/27/2020
+ms.date: 9/9/2020
 ---
 # Microsoft Academic Graph data schema
 
@@ -40,7 +40,7 @@ Column # | Name | Type | Note
 8 | PaperCount | long |
 9 | PaperFamilyCount | long | See [FAQ](resources-faq.md#papercount-vs-paperfamilycount)
 10 | CitationCount | long |
-11 | Iso3166Code | string | Two-letter codes (alpha-2) defined in [ISO_3166 Code](https://www.iso.org/iso-3166-country-codes.html) (ISO.org) and [ISO 3166-2](https://en.wikipedia.org/wiki/ISO_3166-2) (Wiki)
+11 | Iso3166Code | string | Two-letter codes (alpha-2) defined in [ISO_3166 Code (ISO.org)](https://www.iso.org/iso-3166-country-codes.html) and [ISO 3166-2 (Wiki)](https://en.wikipedia.org/wiki/ISO_3166-2). Example: US
 12 | Latitude | float? | 
 13 | Longitude | float? |
 14 | CreatedDate | DateTime |
