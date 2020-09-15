@@ -372,4 +372,4 @@ To handle filter event, see **FilterablePaperList.appendFilter(attributeName, at
 
 ### Use sample UI code to see them in action
 
-We've create a sample client app written in javascript. You should be able to see the conference website with filterable paper list by wiring up the MAKES host URL to your deployed MAKES instance. For more to run the client app information, see **<tutorial_resource_root>/ConferenceWebsite/README.md**
+We've create a sample client app written in javascript. You should be able to see the conference application with filterable paper list by wiring up the MAKES host URL to your deployed MAKES instance. For more to run the client app information, see **<tutorial_resource_root>/ConferenceWebsite/README.md**
