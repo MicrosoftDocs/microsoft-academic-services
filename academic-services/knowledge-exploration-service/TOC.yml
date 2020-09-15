@@ -31,13 +31,15 @@
     - name: Define data
       href: how-to-index-data.md
 - name: Tutorials
-  - name: Build a conference knowledge application
     expanded: false
     items:
-    - name: Overview
-      href: tutorial-conference-app-overview.md
-    - name: Create filterable paper list
-      href: tutorial-conference-filterable-paperlist.md
+    - name: Build a conference knowledge application
+      expanded: false
+      items:
+        - name: Overview
+          href: tutorial-conference-app-overview.md
+        - name: Create filterable paper list
+          href: tutorial-conference-filterable-paperlist.md
 
 - name: Concepts
   expanded: true
