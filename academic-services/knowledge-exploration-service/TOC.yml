@@ -31,7 +31,7 @@
     - name: Define data
       href: how-to-index-data.md
 - name: Tutorials
-    expanded: false
+    expanded: true
     items:
     - name: Build a conference knowledge application
       expanded: false
