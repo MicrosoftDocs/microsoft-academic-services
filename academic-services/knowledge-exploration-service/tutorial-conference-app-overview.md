@@ -1,3 +1,11 @@
+---
+title: Conference Knowledge Application Tutorial Overview
+description: Overiview for a series of tutorials that leverage MAKES to build a conference knowledge application
+ms.topic: tutorial
+ms.date: 2020-09-14
+---
+# Conference Knowledge Application Tutorial
+
 This tutorial walks users through building a KDD Conference application using MAKES.
 
 User of the conference application should be able to find relatevent KDD papers and presentation time slots through auto-suggest, search, and filters.

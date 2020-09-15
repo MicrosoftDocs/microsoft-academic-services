@@ -1,4 +1,11 @@
-# Introduction
+---
+title: Create filterable paper list using MAKES 
+description: Step by step tutorial for creating building a filterable paper list using MAKES
+ms.topic: tutorial
+ms.date: 2020-09-14
+---
+
+# Create filterable paper list using MAKES 
 
 This is the first part of building an knowledge application for KDD conference. 
 
@@ -16,7 +23,7 @@ In this tutorial, we'll focus on designing the appropriate KES schema such that 
     (You can find this in your MAKES storage account under:
     **https://<makes_storage_account>.blob.core.windows.net/makes/<makes_release>/tools/kesm.zip**)
 
-1. Download and unzip tutorial resources from [here](./TutorialResources.zip).
+1. Download and unzip tutorial resources from [here](TutorialResources.zip).
 
 ## Design a KES schema for KDD data
 
@@ -212,7 +219,7 @@ Validate the index is built according to schema by inspecting the index meta dat
 kesm.exe DescribeIndex --IndexFilePath <tutorial_resource_root>/kddpapers.kes
 ```
 
-![snap-shot-describe-index-cmd-output](media/snap-shot-describe-index-cmd-output.png)
+![describe index command output](media/snap-shot-describe-index-cmd-output.png)
 
 ### Submit a index job for production workflow
 
@@ -222,7 +229,7 @@ The index we're creating for this tutorial is relatively small and can be built 
 
 We are now ready to set up a MAKES API instance with custom index.
 
-1. Upload built custom index to your MAKES storage account. You can do so by using following [Blob Upload from Azure Portal](https://docs.microsoft.com/en-us/azure/storage/blobs/storage-quickstart-blobs-portal). If you use cloud index build, you may skip this step.
+1. Upload built custom index to your MAKES storage account. You can do so by using following [Blob Upload from Azure Portal](https://docs.microsoft.com/azure/storage/blobs/storage-quickstart-blobs-portal). If you use cloud index build, you may skip this step.
 
 1. Run CreateHostResources to create MAKES hosting virtual machine image.
 

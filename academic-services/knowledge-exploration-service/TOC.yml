@@ -40,7 +40,6 @@
       href: tutorial-conference-app-overview.md
     - name: Create filterable paper list
       href: tutorial-conference-filterable-paperlist.md
-
 - name: Concepts
   expanded: true
   items:
