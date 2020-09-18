@@ -2,7 +2,7 @@
 title: Conference Knowledge Application Tutorial Overview
 description: Overiview for a series of tutorials that leverage MAKES to build a conference knowledge application
 ms.topic: tutorial
-ms.date: 2020-09-14
+ms.date: 09/18/2020
 ---
 # Conference Knowledge Application Tutorial
 

@@ -1,17 +1,17 @@
 ---
-title: Create filterable paper list using MAKES 
-description: Step by step tutorial for creating building a filterable paper list using MAKES
+title: Create a filterable paper list using MAKES 
+description: Step by step tutorial for creating a filterable paper list using MAKES
 ms.topic: tutorial
-ms.date: 2020-09-14
+ms.date: 09/18/2020
 ---
 
-# Create filterable paper list using MAKES 
+# Create a filterable paper list using MAKES
 
 This is the first part of building an knowledge application for KDD conference. 
 
 The application will have all the knowledge of papers published in **Internationial Conference on Knowledge Discovery and Data Mining**. It will help users find KDD papers and Oral presentations through Natural Language Processing and smart filters.
 
-In this tutorial, we'll focus on designing the appropriate KES schema such that KDD papers can be retrievable and filterable. We will start by designing a KES schema for the conference papers, build/host the index, and leverage MAKES REST API (Evaluate and Histogram) to create the Filterable Paper List UI.
+In this tutorial, we'll focus on designing the appropriate KES schema such that KDD papers can be retrievable and filterable. We will start by designing a KES schema for the conference papers, build/host the index, and leverage the MAKES REST APIs (Evaluate and CalcHistogram) to create the Filterable Paper List UI.
 
 ## Prerequisites
 
@@ -19,7 +19,7 @@ In this tutorial, we'll focus on designing the appropriate KES schema such that 
 
 ## Download and unzip tutorial resources
 
-1. Download and unzip MAKES managment tool (kesm.exe) from your latest MAKES release.
+1. Download and unzip the MAKES management tool (kesm.exe) from your latest MAKES release.
     (You can find this in your MAKES storage account under:
     **https://<makes_storage_account>.blob.core.windows.net/makes/<makes_release>/tools/kesm.zip**)
 
@@ -119,7 +119,7 @@ After inspecting the data, we can now create the schema for it.
 
 The display attrbitues are attributes that are needed for display only, such as **OriginalTitle**, **OriginalAuthorName** In this case, we can define them as **Blob** type such that KES won't create any index for them.
 
-The following schema elements reflects the display attributes:
+The following schema elements reflect the display attributes:
 
 ```json
 {
@@ -149,7 +149,7 @@ The numeric attributes that we want to filter by would be the conference paper's
 >[!NOTE]
 >Try adding **is_between** to numeric filter attributes and extend the sample code to enables publication year range filter.
 
-The following schema elements reflects the filterable numeric attributes:
+The following schema elements reflect the filterable numeric attributes:
 
 ```json
 {
@@ -163,9 +163,9 @@ The following schema elements reflects the filterable numeric attributes:
 }
 ```
 
-For string attributes, we want to select attributes that common values such as journal name, conference name. For attribute values that may be too noisy, you may opt for the normalized version such as using **AuthorName** instead of **OriginalAuthorName**. we should add **equals** operation to these attributes.
+For string attributes, we want to select attributes that have common values such as journal name, conference name. For attribute values that may be too noisy, you may opt for the normalized version such as using **AuthorName** instead of **OriginalAuthorName**. We should add **equals** operation to these attributes.
 
-The following schema elements reflects the filterable string attributes:
+The following schema elements reflect the filterable string attributes:
 
 ```json
 {
@@ -194,10 +194,10 @@ We've include a complete schema for you to compare against. See **<tutorial_reso
 
 Once you're ready with your schema. We can start building a MAKES index for the KDD data.
 
-Since the index we're building is relatively small and simple, we can build this locally on a dev machine. If the index you're building is large or contains more complex operations, use cloud index build to leverage high performing machines in Azure.
+Since the index we're building is relatively small and simple, we can build this locally on a dev machine. If the index you're building is large or contains more complex operations, use cloud index build to leverage high performing machines in Azure. To learn more, follow [How to create index from MAG](how-to-create-index-from-mag.md)
 
 >[!NOTE]
->Regardless of what you decide to use for production index builds, you should always use local index build to validate schema correctness during development to avoid long running failures.
+>Regardless of what you decide to use for production index builds, the best practice is to perform a local index build to validate schema correctness during development to avoid long running failures.
 
 ### Validate schema using local index build
 
@@ -225,20 +225,20 @@ kesm.exe DescribeIndex --IndexFilePath <tutorial_resource_root>/kddpapers.kes
 
 The index we're creating for this tutorial is relatively small and can be built locally. For larger and more complex index, use cloud builds to leverage high performing machines in Azure to build. To learn more, follow [How to create index from MAG](how-to-create-index-from-mag.md)
 
-## Deploy MAKES API Host with custom index
+## Deploy MAKES API Host with a custom index
 
-We are now ready to set up a MAKES API instance with custom index.
+We are now ready to set up a MAKES API instance with a custom index.
 
-1. Upload built custom index to your MAKES storage account. You can do so by using following [Blob Upload from Azure Portal](https://docs.microsoft.com/azure/storage/blobs/storage-quickstart-blobs-portal). If you use cloud index build, you may skip this step.
+1. Upload the built, custom index to your MAKES storage account. You can do so by using following [Blob Upload from Azure Portal](https://docs.microsoft.com/azure/storage/blobs/storage-quickstart-blobs-portal). If you use cloud index build, you may skip this step.
 
-1. Run CreateHostResources to create MAKES hosting virtual machine image.
+1. Run CreateHostResources to create a MAKES hosting virtual machine image.
 
     ```cmd
     kesm.exe CreateHostResources --MakesPackage https://<makes_storage_account_name>.blob.core.windows.net/makes/<makes_release_version> --HostResourceName <makes_host_resource_name>
     ```
 
 > [!NOTE]
-> If your account is connected to multiple Azure Directories or Azure Subscriptions, you'll also have to specify the **--AzureActiveDirectoryDomainName** and/or **--AzureSubscriptionId** parameters. See [Command Line Tool Reference](reference-makes-command-line-tool#common-authentication-parameters) for more details.
+> If your account is connected to multiple Azure Directories or Azure Subscriptions, you'll also have to specify the **--AzureActiveDirectoryDomainName** and/or **--AzureSubscriptionId** parameters. See [Command Line Tool Reference](reference-makes-command-line-tool.md#common-authentication-parameters) for more details.
 
 1. Run DeployHost command and use the "--MakesIndex" parameter to load the custom KDD paper index we've built.
 
@@ -246,14 +246,14 @@ We are now ready to set up a MAKES API instance with custom index.
      kesm.exe DeployHost --HostName "<makes_host_instance_name>" --MakesPackage "https://<makes_storage_account_name>.blob.core.windows.net/makes/<makes_release_version>/"  --MakesHostImageId "<id_from_previous_command_output>" --MakesIndex "<custom_index_url>"
     ```
 
-For more detailed deployment instruction, See [Create API Instances](get-started-create-api-instances.md#create-makes-hosting-resources)
+For more detailed deployment instructions, See [Create API Instances](get-started-create-api-instances.md#create-makes-hosting-resources)
 
 > [!NOTE]
 > Since the index we're hosting is relatively small, you can reduce Azure consumption for the tutorial MAKES host instance by using the "--HostMachineSku" parameter and set the SKU to "Standard_D2_V2".
 
 ## Create Client Application with MAKES REST APIs
 
-We now have a backend API to server our conference paper data. The last step is to create the client application to showcase the filterable paper list. The client application will retrieve data and generate filters via Evaluate and Histogram APIs.
+We now have a backend API to serve our conference paper data. The last step is to create the client application to showcase the filterable paper list. The client application will retrieve data and generate filters via Evaluate and CalcHistogram APIs.
 
 ### Paper list KES Query Expression
 
@@ -335,13 +335,13 @@ The corresponding data transformation logic for filter UI elements can be found 
 - **<tutorial_resource_root>/ConferenceWebsite/filterSectionListItem.js**
 - **<tutorial_resource_root>/ConferenceWebsite/filterAttributeListItem.js**
 
-### Handle filter event
+### Handle filter events
 
-We can apply filter by modifying the paper list expression. To apply a filter, we combine the current paper expression and the target filter expression with a "And" operator.
+We can apply filters by modifying the paper list expression. To apply a filter, we combine the current paper expression and the target filter expression with a "And" operator.
 
-For example, with a *initial paper expression** being **All()**, to apply a publication year filter to constraint the publication to 2013, the *filter expression* will be **Y=2019**, and the final paper list expression will become **And(All(),Y=2019)**.
+For example, with a *initial paper expression** being **All()**, to apply a publication year filter to constrain the publications returned to those published in 2019, the *filter expression* will be **Y=2019**, and the final paper list expression will become **And(All(),Y=2019)**.
 
-To handle filter event, see **FilterablePaperList.appendFilter(attributeName, attributeValue)** and **FilterablePaperList.updatePaperList()** method in **<tutorial_resource_root>/ConferenceWebsite/filterablePaperList.js** for more details.
+To handle filter events, see **FilterablePaperList.appendFilter(attributeName, attributeValue)** and **FilterablePaperList.updatePaperList()** method in **<tutorial_resource_root>/ConferenceWebsite/filterablePaperList.js** for more details.
 
 ```javascript
     /*
@@ -379,4 +379,4 @@ To handle filter event, see **FilterablePaperList.appendFilter(attributeName, at
 
 ### Use sample UI code to see them in action
 
-We've create a sample client app written in javascript. You should be able to see the conference application with filterable paper list by wiring up the MAKES host URL to your deployed MAKES instance. For more to run the client app information, see **<tutorial_resource_root>/ConferenceWebsite/README.md**
+We've created a sample client app written in javascript. You should be able to see the conference application with a filterable paper list by wiring up the MAKES host URL to your deployed MAKES instance. For more to run the client app information, see **<tutorial_resource_root>/ConferenceWebsite/README.md**
