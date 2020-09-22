@@ -11,7 +11,7 @@ This is the first part of building an knowledge application for KDD conference.
 
 The application will have all the knowledge of papers published in **Internationial Conference on Knowledge Discovery and Data Mining**. It will help users find KDD papers and Oral presentations through Natural Language Processing and smart filters.
 
-In this tutorial, we'll focus on designing the appropriate KES schema such that KDD papers can be retrievable and filterable. We will start by designing a KES schema for the conference papers, build/host the index, and leverage the MAKES REST APIs (Evaluate and CalcHistogram) to create the Filterable Paper List UI.
+In this tutorial, we'll focus on designing the appropriate KES schema such that KDD papers can be retrievable and filterable. We will start by designing a KES schema for the conference papers, build/host the index, and leverage the MAKES REST APIs (Evaluate and Histogram) to create the Filterable Paper List UI.
 
 ## Prerequisites
 
@@ -253,7 +253,7 @@ For more detailed deployment instructions, See [Create API Instances](get-starte
 
 ## Create Client Application with MAKES REST APIs
 
-We now have a backend API to serve our conference paper data. The last step is to create the client application to showcase the filterable paper list. The client application will retrieve data and generate filters via Evaluate and CalcHistogram APIs.
+We now have a backend API to serve our conference paper data. The last step is to create the client application to showcase the filterable paper list. The client application will retrieve data and generate filters via Evaluate and Histogram APIs.
 
 ### Paper list KES Query Expression
 
