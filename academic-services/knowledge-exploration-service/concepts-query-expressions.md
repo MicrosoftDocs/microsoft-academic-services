@@ -1,8 +1,8 @@
 ---
 title: Structured query expressions
-description: Learn how to use structured query expressions
+description: Learn how to use KES structured query expressions
 ms.topic: reference
-ms.date: 2020-02-10
+ms.date: 09/21/2020
 ---
 
 # Structured query expressions

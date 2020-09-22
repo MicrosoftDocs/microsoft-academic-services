@@ -2,7 +2,7 @@
 title: POST Histogram
 description: Computes attribute value distribution for a structured query expression
 ms.topic: reference
-ms.date: 2020-02-10
+ms.date: 09/21/2020
 ---
 
 # Histogram REST API

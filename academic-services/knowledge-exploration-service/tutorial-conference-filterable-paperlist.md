@@ -24,7 +24,6 @@ In this tutorial, we'll focus on designing the appropriate KES schema such that 
     **https://<makes_storage_account>.blob.core.windows.net/makes/<makes_release>/tools/kesm.zip**)
 
 1. Download and unzip tutorial resources from [here](TutorialResources.zip).
-1. Download and unzip tutorial resources from [here](media.zip).
 
 ## Design a KES schema for KDD data
 
@@ -239,7 +238,7 @@ We are now ready to set up a MAKES API instance with a custom index.
     ```
 
 > [!NOTE]
-> If your account is connected to multiple Azure Directories or Azure Subscriptions, you'll also have to specify the **--AzureActiveDirectoryDomainName** and/or **--AzureSubscriptionId** parameters. See [Command Line Tool Reference](reference-makes-command-line-tool.md#common-authentication-parameters) for more details.
+> If your account is connected to multiple Azure Directories or Azure Subscriptions, you'll also have to specify the **--AzureActiveDirectoryDomainName** and/or **--AzureSubscriptionId** parameters. See [Command Line Tool Reference](reference-makes-command-line-tool.md#common-azure-authentication-parameters) for more details.
 
 1. Run DeployHost command and use the "--MakesIndex" parameter to load the custom KDD paper index we've built.
 
