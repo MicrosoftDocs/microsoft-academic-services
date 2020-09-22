@@ -24,6 +24,7 @@ In this tutorial, we'll focus on designing the appropriate KES schema such that 
     **https://<makes_storage_account>.blob.core.windows.net/makes/<makes_release>/tools/kesm.zip**)
 
 1. Download and unzip tutorial resources from [here](TutorialResources.zip).
+1. Download and unzip tutorial resources from [here](media.zip).
 
 ## Design a KES schema for KDD data
 
