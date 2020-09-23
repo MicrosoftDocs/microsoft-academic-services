@@ -4,7 +4,7 @@ description: Compute author h-index for Microsoft Academic Graph using Azure Dat
 services: microsoft-academic-services
 ms.topic: tutorial
 ms.service: microsoft-academic-services
-ms.date: 7/5/2019
+ms.date: 9/23/2020
 ---
 # Tutorial: Compute author h-index using Azure Databricks
 
@@ -14,8 +14,7 @@ In this tutorial, you compute h-index for all authors in Microsoft Academic Grap
 
 Complete these tasks before you begin this tutorial:
 
-* Setting up provisioning of Microsoft Academic Graph to an Azure blob storage account. See [Get Microsoft Academic Graph on Azure storage](get-started-setup-provisioning
-).
+* Setting up provisioning of Microsoft Academic Graph to an Azure blob storage account. See [Get Microsoft Academic Graph on Azure storage](get-started-setup-provisioning.md).
 
 * Setting up Azure Databricks service. See [Set up Azure Databricks](get-started-setup-databricks.md).
 
@@ -30,6 +29,8 @@ Complete these tasks before you begin this tutorial:
    :heavy_check_mark:  The name of the container in your Azure Storage (AS) account containing MAG dataset.
 
 ## Import PySparkMagClass.py as a notebook
+
+In this section, you import PySparkMagClass.py as a shared notebook in Azure Databricks workspace. You will run this utility notebook from another notebook later.
 
 Complete task in [Import PySparkMagClass Shared Notebook](import-pysparkmagclass.md)
 
