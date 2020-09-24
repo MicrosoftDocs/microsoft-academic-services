@@ -259,7 +259,7 @@ We now have a backend API to serve our conference paper data. The last step is t
 
 We start building our client by crafting a KES query expression to represent the paper list shown on the UI. Since the initial list of papers we want to see is "all papers", the corresponding KES query expression would be "**All()**".
 
-This corresponds to the following code in **<tutorial_resource_root>/ConferenceWebsite/index.js**
+This corresponds to the following code in **<tutorial_resource_root>/ConferenceApp_FilterablePaper/index.js**
 
 ```javascript
 /*
@@ -278,7 +278,7 @@ For more information on KES Query Expressions, see [Structured query expressions
 
 We can call Evaluate API with the paper list expression ( Initially set to "**All()**" ) to retrieve paper entities for display.
 
-To get papers using Evaluate API, see **MakesInteractor.GetPapers(paperExpression)** method in **<tutorial_resource_root>/ConferenceWebsite/makesInteractor.js**:
+To get papers using Evaluate API, see **MakesInteractor.GetPapers(paperExpression)** method in **<tutorial_resource_root>/ConferenceApp_FilterablePaper/makesInteractor.js**:
 
 ```javascript
 /*
@@ -301,8 +301,8 @@ For more information on Evaluate API, see [Evaluate REST API](reference-post-eva
 
  After retrieving the paper entities from Evaluate API, all is left to do is to translate the entity data to UI elements. The corresponding data transformation logic for paper UI elements can be found in:
 
-- **<tutorial_resource_root>/ConferenceWebsite/paperListItem.js**
-- **<tutorial_resource_root>/ConferenceWebsite/paperFieldsOfStudyListItem.js**
+- **<tutorial_resource_root>/ConferenceApp_FilterablePaper/paperListItem.js**
+- **<tutorial_resource_root>/ConferenceApp_FilterablePaper/paperFieldsOfStudyListItem.js**
 
 ### Generate filters  
 
@@ -310,7 +310,7 @@ We can also call Histogram API with the paper list expression to get filter attr
 
 Histogram returns the most probabilistic attribute values for each attributes. We can use these values for each filter attribute as suggested filter values.
 
-To generate filters using Histogram API, see **MakesInteractor.GetFilters(paperExpression)** method in **<tutorial_resource_root>/ConferenceWebsite/makesInteractor.js**:
+To generate filters using Histogram API, see **MakesInteractor.GetFilters(paperExpression)** method in **<tutorial_resource_root>/ConferenceApp_FilterablePaper/makesInteractor.js**:
 
 ```javascript
     /*
@@ -332,8 +332,8 @@ For more information on Histogram API, see [Histogram REST API](reference-post-h
 
 The corresponding data transformation logic for filter UI elements can be found in:
 
-- **<tutorial_resource_root>/ConferenceWebsite/filterSectionListItem.js**
-- **<tutorial_resource_root>/ConferenceWebsite/filterAttributeListItem.js**
+- **<tutorial_resource_root>/ConferenceApp_FilterablePaper/filterSectionListItem.js**
+- **<tutorial_resource_root>/ConferenceApp_FilterablePaper/filterAttributeListItem.js**
 
 ### Handle filter events
 
@@ -341,7 +341,7 @@ We can apply filters by modifying the paper list expression. To apply a filter, 
 
 For example, with a *initial paper expression** being **All()**, to apply a publication year filter to constrain the publications returned to those published in 2019, the *filter expression* will be **Y=2019**, and the final paper list expression will become **And(All(),Y=2019)**.
 
-To handle filter events, see **FilterablePaperList.appendFilter(attributeName, attributeValue)** and **FilterablePaperList.updatePaperList()** method in **<tutorial_resource_root>/ConferenceWebsite/filterablePaperList.js** for more details.
+To handle filter events, see **FilterablePaperList.appendFilter(attributeName, attributeValue)** and **FilterablePaperList.updatePaperList()** method in **<tutorial_resource_root>/ConferenceApp_FilterablePaper/filterablePaperList.js** for more details.
 
 ```javascript
     /*
@@ -379,4 +379,4 @@ To handle filter events, see **FilterablePaperList.appendFilter(attributeName, a
 
 ### Use sample UI code to see them in action
 
-We've created a sample client app written in javascript. You should be able to see the conference application with a filterable paper list by wiring up the MAKES host URL to your deployed MAKES instance. For more to run the client app information, see **<tutorial_resource_root>/ConferenceWebsite/README.md**
+We've created a sample client app written in javascript. You should be able to see the conference application with a filterable paper list by wiring up the MAKES host URL to your deployed MAKES instance. For more to run the client app information, see **<tutorial_resource_root>/ConferenceApp_FilterablePaper/README.md**
