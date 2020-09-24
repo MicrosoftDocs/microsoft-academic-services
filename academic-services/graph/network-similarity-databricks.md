@@ -36,7 +36,7 @@ Follow instructions in [Import PySparkMagClass Shared Notebook](import-pysparkma
 
 ## Import PySparkNetworkSimilarityClass shared notebook
 
-In this section, you import PySparkNetworkSimilarityClass.py as a shared notebook in Azure Databricks workspace. You will run this utility notebook from another notebook later.
+In this section, you import PySparkNetworkSimilarityClass.py as a shared notebook in Azure Databricks workspace. You will run this utility notebook from other notebooks later.
 
 1. Save **`ns/PySparkNetworkSimilarityClass.py`** in MAG dataset to local drive.
 
