@@ -12,7 +12,7 @@ ms.date: 9/23/2020
 
 ## getTopEntities(e, targetType, maxCount, minScore)
 
-Returns a dataframe with entities of top similarity scores to an entity using a network similarity resource.
+Returns a dataframe with entities of top similarity scores to an entity.
 Score returned is between [-1, 1], with bigger number representing higher similarity.
 If the entity ID is not in the resource file, the retrun dataframe will be empty.
 
@@ -33,5 +33,6 @@ minScore | float | Minimum score | 0.0 | 0.0
    ```
 
 **Output**
+- You will see output as follows
 
     ![GetTopEntities output](media/network-similarity/databricks-get-top-entities.png "GetTopEntities output")

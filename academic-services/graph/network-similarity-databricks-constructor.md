@@ -32,4 +32,4 @@ key | string | Access key for the container, if sas is specified, key is ignored
 
 **Output**
 
-No output.
+None.

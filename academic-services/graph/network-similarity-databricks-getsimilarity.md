@@ -8,11 +8,11 @@ ms.date: 9/23/2020
 ---
 # NetworkSimilarity.getSimilarity Function
 
-### Compute similarity score between two entities using a network similarity resource.
+### Compute similarity score between two entities.
 
 ## getSimilarity(EntityId1, EntityId2)
 
-Returns the similarity score between two entities using the specific network similarity resource.
+Returns the similarity score between two entities.
 Score returned is between [-1, 1], with bigger number representing higher similarity.
 If either of the entity IDs are not in the resource file, the retrun value will be zero.
 
