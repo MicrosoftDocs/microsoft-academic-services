@@ -80,17 +80,19 @@
     - name: PySpark
       expanded: false
       items:
+      - name: Constructor
+        href: network-similarity-databricks-constructor.md
       - name: GetSimilarity
-        href: network-similarity-getsimilarity-databricks.md
+        href: network-similarity-databricks-getsimilarity.md
       - name: GetTopEntities
-        href: network-similarity-gettopEntities-databricks.md
+        href: network-similarity-databricks-gettopEntities.md
     - name: U-SQL
       expanded: false
       items:
       - name: GetSimilarity
-        href: network-similarity-getsimilarity-datalake.md
+        href: network-similarity-datalake-getsimilarity.md
       - name: GetTopEntities
-        href: network-similarity-gettopEntities-datalake.md
+        href: network-similarity-datalake-gettopEntities.md
 - name: Resources
   expanded: true
   items:

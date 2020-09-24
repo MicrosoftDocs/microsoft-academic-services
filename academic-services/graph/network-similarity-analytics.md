@@ -76,14 +76,19 @@ In this section, you submit an ADLA job to define network similarity functions.
 
 - You will see output in `/Output/NetworkSimilarity/GetSimilarity.tsv` as follows
 
-    > 1290206253	201448701	af	0.766698062
+   ```
+   EntityId   | SimilarEntityId | SimilarEntityType | Score
+   -----------+-----------------+-------------------+------------
+   1290206253 | 201448701       | af                | 0.766698062
+   ```
+
 
 ### Getting top related entities
 
 - Following script calls getTopEntities method to get top related entities
 
    ```U-SQL
-   @topEntities = AcademicGraph.NetworkSimilarity.GetTopEntities(@uriPrefix, @resourcePath, @entityId1, 20, (float)0);
+   @topEntities = AcademicGraph.NetworkSimilarity.GetTopEntities(@uriPrefix, @resourcePath, @entityId1, 10, (float)0);
    ```
 
 - You will see output in `/Output/NetworkSimilarity/GetTopEntities.tsv` as follows

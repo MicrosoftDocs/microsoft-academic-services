@@ -4,7 +4,7 @@ description: Using Network Similarity Package
 services: microsoft-academic-services
 ms.topic: extra
 ms.service: microsoft-academic-services
-ms.date: 3/20/2020
+ms.date: 9/23/2020
 ---
 # Network Similarity Package
 
@@ -36,30 +36,30 @@ The Network Similarity package is distributed in a separate folder (ns) in MAG.
 
   |File Name|Description|
   |---------|---------|
-  |PySparkNetworkSimilarityClass.py|PySpark utility functions for computing network similarity.|
-  |NetworkSimilaritySample.py|PySpark sample script for computing network similarity.|
+  |ns/PySparkNetworkSimilarityClass.py|PySpark utility functions for computing network similarity.|
+  |ns/NetworkSimilaritySample.py|PySpark sample script for computing network similarity.|
   
 * Files with .usql extension are U-SQL scripts for Azure Data Lake Analytics.
 
   |File Name|Description|
   |---------|---------|
-  |NetworkSimilarityFunction.usql|U-SQL utility functions for computing network similarity.|
-  |NetworkSimilaritySample.usql|U-SQL sample script for computing network similarity.|
+  |ns/NetworkSimilarityFunction.usql|U-SQL utility functions for computing network similarity.|
+  |ns/NetworkSimilaritySample.usql|U-SQL sample script for computing network similarity.|
 
 * Files with .txt extension are network similarity resource files for different type of entities. Here are the description of the resource files.
  
   |File Name|Entity Type|Description|
   |---|---|---|
-  |AffiliationCopaper.txt|Affiliation|Two affiliations are similar if they are closed connected with each other in the weighted affiliation collaboration graph.|
-  |AffiliationCovenue.txt|Affiliation|Two affiliations are similar if they publish in similar venues (journals and conferences).|
-  |AffiliationMetapath.txt|Affiliation|Two affiliations are similar if they co-occur with common affiliations, venues, and fields of study.|
-  |FosCopaper.txt|Field of study|Two fields of study are similar if they appear in the same paper.|
-  |FosCovenue.txt|Field of study|Two fields of study are similar if they have papers from similar venues.|
-  |FosMetapath.txt|Field of study|Two fields of study are similar if they co-occur with common affiliations, venues, and fields of study.|
-  |VenueCoauthor.txt|Venue|Two venues are similar if they publish papers with common authors.|
-  |VenueCofos.txt|Venue|Two venues are similar if they publish papers with similar fields of study.|
-  |VenueMetapath.txt|Venue|Two venues are similar if they co-occur with common affiliations, venues, and fields of study.|
-  |AuthorCopaper.txt|Author|Two authors are similar if they are closed connected with each other in the weighted author collaboration graph.|
+  |ns/AffiliationCopaper.txt|Affiliation|Two affiliations are similar if they are closed connected with each other in the weighted affiliation collaboration graph.|
+  |ns/AffiliationCovenue.txt|Affiliation|Two affiliations are similar if they publish in similar venues (journals and conferences).|
+  |ns/AffiliationMetapath.txt|Affiliation|Two affiliations are similar if they co-occur with common affiliations, venues, and fields of study.|
+  |ns/FosCopaper.txt|Field of study|Two fields of study are similar if they appear in the same paper.|
+  |ns/FosCovenue.txt|Field of study|Two fields of study are similar if they have papers from similar venues.|
+  |ns/FosMetapath.txt|Field of study|Two fields of study are similar if they co-occur with common affiliations, venues, and fields of study.|
+  |ns/VenueCoauthor.txt|Venue|Two venues are similar if they publish papers with common authors.|
+  |ns/VenueCofos.txt|Venue|Two venues are similar if they publish papers with similar fields of study.|
+  |ns/VenueMetapath.txt|Venue|Two venues are similar if they co-occur with common affiliations, venues, and fields of study.|
+  |ns/AuthorCopaper.txt|Author|Two authors are similar if they are closed connected with each other in the weighted author collaboration graph.|
 
 ## Samples
 
