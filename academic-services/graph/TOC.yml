@@ -20,10 +20,10 @@
   - name: Generate author h-index
     expanded: false
     items:
-    - name: U-SQL
-      href: tutorial-azure-data-lake-hindex.md
     - name: PySpark
       href: tutorial-azure-databricks-hindex.md
+    - name: U-SQL
+      href: tutorial-azure-data-lake-hindex.md
   - name: Full-text search using Azure Search
     expanded: false
     items:
@@ -37,10 +37,10 @@
   - name: Microsoft Academic Graph samples
     expanded: false
     items:
-    - name: U-SQL + PowerBI
-      href: samples-azure-data-lake-analytics.md
     - name: PySpark
       href: samples-azure-databricks.md
+    - name: U-SQL + PowerBI
+      href: samples-azure-data-lake-analytics.md
   - name: Language Similarity samples
     expanded: false
     items:
@@ -49,10 +49,10 @@
   - name: Network Similarity samples
     expanded: false
     items:
-    - name: U-SQL
-      href: network-similarity-analytics.md
     - name: PySpark
       href: network-similarity-databricks.md
+    - name: U-SQL
+      href: network-similarity-analytics.md
 - name: How-to guides
   expanded: true
   items:
@@ -73,7 +73,24 @@
     - name: ComputeSimilarity
       href: language-similarity-computesimilarity.md
     - name: GetTopFieldsOfStudy
-      href: language-similarity-gettopfieldsofstudy.md    
+      href: language-similarity-gettopfieldsofstudy.md
+  - name: Network Similarity Methods
+    expanded: false
+    items:
+    - name: PySpark
+      expanded: false
+      items:
+      - name: GetSimilarity
+        href: network-similarity-getsimilarity-databricks.md
+      - name: GetTopEntities
+        href: network-similarity-gettopEntities-databricks.md
+    - name: U-SQL
+      expanded: false
+      items:
+      - name: GetSimilarity
+        href: network-similarity-getsimilarity-datalake.md
+      - name: GetTopEntities
+        href: network-similarity-gettopEntities-datalake.md
 - name: Resources
   expanded: true
   items:

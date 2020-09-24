@@ -35,7 +35,7 @@ Complete these tasks before beginning this tutorial:
 
 In prerequisite [Set up Azure Data Lake Analytics](get-started-setup-azure-data-lake-analytics.md), you added the Azure Storage (AS) created for MAG provision as a data source for the Azure Data Lake Analytics service (ADLA). In this section, you submit an ADLA job to create functions extracting MAG data from Azure Storage (AS).
 
-Complete task in [Define MAG functions](define-mag-function.md).
+Follow instructions in [Define MAG functions](define-mag-function.md).
 
 ## Sample projects
 

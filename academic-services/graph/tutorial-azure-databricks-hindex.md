@@ -32,7 +32,7 @@ Complete these tasks before you begin this tutorial:
 
 In this section, you import PySparkMagClass.py as a shared notebook in Azure Databricks workspace. You will run this utility notebook from another notebook later.
 
-Complete task in [Import PySparkMagClass Shared Notebook](import-pysparkmagclass.md).
+Follow instructions in [Import PySparkMagClass Shared Notebook](import-pysparkmagclass.md).
 
 ## Create a new notebook
 

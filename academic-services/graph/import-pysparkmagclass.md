@@ -1,12 +1,12 @@
 ---
-title: 'Import PySparkMagClass Shared Notebook'
+title: 'Import PySparkMagClass'
 description: Import PySparkMagClass Notebook
 services: microsoft-academic-services
 ms.topic: tutorial
 ms.service: microsoft-academic-services
 ms.date: 9/23/2020
 ---
-# Import PySparkMagClass Shared Notebook
+# Import PySparkMagClass (PySpark)
 
 ## Import PySparkMagClass.py as a shared notebook
 
