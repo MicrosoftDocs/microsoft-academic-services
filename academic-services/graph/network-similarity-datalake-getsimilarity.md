@@ -10,11 +10,11 @@ ms.date: 9/23/2020
 
 Namespace: AcademicGraph.NetworkSimilarity
 
-### Compute similarity score between two entities using a network similarity resource.
+### Compute similarity score between two entities.
 
-## GetSimilarity(string, string, long, long)
+## GetSimilarity(string BaseDir, string ResourcePath, long EntityId1, long EntityId2)
 
-Returns a stream with a single row containing the similarity score between two entities using the specific network similarity resource.
+Returns a stream with a single row containing the similarity score between two entities using a network similarity resource.
 Score returned is between [-1, 1], with bigger number representing higher similarity.
 If either of the entity IDs are not in the resource file, the retrun stream will be empty.
 
