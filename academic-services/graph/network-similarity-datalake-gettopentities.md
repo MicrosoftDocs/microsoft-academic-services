@@ -12,7 +12,7 @@ Namespace: AcademicGraph.NetworkSimilarity
 
 ### Returns entities with top similarity scores related to an entity.
 
-## GetTopEntities(string BaseDir, string ResourcePath, long EntityId, int MaxCount, float MinScore)
+## GetTopEntities(BaseDir, ResourcePath, EntityId, MaxCount, MinScore)
 
 Returns a stream with entities of top similarity scores to an entity using a network similarity resource.
 Score returned is between [-1, 1], with bigger number representing higher similarity.

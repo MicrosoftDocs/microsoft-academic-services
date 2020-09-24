@@ -82,9 +82,9 @@
       items:
       - name: Constructor
         href: network-similarity-databricks-constructor.md
-      - name: GetSimilarity
+      - name: getSimilarity
         href: network-similarity-databricks-getsimilarity.md
-      - name: GetTopEntities
+      - name: getTopEntities
         href: network-similarity-databricks-gettopEntities.md
     - name: U-SQL
       expanded: false
