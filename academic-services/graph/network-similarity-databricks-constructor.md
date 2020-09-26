@@ -11,7 +11,7 @@ ms.date: 9/23/2020
 ### Initializes a new instance of the NetworkSimilarity class.
 
   ```Python
-  class NetworkSimilarity(account, container, resource, sas='', key='');
+  class NetworkSimilarity(account, container, entitytype, sense, sas='', key='');
   ```
 
 **Parameters**
@@ -20,14 +20,15 @@ Name | Data Type | Description | Example
 --- | --- | --- | ---
 account | string | Azure Storage (AS) account | 'myblobaccount'
 container | string | Container name in Azure Storage (AS) account | 'mag-2020-01-01'
-resource | string | Resource stream path | 'ns/AffiliationMetapath.txt'
+entitytype | string | Resource stream path | 'affiliation'
+sense | string | Similarity Sense | 'metapath'
 sas | string | Complete 'Blob service SAS URL' of the shared access signature (sas) for the container | 'myshareaccesssignature'
 key | string | Access key for the container, if sas is specified, key is ignored | 'myaccountkey'
 
 **Example**
 
    ```Python
-   ns = NetworkSimilarity(account='myblobaccount', container='mag-2020-01-01', resource='ns/AffiliationMetapath.txt', sas='myshareaccesssignature')
+   ns = NetworkSimilarity(account='myblobaccount', container='mag-2020-01-01', entityType='affiliation", sense='metapath', sas='myshareaccesssignature')
    ```
 
 **Output**

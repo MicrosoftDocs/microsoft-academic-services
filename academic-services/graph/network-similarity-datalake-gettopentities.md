@@ -12,7 +12,7 @@ Namespace: AcademicGraph.NetworkSimilarity
 
 ### Returns entities with top similarity scores related to an entity.
 
-## GetTopEntities(BaseDir, ResourcePath, EntityId, MaxCount, MinScore)
+## GetTopEntities(BaseDir, EntityType, Sense, EntityId, MaxCount, MinScore)
 
 Returns a stream with entities of top similarity scores to an entity using a network similarity resource.
 Score returned is between [-1, 1], with bigger number representing higher similarity.
@@ -23,15 +23,16 @@ If the entity ID is not in the resource file, the retrun stream will be empty.
 Name | Data Type | Description | Example
 --- | --- | --- | ---
 BaseDir | string | UriPrefix to the Azure Storage container | "wasb://mag-2020-01-01@myblobaccount/"
-ResourcePath | string | Network similarity resouce path. Available resources are documented in [Network Similarity Package](network-similarity#contents) | "ns/AffiliationMetapath.txt"
+EntityType | string | Entity Type. Available entity types are documented in [Network Similarity Package](network-similarity#available-senses) | "affiliation"
+Sense | string | Similarity sense. Available senses are documented in [Network Similarity Package](network-similarity#available-senses) | "metapath"
 EntityId | long | Id of the entity | 1290206253
 MaxCount | int | Maximum number of result | 10
-MinScore | float | Minimum score | 0.0
+MinScore | float | Minimum score | 0
 
 **Example**
 
    ```U-SQL
-   @score = AcademicGraph.NetworkSimilarity.GetTopEntities("wasb://mag-2020-01-01@myblobaccount/", "ns/AffiliationMetapath.txt", 1290206253, 10, (float)0);
+   @score = AcademicGraph.NetworkSimilarity.GetTopEntities("wasb://mag-2020-01-01@myblobaccount/", "affiliation", "metapath", 1290206253, 10, (float)0);
    ```
 
 **Output**

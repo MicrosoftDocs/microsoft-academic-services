@@ -14,7 +14,7 @@ ms.date: 9/23/2020
 
 Returns the similarity score between two entities.
 Score returned is between [-1, 1], with bigger number representing higher similarity.
-If either of the entity IDs are not in the resource file, the retrun value will be zero.
+If either of the entity IDs are available, the retrun value will be zero.
 
 **Parameters**
 

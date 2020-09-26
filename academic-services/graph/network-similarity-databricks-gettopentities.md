@@ -14,7 +14,7 @@ ms.date: 9/23/2020
 
 Returns a dataframe with entities of top similarity scores to an entity.
 Score returned is between [-1, 1], with bigger number representing higher similarity.
-If the entity ID is not in the resource file, the retrun dataframe will be empty.
+If the entity ID is not available, the retrun dataframe will be empty.
 
 **Parameters**
 

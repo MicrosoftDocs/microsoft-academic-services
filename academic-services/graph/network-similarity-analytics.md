@@ -71,7 +71,7 @@ In this section, you submit an ADLA job to define network similarity functions.
 - Following script calls GetSimilarity method to get similarity score between two entities
 
    ```U-SQL
-   @score = AcademicGraph.NetworkSimilarity.GetSimilarity(@uriPrefix, @resourcePath, @entityId1, @entityId2);
+   @score = AcademicGraph.NetworkSimilarity.GetSimilarity(@uriPrefix, @entityType, @sense, @entityId1, @entityId2);
    ```
 
 - You will see output in `/Output/NetworkSimilarity/GetSimilarity.tsv` as follows
@@ -88,7 +88,7 @@ In this section, you submit an ADLA job to define network similarity functions.
 - Following script calls getTopEntities method to get top related entities
 
    ```U-SQL
-   @topEntities = AcademicGraph.NetworkSimilarity.GetTopEntities(@uriPrefix, @resourcePath, @entityId1, 10, (float)0);
+   @topEntities = AcademicGraph.NetworkSimilarity.GetTopEntities(@uriPrefix, @entityType, @sense, @entityId1, 10, (float)0);
    ```
 
 - You will see output in `/Output/NetworkSimilarity/GetTopEntities.tsv` as follows

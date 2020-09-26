@@ -28,6 +28,23 @@ Before running these examples, you need to complete the following setups:
   > [!NOTE]
   > Network Similarity Package is not included in basic MAG distribution. Please ask for Network Similarity Package when requesting MAG. Otherwise it will not be included in your distribution.
 
+## Available senses
+
+* The following senses are of entity embeddings that are currently available.
+ 
+  |Entity Type|Sense|Description|
+  |---|---|---|
+  | affiliation | copaper | Two affiliations are similar if they are closed connected with each other in the weighted affiliation collaboration graph.|
+  | affiliation | covenue | Two affiliations are similar if they publish in similar venues (journals and conferences).|
+  | affiliation | metapath | Two affiliations are similar if they co-occur with common affiliations, venues, and fields of study.|
+  | fos | copaper | Two fields of study are similar if they appear in the same paper.|
+  | fos | covenue | Two fields of study are similar if they have papers from similar venues.|
+  | fos | metapath | Two fields of study are similar if they co-occur with common affiliations, venues, and fields of study.|
+  | venue | coauthor | Two venues are similar if they publish papers with common authors.|
+  | venue | cofos | Two venues are similar if they publish papers with similar fields of study.|
+  | venue | metapath | Two venues are similar if they co-occur with common affiliations, venues, and fields of study.|
+  | author | copaper | Two authors are similar if they are closed connected with each other in the weighted author collaboration graph.|
+
 ## Contents
 
 The Network Similarity package is distributed in a separate folder (ns) in MAG.
@@ -46,22 +63,9 @@ The Network Similarity package is distributed in a separate folder (ns) in MAG.
   |ns/NetworkSimilarityFunction.usql|U-SQL utility functions for computing network similarity.|
   |ns/NetworkSimilaritySample.usql|U-SQL sample script for computing network similarity.|
 
-* Files with .txt extension are network similarity resource files for different type of entities. Here are the description of the resource files.
- 
-  |File Name|Entity Type|Description|
-  |---|---|---|
-  |ns/AffiliationCopaper.txt|Affiliation|Two affiliations are similar if they are closed connected with each other in the weighted affiliation collaboration graph.|
-  |ns/AffiliationCovenue.txt|Affiliation|Two affiliations are similar if they publish in similar venues (journals and conferences).|
-  |ns/AffiliationMetapath.txt|Affiliation|Two affiliations are similar if they co-occur with common affiliations, venues, and fields of study.|
-  |ns/FosCopaper.txt|Field of study|Two fields of study are similar if they appear in the same paper.|
-  |ns/FosCovenue.txt|Field of study|Two fields of study are similar if they have papers from similar venues.|
-  |ns/FosMetapath.txt|Field of study|Two fields of study are similar if they co-occur with common affiliations, venues, and fields of study.|
-  |ns/VenueCoauthor.txt|Venue|Two venues are similar if they publish papers with common authors.|
-  |ns/VenueCofos.txt|Venue|Two venues are similar if they publish papers with similar fields of study.|
-  |ns/VenueMetapath.txt|Venue|Two venues are similar if they co-occur with common affiliations, venues, and fields of study.|
-  |ns/AuthorCopaper.txt|Author|Two authors are similar if they are closed connected with each other in the weighted author collaboration graph.|
-
 ## Samples
+
+Please see following samples 
 
 * [Network Similarity Sample (U-SQL)](network-similarity-analytics.md)
 * [Network Similarity Sample (PySpark)](network-similarity-databricks.md)
