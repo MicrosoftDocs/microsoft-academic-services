@@ -73,7 +73,7 @@ In this section, you import NetworkSimilaritySample.py as a notebook in Azure Da
 - Cmd 5 creates a NetworkSimilarity instance to compute similarity
 
    ```python
-   ns = NetworkSimilarity(container=MagContainer, account=AzureStorageAccount, key=AzureStorageAccessKey, entityType=EntityType, sense=Sense)
+   ns = NetworkSimilarity(container=MagContainer, account=AzureStorageAccount, key=AzureStorageAccessKey, entitytype=EntityType, sense=Sense)
    ```
 
 ### Getting similarity score between two entities
