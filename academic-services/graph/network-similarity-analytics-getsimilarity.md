@@ -34,7 +34,7 @@ Name | Data Type | Description | Example
 --- | --- | --- | ---
 EntityId | long | Same value as EntityId1 | 1290206253
 SimilarEntityId | long | Same value as EntityId2 | 201448701
-SimilarEntityType | string | Entity type. Possible types are <br> "af": Affiliation <br> "au": Author <br> "c": Conference <br> "j": Journal <br> "f": Field of study | "af"
+SimilarEntityType | string | Entity type. Possible types are <br> "af": Affiliation <br> "au": Author <br> "c": Conference <br> "f": Field of study <br> "j": Journal | "af"
 Score | float | Similarity score between EntityId1 and EntityId2 | 0.766698062
 
 > [!NOTE]
