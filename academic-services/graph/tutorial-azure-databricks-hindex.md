@@ -50,11 +50,7 @@ In this section, you import HIndexDatabricksSample notebook into Azure Databrick
 
 1. Select **Import**.
 
-1. Click **Run All** button.
-
-## Notebook description
-
-### Initialize storage account and container details
+## Initialize storage account and container details
 
   | Variable  | Value | Description  |
   | --------- | --------- | --------- |
@@ -62,6 +58,12 @@ In this section, you import HIndexDatabricksSample notebook into Azure Databrick
   | AzureStorageAccessKey | Replace **`<AzureStorageAccessKey>`**. | This is the Access Key of the Azure Storage account. |
   | MagContainer | Replace **`<MagContainer>`**. | This is the container name in Azure Storage account containing MAG dataset, usually in the form of mag-yyyy-mm-dd. |
   | OutputContainer | Replace **`<OutputContainer>`**. | This is the container name in Azure Storage account where the output goes to. |
+
+## run the notebook
+
+1. Click **Run All** button.
+
+## Notebook description
 
 ### Define MicrosoftAcademicGraph class
 
