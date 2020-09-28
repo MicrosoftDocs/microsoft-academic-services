@@ -164,12 +164,6 @@ Join topEntities with affiliations for display names
 
     ![Top entities detail](media/network-similarity/databricks-top-entities-detail.png "Top entities detail")
 
-## Clean up resources
-
-After you finish the tutorial, you can terminate the cluster. From the Azure Databricks workspace, select **Clusters** on the left. For the cluster to terminate, under **Actions**, point to the ellipsis (...) and select the **Terminate** icon.
-
-If you don't manually terminate the cluster, it automatically stops, provided you selected the **Terminate after \_\_ minutes of inactivity** check box when you created the cluster. In such a case, the cluster automatically stops if it's been inactive for the specified time.
-
 ## Resources
 
 * [Create an Azure Databricks service](https://azure.microsoft.com/services/databricks/)
