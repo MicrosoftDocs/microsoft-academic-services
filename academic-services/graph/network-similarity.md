@@ -58,6 +58,7 @@ Follow these samples for detail usage information.
   - [Constructor](network-similarity-databricks-constructor.md)
   - [getSimilarity](network-similarity-databricks-getsimilarity.md)
   - [getTopEntities](network-similarity-databricks-gettopentities.md)
+
 - U-SQL version
   - [GetSimilarity](network-similarity-analytics-getsimilarity.md)
   - [GetTopEntities](network-similarity-analytics-gettopentities.md)
