@@ -1,6 +1,6 @@
 ---
-title: 'Import PySparkMagClass'
-description: Import PySparkMagClass Notebook
+title: 'Import MagClass'
+description: Import MagClass Notebook
 services: microsoft-academic-services
 ms.topic: tutorial
 ms.service: microsoft-academic-services

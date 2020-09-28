@@ -45,25 +45,14 @@ Before running these examples, you need to complete the following setups:
   | venue | metapath | Two venues are similar if they co-occur with common affiliations, venues, and fields of study.|
   | author | copaper | Two authors are similar if they are closed connected with each other in the weighted author collaboration graph.|
 
-## Contents
-
-The Network Similarity package is distributed in a separate folder (ns) in MAG.
-
-* Files with .py extension are Python scripts for Azure Databricks.
-
-  |File Name|Description|
-  |---------|---------|
-  |ns/PySparkNetworkSimilarityClass.py|PySpark utility functions for computing network similarity.|
-  |ns/NetworkSimilaritySample.py|PySpark sample script for computing network similarity.|
-  
-* Files with .usql extension are U-SQL scripts for Azure Data Lake Analytics.
-
-  |File Name|Description|
-  |---------|---------|
-  |ns/NetworkSimilarityFunction.usql|U-SQL utility functions for computing network similarity.|
-  |ns/NetworkSimilaritySample.usql|U-SQL sample script for computing network similarity.|
-
 ## PySpark version
+
+### Contents
+
+  |File Name|Description|
+  |---------|---------|
+  |ns/NetworkSimilarityClass.py|PySpark utility functions for computing network similarity.|
+  |ns/NetworkSimilaritySample.py|PySpark sample script for computing network similarity.|
 
 ### Constructor
 
@@ -79,6 +68,13 @@ The Network Similarity package is distributed in a separate folder (ns) in MAG.
 * [Network Similarity Sample (PySpark)](network-similarity-databricks.md)
 
 ## U-SQL version
+
+### Contents
+
+  |File Name|Description|
+  |---------|---------|
+  |ns/NetworkSimilarityFunction.usql|U-SQL utility functions for computing network similarity.|
+  |ns/NetworkSimilaritySample.usql|U-SQL sample script for computing network similarity.|
 
 ### Functions
 
