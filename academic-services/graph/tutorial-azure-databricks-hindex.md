@@ -54,10 +54,10 @@ In this section, you import HIndexDatabricksSample notebook into Azure Databrick
 
   | Variable  | Value | Description  |
   | --------- | --------- | --------- |
-  | AzureStorageAccount | Replace **`<AzureStorageAccount>`**. | This is the Azure Storage account containing MAG dataset. |
-  | AzureStorageAccessKey | Replace **`<AzureStorageAccessKey>`**. | This is the Access Key of the Azure Storage account. |
-  | MagContainer | Replace **`<MagContainer>`**. | This is the container name in Azure Storage account containing MAG dataset, usually in the form of mag-yyyy-mm-dd. |
-  | OutputContainer | Replace **`<OutputContainer>`**. | This is the container name in Azure Storage account where the output goes to. |
+  | AzureStorageAccount | Replace **`<AzureStorageAccount>`** | This is the Azure Storage account containing MAG dataset. |
+  | AzureStorageAccessKey | Replace **`<AzureStorageAccessKey>`** | This is the Access Key of the Azure Storage account. |
+  | MagContainer | Replace **`<MagContainer>`** | This is the container name in Azure Storage account containing MAG dataset, usually in the form of mag-yyyy-mm-dd. |
+  | OutputContainer | Replace **`<OutputContainer>`** | This is the container name in Azure Storage account where the output goes to. |
 
 ## run the notebook
 

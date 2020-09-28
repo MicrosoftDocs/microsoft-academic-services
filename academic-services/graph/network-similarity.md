@@ -54,6 +54,10 @@ Before running these examples, you need to complete the following setups:
   |ns/NetworkSimilarityClass.py|PySpark utility functions for computing network similarity.|
   |ns/NetworkSimilaritySample.py|PySpark sample script for computing network similarity.|
 
+### Sample
+
+* [Network Similarity Sample (PySpark)](network-similarity-databricks.md)
+
 ### Constructor
 
 * [NetworkSimilarity](network-similarity-databricks-constructor.md)
@@ -62,10 +66,6 @@ Before running these examples, you need to complete the following setups:
 
 * [getSimilarity](network-similarity-databricks-getsimilarity.md)
 * [getTopEntities](network-similarity-databricks-gettopentities.md)
-
-### Sample
-
-* [Network Similarity Sample (PySpark)](network-similarity-databricks.md)
 
 ## U-SQL version
 
@@ -76,14 +76,14 @@ Before running these examples, you need to complete the following setups:
   |ns/NetworkSimilarityFunction.usql|U-SQL utility functions for computing network similarity.|
   |ns/NetworkSimilaritySample.usql|U-SQL sample script for computing network similarity.|
 
+### Sample
+
+* [Network Similarity Sample (U-SQL)](network-similarity-analytics.md)
+
 ### Functions
 
 * [GetSimilarity](network-similarity-analytics-getsimilarity.md)
 * [GetTopEntities](network-similarity-analytics-gettopentities.md)
-
-### Sample
-
-* [Network Similarity Sample (U-SQL)](network-similarity-analytics.md)
 
 
 ## Resource

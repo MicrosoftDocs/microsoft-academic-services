@@ -66,9 +66,9 @@ In this section, you import NetworkSimilaritySample.py as a notebook in Azure Da
 
   | Variable  | Value | Description  |
   | --------- | --------- | --------- |
-  | AzureStorageAccount | Replace **`<AzureStorageAccount>`**. | This is the Azure Storage account containing MAG dataset. |
-  | AzureStorageAccessKey | Replace **`<AzureStorageAccessKey>`**. | This is the Access Key of the Azure Storage account. |
-  | MagContainer | Replace **`<MagContainer>`**. | This is the container name in Azure Storage account containing MAG dataset, usually in the form of mag-yyyy-mm-dd. |
+  | AzureStorageAccount | Replace **`<AzureStorageAccount>`** | This is the Azure Storage account containing MAG dataset. |
+  | AzureStorageAccessKey | Replace **`<AzureStorageAccessKey>`** | This is the Access Key of the Azure Storage account. |
+  | MagContainer | Replace **`<MagContainer>`** | This is the container name in Azure Storage account containing MAG dataset, usually in the form of mag-yyyy-mm-dd. |
   | EntityType | 'affiliation' | See document for available entity types. Replace with other entity type if needed. |
   | Sense | 'metapath' | See document for available senses. Replace with other sense if needed. |
   | EntityId1 | 1290206253 | Entity id of Microsoft. Replace with other entity id if needed. |
