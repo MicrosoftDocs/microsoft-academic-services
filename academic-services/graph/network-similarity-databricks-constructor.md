@@ -6,7 +6,7 @@ ms.topic: extra
 ms.service: microsoft-academic-services
 ms.date: 9/23/2020
 ---
-# NetworkSimilarity(string) Constructor (PySpark)
+# NetworkSimilarity Constructor (PySpark)
 
 ### Initializes a new instance of the NetworkSimilarity class.
 
