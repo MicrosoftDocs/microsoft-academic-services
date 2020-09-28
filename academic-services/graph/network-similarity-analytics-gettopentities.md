@@ -21,8 +21,8 @@ Returns a stream with entities of top similarity scores to an entity by entity t
 Name | Data Type | Description | Example
 --- | --- | --- | ---
 BaseDir | string | UriPrefix to the Azure Storage container | "wasb://mag-2020-01-01@myblobaccount/"
-EntityType | string | Entity type. See available entity types and senses in [Network Similarity Package](network-similarity#available-senses) | "affiliation"
-Sense | string | Similarity sense. See available entity types and senses in [Network Similarity Package](network-similarity#available-senses) | "metapath"
+EntityType | string | Entity type. See available entity types and senses in [Network Similarity Package](network-similarity.md#available-senses) | "affiliation"
+Sense | string | Similarity sense. See available entity types and senses in [Network Similarity Package](network-similarity.md#available-senses) | "metapath"
 EntityId | long | Id of the entity | 1290206253
 MaxCount | int | Maximum number of result | 10
 MinScore | float | Minimum score | 0

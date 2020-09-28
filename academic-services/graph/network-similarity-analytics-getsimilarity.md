@@ -23,8 +23,8 @@ If either of the entity IDs are not in the resource file, the retrun stream will
 Name | Data Type | Description | Example
 --- | --- | --- | ---
 BaseDir | string | UriPrefix to the Azure Storage container | "wasb://mag-2020-01-01@myblobaccount/"
-EntityType | string | Entity Type. See available entity types and senses in [Network Similarity Package](network-similarity#available-senses) | "affiliation"
-Sense | string | Similarity sense. See available entity types and senses in [Network Similarity Package](network-similarity#available-senses) | "metapath"
+EntityType | string | Entity Type. See available entity types and senses in [Network Similarity Package](network-similarity.md#available-senses) | "affiliation"
+Sense | string | Similarity sense. See available entity types and senses in [Network Similarity Package](network-similarity.md#available-senses) | "metapath"
 EntityId1 | long | Id of the first entity | 1290206253
 EntityId2 | long | Id of the second entity | 201448701
 

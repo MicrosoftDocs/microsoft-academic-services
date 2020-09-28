@@ -37,4 +37,6 @@ float | Similarity score between two entities. <br> Score is between [-1, 1], wi
 
 **Output**
 
-    > 0.7666980387511901
+   ```
+   0.7666980387511901
+   ```
