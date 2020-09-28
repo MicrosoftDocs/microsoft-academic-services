@@ -90,9 +90,9 @@
       expanded: false
       items:
       - name: GetSimilarity
-        href: network-similarity-datalake-getsimilarity.md
+        href: network-similarity-analytics-getsimilarity.md
       - name: GetTopEntities
-        href: network-similarity-datalake-gettopEntities.md
+        href: network-similarity-analytics-gettopEntities.md
 - name: Resources
   expanded: true
   items:

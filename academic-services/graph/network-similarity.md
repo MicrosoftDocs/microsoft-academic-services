@@ -10,7 +10,7 @@ ms.date: 9/23/2020
 
 The Microsoft Academic Network Similarity Package provides supplementary processing functionality for use with the Microsoft Academic Graph (MAG). For a detail description of the technology, please see [Multi-Sense Network Representation Learning in Microsoft Academic Graph](https://www.microsoft.com/research/project/academic/articles/multi-sense-network-representation-learning-in-microsoft-academic-graph/).
 
-This package includes network embedding resources for academic entities. It also includes Python classes for use in Azure Databricks and U-SQL functions for Azure Data Lake Analytics.
+This package includes Python classes for Azure Databricks and U-SQL functions for Azure Data Lake Analytics. It also includes network embedding resources for sevaral academic entities similarity senses.
 
 The functions/classes perform the following tasks.
 
@@ -63,12 +63,32 @@ The Network Similarity package is distributed in a separate folder (ns) in MAG.
   |ns/NetworkSimilarityFunction.usql|U-SQL utility functions for computing network similarity.|
   |ns/NetworkSimilaritySample.usql|U-SQL sample script for computing network similarity.|
 
-## Samples
+## PySpark version
 
-Please see following samples 
+### Constructor
+
+* [NetworkSimilarity](network-similarity-databricks-constructor.md)
+
+### Methods
+
+* [getSimilarity](network-similarity-databricks-getsimilarity.md)
+* [getTopEntities](network-similarity-databricks-gettopentities.md)
+
+### Sample
+
+* [Network Similarity Sample (PySpark)](network-similarity-databricks.md)
+
+## U-SQL version
+
+### Functions
+
+* [GetSimilarity](network-similarity-analytics-getsimilarity.md)
+* [GetTopEntities](network-similarity-analytics-gettopentities.md)
+
+### Sample
 
 * [Network Similarity Sample (U-SQL)](network-similarity-analytics.md)
-* [Network Similarity Sample (PySpark)](network-similarity-databricks.md)
+
 
 ## Resource
 

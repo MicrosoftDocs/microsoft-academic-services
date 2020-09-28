@@ -42,11 +42,11 @@ Before you begin, you should have these items of information:
 
    :heavy_check_mark:  The name of the output container in your Azure Storage (AS) account.
 
-## Import PySparkMagClass shared notebook
+## Import PySparkMagClass notebook
 
-In this section, you import PySparkMagClass.py as a shared notebook in Azure Databricks workspace. You will run this utility notebook from other notebooks later.
+In this section, you import PySparkMagClass.py notebook to Azure Databricks workspace. You will run this utility notebook from other notebooks later.
 
-Follow instructions in [Import PySparkMagClass Shared Notebook](import-pysparkmagclass.md).
+Follow instructions in [Import PySparkMagClass Notebook](import-pysparkmagclass.md).
 
 ## Create a new notebook
 
@@ -69,7 +69,7 @@ In this section, you create the first notebook cell to run PySparkMagClass noteb
 1. Copy and paste following code block into the first cell.
 
    ```python
-   %run "/Shared/PySparkMagClass"
+   %run "./PySparkMagClass"
    ```
 
 1. Press the **SHIFT + ENTER** keys to run the code in this block. It defines MicrosoftAcademicGraph class.

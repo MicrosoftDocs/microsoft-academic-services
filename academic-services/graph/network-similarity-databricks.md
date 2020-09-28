@@ -28,15 +28,15 @@ Complete these tasks before you begin this tutorial:
 
    :heavy_check_mark:  The name of the container in your Azure Storage (AS) account containing MAG dataset.
 
-## Import PySparkMagClass shared notebook
+## Import PySparkMagClass notebook
 
-In this section, you import PySparkMagClass.py as a shared notebook in Azure Databricks workspace. You will run this utility notebook from another notebook later.
+In this section, you import PySparkMagClass.py notebook to Azure Databricks workspace. You will include this notebook in this sample later.
 
-Follow instructions in [Import PySparkMagClass Shared Notebook](import-pysparkmagclass.md).
+Follow instructions in [Import PySparkMagClass Notebook](import-pysparkmagclass.md).
 
-## Import PySparkNetworkSimilarityClass shared notebook
+## Import PySparkNetworkSimilarityClass notebook
 
-In this section, you import PySparkNetworkSimilarityClass.py as a shared notebook in Azure Databricks workspace. You will run this utility notebook from other notebooks later.
+In this section, you import PySparkNetworkSimilarityClass.py notebook to Azure Databricks workspace. You will include this notebook in this sample later.
 
 1. Save **`ns/PySparkNetworkSimilarityClass.py`** in MAG dataset to local drive.
 
@@ -46,7 +46,7 @@ In this section, you import PySparkNetworkSimilarityClass.py as a shared noteboo
 
 1. Select **Import**. This will create a notebook with path `"/Shared/PySparkNetworkSimilarityClass"`. No need to run this notebook.
 
-## Run sample notebook
+## Import NetworkSimilaritySample notebook
 
 In this section, you import NetworkSimilaritySample.py as a notebook in Azure Databricks workspace and run the notebook.
 
@@ -66,22 +66,70 @@ In this section, you import NetworkSimilaritySample.py as a notebook in Azure Da
 
 1. Click **Run All** button.
 
-## Script description
+## Notebook description
 
-### Creating a NetworkSimilarity instance
+### Network Similarity Sample
 
-- Cmd 5 creates a NetworkSimilarity instance to compute similarity
+In this sample, you compute network similarity score and top related entities using Azure Databricks.
+
+### Prerequisites
+
+To run this notebook:
+- [Create an Azure Databricks service](https://azure.microsoft.com/en-us/services/databricks/).
+- [Create a cluster for the Azure Databricks service](https://docs.azuredatabricks.net/user-guide/clusters/create.html).
+- [Import](https://docs.databricks.com/user-guide/notebooks/notebook-manage.html#import-a-notebook) samples/PySparkMagClass.py under your working folder.
+- [Import](https://docs.databricks.com/user-guide/notebooks/notebook-manage.html#import-a-notebook) ns/PySparkNetworkSimilarityClass.py under the same folder.
+- [Import](https://docs.databricks.com/user-guide/notebooks/notebook-manage.html#import-a-notebook) this notebook under the same folder.
+
+### Set up the storage account and container details
+
+- Replace **`<AzureStorageAccount>`**. This is the Azure Storage account containing MAG dataset.
+- Replace **`<AzureStorageAccessKey>`**. This is the Access Key of the Azure Storage account.
+- Replace **`<MagContainer>`**. This is the container name in Azure Storage account containing MAG dataset, usually in the form of mag-yyyy-mm-dd.
 
    ```python
-   ns = NetworkSimilarity(container=MagContainer, account=AzureStorageAccount, key=AzureStorageAccessKey, entitytype=EntityType, sense=Sense)
+   AzureStorageAccount = '<AzureStorageAccount>'     # Azure Storage (AS) account containing MAG dataset
+   AzureStorageAccessKey = '<AzureStorageAccessKey>' # Access Key of the Azure Storage (AS) account
+   MagContainer = '<MagContainer>'                   # The container name in Azure Storage (AS) account containing MAG dataset, usually in the form of mag-yyyy-mm-dd
+
+   EntityType = 'affiliation'                        # See document for available entity types. Replace with other entity type if needed.
+   Sense = 'metapath'                                # See document for available senses. Replace with other sense if needed.
+   EntityId1 = 1290206253                            # Entity id of Microsoft. Replace with other entity id if needed
+   EntityId2 = 201448701                             # Entity id of University of Washington. Replace with other entity id if needed
    ```
 
-### Getting similarity score between two entities
+### Define MicrosoftAcademicGraph class
 
-- Cmd 6 calls getSimilarity method to get similarity score between two entities
+Run PySparkMagClass notebook to define MicrosoftAcademicGraph class.
 
    ```python
-   score = ns.getSimilarity(EntityId1, EntityId2)
+   %run "./PySparkMagClass"
+   ```
+
+### Define NetworkSimilarity class
+
+Run PySparkNetworkSimilarityClass notebook to define NetworkSimilarity class.
+
+   ```python
+   %run "./PySparkNetworkSimilarityClass"
+   ```
+
+### Create a MicrosoftAcademicGraph instance to access MAG dataset
+
+   ```python
+   MAG = MicrosoftAcademicGraph(container=MagContainer, account=AzureStorageAccount, key=AzureStorageAccessKey)
+   ```
+
+### Create a NetworkSimilarity instance to compute similarity
+
+   ```python
+   NS = NetworkSimilarity(mag=MAG, entitytype=EntityType, sense=Sense)
+   ```
+
+### Call getSimilarity()
+
+   ```python
+   score = NS.getSimilarity(EntityId1, EntityId2)
    print(score)
    ```
 
@@ -89,12 +137,10 @@ In this section, you import NetworkSimilaritySample.py as a notebook in Azure Da
 
     > 0.7666980387511901
 
-### Getting top related entities
-
-- Cmd 7 calls getTopEntities method to get top related entities
+### Call getTopEntities()
 
    ```python
-   topEntities = ns.getTopEntities(EntityId1)
+   topEntities = NS.getTopEntities(EntityId1)
    display(topEntities)
    ```
 
@@ -102,22 +148,18 @@ In this section, you import NetworkSimilaritySample.py as a notebook in Azure Da
 
     ![GetTopEntities output](media/network-similarity/databricks-get-top-entities.png "GetTopEntities output")
 
-### Getting entity details
 
-- Cmd 8 joins top entities with affiliation table to get entity details
+### Display entity details
 
    ```python
-   # Create a MicrosoftAcademicGraph instance to access MAG dataset
-   mag = MicrosoftAcademicGraph(container=MagContainer, account=AzureStorageAccount, key=AzureStorageAccessKey)
-
    # Get authors dataframe
-   affiliations = mag.getDataframe('Affiliations')
+   affiliations = MAG.getDataframe('Affiliations')
 
    # Join top entities with authors to show auhtor names
    topEntitiesWithName = topEntities \
-       .join(affiliations, topEntities.EntityId == affiliations.AffiliationId, 'inner') \
-       .select(topEntities.EntityId, affiliations.DisplayName, topEntities.Score) \
-       .orderBy(topEntities.Score.desc())
+      .join(affiliations, topEntities.EntityId == affiliations.AffiliationId, 'inner') \
+      .select(topEntities.EntityId, affiliations.DisplayName, topEntities.Score) \
+      .orderBy(topEntities.Score.desc())
    display(topEntitiesWithName)
    ```
 

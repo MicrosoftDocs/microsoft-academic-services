@@ -8,9 +8,9 @@ ms.date: 9/23/2020
 ---
 # Import PySparkMagClass (PySpark)
 
-## Import PySparkMagClass.py as a shared notebook
+## Import PySparkMagClass.py notebook
 
-In this section, you import PySparkMagClass.py as a shared notebook in Azure Databricks workspace. You could run this utility notebook from other notebooks later.
+In this section, you import PySparkMagClass.py notebook to Azure Databricks workspace. You could run this utility notebook from other notebooks later.
 
 1. Save samples\PySparkMagClass.py in MAG dataset to local drive.
 
@@ -24,10 +24,7 @@ In this section, you import PySparkMagClass.py as a shared notebook in Azure Dat
 
     ![Provide details for a notebook in Databricks](media/databricks/import-notebook-dialog.png "Provide details for a notebook in Databricks")
 
-1. Select **Import**. This will create a notebook with path `"/Shared/PySparkMagClass"`. No need to run this notebook.
-
-   > [!NOTE]
-   > When importing this notebook under **Shared** folder. The full path of this notebook is `"/Shared/PySparkMagClass"`. If you import it under other folders, note the actual full path and use it in following sections.
+1. Select **Import**. This will create a notebook with path `"./PySparkMagClass"`. No need to run this notebook.
 
 ## Resources
 
