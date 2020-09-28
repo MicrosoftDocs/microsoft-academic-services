@@ -66,4 +66,6 @@ Follow these samples for detail usage information.
 
 ## Resource
 
-* [Get Microsoft Academic Graph on Azure storage](get-started-setup-provisioning.md)
+- [Multi-Sense Network Representation Learning in Microsoft Academic Graph](https://www.microsoft.com/research/project/academic/articles/multi-sense-network-representation-learning-in-microsoft-academic-graph/)
+
+- [Get Microsoft Academic Graph on Azure storage](get-started-setup-provisioning.md)
