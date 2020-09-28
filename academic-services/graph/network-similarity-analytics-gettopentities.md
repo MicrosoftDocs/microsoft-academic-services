@@ -33,7 +33,7 @@ Column Name | Data Type | Description | Example
 --- | --- | --- | ---
 EntityId | long | Same value as input EntityId | 1290206253
 SimilarEntityId | long | Id of the related entity | 1291425158
-SimilarEntityType | string | Entity type. Possible types are <br> "af": Affiliation <br> "au": Author <br> "c": Conference <br> "j": Journal <br> "fos": Field of study | "af"
+SimilarEntityType | string | Entity type. Possible types are <br> "af": Affiliation <br> "au": Author <br> "c": Conference <br> "j": Journal <br> "f": Field of study | "af"
 Score | float | Similarity score between input entity and the related entity | 0.971670866
 
 > [!NOTE]

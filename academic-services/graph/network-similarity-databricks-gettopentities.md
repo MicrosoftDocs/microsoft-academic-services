@@ -26,7 +26,7 @@ minScore | float | Minimum score | 0.0 | 0.0
 Column Name | Data Type | Description | Example
 --- | --- | --- | ---
 EntityId | long | Id of the related entity | 1291425158
-EntityType | string | Entity type. Possible types are <br> "af": Affiliation <br> "au": Author <br> "c": Conference <br> "j": Journal <br> "fos": Field of study | "af"
+EntityType | string | Entity type. Possible types are <br> "af": Affiliation <br> "au": Author <br> "c": Conference <br> "j": Journal <br> "f": Field of study | "af"
 Score | float | Similarity score between input entity and the related entity. | 0.971670866
 
 > [!NOTE]
