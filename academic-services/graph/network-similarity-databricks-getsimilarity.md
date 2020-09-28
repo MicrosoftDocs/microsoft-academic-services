@@ -26,13 +26,7 @@ e2 | long | Id of the second entity | 201448701
 
 Data Type | Description | Example
 --- | --- | ---
-float | Similarity score between two entities | 0.7666980387511901
-
-> [!NOTE]
->
-> Score is between [-1, 1], with bigger number representing higher similarity.
->
-> If either of the entity IDs are not available, the retrun value will be zero.
+float | Similarity score between two entities. <br> Score is between [-1, 1], with bigger number representing higher similarity. <br> If either of the entity IDs are not available, the retrun value will be zero. | 0.7666980387511901
 
 **Example**
 

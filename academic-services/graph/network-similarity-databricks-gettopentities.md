@@ -27,13 +27,7 @@ Column Name | Data Type | Description | Example
 --- | --- | --- | ---
 EntityId | long | Id of the related entity | 1291425158
 EntityType | string | Entity type. Possible types are <br> "af": Affiliation <br> "au": Author <br> "c": Conference <br> "f": Field of study <br> "j": Journal | "af"
-Score | float | Similarity score between input entity and the related entity. | 0.971670866
-
-> [!NOTE]
->
-> Score is between [-1, 1], with bigger number representing higher similarity.
->
-> If the entity ID is not available, the retrun dataframe will be empty.
+Score | float | Similarity score between input entity and the related entity. <br> Score is between [-1, 1], with bigger number representing higher similarity. <br> If the entity ID is not available, the retrun dataframe will be empty. | 0.971670866
 
 **Example**
 
