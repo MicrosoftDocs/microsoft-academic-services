@@ -60,7 +60,7 @@ In this section, you import NetworkSimilaritySample.py as a notebook in Azure Da
 
 ## Initialize storage account and container details
 
-Replace value for following variables.
+Replace values for following variables.
 
   | Variable  | Value | Description  |
   | --------- | --------- | --------- |
@@ -89,7 +89,7 @@ Replace value for following variables.
 
 ## Notebook description
 
-### Define MicrosoftAcademicGraph class
+#### Define MicrosoftAcademicGraph class
 
 Run MagClass notebook to define MicrosoftAcademicGraph class.
 
@@ -97,7 +97,7 @@ Run MagClass notebook to define MicrosoftAcademicGraph class.
    %run "./MagClass"
    ```
 
-### Define NetworkSimilarity class
+#### Define NetworkSimilarity class
 
 Run NetworkSimilarityClass notebook to define NetworkSimilarity class.
 
@@ -105,7 +105,7 @@ Run NetworkSimilarityClass notebook to define NetworkSimilarity class.
    %run "./NetworkSimilarityClass"
    ```
 
-### Create a MicrosoftAcademicGraph instance to access MAG dataset
+#### Create a MicrosoftAcademicGraph instance to access MAG dataset
 
 Use account=AzureStorageAccount, key=AzureStorageAccessKey, container=MagContainer.
 
@@ -113,7 +113,7 @@ Use account=AzureStorageAccount, key=AzureStorageAccessKey, container=MagContain
    MAG = MicrosoftAcademicGraph(container=MagContainer, account=AzureStorageAccount, key=AzureStorageAccessKey)
    ```
 
-### Create a NetworkSimilarity instance to compute similarity
+#### Create a NetworkSimilarity instance to compute similarity
 
 Use mag=MAG, entitytype=EntityType, sense=Sense
 
@@ -121,7 +121,7 @@ Use mag=MAG, entitytype=EntityType, sense=Sense
    NS = NetworkSimilarity(mag=MAG, entitytype=EntityType, sense=Sense)
    ```
 
-### Compute similarity score between two entities: getSimilarity()
+#### Compute similarity score between two entities: getSimilarity()
 
    ```python
    score = NS.getSimilarity(EntityId1, EntityId2)
@@ -132,7 +132,7 @@ Use mag=MAG, entitytype=EntityType, sense=Sense
 
     > 0.7666980387511901
 
-### Get top related entities: getTopEntities()
+#### Get top related entities: getTopEntities()
 
    ```python
    topEntities = NS.getTopEntities(EntityId1)
@@ -144,7 +144,7 @@ Use mag=MAG, entitytype=EntityType, sense=Sense
     ![GetTopEntities output](media/network-similarity/databricks-get-top-entities.png "GetTopEntities output")
 
 
-### Display entity details
+#### Display entity details
 
 Join topEntities with affiliations for display names
 

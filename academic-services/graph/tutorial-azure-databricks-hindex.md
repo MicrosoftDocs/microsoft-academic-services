@@ -52,7 +52,7 @@ In this section, you import HIndexDatabricksSample notebook into Azure Databrick
 
 ## Initialize storage account and container details
 
-Replace value for following variables.
+Replace values for following variables.
 
   | Variable  | Value | Description  |
   | --------- | --------- | --------- |
@@ -61,13 +61,20 @@ Replace value for following variables.
   | MagContainer | Replace **`<MagContainer>`** | This is the container name in Azure Storage account containing MAG dataset, usually in the form of mag-yyyy-mm-dd. |
   | OutputContainer | Replace **`<OutputContainer>`** | This is the container name in Azure Storage account where the output goes to. |
 
+   ```python
+   AzureStorageAccount = '<AzureStorageAccount>'
+   AzureStorageAccessKey = '<AzureStorageAccessKey>'
+   MagContainer = '<MagContainer>'
+   OutputContainer = '<OutputContainer>'
+   ```
+
 ## Run the notebook
 
 1. Click **Run All** button.
 
 ## Notebook description
 
-### Define MicrosoftAcademicGraph class
+#### Define MicrosoftAcademicGraph class
 
 Run MagClass notebook to define MicrosoftAcademicGraph class.
 
@@ -75,21 +82,21 @@ Run MagClass notebook to define MicrosoftAcademicGraph class.
    %run "./MagClass"
    ```
 
-### Create a MicrosoftAcademicGraph instance to access MAG dataset
+#### Create a MicrosoftAcademicGraph instance to access MAG dataset
 Use account=AzureStorageAccount, key=AzureStorageAccessKey, container=MagContainer.
 
    ```python
    MAG = MicrosoftAcademicGraph(account=AzureStorageAccount, key=AzureStorageAccessKey, container=MagContainer
    ```
 
-### Import python libraries
+#### Import python libraries
 
    ```python
    from pyspark.sql import functions as F
    from pyspark.sql.window import Window
    ```
 
-### Get affiliations
+#### Get affiliations
 
    ```python
    Affiliations = MAG.getDataframe('Affiliations')
@@ -108,7 +115,7 @@ Use account=AzureStorageAccount, key=AzureStorageAccessKey, container=MagContain
    only showing top 3 rows
    ``` 
 
-### Get authors
+#### Get authors
 
    ```python
    Authors = MAG.getDataframe('Authors')
@@ -126,7 +133,7 @@ Use account=AzureStorageAccount, key=AzureStorageAccessKey, container=MagContain
    +--------+--------------------+----------------------+----------+
    only showing top 3 rows
    ``` 
-### Get (author, paper) pairs
+#### Get (author, paper) pairs
 
    ```python
    PaperAuthorAffiliations = MAG.getDataframe('PaperAuthorAffiliations')
@@ -145,7 +152,7 @@ Use account=AzureStorageAccount, key=AzureStorageAccessKey, container=MagContain
    only showing top 3 rows
    ``` 
 
-### Get papers and estimated citation
+#### Get papers and estimated citation
 
 Treat papers with same FamilyId as a single paper and sum EstimatedCitation for all papers wiht the same FamilyId
 
@@ -162,7 +169,7 @@ Treat papers with same FamilyId as a single paper and sum EstimatedCitation for 
       .agg(F.sum(p.EstimatedCitation).alias('EstimatedCitation'))
    ```
 
-### Generate author, paper, citation dataframe
+#### Generate author, paper, citation dataframe
 
    ```python
    AuthorPaperCitation = AuthorPaper \
@@ -170,7 +177,7 @@ Treat papers with same FamilyId as a single paper and sum EstimatedCitation for 
       .select(AuthorPaper.AuthorId, AuthorPaper.PaperId, PaperCitation.EstimatedCitation)
    ```
 
-### Order by citation
+#### Order by citation
 
    ```python
    ap = AuthorPaperOrderByCitation.alias('ap')
@@ -180,7 +187,7 @@ Treat papers with same FamilyId as a single paper and sum EstimatedCitation for 
             F.max(F.when(ap.EstimatedCitation >= ap.Rank, ap.Rank).otherwise(0)).alias('HIndex'))
    ```
 
-### Get author detail information
+#### Get author detail information
 
    ```python
    i = AuthorHIndexTemp.alias('i')
@@ -193,7 +200,7 @@ Treat papers with same FamilyId as a single paper and sum EstimatedCitation for 
       .select(i.AuthorId, a.DisplayName, af.DisplayName.alias('AffiliationDisplayName'), a.PaperCount, i.TotalEstimatedCitation, i.HIndex)
    ```
 
-### Display top authors and visualize the result
+#### Display top authors and visualize the result
 
    ```python
    TopAuthorHIndex = AuthorHIndex \
