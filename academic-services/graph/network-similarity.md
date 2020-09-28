@@ -30,7 +30,7 @@ Before running these examples, you need to complete the following setups:
 
 ## Available senses
 
-* The following senses are of entity embeddings that are currently available.
+The following senses are of entity embeddings that are currently available.
  
   |Entity Type|Sense|Description|
   |---|---|---|
@@ -45,46 +45,22 @@ Before running these examples, you need to complete the following setups:
   | venue | metapath | Two venues are similar if they co-occur with common affiliations, venues, and fields of study.|
   | author | copaper | Two authors are similar if they are closed connected with each other in the weighted author collaboration graph.|
 
-## PySpark version
+## Sample
 
-### Contents
+Follow these samples for detail usage information.
 
-  |File Name|Description|
-  |---------|---------|
-  |ns/NetworkSimilarityClass.py|PySpark utility functions for computing network similarity.|
-  |ns/NetworkSimilaritySample.py|PySpark sample script for computing network similarity.|
+- [Network Similarity Sample (PySpark)](network-similarity-databricks.md)
+- [Network Similarity Sample (U-SQL)](network-similarity-analytics.md)
 
-### Sample
+## Reference
 
-* [Network Similarity Sample (PySpark)](network-similarity-databricks.md)
-
-### Constructor
-
-* [NetworkSimilarity](network-similarity-databricks-constructor.md)
-
-### Methods
-
-* [getSimilarity](network-similarity-databricks-getsimilarity.md)
-* [getTopEntities](network-similarity-databricks-gettopentities.md)
-
-## U-SQL version
-
-### Contents
-
-  |File Name|Description|
-  |---------|---------|
-  |ns/NetworkSimilarityFunction.usql|U-SQL utility functions for computing network similarity.|
-  |ns/NetworkSimilaritySample.usql|U-SQL sample script for computing network similarity.|
-
-### Sample
-
-* [Network Similarity Sample (U-SQL)](network-similarity-analytics.md)
-
-### Functions
-
-* [GetSimilarity](network-similarity-analytics-getsimilarity.md)
-* [GetTopEntities](network-similarity-analytics-gettopentities.md)
-
+- PySpark version
+  - [Constructor](network-similarity-databricks-constructor.md)
+  - [getSimilarity](network-similarity-databricks-getsimilarity.md)
+  - [getTopEntities](network-similarity-databricks-gettopentities.md)
+- U-SQL version
+  - [GetSimilarity](network-similarity-analytics-getsimilarity.md)
+  - [GetTopEntities](network-similarity-analytics-gettopentities.md)
 
 ## Resource
 
