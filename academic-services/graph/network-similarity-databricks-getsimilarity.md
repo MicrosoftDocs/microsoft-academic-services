@@ -10,11 +10,10 @@ ms.date: 9/23/2020
 
 ### Compute similarity score between two entities.
 
-## getSimilarity(e1, e2)
+## double getSimilarity(e1, e2)
 
 Returns the similarity score between two entities.
-Score returned is between [-1, 1], with bigger number representing higher similarity.
-If either of the entity IDs are available, the retrun value will be zero.
+
 
 **Parameters**
 
@@ -22,6 +21,18 @@ Name | Data Type | Description | Example
 --- | --- | --- | ---
 e1 | long | Id of the first entity | 1290206253
 e2 | long | Id of the second entity | 201448701
+
+**Return Value**
+
+Data Type | Description | Example
+--- | --- | ---
+float | Similarity score between two entities | 0.7666980387511901
+
+> [!NOTE]
+>
+> Score is between [-1, 1], with bigger number representing higher similarity.
+>
+> If either of the entity IDs are not available, the retrun value will be zero.
 
 **Example**
 

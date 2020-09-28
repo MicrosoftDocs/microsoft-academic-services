@@ -14,9 +14,7 @@ Namespace: AcademicGraph.NetworkSimilarity
 
 ## GetTopEntities(BaseDir, EntityType, Sense, EntityId, MaxCount, MinScore)
 
-Returns a stream with entities of top similarity scores to an entity using a network similarity resource.
-Score returned is between [-1, 1], with bigger number representing higher similarity.
-If the entity ID is not in the resource file, the retrun stream will be empty.
+Returns a stream with entities of top similarity scores to an entity by entity type and similarity sense.
 
 **Parameters**
 
@@ -28,6 +26,21 @@ Sense | string | Similarity sense. See available entity types and senses in [Net
 EntityId | long | Id of the entity | 1290206253
 MaxCount | int | Maximum number of result | 10
 MinScore | float | Minimum score | 0
+
+**Output Schema**
+
+Column Name | Data Type | Description | Example
+--- | --- | --- | ---
+EntityId | long | Same value as input EntityId | 1290206253
+SimilarEntityId | long | Id of the related entity | 1291425158
+SimilarEntityType | string | Entity type. Possible types are <br> "af": Affiliation <br> "au": Author <br> "c": Conference <br> "j": Journal <br> "fos": Field of study | "af"
+Score | float | Similarity score between input entity and the related entity | 0.971670866
+
+> [!NOTE]
+>
+> Score is between [-1, 1], with bigger number representing higher similarity.
+>
+> If the entity ID is not in the available, the retrun stream will be empty.
 
 **Example**
 

@@ -28,6 +28,21 @@ Sense | string | Similarity sense. See available entity types and senses in [Net
 EntityId1 | long | Id of the first entity | 1290206253
 EntityId2 | long | Id of the second entity | 201448701
 
+**Output Schema**
+
+Name | Data Type | Description | Example
+--- | --- | --- | ---
+EntityId | long | Same value as EntityId1 | 1290206253
+SimilarEntityId | long | Same value as EntityId2 | 201448701
+SimilarEntityType | string | Entity type. Possible types are <br> "af": Affiliation <br> "au": Author <br> "c": Conference <br> "j": Journal <br> "fos": Field of study | "af"
+Score | float | Similarity score between EntityId1 and EntityId2 | 0.766698062
+
+> [!NOTE]
+>
+> Score is between [-1, 1], with bigger number representing higher similarity.
+>
+> If either of the entity IDs are not in available, the retrun stream will be empty.
+
 **Example**
 
    ```U-SQL
