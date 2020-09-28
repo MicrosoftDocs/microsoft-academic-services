@@ -10,7 +10,7 @@ ms.date: 9/23/2020
 
 ### Compute similarity score between two entities.
 
-## float1 getSimilarity(e1, e2)
+## float getSimilarity(e1, e2)
 
 Returns the similarity score between two entities.
 
