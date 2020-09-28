@@ -50,6 +50,7 @@ The following senses are of entity embeddings that are currently available.
 Follow these samples for detail usage information.
 
 - [Network Similarity Sample (PySpark)](network-similarity-databricks.md)
+
 - [Network Similarity Sample (U-SQL)](network-similarity-analytics.md)
 
 ## Reference
