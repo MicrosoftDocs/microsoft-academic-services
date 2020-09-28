@@ -28,99 +28,70 @@ Complete these tasks before you begin this tutorial:
 
    :heavy_check_mark:  The name of the container in your Azure Storage (AS) account containing MAG dataset.
 
-## Import PySparkMagClass notebook
+## Import MagClass notebook
 
-In this section, you import PySparkMagClass.py notebook to Azure Databricks workspace. You will include this notebook in this sample later.
+In this section, you import MagClass notebook into Azure Databricks workspace. You will include this notebook in this sample later.
 
-Follow instructions in [Import PySparkMagClass Notebook](import-pysparkmagclass.md).
+Follow instructions in [Import MagClass Notebook](import-magclass.md).
 
-## Create a new notebook
+## Import HIndexDatabricksSample notebook
 
-In this section, you create a new notebook in Azure Databricks workspace.
+In this section, you import HIndexDatabricksSample notebook into Azure Databricks workspace and run the notebook.
 
-1. On the left, select **Workspace**. From the **Workspace** drop-down, select **Create** > **Notebook**. Optionally, you could create this notebook in **Users** level.
+1. Save **`sample/HIndexDatabricksSample.py`** in MAG dataset to local drive.
 
-    ![Create a notebook in Databricks](media/databricks/databricks-create-notebook.png "Create notebook in Databricks")
+1. In Azure Databricks workspace portal, from the **Workspace** > **Users** > **Your folder** drop-down, select **Import**.
 
-1. In the **Create Notebook** dialog box, enter a name for the notebook. Select **Python** as the language.
+    ![Import a notebook in Databricks](media/databricks/import-notebook-menu.png "import notebook in Databricks")
 
-    ![Provide details for a notebook in Databricks](media/databricks/create-notebook.png "Provide details for a notebook in Databricks")
+1. Drag and drop NetworkSimilaritySample.py to the **Import Notebook** dialog box.
 
-1. Select **Create**.
+    ![Provide details for a notebook in Databricks](media/databricks/import-notebook-dialog.png "Provide details for a notebook in Databricks")
 
-## Create first notebook cell
+1. Select **Import**.
 
-In this section, you create the first notebook cell to run PySparkMagClass notebook.
+1. Click **Run All** button.
 
-1. Copy and paste following code block into the first cell.
+## Notebook description
 
-   ```python
-   %run "/Shared/PySparkMagClass"
-   ```
+### Initialize storage account and container details
 
-1. Press the **SHIFT + ENTER** keys to run the code in this block. It defines MicrosoftAcademicGraph class.
+  | Variable  | Value | Description  |
+  | --------- | --------- | --------- |
+  | AzureStorageAccount | Replace **`<AzureStorageAccount>`**. | This is the Azure Storage account containing MAG dataset. |
+  | AzureStorageAccessKey | Replace **`<AzureStorageAccessKey>`**. | This is the Access Key of the Azure Storage account. |
+  | MagContainer | Replace **`<MagContainer>`**. | This is the container name in Azure Storage account containing MAG dataset, usually in the form of mag-yyyy-mm-dd. |
+  | OutputContainer | Replace **`<OutputContainer>`**. | This is the container name in Azure Storage account where the output goes to. |
 
-## Define configration variables
+### Define MicrosoftAcademicGraph class
 
-In this section, you add a new notebook cell and define configration variables.
-
-1. Copy and paste following code block into the first cell.
-
-   ```python
-   # Define configration variables
-   AzureStorageAccount = '<AzureStorageAccount>'     # Azure Storage (AS) account containing MAG dataset
-   AzureStorageAccessKey = '<AzureStorageAccessKey>' # Access Key of the Azure Storage (AS) account
-   MagContainer = '<MagContainer>'                   # The container name in Azure Storage (AS) account containing MAG dataset, Usually in forms of mag-yyyy-mm-dd
-   ```
-
-1. In this code block, replace `<AzureStorageAccount>`, `<AzureStorageAccessKey>`, and `<MagContainer>` placeholder values with the values that you collected while completing the prerequisites of this sample.
-
-   |Value  |Description  |
-   |---------|---------|
-   |**`<AzureStorageAccount>`** | The name of your Azure Storage account. |
-   |**`<AzureStorageAccessKey>`** | The access key of your Azure Storage account. |
-   |**`<MagContainer>`** | The container name in Azure Storage account containing MAG dataset, usually in the form of **mag-yyyy-mm-dd**. |
-
-1. Press the **SHIFT + ENTER** keys to run the code in this block.
-
-## Create a MicrosoftAcademicGraph instance
-
-In this section, you create a MicrosoftAcademicGraph instance to access MAG dataset.
-
-1. Copy and paste the following code block in a new cell.
+Run MagClass notebook to define MicrosoftAcademicGraph class.
 
    ```python
-   # Create a MicrosoftAcademicGraph instance to access MAG dataset
-   MAG = MicrosoftAcademicGraph(container=MagContainer, account=AzureStorageAccount, key=AzureStorageAccessKey)
+   %run "./MagClass"
    ```
 
-1. Press the **SHIFT + ENTER** keys to run the code in this block.
+### Create a MicrosoftAcademicGraph instance to access MAG dataset
+Use account=AzureStorageAccount, key=AzureStorageAccessKey, container=MagContainer.
 
-## Import functions
+   ```python
+   MAG = MicrosoftAcademicGraph(account=AzureStorageAccount, key=AzureStorageAccessKey, container=MagContainer
+   ```
 
-In this section, you import pyspark sql functions.
-
-1. Copy and paste the following code block in a new cell. Press the **SHIFT + ENTER** keys to run the code in this block.
+### Import python libraries
 
    ```python
    from pyspark.sql import functions as F
    from pyspark.sql.window import Window
    ```
 
-## Create data frames for MAG entities
-
-In this section you will create data frames for several different MAG entities. These data frames will be used later on in the tutorial. Note that some of the cells might take several minutes to run.
-
-1. Get **Affiliations**. Paste the following code in a new cell.
+### Get affiliations
 
    ```python
-   # Get affiliations
    Affiliations = MAG.getDataframe('Affiliations')
    Affiliations = Affiliations.select(Affiliations.AffiliationId, Affiliations.DisplayName)
    Affiliations.show(3)
    ```
-
-   Press the **SHIFT + ENTER** keys to run the code in this block. You see an output similar to the following snippet:
 
    ```
    +-------------+--------------------+
@@ -133,16 +104,13 @@ In this section you will create data frames for several different MAG entities. 
    only showing top 3 rows
    ``` 
 
-1. Get **Authors**. Paste the following code in a new cell.
+### Get authors
 
    ```python
-   # Get authors
    Authors = MAG.getDataframe('Authors')
    Authors = Authors.select(Authors.AuthorId, Authors.DisplayName, Authors.LastKnownAffiliationId, Authors.PaperCount)
    Authors.show(3)
    ```
-
-   Press the **SHIFT + ENTER** keys to run the code in this block. You see an output similar to the following snippet:
 
    ```
    +--------+--------------------+----------------------+----------+
@@ -154,17 +122,13 @@ In this section you will create data frames for several different MAG entities. 
    +--------+--------------------+----------------------+----------+
    only showing top 3 rows
    ``` 
-
-1. Get **(Author, Paper) pairs**. Paste the following code in a new cell.
+### Get (author, paper) pairs
 
    ```python
-   # Get (author, paper) pairs
    PaperAuthorAffiliations = MAG.getDataframe('PaperAuthorAffiliations')
    AuthorPaper = PaperAuthorAffiliations.select(PaperAuthorAffiliations.AuthorId, PaperAuthorAffiliations.PaperId).distinct()
    AuthorPaper.show(3)
    ```
-
-   Press the **SHIFT + ENTER** keys to run the code in this block. You see an output similar to the following snippet:
 
    ```
    +----------+--------+
@@ -177,81 +141,61 @@ In this section you will create data frames for several different MAG entities. 
    only showing top 3 rows
    ``` 
 
-1. Get **(Paper, EstimatedCitation) pairs**. Paste the following code in a new cell. Press the **SHIFT + ENTER** keys to run the code in this block.
+### Get papers and estimated citation
+
+Treat papers with same FamilyId as a single paper and sum EstimatedCitation for all papers wiht the same FamilyId
 
    ```python
-   # Get (Paper, EstimatedCitation).
-   # Treat papers with same FamilyId as a single paper and sum the EstimatedCitation
    Papers = MAG.getDataframe('Papers')
+
    p = Papers.where(Papers.EstimatedCitation > 0) \
-     .select(F.when(Papers.FamilyId.isNull(), Papers.PaperId).otherwise(Papers.FamilyId).alias('PaperId'), \
-             Papers.EstimatedCitation) \
-     .alias('p')
+      .select(F.when(Papers.FamilyId.isNull(), Papers.PaperId) \
+      .otherwise(Papers.FamilyId).alias('PaperId'), Papers.EstimatedCitation) \
+      .alias('p')
 
    PaperCitation = p \
-     .groupBy(p.PaperId) \
-     .agg(F.sum(p.EstimatedCitation).alias('EstimatedCitation'))
+      .groupBy(p.PaperId) \
+      .agg(F.sum(p.EstimatedCitation).alias('EstimatedCitation'))
    ```
 
-   You have now extracted MAG data from Azure Storage into Azure Databricks.
-
-## Compute author h-index
-
-In this section, you compute h-index for all authors.
-
-1. **Create an author-paper-citation table**. Paste the following code in a new cell. Press the **SHIFT + ENTER** keys to run the code in this block.
+### Generate author, paper, citation dataframe
 
    ```python
-   # Generate author, paper, citation table
    AuthorPaperCitation = AuthorPaper \
-       .join(PaperCitation, AuthorPaper.PaperId == PaperCitation.PaperId, 'inner') \
-       .select(AuthorPaper.AuthorId, AuthorPaper.PaperId, PaperCitation.EstimatedCitation)
+      .join(PaperCitation, AuthorPaper.PaperId == PaperCitation.PaperId, 'inner') \
+      .select(AuthorPaper.AuthorId, AuthorPaper.PaperId, PaperCitation.EstimatedCitation)
    ```
 
-1. **Order AuthorPaperCitation by citation**. Paste the following code in a new cell. Press the **SHIFT + ENTER** keys to run the code in this block.
+### Order by citation
 
    ```python
-   # Order author, paper by citation
-   AuthorPaperOrderByCitation = AuthorPaperCitation \
-     .withColumn('Rank', F.row_number().over(Window.partitionBy('AuthorId').orderBy(F.desc('EstimatedCitation'))))
-   ```
-
-1. **Compute h-index for all authors**. Paste the following code in a new cell. Press the **SHIFT + ENTER** keys to run the code in this block.
-
-   ```python
-   # Generate author hindex
    ap = AuthorPaperOrderByCitation.alias('ap')
    AuthorHIndexTemp = ap \
-     .groupBy(ap.AuthorId) \
-     .agg(F.sum(ap.EstimatedCitation).alias('TotalEstimatedCitation'), \
-          F.max(F.when(ap.EstimatedCitation >= ap.Rank, ap.Rank).otherwise(0)).alias('HIndex'))
+      .groupBy(ap.AuthorId) \
+      .agg(F.sum(ap.EstimatedCitation).alias('TotalEstimatedCitation'), \
+            F.max(F.when(ap.EstimatedCitation >= ap.Rank, ap.Rank).otherwise(0)).alias('HIndex'))
    ```
 
-1. **Get author detail information**. Paste the following code in a new cell. Press the **SHIFT + ENTER** keys to run the code in this block.
+### Get author detail information
 
    ```python
-   # Get author detail information
    i = AuthorHIndexTemp.alias('i')
    a = Authors.alias('a')
    af = Affiliations.alias('af')
 
    AuthorHIndex = i \
-     .join(a, a.AuthorId == i.AuthorId, 'inner') \
-     .join(af, a.LastKnownAffiliationId == af.AffiliationId, 'outer') \
-     .select(i.AuthorId, a.DisplayName, af.DisplayName.alias('AffiliationDisplayName'), a.PaperCount, i.TotalEstimatedCitation, i.HIndex)
+      .join(a, a.AuthorId == i.AuthorId, 'inner') \
+      .join(af, a.LastKnownAffiliationId == af.AffiliationId, 'outer') \
+      .select(i.AuthorId, a.DisplayName, af.DisplayName.alias('AffiliationDisplayName'), a.PaperCount, i.TotalEstimatedCitation, i.HIndex)
    ```
 
-## Visualize result 
-
-In this section, you query top authors by h-index and visualize the result.
-
-1. Query top authors with highest h-index. Paste the following code in a new cell. Press the **SHIFT + ENTER** keys to run the code in this block.
+### Display top authors and visualize the result
 
    ```python
    TopAuthorHIndex = AuthorHIndex \
-     .select(AuthorHIndex.DisplayName, AuthorHIndex.AffiliationDisplayName, AuthorHIndex.PaperCount, AuthorHIndex.TotalEstimatedCitation, AuthorHIndex.HIndex) \
-     .orderBy(F.desc('HIndex')) \
-     .limit(100)
+      .select(AuthorHIndex.DisplayName, AuthorHIndex.AffiliationDisplayName, AuthorHIndex.PaperCount, AuthorHIndex.TotalEstimatedCitation, AuthorHIndex.HIndex) \
+      .orderBy(F.desc('HIndex')) \
+      .limit(100)
    display(TopAuthorHIndex)
    ```
 
