@@ -58,11 +58,9 @@ In this section, you import NetworkSimilaritySample.py as a notebook in Azure Da
 
 1. Select **Import**.
 
-1. Click **Run All** button.
+## Initialize storage account and container details
 
-## Notebook description
-
-### Initialize storage account and container details
+Replace value for following variables.
 
   | Variable  | Value | Description  |
   | --------- | --------- | --------- |
@@ -84,6 +82,12 @@ In this section, you import NetworkSimilaritySample.py as a notebook in Azure Da
    EntityId1 = 1290206253
    EntityId2 = 201448701
    ```
+
+## Run the notebook
+
+1. Click **Run All** button.
+
+## Notebook description
 
 ### Define MicrosoftAcademicGraph class
 
