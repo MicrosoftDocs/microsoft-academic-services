@@ -33,6 +33,6 @@ minScore | float | Minimum score | 0.0 | 0.0
    ```
 
 **Output**
-- You will see output as follows
+- Sample output.
 
     ![GetTopEntities output](media/network-similarity/databricks-get-top-entities.png "GetTopEntities output")
