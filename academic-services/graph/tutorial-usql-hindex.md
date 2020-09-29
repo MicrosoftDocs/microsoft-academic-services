@@ -181,7 +181,7 @@ The output of the ADLA job in previous section goes to "/Output/AuthorHIndex.tsv
 If you're interested in Academic analytics and visualization, we have created U-SQL samples that use some of the same functions referenced in this tutorial.
 
 > [!div class="nextstepaction"]
->[Analytics and visualization samples](samples-azure-data-lake-analytics.md)
+>[Analytics and visualization samples](samples-usql-analytics.md)
 
 ## Resources
 

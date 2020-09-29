@@ -49,9 +49,9 @@ The following senses are of entity embeddings that are currently available.
 
 Follow these samples for detail usage information.
 
-- [Network Similarity Sample (PySpark)](network-similarity-databricks.md)
+- [Network Similarity Sample (PySpark)](samples-databricks-network-similarity.md)
 
-- [Network Similarity Sample (U-SQL)](network-similarity-analytics.md)
+- [Network Similarity Sample (U-SQL)](samples-usql-network-similarity.md)
 
 ## Reference
 
@@ -61,8 +61,8 @@ Follow these samples for detail usage information.
   - [getTopEntities](network-similarity-databricks-gettopentities.md)
 
 - U-SQL version
-  - [GetSimilarity](network-similarity-analytics-getsimilarity.md)
-  - [GetTopEntities](network-similarity-analytics-gettopentities.md)
+  - [GetSimilarity](network-similarity-usql-getsimilarity.md)
+  - [GetTopEntities](network-similarity-usql-gettopentities.md)
 
 ## Resource
 

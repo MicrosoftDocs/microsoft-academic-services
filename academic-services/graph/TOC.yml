@@ -21,9 +21,9 @@
     expanded: false
     items:
     - name: PySpark
-      href: tutorial-azure-databricks-hindex.md
+      href: tutorial-databricks-hindex.md
     - name: U-SQL
-      href: tutorial-azure-data-lake-hindex.md
+      href: tutorial-usql-hindex.md
   - name: Full-text search using Azure Search
     expanded: false
     items:
@@ -38,9 +38,9 @@
     expanded: false
     items:
     - name: PySpark
-      href: samples-azure-databricks.md
+      href: samples-databricks-analytics.md
     - name: U-SQL + PowerBI
-      href: samples-azure-data-lake-analytics.md
+      href: samples-usql-analytics.md
   - name: Language Similarity samples
     expanded: false
     items:
@@ -50,9 +50,9 @@
     expanded: false
     items:
     - name: PySpark
-      href: network-similarity-databricks.md
+      href: samples-databricks-network-similarity.md
     - name: U-SQL
-      href: network-similarity-analytics.md
+      href: samples-usql-network-similarity.md
 - name: How-to guides
   expanded: true
   items:
@@ -90,9 +90,9 @@
       expanded: false
       items:
       - name: GetSimilarity
-        href: network-similarity-analytics-getsimilarity.md
+        href: network-similarity-usql-getsimilarity.md
       - name: GetTopEntities
-        href: network-similarity-analytics-gettopEntities.md
+        href: network-similarity-usql-gettopEntities.md
 - name: Resources
   expanded: true
   items:
