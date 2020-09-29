@@ -20,7 +20,7 @@ Name | Data Type | Description | Example
 --- | --- | --- | ---
 mag | MicrosoftAcademicGraph | An instance of MicrosoftAcademicGraph | See example below
 entitytype | string | Entity type. See available entity types and senses in [Network Similarity Package](network-similarity.md#available-senses) | 'affiliation'
-sense | string | Similarity sense. See available entity types and senses in [Network Similarity Package](network-similarity.md#available-senses) | 'metapath'
+sense | string | Similarity sense. See available entity types and senses in [Network Similarity Package](network-similarity.#available-senses) | 'metapath'
 
 **Example**
 
