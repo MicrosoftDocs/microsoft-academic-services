@@ -39,6 +39,16 @@
       href: how-to-grammar.md
     - name: Build and test grammar
       href: how-to-grammar-build.md
+- name: Tutorials
+  expanded: true
+  items:
+  - name: Build a conference knowledge application
+    expanded: false
+    items:
+    - name: Overview
+      href: tutorial-conference-app-overview.md
+    - name: Create filterable paper list
+      href: tutorial-conference-filterable-paperlist.md
 - name: Concepts
   expanded: true
   items:
@@ -56,13 +66,13 @@
   - name: MAKES REST API
     expanded: false
     items:
-      - name: GET CalcHistogram
+      - name: GET Histogram
         href: reference-get-histogram.md
       - name: GET Evaluate
         href: reference-get-evaluate.md
       - name: GET Interpret
         href: reference-get-interpret.md
-      - name: POST CalcHistogram
+      - name: POST Histogram
         href: reference-post-histogram.md
       - name: POST Evaluate
         href: reference-post-evaluate.md

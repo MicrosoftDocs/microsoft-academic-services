@@ -1,25 +1,28 @@
 ---
-title: GET CalcHistogram
+title: GET Histogram
 description: Computes attribute value distribution for a structured query expression
 ms.topic: reference
-ms.date: 2020-02-10
+ms.date: 09/21/2020
 ---
 
-# CalcHistogram REST API
+# Histogram REST API
 
-The **CalcHistogram** method computes the entities matching a [structured query expressions](concepts-query-expressions.md) and then calculates the distribution of the requested attributes values in the matched entities.
+The **Histogram** method computes the entities matching a [structured query expressions](concepts-query-expressions.md) and then calculates the distribution of the requested attributes values in the matched entities.
 
 This method is useful for determining the most dominant attribute values in a result set, e.g. finding the most dominant conference Microsoft publishes in (see [examples](#examples) section below).
 
 ``` HTTP
-GET http://{serviceName}.{serviceRegion}.cloudapp.azure.com/calchistogram?expr={expr}
+GET http://{serviceName}.{serviceRegion}.cloudapp.azure.com/histogram?expr={expr}
 ```  
 
 With optional parameters:
 
 ``` HTTP
-GET http://{serviceName}.{serviceRegion}.cloudapp.azure.com/calchistogram?expr={expr}&attributes={attributes}&offset={offset}&count={count}
+GET http://{serviceName}.{serviceRegion}.cloudapp.azure.com/histogram?expr={expr}&attributes={attributes}&offset={offset}&count={count}
 ```  
+
+>[!NOTE]
+> The histogram API endpoint **/calchistogram** is deprecated and will be removed in future versions. Use **/histogram** endpoint for building new applications. 
 
 ## URI Parameters
 
@@ -38,7 +41,7 @@ Name | Type | Description
 
 ## Definitions
 
-| | |
+| Name | Description |
 | --- | --- |
 [HistogramAttribute](#histogramattribute) | Information for an individual attribute
 [HistogramAttributeValue](#histogramattributevalue) | Information for a distinct attribute value
@@ -75,7 +78,7 @@ num_entities | integer | The number of matching entities that were used to gener
 #### Request headers
 
 ```http
-GET /calchistogram?expr=And(Composite(AA.AfN=%27microsoft%27),Y=2019)&attributes=C.CN,F.DFN&offset=0&count=10 HTTP/1.1
+GET /histogram?expr=And(Composite(AA.AfN=%27microsoft%27),Y=2019)&attributes=C.CN,F.DFN&offset=0&count=10 HTTP/1.1
 Host: makesexample.westus.cloudapp.azure.com
 Connection: keep-alive
 Upgrade-Insecure-Requests: 1

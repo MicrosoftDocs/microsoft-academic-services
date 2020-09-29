@@ -2,7 +2,7 @@
 title: FAQ about Microsoft Academic Graph
 description: Answers some of the most frequently asked questions about the Microsoft Academic Graph
 ms.topic: reference
-ms.date: 5/19/2020
+ms.date: 8/27/2020
 ---
 # Frequently Asked Questions about Microsoft Academic Graph
 
@@ -57,11 +57,19 @@ An entities "importance" is calculated using its relationships with other entiti
 
 It is relatively easy and inexpensive to compute citation counts and h-index using [U-SQL](https://msdn.microsoft.com/azure/data-lake-analytics/u-sql/u-sql-language-reference) with [Azure Data Lake Analytic](https://azure.microsoft.com/services/data-lake-analytics/) for all authors in MAG, currently 250 million in total. The cost range from $1 (USD) with 1 AU running for 40 minutes to $2 with 16AU running for 5 minutes.
 
-## What is FamilyId in Papers.txt
+## What is FamilyId in Papers
 
 A paper "family" is defined as a group of papers that have been determined to be the same fundamental paper, but published in different venues (e.g. pre-print and conference). In this case only one of the papers will be determined to be the "primary" paper, and each paper in the family group will have its "FamilyId" value set to the primary papers ID.
 
 If the "FamilyId" value is not defined for a paper it means that the paper is not part of a larger family group, however it is still considered to be the primary paper of a single-paper family."
+
+## Rank vs. FamilyRank in Papers
+
+Rank of a paper is the static rank associated with the individual paper.
+
+For papers belonging to paper families, all papers of the same family have the same FamilyRank value, which represents the aggregated rank of all papers in the family.
+
+For papers not having a FamilyId, the FamilyRank is null.
 
 ## PaperCount vs. PaperFamilyCount
 

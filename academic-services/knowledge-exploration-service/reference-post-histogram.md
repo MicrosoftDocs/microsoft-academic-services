@@ -1,19 +1,22 @@
 ---
-title: POST CalcHistogram
+title: POST Histogram
 description: Computes attribute value distribution for a structured query expression
 ms.topic: reference
-ms.date: 2020-02-10
+ms.date: 09/21/2020
 ---
 
-# CalcHistogram REST API
+# Histogram REST API
 
-The **CalcHistogram** method computes the entities matching a [structured query expressions](concepts-query-expressions.md) and then calculates the distribution of the requested attributes values in the matched entities.
+The **Histogram** method computes the entities matching a [structured query expressions](concepts-query-expressions.md) and then calculates the distribution of the requested attributes values in the matched entities.
 
 This method is useful for determining the most dominant attribute values in a result set, e.g. finding the most dominant conference Microsoft publishes in (see [examples](#examples) section below).
 
 ``` HTTP
-POST http://{serviceName}.{serviceRegion}.cloudapp.azure.com/calchistogram
+POST http://{serviceName}.{serviceRegion}.cloudapp.azure.com/histogram
 ```  
+
+>[!NOTE]
+> The histogram API endpoint **/calchistogram** is deprecated and will be removed in future versions. Use **/histogram** endpoint for building new applications. 
 
 ## Request Body
 
@@ -69,7 +72,7 @@ num_entities | integer | The number of matching entities that were used to gener
 #### Request headers
 
 ```http
-POST /calchistogram HTTP/1.1
+POST /histogram HTTP/1.1
 Host: makesexample.westus.cloudapp.azure.com
 Connection: keep-alive
 Content-Length: 117
