@@ -7,7 +7,7 @@ ms.date: 9/1/2020
 
 # Semantic functions
 
-Semantic functions associates semantic output with each interpreted path through the grammar.  In particular, the service evaluates the sequence of statements in the `tag` elements traversed by the interpretation to compute the final output.  
+Semantic functions associate semantic output with each interpreted path through the grammar.  In particular, the service evaluates the sequence of statements in the `tag` elements traversed by the interpretation to compute the final output.  
 
 A statement may be an assignment of a literal or a variable to another variable.  It may also assign the output of a function with 0 or more parameters to a variable.  Each function parameter may be specified using a literal or a variable.  If the function does not return any output, the assignment is omitted.
 
@@ -91,8 +91,8 @@ In the following example, we use the Query() function to implement support for s
 ```xml
 written in the 90s
 <tag>
-  beginYear = Query(" paperEntity#Y", 1990, "ge");
-  endYear = Query(" paperEntity#Y", 2000, "lt");
+  beginYear = Query("paperEntity#Y", 1990, "ge");
+  endYear = Query("paperEntity#Y", 2000, "lt");
   year = And(beginYear, endYear);
 </tag>
 ```
@@ -105,14 +105,28 @@ Returns a query that encapsulates an *innerQuery* composed of matches against su
 
 For example, the following query returns academic publications by "harry shum" while he was at "microsoft":
 ```
-Composite(And(Query(" paperEntity#AA.AuN", "harry shum"),
-              Query(" paperEntity#AA.AfN", "microsoft")));
+Composite(
+  And(
+    Query("paperEntity#AA.AuN", "harry shum"),
+    Query("paperEntity#AA.AfN", "microsoft"))
+);
 ```
 
-On the other hand, the following query returns academic publications where one of the authors is "harry shum" and one of the affiliations is "microsoft":
+On the other hand, the following example returns the academic publications written by "harry shum at microsoft" with other collaborators authors from "carnegie mellon university".
+
 ```
-And(Composite(Query(" paperEntity#AA.AuN", "harry shum"), 
-    Composite(Query(" paperEntity#AA.AfN", "microsoft")));
+And(
+    Composite(
+        And(
+            Query("paperEntity#AA.AuN", "harry shum"),
+            Query("paperEntity#AA.AfN", "microsoft")
+        )
+    ),
+    Composite(
+            Query("paperEntity#AA.AfN", "carnegie mellon university")
+        )
+    )
+)
 ```
 
 ## GetVariable Function

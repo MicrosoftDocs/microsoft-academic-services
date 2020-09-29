@@ -11,9 +11,9 @@ Describes how to use KESM to build a MAKES index on a win-x64 machine using the 
 
 ## Prerequisites
 
-* Operating system that supports win-x64 executables
-* Microsoft Academic Knowledge Exploration Service (MAKES) subscription. See [Get started with Microsoft Academic Knowledge Exploration Service](get-started-setup-provisioning.md) to obtain one.
-* Download and install the [KESM command line tool](get-started-create-api-instances.md#download-the-command-line-tool-kesmexe-from-your-azure-storage-account)
+- Operating system that supports win-x64 executables
+- Microsoft Academic Knowledge Exploration Service (MAKES) subscription. See [Get started with Microsoft Academic Knowledge Exploration Service](get-started-setup-provisioning.md) to obtain one
+- Download and install the [KESM command line tool](get-started-create-api-instancesmd#download-the-command-line-tool-kesmexe-from-your-azure-storage-account)
 
 ## Create local files
 
@@ -24,207 +24,38 @@ Navigate to the win-x64/kesm sub-folder of the directory where you unzipped the 
 ```json
 {
   "attributes": [
-    {
-      "name": "AA",
-      "type": "Composite*"
-    },
-    {
-      "name": "AA.AfId",
-      "type": "int64",
-      "operations": [
-        "equals"
-      ]
-    },
-    {
-      "name": "AA.AfN",
-      "type": "string?",
-      "operations": [
-        "equals",
-        "starts_with"
-      ]
-    },
-    {
-      "name": "AA.AuId",
-      "type": "int64",
-      "operations": [
-        "equals"
-      ]
-    },
-    {
-      "name": "AA.AuN",
-      "type": "string?",
-      "operations": [
-        "equals",
-        "starts_with"
-      ]
-    },
-    {
-      "name": "AA.DAfN",
-      "type": "blob?"
-    },
-    {
-      "name": "AA.DAuN",
-      "type": "blob?"
-    },
-    {
-      "name": "AA.S",
-      "type": "int32?",
-      "operations": [
-        "equals"
-      ]
-    },
-    {
-      "name": "AW",
-      "type": "string*",
-      "operations": [
-        "equals"
-      ]
-    },
-    {
-      "name": "C",
-      "type": "Composite?"
-    },
-    {
-      "name": "C.CId",
-      "type": "int64",
-      "operations": [
-        "equals"
-      ]
-    },
-    {
-      "name": "C.CN",
-      "type": "string?",
-      "operations": [
-        "equals",
-        "starts_with"
-      ],
-      "synonyms": "conference-series-synonyms.txt"
-    },
-    {
-      "name": "CC",
-      "type": "int32?"
-    },
-    {
-      "name": "CI",
-      "type": "Composite?"
-    },
-    {
-      "name": "CI.CIId",
-      "type": "int64",
-      "operations": [
-        "equals"
-      ]
-    },
-    {
-      "name": "CI.CIN",
-      "type": "string?",
-      "operations": [
-        "equals",
-        "starts_with"
-      ],
-      "synonyms": "conference-instance-synonyms.txt"
-    },
-    {
-      "name": "D",
-      "type": "date?",
-      "operations": [
-        "equals",
-        "is_between"
-      ]
-    },
-    {
-      "name": "DN",
-      "type": "blob?"
-    },
-    {
-      "name": "DOI",
-      "type": "string?",
-      "operations": [
-        "equals",
-        "starts_with"
-      ]
-    },
-    {
-      "name": "F",
-      "type": "Composite*"
-    },
-    {
-      "name": "F.DFN",
-      "type": "blob?"
-    },
-    {
-      "name": "F.FId",
-      "type": "int64",
-      "operations": [
-        "equals"
-      ]
-    },
-    {
-      "name": "F.FN",
-      "type": "string?",
-      "operations": [
-        "equals",
-        "starts_with"
-      ]
-    },
-    {
-      "name": "FP",
-      "type": "string?",
-      "operations": [
-        "equals"
-      ]
-    },
-    {
-      "name": "IA",
-      "type": "blob?"
-    },
-    {
-      "name": "Id",
-      "type": "int64!",
-      "operations": [
-        "equals"
-      ]
-    },
-    {
-      "name": "LP",
-      "type": "string?",
-      "operations": [
-        "equals"
-      ]
-    },
-    {
-      "name": "RId",
-      "type": "int64*",
-      "operations": [
-        "equals"
-      ]
-    },
-    {
-      "name": "S",
-      "type": "blob?"
-    },
-    {
-      "name": "Ti",
-      "type": "string?",
-      "operations": [
-        "equals"
-      ]
-    },
-    {
-      "name": "W",
-      "type": "string*",
-      "operations": [
-        "equals"
-      ]
-    },
-    {
-      "name": "Y",
-      "type": "int32?",
-      "operations": [
-        "equals",
-        "is_between"
-      ]
-    }
+    {"name": "AA", "type": "Composite*"},
+    {"name": "AA.AfId", "type": "int64", "operations": ["equals"]},
+    {"name": "AA.AfN", "type": "string?", "operations": ["equals", "starts_with"]},
+    {"name": "AA.AuId", "type": "int64", "operations": ["equals"]},
+    {"name": "AA.AuN", "type": "string?", "operations": ["equals", "starts_with"]},
+    {"name": "AA.DAfN", "type": "blob?"},
+    {"name": "AA.DAuN", "type": "blob?"},
+    {"name": "AA.S", "type": "int32?", "operations": ["equals"]},
+    {"name": "AW", "type": "string*", "operations": ["equals"]},
+    {"name": "C", "type": "Composite?"},
+    {"name": "C.CId", "type": "int64", "operations": ["equals"]},
+    {"name": "C.CN", "type": "string?", "operations": ["equals", "starts_with"], "synonyms": "conference-series-synonyms.txt"},
+    {"name": "CC", "type": "int32?"},
+    {"name": "CI", "type": "Composite?"},
+    {"name": "CI.CIId", "type": "int64", "operations": ["equals"]},
+    {"name": "CI.CIN", "type": "string?", "operations": ["equals", "starts_with"], "synonyms": "conference-instance-synonyms.txt"},
+    {"name": "D", "type": "date?", "operations": ["equals", "is_between"]},
+    {"name": "DN", "type": "blob?"},
+    {"name": "DOI", "type": "string?", "operations": ["equals", "starts_with"]},
+    {"name": "F", "type": "Composite*"},
+    {"name": "F.DFN", "type": "blob?"},
+    {"name": "F.FId", "type": "int64", "operations": ["equals"]},
+    {"name": "F.FN", "type": "string?", "operations": ["equals", "starts_with"]},
+    {"name": "FP", "type": "string?", "operations": ["equals"]},
+    {"name": "IA", "type": "blob?"},
+    {"name": "Id", "type": "int64!", "operations": ["equals"]},
+    {"name": "LP", "type": "string?", "operations": ["equals"]},
+    {"name": "RId", "type": "int64*", "operations": ["equals"]},
+    {"name": "S", "type": "blob?"},
+    {"name": "Ti", "type": "string?", "operations": ["equals"]},
+    {"name": "W", "type": "string*", "operations": ["equals"]},
+    {"name": "Y", "type": "int32?", "operations": ["equals", "is_between"]}
   ]
 }
 ```

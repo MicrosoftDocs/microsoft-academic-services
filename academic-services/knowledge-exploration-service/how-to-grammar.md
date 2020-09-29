@@ -7,20 +7,20 @@ ms.date: 9/1/2020
 
 # Grammar
 
-This document details the role of a grammar in allowing natural language processing in MAKES, the composition of a MAKES grammar, how to compile a MAKES grammar, and how to load a compiled MAKES grammar into a MAKES instance.
+This document details the composition of a MAKES grammar and the role of a grammar in allowing natural language processing in MAKES via Interpret API.
 
 ## Natural language processing with grammars
 
 MAKES supports natural language query interpretation through the [Interpret API](reference-get-interpret.md), which requires a [Context Free Grammar (CFG)](https://academic.microsoft.com/topic/97212296) adhering to the [Speech Recognition Grammar Specification (SRGS)](https://www.w3.org/TR/speech-grammar/) format, a W3C standard for speech recognition grammars with support for generating semantic interpretations.
 
-In the context of the SRGS, the role of the MAKES grammar is as a *speech recognizer*. MAKES takes an input stream (natural language query) and tries to match it to a series of *rules* defined in the grammar, which in turn generate [structured query expressions](concepts-query-expressions.md) as their output. Structured query expressions are what MAKES uses to retrieve entities matching a specific set of constraints.
+In the context of the SRGS, MAKES Interpret API act as a *speech recognizer* specified by a MAKES grammar. MAKES Interpret API takes an input stream (natural language query) and tries to match it to a series of *rules* defined in the grammar, which in turn generate [structured query expressions](concepts-query-expressions.md) as their output. Structured query expressions are what MAKES uses to retrieve entities matching a specific set of constraints.
 
 A *rule* is defined as one or more of the following:
 
 * [Text nodes](https://www.w3.org/TR/REC-DOM-Level-1/level-one-core.html#ID-1312295772) (the text inside of an element), or "tokens" are text that must be exactly matched in the natural language query for further expansion
 * [Indexed attribute references](reference-grammar-syntax.md#attrref-element) (```<attrref>```) allow natural language query terms to be matched with [indexed data](how-to-index-schema.md)
 * [Rule references](reference-grammar-syntax.md#ruleref-element) (```<ruleref>```) expand rules defined using the [```rule```](reference-grammar-syntax.md#rule-element) element
-* [Tags](reference-grammar-syntax.md#tag-element) (```<tag>```) specify how a path through the grammar is interpreted using [semantic functions](reference-semantic-functions.md)
+* [Tags](reference-grammar-syntax.md#tag-element) (```<tag>```) modifies the context/interpretation of a grammar path using [semantic functions](reference-semantic-functions.md)
 * [Sequence enclosures](reference-grammar-syntax.md#item-element) (```<item>```) expand rules defined inside the enclosing element
 * [Alternative enclosures](reference-grammar-syntax.md#one-of-element) (```<one-of>```) allow for different interpretations to be generated based on "alternate" matching criteria
 
@@ -43,7 +43,7 @@ See below for an example grammar that defines rules for matching a small subset 
 
     <!-- The following enclosure is repeated indefinitely (one to infinity), 
        with each repeat incurring a weight penalty of -1 -->
-    <item repeat="1-" repeat-logprob="-1">
+    <item repeat="1-INF" repeat-logprob="-1">
 
       <one-of>
 
@@ -125,18 +125,18 @@ See below for an example grammar that defines rules for matching a small subset 
 We can illustrate how rule expansion happens through the above grammar using the sample query "knowledge discovery and data mining 2019 deep learning" and the example index created in the ["create custom MAKES index" how-to guide](how-to-index-build.md). This illustration attempts to model what the parse tree generated from each subsequent rule expansion might look like, and **only includes branches resulting in valid interpretations**:
 
 1. "knowledge discovery and data mining" => synonym of conference series named "kdd"
-    1. "2019" => publication year "2019", weight -1
-        1. "deep learning" => field of study "deep learning", weight -1
-            1. END OF QUERY, top matching paper "Cluster-GCN: An Efficient Algorithm for Training Deep and Large Graph Convolutional Networks", weight -18.942
-        1. "deep" => title word "deep", weight -1
-            1. "learning" => title word "learning", weight -1
-                1. END OF QUERY, top matching paper "Sherlock: A Deep Learning Approach to Semantic Data Type Detection", weight -19.03
+    1. "2019" => publication year "2019", weight -1, accumulated weight -1
+        1. "deep learning" => field of study "deep learning", weight -1, accumulated weight -2
+            1. END OF QUERY, top matching paper "Cluster-GCN: An Efficient Algorithm for Training Deep and Large Graph Convolutional Networks", weight -18.942, accumulated weight -20.942
+        1. "deep" => title word "deep", weight -1, accumulated weight -2
+            1. "learning" => title word "learning", weight -1, accumulated weight -3
+                1. END OF QUERY, top matching paper "Sherlock: A Deep Learning Approach to Semantic Data Type Detection", weight -19.03, accumulated weight -22.03
 1. "knowledge discovery and data mining 2019" => synonym of conference instance named "kdd 2019"
-    1. "deep learning" => field of study "deep learning", weight -1
-        1. END OF QUERY, top matching paper "Cluster-GCN: An Efficient Algorithm for Training Deep and Large Graph Convolutional Networks", weight -18.942
-    1. "deep" => title word "deep", weight -1
-        1. "learning" => title word "learning", weight -1
-            1. END OF QUERY, top matching paper "Sherlock: A Deep Learning Approach to Semantic Data Type Detection", weight -19.03
+    1. "deep learning" => field of study "deep learning", weight -1, accumulated weight -1
+        1. END OF QUERY, top matching paper "Cluster-GCN: An Efficient Algorithm for Training Deep and Large Graph Convolutional Networks", weight -18.942, accumulated weight -19.942
+    1. "deep" => title word "deep", weight -1, accumulated weight -1
+        1. "learning" => title word "learning", weight -1, accumulated weight -2
+            1. END OF QUERY, top matching paper "Sherlock: A Deep Learning Approach to Semantic Data Type Detection", weight -19.03, accumulated weight -21.03
 
 The full parse tree including invalid interpretations would be significantly larger, as each possible alternative enclosure and indexed attribute reference are expanded and tested. For example, using the query term "2019" at node 1.a. in the above illustration:
 

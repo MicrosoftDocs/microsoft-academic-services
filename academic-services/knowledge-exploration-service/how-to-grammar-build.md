@@ -11,7 +11,8 @@ Describes how to use KESM to build a MAKES index on a win-x64 machine using the 
 
 ## Prerequisites
 
-* Complete the ["create custom MAKES index"](how-to-index-build.md) how-to guide
+- Microsoft Academic Knowledge Exploration Service (MAKES) subscription. See [Get started with Microsoft Academic Knowledge Exploration Service](get-started-setup-provisioning.md) to obtain one
+- Complete the ["create custom MAKES index"](how-to-index-build.md) how-to guide
 
 ## Create local files
 
