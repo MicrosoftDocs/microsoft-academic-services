@@ -2,7 +2,7 @@
 title: Microsoft Academic Graph using Data Lake Analytics
 description: Set up Azure Data Lake Analytics for Microsoft Academic Graph
 ms.topic: get-started-article
-ms.date: 3/20/2019
+ms.date: 9/23/2019
 ---
 # Set up Azure Data Lake Analytics for Microsoft Academic Graph
 
@@ -59,5 +59,5 @@ Advance to the next step to learn about analytics and visualization using Azure 
 
 ## Resources
 
-* [Get started with Azure Data Lake Analytics using Azure portal](https://docs.microsoft.com/en-us/azure/data-lake-analytics/data-lake-analytics-get-started-portal)
+* [Get started with Azure Data Lake Analytics using Azure portal](https://docs.microsoft.com/azure/data-lake-analytics/data-lake-analytics-get-started-portal)
 * [Data Lake Analytics](https://azure.microsoft.com/services/data-lake-analytics/)
