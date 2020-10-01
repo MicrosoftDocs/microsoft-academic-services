@@ -4,7 +4,7 @@ description: Set up AzureDatabricks for Microsoft Academic Graph
 services: microsoft-academic-services
 ms.topic: get-started-article
 ms.service: microsoft-academic-services
-ms.date: 3/14/2019
+ms.date: 9/23/2019
 ---
 # Set up  Azure Databricks for Microsoft Academic Graph
 
@@ -30,7 +30,7 @@ In this section, you create an Azure Databricks service by using the Azure porta
     |---------|---------|
     |**Workspace name**     | Provide a name for your Databricks workspace.        |
     |**Subscription**     | From the drop-down, select your Azure subscription.        |
-    |**Resource group**     | Specify whether you want to create a new resource group or use an existing one. A resource group is a container that holds related resources for an Azure solution. For more information, see [Azure Resource Group overview](http://docs.microsoft.com/azure/azure-resource-manager/resource-group-overview). |
+    |**Resource group**     | Specify whether you want to create a new resource group or use an existing one. A resource group is a container that holds related resources for an Azure solution. For more information, see [Azure Resource Group overview](https://docs.microsoft.com/azure/azure-resource-manager/resource-group-overview). |
     |**Location**     | Select **West US 2**.  For other available regions, see [Azure services available by region](https://azure.microsoft.com/regions/services/).      |
     |**Pricing Tier**     |  Select **Standard**.     |
 
@@ -65,7 +65,7 @@ In this section, you create an Azure Databricks service by using the Azure porta
 Advance to the next section to learn about computing author h-index.
 
 > [!div class="nextstepaction"]
->[Compute author h-index tutorial (Python/SQL)](tutorial-azure-databricks-hindex.md)
+>[Compute author h-index tutorial (Python/SQL)](tutorial-databricks-hindex.md)
 
 ## Resources
 

@@ -4,11 +4,11 @@ description: Network Similarity Sample (U-SQL)
 services: microsoft-academic-services
 ms.topic: tutorial
 ms.service: microsoft-academic-services
-ms.date: 2/25/2020
+ms.date: 9/23/2020
 ---
 # Network Similarity Sample (U-SQL)
 
-In this sample, you compute network similarity score and top related affiliations in Microsoft Academic Graph (MAG) using Azure Data Analytics (U-SQL).
+In this sample, you will compute the network similarity score and top related affiliations in Microsoft Academic Graph (MAG) using Azure Data Analytics (U-SQL).
 
 ## Prerequisites
 
@@ -33,21 +33,7 @@ Complete these tasks before beginning this tutorial:
 
 In prerequisite [Set up Azure Data Lake Analytics](get-started-setup-azure-data-lake-analytics.md), you added the Azure Storage (AS) created for MAG provision as a data source for the Azure Data Lake Analytics service (ADLA). In this section, you submit an ADLA job to create functions extracting MAG data from Azure Storage (AS).
 
-1. Download `samples/CreateFunctions.usql` to your local drive. <br> From [Azure portal](https://portal.azure.com), go to the Azure Storage account > **Containers > [mag-yyyy-mm-dd] > samples > CreateFunctions.usql > Download**.
-
-   ![Download CreateFunctions.usql](media/samples-azure-data-lake-hindex/create-functions-download.png "Download CreateFunctions.usql")
-
-1. Go to the Azure Data Lake Analytics (ADLA) service that you created, and select **Overview > New job > Open file**. Select `CreateFunctions.usql` in your local drive.
-
-   ![New job - Open CreateFunctions.usql](media/samples-azure-data-lake-hindex/create-functions-open.png "New job - Open CreateFunctions.usql")
-
-1. Select **Submit**.
-
-   ![Submit CreateFunctions job](media/samples-azure-data-lake-hindex/create-functions-submit.png "Submit CreateFunctions job")
-
-1. The job should finish successfully.
-
-   ![CreateFunctions job status](media/samples-azure-data-lake-hindex/create-functions-status.png "CreateFunctions job status")
+Follow instructions in [Define MAG functions](define-mag-function.md).
 
 ## Define network similarity functions
 
@@ -82,22 +68,27 @@ In this section, you submit an ADLA job to define network similarity functions.
 
 ### Getting similarity score between two entities
 
-- Following script calls getSimilarity method to get similarity score between two entities
+- Following script calls GetSimilarity method to get similarity score between two entities
 
    ```U-SQL
-   @score = AcademicGraph.NetworkSimilarity.GetSimilarity(@uriPrefix, @resourcePath, @entityId1, @entityId2);
+   @score = AcademicGraph.NetworkSimilarity.GetSimilarity(@uriPrefix, @entityType, @sense, @entityId1, @entityId2);
    ```
 
 - You will see output in `/Output/NetworkSimilarity/GetSimilarity.tsv` as follows
 
-    > 1290206253	201448701	af	0.766698062
+   ```
+   EntityId   | SimilarEntityId | SimilarEntityType | Score
+   -----------+-----------------+-------------------+------------
+   1290206253 | 201448701       | af                | 0.766698062
+   ```
+
 
 ### Getting top related entities
 
 - Following script calls getTopEntities method to get top related entities
 
    ```U-SQL
-   @topEntities = AcademicGraph.NetworkSimilarity.GetTopEntities(@uriPrefix, @resourcePath, @entityId1, 20, (float)0);
+   @topEntities = AcademicGraph.NetworkSimilarity.GetTopEntities(@uriPrefix, @entityType, @sense, @entityId1, 10, (float)0);
    ```
 
 - You will see output in `/Output/NetworkSimilarity/GetTopEntities.tsv` as follows
