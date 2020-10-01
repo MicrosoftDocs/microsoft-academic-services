@@ -8,7 +8,7 @@ ms.date: 9/23/2020
 ---
 # NetworkSimilarity.getTopEntities Function
 
-## getTopEntities(e, targetType, maxCount, minScore)
+## getTopEntities(entityId, targetType, maxCount, minScore)
 
 Returns a dataframe containing entities with the highest similarity scores in relation to the passed in entity id.
 
@@ -16,7 +16,7 @@ Returns a dataframe containing entities with the highest similarity scores in re
 
 Name | Data Type | Description | Default | Example
 --- | --- | --- | --- | ---
-e | long | Id of the entity | | 1290206253
+entityId | long | Id of the entity | | 1290206253
 targetType | string | target entity type. If empty, include all entity types in the resource file  | '' | 'af'
 maxCount | int | Maximum number of result | 20 | 10
 minScore | float | Minimum score | 0.0 | 0.0
