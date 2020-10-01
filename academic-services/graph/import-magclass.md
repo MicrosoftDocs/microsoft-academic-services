@@ -10,7 +10,9 @@ ms.date: 9/23/2020
 
 ## Import MagClass.py notebook
 
-In this section, you will import the MagClass.py notebook to Azure Databricks workspace. You could run this utility notebook from other notebooks later.
+In this section, you will import the MagClass.py notebook to Azure Databricks workspace.
+It defines MicrosoftAcademicGraph class for accessing MAG data.
+You will run this utility notebook from other notebooks later.
 
 1. Download `samples/pyspark/MagClass.py` in MAG dataset to your local drive.
 

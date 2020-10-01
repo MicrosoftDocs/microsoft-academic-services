@@ -264,18 +264,6 @@ Column # | Name | Type | Note
 2 | FieldOfStudyId | long | PRIMARY KEY <br> FOREIGN KEY REFERENCES FieldsOfStudy.FieldOfStudyId
 3 | Score | float | Confidence range between 0 and 1. Bigger number representing higher confidence.
 
-## Paper Recommendations
-
-**Path** `advanced/PaperRecommendations.txt`
-
-**Schema**
-
-Column # | Name | Type | Note
---- | --- | --- | ---
-1 | PaperId | long | PRIMARY KEY <br> FOREIGN KEY REFERENCES Papers.PaperId
-2 | RecommendedPaperId | long | PRIMARY KEY <br> FOREIGN KEY REFERENCES Papers.PaperId
-3 | Score | float | Confidence range between 0 and 1. Bigger number representing higher confidence.
-
 ## Paper MeSH
 
 **Path** `advanced/PaperMeSH.txt`
@@ -290,6 +278,20 @@ Column # | Name | Type | Note
 4 | QualifierUI | string | 
 5 | QualifierName | string | 
 6 | IsMajorTopic | boolean | 
+
+For MeSH descriptor and qualifier definitions, please see [Medical Subject Headings documentation](https://www.nlm.nih.gov/mesh/mbinfo.html).
+
+## Paper Recommendations
+
+**Path** `advanced/PaperRecommendations.txt`
+
+**Schema**
+
+Column # | Name | Type | Note
+--- | --- | --- | ---
+1 | PaperId | long | PRIMARY KEY <br> FOREIGN KEY REFERENCES Papers.PaperId
+2 | RecommendedPaperId | long | PRIMARY KEY <br> FOREIGN KEY REFERENCES Papers.PaperId
+3 | Score | float | Confidence range between 0 and 1. Bigger number representing higher confidence.
 
 ## Paper References
 
