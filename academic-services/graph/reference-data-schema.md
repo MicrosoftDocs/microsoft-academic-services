@@ -2,7 +2,7 @@
 title: Microsoft Academic Graph data schema
 description: Documents the complete, most recent Microsoft Academic Graph entity data schema, including the name and type of each attribute
 ms.topic: reference
-ms.date: 9/9/2020
+ms.date: 9/30/2020
 ---
 # Microsoft Academic Graph data schema
 
@@ -275,6 +275,21 @@ Column # | Name | Type | Note
 1 | PaperId | long | PRIMARY KEY <br> FOREIGN KEY REFERENCES Papers.PaperId
 2 | RecommendedPaperId | long | PRIMARY KEY <br> FOREIGN KEY REFERENCES Papers.PaperId
 3 | Score | float | Confidence range between 0 and 1. Bigger number representing higher confidence.
+
+## Paper MeSH
+
+**Path** `advanced/PaperMeSH.txt`
+
+**Schema**
+
+Column # | Name | Type | Note
+--- | --- | --- | ---
+1 | PaperId | long | FOREIGN KEY REFERENCES Papers.PaperId
+2 | DescriptorUI | string | 
+3 | DescriptorName | string | 
+4 | QualifierUI | string | 
+5 | QualifierName | string | 
+6 | IsMajorTopic | boolean | 
 
 ## Paper References
 
