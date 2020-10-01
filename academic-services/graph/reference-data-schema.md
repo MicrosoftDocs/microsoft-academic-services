@@ -279,7 +279,7 @@ Column # | Name | Type | Note
 5 | QualifierName | string | 
 6 | IsMajorTopic | boolean | 
 
-For MeSH descriptor and qualifier definitions, please see [Medical Subject Headings documentation](https://www.nlm.nih.gov/mesh/mbinfo.html).
+Please see [Medical Subject Headings documentation](https://www.nlm.nih.gov/mesh/mbinfo.html) for descriptor and qualifier definitions.
 
 ## Paper Recommendations
 
