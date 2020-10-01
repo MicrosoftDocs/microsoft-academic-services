@@ -12,7 +12,7 @@ ms.date: 9/23/2020
 
 In this section, you import MagClass.py notebook to Azure Databricks workspace. You could run this utility notebook from other notebooks later.
 
-1. Save samples\MagClass.py in MAG dataset to local drive.
+1. Download `samples/pyspark/MagClass.py` in MAG dataset to local drive.
 
 1. In the [Azure portal](https://portal.azure.com), go to the Azure Databricks service that you created, and select **Launch Workspace**.
 
@@ -20,7 +20,7 @@ In this section, you import MagClass.py notebook to Azure Databricks workspace. 
 
     ![Import a notebook in Databricks](media/databricks/import-notebook-menu.png "import notebook in Databricks")
     
-1. Drag and drop MagClass.py to the **Import Notebook** dialog box
+1. Drag and drop `MagClass.py` to the **Import Notebook** dialog box
 
     ![Provide details for a notebook in Databricks](media/databricks/import-notebook-dialog.png "Provide details for a notebook in Databricks")
 

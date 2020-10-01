@@ -38,11 +38,11 @@ Follow instructions in [Import MagClass Notebook](import-magclass.md).
 
 In this section, you import NetworkSimilarityClass notebook into Azure Databricks workspace. You will include this notebook in this sample later.
 
-1. Save **`ns/NetworkSimilarityClass.py`** in MAG dataset to local drive.
+1. Download `ns/pyspark/NetworkSimilarityClass.py` in MAG dataset to local drive.
 
 1. In Azure Databricks workspace portal, from **Workspace** > **Users** > **Your folder** drop-down, select **Import**.
 
-1. Drag and drop NetworkSimilarityClass.py to the **Import Notebook** dialog box.
+1. Drag and drop `NetworkSimilarityClass.py` to the **Import Notebook** dialog box.
 
 1. Select **Import**. No need to run this notebook.
 

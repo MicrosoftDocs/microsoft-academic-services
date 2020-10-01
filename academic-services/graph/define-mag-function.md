@@ -12,7 +12,7 @@ ms.date: 9/23/2020
 
 In this section, you submit an ADLA job to create functions extracting MAG data from Azure Storage (AS).
 
-1. Download `samples/CreateFunctions.usql` to your local drive. <br> From [Azure portal](https://portal.azure.com), go to the Azure Storage account > **Containers > [mag-yyyy-mm-dd] > samples > CreateFunctions.usql > Download**.
+1. Download `samples/usql/CreateFunctions.usql` in MAG dataset to local drive. <br> From [Azure portal](https://portal.azure.com), go to the Azure Storage account > **Containers > [mag-yyyy-mm-dd] > samples > usql > CreateFunctions.usql > Download**.
 
    ![Download CreateFunctions.usql](media/samples-azure-data-lake-hindex/create-functions-download.png "Download CreateFunctions.usql")
 

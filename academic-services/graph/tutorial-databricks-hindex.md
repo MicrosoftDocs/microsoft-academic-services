@@ -34,17 +34,17 @@ In this section, you import MagClass notebook into Azure Databricks workspace. Y
 
 Follow instructions in [Import MagClass Notebook](import-magclass.md).
 
-## Import HIndexDatabricksSample notebook
+## Import HIndexSample notebook
 
-In this section, you import HIndexDatabricksSample notebook into Azure Databricks workspace and run the notebook.
+In this section, you import HIndexSample notebook into Azure Databricks workspace and run the notebook.
 
-1. Save **`sample/HIndexDatabricksSample.py`** in MAG dataset to local drive.
+1. Save `samples/pyspark/HIndexSample.py` in MAG dataset to local drive.
 
 1. In Azure Databricks workspace portal, from the **Workspace** > **Users** > **Your folder** drop-down, select **Import**.
 
     ![Import a notebook in Databricks](media/databricks/import-notebook-menu.png "import notebook in Databricks")
 
-1. Drag and drop NetworkSimilaritySample.py to the **Import Notebook** dialog box.
+1. Drag and drop `HIndexSample.py` to the **Import Notebook** dialog box.
 
     ![Provide details for a notebook in Databricks](media/databricks/import-notebook-dialog.png "Provide details for a notebook in Databricks")
 
