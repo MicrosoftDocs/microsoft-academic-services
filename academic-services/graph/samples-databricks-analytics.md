@@ -44,13 +44,13 @@ Before you begin, you should have these items of information:
 
 ## Import MagClass notebook
 
-In this section, you import MagClass.py notebook to Azure Databricks workspace. You will run this utility notebook from other notebooks later.
+In this section, you will import the MagClass.py notebook to Azure Databricks workspace. You will run this utility notebook from other notebooks later.
 
 Follow instructions in [Import MagClass Notebook](import-MagClass.md).
 
 ## Create a new notebook
 
-In this section, you create a new notebook in Azure Databricks workspace.
+In this section, you create a new notebook in the Azure Databricks workspace.
 
 1. On the left, select **Workspace**. From the **Workspace** drop-down, select **Create** > **Notebook**. Optionally, you could create this notebook in **Users** level.
 
@@ -64,7 +64,7 @@ In this section, you create a new notebook in Azure Databricks workspace.
 
 ## Create first notebook cell
 
-In this section, you create the first notebook cell to run MagClass notebook.
+In this section, you create the first notebook cell to run the MagClass notebook.
 
 1. Copy and paste following code block into the first cell.
 

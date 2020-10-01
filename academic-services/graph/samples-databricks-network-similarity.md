@@ -8,15 +8,15 @@ ms.date: 9/23/2020
 ---
 # Network Similarity Sample (PySpark)
 
-In this sample, you compute network similarity score and top related entities using Azure Databricks.
+In this sample, you will compute the network similarity score and top related entities using Azure Databricks.
 
 ## Prerequisites
 
 Complete these tasks before you begin this sample.
 
-* Setting up provisioning of Microsoft Academic Graph to an Azure blob storage account. See [Get Microsoft Academic Graph on Azure storage](get-started-setup-provisioning.md).
+* Set up provisioning of Microsoft Academic Graph to an Azure blob storage account. See [Get Microsoft Academic Graph on Azure storage](get-started-setup-provisioning.md).
 
-* Setting up Azure Databricks service. See [Set up Azure Databricks](get-started-setup-databricks.md).
+* Set up Azure Databricks service. See [Set up Azure Databricks](get-started-setup-databricks.md).
 
 ## Gather the information
 
@@ -30,17 +30,17 @@ Complete these tasks before you begin this sample.
 
 ## Import MagClass notebook
 
-In this section, you import MagClass notebook into Azure Databricks workspace. You will include this notebook in this sample later.
+In this section, you will import the MagClass notebook into Azure Databricks workspace. You will include this notebook in this sample later.
 
 Follow instructions in [Import MagClass Notebook](import-magclass.md).
 
 ## Import NetworkSimilarityClass notebook
 
-In this section, you import NetworkSimilarityClass notebook into Azure Databricks workspace. You will include this notebook in this sample later.
+In this section, you will import the NetworkSimilarityClass notebook into Azure Databricks workspace. You will include this notebook in this sample later.
 
-1. Download `ns/pyspark/NetworkSimilarityClass.py` in MAG dataset to local drive.
+1. Download `ns/pyspark/NetworkSimilarityClass.py` in MAG dataset to your local drive.
 
-1. In Azure Databricks workspace portal, from **Workspace** > **Users** > **Your folder** drop-down, select **Import**.
+1. In the Azure Databricks workspace portal, from **Workspace** > **Users** > **Your folder** drop-down, select **Import**.
 
 1. Drag and drop `NetworkSimilarityClass.py` to the **Import Notebook** dialog box.
 
@@ -48,11 +48,11 @@ In this section, you import NetworkSimilarityClass notebook into Azure Databrick
 
 ## Import NetworkSimilaritySample notebook
 
-In this section, you import NetworkSimilaritySample.py as a notebook in Azure Databricks workspace and run the notebook.
+In this section, you will import the NetworkSimilaritySample.py as a notebook in the Azure Databricks workspace and run the notebook.
 
-1. Save **`ns/NetworkSimilaritySample.py`** in MAG dataset to local drive.
+1. Save **`ns/pyspark/NetworkSimilaritySample.py`** in MAG dataset to your local drive.
 
-1. In Azure Databricks workspace portal, from the **Workspace** > **Users** > **Your folder** drop-down, select **Import**.
+1. In the Azure Databricks workspace portal, from the **Workspace** > **Users** > **Your folder** drop-down, select **Import**.
 
 1. Drag and drop NetworkSimilaritySample.py to the **Import Notebook** dialog box.
 
@@ -67,8 +67,8 @@ Replace values for following variables.
   | AzureStorageAccount | Replace **`<AzureStorageAccount>`** | This is the Azure Storage account containing MAG dataset. |
   | AzureStorageAccessKey | Replace **`<AzureStorageAccessKey>`** | This is the Access Key of the Azure Storage account. |
   | MagContainer | Replace **`<MagContainer>`** | This is the container name in Azure Storage account containing MAG dataset, usually in the form of mag-yyyy-mm-dd. |
-  | EntityType | 'affiliation' | See document for available entity types. Replace with other entity type if needed. |
-  | Sense | 'metapath' | See document for available senses. Replace with other sense if needed. |
+  | EntityType | 'affiliation' | See documentation for available entity types. Replace with other entity type if needed. |
+  | Sense | 'metapath' | See documentation for available senses. Replace with other sense if needed. |
   | EntityId1 | 1290206253 | Entity id of Microsoft. Replace with other entity id if needed. |
   | EntityId2 | 201448701 | Entity id of University of Washington. Replace with other entity id if needed. |
 
@@ -85,13 +85,13 @@ Replace values for following variables.
 
 ## Run the notebook
 
-1. Click **Run All** button.
+1. Click the **Run All** button.
 
 ## Notebook description
 
 #### Define MicrosoftAcademicGraph class
 
-Run MagClass notebook to define MicrosoftAcademicGraph class.
+Run the MagClass notebook to define MicrosoftAcademicGraph class.
 
    ```python
    %run "./MagClass"
@@ -121,7 +121,7 @@ Use mag=MAG, entitytype=EntityType, sense=Sense
    NS = NetworkSimilarity(mag=MAG, entitytype=EntityType, sense=Sense)
    ```
 
-#### Compute similarity score between two entities: getSimilarity()
+#### Compute the similarity score between two entities: getSimilarity()
 
    ```python
    score = NS.getSimilarity(EntityId1, EntityId2)
@@ -160,7 +160,7 @@ Join topEntities with affiliations for display names
    display(topEntitiesWithName)
    ```
 
-- You will see output for Cmd 8 as follows
+- You will see output as follows
 
     ![Top entities detail](media/network-similarity/databricks-top-entities-detail.png "Top entities detail")
 

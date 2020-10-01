@@ -8,7 +8,7 @@ ms.date: 9/23/2020
 ---
 # Tutorial: Compute author h-index using Azure Databricks
 
-In this tutorial, you compute h-index for all authors in Microsoft Academic Graph (MAG) using Azure Databricks. You extract data from Azure Storage into data frames, compute h-index, and visualize the result in table and graph forms.
+In this tutorial, you will compute h-index for all authors in Microsoft Academic Graph (MAG) using Azure Databricks. You will extract data from Azure Storage into data frames, compute h-index, and visualize the result in table and graph forms.
 
 ## Prerequisites
 
@@ -30,17 +30,17 @@ Complete these tasks before you begin this tutorial:
 
 ## Import MagClass notebook
 
-In this section, you import MagClass notebook into Azure Databricks workspace. You will include this notebook in this sample later.
+In this section, you will import the MagClass notebook into Azure Databricks workspace. You will include this notebook in this sample later.
 
 Follow instructions in [Import MagClass Notebook](import-magclass.md).
 
 ## Import HIndexSample notebook
 
-In this section, you import HIndexSample notebook into Azure Databricks workspace and run the notebook.
+In this section, you will import the HIndexSample notebook into Azure Databricks workspace and run the notebook.
 
-1. Save `samples/pyspark/HIndexSample.py` in MAG dataset to local drive.
+1. Save `samples/pyspark/HIndexSample.py` in MAG dataset to your local drive.
 
-1. In Azure Databricks workspace portal, from the **Workspace** > **Users** > **Your folder** drop-down, select **Import**.
+1. In the Azure Databricks workspace portal, from the **Workspace** > **Users** > **Your folder** drop-down, select **Import**.
 
     ![Import a notebook in Databricks](media/databricks/import-notebook-menu.png "import notebook in Databricks")
 
@@ -70,13 +70,13 @@ Replace values for following variables.
 
 ## Run the notebook
 
-1. Click **Run All** button.
+1. Click the **Run All** button.
 
 ## Notebook description
 
 #### Define MicrosoftAcademicGraph class
 
-Run MagClass notebook to define MicrosoftAcademicGraph class.
+Run the MagClass notebook to define MicrosoftAcademicGraph class.
 
    ```python
    %run "./MagClass"
@@ -154,7 +154,7 @@ Use account=AzureStorageAccount, key=AzureStorageAccessKey, container=MagContain
 
 #### Get papers and estimated citation
 
-Treat papers with same FamilyId as a single paper and sum EstimatedCitation for all papers wiht the same FamilyId
+Treat papers with same FamilyId as a single paper and sum EstimatedCitation for all papers with the same FamilyId
 
    ```python
    Papers = MAG.getDataframe('Papers')

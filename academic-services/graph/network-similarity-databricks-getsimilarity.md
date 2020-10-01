@@ -8,9 +8,9 @@ ms.date: 9/23/2020
 ---
 # NetworkSimilarity.getSimilarity Function
 
-### Compute similarity score between two entities.
+### Compute the similarity score between two entities.
 
-## float getSimilarity(e1, e2)
+## float getSimilarity(entityId1, entityId2)
 
 Returns the similarity score between two entities.
 
@@ -19,14 +19,14 @@ Returns the similarity score between two entities.
 
 Name | Data Type | Description | Example
 --- | --- | --- | ---
-e1 | long | Id of the first entity | 1290206253
-e2 | long | Id of the second entity | 201448701
+entityId1 | long | Id of the first entity | 1290206253
+entityId2 | long | Id of the second entity | 201448701
 
 **Return Value**
 
 Data Type | Description | Example
 --- | --- | ---
-float | Similarity score between two entities. <br> Score is between [-1, 1], with bigger number representing higher similarity. <br> If either of the entity IDs are not available, the retrun value will be zero. | 0.7666980387511901
+float | Similarity score between two entities. <br> Score is between [-1, 1], with larger number representing higher similarity. <br> If either of the entity IDs are not available, the return value will be zero. | 0.7666980387511901
 
 **Example**
 

@@ -10,7 +10,7 @@ ms.date: 9/23/2020
 
 ## getTopEntities(e, targetType, maxCount, minScore)
 
-Returns a dataframe with entities of top similarity scores to an entity.
+Returns a dataframe containing entities with the highest similarity scores in relation to the passed in entity id.
 
 **Parameters**
 
@@ -27,7 +27,7 @@ Column Name | Data Type | Description | Example
 --- | --- | --- | ---
 EntityId | long | Id of the related entity | 1291425158
 EntityType | string | Entity type. Possible types are <br> "af": Affiliation <br> "au": Author <br> "c": Conference <br> "f": Field of study <br> "j": Journal | "af"
-Score | float | Similarity score between input entity and the related entity. <br> Score is between [-1, 1], with bigger number representing higher similarity. <br> If the entity ID is not available, the retrun dataframe will be empty. | 0.971670866
+Score | float | Similarity score between input entity and the related entity. <br> Score is between [-1, 1], with larger number representing higher similarity. <br> If the entity ID is not available, the return dataframe will be empty. | 0.971670866
 
 **Example**
 

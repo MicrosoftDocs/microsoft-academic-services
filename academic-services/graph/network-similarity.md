@@ -47,7 +47,7 @@ The following senses are of entity embeddings that are currently available.
 
 ## Sample
 
-Follow these samples for detail usage information.
+Follow these samples for detailed usage information.
 
 - [Network Similarity Sample (PySpark)](samples-databricks-network-similarity.md)
 

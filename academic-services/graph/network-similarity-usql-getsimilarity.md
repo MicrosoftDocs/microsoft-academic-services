@@ -10,13 +10,13 @@ ms.date: 9/23/2020
 
 Namespace: AcademicGraph.NetworkSimilarity
 
-### Compute similarity score between two entities.
+### Compute the similarity score between two entities.
 
 ## GetSimilarity(BaseDir, EntityType, Sense, EntityId1, EntityId2)
 
 Returns a stream with a single row containing the similarity score between two entities using a network similarity resource.
-Score returned is between [-1, 1], with bigger number representing higher similarity.
-If either of the entity IDs are not in the resource file, the retrun stream will be empty.
+Score returned is between [-1, 1], with larger number representing higher similarity.
+If either of the entity IDs are not in the resource file, the return stream will be empty.
 
 **Parameters**
 
@@ -35,7 +35,7 @@ Name | Data Type | Description | Example
 EntityId | long | Same value as EntityId1 | 1290206253
 SimilarEntityId | long | Same value as EntityId2 | 201448701
 SimilarEntityType | string | Entity type. Possible types are <br> "af": Affiliation <br> "au": Author <br> "c": Conference <br> "f": Field of study <br> "j": Journal | "af"
-Score | float | Similarity score between EntityId1 and EntityId2. <br> Score is between [-1, 1], with bigger number representing higher similarity. <br> If either of the entity IDs are not available, the retrun stream will be empty. | 0.766698062
+Score | float | Similarity score between EntityId1 and EntityId2. <br> Score is between [-1, 1], with larger number representing higher similarity. <br> If either of the entity IDs are not available, the return stream will be empty. | 0.766698062
 
 **Example**
 
