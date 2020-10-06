@@ -4,7 +4,7 @@ description: Using Network Similarity Package
 services: microsoft-academic-services
 ms.topic: extra
 ms.service: microsoft-academic-services
-ms.date: 9/23/2020
+ms.date: 10/06/2020
 ---
 # Network Similarity Package
 
@@ -34,16 +34,18 @@ The following senses are of entity embeddings that are currently available.
  
   |Entity Type|Sense|Description|
   |---|---|---|
+  | affiliation | cofos | Two affiliations are similar if they publish papers with similar fields of study.|
   | affiliation | copaper | Two affiliations are similar if they are closed connected with each other in the weighted affiliation collaboration graph.|
   | affiliation | covenue | Two affiliations are similar if they publish in similar venues (journals and conferences).|
   | affiliation | metapath | Two affiliations are similar if they co-occur with common affiliations, venues, and fields of study.|
+  | author | copaper | Two authors are similar if they are closed connected with each other in the weighted author collaboration graph.|
+  | fos | coauthor | Two fields of study are similar if they have papers with common authors.|
   | fos | copaper | Two fields of study are similar if they appear in the same paper.|
   | fos | covenue | Two fields of study are similar if they have papers from similar venues.|
   | fos | metapath | Two fields of study are similar if they co-occur with common affiliations, venues, and fields of study.|
   | venue | coauthor | Two venues are similar if they publish papers with common authors.|
   | venue | cofos | Two venues are similar if they publish papers with similar fields of study.|
   | venue | metapath | Two venues are similar if they co-occur with common affiliations, venues, and fields of study.|
-  | author | copaper | Two authors are similar if they are closed connected with each other in the weighted author collaboration graph.|
 
 ## Sample
 
