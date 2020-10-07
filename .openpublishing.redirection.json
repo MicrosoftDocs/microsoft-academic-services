@@ -3,32 +3,32 @@
         {
             "source_path": "academic-services/graph/network-similarity-analytics.md",
             "redirect_url": "samples-usql-network-similarity",
-            "redirect_document_id": false
+            "redirect_document_id": true
         },
         {
             "source_path": "academic-services/graph/network-similarity-databricks.md",
             "redirect_url": "samples-databricks-network-similarity",
-            "redirect_document_id": false
+            "redirect_document_id": true
         },
         {
             "source_path": "academic-services/graph/samples-azure-databricks.md",
             "redirect_url": "samples-databricks-analytics",
-            "redirect_document_id": false
+            "redirect_document_id": true
         },
         {
             "source_path": "academic-services/graph/samples-azure-data-lake-analytics.md",
             "redirect_url": "samples-usql-analytics",
-            "redirect_document_id": false
+            "redirect_document_id": true
         },
         {
             "source_path": "academic-services/graph/tutorial-azure-databricks-hindex.md",
             "redirect_url": "tutorial-databricks-hindex",
-            "redirect_document_id": false
+            "redirect_document_id": true
         },
         {
             "source_path": "academic-services/graph/tutorial-azure-data-lake-hindex.md",
             "redirect_url": "tutorial-usql-hindex",
-            "redirect_document_id": false
+            "redirect_document_id": true
         },
         {
             "source_path": "academic-services/knowledge-exploration-service/how-to-deploy-makes-azure-management-portal.md",
