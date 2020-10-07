@@ -41,7 +41,7 @@ KES allows this to be defined for an entity as a relative log probability using 
 
 ## Entity data file format
 
-An entity data file contains one or more rows/lines of [entity data](#entity-data-json-format), and is used as the "data file" when [building an index](how-to-index-build.md).
+An entity data file contains one or more rows/lines of [entity data](#entity-data-json-format), and is used as the "data file" when building an index.
 
 > [!IMPORTANT]
 > While each **row** in an entity data file must be a valid JSON object, the overall file itself is not JSON but simply a *rows/lines of JSON objects*. The file contents are **NOT** meant to be an array of JSON objects.
