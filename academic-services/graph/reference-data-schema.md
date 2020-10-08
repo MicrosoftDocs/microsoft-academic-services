@@ -2,7 +2,7 @@
 title: Microsoft Academic Graph data schema
 description: Documents the complete, most recent Microsoft Academic Graph entity data schema, including the name and type of each attribute
 ms.topic: reference
-ms.date: 9/9/2020
+ms.date: 9/30/2020
 ---
 # Microsoft Academic Graph data schema
 
@@ -132,7 +132,7 @@ Column # | Name | Type | Note
 3 | RelatedEntityId | long |
 4 | RelatedEntityType | string | af: Affiliation <br> j: Journal <br> c: Conference
 5 | RelatedType | int | 0: Two entities are similar if they appear on the same paper <br> 1: Two entities are similar if they have common coauthors <br> 2: Two entities are similar if they are co-cited by others <br> 3: Two entities are similar if they have common fields of study <br> 4: Two entities are similar if they appear in the same venue <br> 5: Entity A is similar to entity B if A cites B <br> 6: Entity A is similar to entity B if A is cited by B
-6 | Score | float | Confidence range between 0 and 1. Bigger number representing higher confidence.
+6 | Score | float | Confidence range between 0 and 1. Larger number representing higher confidence.
 
 ## Field of Study Children
 
@@ -264,6 +264,23 @@ Column # | Name | Type | Note
 2 | FieldOfStudyId | long | PRIMARY KEY <br> FOREIGN KEY REFERENCES FieldsOfStudy.FieldOfStudyId
 3 | Score | float | Confidence range between 0 and 1. Bigger number representing higher confidence.
 
+## Paper MeSH
+
+**Path** `advanced/PaperMeSH.txt`
+
+**Schema**
+
+Column # | Name | Type | Note
+--- | --- | --- | ---
+1 | PaperId | long | FOREIGN KEY REFERENCES Papers.PaperId
+2 | DescriptorUI | string | 
+3 | DescriptorName | string | 
+4 | QualifierUI | string | 
+5 | QualifierName | string | 
+6 | IsMajorTopic | boolean | 
+
+Please see [Medical Subject Headings documentation](https://www.nlm.nih.gov/mesh/mbinfo.html) for descriptor and qualifier definitions.
+
 ## Paper Recommendations
 
 **Path** `advanced/PaperRecommendations.txt`
@@ -325,7 +342,7 @@ Column # | Name | Type | Note
 1 | PaperId | long | PRIMARY KEY
 2 | Rank | uint | See [FAQ](resources-faq.md#what-is-the-rank-value-on-entities)
 3 | Doi | string | Doi values are upper-cased per [DOI standard](https://www.doi.org/doi_handbook/2_Numbering.html#2.4)
-4 | DocType | string | Book, BookChapter, Conference, Dataset, Journal, Patent, Repository, NULL : unknown
+4 | DocType | string | Book, BookChapter, Conference, Dataset, Journal, Patent, Repository, Thesis, NULL : unknown
 5 | PaperTitle | string |
 6 | OriginalTitle | string |
 7 | BookTitle | string |

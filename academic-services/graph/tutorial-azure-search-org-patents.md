@@ -4,7 +4,7 @@ description: Set up Azure Search service to do organizational patent search usin
 services: microsoft-academic-services
 ms.topic: tutorial
 ms.service: microsoft-academic-services
-ms.date: 2/25/2020
+ms.date: 9/23/2020
 ---
 
 # Tutorial: Set up organizational patent search with Azure Search
@@ -23,7 +23,7 @@ After completing this tutorial, you should be able to:
 Complete these tasks before beginning this tutorial:
 
 * [Set up provisioning of Microsoft Academic Graph to an Azure blob storage account](get-started-setup-provisioning.md)
-* [Set up Azure Data Lake Analytics for Microsoft Academic Graph](get-started-setup-azure-data-lake-analytics.md)
+* [Set up an Azure Data Lake Analytics for Microsoft Academic Graph](get-started-setup-azure-data-lake-analytics.md)
 
 ## Gather the information that you need
 
@@ -39,23 +39,9 @@ Complete these tasks before beginning this tutorial:
 
 ## Define functions to extract MAG data
 
-In prerequisite [Set up Azure Data Lake Analytics](get-started-setup-azure-data-lake-analytics.md), you added the Azure Storage (AS) created for MAG provision as a data source for the Azure Data Lake Analytics service (ADLA). In this section, you submit an ADLA job to create functions extracting MAG data from Azure Storage (AS).
+In prerequisite [Set up an Azure Data Lake Analytics](get-started-setup-azure-data-lake-analytics.md), you added the Azure Storage (AS) created for MAG provision as a data source for the Azure Data Lake Analytics service (ADLA). In this section, you submit an ADLA job to create functions extracting MAG data from Azure Storage (AS).
 
-1. Download `samples/CreateFunctions.usql` to your local drive. <br> From [Azure portal](https://portal.azure.com), go to the Azure Storage account > **Containers > [mag-yyyy-mm-dd] > samples > CreateFunctions.usql > Download**.
-
-   ![Download CreateFunctions.usql](media/samples-azure-data-lake-hindex/create-functions-download.png "Download CreateFunctions.usql")
-
-1. Go to the Azure Data Lake Analytics (ADLA) service that you created, and select **Overview > New job > Open file**. Select `CreateFunctions.usql` in your local drive.
-
-   ![New job - Open CreateFunctions.usql](media/samples-azure-data-lake-hindex/create-functions-open.png "New job - Open CreateFunctions.usql")
-
-1. Select **Submit**.
-
-   ![Submit CreateFunctions job](media/samples-azure-data-lake-hindex/create-functions-submit.png "Submit CreateFunctions job")
-
-1. The job should finish successfully.
-
-   ![CreateFunctions job status](media/samples-azure-data-lake-hindex/create-functions-status.png "CreateFunctions job status")
+Follow instructions in [Define MAG functions](define-mag-function.md).
 
 ## Generate text documents for organizational patents
 

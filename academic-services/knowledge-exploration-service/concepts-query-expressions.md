@@ -1,15 +1,15 @@
 ---
 title: Structured query expressions
-description: Learn how to use structured query expressions
+description: Learn how to use KES structured query expressions
 ms.topic: reference
-ms.date: 2020-02-10
+ms.date: 09/21/2020
 ---
 
 # Structured query expressions
 
 A structured query expression specifies a set of operations to evaluate against the index for the purpose of retrieving entities.  It consists of both attribute query expressions and higher-level functions.  
 
-Structured query expressions can either be [*automatically* generated for natural language queries](concepts-queries.md) using the [Interpret method](reference-get-interpret.md) or manually created. They are used by the [Evaluate method](reference-get-evaluate.md) to retrieve matching entities and by the [CalcHistogram method](reference-get-histogram.md) to calculate the distribution of attribute values for matching entities.
+Structured query expressions can either be [*automatically* generated for natural language queries](concepts-queries.md) using the [Interpret method](reference-get-interpret.md) or manually created. They are used by the [Evaluate method](reference-get-evaluate.md) to retrieve matching entities and by the [Histogram method](reference-get-histogram.md) to calculate the distribution of attribute values for matching entities.
 
 See below for more information.
 
@@ -115,6 +115,6 @@ And(Composite(AA.AuN='geoffrey zweig'),Composite(AA.AfN'='google'))
 
 [Evaluate API method documentation](reference-get-evaluate.md)
 
-[CalcHistogram API method documentation](reference-get-histogram.md)
+[Histogram API method documentation](reference-get-histogram.md)
 
 [Natural language queries](concepts-queries.md)

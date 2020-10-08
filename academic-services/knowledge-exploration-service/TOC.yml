@@ -47,13 +47,13 @@
   - name: MAKES REST API
     expanded: false
     items:
-      - name: GET CalcHistogram
+      - name: GET Histogram
         href: reference-get-histogram.md
       - name: GET Evaluate
         href: reference-get-evaluate.md
       - name: GET Interpret
         href: reference-get-interpret.md
-      - name: POST CalcHistogram
+      - name: POST Histogram
         href: reference-post-histogram.md
       - name: POST Evaluate
         href: reference-post-evaluate.md

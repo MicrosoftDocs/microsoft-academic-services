@@ -49,20 +49,20 @@ landingContent:
       - linkListType: tutorial
         links:
           - text: Generate author h-index - U-SQL
-            url: tutorial-azure-data-lake-hindex.md
+            url: tutorial-usql-hindex.md
           - text: Generate author h-index - PySpark
-            url: tutorial-azure-databricks-hindex.md
+            url: tutorial-databricks-hindex.md
           - text: Academic refrence parsing - Azure Search
             url: tutorial-azure-search-reference-parsing.md
       - linkListType: sample
         links:
           - text: MAG - U-SQL + PowerBI
-            url: samples-azure-data-lake-analytics.md
+            url: samples-usql-analytics.md
           - text: MAG - PySpark
-            url: samples-azure-databricks.md
+            url: samples-databricks-analytics.md
           - text: Language Similarity - C#
             url: language-similarity-example.md
           - text: Network Similarity - U-SQL
-            url: network-similarity-analytics.md
+            url: samples-usql-network-similarity.md
           - text: Network Similarity - PySpark
-            url: network-similarity-databricks.md
+            url: samples-databricks-network-similarity.md

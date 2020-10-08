@@ -2,17 +2,17 @@
 title: Microsoft Academic Graph using Data Lake Analytics
 description: Set up Azure Data Lake Analytics for Microsoft Academic Graph
 ms.topic: get-started-article
-ms.date: 3/20/2019
+ms.date: 9/23/2019
 ---
 # Set up Azure Data Lake Analytics for Microsoft Academic Graph
 
-You could set up Azure Data Lake Analytics to run U-SQL scripts on Microsoft Academic Graph. Here are the step-by-step instructions.
+You could set up an Azure Data Lake Analytics to run U-SQL scripts on Microsoft Academic Graph. Here are the step-by-step instructions.
 
 ## Prerequisites
 
 Complete these tasks before you begin this tutorial:
 
-* Setting up provisioning of Microsoft Academic Graph to an Azure blob storage account. See [Get Microsoft Academic Graph on Azure storage](get-started-setup-provisioning.md).
+* Set up provisioning of Microsoft Academic Graph to an Azure blob storage account. See [Get Microsoft Academic Graph on Azure storage](get-started-setup-provisioning.md).
 
 ## Gather the information that you need
 
@@ -55,9 +55,9 @@ Before you begin, you should have these items of information:
 Advance to the next step to learn about analytics and visualization using Azure Data Lake Analytics.
 
 > [!div class="nextstepaction"]
->[Compute author h-index tutorial (U-SQL)](tutorial-azure-data-lake-hindex.md)
+>[Compute author h-index tutorial (U-SQL)](tutorial-usql-hindex.md)
 
 ## Resources
 
-* [Get started with Azure Data Lake Analytics using Azure portal](https://docs.microsoft.com/en-us/azure/data-lake-analytics/data-lake-analytics-get-started-portal)
+* [Get started with Azure Data Lake Analytics using Azure portal](https://docs.microsoft.com/azure/data-lake-analytics/data-lake-analytics-get-started-portal)
 * [Data Lake Analytics](https://azure.microsoft.com/services/data-lake-analytics/)
