@@ -6,15 +6,15 @@ ms.topic: get-started-article
 ms.service: microsoft-academic-services
 ms.date: 9/23/2019
 ---
-# Set up  Azure Databricks for Microsoft Academic Graph
+# Set up Azure Databricks for Microsoft Academic Graph
 
-You could set up Azure Databricks to run Analytics script on Microsoft Academic Graph. Here are the step-by-step instructions
+You could set up an Azure Databricks to run Analytics script on Microsoft Academic Graph. Here are the step-by-step instructions
 
 ## Prerequisites
 
 Complete these tasks before you begin this tutorial:
 
-* Setting up provisioning of Microsoft Academic Graph to an Azure blob storage account. See [Get Microsoft Academic Graph on Azure storage](./get-started-setup-provisioning.md).
+* Set up provisioning of Microsoft Academic Graph to an Azure blob storage account. See [Get Microsoft Academic Graph on Azure storage](./get-started-setup-provisioning.md).
 
 ## Create an Azure Databricks service
 

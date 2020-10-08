@@ -14,7 +14,7 @@ Namespace: AcademicGraph.NetworkSimilarity
 
 ## GetTopEntities(BaseDir, EntityType, Sense, EntityId, MaxCount, MinScore)
 
-Returns a stream with entities of top similarity scores to an entity by entity type and similarity sense.
+Given an EntityId and the EntityType, returns entities with top similarity scores based on a particular sense.
 
 **Parameters**
 

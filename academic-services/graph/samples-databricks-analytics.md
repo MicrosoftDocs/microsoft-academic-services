@@ -24,9 +24,9 @@ Illustrates how to perform analytics for Microsoft Academic Graph using PySpark 
 
 Before running these examples, you need to complete the following setups:
 
-* Setting up provisioning of Microsoft Academic Graph to an Azure blob storage account. See [Get Microsoft Academic Graph on Azure storage](get-started-setup-provisioning.md).
+* Set up provisioning of Microsoft Academic Graph to an Azure blob storage account. See [Get Microsoft Academic Graph on Azure storage](get-started-setup-provisioning.md).
 
-* Setting up Azure Databricks service. See [Set up Azure Databricks](get-started-setup-databricks.md).
+* Set up an Azure Databricks service. See [Set up Azure Databricks](get-started-setup-databricks.md).
 
 * Download or clone the [samples repository](https://github.com/Azure-Samples/microsoft-academic-graph-pyspark-samples)
 

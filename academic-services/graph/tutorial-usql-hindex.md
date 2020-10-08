@@ -15,7 +15,7 @@ In this tutorial, you will compute h-index for all authors in Microsoft Academic
 Complete these tasks before beginning this tutorial:
 
 * [Set up provisioning of Microsoft Academic Graph to an Azure blob storage account](get-started-setup-provisioning.md)
-* [Set up Azure Data Lake Analytics for Microsoft Academic Graph](get-started-setup-azure-data-lake-analytics.md)
+* [Set up an Azure Data Lake Analytics for Microsoft Academic Graph](get-started-setup-azure-data-lake-analytics.md)
 
 ## Gather the information that you need
 

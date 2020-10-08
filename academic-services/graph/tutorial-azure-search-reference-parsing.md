@@ -31,7 +31,7 @@ After completing this tutorial, you should be able to:
 Complete these tasks before beginning this tutorial:
 
 * [Set up provisioning of Microsoft Academic Graph to an Azure blob storage account](get-started-setup-provisioning.md)
-* [Set up Azure Data Lake Analytics for Microsoft Academic Graph](get-started-setup-azure-data-lake-analytics.md)
+* [Set up an Azure Data Lake Analytics for Microsoft Academic Graph](get-started-setup-azure-data-lake-analytics.md)
 * [Install Postman desktop app](https://www.getpostman.com/)
 
 ## Gather the information that you need
@@ -50,7 +50,7 @@ Complete these tasks before beginning this tutorial:
 
 ## Define functions to extract MAG data
 
-In prerequisite [Set up Azure Data Lake Analytics](get-started-setup-azure-data-lake-analytics.md), you added the Azure Storage (AS) created for MAG provision as a data source for the Azure Data Lake Analytics service (ADLA). In this section, you submit an ADLA job to create functions extracting MAG data from Azure Storage (AS).
+In prerequisite [Set up an Azure Data Lake Analytics](get-started-setup-azure-data-lake-analytics.md), you added the Azure Storage (AS) created for MAG provision as a data source for the Azure Data Lake Analytics service (ADLA). In this section, you submit an ADLA job to create functions extracting MAG data from Azure Storage (AS).
 
 Follow instructions in [Define MAG functions](define-mag-function.md).
 
