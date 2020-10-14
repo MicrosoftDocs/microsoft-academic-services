@@ -14,9 +14,9 @@ In this tutorial, you will compute h-index for all authors in Microsoft Academic
 
 Complete these tasks before you begin this tutorial:
 
-* Setting up provisioning of Microsoft Academic Graph to an Azure blob storage account. See [Get Microsoft Academic Graph on Azure storage](get-started-setup-provisioning.md).
+* Set up provisioning of Microsoft Academic Graph to an Azure blob storage account. See [Get Microsoft Academic Graph on Azure storage](get-started-setup-provisioning.md).
 
-* Setting up Azure Databricks service. See [Set up Azure Databricks](get-started-setup-databricks.md).
+* Set up an Azure Databricks service. See [Set up Azure Databricks](get-started-setup-databricks.md).
 
 ## Gather the information that you need
 
@@ -220,7 +220,7 @@ Treat papers with same FamilyId as a single paper and sum EstimatedCitation for 
 
 ## Clean up resources
 
-After you finish the tutorial, you can terminate the cluster. From the Azure Databricks workspace, select **Clusters** on the left. For the cluster to terminate, under **Actions**, point to the ellipsis (...) and select the **Terminate** icon.
+After you finish this tutorial, you can terminate the cluster. From the Azure Databricks workspace, select **Clusters** on the left. For the cluster to terminate, under **Actions**, point to the ellipsis (...) and select the **Terminate** icon.
 
 ![Stop a Databricks cluster](media/databricks/terminate-databricks-cluster.png "Stop a Databricks cluster")
 

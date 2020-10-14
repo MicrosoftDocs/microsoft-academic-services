@@ -21,7 +21,7 @@ The functions/classes perform the following tasks.
 
 Before running these examples, you need to complete the following setups:
 
-* Setting up provisioning of Microsoft Academic Graph to an Azure blob storage account. See [Get Microsoft Academic Graph on Azure storage](get-started-setup-provisioning.md).
+* Set up provisioning of Microsoft Academic Graph to an Azure blob storage account. See [Get Microsoft Academic Graph on Azure storage](get-started-setup-provisioning.md).
 
 * Request Network Similarity Package when requesting MAG.
 

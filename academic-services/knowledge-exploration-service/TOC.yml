@@ -30,13 +30,22 @@
       href: how-to-index-synonym.md
     - name: Define data
       href: how-to-index-data.md
+    - name: Build and test index
+      href: how-to-index-build.md
+  - name: Create custom MAKES grammar
+    expanded: false
+    items:
+    - name: Define grammar
+      href: how-to-grammar.md
+    - name: Build and test grammar
+      href: how-to-grammar-build.md
 - name: Concepts
   expanded: true
   items:
-  - name: Natural language queries
-    href: concepts-queries.md
   - name: Structured query expressions
     href: concepts-query-expressions.md
+  - name: Natural language queries
+    href: concepts-queries.md
 - name: Reference
   expanded: true
   items:
@@ -59,6 +68,13 @@
         href: reference-post-evaluate.md
       - name: POST Interpret
         href: reference-post-interpret.md
+  - name: MAKES grammar
+    expanded: false
+    items:
+      - name: Syntax
+        href: reference-grammar-syntax.md
+      - name: Semantic functions
+        href: reference-semantic-functions.md
 - name: Resources
   expanded: true
   items:

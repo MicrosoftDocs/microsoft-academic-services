@@ -16,7 +16,7 @@ Complete these tasks before you begin this sample.
 
 * Set up provisioning of Microsoft Academic Graph to an Azure blob storage account. See [Get Microsoft Academic Graph on Azure storage](get-started-setup-provisioning.md).
 
-* Set up Azure Databricks service. See [Set up Azure Databricks](get-started-setup-databricks.md).
+* Set up an Azure Databricks service. See [Set up Azure Databricks](get-started-setup-databricks.md).
 
 ## Gather the information
 
