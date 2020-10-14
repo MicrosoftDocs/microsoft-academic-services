@@ -21,7 +21,7 @@ landingContent:
       - linkListType: concept
         links:
           - text: How MAKES understands natural language queries
-            url: concept-queries.md
+            url: concepts-queries.md
 
   - title: Top tasks
     linkLists:
@@ -42,7 +42,7 @@ landingContent:
       - linkListType: concept
         links:
           - text: Structured query expressions
-            url: concept-query-expressions.md
+            url: concepts-query-expressions.md
             
   - title: Manage instances
     linkLists:

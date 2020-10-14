@@ -2,7 +2,7 @@
 title: Get Microsoft Academic Graph on Azure storage
 description: Step-by-step instructions for setting up one-time or automatic provisioning of Microsoft Academic Graph to an Azure blob storage account
 ms.topic: get-started-article
-ms.date: 12/2/2019
+ms.date: 9/23/2020
 ---
 # Get Microsoft Academic Graph on Azure storage
 
@@ -30,7 +30,7 @@ Please create a new Azure subscription for the distribution previews. If your or
 
     ![Create new storage account resource](media/create-storage-account/select.png "Create new storage account resource")
 
-1.  Provide following values to create an Azure Storage account. Then click "Review + create" button.
+1.  Provide following values to create an Azure Storage account. Then click the "Review + create" button.
 
     |Property  |Description  |
     |---------|---------|
