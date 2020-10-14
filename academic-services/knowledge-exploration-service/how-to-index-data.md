@@ -1,8 +1,8 @@
 ---
 title: Entity data files
 description: Describes the format for defining entity data to be indexed
-ms.topic: tutorial
-ms.date: 8/5/2020
+ms.topic: how-to
+ms.date: 9/1/2020
 ---
 
 # Entity data files
@@ -44,7 +44,7 @@ KES allows this to be defined for an entity as a relative log probability using 
 An entity data file contains one or more rows/lines of [entity data](#entity-data-json-format), and is used as the "data file" when building an index.
 
 > [!IMPORTANT]
-> While each **row** in an entity data file must be a valid JSON object, the overall file itself is not JSON but simply a *rows/lines of JSON objects*. The file contents are **NOT** meant to be an array of JSON objects.
+> Each **row** in an entity data file must be a valid JSON object, however the overall file content itself is not a valid JSON object. The file contents are **NOT** meant to be an array of JSON objects, meaning files should not start/end with square brackets (```[]```) and lines should not end with a comma (```,```).
 
 > [!TIP]
 > If your entities use a log probability score, you can significantly increase the performance of indexing by pre-sorting the entity data by the log probability score in descending order (entity with highest log probability in first row, entity with lowest log probability in last row).
@@ -56,301 +56,119 @@ An entity data file contains one or more rows/lines of [entity data](#entity-dat
 The following entity JSON data is for an index that supports academic paper entities and uses a subset ([defined in the schema how-to](how-to-index-schema.md#example)) of the full [MAKES academic entity schema](reference-makes-api-entity-schema.md).
 
 > [!IMPORTANT]
-> The following example is purposefully using tabular formatting of the JSON data to make it easy to understand. However in practice **this data would have no such formatting and be contained on a *single* line**.
+> The following example shows each JSON attribute on a separate line to make it easier to read and understand for **documentation purposes only**. In the actual JSON data files to be used for indexing, MAKES requires each entity's JSON to be contained **in a single line**.
 
 ``` JSON
 {
-  "logprob": -19.425,
-  "Id": 2964178568,
-  "Ti": "improving subseasonal forecasting in the western u s with machine learning",
-  "W": [ "improving", "subseasonal", "forecasting", "in", "the", "western", "u", "s", "with", "machine", "learning" ],
-  "AW": [ "water", "managers", "western", "united", "states", "u", "rely", "longterm", "forecasts", "temperature", "precipitation", "prepare", "droughts", "wet", "weather", "extremes", "accuracy", "bureau", "reclamation", "national", "oceanic", "atmospheric", "administration", "noaa", "launched", "subseasonal", "climate", "forecast", "rodeo", "year", "long", "real", "time", "forecasting", "challenge", "participants", "aimed", "skillfully", "predict", "two", "four", "weeks", "six", "advance", "evaluate", "machine", "learning", "approach", "release", "subseasonalrodeo", "dataset", "collected", "train", "system", "ensemble", "nonlinear", "regression", "models", "first", "integrates", "diverse", "collection", "meteorological", "measurements", "dynamic", "model", "prunes", "irrelevant", "predictors", "customized", "multitask", "feature", "selection", "procedure", "second", "uses", "historical", "target", "variable", "introduces", "nearest", "neighbor", "features", "weighted", "local", "linear", "alone", "significantly", "more", "accurate", "debiased", "operational", "cfsv2", "skill", "exceeds", "top", "competitor", "horizon", "moreover", "over", "2011", "2018", "improves", "40", "50", "129", "169", "hope", "both", "methods", "help", "state", "art" ],
+  "logprob": -18.942,
+  "Id": 2945827377,
+  "Ti": "cluster gcn an efficient algorithm for training deep and large graph convolutional networks",
+  "W": ["cluster","gcn","an","efficient","algorithm","for","training","deep","and","large","graph","convolutional","networks"],
+  "AW": ["graph","convolutional","network","gcn","successfully","applied","applications","training","large","scale","remains","challenging","current","sgd","algorithms","suffer","high","computational","cost","exponentially","grows","number","layers","space","requirement","keeping","entire","embedding","node","memory","paper","propose","cluster","novel","algorithm","suitable","exploiting","clustering","structure","works","following","step","samples","block","nodes","associate","dense","subgraph","identified","restricts","neighborhood","search","simple","effective","strategy","leads","significantly","efficiency","able","achieve","comparable","test","accuracy","previous","scalability","create","amazon2m","data","2","million","61","edges","more","5","times","larger","largest","publicly","dataset","reddit","3","layer","faster","state","art","vr","1523","seconds","vs","1961","less","2gb","11","furthermore","4","finish","around","36","minutes","existing","fail","train","issue","allows","us","deeper","without","time","overhead","prediction","f1","score","99","ppi","best","98","71","citezhang2018gaan"],
   "Y": 2019,
   "D": "2019-07-25",
-  "CC": 3,
-  "RId": [ 2173251738, 2011301426, 1485009520, 2127170577, 2342249984, 2060172488, 2131070146, 2176050019, 2084279619, 2083124794, 2141394518, 2140603473, 2333252900, 2002521620, 2043436896, 2963345431, 2610217940, 2903758338, 2071932996, 1975028308, 2160203977, 2768728801, 2417064059, 2044123688, 2738930091, 2515684462, 2771590586, 2343760727, 2027079844, 2102947218, 2524056393, 2800258827, 2255269585, 2790650423, 2793367185, 3000744823, 1502391765, 3014027346 ],
-  "DN": "Improving Subseasonal Forecasting in the Western U.S. with Machine Learning",
-  "DOI": "10.1145/3292500.3330674",
-  "LP": "2335",
-  "FP": "2325",
+  "CC": 49,
+  "RId": [2194775991,2899771611,2964015378,2624431344,2070232376,2027731328,1991418309,2135957668,2807021761,2963695795,2788512147,2963241951,2963581908,2803533564,2963415211,2071128523],
+  "DN": "Cluster-GCN: An Efficient Algorithm for Training Deep and Large Graph Convolutional Networks",
+  "DOI": "10.1145/3292500.3330925",
+  "LP": "266",
+  "FP": "257",
   "BK": "KDD",
   "PB": "ACM",
   "VSN": "KDD",
-  "IA": {
-    "IndexLength": 251,
-    "InvertedIndex": {
-      "Water": [ 0 ],
-      "managers": [ 1 ],
-      "in": [ 2, 57, 67, 80, 132, 248 ],
-      "the": [ 3, 27, 33, 39, 47, 68, 92, 122, 133, 154, 180, 195, 243, 246 ],
-      "western": [ 4, 69 ],
-      "United": [ 5 ],
-      "States": [ 6 ],
-      "(U.S.)": [ 7 ],
-      "rely": [ 8 ],
-      "on": [ 9 ],
-      "longterm": [ 10, 31 ],
-      "forecasts": [ 11, 131 ],
-      "of": [ 12, 29, 36, 114, 125, 153, 194, 211, 245 ],
-      "temperature": [ 13, 64, 225 ],
-      "and": [ 14, 20, 38, 42, 65, 75, 85, 94, 102, 128, 136, 160, 188, 203, 215, 226, 236 ],
-      "precipitation": [ 15, 66 ],
-      "to": [ 16, 61, 72, 77, 91, 100, 241 ],
-      "prepare": [ 17 ],
-      "for": [ 18, 199, 224, 228 ],
-      "droughts": [ 19 ],
-      "other": [ 21 ],
-      "wet": [ 22 ],
-      "weather": [ 23 ],
-      "extremes.": [ 24 ],
-      "To": [ 25 ],
-      "improve": [ 26 ],
-      "accuracy": [ 28 ],
-      "these": [ 30 ],
-      "forecasts,": [ 32 ],
-      "U.S.": [ 34, 70, 183 ],
-      "Bureau": [ 35 ],
-      "Reclamation": [ 37 ],
-      "National": [ 40 ],
-      "Oceanic": [ 41 ],
-      "Atmospheric": [ 43 ],
-      "Administration": [ 44 ],
-      "(NOAA)": [ 45 ],
-      "launched": [ 46 ],
-      "Subseasonal": [ 48 ],
-      "Climate": [ 49, 184 ],
-      "Forecast": [ 50 ],
-      "Rodeo,": [ 51 ],
-      "a": [ 52, 141, 167 ],
-      "year-long": [ 53 ],
-      "real-time": [ 54 ],
-      "forecasting": [ 55, 105 ],
-      "challenge": [ 56 ],
-      "which": [ 58 ],
-      "participants": [ 59 ],
-      "aimed": [ 60 ],
-      "skillfully": [ 62 ],
-      "predict": [ 63 ],
-      "two": [ 71, 115 ],
-      "four": [ 73, 76 ],
-      "weeks": [ 74, 79 ],
-      "six": [ 78 ],
-      "advance.": [ 81 ],
-      "Here": [ 82 ],
-      "we": [ 83 ],
-      "present": [ 84 ],
-      "evaluate": [ 86, 103 ],
-      "our": [ 87, 96, 104, 189, 212, 234, 237 ],
-      "machine": [ 88 ],
-      "learning": [ 89 ],
-      "approach": [ 90 ],
-      "Rodeo": [ 93, 197 ],
-      "release": [ 95 ],
-      "SubseasonalRodeo": [ 97, 134 ],
-      "dataset,": [ 98 ],
-      "collected": [ 99 ],
-      "train": [ 101 ],
-      "system.": [ 106 ],
-      "Our": [ 109 ],
-      "system": [ 110 ],
-      "is": [ 111, 175 ],
-      "an": [ 112, 209 ],
-      "ensemble": [ 113, 190, 210 ],
-      "nonlinear": [ 116 ],
-      "regression": [ 117, 213 ],
-      "models.": [ 118 ],
-      "The": [ 119, 147 ],
-      "first": [ 120 ],
-      "integrates": [ 121 ],
-      "diverse": [ 123 ],
-      "collection": [ 124 ],
-      "meteorological": [ 126 ],
-      "measurements": [ 127, 152 ],
-      "dynamic": [ 129 ],
-      "model": [ 130, 173 ],
-      "dataset": [ 135, 235 ],
-      "prunes": [ 137 ],
-      "irrelevant": [ 138 ],
-      "predictors": [ 139 ],
-      "using": [ 140 ],
-      "customized": [ 142 ],
-      "multitask": [ 143, 162 ],
-      "feature": [ 144 ],
-      "selection": [ 145 ],
-      "procedure.": [ 146 ],
-      "second": [ 148 ],
-      "uses": [ 149 ],
-      "only": [ 150 ],
-      "historical": [ 151 ],
-      "target": [ 155, 201 ],
-      "variable": [ 156, 202 ],
-      "(temperature": [ 157 ],
-      "or": [ 158 ],
-      "precipitation)": [ 159 ],
-      "introduces": [ 161 ],
-      "nearest": [ 163 ],
-      "neighbor": [ 164 ],
-      "features": [ 165 ],
-      "into": [ 166 ],
-      "weighted": [ 168 ],
-      "local": [ 169 ],
-      "linear": [ 170 ],
-      "regression.": [ 171 ],
-      "Each": [ 172 ],
-      "alone": [ 174 ],
-      "significantly": [ 176 ],
-      "more": [ 177 ],
-      "accurate": [ 178 ],
-      "than": [ 179 ],
-      "debiased": [ 181, 216, 219 ],
-      "operational": [ 182 ],
-      "Forecasting": [ 185 ],
-      "System": [ 186 ],
-      "(CFSv2),": [ 187 ],
-      "skill": [ 191, 221 ],
-      "exceeds": [ 192 ],
-      "that": [ 193, 232 ],
-      "top": [ 196 ],
-      "competitor": [ 198 ],
-      "each": [ 200 ],
-      "forecast": [ 204 ],
-      "horizon.": [ 205 ],
-      "Moreover,": [ 206 ],
-      "over": [ 207 ],
-      "2011-2018,": [ 208 ],
-      "models": [ 214 ],
-      "CFSv2": [ 217, 220 ],
-      "improves": [ 218 ],
-      "by": [ 222 ],
-      "40-50%": [ 223 ],
-      "129-169%": [ 227 ],
-      "precipitation.": [ 229 ],
-      "We": [ 230 ],
-      "hope": [ 231 ],
-      "both": [ 233 ],
-      "methods": [ 238 ],
-      "will": [ 239 ],
-      "help": [ 240 ],
-      "advance": [ 242 ],
-      "state": [ 244 ],
-      "art": [ 247 ],
-      "subseasonal": [ 249 ],
-      "forecasting.": [ 250 ]
-    }
-  },
-  "S": [
-    {
-      "Ty": 3,
-      "U": "https://arxiv.org/pdf/1809.07394.pdf"
-    },
-    {
-      "Ty": 3,
-      "U": "https://www.microsoft.com/en-us/research/uploads/prod/2018/12/1809.07394.pdf"
-    },
-    {
-      "Ty": 1,
-      "U": "https://arxiv.org/abs/1809.07394"
-    },
-    {
-      "Ty": 1,
-      "U": "https://dblp.uni-trier.de/db/conf/kdd/kdd2019.html#HwangOCPM19"
-    },
-    {
-      "Ty": 1,
-      "U": "https://dl.acm.org/citation.cfm?id=3330674"
-    },
-    {
-      "Ty": 1,
-      "U": "https://www.kdd.org/kdd2019/accepted-papers#238"
-    },
-    {
-      "Ty": 1,
-      "U": "https://www.microsoft.com/en-us/research/publication/improving-subseasonal-forecasting-in-the-western-u-s-with-machine-learning-2/"
-    }
-  ],
+  "IA": "{\"IndexLength\": 275,\"InvertedIndex\": {\"2\": [149],\"4\": [203],\"5\": [160],\"36\": [215],\"61\": [153],\"1961\": [190],\"Graph\": [0],\"convolutional\": [1],\"network\": [2],\"(GCN)\": [3],\"has\": [4],\"been\": [5],\"successfully\": [6],\"applied\": [7],\"to\": [8,117,127,225,228,236,249],\"many\": [9],\"graph-based\": [10],\"applications;\": [11],\"however,\": [12],\"training\": [13,70,172,202,222],\"a\": [14,25,38,61,87,94,99,144,173,253],\"large-scale\": [15],\"GCN\": [16,35,63,175,205,221,240],\"remains\": [17],\"challenging.\": [18],\"Current\": [19],\"SGD-based\": [20,69],\"algorithms\": [21,223],\"suffer\": [22],\"from\": [23],\"either\": [24],\"high\": [26],\"computational\": [27,122],\"cost\": [28],\"that\": [29,65,91],\"exponentially\": [30],\"grows\": [31],\"with\": [32,93,132,148],\"number\": [33],\"of\": [34,50,89,139],\"layers,\": [36],\"or\": [37],\"large\": [39],\"space\": [40],\"requirement\": [41],\"for\": [42,68,201],\"keeping\": [43],\"the\": [44,48,73,80,105,137,164,183,219,229,264,268],\"entire\": [45],\"graph\": [46,74,100],\"and\": [47,103,121,152,192,244],\"embedding\": [49],\"each\": [51,83],\"node\": [52],\"in\": [53,213],\"memory.\": [54],\"In\": [55],\"this\": [56,109,177,207],\"paper,\": [57],\"we\": [58,142,256],\"propose\": [59],\"Cluster-GCN,\": [60,255],\"novel\": [62],\"algorithm\": [64,210],\"is\": [66,157,180],\"suitable\": [67],\"by\": [71,98],\"exploiting\": [72],\"clustering\": [75,101],\"structure.\": [76],\"Cluster-GCN\": [77,179,233],\"works\": [78],\"as\": [79],\"following:\": [81],\"at\": [82],\"step,\": [84],\"it\": [85],\"samples\": [86],\"block\": [88],\"nodes\": [90,151],\"associate\": [92],\"dense\": [95],\"subgraph\": [96],\"identified\": [97],\"algorithm,\": [102,141],\"restricts\": [104],\"neighborhood\": [106],\"search\": [107],\"within\": [108],\"subgraph.\": [110],\"This\": [111],\"simple\": [112],\"but\": [113],\"effective\": [114],\"strategy\": [115],\"leads\": [116,248],\"significantly\": [118],\"improved\": [119,250],\"memory\": [120,196,245],\"efficiency\": [123],\"while\": [124,217,267],\"being\": [125],\"able\": [126],\"achieve\": [128,257],\"comparable\": [129],\"test\": [130,136,259],\"accuracy\": [131],\"previous\": [133,165,184,269],\"algorithms.\": [134],\"To\": [135],\"scalability\": [138],\"our\": [140,209],\"create\": [143],\"new\": [145],\"Amazon2M\": [146],\"data\": [147],\"million\": [150,154],\"edges\": [155],\"which\": [156,247],\"more\": [158],\"than\": [159,163,182],\"times\": [161],\"larger\": [162],\"largest\": [166],\"publicly\": [167],\"available\": [168],\"dataset\": [169],\"(Reddit).\": [170],\"For\": [171],\"3-layer\": [174],\"on\": [176,206,263],\"data,\": [178,208],\"faster\": [181],\"state-of-the-art\": [185,258],\"VR-GCN\": [186],\"(1523\": [187],\"seconds\": [188],\"vs\": [189,198],\"seconds)\": [191],\"using\": [193],\"much\": [194,238,242],\"less\": [195],\"(2.2GB\": [197],\"11.2GB).\": [199],\"Furthermore,\": [200,232],\"layer\": [204],\"can\": [211],\"finish\": [212],\"around\": [214],\"minutes\": [216],\"all\": [218],\"existing\": [220],\"fail\": [224],\"train\": [226,237],\"due\": [227],\"out-of-memory\": [230],\"issue.\": [231],\"allows\": [234],\"us\": [235],\"deeper\": [239],\"without\": [241],\"time\": [243],\"overhead,\": [246],\"prediction\": [251],\"accuracy---using\": [252],\"5-layer\": [254],\"F1\": [260],\"score\": [261],\"99.36\": [262],\"PPI\": [265],\"dataset,\": [266],\"best\": [270],\"result\": [271],\"was\": [272],\"98.71\": [273],\"by~\\\\citezhang2018gaan.\": [274]}}",
+  "S": "[ { \"Ty\": 3, \"U\": \"https://arxiv.org/pdf/1905.07953.pdf\" }, { \"Ty\": 1, \"U\": \"https://arxiv.org/abs/1905.07953\" }, { \"Ty\": 1, \"U\": \"https://dblp.uni-trier.de/db/conf/kdd/kdd2019.html#ChiangLSLBH19\" }, { \"Ty\": 1, \"U\": \"https://scirate.com/arxiv/1905.07953\" }, { \"Ty\": 1, \"U\": \"https://ui.adsabs.harvard.edu/abs/2019arXiv190507953C/abstract\" }, { \"Ty\": 1, \"U\": \"https://www.kdd.org/kdd2019/accepted-papers#26\" }, { \"U\": \"https://dl.acm.org/citation.cfm?id=3330925\" } ]",
   "AA": [
     {
-      "DAuN": "Jessica Hwang",
-      "AuN": "jessica hwang",
-      "AuId": 2900591679,
-      "DAfN": "Stanford University",
-      "AfN": "stanford university",
-      "AfId": 97018004,
+      "DAuN": "Wei-Lin Chiang",
+      "AuN": "weilin chiang",
+      "AuId": 2250130882,
+      "DAfN": "National Taiwan University",
+      "AfN": "national taiwan university",
+      "AfId": 16733864,
       "S": 1
     },
     {
-      "DAuN": "Paulo Orenstein",
-      "AuN": "paulo orenstein",
-      "AuId": 2634142713,
-      "DAfN": "Stanford University",
-      "AfN": "stanford university",
-      "AfId": 97018004,
+      "DAuN": "Xuanqing Liu",
+      "AuN": "xuanqing liu",
+      "AuId": 2944990871,
+      "DAfN": "University of California, Los Angeles",
+      "AfN": "university of california los angeles",
+      "AfId": 161318765,
       "S": 2
     },
     {
-      "DAuN": "Judah Cohen",
-      "AuN": "judah cohen",
-      "AuId": 2138981458,
-      "DAfN": "Atmospheric and Environmental Research, Lexington, MA, USA",
+      "DAuN": "Si Si",
+      "AuN": "si si",
+      "AuId": 2099379656,
+      "DAfN": "Google",
+      "AfN": "google",
+      "AfId": 1291425158,
       "S": 3
     },
     {
-      "DAuN": "Karl Pfeiffer",
-      "AuN": "karl pfeiffer",
-      "AuId": 2691472296,
-      "DAfN": "Atmospheric and Environmental Research, Lexington, MA, USA",
+      "DAuN": "Yang Li",
+      "AuN": "yang li",
+      "AuId": 2294602198,
+      "DAfN": "Google",
+      "AfN": "google",
+      "AfId": 1291425158,
       "S": 4
     },
     {
-      "DAuN": "Lester Mackey",
-      "AuN": "lester mackey",
-      "AuId": 2134505947,
-      "DAfN": "Microsoft",
-      "AfN": "microsoft",
-      "AfId": 1290206253,
+      "DAuN": "Samy Bengio",
+      "AuN": "samy bengio",
+      "AuId": 2016539005,
+      "DAfN": "Google",
+      "AfN": "google",
+      "AfId": 1291425158,
       "S": 5
+    },
+    {
+      "DAuN": "Cho-Jui Hsieh",
+      "AuN": "chojui hsieh",
+      "AuId": 2148022289,
+      "DAfN": "University of California, Los Angeles",
+      "AfN": "university of california los angeles",
+      "AfId": 161318765,
+      "S": 6
     }
   ],
   "F": [
     {
-      "DFN": "k-nearest neighbors algorithm",
-      "FN": "k nearest neighbors algorithm",
-      "FId": 113238511
+      "DFN": "Theoretical computer science",
+      "FN": "theoretical computer science",
+      "FId": 80444323
     },
     {
-      "DFN": "Wet weather",
-      "FN": "wet weather",
-      "FId": 2991722355
+      "DFN": "Semi-supervised learning",
+      "FN": "semi supervised learning",
+      "FId": 58973888
     },
     {
-      "DFN": "Regression analysis",
-      "FN": "regression analysis",
-      "FId": 152877465
+      "DFN": "Scalability",
+      "FN": "scalability",
+      "FId": 48044578
     },
     {
-      "DFN": "Precipitation",
-      "FN": "precipitation",
-      "FId": 107054158
+      "DFN": "Graph",
+      "FN": "graph",
+      "FId": 132525143
     },
     {
-      "DFN": "Nonlinear regression",
-      "FN": "nonlinear regression",
-      "FId": 46889948
+      "DFN": "F1 score",
+      "FN": "f1 score",
+      "FId": 148524875
     },
     {
-      "DFN": "Machine learning",
-      "FN": "machine learning",
-      "FId": 119857082
+      "DFN": "Embedding",
+      "FN": "embedding",
+      "FId": 41608201
     },
     {
-      "DFN": "Local regression",
-      "FN": "local regression",
-      "FId": 60316415
-    },
-    {
-      "DFN": "Feature selection",
-      "FN": "feature selection",
-      "FId": 148483581
+      "DFN": "Deep learning",
+      "FN": "deep learning",
+      "FId": 108583219
     },
     {
       "DFN": "Computer science",
@@ -358,9 +176,171 @@ The following entity JSON data is for an index that supports academic paper enti
       "FId": 41008148
     },
     {
-      "DFN": "Climate forecast",
-      "FN": "climate forecast",
-      "FId": 2994424460
+      "DFN": "Clustering coefficient",
+      "FN": "clustering coefficient",
+      "FId": 22047676
+    },
+    {
+      "DFN": "Cluster analysis",
+      "FN": "cluster analysis",
+      "FId": 73555534
+    },
+    {
+      "DFN": "Artificial intelligence",
+      "FN": "artificial intelligence",
+      "FId": 154945302
+    }
+  ],
+  "C": {
+    "CN": "kdd",
+    "CId": 1130985203
+  },
+  "CI": {
+    "CIN": "kdd 2019",
+    "CIId": 2992576872
+  }
+}
+{
+  "logprob": -19.03,
+  "Id": 2951621897,
+  "Ti": "sherlock a deep learning approach to semantic data type detection",
+  "W": ["sherlock","a","deep","learning","approach","to","semantic","data","type","detection"],
+  "AW": ["correctly","detecting","semantic","type","data","columns","crucial","science","tasks","automated","cleaning","schema","matching","discovery","existing","preparation","systems","rely","dictionary","lookups","regular","expression","detect","types","approaches","robust","dirty","limited","number","introduce","sherlock","multi","input","deep","neural","network","train","686","765","retrieved","viznet","corpus","78","dbpedia","column","headers","characterize","matched","1","588","features","describing","statistical","properties","character","distributions","word","embeddings","paragraph","vectors","values","achieves","support","weighted","f","score","0","89","exceeding","machine","learning","baselines","benchmarks","consensus","crowdsourced","annotations"],
+  "Y": 2019,
+  "D": "2019-07-25",
+  "CC": 11,
+  "RId": [2101234009,2250539671,2131744502,102708294,2008896880,2094728533,2151401338,2108223890,2092364718,2064766209,2111869785,2106895292,2028742638,2275294428,2795089200,2255747889,2795302121,1501251778,2522154031,2941366772,2604190938,2798546256,2187252142,2789111643,2407487288],
+  "DN": "Sherlock: A Deep Learning Approach to Semantic Data Type Detection",
+  "DOI": "10.1145/3292500.3330993",
+  "LP": "1508",
+  "FP": "1500",
+  "BK": "KDD",
+  "PB": "ACM",
+  "VSN": "KDD",
+  "IA": "{\"IndexLength\": 142,\"InvertedIndex\": {\"Correctly\": [0],\"detecting\": [1,70],\"the\": [2,82,104,137],\"semantic\": [3,40,71,88],\"type\": [4],\"of\": [5,59,114,123,127,139],\"data\": [6,11,17,22,25,52,78],\"columns\": [7,79],\"is\": [8],\"crucial\": [9],\"for\": [10,69],\"science\": [12],\"tasks\": [13],\"such\": [14],\"as\": [15],\"automated\": [16],\"cleaning,\": [18],\"schema\": [19],\"matching,\": [20],\"and\": [21,27,34,53,111,132,136],\"discovery.\": [23],\"Existing\": [24],\"preparation\": [26],\"analysis\": [28],\"systems\": [29],\"rely\": [30],\"on\": [31,76],\"dictionary\": [32,131],\"lookups\": [33],\"regular\": [35,133],\"expression\": [36,134],\"matching\": [37,86],\"to\": [38,50,92],\"detect\": [39,55],\"types.\": [41,60,72],\"However,\": [42],\"these\": [43],\"matching-based\": [44],\"approaches\": [45],\"often\": [46],\"are\": [47],\"not\": [48],\"robust\": [49],\"dirty\": [51],\"only\": [54],\"a\": [56,64,119],\"limited\": [57],\"number\": [58],\"We\": [61,73,95],\"introduce\": [62],\"Sherlock,\": [63],\"multi-input\": [65],\"deep\": [66],\"neural\": [67],\"network\": [68],\"train\": [74],\"Sherlock\": [75,117],\"$686,765$\": [77],\"retrieved\": [80],\"from\": [81,90],\"VizNet\": [83],\"corpus\": [84],\"by\": [85],\"$78$\": [87],\"types\": [89],\"DBpedia\": [91],\"column\": [93,99,115],\"headers.\": [94],\"characterize\": [96],\"each\": [97],\"matched\": [98],\"with\": [100],\"$1,588$\": [101],\"features\": [102],\"describing\": [103],\"statistical\": [105],\"properties,\": [106],\"character\": [107],\"distributions,\": [108],\"word\": [109],\"embeddings,\": [110],\"paragraph\": [112],\"vectors\": [113],\"values.\": [116],\"achieves\": [118],\"support-weighted\": [120],\"F$_1$\": [121],\"score\": [122],\"$0.89$,\": [124],\"exceeding\": [125],\"that\": [126],\"machine\": [128],\"learning\": [129],\"baselines,\": [130],\"benchmarks,\": [135],\"consensus\": [138],\"crowdsourced\": [140],\"annotations.\": [141]}}",
+  "S": "[ { \"Ty\": 1, \"U\": \"https://dblp.uni-trier.de/db/conf/kdd/kdd2019.html#HulsebosHBZSKDH19\" }, { \"Ty\": 1, \"U\": \"https://dl.acm.org/citation.cfm?id=3330993\" }, { \"Ty\": 1, \"U\": \"https://doi.org/10.1145/3292500.3330993\" }, { \"Ty\": 1, \"U\": \"https://www.kdd.org/kdd2019/accepted-papers#150\" }, { \"U\": \"http://doi.org/10.1145/3292500.3330993\" } ]",
+  "AA": [
+    {
+      "DAuN": "Madelon Hulsebos",
+      "AuN": "madelon hulsebos",
+      "AuId": 2945167634,
+      "DAfN": "Massachusetts Institute of Technology",
+      "AfN": "massachusetts institute of technology",
+      "AfId": 63966007,
+      "S": 1
+    },
+    {
+      "DAuN": "Kevin Hu",
+      "AuN": "kevin hu",
+      "AuId": 2169178449,
+      "DAfN": "Massachusetts Institute of Technology",
+      "AfN": "massachusetts institute of technology",
+      "AfId": 63966007,
+      "S": 2
+    },
+    {
+      "DAuN": "Michiel Bakker",
+      "AuN": "michiel a bakker",
+      "AuId": 2886122990,
+      "DAfN": "Massachusetts Institute of Technology",
+      "AfN": "massachusetts institute of technology",
+      "AfId": 63966007,
+      "S": 3
+    },
+    {
+      "DAuN": "Emanuel Zgraggen",
+      "AuN": "emanuel zgraggen",
+      "AuId": 1770674175,
+      "DAfN": "Massachusetts Institute of Technology",
+      "AfN": "massachusetts institute of technology",
+      "AfId": 63966007,
+      "S": 4
+    },
+    {
+      "DAuN": "Arvind Satyanarayan",
+      "AuN": "arvind satyanarayan",
+      "AuId": 2022576506,
+      "DAfN": "Massachusetts Institute of Technology",
+      "AfN": "massachusetts institute of technology",
+      "AfId": 63966007,
+      "S": 5
+    },
+    {
+      "DAuN": "Tim Kraska",
+      "AuN": "tim kraska",
+      "AuId": 2078839115,
+      "DAfN": "Massachusetts Institute of Technology",
+      "AfN": "massachusetts institute of technology",
+      "AfId": 63966007,
+      "S": 6
+    },
+    {
+      "DAuN": "Çagatay Demiralp",
+      "AuN": "cagatay demiralp",
+      "AuId": 2000216820,
+      "DAfN": "Megagon Labs, Mountain View, CA, USA",
+      "S": 7
+    },
+    {
+      "DAuN": "César Hidalgo",
+      "AuN": "cesar a hidalgo",
+      "AuId": 2152661887,
+      "DAfN": "Massachusetts Institute of Technology",
+      "AfN": "massachusetts institute of technology",
+      "AfId": 63966007,
+      "S": 8
+    }
+  ],
+  "F": [
+    {
+      "DFN": "Semantic data model",
+      "FN": "semantic data model",
+      "FId": 90312973
+    },
+    {
+      "DFN": "Schema matching",
+      "FN": "schema matching",
+      "FId": 2777327318
+    },
+    {
+      "DFN": "Regular expression",
+      "FN": "regular expression",
+      "FId": 121329065
+    },
+    {
+      "DFN": "Paragraph",
+      "FN": "paragraph",
+      "FId": 2777206241
+    },
+    {
+      "DFN": "Natural language processing",
+      "FN": "natural language processing",
+      "FId": 204321447
+    },
+    {
+      "DFN": "Dirty data",
+      "FN": "dirty data",
+      "FId": 180235380
+    },
+    {
+      "DFN": "Deep learning",
+      "FN": "deep learning",
+      "FId": 108583219
+    },
+    {
+      "DFN": "Data discovery",
+      "FN": "data discovery",
+      "FId": 2777516300
+    },
+    {
+      "DFN": "Computer science",
+      "FN": "computer science",
+      "FId": 41008148
+    },
+    {
+      "DFN": "Artificial neural network",
+      "FN": "artificial neural network",
+      "FId": 50644808
     },
     {
       "DFN": "Artificial intelligence",
@@ -378,3 +358,10 @@ The following entity JSON data is for an index that supports academic paper enti
   }
 }
 ```
+
+## Next steps
+
+Advance to the next section to learn how to build and test a custom MAKES index using the example data presented in the previous sections.
+
+> [!div class="nextstepaction"]
+>[Build and test index](how-to-index-build.md)
