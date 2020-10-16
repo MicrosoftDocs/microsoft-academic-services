@@ -151,7 +151,7 @@ foreach ($privateLibraryPaper in $privateLibraryPapers)
         query = $privateLibraryPaper.OriginalTitle;
         complete = 0;
         normalize = 1;
-        attributes = "Id,DN,F.DFN,F.FN,AA.DAuN,AA.AuN,AA.DAfN,AA.AfN,AA.S,IA,W,DOI,CC,ECC";
+        attributes = "Id,DN,F.DFN,F.FN,AA.DAuN,AA.AuN,AA.DAfN,AA.AfN,AA.S,IA,DOI,CC,ECC";
         count = 1;
         entityCount = 1;
         timeout = 2000;
