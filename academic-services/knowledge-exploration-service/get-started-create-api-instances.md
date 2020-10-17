@@ -82,7 +82,7 @@ At this point you are ready to deploy an instance of MAKES to your Azure account
     The command will then prompt you to go to a secure website to authenticate.
 
 > [!NOTE]
-> If your account is connected to multiple Azure Directories or Azure Subscriptions, you'll also have to specify the **--AzureActiveDirectoryDomainName** and/or **--AzureSubscriptionId** parameters. See [Command Line Tool Reference](reference-makes-command-line-tool.md#common-authentication-parameters) for more details.
+> If your account is connected to multiple Azure Directories or Azure Subscriptions, you'll also have to specify the **--AzureActiveDirectoryDomainName** and/or **--AzureSubscriptionId** parameters. See [Command Line Tool Reference](reference-makes-command-line-tool.md#common-azure-authentication-parameters) for more details.
 
 1. Open a new browser window and copy the URL from the command.  Ex: **https://microsoft.com/devicelogin**
 
