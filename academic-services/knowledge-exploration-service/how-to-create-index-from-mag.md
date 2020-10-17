@@ -14,7 +14,7 @@ ms.date: 2020-06-12
 - Microsoft Academic Graph (MAG) subscription. See [Get Microsoft Academic Graph on an Azure Storage](../graph/get-started-setup-provisioning.md) to obtain one.
 - [Set up Azure Data Lake Analytics for MAG](../graph/get-started-setup-azure-data-lake-analytics.md)
 - Microsoft Academic Knowledge Exploration Service (MAKES) subscription. See [Get started with Microsoft Academic Knowledge Exploration Service](get-started-setup-provisioning.md) to obtain one.
-- Azure Subscription with access to appropriate Azure Services, Virtual Machine SKU, and enough vCPU quota. See [Azure Subscription quota limit reached](resources-troubleshoot-guide.md#Azure-Subscription-quota-limit-reached) for more information.
+- Azure Subscription with access to appropriate Azure Services, Virtual Machine SKU, and enough vCPU quota. See [Azure Subscription quota limit reached](resources-troubleshoot-guide.md#azure-subscription-quota-limit-reached) for more information.
 
 ## Transform MAG to MAKES entity files
 
@@ -133,7 +133,7 @@ The next step is generating MAKES index file from MAKES entity file. You'll subm
 > Time to create an index can be up to 3 hours.
 >
 > Due to regional restrictions, new Azure Batch Accounts in many region will have 0 vCore limit. This will cause index jobs to get stuck.
-> See [Azure Subscription quota limit reached](resources-troubleshoot-guide.md#Azure-Subscription-quota-limit-reached) for more details.
+> See [Azure Subscription quota limit reached](resources-troubleshoot-guide.md#azure-subscription-quota-limit-reached) for more details.
 
 ## Monitor the build index job progress
 
