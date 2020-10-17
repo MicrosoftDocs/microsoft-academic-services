@@ -2,7 +2,7 @@
 title: Get started with create MAKES API instances
 description: Step-by-step guide for deploying Microsoft Academic Knowledge Exploration Service(MAKES) APIs using MAKES management tool.
 ms.topic: tutorial
-ms.date: 2020-06-12
+ms.date: 10/16/2020
 ---
 
 # Deploying a basic MAKES instance to Azure from your Subscription
@@ -12,7 +12,7 @@ ms.date: 2020-06-12
 ## Prerequisites
 
 - Microsoft Academic Knowledge Exploration Service (MAKES) subscription. See [Get started with Microsoft Academic Knowledge Exploration Service](get-started-setup-provisioning.md) to obtain one.
-- Azure Subscription. The Azure Subscription must be able to create virtual machine with "Standard_DS4_v2" SKU. See [Azure Subscription quota limit reached](resources-troubleshoot-guide.md#Azure-Subscription-quota-limit-reached) for more information.
+- Azure Subscription. The Azure Subscription must be able to create virtual machine with "Standard_DS4_v2" SKU. See [Azure Subscription quota limit reached](resources-troubleshoot-guide.md#azure-subscription-quota-limit-reached) for more information.
 
 ## Verify the folders and content of the current release
 
@@ -57,7 +57,7 @@ Once the file has been downloaded you will need to extract the contents.  Right 
 
 > [!IMPORTANT]
 > This command will run under your Azure credentials, have your Azure login credentials ready.
-> The Azure Subscription used for the command must be able to create a virtual machine with "Standard_DS4_v2" SKU. See [Azure Subscription quota limit reached](resources-troubleshoot-guide.md#Azure-Subscription-quota-limit-reached) for more details.
+> The Azure Subscription used for the command must be able to create a virtual machine with "Standard_DS4_v2" SKU. See [Azure Subscription quota limit reached](resources-troubleshoot-guide.md#azure-subscription-quota-limit-reached) for more details.
 
 At this point you are ready to deploy an instance of MAKES to your Azure account. We will start by creating an Azure VM Image that MAKES can use to deploy MAKES hosts. Kesm.exe will create the VM Image by spinning up a virtual machine with "Standard_DS4_v2" SKU. This image contains the necessary environment resources and configuration for MAKES to run inside Azure Machine Scale Sets and can be reused to generate more instances of MAKES.
 
@@ -82,7 +82,7 @@ At this point you are ready to deploy an instance of MAKES to your Azure account
     The command will then prompt you to go to a secure website to authenticate.
 
 > [!NOTE]
-> If your account is connected to multiple Azure Directories or Azure Subscriptions, you'll also have to specify the **--AzureActiveDirectoryDomainName** and/or **--AzureSubscriptionId** parameters. See [Command Line Tool Reference](reference-makes-command-line-tool#common-authentication-parameters) for more details.
+> If your account is connected to multiple Azure Directories or Azure Subscriptions, you'll also have to specify the **--AzureActiveDirectoryDomainName** and/or **--AzureSubscriptionId** parameters. See [Command Line Tool Reference](reference-makes-command-line-tool.md#common-azure-authentication-parameters) for more details.
 
 1. Open a new browser window and copy the URL from the command.  Ex: **https://microsoft.com/devicelogin**
 
@@ -99,7 +99,7 @@ At this point you are ready to deploy an instance of MAKES to your Azure account
 
 > [!IMPORTANT]
 > This command will run under your Azure credentials, have your Azure login credentials ready.
-> The Azure Subscription used for the command must be able to create a virtual machine with "Standard_D14_v2" SKU. See [Azure Subscription quota limit reached](resources-troubleshoot-guide.md#Azure-Subscription-quota-limit-reached) for more details.
+> The Azure Subscription used for the command must be able to create a virtual machine with "Standard_D14_v2" SKU. See [Azure Subscription quota limit reached](resources-troubleshoot-guide.md#azure-subscription-quota-limit-reached) for more details.
 
 Now that the MAKES hosting Virtual Machine Image is created, you are ready to use it to deploy MAKES hosts to a Virtual Machine Scale Set.
 

@@ -1,8 +1,8 @@
 ---
 title: Index schema
 description: Defines the file format and structure for MAKES index schema
-ms.topic: tutorial
-ms.date: 8/5/2020
+ms.topic: how-to
+ms.date: 9/1/2020
 ---
 
 # Index schema files
@@ -109,213 +109,50 @@ is_between | Enables inequality matching (<, <=, >=, >) of attribute values | in
 
 ### Academic paper entity schema
 
-The following schema definition is for an index that supports academic paper entities, and is meant to be a subset of the full [MAKES academic entity schema](reference-makes-api-entity-schema.md).
+The following schema definition is for an index that supports academic paper entities, and is meant to be a subset of the full [MAKES academic entity schema](reference-makes-api-entity-schema.md). It also includes references to [example synonym files detailed on the synonym how-to page](how-to-index-synonym.md#example).
 
 ``` JSON
 {
   "attributes": [
-    {
-      "name": "AA",
-      "type": "Composite*"
-    },
-    {
-      "name": "AA.AfId",
-      "type": "int64",
-      "operations": [
-        "equals"
-      ]
-    },
-    {
-      "name": "AA.AfN",
-      "type": "string?",
-      "operations": [
-        "equals",
-        "starts_with"
-      ],
-      "synonyms": "AffiliationSynonyms.txt"
-    },
-    {
-      "name": "AA.AuId",
-      "type": "int64",
-      "operations": [
-        "equals"
-      ]
-    },
-    {
-      "name": "AA.AuN",
-      "type": "string?",
-      "operations": [
-        "equals",
-        "starts_with"
-      ],
-      "synonyms": "AuthorSynonyms.txt"
-    },
-    {
-      "name": "AA.DAfN",
-      "type": "blob?"
-    },
-    {
-      "name": "AA.DAuN",
-      "type": "blob?"
-    },
-    {
-      "name": "AA.S",
-      "type": "int32?",
-      "operations": [
-        "equals"
-      ]
-    },
-    {
-      "name": "AW",
-      "type": "string*",
-      "operations": [
-        "equals"
-      ]
-    },
-    {
-      "name": "C",
-      "type": "Composite?"
-    },
-    {
-      "name": "C.CId",
-      "type": "int64",
-      "operations": [
-        "equals"
-      ]
-    },
-    {
-      "name": "C.CN",
-      "type": "string?",
-      "operations": [
-        "equals",
-        "starts_with"
-      ],
-      "synonyms": "ConferenceSynonyms.txt"
-    },
-    {
-      "name": "CC",
-      "type": "int32?"
-    },
-    {
-      "name": "CI",
-      "type": "Composite?"
-    },
-    {
-      "name": "CI.CIId",
-      "type": "int64",
-      "operations": [
-        "equals"
-      ]
-    },
-    {
-      "name": "CI.CIN",
-      "type": "string?",
-      "operations": [
-        "equals"
-      ]
-    },
-    {
-      "name": "D",
-      "type": "date?",
-      "operations": [
-        "equals",
-        "is_between"
-      ]
-    },
-    {
-      "name": "DN",
-      "type": "blob?"
-    },
-    {
-      "name": "DOI",
-      "type": "string?",
-      "operations": [
-        "equals",
-        "starts_with"
-      ]
-    },
-    {
-      "name": "F",
-      "type": "Composite*"
-    },
-    {
-      "name": "F.DFN",
-      "type": "blob?"
-    },
-    {
-      "name": "F.FId",
-      "type": "int64",
-      "operations": [
-        "equals"
-      ]
-    },
-    {
-      "name": "F.FN",
-      "type": "string?",
-      "operations": [
-        "equals",
-        "starts_with"
-      ],
-      "synonyms": "FieldOfStudySynonyms.txt"
-    },
-    {
-      "name": "FP",
-      "type": "string?",
-      "operations": [
-        "equals"
-      ]
-    },
-    {
-      "name": "IA",
-      "type": "blob?"
-    },
-    {
-      "name": "Id",
-      "type": "int64!",
-      "operations": [
-        "equals"
-      ]
-    },
-    {
-      "name": "LP",
-      "type": "string?",
-      "operations": [
-        "equals"
-      ]
-    },
-    {
-      "name": "RId",
-      "type": "int64*",
-      "operations": [
-        "equals"
-      ]
-    },
-    {
-      "name": "S",
-      "type": "blob?"
-    },
-    {
-      "name": "Ti",
-      "type": "string?",
-      "operations": [
-        "equals"
-      ]
-    },
-    {
-      "name": "W",
-      "type": "string*",
-      "operations": [
-        "equals"
-      ]
-    },
-    {
-      "name": "Y",
-      "type": "int32?",
-      "operations": [
-        "equals",
-        "is_between"
-      ]
-    }
+    {"name": "AA", "type": "Composite*"},
+    {"name": "AA.AfId", "type": "int64", "operations": ["equals"]},
+    {"name": "AA.AfN", "type": "string?", "operations": ["equals", "starts_with"]},
+    {"name": "AA.AuId", "type": "int64", "operations": ["equals"]},
+    {"name": "AA.AuN", "type": "string?", "operations": ["equals", "starts_with"]},
+    {"name": "AA.DAfN", "type": "blob?" },
+    {"name": "AA.DAuN", "type": "blob?"},
+    {"name": "AA.S", "type": "int32?", "operations": ["equals"]},
+    {"name": "AW", "type": "string*", "operations": ["equals"]},
+    {"name": "C", "type": "Composite?"},
+    {"name": "C.CId", "type": "int64", "operations": ["equals"]},
+    {"name": "C.CN", "type": "string?", "operations": ["equals", "starts_with"], "synonyms": "conference-series-synonyms.txt"},
+    {"name": "CC", "type": "int32?"},
+    {"name": "CI", "type": "Composite?"},
+    {"name": "CI.CIId", "type": "int64", "operations": ["equals"]},
+    {"name": "CI.CIN", "type": "string?", "operations": ["equals", "starts_with"], "synonyms": "conference-instance-synonyms.txt"},
+    {"name": "D", "type": "date?", "operations": ["equals", "is_between"]},
+    {"name": "DN", "type": "blob?"},
+    {"name": "DOI", "type": "string?", "operations": ["equals", "starts_with"]},
+    {"name": "F", "type": "Composite*"},
+    {"name": "F.DFN", "type": "blob?"},
+    {"name": "F.FId", "type": "int64", "operations": ["equals"]},
+    {"name": "F.FN", "type": "string?", "operations": ["equals", "starts_with"]},
+    {"name": "FP", "type": "string?", "operations": ["equals"]},
+    {"name": "IA", "type": "blob?" },
+    {"name": "Id", "type": "int64!", "operations": ["equals"]},
+    {"name": "LP", "type": "string?", "operations": ["equals"]},
+    {"name": "RId", "type": "int64*", "operations": ["equals"]},
+    {"name": "S", "type": "blob?"},
+    {"name": "Ti", "type": "string?", "operations": ["equals"]},
+    {"name": "W", "type": "string*", "operations": ["equals"]},
+    {"name": "Y", "type": "int32?", "operations": ["equals", "is_between"]}
   ]
 }
 ```
+
+## Next steps
+
+Advance to the next sections to learn about defining synonym data.
+
+> [!div class="nextstepaction"]
+>[Define synonyms](how-to-index-synonym.md)

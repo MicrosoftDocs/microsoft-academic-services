@@ -2,7 +2,7 @@
 title: Create Microsoft Academic Knowlege Exploration Service (MAKES) index from Microsoft Academic Graph (MAG)
 description: Step-by-step guide for generating MAKES indexes from a MAG release.
 ms.topic: tutorial
-ms.date: 2020-06-12
+ms.date: 10/16/2020
 ---
 
 # Create custom MAKES index from a MAG release
@@ -14,7 +14,7 @@ ms.date: 2020-06-12
 - Microsoft Academic Graph (MAG) subscription. See [Get Microsoft Academic Graph on an Azure Storage](../graph/get-started-setup-provisioning.md) to obtain one.
 - [Set up Azure Data Lake Analytics for MAG](../graph/get-started-setup-azure-data-lake-analytics.md)
 - Microsoft Academic Knowledge Exploration Service (MAKES) subscription. See [Get started with Microsoft Academic Knowledge Exploration Service](get-started-setup-provisioning.md) to obtain one.
-- Azure Subscription with access to appropriate Azure Services, Virtual Machine SKU, and enough vCPU quota. See [Azure Subscription quota limit reached](resources-troubleshoot-guide.md#Azure-Subscription-quota-limit-reached) for more information.
+- Azure Subscription with access to appropriate Azure Services, Virtual Machine SKU, and enough vCPU quota. See [Azure Subscription quota limit reached](resources-troubleshoot-guide.md#azure-subscription-quota-limit-reached) for more information.
 
 ## Transform MAG to MAKES entity files
 
@@ -97,10 +97,10 @@ If you have not done so already, download the Kesm.exe tool from your MAKES subs
 1. Run the command
     > [!NOTE]
     > If have multiple Azure Subscriptions and/or Tenants, you'll specify additional parameters.
-    > See [Azure login failure due to multiple subscriptions or multiple tenants being tied to a single Azure account](resources-troubleshoot-guide.md#Azure-login-failure-due-to-multiple-subscriptions-or-multiple-tenants-being-tied-to-a-single-Azure-account) for more details.
+    > See [Azure login failure due to multiple subscriptions or multiple tenants being tied to a single Azure account](resources-troubleshoot-guide.md#azure-login-failure-due-to-multiple-subscriptions-or-multiple-tenants-being-tied-to-a-single-azure-account) for more details.
     >
     > If your Azure Subscription hasn't been registered for Azure Batch service, you'll need to do so.
-    See [Azure Batch service not registered](resources-troubleshoot-guide.md#Azure-Batch-service-not-registered) for more details.
+    See [Azure Batch service not registered](resources-troubleshoot-guide.md#azure-batch-service-not-registered) for more details.
 
 ## Generate MAKES index files from MAKES entity files
 
@@ -123,7 +123,7 @@ The next step is generating MAKES index file from MAKES entity file. You'll subm
 1. Run the command
     > [!NOTE]
     > If have multiple Azure Subscriptions and/or Tenants, you'll specify additional parameters.
-    > See [Azure login failure due to multiple subscriptions or multiple tenants being tied to a single Azure account](resources-troubleshoot-guide.md#Azure-login-failure-due-to-multiple-subscriptions-or-multiple-tenants-being-tied-to-a-single-Azure-account) for more details.
+    > See [Azure login failure due to multiple subscriptions or multiple tenants being tied to a single Azure account](resources-troubleshoot-guide.md#azure-login-failure-due-to-multiple-subscriptions-or-multiple-tenants-being-tied-to-a-single-azure-account) for more details.
 
 1. The command should return a build index job ID for you monitor the job progress
 
@@ -133,7 +133,7 @@ The next step is generating MAKES index file from MAKES entity file. You'll subm
 > Time to create an index can be up to 3 hours.
 >
 > Due to regional restrictions, new Azure Batch Accounts in many region will have 0 vCore limit. This will cause index jobs to get stuck.
-> See [Azure Subscription quota limit reached](resources-troubleshoot-guide.md#Azure-Subscription-quota-limit-reached) for more details.
+> See [Azure Subscription quota limit reached](resources-troubleshoot-guide.md#azure-subscription-quota-limit-reached) for more details.
 
 ## Monitor the build index job progress
 
@@ -142,10 +142,10 @@ You can check the build index job progress using Azure Management Portal. Each j
 1. In [Azure Management Portal](https://portal.azure.com), find the Azure Batch Account associated with the indexing resources created above. The batch account name should be the same as the **--IndexResourceName** parameter used for CreateIndexResources command above.
 
 1. In Azure Batch Account detail page, select **Jobs** and find the build index job using the build index job ID from executing BuildIndex command above.
-    ![select-job-from-batch-account-detail-page](media/select-job-from-batch-account-detail-page.png)
+    ![select job from batch account detail page](media/select-job-from-batch-account-detail-page.png)
 
 1. Get the build index job progress by selecting **Refresh**.
-    ![build-index-job-detail-page](media/build-index-job-detail-page.png)
+    ![build index job detail page](media/build-index-job-detail-page.png)
 
 >[!NOTE]
 > Preprocessor and indexer tasks are created in batches to avoid overwhelming the virtual machine workers. See jobManager task's output for more details.
