@@ -77,7 +77,7 @@ landingContent:
                 url: how-to-grammar.md
               - text: Compile and test grammar
                 url: how-to-grammar-build.md
-       - linkListType: tutorials
+      - linkListType: tutorials
         links:
           - text: Create a custom index from MAG
             url: how-to-create-index-from-mag.md
