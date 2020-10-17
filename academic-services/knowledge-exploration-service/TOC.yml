@@ -78,11 +78,11 @@
 - name: Resources
   expanded: true
   items:
-    - name: FAQ
-     href: resources-faq.md
-    - name: Pricing
-     href: resources-pricing.md
-    - name: Troubleshooting guide
-     href: resources-troubleshoot-guide.md
-    - name: Stack Overflow
-     href: http://stackoverflow.com/questions/tagged/microsoft-academic-knowledge-exploration-service
+  - name: FAQ
+    href: resources-faq.md
+  - name: Pricing
+    href: resources-pricing.md
+  - name: Troubleshooting guide
+    href: resources-troubleshoot-guide.md
+  - name: Stack Overflow
+    href: http://stackoverflow.com/questions/tagged/microsoft-academic-knowledge-exploration-service
