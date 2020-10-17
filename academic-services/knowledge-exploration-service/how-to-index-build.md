@@ -13,7 +13,7 @@ Describes how to use KESM to build a MAKES index on a win-x64 machine using the 
 
 - Operating system that supports win-x64 executables
 - Microsoft Academic Knowledge Exploration Service (MAKES) subscription. See [Get started with Microsoft Academic Knowledge Exploration Service](get-started-setup-provisioning.md) to obtain one
-- Download and install the [KESM command line tool](get-started-create-api-instancesmd#download-the-command-line-tool-kesmexe-from-your-azure-storage-account)
+- Download and install the [KESM command line tool](get-started-create-api-instances.md#download-the-command-line-tool-kesmexe-from-your-azure-storage-account)
 
 ## Create local files
 

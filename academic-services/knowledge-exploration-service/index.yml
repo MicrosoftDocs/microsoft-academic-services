@@ -72,6 +72,7 @@ landingContent:
               - text: Build and test index
                 url: how-to-index-build.md
           - linkListType: Create custom MAKES grammar
+            links:
               - text: Define grammar
                 url: how-to-grammar.md
               - text: Compile and test grammar
