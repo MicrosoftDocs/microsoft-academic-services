@@ -59,7 +59,24 @@ landingContent:
 
   - title: Customize MAKES
     linkLists:
-      - linkListType: tutorial
+      - linkListType: how-to-guide
+        links:
+          - linkListType: Create custom MAKES index
+            links:
+              - text: Define schema
+                url: how-to-index-schema.md
+              - text:  Define synonyms
+                url: how-to-index-synonym.md
+              - text: Define data
+                url: how-to-index-data.md
+              - text: Build and test index
+                url: how-to-index-build.md
+          - linkListType: Create custom MAKES grammar
+              - text: Define grammar
+                url: how-to-grammar.md
+              - text: Compile and test grammar
+                url: how-to-grammar-build.md
+       - linkListType: tutorials
         links:
           - text: Create a custom index from MAG
             url: how-to-create-index-from-mag.md

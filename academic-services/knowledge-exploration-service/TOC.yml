@@ -15,7 +15,7 @@
 - name: How to
   expanded: true
   items:
-  - name: Deploy new MAKES releases to existing MAKES instances
+  - name: Update existing instance with new release
     href: how-to-deploy-new-indexes-to-makes.md
   - name: Delete a MAKES deployment 
     href: how-to-delete-api-instances.md
@@ -37,7 +37,7 @@
     items:
     - name: Define grammar
       href: how-to-grammar.md
-    - name: Build and test grammar
+    - name: Compile and test grammar
       href: how-to-grammar-build.md
 - name: Concepts
   expanded: true
