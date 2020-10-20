@@ -12,7 +12,7 @@ $privateLibraryPapersFilePath = 'samplePrivateLibraryData.json'
 # The output linked library paper data file
 $linkedPrivateLibraryPapersFilePath = 'samplePrivateLibraryData.linked.json'
 # The MAKES API instance endpoint to leverage for entity linking
-$makesEndpoint = 'http://makesdemo.westus.cloudapp.azure.com' # e.g 'http://mymakeshost.westus.cloudapp.azure.com'
+$makesEndpoint = '' # e.g 'http://mymakeshost.westus.cloudapp.azure.com'
 # The MAKES Interpret endpoint to leverage for entity linking
 $interpretEntpoint = $makesEndpoint + "/interpret"
 # The minimum interpretation logprob/score required for entity linking
