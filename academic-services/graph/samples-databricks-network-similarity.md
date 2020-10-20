@@ -4,7 +4,7 @@ description: Network Similarity Sample (PySpark)
 services: microsoft-academic-services
 ms.topic: extra
 ms.service: microsoft-academic-services
-ms.date: 9/23/2020
+ms.date: 10/20/2020
 ---
 # Network Similarity Sample (PySpark)
 
@@ -38,7 +38,7 @@ Follow instructions in [Import MagClass Notebook](import-magclass.md).
 
 In this section, you will import the NetworkSimilarityClass notebook into Azure Databricks workspace. You will include this notebook in this sample later.
 
-1. Download `ns/pyspark/NetworkSimilarityClass.py` in MAG dataset to your local drive.
+1. Download `ns/pyspark/NetworkSimilarityClass.py` in MAG dataset to your local drive. From [Azure portal](https://portal.azure.com), go to the Azure Storage account > **Containers > [mag-yyyy-mm-dd] > ns > pyspark > NetworkSimilarityClass.py > Download**.
 
 1. In the Azure Databricks workspace portal, from **Workspace** > **Users** > **Your folder** drop-down, select **Import**.
 
@@ -50,7 +50,7 @@ In this section, you will import the NetworkSimilarityClass notebook into Azure 
 
 In this section, you will import the NetworkSimilaritySample.py as a notebook in the Azure Databricks workspace and run the notebook.
 
-1. Save **`ns/pyspark/NetworkSimilaritySample.py`** in MAG dataset to your local drive.
+1. Download `ns/pyspark/NetworkSimilaritySample.py` in MAG dataset to your local drive. From [Azure portal](https://portal.azure.com), go to the Azure Storage account > **Containers > [mag-yyyy-mm-dd] > ns > pyspark > NetworkSimilaritySample.py > Download**.
 
 1. In the Azure Databricks workspace portal, from the **Workspace** > **Users** > **Your folder** drop-down, select **Import**.
 
