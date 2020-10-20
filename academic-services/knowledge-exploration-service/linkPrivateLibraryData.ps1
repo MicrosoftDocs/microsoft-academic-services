@@ -1,7 +1,7 @@
 #Requires -Version 7
 
 <#
-  This script helps user link the sample privatge library data with MAG entities and enrich the library paper data by adding linked MAG entity information such as fields of study, structured author/affiliation, DOI, citations, and abstracts.
+  This script helps users link the sample private library data with MAG entities and enrich the library paper data by adding linked MAG entity information such as fields of study, structured author/affiliation, DOI, citations, and abstracts.
 #>
 
 
@@ -12,11 +12,11 @@ $privateLibraryPapersFilePath = 'samplePrivateLibraryData.json'
 # The output linked library paper data file
 $linkedPrivateLibraryPapersFilePath = 'samplePrivateLibraryData.linked.json'
 # The MAKES API instance endpoint to leverage for entity linking
-$makesEndpoint = '' # e.g 'http://mymakeshost.westus.cloudapp.azure.com'
+$makesEndpoint = 'http://makesdemo.westus.cloudapp.azure.com' # e.g 'http://mymakeshost.westus.cloudapp.azure.com'
 # The MAKES Interpret endpoint to leverage for entity linking
 $interpretEntpoint = $makesEndpoint + "/interpret"
 # The minimum interpretation logprob/score required for entity linking
-$minLogProbForLinking = -100
+$minLogProbForLinking = -50
 # The default logprob/score for library papers that can't be linked with MAG entities
 $defaultLogProbForUnlinkedEntities = -20
 
@@ -24,6 +24,7 @@ $defaultLogProbForUnlinkedEntities = -20
 
 #region Utility Functions
 
+# <snippet_merge_entities> 
 # Adds various MAG paper entity information to library paper entity
 function Merge-MagEntity {
     param($privateLibraryPaper, $magEntity)
@@ -99,7 +100,9 @@ function Merge-MagEntity {
         $privateLibraryPaper | Add-Member -MemberType NoteProperty -Name 'OriginalAbstract' -Value  $abstract
     }
 }
+# </snippet_merge_entities> 
 
+# Converts a string to normalized form for search
 function ConvertTo-NormalizedStr {
     param($str)
     # replace all non-alphanumeric characters with a space
@@ -111,15 +114,17 @@ function ConvertTo-NormalizedStr {
     return $str
 }
 
+# Converts a string to a distcint words array
 function ConvertTo-DistinctWordsArray {
     param($str)
     # get words array from string
-    $words = $str.Split(' ')
+    $words = $str.Split(' ', [System.StringSplitOptions]::RemoveEmptyEntries)
     # get unique words
-    $words = $words | Get-Unique 
+    $words = $words | select-object -unique 
     return $words
 }
 
+# Adds title and abstract search attributes for a library paper by transforming its original title and abstract
 function Edit-AddSearchAttribues
 {
     param($libraryPaper)
@@ -131,6 +136,14 @@ function Edit-AddSearchAttribues
     # add normlized title words for partial title search
     $titleWords = ConvertTo-DistinctWordsArray $normalizedTitle
     $libraryPaper | Add-Member -MemberType NoteProperty -Name 'TitleWords' -Value  $titleWords
+
+    # add normalized abstract words for partial abstract search
+    if ($null -ne $libraryPaper.OriginalAbstract)
+    {
+        $normalizedAbstract = ConvertTo-NormalizedStr $libraryPaper.OriginalAbstract
+        $abstractWords = ConvertTo-DistinctWordsArray $normalizedAbstract
+        $libraryPaper | Add-Member -MemberType NoteProperty -Name 'AbstractWords' -Value  $abstractWords
+    }
 }
 
 #endregion Utility Functions
@@ -145,10 +158,11 @@ Write-Host "Linked | ConfidenceScore | OriginalTitle | MagTitle"
 # loop through each presentation to link with MAG entities
 foreach ($privateLibraryPaper in $privateLibraryPapers)
 {
-    #  link entity by using MAKES Interpret API
+    # <snippet_interpret_request> 
+    # link entity by using MAKES Interpret API
     $interpretRequestBody = @{
         #  attempt to link library paper with papers in MAG via title
-        query = $privateLibraryPaper.OriginalTitle;
+        query = "title: " + $privateLibraryPaper.OriginalTitle;
         complete = 0;
         normalize = 1;
         attributes = "Id,DN,F.DFN,F.FN,AA.DAuN,AA.AuN,AA.DAfN,AA.AfN,AA.S,IA,DOI,CC,ECC";
@@ -156,20 +170,23 @@ foreach ($privateLibraryPaper in $privateLibraryPapers)
         entityCount = 1;
         timeout = 2000;
     }
+    # </snippet_interpret_request> 
   
     # submit interpret request and parse response as json
     $interpretResponse = Invoke-WebRequest $interpretEntpoint -Body $interpretRequestBody -Method 'POST'
     $interpretResponseContentJson = $interpretResponse.Content | ConvertFrom-Json -AsHashTable
 
-    # the interpretation logprob represents the "fitness" of the entity to be linked 
-    $entityLinkScore = $interpretResponseContentJson.interpretations[0].logprob
+    # <snippet_interpret_log_probability_as_confidence_score>
+    # the interpretation log probability includes the entity log probability. 
+    # to get the fitness/confidence score of the interpretation, we must exclude the log probability of the entity
+    $linkedEntity = $interpretResponseContentJson.interpretations[0].rules[0].output.entities[0]
+    $entityLinkScore = $interpretResponseContentJson.interpretations[0].logprob - $linkedEntity.logprob
 
     # only link library paper with MAG entity that has a high confident score/logprob
     if ( $null -ne $entityLinkScore -and $entityLinkScore -gt $minLogProbForLinking)
     {
-        $linkedEntity = $interpretResponseContentJson.interpretations[0].rules[0].output.entities[0]
         Merge-MagEntity $privateLibraryPaper $linkedEntity
-        Write-Host "True" "|" $privateLibraryPaper.logprob "|" $privateLibraryPaper.OriginalTitle "|" $linkedEntity.DN
+        Write-Host "True" "|" $entityLinkScore "|" $privateLibraryPaper.OriginalTitle "|" $linkedEntity.DN
     } 
     else 
     {
@@ -177,6 +194,7 @@ foreach ($privateLibraryPaper in $privateLibraryPapers)
         $privateLibraryPaper | Add-Member -MemberType NoteProperty -Name 'logprob' -Value $defaultLogProbForUnlinkedEntities
         Write-Host "False" "|" $entityLinkScore "|" $privateLibraryPaper.OriginalTitle "|" $interpretResponseContentJson.interpretations[0].rules[0].output.entities[0].DN
     }
+    # </snippet_interpret_log_probability_as_confidence_score>
 
     # add search attributes by transforming existing entity attributes
     Edit-AddSearchAttribues $privateLibraryPaper

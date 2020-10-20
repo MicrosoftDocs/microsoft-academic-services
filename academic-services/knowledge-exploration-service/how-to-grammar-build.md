@@ -5,7 +5,7 @@ ms.topic: how-to
 ms.date: 9/1/2020
 ---
 
-# How to build and test a custom grammar
+# How to compile and test a custom grammar
 
 Describes how to use KESM to build a MAKES index on a win-x64 machine using the example data provided in the "Create custom MAKES index" how-to guides.
 
