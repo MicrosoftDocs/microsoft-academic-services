@@ -4,7 +4,7 @@ description: Import MagClass Notebook
 services: microsoft-academic-services
 ms.topic: tutorial
 ms.service: microsoft-academic-services
-ms.date: 9/23/2020
+ms.date: 10/20/2020
 ---
 # Import MagClass (PySpark)
 
