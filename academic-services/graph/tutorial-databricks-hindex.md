@@ -4,7 +4,7 @@ description: Compute author h-index for Microsoft Academic Graph using Azure Dat
 services: microsoft-academic-services
 ms.topic: tutorial
 ms.service: microsoft-academic-services
-ms.date: 9/23/2020
+ms.date: 10/20/2020
 ---
 # Tutorial: Compute author h-index using Azure Databricks
 
@@ -38,7 +38,7 @@ Follow instructions in [Import MagClass Notebook](import-magclass.md).
 
 In this section, you will import the HIndexSample notebook into Azure Databricks workspace and run the notebook.
 
-1. Save `samples/pyspark/HIndexSample.py` in MAG dataset to your local drive.
+1. Download `samples/pyspark/HIndexSample.py` in MAG dataset to your local drive.<br>From [Azure portal](https://portal.azure.com), go to the Azure Storage account > **Containers > [mag-yyyy-mm-dd] > samples > pyspark > HIndexSample.py > Download**.
 
 1. In the Azure Databricks workspace portal, from the **Workspace** > **Users** > **Your folder** drop-down, select **Import**.
 

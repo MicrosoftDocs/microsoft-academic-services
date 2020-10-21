@@ -4,7 +4,7 @@ description: Network Similarity Sample (U-SQL)
 services: microsoft-academic-services
 ms.topic: tutorial
 ms.service: microsoft-academic-services
-ms.date: 9/23/2020
+ms.date: 10/20/2020
 ---
 # Network Similarity Sample (U-SQL)
 
@@ -39,7 +39,7 @@ Follow instructions in [Define MAG functions](define-mag-function.md).
 
 In this section, you submit an ADLA job to define network similarity functions.
 
-1. Download `ns/NetworkSimilarityFunction.usql` to your local drive. <br> From [Azure portal](https://portal.azure.com), go to the Azure Storage account > **Containers > [mag-yyyy-mm-dd] > ns > NetworkSimilarityFunction.usql > Download**.
+1. Download `ns/usql/NetworkSimilarityFunction.usql` to your local drive.<br>From [Azure portal](https://portal.azure.com), go to the Azure Storage account > **Containers > [mag-yyyy-mm-dd] > ns > usql > NetworkSimilarityFunction.usql > Download**.
 
 1. Go to the Azure Data Lake Analytics (ADLA) service that you created, and select **Overview > New job > Open file**. Select `NetworkSimilarityFunction.usql` in your local drive.
 
@@ -49,7 +49,7 @@ In this section, you submit an ADLA job to define network similarity functions.
 
 ## Run Sample script
 
-1. Download `ns/NetworkSimilaritySample.usql` to your local drive. <br> From [Azure portal](https://portal.azure.com), go to the Azure Storage account > **Containers > [mag-yyyy-mm-dd] > ns > NetworkSimilaritySample.usql > Download**.
+1. Download `ns/usql/NetworkSimilaritySample.usql` to your local drive.<br>From [Azure portal](https://portal.azure.com), go to the Azure Storage account > **Containers > [mag-yyyy-mm-dd] > ns > usql > NetworkSimilaritySample.usql > Download**.
 
 1. Go to the Azure Data Lake Analytics (ADLA) service that you created, and select **Overview > New job > Open file**. Select `NetworkSimilaritySample.usql` in your local drive.
 
