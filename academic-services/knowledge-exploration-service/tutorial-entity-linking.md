@@ -18,11 +18,11 @@ This tutorial illustrates how to link private publication records with their cor
 
 ## Download samples and setup working directory
 
-This tutorial illustrates how a fictional library could go about linking their existing, minimal library records to the much more expansive MAG/MAKES metadata, allowing them to enhance their records and create a powerful library search website.
+This tutorial illustrates how a fictional library would link their existing library records to the much more expansive MAG/MAKES metadata, allowing them to enhance their records and create a powerful library search website.
 
-To get started with entity linking, create a working directory on you local filesystem and download the [sample publication records](samplePrivateLibraryData.json) and the [sample entity linking script](linkPrivateLibraryData.ps1) to it.
+To get started with entity linking, create a working directory on your local filesystem and download the [sample publication records](samplePrivateLibraryData.json) and the [sample entity linking script](linkPrivateLibraryData.ps1) to it.
 
-As mentioned, the sample library publication records contain minimal information:
+The sample library publication records contain the following information:
 
 - Publication title
 - URL for the publication on the library's website
@@ -31,48 +31,86 @@ Once the working directory has been setup, our next step is to determine the ent
 
 ## Determine entity linking strategy
 
-Once we know what entity we want to link our data against, we can determine the appropriate linking strategy. In abstract, we'll leverage MAKES' [natural language processing](concepts-queries.md) capability via Interpret API to link entities.
+In this tutorial we show how to link library records with paper entities using MAKES' [natural language processing](concepts-queries.md) capability via the [Interpret API](reference-get-interpret.md).
 
-MAKES' default grammar supports matching natural language queries against various paper attributes (i.e. title, author names, fields of study, title/abstract terms, etc.), resulting in a query expression which can be used to retrieve corresponding paper entities.
+MAKES' default grammar supports matching natural language queries against various paper attributes (i.e. title, author names, fields of study, title/abstract terms, etc.), resulting in a query expression which can be used to retrieve corresponding paper entities. This allows us to match the publication title included in the sample library data.
 
-Our sample library data includes a title. We can leverage MAKES' paper title search capability to link our data. We achieve this by sending Interpret requests to a MAKES instance with the query attribute being `title: [library paper title]` as the following:
+To accomplish this we call Interpret for each library record, using the publication title to generate a "scoped" query in the format `title: [library publication title]`:
 
 :::code language="powershell" source="linkPrivateLibraryData.ps1" id="snippet_interpret_request":::
 
-You can leverage the Interpret test page to explore different scope search requests and pick the one that makes the most sense for your scenario. Below is a table of different scope search that the default MAKES grammar supports:
+In addition to the "title" scope we also support scopes for each different type of paper attribute that can be matched:
 
 Scope Prefix | Description | Example Query
 --- | ---| ---
-abstract: | Match term or quoted value from the paper abstract | abstract: “heterogeneous entity graph comprised of six types of entities”
-affiliation: | Match affiliation (institution) name | affiliation: “microsoft research”
-author: | Match author name | author: “darrin eide”
+abstract: | Match term or quoted value from the paper abstract | abstract: heterogeneous entity graph comprised of six types of entities
+affiliation: | Match affiliation (institution) name | affiliation: microsoft research
+author: | Match author name | author: darrin eide
 conference: | Match conference series name | conference: www
 doi: | Match paper Document Object Identifier (DOI) | doi: 10.1037/0033-2909.105.1.156
 journal: | Match journal name | journal: nature
-title: | Match term or quoted value from the paper title | title: “an overview of microsoft academic service mas and applications”
-fieldsofstudy: | Match paper field of study (topic) | fieldsofstudy: “knowledge base”
+title: | Match term or quoted value from the paper title | title: an overview of microsoft academic service mas and applications
+fieldsofstudy: | Match paper field of study (topic) | fieldsofstudy: knowledge base
 year: | Match paper publication year | year: 2015
 
-You can also build a custom grammar to better fit your linking scenario. See [How to define a custom grammar](how-to-grammar.md) for more detail.
+You can experiment with these different scopes and pick the one that makes the most sense for your data/scenario using the Interpret test page. We also allow completely custom grammars to be used, allowing you to generate a grammar explicitly designed for the data being using to link entities. See [How to define a custom grammar](how-to-grammar.md) for more details.
 
 ## Set appropriate confidence score for linked entities
 
->
 > [!Important]
-> This section heavily depends on the understanding of the following MAKES concepts:
+> This section assumes understanding of the following MAKES concepts:
 >
 >- [How MAKES generates semantic interpretations of natural language queries](concepts-queries.md)
 >- [Entity log probability](how-to-index-data.md#entity-log-probability)
 
-Next we need to set an appropriate confidence score threshold to help us determine when entity linking has successfully linked a library record's title with a corresponding MAG paper. The [Interpret API](reference-get-interpret.md) returns a [log probability associated with each interpretation](reference-grammar-syntax.md#interpretation-probability), which can be used as a "confidence score" for the given interpretation. Since the probability for an interpretation can range from 0 to 1, the log probability for an interpretation can be anywhere from zero to negative infinity.
+The next step in entity linking is determining an appropriate confidence score threshold, which allows us to determine when entity linking has successfully linked a library record's title with a corresponding MAG paper. The [Interpret API](reference-get-interpret.md) returns a [log probability associated with each interpretation](reference-grammar-syntax.md#interpretation-probability), which we leverage as a "confidence score" for the given interpretation. Since the probability for an interpretation can range from 0 to 1, the log probability can be anywhere from zero to negative infinity.
 
-This interpretation log probability value represents the sum of two different log probabilities. The first is the log probability assigned by the natural language grammar that the Interpret API uses, and represents the log probability that an interpretation is correct based on rules defined in the grammar. The second is the log probability associated with the top entity matching the interpretation.
+The log probability value actually represents the sum of two *different* log probabilities which we need to disentangle. The first log probability is associated with the different attributes matched in the natural language grammar that the Interpret API uses, and is used to represent how likely an interpretation is to be correct based on rules defined in the grammar. The second log probability is associated with the top matching entity for the interpretation.
 
-For entity linking, we want to isolate the grammar log probability as it reflects the quality of the match. To isolate the grammar log probability we subtract the top matching entity's log probability.
+> [!Note]
+> The default MAKES grammar assigns *log probability penalties* for different types of attribute matches to either encourage or discourage their use. For example, the grammar *favors* complete publication title matching by not assigning a penalty when fully matched. However, when only *part of a title* is matched, i.e. individual words, each word is assigned a log probability penalty of -1. Similarly, when individual words from a papers abstract are matched an even heavier penalty of -3 is applied. The heaviest penalty, -25, is applied when a query term cannot be matched against any known paper attributes.
+>
+> See the entity linking example at the bottom of the page for a clearer illustration of this
 
-The default MAKES grammar has various penalties associated with the different types of matching. For example, the grammar favors a complete title match by having a penalty of -1. A word matching a paper's abstract word instead of a title word will result a penalty of -3. The steepest penalty, -25 is when a word cannot be matched against any paper attributes. *BLEBH* for more detailed walkthrough of the default grammar, see the entity linking example score walk through bellow *BLEBH*
+For entity linking, we want to isolate the attribute match log probability (represented by `interpretations[0].logprob`), as it best reflects the *quality* of the match. Because the log probability for an interpretation is the sum of the two different log probabilities, we calculate this by simply subtracting the top matching entity's log probability (represented by `interpretations[0].rules[0].output.entities[0].logprob`). 
 
-The sample entity linking script uses **-50** as the cut off confidence score for linking data. This allows for some penalization for entity linking, such as two title word mismatch.
+Using one of the sample library publication titles as an example:
+
+```json
+{
+    "query": "title: cultural intelligence trait competitiveness and multicultural team experiences",
+    "interpretations": [
+        {
+            "logprob": -94.454,
+            "parse": "<rule name=\"#GetPapers\">title: <attr name=\"academic#W\">cultural</attr> <attr name=\"academic#W\">intelligence</attr> trait <attr name=\"academic#AW\">competitiveness</attr> and <attr name=\"academic#AW\">multicultural</attr> team <attr name=\"academic#AW\">experiences</attr><end/></rule>",
+            "rules": [
+                {
+                    "name": "#GetPapers",
+                    "output": {
+                        "type": "query",
+                        "value": "And(And(And(And(W='cultural',W='intelligence'),AW='competitiveness'),AW='multicultural'),AW='experiences')",
+                        "entities": [
+                            {
+                                "logprob": -22.454,
+                                "prob": 1.771543E-10,
+                                "kesEntityId": 20110523,
+                                "Id": 96291970,
+                                "Ti": "cultural intelligence antecedents and propensity to accept a foreign based job assignment"
+                            }
+                        ]
+                    }
+                }
+            ]
+        }
+    ],
+    "timed_out_count": 0,
+    "timed_out": false
+}
+```
+
+The attribute match log probability for the sample response above would be `-94.454 - (-22.454) = -72`, which given the default grammar likely does not reflect an accurate match (note that the exact title is not matched, words from both the title and abstract are used to match, and some words are not matched at all).
+
+The sample entity linking script uses `-50` as the confidence score threshold for linking data. This allows for some penalization in the title match (e.g. up to two query terms being dropped), but generally reflects a reasonably confident match.
 
 :::code language="powershell" source="linkPrivateLibraryData.ps1" id="snippet_interpret_log_probability_as_confidence_score":::
 
@@ -82,9 +120,9 @@ Depending on your linking strategy, you may want to set a different confidence c
 
 Next we determine which MAKES entity attributes we want to include with our library records that can help enrich our private data. See the [MAKES Entity Schema](reference-makes-api-entity-schema.md) to explore the different types and entities and attributes available in the MAKES' default index.
 
-In this tutorial, the sample private library publication records only contains a paper title and fake library URL. The goal of the tutorial is to augment the minimal information with additional metadata from MAKES, enabling a robust semantic/keyword search experience.
+In this tutorial, the sample library publication records only contain a paper title and fake library URL. The goal of the tutorial is to augment the minimal information with additional metadata from MAKES, enabling a robust semantic/keyword search experience.
 
-In the sample entity linking Powershell script, we will leverage paper entity's DOI, citation count, abstract, fields of study, authors, affiliations, journal, and conference information to enrich our data and support semantic/keyword search.
+In the sample entity linking Powershell script, we leverage paper entity's DOI, citation count, abstract, fields of study, authors, affiliations, journal, and conference information to enrich our data and support semantic/keyword search.
 
 We retrieve this information using the "attributes" parameter in our Interpret request as the following:
 
