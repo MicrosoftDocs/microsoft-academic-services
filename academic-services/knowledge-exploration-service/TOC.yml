@@ -42,7 +42,7 @@
 - name: Tutorial
   expanded: true
   items:
-  - name: Link MAKES entity with private library data
+  - name: Link private library data with MAKES entities
     href: tutorial-entity-linking.md
 - name: Concepts
   expanded: true
