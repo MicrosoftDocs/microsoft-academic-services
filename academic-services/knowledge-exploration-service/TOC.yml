@@ -39,6 +39,11 @@
       href: how-to-grammar.md
     - name: Build and test grammar
       href: how-to-grammar-build.md
+- name: Tutorial
+  expanded: true
+  items:
+  - name: Link MAKES entity with private library data
+    href: tutorial-entity-linking.md
 - name: Concepts
   expanded: true
   items:
