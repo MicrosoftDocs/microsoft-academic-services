@@ -5,7 +5,7 @@ ms.topic: tutorial
 ms.date: 10/15/2020
 ---
 
-# Entity Linking
+# Link private publication records with MAKES entities
 
 This tutorial illustrates how to link private publication records with their corresponding MAKES paper entities, enabling custom entity metadata to be generated.
 
@@ -18,7 +18,7 @@ This tutorial illustrates how to link private publication records with their cor
 
 ## Download samples and setup working directory
 
-This tutorial illustrates how a fictional library would link their existing library records to the much more expansive MAG/MAKES metadata, allowing them to enhance their records and create a powerful library search website.
+This tutorial illustrates how a fictional library would link their existing library records to the much more expansive MAKES metadata, allowing them to enhance their records and create a powerful library search website.
 
 To get started with entity linking, create a working directory on your local filesystem and download the [sample publication records](samplePrivateLibraryData.json) and the [sample entity linking script](linkPrivateLibraryData.ps1) to it.
 
@@ -33,9 +33,9 @@ Once the working directory has been setup, our next step is to determine the ent
 
 In this tutorial we show how to link library records with paper entities using MAKES' [natural language processing](concepts-queries.md) capability via the [Interpret API](reference-get-interpret.md).
 
-MAKES' default grammar supports matching natural language queries against various paper attributes (i.e. title, author names, fields of study, title/abstract terms, etc.), resulting in a query expression which can be used to retrieve corresponding paper entities. This allows us to match the publication title included in the sample library data.
+MAKES' default grammar supports matching natural language queries against various paper attributes (i.e. title, author names, fields of study, title/abstract terms, etc.), resulting in a query expression which can be used to retrieve corresponding paper entities. This allows us to match the publication title included in the sample library data against the MAKES paper entity's title and link them together.
 
-To accomplish this we call Interpret for each library record, using the publication title to generate a "scoped" query in the format `title: [library publication title]`:
+To accomplish this, we call Interpret for each library record, using the publication title to generate a "scoped" query in the format of `title: <LibraryPublication Title>`. The Interpret request for linking the sample library publication against MAKES paper entity is the following:
 
 :::code language="powershell" source="linkPrivateLibraryData.ps1" id="snippet_interpret_request":::
 
@@ -53,7 +53,7 @@ title: | Match term or quoted value from the paper title | title: an overview of
 fieldsofstudy: | Match paper field of study (topic) | fieldsofstudy: knowledge base
 year: | Match paper publication year | year: 2015
 
-You can experiment with these different scopes and pick the one that makes the most sense for your data/scenario using the Interpret test page. We also allow completely custom grammars to be used, allowing you to generate a grammar explicitly designed for the data being using to link entities. See [How to define a custom grammar](how-to-grammar.md) for more details.
+You can experiment with these different scopes and pick the one that makes the most sense for your data/scenario using the Interpret test page. MAKES also supports custom grammars, allowing you to craft a grammar explicitly designed for the data being using to link entities. See [How to define a custom grammar](how-to-grammar.md) for more details.
 
 ## Set appropriate confidence score for linked entities
 
@@ -63,16 +63,16 @@ You can experiment with these different scopes and pick the one that makes the m
 >- [How MAKES generates semantic interpretations of natural language queries](concepts-queries.md)
 >- [Entity log probability](how-to-index-data.md#entity-log-probability)
 
-The next step in entity linking is determining an appropriate confidence score threshold, which allows us to determine when entity linking has successfully linked a library record's title with a corresponding MAG paper. The [Interpret API](reference-get-interpret.md) returns a [log probability associated with each interpretation](reference-grammar-syntax.md#interpretation-probability), which we leverage as a "confidence score" for the given interpretation. Since the probability for an interpretation can range from 0 to 1, the log probability can be anywhere from zero to negative infinity.
+The next step in entity linking is determining an appropriate confidence score threshold, which allows us to determine when entity linking has successfully linked a library record's title with a corresponding MAG paper. The [Interpret API](reference-get-interpret.md) returns a [log probability associated with each interpretation](reference-grammar-syntax.md#interpretation-probability), which we leverage as a "confidence score" for the given interpretation. Since the probability for an interpretation can range from 0 to 1, the interpretation log probability can be anywhere from zero to negative infinity.
 
-The log probability value actually represents the sum of two *different* log probabilities which we need to disentangle. The first log probability is associated with the different attributes matched in the natural language grammar that the Interpret API uses, and is used to represent how likely an interpretation is to be correct based on rules defined in the grammar. The second log probability is associated with the top matching entity for the interpretation.
+The interpretation log probability value actually represents the sum of two *different* log probabilities which we need to disentangle. The first log probability, grammar path log probability, is associated with the different attributes matched in the natural language grammar that the Interpret API uses, and is used to represent how likely an interpretation is to be correct based on rules defined in the grammar. The second log probability, [entity log probability](how-to-index-data.md#entity-log-probability), is associated with the top matching entity for the interpretation.
 
 > [!Note]
-> The default MAKES grammar assigns *log probability penalties* for different types of attribute matches to either encourage or discourage their use. For example, the grammar *favors* complete publication title matching by not assigning a penalty when fully matched. However, when only *part of a title* is matched, i.e. individual words, each word is assigned a log probability penalty of -1. Similarly, when individual words from a papers abstract are matched an even heavier penalty of -3 is applied. The heaviest penalty, -25, is applied when a query term cannot be matched against any known paper attributes.
+> The default MAKES grammar assigns *log probability penalties* for different types of attribute matches to either encourage or discourage their use. For example, the grammar *favors* complete publication title matching by not assigning a penalty when it is fully matched. However, when only *part of a title* is matched, i.e. individual words, each word is assigned a log probability penalty of -1. Similarly, when individual words from a papers abstract are matched, a heavier penalty of -3 is applied. The heaviest penalty, -25, is applied when a query term cannot be matched against any known paper attributes.
 >
 > See the entity linking example at the bottom of the page for a clearer illustration of this
 
-For entity linking, we want to isolate the attribute match log probability (represented by `interpretations[0].logprob`), as it best reflects the *quality* of the match. Because the log probability for an interpretation is the sum of the two different log probabilities, we calculate this by simply subtracting the top matching entity's log probability (represented by `interpretations[0].rules[0].output.entities[0].logprob`). 
+For entity linking, we want to isolate the grammar path log probability from the interpretation log probability (represented by `interpretations[0].logprob`), as it best reflects the *quality* of the match. Because the interpretation log probability is the sum of the two different log probabilities, we calculate the grammar path log probability by simply subtracting the top matching entity's log probability (represented by `interpretations[0].rules[0].output.entities[0].logprob`) from the interpretation log probability. 
 
 Using one of the sample library publication titles as an example:
 
@@ -108,7 +108,7 @@ Using one of the sample library publication titles as an example:
 }
 ```
 
-The attribute match log probability for the sample response above would be `-94.454 - (-22.454) = -72`, which given the default grammar likely does not reflect an accurate match (note that the exact title is not matched, words from both the title and abstract are used to match, and some words are not matched at all).
+The grammar path log probability for the sample response above would be `-94.454 - (-22.454) = -72`, which given the default grammar likely does not reflect an accurate match (note that the exact title is not matched, words from both the title and abstract are used to match, and some words are not matched at all).
 
 The sample entity linking script uses `-50` as the confidence score threshold for linking data. This allows for some penalization in the title match (e.g. up to two query terms being dropped), but generally reflects a reasonably confident match.
 
@@ -120,7 +120,7 @@ Depending on your linking strategy, you may want to set a different confidence c
 
 Next we determine which MAKES entity attributes we want to include with our library records that can help enrich our private data. See the [MAKES Entity Schema](reference-makes-api-entity-schema.md) to explore the different types and entities and attributes available in the MAKES' default index.
 
-In this tutorial, the sample library publication records only contain a paper title and fake library URL. The goal of the tutorial is to augment the minimal information with additional metadata from MAKES, enabling a robust semantic/keyword search experience.
+In this tutorial, the sample library publication records only contain a paper title and a fake library URL. The goal of the tutorial is to augment the minimal information with additional metadata from MAKES, enabling a robust semantic/keyword search experience.
 
 In the sample entity linking Powershell script, we leverage paper entity's DOI, citation count, abstract, fields of study, authors, affiliations, journal, and conference information to enrich our data and support semantic/keyword search.
 
@@ -189,7 +189,7 @@ False | -83 | The relationship between Advisors’ Leadership Behaviors and Grad
 False | -145 | The Effects of Budgetary Goal Difficulty, Task Uncertainty and Budgetary Emphasis on Performance: Moderated Regression Analysis | THE JOINT EFFECTS OF BUDGETARY SLACK AND TASK UNCERTAINTY ON SUBUNIT PERFORMANCE
 False | -102 | Promoting Participation in Performing Arts Activities through Internet Technology: A Case Study in Taiwan. | Enhancing students' learning experience and promoting inclusive practice via social media
 
-You can use the parsed grammar path see how the grammar score/confidence score is derived. For example, submit the following request using the Interpret test page to see how the -72 confidence score is derived for "Cultural Intelligence, Trait Competitiveness and Multicultural Team Experiences":
+You can use the parsed grammar path see how the grammar path log probability/confidence score is derived. For example, submit the following request using the Interpret test page to see how the -72 confidence score is derived for "Cultural Intelligence, Trait Competitiveness and Multicultural Team Experiences":
 
 ```json
 {
@@ -258,11 +258,11 @@ The formatted grammar path parse is:
 Using the parse above and the default MAKES grammar rules definition, the accumulative penalties can be broken down by :
 
 1. Scoped title words search (":title"), receiving penalty of -1
-1. Match 2 title words ("cultural", "intelligence"), receiving penalty of -2 (-1 * 2)
+1. Match 2 title words consecutively ("cultural", "intelligence"), receiving penalty of -2 (-1 * 2)
 1. Main loop repeat, receiving penalty of -1
 1. Unable to match "trait", receiving penalty of -25
 1. Main loop repeat, receiving penalty of -1
-1. Match 2 abstract words ("competitiveness", "multicultural") receiving penalty of -9 (-3 + -3 * 2)
+1. Match 2 abstract words consecutively ("competitiveness", "multicultural") receiving penalty of -9 (-3 + -3 * 2)
 1. Main loop repeat, receiving penalty of -1
 1. Unable to match "team", receiving penalty of -25
 1. Main loop repeat, receiving penalty of -1
