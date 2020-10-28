@@ -39,6 +39,11 @@
       href: how-to-grammar.md
     - name: Build and test grammar
       href: how-to-grammar-build.md
+- name: Tutorial
+  expanded: true
+  items:
+  - name: Link private publication records with MAKES entities
+    href: tutorial-entity-linking.md
 - name: Concepts
   expanded: true
   items:
