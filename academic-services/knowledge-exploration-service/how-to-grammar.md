@@ -5,7 +5,7 @@ ms.topic: tutorial
 ms.date: 9/1/2020
 ---
 
-# Grammar
+# How to define a custom grammar
 
 This document details the composition of a MAKES grammar and the role of a grammar in allowing natural language processing in MAKES via Interpret API.
 
