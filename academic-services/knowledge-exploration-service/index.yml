@@ -9,7 +9,7 @@ metadata:
   ms.topic: landing-page
   author: DarrinEide
   ms.author: darrine
-  ms.date: 7/31/2020
+  ms.date: 10/30/2020
 
 landingContent:
   - title: About MAKES
@@ -44,19 +44,6 @@ landingContent:
           - text: Structured query expressions
             url: concepts-query-expressions.md
             
-  - title: Manage instances
-    linkLists:
-      - linkListType: how-to-guide
-        links:
-          - text: Update existing instance with new release
-            url: how-to-deploy-new-indexes-to-makes.md
-          - text: Delete instance
-            url: how-to-delete-api-instances.md
-      - linkListType: reference
-        links:
-          - text: Command line tool
-            url: reference-makes-command-line-tool.md
-
   - title: Customize MAKES
     linkLists:
       - linkListType: how-to-guide
@@ -77,3 +64,18 @@ landingContent:
         links:
           - text: Create a custom index from MAG
             url: how-to-create-index-from-mag.md
+          - text: Link private publication records with MAKES entities
+            url: tutorial-entity-linking.md
+
+  - title: Manage instances
+    linkLists:
+      - linkListType: how-to-guide
+        links:
+          - text: Update existing instance with new release
+            url: how-to-deploy-new-indexes-to-makes.md
+          - text: Delete instance
+            url: how-to-delete-api-instances.md
+      - linkListType: reference
+        links:
+          - text: Command line tool
+            url: reference-makes-command-line-tool.md

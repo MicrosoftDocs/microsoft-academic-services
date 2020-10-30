@@ -13,14 +13,12 @@
   - name: Deploy new MAKES instance
     href: get-started-create-api-instances.md
 - name: How to
-  expanded: true
+  expanded: false
   items:
   - name: Update existing instance with new release
     href: how-to-deploy-new-indexes-to-makes.md
   - name: Delete a MAKES deployment 
     href: how-to-delete-api-instances.md
-  - name: Create custom index from MAG
-    href: how-to-create-index-from-mag.md
   - name: Create custom MAKES index
     expanded: false
     items:
@@ -39,20 +37,22 @@
       href: how-to-grammar.md
     - name: Compile and test grammar
       href: how-to-grammar-build.md
-- name: Tutorial
-  expanded: true
+- name: Tutorials
+  expanded: false
   items:
+  - name: Create custom index from MAG
+    href: how-to-create-index-from-mag.md
   - name: Link private publication records with MAKES entities
     href: tutorial-entity-linking.md
 - name: Concepts
-  expanded: true
+  expanded: false
   items:
   - name: Structured query expressions
     href: concepts-query-expressions.md
   - name: Natural language queries
     href: concepts-queries.md
 - name: Reference
-  expanded: true
+  expanded: false
   items:
   - name: KESM command line tool
     href: reference-makes-command-line-tool.md
@@ -81,7 +81,7 @@
       - name: Semantic functions
         href: reference-semantic-functions.md
 - name: Resources
-  expanded: true
+  expanded: false
   items:
   - name: FAQ
     href: resources-faq.md
