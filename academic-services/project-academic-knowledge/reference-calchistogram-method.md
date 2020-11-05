@@ -19,6 +19,7 @@ https://api.labs.cognitive.microsoft.com/academic/v1.0/calchistogram?
 
 Name | Value | Required? | Description
 --- | --- | --- | ---
+**subscription-key** | String | Yes | Valid [Project Academic Knowledge subscription key](https://msr-apis.portal.azure-api.net/products/project-academic-knowledge)
 **expr** | Text string | Yes | A query expression that specifies the entities over which to calculate histograms.
 **model** | Text string | No | Select the name of the model that you wish to query. Currently, the value defaults to *latest*.
 **attributes** | Text string | No<br>default: | A comma-delimited list that specifies the attribute values that are included in the response. Attribute names are case-sensitive.
@@ -51,7 +52,7 @@ https://api.labs.cognitive.microsoft.com/academic/v1.0/calchistogram?expr=And(Co
 In this example, in order to generate a histogram of the count of publications by year for a particular author since 2010, we can first generate the query expression using the **interpret** API with query string: *papers by jaime teevan after 2012*.
 
 ``` HTTP
-https://api.labs.cognitive.microsoft.com/academic/v1.0/interpret?query=papers by jaime teevan after 2012
+https://api.labs.cognitive.microsoft.com/academic/v1.0/interpret?query=papers by jaime teevan after 2012&subscription-key=<subscription_key>
 ```
 
 The expression in the first interpretation that is returned from the interpret API is *And(Composite(AA.AuN=='jaime teevan'),Y>2012)*.\
