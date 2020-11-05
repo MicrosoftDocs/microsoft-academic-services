@@ -19,6 +19,7 @@ https://api.labs.cognitive.microsoft.com/academic/v1.0/evaluate?
 
 Name | Value | Required? | Description
 --- | --- | --- | ---
+**subscription-key** | String | Yes | Valid [Project Academic Knowledge subscription key](https://msr-apis.portal.azure-api.net/products/project-academic-knowledge)
 **expr** | Text string | Yes | A query expression that specifies which entities should be returned.
 **model** | Text string | No | Name of the model that you wish to query.  Currently, the value defaults to *latest*.
 **attributes** | Text string | No<br>default: Id | A comma-delimited list that specifies the attribute values that are included in the response. Attribute names are case-sensitive.
@@ -38,7 +39,7 @@ Name | Description
 
 ``` HTTP
 https://api.labs.cognitive.microsoft.com/academic/v1.0/evaluate?expr=
-Composite(AA.AuN=='jaime teevan')&count=2&attributes=Ti,Y,CC,AA.AuN,AA.AuId
+Composite(AA.AuN=='jaime teevan')&count=2&attributes=Ti,Y,CC,AA.AuN,AA.AuId&subscription-key=<subscription_key>
 ```
 
 Typically, an expression will be obtained from a response to the **interpret** method.  But you can also compose query expressions yourself (see [Query Expression Syntax](reference-query-expression-syntax.md)).  
