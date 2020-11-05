@@ -23,6 +23,7 @@ https://api.labs.cognitive.microsoft.com/academic/v1.0/interpret?
 
 Name     | Value | Required?  | Description
 ---------|---------|---------|---------
+**subscription-key** | String | Yes | Valid [Project Academic Knowledge subscription key](https://msr-apis.portal.azure-api.net/products/project-academic-knowledge)
 **query**    | String | Yes | Query entered by user.  If complete is set to 1, query will be interpreted as a prefix for generating query auto-completion suggestions.
 **model**    | String | No  | Name of the model that you wish to query.  Currently, the value defaults to *latest*.
 **complete** | 0 or 1 | No<br>default:0  | 1 means that auto-completion suggestions are generated based on the grammar and graph data.
@@ -56,7 +57,7 @@ Name | Description
 This example generates the most likely query suggestions (completions) for a partial author query "author: j tee".
 
 ``` HTTP
-https://api.labs.cognitive.microsoft.com/academic/v1.0/interpret?query=author:%20j%20tee&complete=1&count=2
+https://api.labs.cognitive.microsoft.com/academic/v1.0/interpret?query=author:%20j%20tee&complete=1&count=2&subscription-key=<subscription_key>
 ```
 
 The important parts of the request:
@@ -114,7 +115,7 @@ Sinha, Arnab, et al. "An Overview of Microsoft Academic Service (MAS) and Applic
 The HTTP request:
 
 ``` HTTP
-https://api.labs.cognitive.microsoft.com/academic/v1.0/interpret?query=Sinha,%20Arnab,%20et%20al.%20"An%20Overview%20of%20Microsoft%20Academic%20Service%20(MAS)%20and%20Applications."%20Proceedings%20of%20the%2024th%20International%20Conference%20on%20World%20Wide%20Web,%202015,%20pp.%20243–246.&count=1&entityCount=1&attributes=Id,DN,Y,AA.DAuN,VFN
+https://api.labs.cognitive.microsoft.com/academic/v1.0/interpret?query=Sinha,%20Arnab,%20et%20al.%20"An%20Overview%20of%20Microsoft%20Academic%20Service%20(MAS)%20and%20Applications."%20Proceedings%20of%20the%2024th%20International%20Conference%20on%20World%20Wide%20Web,%202015,%20pp.%20243–246.&count=1&entityCount=1&attributes=Id,DN,Y,AA.DAuN,VFN&subscription-key=<subscription_key>
 ```
 
 The important parts of the request:
