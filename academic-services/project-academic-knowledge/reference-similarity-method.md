@@ -19,6 +19,7 @@ https://api.labs.cognitive.microsoft.com/academic/v1.0/similarity?
 
 Parameter | Data Type | Required | Description
 --- | --- | --- | ---
+**subscription-key** | String | Yes | Valid [Project Academic Knowledge subscription key](https://msr-apis.portal.azure-api.net/products/project-academic-knowledge)
 **s1** | String | Yes | String* to be compared
 **s2** | String | Yes | String* to be compared
 
@@ -46,7 +47,7 @@ HTTP Status | Reason | Response
 ### Request
 
 ``` HTTP
-https://api.labs.cognitive.microsoft.com/academic/v1.0/similarity?s1=Using complementary priors, we derive a fast greedy algorithm that can learn deep directed belief networks one layer at a time, provided the top two layers form an undirected associative memory
+https://api.labs.cognitive.microsoft.com/academic/v1.0/similarity?subscription-key=<subscription_key>&s1=Using complementary priors, we derive a fast greedy algorithm that can learn deep directed belief networks one layer at a time, provided the top two layers form an undirected associative memory
 &s2=Deepneural nets with a large number of parameters are very powerful machine learning systems. However, overfitting is a serious problem in such networks
 ```
 
