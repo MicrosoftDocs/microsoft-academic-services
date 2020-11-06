@@ -140,8 +140,13 @@ If we're able to find an interpretation that meets our confidence cut off score,
 1. Modify the entity linking script and set the **makesEndpoint** variable to your deployed MAKES instance url
 1. Open up a powershell console and run the sample entity linking script. Make sure the sample library data and linking script are under the same directory.
 
+>[!NOTE]
+> If you see the error message "**You cannot run this script on the current system. For more information about running scripts and setting execution policy, see about_Execution_Policies at https://go.microsoft.com/fwlink/?LinkID=135170**", make sure you have modified the entity linking script and set the **makesEndpoint** varaible to your makes instance endpoint.
+>
+
 The sample entity linking script output should look like the following:
 
+```
 Linked | Confidence Score | Original Title | MAG Title
 ---- | ---- |---- |----
 True | 0 | Microsoft Academic Graph: When experts are not enough | Microsoft Academic Graph: When experts are not enough
@@ -188,6 +193,7 @@ False | -287 | The Relationship among Transformational Leadership, Public Admini
 False | -83 | The relationship between Advisors’ Leadership Behaviors and Graduate Students’ Achievement Motives | The Relationship between Transformational Leadership Behaviors of Faculty Supervisors and Self-Efficacies of Graduate Assistants.
 False | -145 | The Effects of Budgetary Goal Difficulty, Task Uncertainty and Budgetary Emphasis on Performance: Moderated Regression Analysis | THE JOINT EFFECTS OF BUDGETARY SLACK AND TASK UNCERTAINTY ON SUBUNIT PERFORMANCE
 False | -102 | Promoting Participation in Performing Arts Activities through Internet Technology: A Case Study in Taiwan. | Enhancing students' learning experience and promoting inclusive practice via social media
+```
 
 You can use the parsed grammar path see how the grammar path log probability/confidence score is derived. For example, submit the following request using the Interpret test page to see how the -72 confidence score is derived for "Cultural Intelligence, Trait Competitiveness and Multicultural Team Experiences":
 

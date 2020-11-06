@@ -114,7 +114,7 @@ function ConvertTo-NormalizedStr {
     return $str
 }
 
-# Converts a string to a distcint words array
+# Converts a string to a distinct words array
 function ConvertTo-DistinctWordsArray {
     param($str)
     # get words array from string
@@ -182,7 +182,7 @@ foreach ($privateLibraryPaper in $privateLibraryPapers)
     $linkedEntity = $interpretResponseContentJson.interpretations[0].rules[0].output.entities[0]
     $entityLinkScore = $interpretResponseContentJson.interpretations[0].logprob - $linkedEntity.logprob
 
-    # only link library paper with MAG entity that has a high confident score/logprob
+    # only link library paper with MAG entity that has a high confidence score/logprob
     if ( $null -ne $entityLinkScore -and $entityLinkScore -gt $minLogProbForLinking)
     {
         Merge-MagEntity $privateLibraryPaper $linkedEntity

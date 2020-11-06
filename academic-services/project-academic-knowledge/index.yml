@@ -21,7 +21,7 @@ landingContent:
       - linkListType: concept
         links:
           - text: How PAK understands natural language queries
-            url: concept-queries.md
+            url: concepts-queries.md
 
   - title: Get started
     linkLists:
