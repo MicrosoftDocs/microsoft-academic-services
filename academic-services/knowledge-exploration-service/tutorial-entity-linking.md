@@ -14,13 +14,13 @@ This tutorial illustrates how to link private publication records with their cor
 - [Microsoft Academic Knowledge Service (MAKES) subscription](get-started-setup-provisioning.md)
 - [Powershell 7](https://docs.microsoft.com/powershell/scripting/install/installing-powershell-core-on-windows?view=powershell-7&preserve-view=true)
 - [Sample private library publication records](samplePrivateLibraryData.json)
-- [Sample entity linking Powershell script](linkPrivateLibraryData.ps1)
+- [Sample entity linking Powershell script](linkPrivateLibraryData.signed.ps1)
 
 ## Download samples and setup working directory
 
 This tutorial illustrates how a fictional library would link their existing library records to the much more expansive MAKES metadata, allowing them to enhance their records and create a powerful library search website.
 
-To get started with entity linking, create a working directory on your local filesystem and download the [sample publication records](samplePrivateLibraryData.json) and the [sample entity linking script](linkPrivateLibraryData.ps1) to it.
+To get started with entity linking, create a working directory on your local filesystem and download the [sample publication records](samplePrivateLibraryData.json) and the [sample entity linking script](linkPrivateLibraryData.signed.ps1) to it.
 
 The sample library publication records contain the following information:
 
@@ -37,7 +37,7 @@ MAKES' default grammar supports matching natural language queries against variou
 
 To accomplish this, we call Interpret for each library record, using the publication title to generate a "scoped" query in the format of `title: <LibraryPublication Title>`. The Interpret request for linking the sample library publication against MAKES paper entity is the following:
 
-:::code language="powershell" source="linkPrivateLibraryData.ps1" id="snippet_interpret_request":::
+:::code language="powershell" source="linkPrivateLibraryData.signed.ps1" id="snippet_interpret_request":::
 
 In addition to the "title" scope we also support scopes for each different type of paper attribute that can be matched:
 
@@ -112,7 +112,7 @@ The grammar path log probability for the sample response above would be `-94.454
 
 The sample entity linking script uses `-50` as the confidence score threshold for linking data. This allows for some penalization in the title match (e.g. up to two query terms being dropped), but generally reflects a reasonably confident match.
 
-:::code language="powershell" source="linkPrivateLibraryData.ps1" id="snippet_interpret_log_probability_as_confidence_score":::
+:::code language="powershell" source="linkPrivateLibraryData.signed.ps1" id="snippet_interpret_log_probability_as_confidence_score":::
 
 Depending on your linking strategy, you may want to set a different confidence cut off score. For example, you can set a lower confidence cut off score if having false positives (incorrect linked entities) doesn't impact your use case. You may also want to design a custom grammar to create a better scoring system for your scenario. For example, if your private data is a list of MLA formatted references, you may want to create a grammar that parses out author, title, and venue and have lower penalties for unmatched terms.
 
@@ -126,17 +126,17 @@ In the sample entity linking Powershell script, we leverage paper entity's DOI, 
 
 We retrieve this information using the "attributes" parameter in our Interpret request as the following:
 
-:::code language="powershell" source="linkPrivateLibraryData.ps1" id="snippet_interpret_request":::
+:::code language="powershell" source="linkPrivateLibraryData.signed.ps1" id="snippet_interpret_request":::
 
 If we're able to find an interpretation that meets our confidence cut off score, we will then merge the entities together using the following helper function:
 
-:::code language="powershell" source="linkPrivateLibraryData.ps1" id="snippet_merge_entities":::
+:::code language="powershell" source="linkPrivateLibraryData.signed.ps1" id="snippet_merge_entities":::
 
 ## Run sample solution to see entity linking in action
 
 1. Deploy a MAKES instance by following the [Create API Instance](get-started-create-api-instances.md) guide
 1. Download [Sample Library Data](samplePrivateLibraryData.json)
-1. Download [Sample Entity Linking Script](linkPrivateLibraryData.ps1)
+1. Download [Sample Entity Linking Script](linkPrivateLibraryData.signed.ps1)
 1. Modify the entity linking script and set the **makesEndpoint** variable to your deployed MAKES instance url
 1. Open up a powershell console and run the sample entity linking script. Make sure the sample library data and linking script are under the same directory.
 
