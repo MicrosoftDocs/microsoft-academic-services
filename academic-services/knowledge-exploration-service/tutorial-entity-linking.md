@@ -141,7 +141,7 @@ If we're able to find an interpretation that meets our confidence cut off score,
 1. Open up a powershell console and run the sample entity linking script. Make sure the sample library data and linking script are under the same directory.
 
 >[!NOTE]
-> If you see the error message "**You cannot run this script on the current system. For more information about running scripts and setting execution policy, see about_Execution_Policies at https://go.microsoft.com/fwlink/?LinkID=135170**", make sure you have modified the entity linking script and set the **makesEndpoint** varaible to your makes instance endpoint.
+> If you see the error message **"You cannot run this script on the current system. For more information about running scripts and setting execution policy, see about_Execution_Policies at https://go.microsoft.com/fwlink/?LinkID=135170"** , make sure you have modified the entity linking script and set the **makesEndpoint** varaible to your makes instance endpoint use Powershel ISE. Alternatively, you can copy and paste the code into a new file to work around the restriction, or modify your script execution policy by following the link shown in the error message.
 >
 
 The sample entity linking script output should look like the following:
