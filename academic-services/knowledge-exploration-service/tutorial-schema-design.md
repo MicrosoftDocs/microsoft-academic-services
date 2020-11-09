@@ -17,6 +17,7 @@ This tutorial is a continuation of [Link private publication records with MAKES 
 
 - [Microsoft Academic Knowledge Service (MAKES) subscription](get-started-setup-provisioning.md)
 - Completion of [Link private publication records with MAKES entities](tutorial-entity-linking.md) tutorial
+- [Schema for Linked Sample Library Data](samplePrivateLibraryData.linked.schema.json)
 
 ## Design a schema for linked private library data
 
