@@ -7,9 +7,10 @@ ms.date: 10/15/2020
 
 # Design schema for filter and search
 
-This tutorial illustrates how to
-    1. Design a MAKES schema for private publications to enable search and smart filters.
-    1. Build a filterable paper list using MAKES APIs.
+This tutorial illustrates how to:
+
+    - Design a MAKES schema for private publications to enable search and smart filters.
+    - Build a filterable paper list using MAKES APIs.
 
 This tutorial is a continuation of [Link private publication records with MAKES entities](tutorial-entity-linking.md) tutorial and depends on its completion. 
 
@@ -17,15 +18,15 @@ This tutorial is a continuation of [Link private publication records with MAKES 
 
 - [Microsoft Academic Knowledge Service (MAKES) subscription](get-started-setup-provisioning.md)
 - Completion of [Link private publication records with MAKES entities](tutorial-entity-linking.md) tutorial
-- [Schema for Linked Sample Library Data](samplePrivateLibraryData.linked.schema.json)
+- Download [Schema for Linked Sample Library Data](samplePrivateLibraryData.linked.schema.json)
 
 ## Design a schema for linked private library data
 
-For any MAKES schema design, we need to determine what attributes to include in the index, what are the appropriate types to store the attributes, and what operations should the attributes support. 
+For any MAKES schema design, we need to determine what entity attributes to include, what are the appropriate types to store the entity attributes, and what operations should the entity attributes support. 
 
-In this tutorial, we'll be designing a schema for the linked private library publications. You should have an file named **samplePrivateLibraryData.linked.json** from completing [Link private publication records with MAKES entities](tutorial-entity-linking.md) tutorial.
+In this tutorial, we'll be designing a schema to power library application with search and filtering. The entities we'll be using for this index is the linked private library publications from previous tutorial. You should have an file named **samplePrivateLibraryData.linked.json** from completing [Link private publication records with MAKES entities](tutorial-entity-linking.md) tutorial.
 
-Here's an example entity from **samplePrivateLibraryData.linked.json**
+Here's an entity as example from **samplePrivateLibraryData.linked.json**
 
 ```json
 {
@@ -107,11 +108,15 @@ Here's an example entity from **samplePrivateLibraryData.linked.json**
 }
 ```
 
-After inspecting the data, we can now create the schema for it.
+After inspecting the data, we can now design a schema for it.
 
 ### Display only attributes
 
-The display attrbitues are attributes that are needed for display only, such as **OriginalTitle**, **OriginalAuthorName** In this case, we can define them as **Blob** type such that KES won't create any index for them.
+The display attrbitues are attributes that are needed for display only, such as **OriginalTitle**, **OriginalAuthorName** in our **PaperListItem** UI elements:
+
+![The screenshot of a single paper list element]()
+
+In this case, we can define them as **Blob** type such that KES won't create any index for them.
 
 The following schema elements reflect the display attributes:
 
@@ -133,11 +138,11 @@ The following schema elements reflect the display attributes:
 }
 ```
 
-### Filter attributes
+### Filter and search attributes
 
 Filter attributes are attributes that can be used to filter entity data.
 
-The numeric attributes that we want to filter by would be the publication's **Year, CitationCount, EstimatedCitationCount**. Depending on the filter UX we want to provide, we can add **equals** and/or **is_between** operations to the filterable numeric attributes.
+We're designing for a library application that supports publication search by time and citation count. The numeric attributes that we want to filter by would be the publication's **Year, CitationCount, EstimatedCitationCount**. Depending on the filter UX we want to provide, we can add **equals** and/or **is_between** operations to the filterable numeric attributes.
 
 >[!NOTE]
 >Try adding **is_between** to numeric filter attributes and extend the sample code to enables publication year range filter.
@@ -156,7 +161,9 @@ The following schema elements reflect the filterable numeric attributes:
 }
 ```
 
-For string attributes, we want to select attributes that have common values such as FieldsOfStudy.Name. Attribute having common values allows MAKES to generate filter suggestions based on entity statistics using Histogram API. For attribute values that may be too noisy, you may opt for the normalized version such as using **AuthorName** instead of **OriginalAuthorName**. We should add **equals** operation to these attributes.
+For string attributes, we want to select attributes that have common values such as **FieldsOfStudy.Name**. Attribute having common values allows MAKES to generate filter suggestions based on entity statistics using Histogram API. For attribute values that may be too noisy, you may opt for the normalized version such as using **AuthorName** instead of **OriginalAuthorName**. We should add **equals** operation to these attributes.
+
+![Fields of study filter snapshot]()
 
 We may also want to select attributes with unique values, such as DOI. This enables fast DOI search and retrival. 
 
