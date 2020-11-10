@@ -7,12 +7,12 @@ ms.date: 10/15/2020
 
 # Design schema for filter and search
 
-This tutorial illustrates how to:
+This tutorial illustrates how to
 
-    - Design a MAKES schema for private publications to enable search and smart filters.
-    - Build a filterable paper list using MAKES APIs.
+- Design a MAKES schema for private publications to enable search and smart filters.
+- Build a filterable paper list using MAKES APIs.
 
-This tutorial is a continuation of [Link private publication records with MAKES entities](tutorial-entity-linking.md) tutorial and depends on its completion. 
+This tutorial is a continuation of [Link private publication records with MAKES entities](tutorial-entity-linking.md) tutorial and depends on its completion.
 
 ## Prerequisites
 
@@ -22,7 +22,7 @@ This tutorial is a continuation of [Link private publication records with MAKES 
 
 ## Design a schema for linked private library data
 
-For any MAKES schema design, we need to determine what entity attributes to include, what are the appropriate types to store the entity attributes, and what operations should the entity attributes support. 
+For any MAKES schema design, we need to determine what entity attributes to include, what are the appropriate types to store the entity attributes, and what operations should the entity attributes support.
 
 In this tutorial, we'll be designing a schema to power library application with search and filtering. The entities we'll be using for this index is the linked private library publications from previous tutorial. You should have an file named **samplePrivateLibraryData.linked.json** from completing [Link private publication records with MAKES entities](tutorial-entity-linking.md) tutorial.
 
@@ -112,9 +112,9 @@ After inspecting the data, we can now design a schema for it.
 
 ### Display only attributes
 
-The display attrbitues are attributes that are needed for display only, such as **OriginalTitle**, **OriginalAuthorName** in our **PaperListItem** UI elements:
+The display attributes are attributes that are needed for display only, such as **OriginalTitle**, **OriginalAuthorName** in our **PaperListItem** UI elements:
 
-![The screenshot of a single paper list element]()
+![The screenshot of a single paper list element](media/privateLibraryExampleApp-publicationCard.png)
 
 In this case, we can define them as **Blob** type such that KES won't create any index for them.
 
@@ -125,7 +125,7 @@ The following schema elements reflect the display attributes:
   "attributes": [
     {"name": "OriginalTitle","type": "blob?"},
     {"name": "OriginalAbstract","type": "blob?"},
-    
+
     {"name": "VenueFullName","type": "blob?"},
 
     {"name": "AuthorAffiliations","type": "Composite*"},
@@ -142,12 +142,13 @@ The following schema elements reflect the display attributes:
 
 Filter attributes are attributes that can be used to filter entity data.
 
-We're designing for a library application that supports publication search by time and citation count. The numeric attributes that we want to filter by would be the publication's **Year, CitationCount, EstimatedCitationCount**. Depending on the filter UX we want to provide, we can add **equals** and/or **is_between** operations to the filterable numeric attributes.
+We're designing for a library application that supports publication search by time and citation count. The numeric attributes that we want to enable filter capability can be the publication's **Year, CitationCount, EstimatedCitationCount**.
 
->[!NOTE]
->Try adding **is_between** to numeric filter attributes and extend the sample code to enables publication year range filter.
+![year filter section snapshot](media/privateLibraryExampleApp-yearFilterSection.png)
 
-The following schema elements reflect the filterable numeric attributes:
+Depending on the filter UX we want to provide, we can add **equals** and/or **is_between** operations to the filterable numeric attributes.
+
+The following schema elements from  reflect the filterable numeric attributes:
 
 ```json
 {
@@ -161,11 +162,16 @@ The following schema elements reflect the filterable numeric attributes:
 }
 ```
 
-For string attributes, we want to select attributes that have common values such as **FieldsOfStudy.Name**. Attribute having common values allows MAKES to generate filter suggestions based on entity statistics using Histogram API. For attribute values that may be too noisy, you may opt for the normalized version such as using **AuthorName** instead of **OriginalAuthorName**. We should add **equals** operation to these attributes.
+>[!NOTE]
+>Try adding **is_between** to numeric filter attributes and extend the sample code to enables publication year range filter.
 
-![Fields of study filter snapshot]()
+For string attributes, we want to select attributes that have common values such as **FieldsOfStudy.Name**. Attribute having common values allows MAKES to generate filter suggestions based on entity statistics using Histogram API.
 
-We may also want to select attributes with unique values, such as DOI. This enables fast DOI search and retrival. 
+![fields of study filter snapshot](media/privateLibraryExampleApp-fieldsOfStudyFilterSection.png)
+
+ For attribute values that may be too noisy, you may opt for the normalized version such as using **AuthorName** instead of **OriginalAuthorName**. We should add **equals** operation to these attributes.
+
+We may also want to select attributes with unique values, such as DOI. This enables fast DOI search and retrieval.
 
 The following schema elements reflect the filterable string attributes:
 
@@ -211,8 +217,7 @@ Since the index we're building is relatively small and simple, we can build this
     ```
 
 >[!NOTE]
-> BuildIndexLocal command is only avaliable on win-x64 version of kesm
-
+> BuildIndexLocal command is only available on win-x64 version of kesm
 
 Validate the index is built according to schema by inspecting the index meta data using the following command:
 
@@ -260,14 +265,14 @@ We now have a backend API to serve our conference paper data. The last step is t
 
 We start building our client by crafting a KES query expression to represent the paper list shown on the UI. Since the initial list of papers we want to see is "all papers", the corresponding KES query expression would be "**All()**".
 
-This corresponds to the following code in **<MakesInstanceUrl>/examples/privateLibraryExample/privateLibraryExample.js**
+This corresponds to the following code in **{MakesInstanceUrl}/examples/privateLibraryExample/privateLibraryExample.js**
 
 ```javascript
 /**
  * Client app entry point/ main.
  **/
 var app = null;
-runable().then(privateLibraryExampleRunable => {    
+runable().then(privateLibraryExampleRunable => {
     if (privateLibraryExampleRunable) {
         app = new FilterablePaperList();
         app.setOriginalPaperListExpression("All()");
@@ -288,7 +293,7 @@ For more information on KES Query Expressions, see [Structured query expressions
 
 We can call Evaluate API with the paper list expression ( Initially set to "**All()**" ) to retrieve paper entities for display.
 
-To get papers using Evaluate API, see **MakesInteractor.GetPapers(paperExpression)** method in **<MakesInstanceUrl>/examples/privateLibraryExample/makesInteractor.js**:
+To get papers using Evaluate API, see **MakesInteractor.GetPapers(paperExpression)** method in **\<MakesInstanceUrl>/examples/privateLibraryExample/makesInteractor.js**:
 
 ```javascript
 /*
@@ -311,16 +316,16 @@ For more information on Evaluate API, see [Evaluate REST API](reference-post-eva
 
  After retrieving the paper entities from Evaluate API, all is left to do is to translate the entity data to UI elements. The corresponding data transformation logic for paper UI elements can be found in:
 
-- **<MakesInstanceUrl>/examples/privateLibraryExample/paperListItem.js**
-- **<MakesInstanceUrl>/examples/privateLibraryExample/paperFieldsOfStudyListItem.js**
+- **\<MakesInstanceUrl>/examples/privateLibraryExample/paperListItem.js**
+- **\<MakesInstanceUrl>/examples/privateLibraryExample/paperFieldsOfStudyListItem.js**
 
 ### Generate filters  
 
 We can also call Histogram API with the paper list expression to get filter attribute histograms and transform them into filters.
 
-Histogram returns the most probabilistic values for each attributes from the entities specified by the expression. In the context of this tutorial, Histogram API will return the top attribute values from publication entities that have the highiest ranks (the publications that the user is most likely looking for). We can use these values for each filter attribute as **filter suggestion**.
+Histogram returns the most probabilistic values for each attributes from the entities specified by the expression. In the context of this tutorial, Histogram API will return the top attribute values from publication entities that have the highest ranks (the publications that the user is most likely looking for). We can use these values for each filter attribute as **filter suggestion**.
 
-To generate filter suggestions using Histogram API, see **MakesInteractor.GetFilters(paperExpression)** method in **<MakesInstanceUrl>/makesInteractor.js**:
+To generate filter suggestions using Histogram API, see **MakesInteractor.GetFilters(paperExpression)** method in **\<MakesInstanceUrl>/makesInteractor.js**:
 
 ```javascript
     /*
@@ -342,8 +347,8 @@ For more information on Histogram API, see [Histogram REST API](reference-post-h
 
 The corresponding data transformation logic for filter UI elements can be found in:
 
-- **<MakesInstanceUrl>/filterSectionListItem.js**
-- **<MakesInstanceUrl>/filterAttributeListItem.js**
+- **\<MakesInstanceUrl>/filterSectionListItem.js**
+- **\<MakesInstanceUrl>/filterAttributeListItem.js**
 
 ### Handle filter events
 
@@ -351,7 +356,7 @@ We can apply filters by modifying the paper list expression. To apply a filter, 
 
 For example, with a *initial paper expression** being **All()**, to apply a publication year filter to constrain the publications returned to those published in 2019, the *filter expression* will be **Y=2019**, and the final paper list expression will become **And(All(),Y=2019)**.
 
-To handle filter events, see **FilterablePaperList.appendFilter(attributeName, attributeValue)** and **FilterablePaperList.updatePaperList()** method in **<MakesInstanceUrl>/filterablePaperList.js** for more details.
+To handle filter events, see **FilterablePaperList.appendFilter(attributeName, attributeValue)** and **FilterablePaperList.updatePaperList()** method in **\<MakesInstanceUrl>/filterablePaperList.js** for more details.
 
 ```javascript
     /*
@@ -389,4 +394,4 @@ To handle filter events, see **FilterablePaperList.appendFilter(attributeName, a
 
 ### Use sample UI code to see them in action
 
-We've created a sample client app written in javascript along with MAKES. After custom index deployment is complete, you should be able to see the private library example application by visiting **<MakesInstanceUrl>/examples/privateLibraryExample**.
+We've created a sample client app written in javascript along with MAKES. After custom index deployment is complete, you should be able to see the private library example application by visiting **\<MakesInstanceUrl>/examples/privateLibraryExample**.
