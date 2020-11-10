@@ -10,7 +10,7 @@ ms.date: 10/15/2020
 This tutorial illustrates how to
 
 - Design a MAKES schema for private publications to enable search and smart filters.
-- Build a filterable paper list using MAKES APIs.
+- Build a filterable paper list UI using MAKES APIs.
 
 This tutorial is a continuation of [Link private publication records with MAKES entities](tutorial-entity-linking.md) tutorial and depends on its completion.
 
@@ -22,9 +22,9 @@ This tutorial is a continuation of [Link private publication records with MAKES 
 
 ## Design a schema for linked private library data
 
-For any MAKES schema design, we need to determine what entity attributes to include, what are the appropriate types to store the entity attributes, and what operations should the entity attributes support.
+For any MAKES schema design, we need to determine what entity attributes to include, what types to store entity attributes as, and what operations will the entity attributes support.
 
-In this tutorial, we'll be designing a schema to power library application with search and filtering. The entities we'll be using for this index is the linked private library publications from previous tutorial. You should have an file named **samplePrivateLibraryData.linked.json** from completing [Link private publication records with MAKES entities](tutorial-entity-linking.md) tutorial.
+In this tutorial, we will build a library application with search and filter capabilities. We will start by desgning a schema and building a custom index to power the app. We will be leverging the linked private library publications from previous tutorial as the input entities for building the custom index. You should have an file named **samplePrivateLibraryData.linked.json** in your working directory from completing [Link private publication records with MAKES entities](tutorial-entity-linking.md) tutorial.
 
 Here's an entity as example from **samplePrivateLibraryData.linked.json**
 
@@ -112,7 +112,7 @@ After inspecting the data, we can now design a schema for it.
 
 ### Display only attributes
 
-The display attributes are attributes that are needed for display only, such as **OriginalTitle**, **OriginalAuthorName** in our **PaperListItem** UI elements:
+The display attributes are attributes that are needed for display only, such as **OriginalTitle** and **OriginalAuthorName** in a **PaperListItem** UI element:
 
 ![The screenshot of a single paper list element](media/privateLibraryExampleApp-publicationCard.png)
 
@@ -142,11 +142,11 @@ The following schema elements reflect the display attributes:
 
 Filter attributes are attributes that can be used to filter entity data.
 
-We're designing for a library application that supports publication search by time and citation count. The numeric attributes that we want to enable filter capability can be the publication's **Year, CitationCount, EstimatedCitationCount**.
+We can make our library application support publication search by time and citation count easily by adding numberic filter operations to **Year**, **CitationCount**, and/or **EstimatedCitationCount**.
 
 ![year filter section snapshot](media/privateLibraryExampleApp-yearFilterSection.png)
 
-Depending on the filter UX we want to provide, we can add **equals** and/or **is_between** operations to the filterable numeric attributes.
+Depending on the filter UX we want to provide, we can add **equals** and/or **is_between** operations to the filterable numeric attributes. The example application UX only supports bolean based filtering and having only **equals** operation is enough.
 
 The following schema elements from  reflect the filterable numeric attributes:
 
@@ -154,22 +154,22 @@ The following schema elements from  reflect the filterable numeric attributes:
 {
   "attributes": [
     {"name": "Id","type": "int64!","operations": [ "equals" ]},
-    {"name": "Year","type": "int32?","operations": [ "equals", "is_between" ]},
-    {"name": "CitationCount","type": "int32?","operations": [ "equals", "is_between" ]},
-    {"name": "EstimatedCitationCount","type": "int32?","operations": [ "equals", "is_between" ]},
+    {"name": "Year","type": "int32?","operations": [ "equals"]},
+    {"name": "CitationCount","type": "int32?","operations": [ "equals"]},
+    {"name": "EstimatedCitationCount","type": "int32?","operations": [ "equals"]},
     {"name": "AuthorAffiliations.Sequence","type": "int32?","operations": [ "equals" ]}
   ]
 }
 ```
 
 >[!NOTE]
->Try adding **is_between** to numeric filter attributes and extend the sample code to enables publication year range filter.
+>Try adding **is_between** to numeric filter attributes and extend the sample code to enable publication year range filter.
 
 For string attributes, we want to select attributes that have common values such as **FieldsOfStudy.Name**. Attribute having common values allows MAKES to generate filter suggestions based on entity statistics using Histogram API.
 
 ![fields of study filter snapshot](media/privateLibraryExampleApp-fieldsOfStudyFilterSection.png)
 
- For attribute values that may be too noisy, you may opt for the normalized version such as using **AuthorName** instead of **OriginalAuthorName**. We should add **equals** operation to these attributes.
+ For attribute values that may be too noisy, you may opt for the normalized version such as using **AuthorName** instead of **OriginalAuthorName**. For the example library application we need to add **equals** operation to these attributes to support our various text filter expereince.
 
 We may also want to select attributes with unique values, such as DOI. This enables fast DOI search and retrieval.
 
@@ -201,7 +201,7 @@ For more information on schema file syntax and supported types/operations, see [
 
 Once you're ready with your schema. We can start building a MAKES index for the linked library data.
 
-Since the index we're building is relatively small and simple, we can build this locally on a dev machine. If the index you're building is large or contains more complex operations, use cloud index build to leverage high performing machines in Azure. To learn more, follow [How to create index from MAG](how-to-create-index-from-mag.md)
+Since the index we're building is relatively small and simple, we can build this locally on a x64 windows machine. If the index you're building is large or contains more complex operations, use cloud index build to leverage high performing machines in Azure. To learn more, follow [How to create index from MAG](how-to-create-index-from-mag.md)
 
 >[!NOTE]
 >Regardless of what you decide to use for production index builds, the best practice is to perform a local index build to validate schema correctness during development to avoid long running failures.
@@ -259,11 +259,13 @@ For more detailed deployment instructions, See [Create API Instances](get-starte
 
 ## Create Client Application with MAKES REST APIs
 
-We now have a backend API to serve our conference paper data. The last step is to create the client application to showcase the filterable paper list. The client application will retrieve data and generate filters via Evaluate and Histogram APIs.
+We now that we have a set of backend MAKES APIs to serve our linked private library publications. The last step is to create the frontend client to showcase the publication filter capability. The client application will retrieve data and generate filters via Evaluate and Histogram APIs.
 
 ### Paper list KES Query Expression
 
-We start building our client by crafting a KES query expression to represent the paper list shown on the UI. Since the initial list of papers we want to see is "all papers", the corresponding KES query expression would be "**All()**".
+![publication list snapshot](media/privateLibraryExampleApp-publicationCardList.png)
+
+We start building our frontend client by crafting a KES query expression to represent the publication list shown on the UI. Since the initial list of papers we want to see is "all papers", the corresponding KES query expression would be "**All()**".
 
 This corresponds to the following code in **{MakesInstanceUrl}/examples/privateLibraryExample/privateLibraryExample.js**
 
@@ -319,11 +321,13 @@ For more information on Evaluate API, see [Evaluate REST API](reference-post-eva
 - **\<MakesInstanceUrl>/examples/privateLibraryExample/paperListItem.js**
 - **\<MakesInstanceUrl>/examples/privateLibraryExample/paperFieldsOfStudyListItem.js**
 
-### Generate filters  
+### Generate filter suggestions  
+
+![fields of study filter snapshot](media/privateLibraryExampleApp-filterSectionList.png)
 
 We can also call Histogram API with the paper list expression to get filter attribute histograms and transform them into filters.
 
-Histogram returns the most probabilistic values for each attributes from the entities specified by the expression. In the context of this tutorial, Histogram API will return the top attribute values from publication entities that have the highest ranks (the publications that the user is most likely looking for). We can use these values for each filter attribute as **filter suggestion**.
+Histogram returns the most probabilistic values for each attributes from the entities specified by the expression. In the context of this tutorial, Histogram API will return the top attribute values from publication entities that have the highest ranks (the publications that the user is most likely looking for). We can use these values for each filter attribute as **filter suggestions**.
 
 To generate filter suggestions using Histogram API, see **MakesInteractor.GetFilters(paperExpression)** method in **\<MakesInstanceUrl>/makesInteractor.js**:
 
@@ -350,13 +354,13 @@ The corresponding data transformation logic for filter UI elements can be found 
 - **\<MakesInstanceUrl>/filterSectionListItem.js**
 - **\<MakesInstanceUrl>/filterAttributeListItem.js**
 
-### Handle filter events
+### Handle filter actions
 
 We can apply filters by modifying the paper list expression. To apply a filter, we combine the current paper expression and the target filter expression with a "And" operator.
 
 For example, with a *initial paper expression** being **All()**, to apply a publication year filter to constrain the publications returned to those published in 2019, the *filter expression* will be **Y=2019**, and the final paper list expression will become **And(All(),Y=2019)**.
 
-To handle filter events, see **FilterablePaperList.appendFilter(attributeName, attributeValue)** and **FilterablePaperList.updatePaperList()** method in **\<MakesInstanceUrl>/filterablePaperList.js** for more details.
+To handle filter action, see **FilterablePaperList.appendFilter(attributeName, attributeValue)** and **FilterablePaperList.updatePaperList()** method in **\<MakesInstanceUrl>/filterablePaperList.js** for more details.
 
 ```javascript
     /*
@@ -394,4 +398,4 @@ To handle filter events, see **FilterablePaperList.appendFilter(attributeName, a
 
 ### Use sample UI code to see them in action
 
-We've created a sample client app written in javascript along with MAKES. After custom index deployment is complete, you should be able to see the private library example application by visiting **\<MakesInstanceUrl>/examples/privateLibraryExample**.
+We've created a sample client app written in javascript along with MAKES. After custom index deployment is complete, you should be able to see the private library example application by visiting **\<MakesInstanceUrl>/examples/privateLibraryExample/privateLibraryExample.html**.
