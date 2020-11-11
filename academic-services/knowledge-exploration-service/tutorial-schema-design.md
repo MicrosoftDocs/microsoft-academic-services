@@ -455,4 +455,11 @@ We can apply filters by modifying the publication list expression. To apply a fi
 
 The publication list expression is initially set to `All()`, showing all publications. To constrain the publications returned to those published in 2019, we apply a publication year filter with the filter expression being `Year=2019`. The publication list expression will then become `And(All(),Year=2019)`. If we want to further constraint the publications returned to computer science related only, we apply a fields of study filter with the filter expression being `Composite(FieldsOfStudy.Name='computer science')`. The publication list expression will then become `And(All(),Year=2019,Composite(FieldsOfStudy.Name='computer science'))`
 
-To handle the filter action, see `FilterablePublicationList.appendFilter(attributeName, attributeValue)` and `FilterablePublicationList.updatePublicationList()` method in `filterablePublicationList.js` for more details.
+For more details see `FilterablePublicationList.appendFilter(attributeName, attributeValue)` and `FilterablePublicationList.updatePublicationList()` method in `filterablePublicationList.js`.
+
+<!-- ## Next steps
+
+Advance to the next section to learn how to add search capability to the library application.
+
+> [!div class="nextstepaction"]
+> [Add search to the library application](tutorial-grammar-design.md) -->
