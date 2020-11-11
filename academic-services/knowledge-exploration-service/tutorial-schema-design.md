@@ -5,12 +5,13 @@ ms.topic: tutorial
 ms.date: 10/15/2020
 ---
 
-# Design schema for filter and search
+# Design schema for filter
 
 This tutorial illustrates how to
 
-- Design a MAKES schema for private publications to enable search and smart filters.
-- Build a filterable paper list UI (as shown below) using MAKES APIs.
+- Design a MAKES schema for private publications to enable smart filters.
+- Build and deploy a custom index for private publications
+- Build a filterable publication list UI (as shown below) using MAKES APIs.
 
 ![Private Library Application](media/privateLibraryExampleApp-homepage.png)
 
@@ -18,7 +19,7 @@ This tutorial is a continuation of the [Link private publication records with MA
 
 ## Prerequisites
 
-- [Microsoft Academic Knowledge Exploration Service (MAKES) subscription](get-started-setup-provisioning.md) (release after 11/10)
+- [Microsoft Academic Knowledge Exploration Service (MAKES) subscription](get-started-setup-provisioning.md) (release version after 2020-11-30)
 - Completion of [Link private publication records with MAKES entities](tutorial-entity-linking.md) tutorial
 - Read through [How to define index schema](how-to-index-schema.md)
 - Download [Schema for linked sample library publication](samplePrivateLibraryData.linked.schema.json)
@@ -27,11 +28,13 @@ This tutorial is a continuation of the [Link private publication records with MA
 
 For any MAKES schema design, we need to determine
 
-- What entity attributes to include ?
-- What are the appropriate data types are for each entity attribute ?
-- What index operations should the entity attributes support ?
+- What are the input entities and what the entity attributes to include ?
+- What are the appropriate data types for each included entity attribute ?
+- What index operations should the included entity attributes support ?
 
-In this tutorial, we will build a library application with search and filter capabilities. We will start by designing a schema and building a custom index to power the app. We will be leveraging the linked private library publications from previous tutorial as the input entities for building the custom index. You should have a file named **samplePrivateLibraryData.linked.json** in your working directory from completing [Link private publication records with MAKES entities](tutorial-entity-linking.md) tutorial.
+### Input entities
+
+We will be leveraging the linked private library publications from previous tutorial as the input entities for building the custom index. You should have a file named **samplePrivateLibraryData.linked.json** in your working directory from completing [Link private publication records with MAKES entities](tutorial-entity-linking.md) tutorial. The entities have all the information needed to build the application.
 
 Here's an entity as example from **samplePrivateLibraryData.linked.json**
 
@@ -74,10 +77,14 @@ Here's an entity as example from **samplePrivateLibraryData.linked.json**
 }
 ```
 
-We are designing a schema that will
+For more information on input entity data format, see [Entity data files](how-to-index-data.md).
+
+### Design goal
+
+To determine what entity attributes should be included in the index and what index operation should those attribute have, we have to have a clear design goal. For this tutorial, we are designing a schema that will
 
 1. Show publication information in Publication List Items
-    ![The screenshot of a single paper list element](media/privateLibraryExampleApp-publicationCardList.png)
+    ![The screenshot of a single publication list element](media/privateLibraryExampleApp-publicationCardList.png)
 
 2. Create filter suggestions in Filter Sections
     ![fields of study filter snapshot](media/privateLibraryExampleApp-filterSectionList.png)
@@ -85,59 +92,51 @@ We are designing a schema that will
 3. Filter the publications
     ![year filter section snapshot](media/privateLibraryExampleApp-filterAction.png)
 
+## Included entity attributes, type, and index operations
+
+The design goal above guides us to create the following schema:
+
 We've include a complete schema for you to compare against. See [Schema for Linked Sample Library Data](samplePrivateLibraryData.linked.schema.json). The schema corresponds to the following table:
 
 | Attribute Name | Description| Index Data Type | Index Operations |
 | ---- | ---- | ---- | ---- |
-| OriginalTitle | Used in Publication List Item as display only attribute. | Blob? | - |
-| OriginalAbstract | Used in Publication List Item as display only attribute. | Blob? | - |
-| FullTextUrl | Used in Publication List Item as display only attribute. | Blob? | - |
-| VenueFullName | Used in Publication List Item as display only attribute. | Blob? | - |
-| EstimatedCitationCount | Used in Publication List Item as display only attribute. | Blob? | - |
-| Date | Used as filter options and in Publication List Item. | Date? | ["equals"] |
-|AuthorAffiliations| Indicates that "AuthorAffiliations" attribute indicates a object/a composition of multiple attributes | Composite* | - |
-|AuthorAffiliations.AffiliationName | Used as filter options and in Publication List Item. | String? | ["equals"] |
-|AuthorAffiliations.OriginalAuthorName | Used in Publication List Item as display only attribute. | String? | ["equals"] |
-|AuthorAffiliations.Sequence | Used in Publication List Item as display only attribute. |  int? | ["equals"] |
-|FieldsOfStudy| Indicates that "FieldsOfStudy" attribute indicates a object/a composition of multiple attributes | Composite* | - |
-|FieldsOfStudy.OriginalName| Used in Publication List Item as display only attribute. | Blob? | - |
-|FieldsOfStudy.Name| Used as filter options and in Publication List Item. | Blob? | - |
-|Year| Used as filter options and in Publication List Item. | int? | ["equals"] |
+| OriginalTitle | Display only attribute, used in Publication List. | `blob?` | - |
+| OriginalAbstract | Display only attribute, used in Publication List Item | `blob?` | - |
+| FullTextUrl | Display only attribute, used in Publication List Item. | `blob?` | - |
+| VenueFullName | Display only attribute, used in Publication List Item. | `blob?` | - |
+| EstimatedCitationCount | Display only attribute, used in Publication List Item. | `blob?` | - |
+| Date | Filter and display attribute, used in Publication List Item and Filter Item | `date?` | `["equals"]` |
+| Year | Filter and display attribute used in Publication List Item and Filter Item. | `int?` | `["equals"]` |
+| AuthorAffiliations | Indicates that "AuthorAffiliations" attribute indicates a object/a composition of multiple attributes | `Composite*` | - |
+| AuthorAffiliations.AffiliationName | Filter and display attribute used in Publication List Item and Filter Item. | `string?` | `["equals"]` |
+| AuthorAffiliations.AuthorName | Filter and display attribute used in Publication List Item and Filter Item. | `string?` | `["equals"]` |
+| AuthorAffiliations.OriginalAuthorName | Display only attribute, used in Publication List Item. | `string?` | `["equals"]` |
+| AuthorAffiliations.Sequence | Display only attribute, used in Publication List Item. | `blob?` | - |
+| FieldsOfStudy | Indicates that "FieldsOfStudy" attribute indicates a object/a composition of multiple attributes | `Composite*` | - |
+| FieldsOfStudy.OriginalName | Display only attribute, used in Publication List Item. | `blob?` | - |
+| FieldsOfStudy.Name | Filter and display attribute used in Publication List Item and Filter Item. | `string?` | `["equals"]` |
 
-### Display only attributes
+#### Display only attributes
 
-The display attributes are attributes that are needed for display only, such as **OriginalTitle** and **OriginalAuthorName** in a PaperListItem UI element. We can define them as **Blob** type such that KES can optimize the index's storage.
+The display attributes are attributes that are needed for display only, such as **OriginalTitle** and **OriginalAuthorName** in a PublicationListItem. We can define them as **Blob?** type such that KES can optimize the storage for them.
 
-### Filter option attributes
+#### Operational attributes
 
-Filter attributes are attributes that needs to be index so they can be used for filtering entity at runtime.
+Operational attributes are attributes that needs to be index so they can be used for performing actions at runtime. 
 
-We enable our library application to filter publications by year by adding the `"equals"` operation to the **Year** attribute.
+For example, we enable our library application to filter publications by year by adding the `"equals"` operation to the **Year** attribute.
 
 ![year filter section snapshot](media/privateLibraryExampleApp-yearFilterSection.png)
 
-<!--
-
-You may add an additional **is_between** to your attribute index operations to enable filtering over a range. For example, microsoft.academic.com will create a timeline for this "". 
-Depending on the filter UI we want to provide, we can add **equals** and/or **is_between** operations to the filterable numeric attributes.
- Add linked to explain different types of operations.
- The example application UI only supports boolean based filtering and having only **equals** operation is enough.
- > [!NOTE]
-> Try adding **is_between** to numeric filter attributes and extend the sample code to enable publication year range filter.
-
--->
-
-<!-- For string attributes, we want to select attributes that have common values such as **FieldsOfStudy.Name**. Attribute having common values allows MAKES to generate filter suggestions based on entity statistics using Histogram API. -->
-
-We also want to select string attributes as our filter option, such as **FieldsOfStudy.Name**.
+We also want to include string attributes as our filter option, such as **FieldsOfStudy.Name**.
 
 ![fields of study filter section snapshot](media/privateLibraryExampleApp-fieldsOfStudyFilterSection.png)
 
-Attribute having common values allows MAKES to generate useful filter suggestions that helps the user to navigate the search space. For attribute values that may be too noisy, you may opt for the normalized version the same attribute. Such as picking **AuthorName** over **OriginalAuthorName** as the attribute to index.
+Attributes with characteristic that can partition/group the entities well allows MAKES to generate useful filter suggestions for navigating the entities. For example, being able to filter the search results by the publication year and fields of study is a useful feature. For attribute values that may be too noisy, you may opt to index the normalized version of the same attribute to improve the filter experience, such as picking **AuthorName** over **OriginalAuthorName** to generate better filter suggestions.
 
 For more information on schema file syntax and supported types/operations, see [Index Schema Files](how-to-index-schema.md).
 
-## Build a custom paper index
+## Build a custom publication index
 
 Once you're ready with your schema, we can start building a MAKES index for the linked library data.
 
@@ -155,13 +154,153 @@ Since the index we're building is relatively small and simple, we can build this
     ```cmd
     kesm.exe BuildIndexLocal --SchemaFilePath samplePrivateLibraryData.linked.schema.json --EntitiesFilePath samplePrivateLibraryData.linked.json --OutputIndexFilePath samplePrivateLibraryData.linked.kes --IndexDescription "Linked Private Library Publications"
     ```
+    >[!NOTE]
+    > BuildIndexLocal command is only available on win-x64 version of kesm
 
->[!NOTE]
-> BuildIndexLocal command is only available on win-x64 version of kesm
+1. Run Evaluate command to verify the stored entity attributes are correct:
+    
+    ```cmd
+    kesm Evaluate --IndexFilePaths samplePrivateLibraryData.linked.kes --KesQueryExpression="All()" --Count 1 --Attributes *
+    ```
 
-<!--
-    Use Evaluate to validate shit is built correctly
--->
+    The output should be 
+
+    ```cmd
+    {
+      "expr": "All()",
+      "entities": [
+        {
+          "logprob": -17.514,
+          "prob": 2.4760901E-08,
+          "OriginalTitle": "An Overview of Microsoft Academic Service (MAS) and Applications",
+          "OriginalAbstract": "In this paper we describe a new release of a Web scale entity graph that serves as the backbone of Microsoft Academic Service (MAS), a major production effort with a broadened scope to the namesake vertical search engine that has been publicly available since 2008 as a research prototype. At the core of MAS is a heterogeneous entity graph comprised of six types of entities that model the scholarly activities: field of study, author, institution, paper, venue, and event. In addition to obtaining these entities from the publisher feeds as in the previous effort, we in this version include data mining results from the Web index and an in-house knowledge base from Bing, a major commercial search engine. As a result of the Bing integration, the new MAS graph sees significant increase in size, with fresh information streaming in automatically following their discoveries by the search engine. In addition, the rich entity relations included in the knowledge base provide additional signals to disambiguate and enrich the entities within and beyond the academic domain. The number of papers indexed by MAS, for instance, has grown from low tens of millions to 83 million while maintaining an above 95% accuracy based on test data sets derived from academic activities at Microsoft Research. Based on the data set, we demonstrate two scenarios in this work: a knowledge driven, highly interactive dialog that seamlessly combines reactive search and proactive suggestion experience, and a proactive heterogeneous entity recommendation.",
+          "FullTextUrl": "http://localhost/example-full-text-link-2",
+          "VenueFullName": "The Web Conference",
+          "EstimatedCitationCount": "393",
+          "Year": 2015,
+          "AuthorAffiliations": [
+            {
+              "AffiliationName": "microsoft",
+              "AuthorName": "arnab sinha",
+              "OriginalAuthorName": "Arnab Sinha",
+              "Sequence": "1"
+            },
+            {
+              "AffiliationName": "microsoft",
+              "AuthorName": "zhihong shen",
+              "OriginalAuthorName": "Zhihong Shen",
+              "Sequence": "2"
+            },
+            {
+              "AffiliationName": "microsoft",
+              "AuthorName": "yang song",
+              "OriginalAuthorName": "Yang Song",
+              "Sequence": "3"
+            },
+            {
+              "AffiliationName": "microsoft",
+              "AuthorName": "hao ma",
+              "OriginalAuthorName": "Hao Ma",
+              "Sequence": "4"
+            },
+            {
+              "AffiliationName": "microsoft",
+              "AuthorName": "darrin eide",
+              "OriginalAuthorName": "Darrin Eide",
+              "Sequence": "5"
+            },
+            {
+              "AffiliationName": "microsoft",
+              "AuthorName": "bojune hsu",
+              "OriginalAuthorName": "Bo-June (Paul) Hsu",
+              "Sequence": "6"
+            },
+            {
+              "AffiliationName": "microsoft",
+              "AuthorName": "kuansan wang",
+              "OriginalAuthorName": "Kuansan Wang",
+              "Sequence": "7"
+            }
+          ],
+          "FieldsOfStudy": [
+            {
+              "OriginalName": "World Wide Web",
+              "Name": "world wide web"
+            },
+            {
+              "OriginalName": "Vertical search",
+              "Name": "vertical search"
+            },
+            {
+              "OriginalName": "Test data",
+              "Name": "test data"
+            },
+            {
+              "OriginalName": "Search engine",
+              "Name": "search engine"
+            },
+            {
+              "OriginalName": "Recommender system",
+              "Name": "recommender system"
+            },
+            {
+              "OriginalName": "Knowledge base",
+              "Name": "knowledge base"
+            },
+            {
+              "OriginalName": "Graph",
+              "Name": "graph"
+            },
+            {
+              "OriginalName": "Dialog box",
+              "Name": "dialog box"
+            },
+            {
+              "OriginalName": "Computer science",
+              "Name": "computer science"
+            }
+          ]
+        }
+      ],
+      "timed_out": false
+    }
+    ```
+1. Run Evaluate command to verify index operations are created for specified attributes:
+
+    ```cmd
+    kesm Evaluate --IndexFilePaths samplePrivateLibraryData.linked.kes --KesQueryExpression="Year=2020"
+    ```
+
+    The output should be 
+
+    ```cmd
+    {
+      "expr": "Year=2020",
+      "entities": [
+        {
+          "logprob": -18.255,
+          "prob": 1.18019626E-08
+        },
+        {
+          "logprob": -19.386,
+          "prob": 3.8086159E-09
+        },
+        {
+          "logprob": -19.625,
+          "prob": 2.9989608E-09
+        },
+        {
+          "logprob": -19.853,
+          "prob": 2.3875455E-09
+        },
+        {
+          "logprob": -20.154,
+          "prob": 1.7669693E-09
+        }
+      ],
+      "timed_out": false
+    }
+    ```
 
 ### Submit a index job for production workflow
 
@@ -179,19 +318,19 @@ We are now ready to set up a MAKES API instance with a custom index.
     kesm.exe CreateHostResources --MakesPackage https://<Makes_Storage_Account_Name>.blob.core.windows.net/makes/<Makes_Release_Version> --HostResourceName <Makes_Host_Resource_Name>
     ```
 
-> [!NOTE]
-> If your account is connected to multiple Azure Directories or Azure Subscriptions, you'll also have to specify the **--AzureActiveDirectoryDomainName** and/or **--AzureSubscriptionId** parameters. See [Command Line Tool Reference](reference-makes-command-line-tool.md#common-azure-authentication-parameters) for more details.
+    > [!NOTE]
+    > If your account is connected to multiple Azure Directories or Azure Subscriptions, you'll also have to specify the **--AzureActiveDirectoryDomainName** and/or **--AzureSubscriptionId** parameters. See [Command Line Tool Reference](reference-makes-command-line-tool.md#common-azure-authentication-parameters) for more details.
 
 1. Run DeployHost command and use the "--MakesIndex" parameter to load the custom linked private library publication index we've built.
 
     ```cmd
-     kesm.exe DeployHost --HostName "<makes_host_instance_name>" --MakesPackage "https://<Makes_Storage_Account_Name>.blob.core.windows.net/makes/<Makes_Release_Version>/"  --MakesHostImageId "<Id_From_Previous_Command_Output>" --MakesIndex "<Custom_Index_Url>"
+     kesm.exe DeployHost --HostName "<Makes_Host_Instance_Name>" --MakesPackage "https://<Makes_Storage_Account_Name>.blob.core.windows.net/makes/<Makes_Release_Version>/"  --MakesHostImageId "<Id_From_Previous_Command_Output>" --MakesIndex "<Custom_Index_Url>" --HostMachineSku "Standard_D2_V2"
     ```
 
-For more detailed deployment instructions, See [Create API Instances](get-started-create-api-instances.md#create-makes-hosting-resources)
+    > [!NOTE]
+    > Since the index we're hosting is relatively small, you can reduce Azure consumption for the tutorial MAKES host instance by using the "--HostMachineSku" parameter and set the SKU to "Standard_D2_V2".
 
-> [!NOTE]
-> Since the index we're hosting is relatively small, you can reduce Azure consumption for the tutorial MAKES host instance by using the "--HostMachineSku" parameter and set the SKU to "Standard_D2_V2".
+For more detailed deployment instructions, See [Create API Instances](get-started-create-api-instances.md#create-makes-hosting-resources)
 
 ## Create Client Application with MAKES REST APIs
 
@@ -200,12 +339,12 @@ Download the following files from the deployed MAKES instance:
 `<Makes_Instance_Url>/examples/privateLibraryExample/privateLibraryExample.js`
 `<Makes_Instance_Url>/examples/privateLibraryExample/privateLibraryExample.html`
 `<Makes_Instance_Url>/examples/privateLibraryExample/privateLibraryExample.css`
-`<Makes_Instance_Url>/examples/privateLibraryExample/paperListItem.js`
-`<Makes_Instance_Url>/examples/privateLibraryExample/paperFieldsOfStudyListItem.js`
+`<Makes_Instance_Url>/examples/privateLibraryExample/publicationListItem.js`
+`<Makes_Instance_Url>/examples/privateLibraryExample/publicationFieldsOfStudyListItem.js`
 `<Makes_Instance_Url>/examples/privateLibraryExample/makesInteractor.js`
 `<Makes_Instance_Url>/examples/privateLibraryExample/filterSectionListItem.js`
 `<Makes_Instance_Url>/examples/privateLibraryExample/filterAttributeListItem.js`
-`<Makes_Instance_Url>/examples/privateLibraryExample/filterablePaperList.js`
+`<Makes_Instance_Url>/examples/privateLibraryExample/filterablePublicationList.js`
 `<Makes_Instance_Url>/examples/privateLibraryExample/filter.js`
 `<Makes_Instance_Url>/examples/privateLibraryExample/appliedFilterListItem.js`
 
@@ -215,19 +354,19 @@ Now that we have a set of backend MAKES APIs to serve our linked private library
 
 ![publication list snapshot](media/privateLibraryExampleApp-publicationCardList.png)
 
-We start building our frontend client by crafting a KES query expression to represent the publication list shown on the UI.  Since the initial list of papers we want to see is "all publication", the corresponding KES query expression would be `All()`
+We start building our frontend client by crafting a KES query expression to represent the publication list shown on the UI.  Since the initial list of publications we want to see is "all publication", the corresponding KES query expression would be `All()`
 
 This corresponds to the following code in `privateLibraryExample.js`
 
 ```javascript
 if (privateLibraryExampleRunable) {
-    app = new FilterablePaperList();
-    app.setOriginalPaperListExpression("All()");
+    app = new FilterablePublicationList();
+    app.setOriginalPublicationListExpression("All()");
     mount(document.body, app);
 }
 ```
 
-We will use this expression to fetch paper data in the next step. When filters are applied, we will modify this expression to get the corresponding data.
+We will use this expression to fetch publication data in the next step. When filters are applied, we will modify this expression to get the corresponding data.
 
 For more information on KES Query Expressions, see [Structured query expressions](concepts-query-expressions.md)
 
@@ -235,9 +374,9 @@ For more information on KES Query Expressions, see [Structured query expressions
 
 We can call Evaluate API with a KES query expression to retrieve the top publication entities and transform them into UI elements.
 
-To get publications using Evaluate API, see `MakesInteractor.GetPapers(paperExpression)` method in `makesInteractor.js`. For more information on Evaluate API, see [Evaluate REST API](reference-post-evaluate.md)
+To learn more about how to get publications using Evaluate API, see `MakesInteractor.GetPublications(publicationExpression)` method in `makesInteractor.js`. For more information on Evaluate API, see [Evaluate REST API](reference-post-evaluate.md)
 
-After retrieving the paper entities from Evaluate API, all is left to do is to translate the entity data to UI elements. The corresponding data transformation logic for paper UI elements can be found in: `paperListItem.js` and `paperFieldsOfStudyListItem.js`
+After retrieving the publication entities from Evaluate API, all is left to do is to translate the entity data to UI elements. The corresponding data transformation logic for publication UI elements can be found in: `publicationListItem.js` and `publicationFieldsOfStudyListItem.js`
 
 ### Generate filter suggestions  
 
@@ -245,20 +384,70 @@ After retrieving the paper entities from Evaluate API, all is left to do is to t
 
 We can call Histogram API with a KES query expression to get attribute histograms and transform them into filter suggestions for publications.
 
-Histogram returns the most probabilistic values for each attributes from the entities specified by the expression. In the context of this tutorial, Histogram API will return the top attribute values from publication entities that have the highest ranks (the publications that the user is most likely looking for). We can use these values for each filter attribute as **filter suggestions**.
+Histogram API returns the most common attribute values weighted by the entity's log probability. For example, execute the following command in your working directory to get the top **Year** attribute value from the index.
 
-To generate filter suggestions using Histogram API, see `MakesInteractor.GetFilters(paperExpression)` method in `makesInteractor.js`. For more information on Histogram API, see [Histogram REST API](reference-post-histogram.md)
+    ```cmd
+    kesm Histogram --IndexFilePaths samplePrivateLibraryData.linked.kes --KesQueryExpression "All()"  --Attributes "Year" --Count 1
+    ```
 
+    Histogram API should return 2015 as the top value with log probability of -17.514
+    
+    ```cmd
+    {
+      "expr": "Year=2015",
+      "entities": [
+        {
+          "logprob": -17.514,
+          "prob": 2.4760901E-08,
+          "Year": 2015
+        }
+      ],
+      "timed_out": false
+    }
+    ```
+    This is because there are two publications published in 2015 with entity log probability being -17.514 and -24.52. (-17.514 = LN(EXP(-17.514) + EXP(-24.52))) You can execute the following command to see the entities:
+
+    ```cmd
+    kesm Evaluate --IndexFilePaths samplePrivateLibraryData.linked.kes --KesQueryExpression "Year=2015"  --Attributes "Year"
+    ```
+    and you should see the following:
+
+    ```cmd
+    {
+      "expr": "Year=2015",
+      "entities": [
+        {
+          "logprob": -17.514,
+          "prob": 2.4760901E-08,
+          "Year": 2015
+        },
+        {
+          "logprob": -24.52,
+          "prob": 2.2444E-11,
+          "Year": 2015
+        }
+      ],
+      "timed_out": false
+    }
+    ```
+
+ For more information on Histogram API, see [Histogram REST API](reference-post-histogram.md)
+
+In the context of this tutorial, we leverage Histogram API to get **filter suggestions** by calling it with our current publication list expression and filter attributes.
+
+To learn more about how to generate filter suggestions using Histogram API, see `MakesInteractor.GetFilters(publicationExpression)` method in `makesInteractor.js`.
 The corresponding data transformation logic for filter UI elements can be found in: `filterSectionListItem.js` and in `filterAttributeListItem.js`.
 
 ### Apply filters
 
-We can apply filters by modifying the paper list expression. To apply a filter, we combine the current paper expression and the target filter expression with a "And" operator.
+We can apply filters by modifying the publication list expression. To apply a filter, we create a new expresion by combining the current publication expression and the filter expression with a "And" operator. Cosider the following scenario as an example:
 
-For example, with a **paper expression** initially being **All()**, to apply a publication year filter to constrain the publications returned to those published in 2019, the *filter expression* will be **Y=2019**, and the final paper list expression will become **And(All(),Y=2019)**.
+The publication list expression is initially set to `All()`, showing all publications. To constrain the publications returned to those published in 2019, we apply a publication year filter with the filter expression being `Year=2019`. The publication list expression will then become `And(All(),Year=2019)`. If we want to further constraint the publications returned to computer science related only, we apply a fields of study filter with the filter expression being `Composite(FieldsOfStudy.Name='computer science')`. The publication list expression will then become `And(All(),Year=2019,Composite(FieldsOfStudy.Name='computer science'))`
 
-To handle filter action, see `FilterablePaperList.appendFilter(attributeName, attributeValue)` and `FilterablePaperList.updatePaperList()` method in `filterablePaperList.js` for more details.
+To handle the filter action, see `FilterablePublicationList.appendFilter(attributeName, attributeValue)` and `FilterablePublicationList.updatePublicationList()` method in `filterablePublicationList.js` for more details.
 
 ### Use sample UI code to see them in action
 
 We've created a sample client app written in javascript along with MAKES. After custom index deployment is complete, you should be able to see the private library example application by visiting: `<Makes_Instance_Url>/examples/privateLibraryExample/privateLibraryExample.html`
+
+Alternatively, you can modify the `hostUrl` varaible in `makesInteractor.js` to point to your MAKES instance with custom index and debug the application by launching a browser with `privateLibraryExample.html`
