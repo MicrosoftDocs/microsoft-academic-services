@@ -341,17 +341,17 @@ We've created a sample client app written in javascript along with MAKES. After 
 
 Alternatively, you can download the sample client files listed below and run it locally. Modify the `hostUrl` variable in `makesInteractor.js` and point it to your MAKES instance with custom index. You can then and debug the application by launching the application in a browser with `privateLibraryExample.html`
 
-`<Makes_Instance_Url>/examples/privateLibraryExample/privateLibraryExample.js`
-`<Makes_Instance_Url>/examples/privateLibraryExample/privateLibraryExample.html`
-`<Makes_Instance_Url>/examples/privateLibraryExample/privateLibraryExample.css`
-`<Makes_Instance_Url>/examples/privateLibraryExample/publicationListItem.js`
-`<Makes_Instance_Url>/examples/privateLibraryExample/publicationFieldsOfStudyListItem.js`
-`<Makes_Instance_Url>/examples/privateLibraryExample/makesInteractor.js`
-`<Makes_Instance_Url>/examples/privateLibraryExample/filterSectionListItem.js`
-`<Makes_Instance_Url>/examples/privateLibraryExample/filterAttributeListItem.js`
-`<Makes_Instance_Url>/examples/privateLibraryExample/filterablePublicationList.js`
-`<Makes_Instance_Url>/examples/privateLibraryExample/filter.js`
-`<Makes_Instance_Url>/examples/privateLibraryExample/appliedFilterListItem.js`
+- `<Makes_Instance_Url>/examples/privateLibraryExample/privateLibraryExample.js`
+- `<Makes_Instance_Url>/examples/privateLibraryExample/privateLibraryExample.html`
+- `<Makes_Instance_Url>/examples/privateLibraryExample/privateLibraryExample.css`
+- `<Makes_Instance_Url>/examples/privateLibraryExample/publicationListItem.js`
+- `<Makes_Instance_Url>/examples/privateLibraryExample/publicationFieldsOfStudyListItem.js`
+- `<Makes_Instance_Url>/examples/privateLibraryExample/makesInteractor.js`
+- `<Makes_Instance_Url>/examples/privateLibraryExample/filterSectionListItem.js`
+- `<Makes_Instance_Url>/examples/privateLibraryExample/filterAttributeListItem.js`
+- `<Makes_Instance_Url>/examples/privateLibraryExample/filterablePublicationList.js`
+- `<Makes_Instance_Url>/examples/privateLibraryExample/filter.js`
+- `<Makes_Instance_Url>/examples/privateLibraryExample/appliedFilterListItem.js`
 
 ### Crafting a KES query expression to represent publications
 
