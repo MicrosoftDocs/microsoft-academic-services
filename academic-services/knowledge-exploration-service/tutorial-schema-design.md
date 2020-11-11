@@ -28,15 +28,15 @@ This tutorial illustrates how to
 
 For any MAKES schema design, we need to determine
 
-- What are the input entities and entity attributes to include ?
-- What are the appropriate data types for each included entity attribute ?
-- What index operations should each included entity attribute support ?
+- What are the input entities and entity attributes to include?
+- What are the appropriate data types for each included entity attribute?
+- What index operations should each included entity attribute support?
 
 ### Input entities
 
-We will be leveraging the linked private library publications from previous tutorial as the input entities for building the custom index. You should have a file named **samplePrivateLibraryData.linked.json** in your working directory from completing [Link private publication records with MAKES entities](tutorial-entity-linking.md) tutorial. The entities have all the information needed to build the application.
+We will be leveraging the linked private library publications from previous tutorial as the input entities for building the custom index. You should have a file named **samplePrivateLibraryData.linked.json** in your working directory from completing the [Link private publication records with MAKES entities](tutorial-entity-linking.md) tutorial. The linked private library publication entities have all the information needed to build the application.
 
-Here's an entity as example from **samplePrivateLibraryData.linked.json**
+Here's an entity from **samplePrivateLibraryData.linked.json** as example
 
 ```json
 {
@@ -94,7 +94,7 @@ To determine what entity attributes should be included in the index and what ind
 
 ### Included entity attributes, type, and index operations
 
-The design goal above guides us to create the [Schema for linked sample library publications](samplePrivateLibraryData.linked.schema.json). The schema can be translated to the following table:
+The design goal above guides us to create the [Schema for linked sample library publications](samplePrivateLibraryData.linked.schema.json), which uses a subset of the entity attributes from the input. The schema can be translated to the following table:
 
 | Attribute Name | Description| Index Data Type | Index Operations |
 | ---- | ---- | ---- | ---- |
@@ -164,7 +164,7 @@ Since the index we're building is relatively small and simple, we can build this
 
     The output should be
 
-    ```cmd
+    ```json
     {
       "expr": "All()",
       "entities": [
@@ -190,36 +190,7 @@ Since the index we're building is relatively small and simple, we can build this
               "OriginalAuthorName": "Zhihong Shen",
               "Sequence": "2"
             },
-            {
-              "AffiliationName": "microsoft",
-              "AuthorName": "yang song",
-              "OriginalAuthorName": "Yang Song",
-              "Sequence": "3"
-            },
-            {
-              "AffiliationName": "microsoft",
-              "AuthorName": "hao ma",
-              "OriginalAuthorName": "Hao Ma",
-              "Sequence": "4"
-            },
-            {
-              "AffiliationName": "microsoft",
-              "AuthorName": "darrin eide",
-              "OriginalAuthorName": "Darrin Eide",
-              "Sequence": "5"
-            },
-            {
-              "AffiliationName": "microsoft",
-              "AuthorName": "bojune hsu",
-              "OriginalAuthorName": "Bo-June (Paul) Hsu",
-              "Sequence": "6"
-            },
-            {
-              "AffiliationName": "microsoft",
-              "AuthorName": "kuansan wang",
-              "OriginalAuthorName": "Kuansan Wang",
-              "Sequence": "7"
-            }
+           ...
           ],
           "FieldsOfStudy": [
             {
@@ -230,40 +201,14 @@ Since the index we're building is relatively small and simple, we can build this
               "OriginalName": "Vertical search",
               "Name": "vertical search"
             },
-            {
-              "OriginalName": "Test data",
-              "Name": "test data"
-            },
-            {
-              "OriginalName": "Search engine",
-              "Name": "search engine"
-            },
-            {
-              "OriginalName": "Recommender system",
-              "Name": "recommender system"
-            },
-            {
-              "OriginalName": "Knowledge base",
-              "Name": "knowledge base"
-            },
-            {
-              "OriginalName": "Graph",
-              "Name": "graph"
-            },
-            {
-              "OriginalName": "Dialog box",
-              "Name": "dialog box"
-            },
-            {
-              "OriginalName": "Computer science",
-              "Name": "computer science"
-            }
+            ...
           ]
         }
       ],
       "timed_out": false
     }
     ```
+
 1. Run Evaluate command to verify index operations are created for specified attributes:
 
     ```cmd
