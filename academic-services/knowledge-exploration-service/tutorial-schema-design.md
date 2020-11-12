@@ -13,7 +13,7 @@ This tutorial illustrates how to
 
 - Design a MAKES schema to enable smart filters for library publication entities.
 - Build and deploy a custom index for those entities
-- Build a filterable publication list UI (as shown below) using MAKES APIs.
+- Build a filterable publication list client application (as shown below) using MAKES APIs.
 
 ![Private Library Application](media/privateLibraryExampleApp-homepage.png)
 
@@ -81,7 +81,7 @@ For more information on input entity data format, see [Entity data files](how-to
 
 ### Design goal
 
-To determine what entity attributes should be included in the index and what index operation should those attribute have, we have to have a clear design goal. For this tutorial, we are designing a schema that will
+To determine what entity attributes should be included in the index and what index operation should those attribute have, we have to have a clear design goal. For this tutorial, we are designing a schema that can
 
 1. Show publication information in Publication List Items
     ![The screenshot of a single publication list element](media/privateLibraryExampleApp-publicationCardList.png)
@@ -92,7 +92,7 @@ To determine what entity attributes should be included in the index and what ind
 3. Apply filters to the publications
     ![year filter section snapshot](media/privateLibraryExampleApp-filterAction.png)
 
-### Included entity attributes, type, and index operations
+### Entity attributes, type, and index operations
 
 The design goal above guides us to create the [Schema for linked sample library publications](samplePrivateLibraryData.linked.schema.json), which uses a subset of the entity attributes from the input. The schema can be translated to the following table:
 
@@ -110,13 +110,13 @@ The design goal above guides us to create the [Schema for linked sample library 
 | `AuthorAffiliations.AuthorName` | Filter and display attribute used in Publication List Item and Filter Item. | `string?` | `["equals"]` |
 | `AuthorAffiliations.OriginalAuthorName` | Display only attribute, used in Publication List Item. | `string?` | `["equals"]` |
 | `AuthorAffiliations.Sequence` | Display only attribute, used in Publication List Item. | `blob?` | - |
-| FieldsOfStudy | Indicates that "FieldsOfStudy" attribute is a object/a composition of multiple attributes | `Composite*` | - |
+| `FieldsOfStudy` | Indicates that "FieldsOfStudy" attribute is a object/a composition of multiple attributes | `Composite*` | - |
 | `FieldsOfStudy.OriginalName` | Display only attribute, used in Publication List Item. | `blob?` | - |
 | `FieldsOfStudy.Name` | Filter and display attribute used in Publication List Item and Filter Item. | `string?` | `["equals"]` |
 
 #### Display only attributes
 
-The display attributes are attributes that are needed for display only, such as `OriginalTitle` and `OriginalAuthorName` in a PublicationListItem. We can define them as `blob?` type such that KES can optimize the storage for them.
+The display attributes are attributes that are needed for display only, such as `OriginalTitle` and `OriginalAuthorName` in a Publication List Item. We can define them as `blob?` type such that KES can optimize the storage for them.
 
 #### Operational attributes
 
@@ -130,13 +130,15 @@ We also want to include string attributes as our filter option, such as `FieldsO
 
 ![fields of study filter section snapshot](media/privateLibraryExampleApp-fieldsOfStudyFilterSection.png)
 
-Attributes with characteristic that can partition/group the entities well allows MAKES to generate useful filter suggestions for navigating the entities. For example, being able to filter the search results by the publication year and fields of study is a useful feature. For attribute values that may be too noisy, you may opt to index the normalized version of the same attribute to improve the filter experience, such as picking `AuthorName` over `OriginalAuthorName` to generate better filter suggestions.
+Attributes with characteristic that can partition/group the entities well allows MAKES to generate useful filter suggestions for navigating the entities. For example, being able to filter search results by the publication year and fields of study can help users quickly refine the search space.
+
+For attribute values that may be too noisy, you may opt to index the normalized version of the same attribute to improve the filter experience, such as picking `AuthorName` over `OriginalAuthorName` to generate better filter suggestions.
 
 For more information on schema file syntax and supported types/operations, see [Index Schema Files](how-to-index-schema.md).
 
 ## Build a custom publication index
 
-Once you're ready with your schema, we can start building a MAKES index for the linked library data.
+Once you're ready with your schema, we can start building a MAKES index for the linked library publications.
 
 Since the index we're building is relatively small and simple, we can build this locally on a x64 Windows machine. If the index you're building contains more than 10,000 entities, use cloud index build to leverage high performing machines in Azure. To learn more, follow [How to create index from MAG](how-to-create-index-from-mag.md)
 
@@ -250,7 +252,7 @@ Since the index we're building is relatively small and simple, we can build this
 
 The index we're creating for this tutorial is relatively small and can be built locally. For larger and more complex index(es), use cloud builds to leverage high performing machines in Azure to build. To learn more, follow [How to create index from MAG](how-to-create-index-from-mag.md)
 
-## Deploy MAKES API Host with a custom index
+## Deploy a MAKES API with a custom index
 
 We are now ready to set up a MAKES API instance with a custom index.
 
@@ -276,15 +278,17 @@ We are now ready to set up a MAKES API instance with a custom index.
 
 For more detailed deployment instructions, See [Create API Instances](get-started-create-api-instances.md#create-makes-hosting-resources)
 
-## Create Client Application with MAKES REST APIs
+## Create a client application with MAKES APIs
 
-Now that we have a set of backend MAKES APIs to serve our linked private library publications. The last step is to create the frontend client to showcase the publication filter capability. In the remaining sections of the tutorial, we will be using the sample UI code to illustrate how to retrieve data and generate filters via Evaluate and Histogram APIs.
+Now that we have a set of backend MAKES APIs to serve our linked library publications. The last step is to create the frontend client to showcase the publication filter capability. In the remaining sections of the tutorial, we will be using the sample UI code to illustrate how to retrieve data and generate filters via Evaluate and Histogram APIs.
 
 ### Use sample UI code to see them in action
 
-We've created a sample client app written in javascript along with MAKES. After custom index deployment is complete, you should be able to see the private library example application by visiting: `<Makes_Instance_Url>/examples/privateLibraryExample/privateLibraryExample.html`
+We've created a sample client app written in javascript along with MAKES. After custom index deployment is complete, you should be able to see the private library example application by visiting:
 
-Alternatively, you can download the sample client files listed below and run it locally. Modify the `hostUrl` variable in `makesInteractor.js` and point it to your MAKES instance with custom index. You can then and debug the application by launching the application in a browser with `privateLibraryExample.html`
+`<Makes_Instance_Url>/examples/privateLibraryExample/privateLibraryExample.html`
+
+Alternatively, you can download the sample client files listed below and run it locally.
 
 - `<Makes_Instance_Url>/examples/privateLibraryExample/privateLibraryExample.js`
 - `<Makes_Instance_Url>/examples/privateLibraryExample/privateLibraryExample.html`
@@ -298,9 +302,11 @@ Alternatively, you can download the sample client files listed below and run it 
 - `<Makes_Instance_Url>/examples/privateLibraryExample/filter.js`
 - `<Makes_Instance_Url>/examples/privateLibraryExample/appliedFilterListItem.js`
 
+Modify the `hostUrl` variable in `makesInteractor.js` and point it to your MAKES instance with custom index. You can then and debug the application by launching the application in a browser with `privateLibraryExample.html`
+
 ### Crafting a KES query expression to represent publications
 
-We start building our frontend client by crafting a KES query expression to represent the publication list shown on the UI.  Since the initial list of publications we want to see is "all publication", the corresponding KES query expression would be `All()`.
+We start building our frontend client by crafting a KES query expression to represent the publication list shown on the UI. Since the initial list of publications we want to see is "all publication", we initialize the KES query expression representing the publication list to be `All()`.
 
 This corresponds to the following code in `privateLibraryExample.js`
 
@@ -310,7 +316,7 @@ app.setOriginalPublicationListExpression("All()");
 mount(document.body, app);
 ```
 
-We will use this expression to fetch publication data in the next step. When filters are applied, we will modify this expression to get the corresponding data.
+We will use the **publication list expression** to fetch publication entities in the next step. When filters are applied, we will modify this expression to get the corresponding entities.
 
 For more information on KES Query Expressions, see [Structured query expressions](concepts-query-expressions.md)
 
@@ -318,7 +324,7 @@ For more information on KES Query Expressions, see [Structured query expressions
 
 ![publication list snapshot](media/privateLibraryExampleApp-publicationCardList.png)
 
-We can call [Evaluate API](reference-post-evaluate.md) with a KES query expression to retrieve the top publication entities and transform them into UI elements.
+We can call [Evaluate API](reference-post-evaluate.md) with the **publication list expression** to retrieve the top publication entities and transform them into UI elements.
 
 To learn more about how to get publications using Evaluate API, see `MakesInteractor.GetPublications(publicationExpression)` method in `makesInteractor.js`.
 
@@ -328,15 +334,15 @@ After retrieving the publication entities from Evaluate API, all is left to do i
 
 ![fields of study filter snapshot](media/privateLibraryExampleApp-filterSectionList.png)
 
-We can call Histogram API with a KES query expression to get attribute histograms and transform them into filter suggestions for publications.
+We can call Histogram API with **the publication list expression** to get attribute histograms and transform them into filter suggestions for publications.
 
-[Histogram API](reference-post-histogram.md) returns the most common attribute values weighted by the entity's log probability. For example, execute the following command in your working directory to get the top `Year` attribute value from the index.
+[Histogram API](reference-post-histogram.md) returns the most common attribute values weighted by the entity's log probability. For example, execute the following command in your working directory to get the most common `Year` attribute value from the library publications.
 
   ```cmd
   kesm Histogram --IndexFilePaths samplePrivateLibraryData.linked.kes --KesQueryExpression "All()"  --Attributes "Year" --Count 1
   ```
 
-Histogram API should return 2015 as the top attribute value for `Year` with a log probability of -17.514
+Histogram API should return 2015 as the most common attribute value for `Year` with a weighted log probability of -17.514
 
   ```cmd
   {
@@ -387,18 +393,19 @@ The -17.514 log probability comes from the two publications published in 2015. E
   }
   ```
 
- The -17.514 `Year` attribute histogram log probability comes from the publication entities with `-17.514` and `-24.52` log probability. `LN(EXP(-17.514) + EXP(-24.52)) = -17.514`
+ The -17.514 `Year` attribute histogram log probability comes from adding the two entity log probabilities, `-17.514` and `-24.52` together. `LN(EXP(-17.514) + EXP(-24.52)) = -17.514`
 
-In the context of this tutorial, we leverage Histogram API to get **filter suggestions** by calling it with our current publication list expression and filter attributes.
+In the context of this tutorial, we can leverage the Histogram API response as **filter suggestions**. To learn more about how to generate filter suggestions using Histogram API, see `MakesInteractor.GetFilters(publicationExpression)` method in `makesInteractor.js`.
 
-To learn more about how to generate filter suggestions using Histogram API, see `MakesInteractor.GetFilters(publicationExpression)` method in `makesInteractor.js`.
 The corresponding data transformation logic for filter UI elements can be found in: `filterSectionListItem.js` and in `filterAttributeListItem.js`.
 
 ### Apply filters
 
-We can apply filters by modifying the publication list expression. To apply a filter, we create a new expresion by combining the current publication expression and the filter expression with a "And" operator. Cosider the following scenario as an example:
+We can apply filters by modifying the publication list expression. To apply a filter, we create a new expression by combining the current publication expression and the filter expression with a "And" operator. Consider the following scenario as an example:
 
-The publication list expression is initially set to `All()`, showing all publications. To constrain the publications returned to those published in 2019, we apply a publication year filter with the filter expression being `Year=2019`. The publication list expression will then become `And(All(),Year=2019)`. If we want to further constraint the publications returned to computer science related only, we apply a fields of study filter with the filter expression being `Composite(FieldsOfStudy.Name='computer science')`. The publication list expression will then become `And(All(),Year=2019,Composite(FieldsOfStudy.Name='computer science'))`
+The publication list expression is initially set to `All()`, showing all publications. To constrain the publications returned to those published in 2019, we apply a publication year filter, with the filter expression being `Year=2019`. The publication list expression will then become `And(All(),Year=2019)`.
+
+If we want to further constraint the publications returned to computer science related only, we apply a fields of study filter, with the filter expression being `Composite(FieldsOfStudy.Name='computer science')`. The publication list expression will then become `And(All(),Year=2019,Composite(FieldsOfStudy.Name='computer science'))`.
 
 For more details see `FilterablePublicationList.appendFilter(attributeName, attributeValue)` and `FilterablePublicationList.updatePublicationList()` method in `filterablePublicationList.js`.
 
