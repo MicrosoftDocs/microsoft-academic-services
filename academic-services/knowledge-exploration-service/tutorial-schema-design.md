@@ -342,7 +342,7 @@ We can call Histogram API with **the publication list expression** to get attrib
   kesm Histogram --IndexFilePaths samplePrivateLibraryData.linked.kes --KesQueryExpression "All()"  --Attributes "Year" --Count 1
   ```
 
-Histogram API should return 2015 as the most common attribute value for `Year` with a weighted log probability of -17.514
+Histogram API should return 2015 as the most common attribute value for `Year` with a weighted log probability of `-17.514`
 
   ```cmd
   {
@@ -366,7 +366,7 @@ Histogram API should return 2015 as the most common attribute value for `Year` w
   }
   ```
 
-The -17.514 log probability comes from the two publications published in 2015. Execute the following command to see the entity log probability for those publications in 2015:
+The `-17.514` log probability comes from the two publications published in 2015. Execute the following command to see the entity log probability for those publications in 2015:
 
   ```cmd
   kesm Evaluate --IndexFilePaths samplePrivateLibraryData.linked.kes --KesQueryExpression "Year=2015"  --Attributes "Year"
@@ -393,7 +393,7 @@ The -17.514 log probability comes from the two publications published in 2015. E
   }
   ```
 
- The -17.514 `Year` attribute histogram log probability comes from adding the two entity log probabilities, `-17.514` and `-24.52` together. `LN(EXP(-17.514) + EXP(-24.52)) = -17.514`
+ The histogram log probability of `-17.514` for the top `Year` attribute comes from adding the two entity log probabilities, `-17.514` and `-24.52` together. `LN(EXP(-17.514) + EXP(-24.52)) = -17.514`
 
 In the context of this tutorial, we can leverage the Histogram API response as **filter suggestions**. To learn more about how to generate filter suggestions using Histogram API, see `MakesInteractor.GetFilters(publicationExpression)` method in `makesInteractor.js`.
 
