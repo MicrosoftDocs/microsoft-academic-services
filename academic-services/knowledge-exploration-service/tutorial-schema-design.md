@@ -1,17 +1,17 @@
 ﻿---
-title: Build applications with smart filters
+title: Build a library browser with contextual filters
 description: Step by step tutorial to design MAKES schema for custom data
 ms.topic: tutorial
 ms.date: 10/15/2020
 ---
 
-# Build a library application with smart filters
+# Build a library browser with contextual filters
 
 This tutorial is a continuation of the [Link publications with MAKES entities](tutorial-entity-linking.md) tutorial.
 
 This tutorial illustrates how to
 
-- Design a MAKES schema to enable smart filters for library publication entities.
+- Design a MAKES schema to enable contextual filters for library publication entities.
 - Build and deploy a custom index for those entities
 - Build a filterable publication list client application (as shown below) using MAKES APIs.
 
@@ -130,7 +130,7 @@ We also want to include string attributes as our filter option, such as `FieldsO
 
 ![fields of study filter section snapshot](media/privateLibraryExampleApp-fieldsOfStudyFilterSection.png)
 
-Attributes with characteristic that can partition/group the entities well allows MAKES to generate useful filter suggestions for navigating the entities. For example, being able to filter search results by the publication year and fields of study can help users quickly refine the search space.
+Attributes with characteristic that can partition/group the entities well allows MAKES to generate useful filter suggestions for navigating the entities. For example, being able to filter search results by the publication year and fields of study can help users quickly find the publications they are looking for.
 
 For attribute values that may be too noisy, you may opt to index the normalized version of the same attribute to improve the filter experience, such as picking `AuthorName` over `OriginalAuthorName` to generate better filter suggestions.
 
@@ -214,7 +214,7 @@ Since the index we're building is relatively small and simple, we can build this
 1. Run Evaluate command to verify index operations are created for specified attributes:
 
     ```cmd
-    kesm Evaluate --IndexFilePaths samplePrivateLibraryData.linked.kes --KesQueryExpression="Year=2020"
+    kesm Evaluate --IndexFilePaths samplePrivateLibraryData.linked.kes --KesQueryExpression="Year=2020" --Attributes "Year"
     ```
 
     The output should be
@@ -225,23 +225,28 @@ Since the index we're building is relatively small and simple, we can build this
       "entities": [
         {
           "logprob": -18.255,
-          "prob": 1.18019626E-08
+          "prob": 1.18019626E-08,
+          "Year": 2020
         },
         {
           "logprob": -19.386,
-          "prob": 3.8086159E-09
+          "prob": 3.8086159E-09,
+          "Year": 2020
         },
         {
           "logprob": -19.625,
-          "prob": 2.9989608E-09
+          "prob": 2.9989608E-09,
+          "Year": 2020
         },
         {
           "logprob": -19.853,
-          "prob": 2.3875455E-09
+          "prob": 2.3875455E-09,
+          "Year": 2020
         },
         {
           "logprob": -20.154,
-          "prob": 1.7669693E-09
+          "prob": 1.7669693E-09,
+          "Year": 2020
         }
       ],
       "timed_out": false
@@ -395,7 +400,7 @@ The `-17.514` log probability comes from the two publications published in 2015.
 
  The histogram log probability of `-17.514` for the top `Year` attribute comes from adding the two entity log probabilities, `-17.514` and `-24.52` together. `LN(EXP(-17.514) + EXP(-24.52)) = -17.514`
 
-In the context of this tutorial, we can leverage the Histogram API response as **filter suggestions**. To learn more about how to generate filter suggestions using Histogram API, see `MakesInteractor.GetFilters(publicationExpression)` method in `makesInteractor.js`.
+In the context of this tutorial, we can leverage the Histogram API response as **contextual filter suggestions**. To learn more about how to generate contextual filter suggestions using Histogram API, see `MakesInteractor.GetFilters(publicationExpression)` method in `makesInteractor.js`.
 
 The corresponding data transformation logic for filter UI elements can be found in: `filterSectionListItem.js` and in `filterAttributeListItem.js`.
 

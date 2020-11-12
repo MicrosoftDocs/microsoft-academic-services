@@ -44,7 +44,7 @@
     href: how-to-create-index-from-mag.md
   - name: Link publications with MAKES entities
     href: tutorial-entity-linking.md
-  - name: Build applications with smart filters
+  - name: Build browser applications with contextual filters
     href: tutorial-schema-design.md
 - name: Concepts
   expanded: false
