@@ -40,10 +40,12 @@
 - name: Tutorials
   expanded: false
   items:
-  - name: Create custom index from MAG
+  - name: Create custom index(es) from MAG
     href: how-to-create-index-from-mag.md
-  - name: Link private publication records with MAKES entities
+  - name: Link publications with MAKES entities
     href: tutorial-entity-linking.md
+  - name: Build browser applications with contextual filters
+    href: tutorial-schema-design.md
 - name: Concepts
   expanded: false
   items:

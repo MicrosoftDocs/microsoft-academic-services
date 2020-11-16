@@ -40,7 +40,19 @@ function Merge-MagEntity {
     {
         $privateLibraryPaper | Add-Member -MemberType NoteProperty -Name 'DOI' -Value  $magEntity.DOI
     }
+
+    # add year
+    if ($null -ne $magEntity.Y)
+    {
+        $privateLibraryPaper | Add-Member -MemberType NoteProperty -Name 'Year' -Value  $magEntity.Y
+    }
     
+    # add venue full name
+    if ($null -ne $magEntity.VFN)
+    {
+        $privateLibraryPaper | Add-Member -MemberType NoteProperty -Name 'VenueFullName' -Value  $magEntity.VFN
+    }
+
     # add citation count
     $privateLibraryPaper | Add-Member -MemberType NoteProperty -Name 'CitationCount' -Value  $magEntity.CC
 
@@ -165,7 +177,7 @@ foreach ($privateLibraryPaper in $privateLibraryPapers)
         query = "title: " + $privateLibraryPaper.OriginalTitle;
         complete = 0;
         normalize = 1;
-        attributes = "Id,DN,F.DFN,F.FN,AA.DAuN,AA.AuN,AA.DAfN,AA.AfN,AA.S,IA,DOI,CC,ECC";
+        attributes = "Id,DN,F.DFN,F.FN,AA.DAuN,AA.AuN,AA.DAfN,AA.AfN,AA.S,IA,DOI,Y,VFN,CC,ECC";
         count = 1;
         entityCount = 1;
         timeout = 2000;
