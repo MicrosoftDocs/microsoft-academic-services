@@ -66,7 +66,7 @@ landingContent:
             url: how-to-create-index-from-mag.md
           - text: Link private publication records with MAKES entities
             url: tutorial-entity-linking.md
-         - text: Build a library browser with contextual filters
+          - text: Build a library browser with contextual filters
             url: tutorial-schema-design.md
 
   - title: Manage instances
