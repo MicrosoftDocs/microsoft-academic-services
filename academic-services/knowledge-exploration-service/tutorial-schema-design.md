@@ -2,7 +2,7 @@
 title: Build a library browser with contextual filters
 description: Step by step tutorial to design MAKES schema for custom data
 ms.topic: tutorial
-ms.date: 10/15/2020
+ms.date: 11/16/2020
 ---
 
 # Build a library browser with contextual filters
@@ -138,18 +138,18 @@ For more information on schema file syntax and supported types/operations, see [
 
 ## Build a custom publication index
 
-Once you're ready with your schema, we can start building a MAKES index for the linked library publications.
+Once you're ready with your schema, we can build a MAKES index for the linked library publications.
 
-Since the index we're building is relatively small and simple, we can build this locally on a x64 Windows machine. If the index you're building contains more than 10,000 entities, use cloud index build to leverage high performing machines in Azure. To learn more, follow [How to create index from MAG](how-to-create-index-from-mag.md)
+Since the index we're building is relatively small and simple, we can build this locally on a x64 Windows machine. If the index you're building contains more than 10,000 entities, use the cloud index build to leverage high performing machines in Azure. To learn more, follow [How to create index from MAG](how-to-create-index-from-mag.md)
 
 >[!NOTE]
 >Regardless of what you decide to use for production index builds, the best practice is to perform a local index build to validate schema correctness during development to avoid long running failures.
 
 ### Validate schema using local index build
 
-1. Copy win-x64 version of kesm.exe to your working directory or include it in your command line PATH variable.
+1. Copy the win-x64 version of kesm.exe to your working directory or include it in your command line PATH variable.
 
-1. Open up a commandline console, change directory to your working directory, and build the index with the following command:
+1. Open up a commandline console, change your current directory to your working directory, and build the index with the following command:
 
     ```cmd
     kesm.exe BuildIndexLocal --SchemaFilePath samplePrivateLibraryData.linked.schema.json --EntitiesFilePath samplePrivateLibraryData.linked.json --OutputIndexFilePath samplePrivateLibraryData.linked.kes --IndexDescription "Linked Private Library Publications"
@@ -253,7 +253,7 @@ Since the index we're building is relatively small and simple, we can build this
     }
     ```
 
-### Submit a index job for production workflow
+### Submit an index job for production workflow
 
 The index we're creating for this tutorial is relatively small and can be built locally. For larger and more complex index(es), use cloud builds to leverage high performing machines in Azure to build. To learn more, follow [How to create index from MAG](how-to-create-index-from-mag.md)
 
