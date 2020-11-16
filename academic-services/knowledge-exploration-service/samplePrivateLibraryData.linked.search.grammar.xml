@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="utf-8"?>
+<grammar root="SearchPapers">
+  <import schema="samplePrivateLibraryData.linked.search.schema.json" name="libraryPapers"/>
+
+  <rule id="SearchPapers">
+
+    <tag>
+      <!-- Query variable contains the query expression that maps to each grammar interpretation path and can be directly used with Evaluate to get entities -->
+      query = All();
+
+      <!-- Variables used for various asserts later in grammar -->
+      hasSearchResult = false;
+    </tag>
+
+    <item repeat="1-INF" repeat-logprob="-1">
+
+      <!-- Assert that we never search for terms beyond the end of the query -->
+      <tag>
+        IsBeyondEndOfQuery = GetVariable("IsBeyondEndOfQuery", "system");
+        AssertEquals(IsBeyondEndOfQuery, false);
+      </tag>
+
+      <one-of>
+        <!-- Different search behaviors -->
+        <item>
+          <one-of>
+            <!-- Entity attribute search -->
+            <item>
+              <one-of>
+                <!-- Match full title -->
+                <item>
+                  <attrref uri="libraryPapers#Title" name="q"/>
+                </item>
+
+                <!-- Match year -->
+                <item>
+                  <attrref uri="libraryPapers#Year" name="q"/>
+                </item>
+
+                <!-- Match digitial object identifier -->
+                <item>
+                  <attrref uri="libraryPapers#DOI" name="q"/>
+                </item>
+              </one-of>
+
+              <tag>
+                query = And(query, q);
+              </tag>
+            </item>
+
+            <!-- Entity composite attribute search -->
+            <item logprob="-1">
+              <one-of>
+                <!-- Match author -->
+                <item>
+                  <attrref uri="libraryPapers#AuthorAffiliations.AuthorName" name="q"/>
+                </item>
+
+                <!-- Match affiliation -->
+                <item>
+                  <attrref uri="libraryPapers#AuthorAffiliations.AffiliationName" name="q"/>
+                </item>
+
+                <!-- Match field of study -->
+                <item>
+                  <attrref uri="libraryPapers#FieldsOfStudy.Name" name="q"/>
+                </item>
+              </one-of>
+
+              <tag>
+                q = Composite(q);
+                query = And(query, q);
+              </tag>
+            </item>
+
+            <!-- Partial entity title search -->
+            <item logprob="-1">
+              <item repeat="1-INF">
+                <!-- Assert that we never search for terms beyond the end of the query -->
+                <tag>
+                  IsBeyondEndOfQuery = GetVariable("IsBeyondEndOfQuery", "system");
+                  AssertEquals(IsBeyondEndOfQuery, false);
+                </tag>
+                <one-of>
+                  <!-- Match title word -->
+                  <item logprob="-1">
+                    <attrref uri="libraryPapers#TitleWords" name="q"/>
+                    <tag>
+                      query = And(query, q);
+                    </tag>
+                  </item>
+                </one-of>
+              </item>
+            </item>
+
+            <!-- Partial entity abstract search -->
+            <item logprob="-3">
+              <item repeat="1-INF">
+                <!-- Assert that we never search for terms beyond the end of the query -->
+                <tag>
+                  IsBeyondEndOfQuery = GetVariable("IsBeyondEndOfQuery", "system");
+                  AssertEquals(IsBeyondEndOfQuery, false);
+                </tag>
+                <one-of>
+                  <!-- Match abstract word -->
+                  <item logprob="-3">
+                    <attrref uri="libraryPapers#AbstractWords" name="q" />
+                    <tag>
+                      query = And(query, q);
+                    </tag>
+                  </item>
+                </one-of>
+              </item>
+            </item>
+          </one-of>
+
+          <!-- Marks that at least one of the above search behavior has results -->
+          <tag>
+            hasSearchResult = true;
+          </tag>
+        </item>
+
+        <!-- Words/terms that cannot be matched using the above search behaviors, aka "garbage/dropped" terms. -->
+        <item logprob="-25">
+          <!-- Make any terms as "garbage" terms -->
+          <regex pattern='\b\w+' name="garbage" />
+        </item>
+
+      </one-of>
+    </item>
+
+    <tag>
+      <!-- Ensure not all query terms are treated as garbage words/dropped terms. At least one of the search
+       behaviors above has results.-->
+      AssertEquals(hasSearchResult, true);
+    </tag>
+
+    <!-- Treat all remaining terms as dropped terms if needed-->
+    <item repeat="0-1">
+      <tag>
+        <!-- Only match remaining query terms if we're not at the end of the query -->
+        IsAtEndOfQuery = GetVariable("IsAtEndOfQuery", "system");
+        AssertEquals(IsAtEndOfQuery, false);
+      </tag>
+
+      <!-- Gets all remaining query terms and places them into "remainingGarbage" variable -->
+      <regex pattern=".*" name="remainingGarbage" />
+
+      <tag>
+        <!-- Use number of spaces in string + 1 as a way to determine word count -->
+        spaceCount = MatchCount(remainingGarbage, "\s+");
+        spaceCount = Increment(spaceCount);
+
+        <!-- Add grammar weight "penalty" based on the number of "garbage" words present; note that this penalty is equivilant to the "logprob" weight penalty used for <item> tags -->
+        penalty = Multiply(spaceCount, 25000);
+        query = AddGrammarWeight(query, penalty);
+      </tag>
+    </item>
+
+    <!-- Resolve all completions, synonyms -->
+    <tag>
+      out = Resolve(query);
+    </tag>
+
+  </rule>
+
+</grammar>

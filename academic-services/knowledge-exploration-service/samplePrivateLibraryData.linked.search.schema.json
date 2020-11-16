@@ -1,0 +1,27 @@
+{
+  "attributes": [
+    {"name": "OriginalTitle","type": "blob?"},
+    {"name": "OriginalAbstract","type": "blob?"},
+    {"name": "FullTextUrl","type": "string?", "operations": [ "equals"]},
+    {"name": "VenueFullName","type": "blob?"},
+    {"name": "EstimatedCitationCount","type": "blob?"},
+    {"name": "Date", "type": "date?", "operations": [ "equals" ]},
+    {"name": "Year","type": "int32?","operations": [ "equals" ]},
+    
+    {"name": "AuthorAffiliations","type": "Composite*"},
+    {"name": "AuthorAffiliations.AffiliationName","type": "string?","operations": [ "equals"]},
+    {"name": "AuthorAffiliations.AuthorName","type": "string?","operations": [ "equals"]},
+    {"name": "AuthorAffiliations.OriginalAuthorName","type": "blob?"},
+    {"name": "AuthorAffiliations.Sequence","type": "blob?"},
+    
+    {"name": "FieldsOfStudy","type": "Composite*"},
+    {"name": "FieldsOfStudy.OriginalName","type": "blob?"},
+    {"name": "FieldsOfStudy.Name","type": "string?","operations": [ "equals"]},
+  
+    {"name": "DOI","type": "string?","operations": [ "equals", "starts_with" ]},
+    {"name": "Title","type": "string?", "operations": [ "equals", "starts_with"]},
+  
+    {"name": "TitleWords","type": "string*","operations": [ "equals" ]},
+    {"name": "AbstractWords","type": "string*", "operations": [ "equals" ]}
+  ]
+}
