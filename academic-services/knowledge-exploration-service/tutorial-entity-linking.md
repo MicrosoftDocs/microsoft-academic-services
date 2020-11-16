@@ -274,4 +274,7 @@ Using the parse above and the default MAKES grammar rules definition, the accumu
 
 ## Next steps
 
-Advance to the next section to learn how to design a MAKES schema to enable filter and search for the library data.
+Advance to the next section to learn how to build a library application to filter the publications.
+
+> [!div class="nextstepaction"]
+> [Build a library application with smart filters](tutorial-schema-design.md)
