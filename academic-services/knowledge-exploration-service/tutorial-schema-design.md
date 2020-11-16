@@ -92,7 +92,7 @@ To determine what entity attributes should be included in the index we'll use fo
 
 ### Define entity attributes, type, and index operations
 
-The design goal above guides us to define a [schema for the linked sample library publications](samplePrivateLibraryData.linked.schema.json), which uses a subset of the entity attributes generated from the previous tutorials output:
+The design goals above guide us to define a [schema for the linked sample library publications](samplePrivateLibraryData.linked.schema.json), which uses a subset of the entity attributes generated from the previous tutorials output:
 
 | Attribute Name | Description| Index Data Type | Index Operations |
 | ---- | ---- | ---- | ---- |
@@ -403,7 +403,7 @@ We can apply filters by modifying the publication list expression. To apply a fi
 
 The publication list expression is initially set to `All()`, showing all publications. To constrain the publications returned to those published in 2019, we apply a publication year filter, with the filter expression being `Year=2019`. The publication list expression will then become `And(All(),Year=2019)`.
 
-If we want to further constraint the publications returned to computer science related only, we apply a fields of study filter, with the filter expression being `Composite(FieldsOfStudy.Name='computer science')`. The publication list expression will then become `And(All(),Year=2019,Composite(FieldsOfStudy.Name='computer science'))`.
+If we want to further constrain the publications returned to computer science related only, we apply a fields of study filter, with the filter expression being `Composite(FieldsOfStudy.Name='computer science')`. The publication list expression will then become `And(All(),Year=2019,Composite(FieldsOfStudy.Name='computer science'))`.
 
 For more details see `FilterablePublicationList.appendFilter(attributeName, attributeValue)` and `FilterablePublicationList.updatePublicationList()` method in `filterablePublicationList.js`.
 
