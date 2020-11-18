@@ -143,18 +143,47 @@ function Edit-AddSearchAttribues
 
     # add normalized title attribute for title search
     $normalizedTitle = ConvertTo-NormalizedStr $libraryPaper.OriginalTitle
-    $libraryPaper | Add-Member -MemberType NoteProperty -Name 'Title' -Value  $normalizedTitle
-
     # add normlized title words for partial title search
     $titleWords = ConvertTo-DistinctWordsArray $normalizedTitle
-    $libraryPaper | Add-Member -MemberType NoteProperty -Name 'TitleWords' -Value  $titleWords
+    $titleComposite = @{
+        Name = $normalizedTitle;
+        OriginalName = $libraryPaper.OriginalTitle;
+        Words = $titleWords;
+    };
+    $libraryPaper | Add-Member -MemberType NoteProperty -Name 'Title' -Value  $titleComposite
+
 
     # add normalized abstract words for partial abstract search
     if ($null -ne $libraryPaper.OriginalAbstract)
     {
         $normalizedAbstract = ConvertTo-NormalizedStr $libraryPaper.OriginalAbstract
         $abstractWords = ConvertTo-DistinctWordsArray $normalizedAbstract
-        $libraryPaper | Add-Member -MemberType NoteProperty -Name 'AbstractWords' -Value  $abstractWords
+        $abstractComposite = @{
+            Name = $normalizedAbstract;
+            OriginalName = $libraryPaper.OriginalAbstract;
+            Words = $abstractWords;
+        }        
+        $libraryPaper | Add-Member -MemberType NoteProperty -Name 'Abstract' -Value  $abstractComposite
+    }
+
+    # add normalized doi for attribute search
+    if ($null -ne $libraryPaper.DOI)
+    {
+        $normalizedDOI = ConvertTo-NormalizedStr $libraryPaper.DOI
+        $libraryPaper.DOI = @{
+            OriginalName = $libraryPaper.DOI;
+            Name = $normalizedDOI;
+        };
+    }
+
+    # add normalized full text url for attribute search
+    if ($null -ne $libraryPaper.FullTextUrl)
+    {
+        $normalizedFullTextUrl = ConvertTo-NormalizedStr $libraryPaper.FullTextUrl
+        $libraryPaper.FullTextUrl = @{
+            OriginalName = $libraryPaper.FullTextUrl;
+            Name = $normalizedFullTextUrl;
+        };
     }
 }
 

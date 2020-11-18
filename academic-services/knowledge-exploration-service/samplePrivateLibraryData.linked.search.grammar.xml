@@ -10,8 +10,17 @@
 
       <!-- Variables used for various asserts later in grammar -->
       hasSearchResult = false;
+      abstractTitleWordCount = 0;
     </tag>
-
+    
+    <!-- Paper search queries can start with "papers..." or "paper..." -->
+    <one-of>
+      <item logprob="-10"></item>
+      <item>papers</item>
+      <item>paper</item>
+    </one-of>
+    
+    <!-- Process search queries using one or more search grammar -->
     <item repeat="1-INF" repeat-logprob="-1">
 
       <!-- Assert that we never search for terms beyond the end of the query -->
@@ -24,22 +33,13 @@
         <!-- Different search behaviors -->
         <item>
           <one-of>
-            <!-- Entity attribute search -->
-            <item>
+            <!-- Attribute search -->
+            <item logprob="-1">
               <one-of>
-                <!-- Match full title -->
-                <item>
-                  <attrref uri="libraryPapers#Title" name="q"/>
-                </item>
-
                 <!-- Match year -->
                 <item>
+                  <item repeat="0-1">published in</item>
                   <attrref uri="libraryPapers#Year" name="q"/>
-                </item>
-
-                <!-- Match digitial object identifier -->
-                <item>
-                  <attrref uri="libraryPapers#DOI" name="q"/>
                 </item>
               </one-of>
 
@@ -48,33 +48,57 @@
               </tag>
             </item>
 
-            <!-- Entity composite attribute search -->
-            <item logprob="-1">
+            <!-- Composite attribute search -->
+            <item logprob="-2">
               <one-of>
-                <!-- Match author -->
+                <!-- <snippet_direct_attribute_search> -->
+                <!-- Match digitial object identifier -->
                 <item>
+                  <item repeat="0-1">with doi</item>
+                  <attrref uri="libraryPapers#DOI.Name" name="q"/>
+                </item>
+                
+                <!-- Match full title -->
+                <item>
+                  <item repeat="0-1">titled</item>
+                  <attrref uri="libraryPapers#Title.Name" name="q"/>
+                </item>
+                
+                <!-- Match full text url -->
+                <item>
+                  <item repeat="0-1">with full text url</item>
+                  <attrref uri="libraryPapers#FullTextUrl.Name" name="q"/>
+                </item>
+                <!-- </snippet_direct_attribute_search> -->
+                
+                <!-- Match field of study -->
+                <item logprob="-1">
+                  <item repeat="0-1">about</item>
+                  <attrref uri="libraryPapers#FieldsOfStudy.Name" name="q"/>
+                </item>
+                
+                <!-- Match author -->
+                <item logprob="-1">
+                  <item repeat="0-1">by</item>
                   <attrref uri="libraryPapers#AuthorAffiliations.AuthorName" name="q"/>
                 </item>
 
                 <!-- Match affiliation -->
-                <item>
+                <item logprob="-1">
+                  <item repeat="0-1">from</item>
                   <attrref uri="libraryPapers#AuthorAffiliations.AffiliationName" name="q"/>
                 </item>
-
-                <!-- Match field of study -->
-                <item>
-                  <attrref uri="libraryPapers#FieldsOfStudy.Name" name="q"/>
-                </item>
               </one-of>
-
+              <!-- <snippet_create_return_query> -->
               <tag>
                 q = Composite(q);
                 query = And(query, q);
               </tag>
+              <!-- </snippet_create_return_query> -->
             </item>
 
-            <!-- Partial entity title search -->
-            <item logprob="-1">
+            <!-- Partial title search -->
+            <item logprob="-3">
               <item repeat="1-INF">
                 <!-- Assert that we never search for terms beyond the end of the query -->
                 <tag>
@@ -84,8 +108,10 @@
                 <one-of>
                   <!-- Match title word -->
                   <item logprob="-1">
-                    <attrref uri="libraryPapers#TitleWords" name="q"/>
+                    <attrref uri="libraryPapers#Title.Words" name="q"/>
                     <tag>
+                      abstractTitleWordCount = Increment(abstractTitleWordCount);
+                      q = Composite(q);
                       query = And(query, q);
                     </tag>
                   </item>
@@ -93,8 +119,9 @@
               </item>
             </item>
 
-            <!-- Partial entity abstract search -->
-            <item logprob="-3">
+            <!-- <snippet_partial_attribute_search> -->
+            <!-- Partial abstract search -->
+            <item logprob="-4">
               <item repeat="1-INF">
                 <!-- Assert that we never search for terms beyond the end of the query -->
                 <tag>
@@ -104,37 +131,82 @@
                 <one-of>
                   <!-- Match abstract word -->
                   <item logprob="-3">
-                    <attrref uri="libraryPapers#AbstractWords" name="q" />
+                    <attrref uri="libraryPapers#Abstract.Words" name="q" />
                     <tag>
+                      abstractTitleWordCount = Increment(abstractTitleWordCount);
+                      q = Composite(q);
                       query = And(query, q);
                     </tag>
                   </item>
                 </one-of>
               </item>
+              <!-- </snippet_partial_attribute_search> -->
+            </item>
+            
+            <!-- Composite entity search -->
+            <item logprob="-1">
+              <!-- Match author -->
+              <item>
+                by
+                <attrref uri="libraryPapers#AuthorAffiliations.AuthorName" name="qAuthorName"/>
+              </item>
+
+              <!-- Match affiliation -->
+              <item>
+                while at
+                <attrref uri="libraryPapers#AuthorAffiliations.AffiliationName" name="qAffiliationName"/>
+              </item>
+
+              <tag>
+                q = And(qAuthorName, qAffiliationName);
+                q = Composite(q);
+                query = And(query,q);
+              </tag>
             </item>
           </one-of>
 
-          <!-- Marks that at least one of the above search behavior has results -->
+          <!-- Marks that at least one of the above search behaviors is used to parse the query -->
           <tag>
             hasSearchResult = true;
           </tag>
         </item>
 
+        <!-- <snippet_allow_drop_terms_in_quries> -->
         <!-- Words/terms that cannot be matched using the above search behaviors, aka "garbage/dropped" terms. -->
         <item logprob="-25">
           <!-- Make any terms as "garbage" terms -->
           <regex pattern='\b\w+' name="garbage" />
         </item>
+        <!-- </snippet_allow_drop_terms_in_quries> -->
 
       </one-of>
     </item>
 
+    <!-- <snippet_partial_attribute_search_constraints> -->
+    <!-- Ensure that if title/abstract words search was executed, they have at least 3 or more word matches-->
+    <one-of>
+      <item>
+        <tag>
+          Assert(abstractTitleWordCount, 2, "gt");
+        </tag>
+      </item>
+      <item>
+        <tag>
+          Assert(abstractTitleWordCount, 0, "eq");
+        </tag>
+      </item>
+    </one-of>
+    <!-- </snippet_partial_attribute_search_constraints> -->
+
+
+    <!-- <snippet_drop_term_constraints> -->
     <tag>
       <!-- Ensure not all query terms are treated as garbage words/dropped terms. At least one of the search
        behaviors above has results.-->
-      AssertEquals(hasSearchResult, true);
+      AssertEquals(hasSearchResult, true);      
     </tag>
-
+    <!-- <snippet_drop_term_constraints> -->
+    
     <!-- Treat all remaining terms as dropped terms if needed-->
     <item repeat="0-1">
       <tag>
@@ -157,9 +229,16 @@
       </tag>
     </item>
 
-    <!-- Resolve all completions, synonyms -->
+    <!-- Ensure all grammar paths resulted in a query that can be used to retrieve non-empty entity results.-->
     <tag>
-      out = Resolve(query);
+      <!-- Resolve the query by executing it and retriving top results-->
+      entities = Resolve(query);
+      <!-- Check if the execution was able to fetch any results-->
+      hasResults = HasResults(entities);
+      <!-- Ensure only the grammar path is only valid if the return query can retrieve non-empty entity results -->
+      AssertEquals(hasResults, true);
+      <!-- Set the output the query execution result-->
+      out = entities;
     </tag>
 
   </rule>
