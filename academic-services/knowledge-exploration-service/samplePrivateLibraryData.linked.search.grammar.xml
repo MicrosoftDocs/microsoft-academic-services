@@ -176,7 +176,7 @@
         <!-- Words/terms that cannot be matched using the above search behaviors, aka "garbage/dropped" terms. -->
         <item logprob="-25">
           <!-- Make any terms as "garbage" terms -->
-          <regex pattern='\b\w+' name="garbage" />
+          <ruleref uri="#DropWord"/>
         </item>
         <!-- </snippet_allow_drop_terms_in_quries> -->
 
@@ -244,4 +244,11 @@
 
   </rule>
 
+  <!-- treat any terms as "garbage" terms -->
+  <rule id="DropWord" return="String">
+      <regex pattern='\b\w+' name="garbage" />
+      <tag>
+          out = garbage;
+      </tag>
+  </rule>
 </grammar>

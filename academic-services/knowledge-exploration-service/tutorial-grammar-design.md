@@ -255,65 +255,81 @@ As discussed in ["Build a library browser with contextual filters"](tutorial-sch
 
 ### How to test grammar
 
-1. Open up a commandline console, change your current directory to your working directory, and test the grammar with a multiple attribute search test query ("microsoft machine learning) using the following command:
+Open up a commandline console, change your current directory to your working directory, and test the grammar with a multiple attribute search test query ("microsoft machine learning) using the following command:
 
-    ```cmd
-    kesm Interpret --IndexFilePaths samplePrivateLibraryData.linked.search.kes --GrammarFilePath samplePrivateLibraryData.linked.search.grammar.kesg --Query "microsoft machine learning" --NormalizeQuery false --AllowCompletion false
-    ```
+```cmd
+kesm Interpret --IndexFilePaths samplePrivateLibraryData.linked.search.kes --GrammarFilePath samplePrivateLibraryData.linked.search.grammar.kesg --Query "microsoft machine learning" --NormalizeQuery false --AllowCompletion false
+```
 
-    and you should see the following response
+and you should see the following response
 
-    ```cmd
-    {
-    "query": "microsoft machine learning",
-    "interpretations": [
+```json
+{
+"query": "papers from microsoft about machine learning",
+"interpretations": [
+  {
+    "logprob": -20.529,
+    "parse": "<rule name=\"#SearchPapers\">papers from <attr name=\"libraryPapers#AuthorAffiliations.AffiliationName\">microsoft</attr> about <attr name=\"libraryPapers#FieldsOfStudy.Name\">machine learning</attr><end/></rule>",
+    "rules": [
       {
-        "logprob": -30.519,
-        "parse": "<rule name=\"#SearchPapers\"><attr name=\"libraryPapers#AuthorAffiliations.AffiliationName\">microsoft</attr> <attr name=\"libraryPapers#FieldsOfStudy.Name\">machine learning</attr><end/></rule>",
-        "rules": [
-          {
-            "name": "#SearchPapers",
-            "output": {
-              "type": "query",
-              "value": "And(Composite(AuthorAffiliations.AffiliationName='microsoft'),Composite(FieldsOfStudy.Name='machine learning'))",
-              "entities": []
-            }
-          }
-        ]
-      },
-      {
-        "logprob": -55.519,
-        "parse": "<rule name=\"#SearchPapers\">microsoft <attr name=\"libraryPapers#FieldsOfStudy.Name\">machine learning</attr><end/></rule>",
-        "rules": [
-          {
-            "name": "#SearchPapers",
-            "output": {
-              "type": "query",
-              "value": "Composite(FieldsOfStudy.Name='machine learning')",
-              "entities": []
-            }
-          }
-        ]
-      },
-      {
-        "logprob": -77.514,
-        "parse": "<rule name=\"#SearchPapers\"><attr name=\"libraryPapers#AuthorAffiliations.AffiliationName\">microsoft</attr> machine learning<end/></rule>",
-        "rules": [
-          {
-            "name": "#SearchPapers",
-            "output": {
-              "type": "query",
-              "value": "Composite(AuthorAffiliations.AffiliationName='microsoft')",
-              "entities": []
-            }
-          }
-        ]
+        "name": "#SearchPapers",
+        "output": {
+          "type": "query",
+          "value": "And(Composite(AuthorAffiliations.AffiliationName='microsoft'),Composite(FieldsOfStudy.Name='machine learning'))",
+          "entities": []
+        }
       }
-    ],
-    "timed_out_count": 0,
-    "timed_out": false
-    }
-    ```
+    ]
+  },
+  {
+    "logprob": -71.529,
+    "parse": "<rule name=\"#SearchPapers\">papers<rule name=\"#DropWord\"> from</rule><rule name=\"#DropWord\"> microsoft</rule> about <attr name=\"libraryPapers#FieldsOfStudy.Name\">machine learning</attr><end/></rule>",
+    "rules": [
+      {
+        "name": "#SearchPapers",
+        "output": {
+          "type": "query",
+          "value": "Composite(FieldsOfStudy.Name='machine learning')",
+          "entities": []
+        }
+      },
+      {
+        "name": "#DropWord",
+        "output": {
+          "type": "string",
+          "value": "microsoft"
+        }
+      },
+      {
+        "name": "#DropWord",
+        "output": {
+          "type": "string",
+          "value": "from"
+        }
+      }
+    ]
+  },
+  ...
+  }
+],
+"timed_out_count": 0,
+"timed_out": false
+}
+```
+
+The top interpretation's parse shows that the query was interpreted using the **multiple attribute search** grammar path we as we designed. The remaining interpretations represents the drop term grammar that attemps to drop terms from the query but don't yield highier interpretation logprobs.
+
+The top interpretation's `logprob` is the sum of the accumulative grammar weights (grammar path log probability) and the top entity's log probability.
+
+Below is a table of example test queries to validate the search grammar we designed.
+
+| Search Scenario | Test Query | Expected Top Grammar Parse
+|---|---|---|
+| attribute search |  `paper titled an overview of microsoft academic service mas and applications` | `<rule name=\"#SearchPapers\">paper titled <attr name=\"libraryPapers#Title.Name\">an overview of microsoft academic service mas and applications</attr><end/></rule>`
+| multiple attribute search | `papers from microsoft about machine learning` | `<rule name=\"#SearchPapers\">papers from <attr name=\"libraryPapers#AuthorAffiliations.AffiliationName\">microsoft</attr> about <attr name=\"libraryPapers#FieldsOfStudy.Name\">machine learning</attr><end/></rule>`
+| partial attribute search | `microsoft academic applications` | `<rule name=\"#SearchPapers\"><attr name=\"libraryPapers#Title.Words\">microsoft</attr> <attr name=\"libraryPapers#Title.Words\">academic</attr> <attr name=\"libraryPapers#Title.Words\">applications</attr><end/></rule>` |
+| partial attribute search + drop terms | `microsoft garbageterm garbageterm academic garbageterm applications`| `<rule name=\"#SearchPapers\"><attr name=\"libraryPapers#Title.Words\">microsoft</attr><rule name=\"#DropWord\"> garbageterm</rule><rule name=\"#DropWord\"> garbageterm</rule> <attr name=\"libraryPapers#Title.Words\">academic</attr><rule name=\"#DropWord\"> garbageterm</rule> <attr name=\"libraryPapers#Title.Words\">applications</attr><end/></rule>` |
+| multiple attribute search + drop terms | `microsoft garbageterm machine learning garbageterm`| `<rule name=\"#SearchPapers\"><attr name=\"libraryPapers#AuthorAffiliations.AffiliationName\">microsoft</attr><rule name=\"#DropWord\"> garbageterm</rule> <attr name=\"libraryPapers#FieldsOfStudy.Name\">machine learning</attr> garbageterm<end/></rule>` |
 
 ## Create a client application that uses the MAKES API instance
 
@@ -354,7 +370,7 @@ We can control the depth of the search by changing the `searchInterpretationsCou
 
 Similar to how we leverage a KES query expression to retrieve top publications from ["Build a library browser with contextual filters"](tutorial-schema-design.md) tutorial, we will retrieve top publication entities by calling Evaluate API.
 
-Instead of calling Evaluate API once, we call Evaluate API for each interpretation and merge sort the publications by dynamic rank. To learn more, see `MakesInteractor.GetPublicationsByDynamicRank(searchResults)` in `makesInteractor.js` for more details.
+Instead of calling Evaluate API once, we call Evaluate API for each interpretation and merge sort the publications by dynamic rank. We calculate the dynamic rank for a entity by extracting the grammar path log probability as the dynamic rank from the interpretation. To learn more, see `MakesInteractor.GetPublicationsByDynamicRank(searchResults)` in `makesInteractor.js` for more details.
 
 <!--
 Next steps: build amazing applications.
