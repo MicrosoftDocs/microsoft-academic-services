@@ -319,6 +319,9 @@ The remainder of this tutorial details how the library browser application uses 
 - `<Makes_Instance_Url>/examples/privateLibraryExample/privateLibraryExample.js`
 - `<Makes_Instance_Url>/examples/privateLibraryExample/privateLibraryExample.html`
 - `<Makes_Instance_Url>/examples/privateLibraryExample/privateLibraryExample.css`
+- `<Makes_Instance_Url>/examples/privateLibraryExample/results.js`
+- `<Makes_Instance_Url>/examples/privateLibraryExample/searchResult.js`
+- `<Makes_Instance_Url>/examples/privateLibraryExample/searchResults.js`
 - `<Makes_Instance_Url>/examples/privateLibraryExample/publicationListItem.js`
 - `<Makes_Instance_Url>/examples/privateLibraryExample/publicationFieldsOfStudyListItem.js`
 - `<Makes_Instance_Url>/examples/privateLibraryExample/makesInteractor.js`

@@ -15,7 +15,7 @@ This tutorial illustrates how to
 - Build, compile and deploy a MAKES instance with custom index and grammar
 - Extend the library browser with search capability using MAKES APIs
 
-![Library search application](media/privateLibraryExampleApp-homepage.png)
+![Library search application](media/privateLibraryExampleApp-homepage-search.png)
 
 ## Prerequisites
 
@@ -23,7 +23,7 @@ This tutorial illustrates how to
 - Completion of ["Link private publication records with MAKES entities"](tutorial-entity-linking.md) tutorial
 - Completion of ["Build a library browser with contextual filters"](tutorial-schema-design.md) tutorial
 - Read through ["How to define index schema"](how-to-index-schema.md) how-to guide
-- Read through ["How to define index schema"](how-to-grammar.md) how-to guide
+- Read through ["How to define grammar"](how-to-grammar.md) how-to guide
 - Download the [sample search schema for linked private library publications](samplePrivateLibraryData.linked.search.schema.json)
 - Download the [sample search grammar for linked private library publications](samplePrivateLibraryData.linked.search.grammar.xml)
 
@@ -50,17 +50,17 @@ We modified/added the following attributes from the ["Build a library browser wi
 
 Attributes that we plan to use for processing search queries needs to be indexed, similar to filter attributes in the ["Build a library browser with contextual filters"](tutorial-schema-design.md) tutorial. For example, to enable our application to process search queries like "papers from microsoft about machine learning" by enabling the `equals` index operation on the `FieldsOfStudy.Name` and `AuthorAffiliations.AuthorName` attributes.
 
-In addition to indexing the attributes, we also want to normalize the attributes to improve search results. For example, we can improve search accuracy and performance by making all indexed string attributes and search queries lowercase only. For more normalization details, see `MakesInteractor.NormalizeStr(queryStr)` in `makesInteractor.js`
+In addition to indexing the attributes, we also want to normalize the attributes to improve search results. For example, we can improve publication title search accuracy and performance by normalizing the title and search queries to lowercase characters only. For more normalization details, see `MakesInteractor.NormalizeStr(queryStr)` in `makesInteractor.js`
 
-We may also transform the attributes before indexing them to enable fuzzy search or keyword search. For example, we transform `Abstract.OriginalName` into `Abstract.Words` such that individual words from the abstract can be used to process search queries.  
+To enable fuzzy search or keyword search, we may also transform the attributes before indexing them. For example, we enable abstract keywords search by transforming the abstract of a publication `Abstract.OriginalName` into `Abstract.Words` such that unique words from the abstract can be indexed.
 
 ## Design a search grammar
 
-Then, we will design a grammar tailored to process natural language search queries. In this tutorial, we will use the [sample grammar](samplePrivateLibrary.Data.linked.search.grammar.xml) to illustrate how to support **direct attribute search**, **multiple attribute search**, **partial attribute search**, **semantic search*, and **drop terms with penalties**.
+Then, we will design a grammar tailored to process natural language search queries. In this tutorial, we will use the [sample grammar](samplePrivateLibrary.Data.linked.search.grammar.xml) to illustrate how to support **direct attribute search**, **multiple attribute search**, **partial attribute search**, **semantic search**, and **drop terms with penalties**.
 
 ### Support direct attribute search
 
-Direct attribute search is used for processing simple queries that only contains a single attribute. For example, user may want to look up a publication by its title, doi, or full text url. These are basically lookup queries using attributes that can be identifiers of the entities itself. To craft a grammar for direct attribute match, we can use the `<attrref>` element to build our grammar:
+Direct attribute search is used for processing queries that only contains a single publication attribute. For example, user may want to look up a publication by its title, doi, or full text url. These are basically lookup queries using attributes that can be identifiers of the entities itself. To craft a grammar for direct attribute search, we can use the `<attrref>` element to build our grammar:
 
 :::code language="powershell" source="samplePrivateLibraryData.linked.search.grammar.xml" id="snippet_direct_attribute_search":::
 
@@ -74,21 +74,23 @@ We also need to return the corresponding KES query expression once the attribute
 
 Multiple attribute search is used for processing exploratory search queries that contains multiple attribute terms. For example, user may want to search for publications given a few fields of study and affiliations.
 
-We use the `<item repeat="1-INF" repeat-logprob="-1">` element to process queries that contains multiple attributes by continously matching remaining query terms using different search grammars. This allows us to process queries such as "papers about machine learning from microsoft"
+We use the repeat item `<item repeat="1-INF" repeat-logprob="-1">` element to process queries that contains multiple attributes by continously matching remaining query terms using different search grammars.
+
+:::code language="powershell" source="samplePrivateLibraryData.linked.search.grammar.xml" id="snippet_multiple_attribute_search_loop":::
+
+This allows us to process queries such as "papers from microsoft about machine learning"
 
 ### Support partial attribute search
 
 Partial attribute search is used for processing keyword based search queries. For example, user may search for a paper using terms from the paper's title or abstract.
 
-To enable partial attribute search for title and abstract, we create words arrays (i.e. Abstract.Words and Title.Words) to store individual words from title and abstract so they can be indexed.
-
 We use a `<item repeat="1-INF">` element to process keyword based queries using abstract and title words.
 
 :::code language="powershell" source="samplePrivateLibraryData.linked.search.grammar.xml" id="snippet_partial_attribute_search":::
 
-Notice that we have a heavier penalty `<item logprob="-3">` associated with title and abstract word search compared to other. (i.e. author and affiliation searches have a penalty of `<item logprob="-2">`). This is designed to demote title/abstract keyword searches if other searches have results.
+Notice that we have heavier penalties (-3 and -4) associated with title and abstract word search compared to other. (i.e. author and affiliation searches have a penalty of -2). This is designed to demote title/abstract keyword searches if other searches yield results.
 
-In addition to having heavier penalties, we also set a minimum word match count requirement for title and abstract words search. Title and abstract words may cover lots of common terms that can be matched a query. We introduce this requirement to create a higher quality bar for title and abstract words search results. The following code ensures that the title and abstract words search is only valid if there are 3 or more words in the query that can be matched against the title/abstract words.
+In addition to heavier penalties, we also set a minimum word match count requirement for title and abstract words search. Title and abstract words may cover lots of common terms that can be matched against terms in a query. We introduce this requirement to create a higher quality bar for title and abstract words search results. The following code ensures that the title and abstract words search is only valid if there are 3 or more words in the query that can be matched against the title/abstract words.
 
 :::code language="powershell" source="samplePrivateLibraryData.linked.search.grammar.xml" id="snippet_partial_attribute_search_constraints":::
 
@@ -328,6 +330,9 @@ The remainder of this tutorial details how the library browser application uses 
 - `<Makes_Instance_Url>/examples/privateLibraryExample/privateLibraryExample.js`
 - `<Makes_Instance_Url>/examples/privateLibraryExample/privateLibraryExample.html`
 - `<Makes_Instance_Url>/examples/privateLibraryExample/privateLibraryExample.css`
+- `<Makes_Instance_Url>/examples/privateLibraryExample/results.js`
+- `<Makes_Instance_Url>/examples/privateLibraryExample/searchResult.js`
+- `<Makes_Instance_Url>/examples/privateLibraryExample/searchResults.js`
 - `<Makes_Instance_Url>/examples/privateLibraryExample/publicationListItem.js`
 - `<Makes_Instance_Url>/examples/privateLibraryExample/publicationFieldsOfStudyListItem.js`
 - `<Makes_Instance_Url>/examples/privateLibraryExample/makesInteractor.js`
@@ -350,8 +355,6 @@ We can control the depth of the search by changing the `searchInterpretationsCou
 Similar to how we leverage a KES query expression to retrieve top publications from ["Build a library browser with contextual filters"](tutorial-schema-design.md) tutorial, we will retrieve top publication entities by calling Evaluate API.
 
 Instead of calling Evaluate API once, we call Evaluate API for each interpretation and merge sort the publications by dynamic rank. To learn more, see `MakesInteractor.GetPublicationsByDynamicRank(searchResults)` in `makesInteractor.js` for more details.
-
-### Generate filter suggestions
 
 <!--
 Next steps: build amazing applications.

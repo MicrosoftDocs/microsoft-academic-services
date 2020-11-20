@@ -20,6 +20,7 @@
       <item>paper</item>
     </one-of>
     
+    <!-- <snippet_multiple_attribute_search_loop> -->
     <!-- Process search queries using one or more search grammar -->
     <item repeat="1-INF" repeat-logprob="-1">
 
@@ -28,7 +29,7 @@
         IsBeyondEndOfQuery = GetVariable("IsBeyondEndOfQuery", "system");
         AssertEquals(IsBeyondEndOfQuery, false);
       </tag>
-
+    <!-- </snippet_multiple_attribute_search_loop> -->
       <one-of>
         <!-- Different search behaviors -->
         <item>
