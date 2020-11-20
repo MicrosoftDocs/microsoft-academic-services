@@ -1,10 +1,10 @@
 ---
-title: Add search to library browser
+title: Add search to the library browser
 description: Step by step tutorial to design MAKES grammar for custom data
 ms.topic: tutorial
 ms.date: 11/16/2020
 ---
-# Add search to library browser
+# Add search to the library browser
 
 This tutorial is a continuation of the ["Build a library browser with contextual filters"](tutorial-entity-linking.md) tutorial.
 
@@ -33,17 +33,26 @@ In order to search the index, we will have modify the schema from ["Build a libr
 
 ### Modify schema to support search
 
-#### Attribute search
-- Title, DOI, or FullTextUrl
-- Normalize for search
+We modified/added the following attributes from the ["Build a library browser with contextual filters"](tutorial-schema-design.md) tutorial to make the index searchable.
 
-#### Partial attribute search
-- Use words array attributes to allow partial matches
-- TitleWords, AbstractWords
-- Remove stop words to optimize 
+| Attribute Name | Description| Index Data Type | Index Operations |
+| ---- | ---- | ---- | ---- |
+| `Abstract.Words` | A words array containing all distinct words from the publication's abstract. Used for supporting partial matches in abstract search (partial attribute search). | `string*` | `["equals"]` |
+| `DOI` | Indicates that "DOI" attribute is a object composed of multiple attributes | `Composite?` | - |
+| `DOI.Name` | Used for providing direct match in DOI search (attribute search). | `string?` | `["equals"]` |
+| `Title` | Indicates that "Title" attribute is an object composed of multiple attributes | `Composite?` | - |
+| `Title.Name` | Used for providing direct match in title search (attribute search). | `blob?` | - |
+| `Title.Words` | A words array containing all distinct words from the publication's title. Used for supporting partial matches in title search (partial attribute search). | `string*` | `["equals"]` |
+| `FullTextUrl` | Indicates that "FullTextUrl" attribute is an object composed of multiple attributes | `Composite?` | - |
+| `FullTextUrl.Name` | Used for providing direct match in FullTextUrl lookup (attribute search) | `string?` | `["equals"]` |
 
-- Search index schema explaination table
+#### Search attributes
 
+Attributes that we plan to use for processing search queries needs to be indexed, similar to filter attributes in the ["Build a library browser with contextual filters"](tutorial-schema-design.md) tutorial. For example, to enable our application to process search queries like "papers from microsoft about machine learning" by enabling the `equals` index operation on the `FieldsOfStudy.Name` and `AuthorAffiliations.AuthorName` attributes.
+
+In addition to indexing the attributes, we also want to normalize the attributes to improve search results. For example, we can improve search accuracy and performance by making all indexed string attributes and search queries lowercase only. For more normalization details, see `MakesInteractor.NormalizeStr(queryStr)` in `makesInteractor.js`
+
+We may also transform the attributes before indexing them to enable fuzzy search or keyword search. For example, we transform `Abstract.OriginalName` into `Abstract.Words` such that individual words from the abstract can be used to process search queries.  
 
 ## Design a search grammar
 
@@ -63,29 +72,29 @@ We also need to return the corresponding KES query expression once the attribute
 
 ### Support multiple attribute search
 
-Multiple attribute search is used for processing exploratory search quries that contains multiple attribute terms. For example, user may want to search for publications given a few fields of study and affiliations. 
+Multiple attribute search is used for processing exploratory search queries that contains multiple attribute terms. For example, user may want to search for publications given a few fields of study and affiliations.
 
 We use the `<item repeat="1-INF" repeat-logprob="-1">` element to process queries that contains multiple attributes by continously matching remaining query terms using different search grammars. This allows us to process queries such as "papers about machine learning from microsoft"
 
 ### Support partial attribute search
 
-Partial attribute search is used for processing keyword based search quries. For example, user may search for a paper using terms from the paper's title or abstract.
+Partial attribute search is used for processing keyword based search queries. For example, user may search for a paper using terms from the paper's title or abstract.
 
-To enable partial attribute search for title and abstract, we create words arrays (i.e. Abstract.Words and Title.Words) to store indiviual words from title and abstract so they can be indexed. 
+To enable partial attribute search for title and abstract, we create words arrays (i.e. Abstract.Words and Title.Words) to store individual words from title and abstract so they can be indexed.
 
 We use a `<item repeat="1-INF">` element to process keyword based queries using abstract and title words.
 
 :::code language="powershell" source="samplePrivateLibraryData.linked.search.grammar.xml" id="snippet_partial_attribute_search":::
 
-Notice that we have a heavier penalty `<item logprob="-3">` associated with title and abstract word search compared to other. (i.e. author and affiliation searches have a penalty of `<item logprob="-2">`). This is designed to demote title/abstract keyword searches if other searches have results. 
+Notice that we have a heavier penalty `<item logprob="-3">` associated with title and abstract word search compared to other. (i.e. author and affiliation searches have a penalty of `<item logprob="-2">`). This is designed to demote title/abstract keyword searches if other searches have results.
 
-In addition to having heavier penalties, we also set a minimum word match count requirement for title and abstract words search. Title and abstract words may cover lots of common terms that can be matched a query. We introduce this requirement to create a highier quality bar for title and abstract words search results. The following code ensures that the title and abstract words search is only valid if there are 3 or more words in the query that can be matched against the title/abstract words.
+In addition to having heavier penalties, we also set a minimum word match count requirement for title and abstract words search. Title and abstract words may cover lots of common terms that can be matched a query. We introduce this requirement to create a higher quality bar for title and abstract words search results. The following code ensures that the title and abstract words search is only valid if there are 3 or more words in the query that can be matched against the title/abstract words.
 
 :::code language="powershell" source="samplePrivateLibraryData.linked.search.grammar.xml" id="snippet_partial_attribute_search_constraints":::
 
-### Support drop terms with penalties 
+### Support drop terms with penalties
 
-We can improve multiple attribute and partial attribute search by allowing drop/garbage terms in the query. For example, a user may want to search for the publication "A Review of Microsoft Academic Services for Science of Science Studies" by using the parts of the title the user recalls and enters the query "Microsoft Academic Services". Having drop terms support allows this type of queries to be searchable by partial title search. 
+We can improve multiple attribute and partial attribute search by allowing drop/garbage terms in the query. For example, a user may want to search for the publication "A Review of Microsoft Academic Services for Science of Science Studies" by using the parts of the title the user recalls and enters the query "Microsoft Academic Services". Having drop terms support allows this type of queries to be searchable by partial title search.
 
 :::code language="powershell" source="samplePrivateLibraryData.linked.search.grammar.xml" id="snippet_allow_drop_terms_in_quries":::
 
@@ -97,20 +106,216 @@ We also want to ensure that the grammar cannot drop all terms in a query. To ach
 
 ### Support semantic search
 
-- Multiple attributes from a specific composite 
+- Multiple attributes from a specific composite
 
 ## How to build index, compile grammar, test, and deploy MAKES API
 
+We are now ready to set up a MAKES API instance by building a searchable index, compiling a search grammar, and deploying them.
+
 ### How to build index
+
+1. Copy the win-x64 version of kesm.exe to your working directory or include it in your command line PATH variable.
+
+1. Open up a commandline console, change your current directory to your working directory, and build the index with the following command:
+
+    ```cmd
+    kesm BuildIndexLocal --SchemaFilePath samplePrivateLibraryData.linked.search.schema.json --EntitiesFilePath samplePrivateLibraryData.linked.json --OutputIndexFilePath samplePrivateLibraryData.linked.search.kes --IndexDescription "Searchable Linked Private Library Publications"
+    ```
+
+    > [!IMPORTANT]
+    > The `BuildIndexLocal` command is only available on win-x64 version of kesm. If you are using other platforms you will need to execute a cloud build.
+
 ### How to test index
+
+1. Run Evaluate command to verify the stored entity attributes are correct:
+
+    ```cmd
+    kesm Evaluate --IndexFilePaths samplePrivateLibraryData.linked.search.kes --KesQueryExpression="All()" --Count 1 --Attributes *
+    ```
+
+    The output should mirror the following JSON:
+
+    ```json
+    {
+    "expr": "All()",
+    "entities": [
+      {
+        "logprob": -17.514,
+        "prob": 2.4760901E-08,
+        "EstimatedCitationCount": "393",
+        "VenueFullName": "The Web Conference",
+        "Year": 2015,
+        "Abstract": {
+          "OriginalName": "In this paper we describe a new release of a Web scale entity graph that serves as the backbone of Microsoft Academic Service (MAS), a major production effort with a broadened scope to the namesake vertical search engine that has been publicly available since 2008 as a research prototype. At the core of MAS is a heterogeneous entity graph comprised of six types of entities that model the scholarly activities: field of study, author, institution, paper, venue, and event. In addition to obtaining these entities from the publisher feeds as in the previous effort, we in this version include data mining results from the Web index and an in-house knowledge base from Bing, a major commercial search engine. As a result of the Bing integration, the new MAS graph sees significant increase in size, with fresh information streaming in automatically following their discoveries by the search engine. In addition, the rich entity relations included in the knowledge base provide additional signals to disambiguate and enrich the entities within and beyond the academic domain. The number of papers indexed by MAS, for instance, has grown from low tens of millions to 83 million while maintaining an above 95% accuracy based on test data sets derived from academic activities at Microsoft Research. Based on the data set, we demonstrate two scenarios in this work: a knowledge driven, highly interactive dialog that seamlessly combines reactive search and proactive suggestion experience, and a proactive heterogeneous entity recommendation.",
+          "Words": ["in","this","paper","we","describe","a","new","release","of","web","scale","entity","graph","that","serves","as","the","backbone","microsoft","academic","service","mas","major","production","effort","with","broadened","scope","to","namesake","vertical","search","engine","has","been","publicly","available","since","2008","research","prototype","at","core","is","heterogeneous","comprised","six","types","entities","model","scholarly","activities","field","study","author","institution","venue","and","event","addition","obtaining","these","from","publisher","feeds","previous","version","include","data","mining","results","index","an","house","knowledge","base","bing","commercial","result","integration","sees","significant","increase","size","fresh","information","streaming","automatically","following","their","discoveries","by","rich","relations","included","provide","additional","signals","disambiguate","enrich","within","beyond","domain","number","papers","indexed","for","instance","grown","low","tens","millions","83","million","while","maintaining","above","95","accuracy","based","on","test","sets","derived","set","demonstrate","two","scenarios","work","driven","highly","interactive","dialog","seamlessly","combines","reactive","proactive","suggestion","experience","recommendation"]
+        },
+        "DOI": {
+          "OriginalName": "10.1145/2740908.2742839",
+          "Name": "10 1145 2740908 2742839"
+        },
+        "FullTextUrl": {
+          "OriginalName": "http://localhost/example-full-text-link-2",
+          "Name": "http localhost example full text link 2"
+        },
+        "Title": {
+          "OriginalName": "An Overview of Microsoft Academic Service (MAS) and Applications",
+          "Name": "an overview of microsoft academic service mas and applications",
+          "Words": ["an","overview","of","microsoft","academic","service","mas","and","applications"]
+        },
+        "AuthorAffiliations": [
+          {
+            "AffiliationName": "microsoft",
+            "AuthorName": "arnab sinha",
+            "OriginalAuthorName": "Arnab Sinha",
+            "Sequence": "1"
+          },
+          {
+            "AffiliationName": "microsoft",
+            "AuthorName": "zhihong shen",
+            "OriginalAuthorName": "Zhihong Shen",
+            "Sequence": "2"
+          },
+          ...
+        ],
+        "FieldsOfStudy": [
+          {
+            "OriginalName": "World Wide Web",
+            "Name": "world wide web"
+          },
+          {
+            "OriginalName": "Vertical search",
+            "Name": "vertical search"
+          },
+          ...
+        ]
+      }
+    ],
+    "timed_out": false
+    }
+    ```
+
+1. Run Evaluate command using the built index to verify index operations are working as expected:
+
+    ```cmd
+    kesm Evaluate --IndexFilePaths samplePrivateLibraryData.linked.search.kes --KesQueryExpression="Year=2020" --Attributes "Year"
+    ```
+
+    The output should be
+
+    ```cmd
+    {
+      "expr": "Year=2020",
+      "entities": [
+        {
+          "logprob": -18.255,
+          "prob": 1.18019626E-08,
+          "Year": 2020
+        },
+        {
+          "logprob": -19.386,
+          "prob": 3.8086159E-09,
+          "Year": 2020
+        },
+        {
+          "logprob": -19.625,
+          "prob": 2.9989608E-09,
+          "Year": 2020
+        },
+        {
+          "logprob": -19.853,
+          "prob": 2.3875455E-09,
+          "Year": 2020
+        },
+        {
+          "logprob": -20.154,
+          "prob": 1.7669693E-09,
+          "Year": 2020
+        }
+      ],
+      "timed_out": false
+    }
+    ```
+
+As discussed in ["Build a library browser with contextual filters"](tutorial-schema-design.md) tutorial, we use a local build for this tutorial because the amount of data to be indexed is very small. For larger and more complex indexes, cloud build must be used. One advantage of cloud builds is that they can leverage high performance virtual machines in Azure that can dramatically improve build performance. To learn more, follow [How to create index from MAG](how-to-create-index-from-mag.md)
+
 ### How to compile grammar
+
+1. Copy the win-x64 version of kesm.exe to your working directory or include it in your command line PATH variable.
+
+1. Open up a commandline console, change your current directory to your working directory, and compile the grammar with the following command:
+
+    ```cmd
+    kesm CompileGrammarLocal --GrammarDefinitionFilePath samplePrivateLibraryData.linked.search.grammar.xml --OutputCompiledGrammarFilePath samplePrivateLibraryData.linked.search.grammar.kesg
+    ```
+
+    > [!IMPORTANT]
+    > The `CompileGrammarLocal` command is only available on win-x64 version of kesm.
+
 ### How to test grammar
-#### Use small index to validate logic locally
-#### Use large index in pre-prod environment to validate performance
+
+1. Open up a commandline console, change your current directory to your working directory, and test the grammar with a multiple attribute search test query ("microsoft machine learning) using the following command:
+
+    ```cmd
+    kesm Interpret --IndexFilePaths samplePrivateLibraryData.linked.search.kes --GrammarFilePath samplePrivateLibraryData.linked.search.grammar.kesg --Query "microsoft machine learning" --NormalizeQuery false --AllowCompletion false
+    ```
+
+    and you should see the following response
+
+    ```cmd
+    {
+    "query": "microsoft machine learning",
+    "interpretations": [
+      {
+        "logprob": -30.519,
+        "parse": "<rule name=\"#SearchPapers\"><attr name=\"libraryPapers#AuthorAffiliations.AffiliationName\">microsoft</attr> <attr name=\"libraryPapers#FieldsOfStudy.Name\">machine learning</attr><end/></rule>",
+        "rules": [
+          {
+            "name": "#SearchPapers",
+            "output": {
+              "type": "query",
+              "value": "And(Composite(AuthorAffiliations.AffiliationName='microsoft'),Composite(FieldsOfStudy.Name='machine learning'))",
+              "entities": []
+            }
+          }
+        ]
+      },
+      {
+        "logprob": -55.519,
+        "parse": "<rule name=\"#SearchPapers\">microsoft <attr name=\"libraryPapers#FieldsOfStudy.Name\">machine learning</attr><end/></rule>",
+        "rules": [
+          {
+            "name": "#SearchPapers",
+            "output": {
+              "type": "query",
+              "value": "Composite(FieldsOfStudy.Name='machine learning')",
+              "entities": []
+            }
+          }
+        ]
+      },
+      {
+        "logprob": -77.514,
+        "parse": "<rule name=\"#SearchPapers\"><attr name=\"libraryPapers#AuthorAffiliations.AffiliationName\">microsoft</attr> machine learning<end/></rule>",
+        "rules": [
+          {
+            "name": "#SearchPapers",
+            "output": {
+              "type": "query",
+              "value": "Composite(AuthorAffiliations.AffiliationName='microsoft')",
+              "entities": []
+            }
+          }
+        ]
+      }
+    ],
+    "timed_out_count": 0,
+    "timed_out": false
+    }
+    ```
 
 ## Create a client application that uses the MAKES API instance
 
-Now that we have deployed a MAKES API instance that uses the custom index build, the last step is to create a frontend client to that enables users to browse and filter library publications. In the remaining sections of the tutorial, we will be using the sample UI code to illustrate how to retrieve data and generate filters via MAKES Evaluate and Histogram APIs.
+Now that we have deployed a MAKES API instance that uses the custom index and grammar, the last step is to create a frontend client to that enables users to browse and filter library publications. In the remaining sections of the tutorial, we will be using the sample UI code to illustrate how to retrieve data and generate filters via MAKES Evaluate and Histogram APIs.
 
 ### Explore the library browser application sample
 
@@ -134,7 +339,20 @@ The remainder of this tutorial details how the library browser application uses 
 
 Once downloaded, modify the `hostUrl` variable in `makesInteractor.js` and point it to your MAKES instance with custom index. You can then run the application in your browser by opening the `privateLibraryExample.html` file (you can just drag and drop the file into a new browser window).
 
-### Search via Interpret
-### Retrive publications via Evaluate API
-#### Apply dynamic rank to results
+### Search via Interpret API
 
+We process search queries by calling the Interpret API. MAKES process the query and returns top interpretations along with KES query expressions to retrieve the entities from Evaluate API. For more details, see `async SearchPublications(query)` in `makesInteractor.js`.
+
+We can control the depth of the search by changing the `searchInterpretationsCount` class variable in `MakesInteractor`. Increasing the amount of interpretations we get back from Interpret API means increasing the depth of search.
+
+### Retrieve publications and applying dynamic rank
+
+Similar to how we leverage a KES query expression to retrieve top publications from ["Build a library browser with contextual filters"](tutorial-schema-design.md) tutorial, we will retrieve top publication entities by calling Evaluate API.
+
+Instead of calling Evaluate API once, we call Evaluate API for each interpretation and merge sort the publications by dynamic rank. To learn more, see `MakesInteractor.GetPublicationsByDynamicRank(searchResults)` in `makesInteractor.js` for more details.
+
+### Generate filter suggestions
+
+<!--
+Next steps: build amazing applications.
+-->

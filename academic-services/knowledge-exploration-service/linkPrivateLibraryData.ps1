@@ -108,8 +108,11 @@ function Merge-MagEntity {
                 $abstractWords[$index] = $abstractWord
             }
         }
-        $abstract = [string]::Join(" ", $abstractWords)
-        $privateLibraryPaper | Add-Member -MemberType NoteProperty -Name 'OriginalAbstract' -Value  $abstract
+        $abstract = @{
+            OriginalName = [string]::Join(" ", $abstractWords);
+        }
+        
+        $privateLibraryPaper | Add-Member -MemberType NoteProperty -Name 'Abstract' -Value  $abstract
     }
 }
 # </snippet_merge_entities> 
@@ -154,16 +157,11 @@ function Edit-AddSearchAttribues
 
 
     # add normalized abstract words for partial abstract search
-    if ($null -ne $libraryPaper.OriginalAbstract)
+    if ($null -ne $libraryPaper.Abstract -and $null -ne $libraryPaper.Abstract.OriginalName)
     {
-        $normalizedAbstract = ConvertTo-NormalizedStr $libraryPaper.OriginalAbstract
+        $normalizedAbstract = ConvertTo-NormalizedStr $libraryPaper.Abstract.OriginalName
         $abstractWords = ConvertTo-DistinctWordsArray $normalizedAbstract
-        $abstractComposite = @{
-            Name = $normalizedAbstract;
-            OriginalName = $libraryPaper.OriginalAbstract;
-            Words = $abstractWords;
-        }        
-        $libraryPaper | Add-Member -MemberType NoteProperty -Name 'Abstract' -Value  $abstractComposite
+        $libraryPaper.Abstract.Words = $abstractWords;
     }
 
     # add normalized doi for attribute search

@@ -144,7 +144,7 @@ If we're able to find an interpretation that meets our confidence cut off score,
 
 The sample entity linking script output should look like the following:
 
-```
+```cmd
 Linked | Confidence Score | Original Title | MAG Title
 ---- | ---- |---- |----
 True | 0 | Microsoft Academic Graph: When experts are not enough | Microsoft Academic Graph: When experts are not enough

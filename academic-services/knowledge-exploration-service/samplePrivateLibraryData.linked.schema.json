@@ -1,13 +1,22 @@
 {
-  "attributes": [
-    {"name": "OriginalTitle","type": "blob?"},
-    {"name": "OriginalAbstract","type": "blob?"},
-    {"name": "FullTextUrl","type": "blob?"},
-    {"name": "VenueFullName","type": "blob?"},
-    {"name": "EstimatedCitationCount","type": "blob?"},
+  "attributes": [    
     {"name": "Date", "type": "date?", "operations": [ "equals" ]},
+    {"name": "EstimatedCitationCount","type": "blob?"},
+    {"name": "VenueFullName","type": "blob?"},
     {"name": "Year","type": "int32?","operations": [ "equals" ]},
+
+    {"name": "Abstract", "type": "Composite?"},
+    {"name": "Abstract.OriginalName","type": "blob?"},
+
+    {"name": "DOI","type": "Composite?"},
+    {"name": "DOI.OriginalName","type": "blob?"},
     
+    {"name": "Title","type": "Composite?"},
+    {"name": "Title.OriginalName","type": "blob?"},
+
+    {"name": "FullTextUrl","type": "Composite?"},
+    {"name": "FullTextUrl.OriginalName","type": "blob?"},
+
     {"name": "AuthorAffiliations","type": "Composite*"},
     {"name": "AuthorAffiliations.AffiliationName","type": "string?","operations": [ "equals"]},
     {"name": "AuthorAffiliations.AuthorName","type": "string?","operations": [ "equals"]},
