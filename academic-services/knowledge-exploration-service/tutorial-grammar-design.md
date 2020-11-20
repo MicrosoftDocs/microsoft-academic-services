@@ -15,7 +15,7 @@ This tutorial illustrates how to
 - Build, compile and deploy a MAKES instance with custom index and grammar
 - Extend the library browser with search capability using MAKES APIs
 
-![Library search application](media/privateLibraryExampleApp-homepage-search.png)
+![Library search application](media/privateLibraryExampleApp-search-homepage.png)
 
 ## Prerequisites
 
