@@ -144,6 +144,7 @@
               <!-- </snippet_partial_attribute_search> -->
             </item>
             
+            <!-- <snippet_composite_entity_attribute_search> -->
             <!-- Composite entity search -->
             <item logprob="-1">
               <!-- Match author -->
@@ -164,6 +165,7 @@
                 query = And(query,q);
               </tag>
             </item>
+            <!-- </snippet_composite_entity_attribute_search> -->
           </one-of>
 
           <!-- Marks that at least one of the above search behaviors is used to parse the query -->
@@ -230,6 +232,7 @@
       </tag>
     </item>
 
+    <!-- <snippet_ensure_query_has_results> -->
     <!-- Ensure all grammar paths resulted in a query that can be used to retrieve non-empty entity results.-->
     <tag>
       <!-- Resolve the query by executing it and retriving top results-->
@@ -241,7 +244,8 @@
       <!-- Set the output the query execution result-->
       out = entities;
     </tag>
-
+    <!-- </snippet_ensure_query_has_results> -->
+    
   </rule>
 
   <!-- treat any terms as "garbage" terms -->

@@ -106,9 +106,17 @@ We also want to ensure that the grammar cannot drop all terms in a query. To ach
 
 :::code language="xml" source="samplePrivateLibraryData.linked.search.grammar.xml" id="snippet_drop_term_constraints":::
 
-### Support semantic search
+### Support composite entity attribute search
 
-- Multiple attributes from a specific composite
+We can improve search accuratcy by creating a grammar that supports can parse out the specification for a specific set of composite entity attributes from the entity attributes. For example, a user may want to search for publications from an author while the author was affiliated with a certain institution. We create a special grammar to handle search queries like "papers by iheng chen while at national sun yat sen university".
+
+Craft a search grammar to handle the natural language search query format 
+
+:::code language="xml" source="samplePrivateLibraryData.linked.search.grammar.xml" id="snippet_composite_entity_attribute_search":::
+
+Ensure the query returned from the search grammar yields results by calling the `Resolve` semantic function and validate the result by calling `HasResult` and `AssertRequals` semantic function. 
+
+:::code language="xml" source="samplePrivateLibraryData.linked.search.grammar.xml" id="snippet_ensure_query_has_results":::
 
 ## How to build index, compile grammar, test, and deploy MAKES API
 
@@ -326,7 +334,10 @@ Below is a table of example test queries to validate the search grammar we desig
 | Search Scenario | Test Query | Expected Top Grammar Parse
 |---|---|---|
 | attribute search |  `paper titled an overview of microsoft academic service mas and applications` | `<rule name=\"#SearchPapers\">paper titled <attr name=\"libraryPapers#Title.Name\">an overview of microsoft academic service mas and applications</attr><end/></rule>`
-| multiple attribute search | `papers from microsoft about machine learning` | `<rule name=\"#SearchPapers\">papers from <attr name=\"libraryPapers#AuthorAffiliations.AffiliationName\">microsoft</attr> about <attr name=\"libraryPapers#FieldsOfStudy.Name\">machine learning</attr><end/></rule>`
+| composite attribute search | `papers by iheng chen while at national sun yat sen university` | `<rule name="#SearchPapers">papers by <attr name="libraryPapers#AuthorAffiliations.AuthorName">iheng chen</attr> while at <attr name="libraryPapers#AuthorAffiliations.AffiliationName">national sun yat sen university</attr><end/></rule>` |
+| multiple composite attribute search |`papers from national sun yat sen university and from national kaohsiung normal university` | `<rule name="#SearchPapers">papers from <attr name="libraryPapers#AuthorAffiliations.AffiliationName">national sun yat sen university</attr><rule name="#DropWord"> and</rule> from <attr name="libraryPapers#AuthorAffiliations.AffiliationName">national kaohsiung normal university</attr><end/></rule>` |
+| multiple attribute search | `papers from microsoft about machine learning` | `<rule name=\"#SearchPapers\">papers from <attr name=\"libraryPapers#AuthorAffiliations.AffiliationName\">microsoft</attr> about <attr name=\"libraryPapers#FieldsOfStudy.Name\">machine learning</attr><end/></rule>` |
+| multiple attribute search without scope terms |  `microsoft machine learning` | `<rule name="#SearchPapers"><attr name="libraryPapers#AuthorAffiliations.AffiliationName">microsoft</attr><attr name="libraryPapers#FieldsOfStudy.Name">machine learning</attr><end/></rule>` |
 | partial attribute search | `microsoft academic applications` | `<rule name=\"#SearchPapers\"><attr name=\"libraryPapers#Title.Words\">microsoft</attr> <attr name=\"libraryPapers#Title.Words\">academic</attr> <attr name=\"libraryPapers#Title.Words\">applications</attr><end/></rule>` |
 | partial attribute search + drop terms | `microsoft garbageterm garbageterm academic garbageterm applications`| `<rule name=\"#SearchPapers\"><attr name=\"libraryPapers#Title.Words\">microsoft</attr><rule name=\"#DropWord\"> garbageterm</rule><rule name=\"#DropWord\"> garbageterm</rule> <attr name=\"libraryPapers#Title.Words\">academic</attr><rule name=\"#DropWord\"> garbageterm</rule> <attr name=\"libraryPapers#Title.Words\">applications</attr><end/></rule>` |
 | multiple attribute search + drop terms | `microsoft garbageterm machine learning garbageterm`| `<rule name=\"#SearchPapers\"><attr name=\"libraryPapers#AuthorAffiliations.AffiliationName\">microsoft</attr><rule name=\"#DropWord\"> garbageterm</rule> <attr name=\"libraryPapers#FieldsOfStudy.Name\">machine learning</attr> garbageterm<end/></rule>` |
