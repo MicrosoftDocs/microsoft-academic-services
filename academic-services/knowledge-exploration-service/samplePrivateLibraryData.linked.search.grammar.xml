@@ -245,10 +245,7 @@
   </rule>
 
   <!-- treat any terms as "garbage" terms -->
-  <rule id="DropWord" return="String">
+  <rule id="DropWord" return="void">
       <regex pattern='\b\w+' name="garbage" />
-      <tag>
-          out = garbage;
-      </tag>
   </rule>
 </grammar>

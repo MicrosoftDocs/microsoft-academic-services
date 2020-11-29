@@ -333,32 +333,36 @@ Below is a table of example test queries to validate the search grammar we desig
 
 ## Create a client application that uses the MAKES API instance
 
-Now that we have deployed a MAKES API instance that uses the custom index and grammar, the last step is to create a frontend client to that gives users the ability to browse, search, and filter library publications. In the remaining sections of the tutorial, we will be using the sample UI code to illustrate how to retrieve data and generate filters via MAKES Evaluate and Histogram APIs.
+Now that we have deployed a MAKES API instance that uses the custom index and grammar, the last step is to create a frontend client that gives users the ability to browse, search, and filter library publications. In the remaining sections of the tutorial, we will be using the sample UI code to illustrate how to retrieve data and generate filters via MAKES Evaluate and Histogram APIs.
 
 ### Explore the library browser application sample
 
 The code for the library browser application sample is part of the standard MAKES deployment. After the MAKES API instance with the custom index build has been fully deployed, you can use the library browser application by visiting the following URL:
 
-`<Makes_Instance_Url>/examples/privateLibraryExample/privateLibraryExample.html`
+`<Makes_Instance_Url>/examples/privateLibraryExample/index.html`
 
-The remainder of this tutorial details how the library browser application uses the MAKES API to accomplish publication browsing/filtering. To follow along, download the library browser application source files from your MAKES API instance using the following URLs:
+The remainder of this tutorial details how the library browser application uses the MAKES API to accomplish publication browsing, searching, and filtering. To follow along, download the library browser application source files from your MAKES API instance using the following URLs:
 
+- `<Makes_Instance_Url>/examples/privateLibraryExample/index.html`
+- `<Makes_Instance_Url>/examples/privateLibraryExample/appliedFilterListItem.js`
+- `<Makes_Instance_Url>/examples/privateLibraryExample/dynamicRankedPublicationEntities.js`
+- `<Makes_Instance_Url>/examples/privateLibraryExample/filter.js`
+- `<Makes_Instance_Url>/examples/privateLibraryExample/filterAttributeListItem.js`
+- `<Makes_Instance_Url>/examples/privateLibraryExample/filterSectionListItem.js`
+- `<Makes_Instance_Url>/examples/privateLibraryExample/index.js`
+- `<Makes_Instance_Url>/examples/privateLibraryExample/makesInteractor.js`
+- `<Makes_Instance_Url>/examples/privateLibraryExample/parsedSearchQueryInterpretationListItem.js`
 - `<Makes_Instance_Url>/examples/privateLibraryExample/privateLibraryExample.js`
-- `<Makes_Instance_Url>/examples/privateLibraryExample/privateLibraryExample.html`
-- `<Makes_Instance_Url>/examples/privateLibraryExample/privateLibraryExample.css`
-- `<Makes_Instance_Url>/examples/privateLibraryExample/results.js`
+- `<Makes_Instance_Url>/examples/privateLibraryExample/publicationEntities.js`
+- `<Makes_Instance_Url>/examples/privateLibraryExample/publicationFieldsOfStudyListItem.js`
+- `<Makes_Instance_Url>/examples/privateLibraryExample/publicationListItem.js`
+- `<Makes_Instance_Url>/examples/privateLibraryExample/searchBox.js`
 - `<Makes_Instance_Url>/examples/privateLibraryExample/searchResult.js`
 - `<Makes_Instance_Url>/examples/privateLibraryExample/searchResults.js`
-- `<Makes_Instance_Url>/examples/privateLibraryExample/publicationListItem.js`
-- `<Makes_Instance_Url>/examples/privateLibraryExample/publicationFieldsOfStudyListItem.js`
-- `<Makes_Instance_Url>/examples/privateLibraryExample/makesInteractor.js`
-- `<Makes_Instance_Url>/examples/privateLibraryExample/filterSectionListItem.js`
-- `<Makes_Instance_Url>/examples/privateLibraryExample/filterAttributeListItem.js`
-- `<Makes_Instance_Url>/examples/privateLibraryExample/filterablePublicationList.js`
-- `<Makes_Instance_Url>/examples/privateLibraryExample/filter.js`
-- `<Makes_Instance_Url>/examples/privateLibraryExample/appliedFilterListItem.js`
+- `<Makes_Instance_Url>/examples/privateLibraryExample/privateLibraryExample.css`
 
-Once downloaded, modify the `hostUrl` variable in `makesInteractor.js` and point it to your MAKES instance with the custom index you have built from this tutorial. You can then run the application in your browser by opening the `privateLibraryExample.html` file (you can just drag and drop the file into a new browser window).
+
+Once downloaded, modify the `hostUrl` variable in `makesInteractor.js` and point it to your MAKES instance with the custom index you have built from this tutorial. You can then run the application in your browser by opening the `index.html` file (you can just drag and drop the file into a new browser window).
 
 ### Search via Interpret API
 

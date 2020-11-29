@@ -306,30 +306,33 @@ For more detailed deployment instructions, See [Create API Instances](get-starte
 
 ## Create a client application that uses the MAKES API instance
 
-Now that we have deployed a MAKES API instance that uses the custom index, the last step is to create a frontend client to that enables users to browse and filter library publications. In the remaining sections of the tutorial, we will be using the sample UI code to illustrate how to retrieve data and generate filters via MAKES Evaluate and Histogram APIs.
+Now that we have deployed a MAKES API instance that uses the custom index, the last step is to create a frontend client that gives user the ability to browse and filter library publications. In the remaining sections of the tutorial, we will be using the sample UI code to illustrate how to retrieve data and generate filters via MAKES Evaluate and Histogram APIs.
 
 ### Explore the library browser application sample
 
 The code for the library browser application sample is part of the standard MAKES deployment. After the MAKES API instance with the custom index build has been fully deployed, you can use the library browser application by visiting the following URL:
 
-`<Makes_Instance_Url>/examples/privateLibraryExample/privateLibraryExample.html`
+`<Makes_Instance_Url>/examples/privateLibraryExample/index.html`
 
-The remainder of this tutorial details how the library browser application uses the MAKES API to accomplish publication browsing/filtering. To follow along, download the library browser application source files from your MAKES API instance using the following URLs:
+The remainder of this tutorial details how the library browser application uses the MAKES API to accomplish publication browsing and filtering. To follow along, download the library browser application source files from your MAKES API instance using the following URLs:
 
+- `<Makes_Instance_Url>/examples/privateLibraryExample/index.html`
+- `<Makes_Instance_Url>/examples/privateLibraryExample/appliedFilterListItem.js`
+- `<Makes_Instance_Url>/examples/privateLibraryExample/dynamicRankedPublicationEntities.js`
+- `<Makes_Instance_Url>/examples/privateLibraryExample/filter.js`
+- `<Makes_Instance_Url>/examples/privateLibraryExample/filterAttributeListItem.js`
+- `<Makes_Instance_Url>/examples/privateLibraryExample/filterSectionListItem.js`
+- `<Makes_Instance_Url>/examples/privateLibraryExample/index.js`
+- `<Makes_Instance_Url>/examples/privateLibraryExample/makesInteractor.js`
+- `<Makes_Instance_Url>/examples/privateLibraryExample/parsedSearchQueryInterpretationListItem.js`
 - `<Makes_Instance_Url>/examples/privateLibraryExample/privateLibraryExample.js`
-- `<Makes_Instance_Url>/examples/privateLibraryExample/privateLibraryExample.html`
-- `<Makes_Instance_Url>/examples/privateLibraryExample/privateLibraryExample.css`
-- `<Makes_Instance_Url>/examples/privateLibraryExample/results.js`
+- `<Makes_Instance_Url>/examples/privateLibraryExample/publicationEntities.js`
+- `<Makes_Instance_Url>/examples/privateLibraryExample/publicationFieldsOfStudyListItem.js`
+- `<Makes_Instance_Url>/examples/privateLibraryExample/publicationListItem.js`
+- `<Makes_Instance_Url>/examples/privateLibraryExample/searchBox.js`
 - `<Makes_Instance_Url>/examples/privateLibraryExample/searchResult.js`
 - `<Makes_Instance_Url>/examples/privateLibraryExample/searchResults.js`
-- `<Makes_Instance_Url>/examples/privateLibraryExample/publicationListItem.js`
-- `<Makes_Instance_Url>/examples/privateLibraryExample/publicationFieldsOfStudyListItem.js`
-- `<Makes_Instance_Url>/examples/privateLibraryExample/makesInteractor.js`
-- `<Makes_Instance_Url>/examples/privateLibraryExample/filterSectionListItem.js`
-- `<Makes_Instance_Url>/examples/privateLibraryExample/filterAttributeListItem.js`
-- `<Makes_Instance_Url>/examples/privateLibraryExample/filterablePublicationList.js`
-- `<Makes_Instance_Url>/examples/privateLibraryExample/filter.js`
-- `<Makes_Instance_Url>/examples/privateLibraryExample/appliedFilterListItem.js`
+- `<Makes_Instance_Url>/examples/privateLibraryExample/privateLibraryExample.css`
 
 Once downloaded, modify the `hostUrl` variable in `makesInteractor.js` and point it to your MAKES instance with custom index. You can then run the application in your browser by opening the `privateLibraryExample.html` file (you can just drag and drop the file into a new browser window).
 
@@ -337,10 +340,10 @@ Once downloaded, modify the `hostUrl` variable in `makesInteractor.js` and point
 
 We start building our frontend client by crafting a KES query expression to represent the publication list shown on the UI. Since the initial list of publications we want to see is "all publication", we initialize the KES query expression representing the publication list to be `All()`.
 
-This corresponds to the following code in `privateLibraryExample.js`
+This corresponds to the following code in `index.js`
 
 ```javascript
-app = new FilterablePublicationList();
+app = new PrivateLibraryExample();
 app.setOriginalPublicationListExpression("All()");
 mount(document.body, app);
 ```
@@ -436,7 +439,7 @@ The publication list expression is initially set to `All()`, showing all publica
 
 If we want to further constrain the publications returned to computer science related only, we apply a fields of study filter, with the filter expression being `Composite(FieldsOfStudy.Name='computer science')`. The publication list expression will then become `And(All(),Year=2019,Composite(FieldsOfStudy.Name='computer science'))`.
 
-For more details see `FilterablePublicationList.appendFilter(attributeName, attributeValue)` and `FilterablePublicationList.updatePublicationList()` method in `filterablePublicationList.js`.
+For more details see `PrivateLibraryExample.appendFilter(attributeName, attributeValue)` and `PrivateLibraryExample.updatePublicationList()` method in `filterablePublicationList.js`.
 
 ## Next steps
 
