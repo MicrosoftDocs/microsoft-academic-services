@@ -19,7 +19,7 @@ This tutorial illustrates how to
 
 ## Prerequisites
 
-- [Microsoft Academic Knowledge Exploration Service (MAKES) subscription](get-started-setup-provisioning.md) (release version after 2020-11-30)
+- [Microsoft Academic Knowledge Exploration Service (MAKES) subscription](get-started-setup-provisioning.md) (release version after 2020-11-23)
 - Completion of ["Link private publication records with MAKES entities"](tutorial-entity-linking.md) tutorial
 - Completion of ["Build a library browser with contextual filters"](tutorial-schema-design.md) tutorial
 - Read through ["How to define index schema"](how-to-index-schema.md) how-to guide
@@ -33,26 +33,26 @@ In order to search the index, we will have modify the schema from ["Build a libr
 
 ### Modify schema to support search
 
-We modified/added the following attributes from the ["Build a library browser with contextual filters"](tutorial-schema-design.md) tutorial to make the index searchable.
+To make the index searchable, we extend the schema from the ["Build a library browser with contextual filters"](tutorial-schema-design.md) tutorial and add the following attributes and index operations.
 
 | Attribute Name | Description| Index Data Type | Index Operations |
 | ---- | ---- | ---- | ---- |
-| `Abstract.Words` | A words array containing all distinct words from the publication's abstract. Used for supporting partial matches in abstract search (partial attribute search). | `string*` | `["equals"]` |
+| `Abstract.Words` | A words array containing all distinct words from the publication's abstract. Used for supporting partial matches in abstract search. | `string*` | `["equals"]` |
 | `DOI` | Indicates that "DOI" attribute is a object composed of multiple attributes | `Composite?` | - |
-| `DOI.Name` | Used for providing direct match in DOI search (attribute search). | `string?` | `["equals"]` |
-| `Title` | Indicates that "Title" attribute is an object composed of multiple attributes | `Composite?` | - |
-| `Title.Name` | Used for providing direct match in title search (attribute search). | `blob?` | - |
-| `Title.Words` | A words array containing all distinct words from the publication's title. Used for supporting partial matches in title search (partial attribute search). | `string*` | `["equals"]` |
+| `DOI.Name` | Used for providing attibute match in DOI search. | `string?` | `["equals"]` |
+| `Title` | Indicates that "Title" attribute is an object composed of multiple attributes. | `Composite?` | - |
+| `Title.Name` | Used for providing attribute match in title search. | `blob?` | - |
+| `Title.Words` | A words array containing all distinct words from the publication's title. Used for supporting partial matches in title search. | `string*` | `["equals"]` |
 | `FullTextUrl` | Indicates that "FullTextUrl" attribute is an object composed of multiple attributes | `Composite?` | - |
-| `FullTextUrl.Name` | Used for providing direct match in FullTextUrl lookup (attribute search) | `string?` | `["equals"]` |
+| `FullTextUrl.Name` | Used for providing direct attribute match in FullTextUrl search| `string?` | `["equals"]` |
 
 #### Search attributes
 
 Attributes that we plan to use for processing search queries need to be indexed, similar to filter attributes in the ["Build a library browser with contextual filters"](tutorial-schema-design.md) tutorial. For example, to enable our application to process search queries like "papers from microsoft about machine learning" we need to enable the `equals` index operation on the `FieldsOfStudy.Name` and `AuthorAffiliations.AffiliationName` attributes.
 
-In addition to indexing the attributes, we also want to normalize the attributes to improve search results. For example, we can improve publication title search accuracy and performance by normalizing the title and search queries to lowercase characters only. For more normalization details, see `MakesInteractor.NormalizeStr(queryStr)` in `makesInteractor.js`
+Before indexing the attributes, we also want to normalize the attributes to improve search results. For example, we can improve publication title search accuracy by normalizing both the publication titles and the search queries to lowercase characters only. This ensures that publication title quries that have case mismatches will still yield search results. For more normalization details, see `MakesInteractor.NormalizeStr(queryStr)` in `makesInteractor.js`
 
-To enable fuzzy search or keyword search, we may also transform the attributes before indexing them. For example, we enable abstract keywords search by transforming the abstract of a publication `Abstract.OriginalName` into `Abstract.Words` such that unique words from the abstract can be indexed.
+To enable fuzzy search or keyword search, we may also transform the attributes before indexing the attributes. For example, we enable abstract keywords search by transforming the abstract of a publication `Abstract.OriginalName` into `Abstract.Words` such that unique words from the abstract can be indexed.
 
 ## Design a search grammar
 
