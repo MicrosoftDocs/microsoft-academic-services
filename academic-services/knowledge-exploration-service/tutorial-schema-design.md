@@ -144,7 +144,7 @@ Attributes that we plan to use in the filter need to be indexed so they can be u
 
 For example, to enable our library application to filter publications by publication year and field of study names we enable the `equals` index operation on the `Year` and `FieldsOfStudy.Name` attributes:
 
-![Year filter section snapshot](media/privateLibraryExampleApp-yearFilterSection.png)
+![Year filter attribute snapshot](media/privateLibraryExampleApp-yearFilterSection.png)
 
 ![Fields of study filter section snapshot](media/privateLibraryExampleApp-fieldsOfStudyFilterSection.png)
 

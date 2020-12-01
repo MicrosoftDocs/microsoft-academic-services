@@ -56,7 +56,7 @@ To enable fuzzy search or keyword search, we may also transform the attributes b
 
 ## Design a search grammar
 
-Now that we have the appropriate data fields in our index, we will design a grammar tailored to process natural language search queries. In this tutorial, we will use the [sample grammar](samplePrivateLibrary.Data.linked.search.grammar.xml) to illustrate how to support **direct attribute search**, **multiple attribute search**, **partial attribute search**, **semantic search**, and **drop terms with penalties**.
+Now that we have the appropriate data fields in our index, we will design a grammar tailored to process natural language search queries. In this tutorial, we will use the [sample grammar](samplePrivateLibraryData.linked.search.grammar.xml) to illustrate how to support **direct attribute search**, **multiple attribute search**, **partial attribute search**, **semantic search**, and **drop terms with penalties**.
 
 ### Support direct attribute search
 
@@ -331,9 +331,9 @@ The top interpretation's `logprob` is the sum of the accumulative grammar weight
 
 Below is a table of example test queries to validate the search grammar we designed.
 
-| Search Scenario | Test Query | Expected Top Grammar Parse
+| Search Scenario | Test Query | Expected Top Interpretation Grammar Parse
 |---|---|---|
-| attribute search |  `paper titled an overview of microsoft academic service mas and applications` | `<rule name=\"#SearchPapers\">paper titled <attr name=\"libraryPapers#Title.Name\">an overview of microsoft academic service mas and applications</attr><end/></rule>`
+| attribute search | `paper titled an overview of microsoft academic service mas and applications` | `<rule name=\"#SearchPapers\">paper titled <attr name=\"libraryPapers#Title.Name\">an overview of microsoft academic service mas and applications</attr><end/></rule>`
 | composite attribute search | `papers by iheng chen while at national sun yat sen university` | `<rule name="#SearchPapers">papers by <attr name="libraryPapers#AuthorAffiliations.AuthorName">iheng chen</attr> while at <attr name="libraryPapers#AuthorAffiliations.AffiliationName">national sun yat sen university</attr><end/></rule>` |
 | multiple composite attribute search |`papers from national sun yat sen university and from national kaohsiung normal university` | `<rule name="#SearchPapers">papers from <attr name="libraryPapers#AuthorAffiliations.AffiliationName">national sun yat sen university</attr><rule name="#DropWord"> and</rule> from <attr name="libraryPapers#AuthorAffiliations.AffiliationName">national kaohsiung normal university</attr><end/></rule>` |
 | multiple attribute search | `papers from microsoft about machine learning` | `<rule name=\"#SearchPapers\">papers from <attr name=\"libraryPapers#AuthorAffiliations.AffiliationName\">microsoft</attr> about <attr name=\"libraryPapers#FieldsOfStudy.Name\">machine learning</attr><end/></rule>` |

@@ -29,7 +29,6 @@
         IsBeyondEndOfQuery = GetVariable("IsBeyondEndOfQuery", "system");
         AssertEquals(IsBeyondEndOfQuery, false);
       </tag>
-    <!-- </snippet_multiple_attribute_search_loop> -->
       <one-of>
         <!-- Different search behaviors -->
         <item>
@@ -59,6 +58,7 @@
                   <attrref uri="libraryPapers#DOI.Name" name="q"/>
                 </item>
                 
+    <!-- </snippet_multiple_attribute_search_loop> -->
                 <!-- Match full title -->
                 <item>
                   <item repeat="0-1">titled</item>
@@ -208,7 +208,7 @@
        behaviors above has results.-->
       AssertEquals(hasSearchResult, true);      
     </tag>
-    <!-- <snippet_drop_term_constraints> -->
+    <!-- </snippet_drop_term_constraints> -->
     
     <!-- Treat all remaining terms as dropped terms if needed-->
     <item repeat="0-1">
