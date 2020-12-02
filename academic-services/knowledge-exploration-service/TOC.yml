@@ -46,7 +46,7 @@
     href: tutorial-entity-linking.md
   - name: Build browser applications with contextual filters
     href: tutorial-schema-design.md
-  - name: Add search to the library browser
+  - name: Build browser applications with search
     href: tutorial-grammar-design.md
 - name: Concepts
   expanded: false

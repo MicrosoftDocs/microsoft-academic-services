@@ -1,10 +1,10 @@
 ---
-title: Add search to the library browser
+title: Build browser applications with search
 description: Step by step tutorial to design MAKES grammar for custom data
 ms.topic: tutorial
 ms.date: 11/16/2020
 ---
-# Add search to the library browser
+# Build browser applications with search
 
 This tutorial is a continuation of the ["Build a library browser with contextual filters"](tutorial-entity-linking.md) tutorial.
 
@@ -37,30 +37,27 @@ To make the index searchable, we extend the schema from the ["Build a library br
 
 | Attribute Name | Description| Index Data Type | Index Operations |
 | ---- | ---- | ---- | ---- |
-| `Abstract.Words` | A words array containing all distinct words from the publication's abstract. Used for supporting partial matches in abstract search. | `string*` | `["equals"]` |
-| `DOI` | Indicates that "DOI" attribute is a object composed of multiple attributes | `Composite?` | - |
-| `DOI.Name` | Used for providing attibute match in DOI search. | `string?` | `["equals"]` |
-| `Title` | Indicates that "Title" attribute is an object composed of multiple attributes. | `Composite?` | - |
+| `Abstract.Words` | A words array containing all distinct words from the publication's abstract. Used for supporting abstract keyword search. | `string*` | `["equals"]` |
+| `DOI.Name` | Used for providing attribute match in DOI search. | `string?` | `["equals"]` |
 | `Title.Name` | Used for providing attribute match in title search. | `blob?` | - |
-| `Title.Words` | A words array containing all distinct words from the publication's title. Used for supporting partial matches in title search. | `string*` | `["equals"]` |
-| `FullTextUrl` | Indicates that "FullTextUrl" attribute is an object composed of multiple attributes | `Composite?` | - |
-| `FullTextUrl.Name` | Used for providing direct attribute match in FullTextUrl search| `string?` | `["equals"]` |
+| `Title.Words` | A words array containing all distinct words from the publication's title. Used for supporting title keyword search. | `string*` | `["equals"]` |
+| `FullTextUrl.Name` | Used for providing attribute match in FullTextUrl search| `string?` | `["equals"]` |
 
 #### Search attributes
 
 Attributes that we plan to use for processing search queries need to be indexed, similar to filter attributes in the ["Build a library browser with contextual filters"](tutorial-schema-design.md) tutorial. For example, to enable our application to process search queries like "papers from microsoft about machine learning" we need to enable the `equals` index operation on the `FieldsOfStudy.Name` and `AuthorAffiliations.AffiliationName` attributes.
 
-Before indexing the attributes, we also want to normalize the attributes to improve search results. For example, we can improve publication title search accuracy by normalizing both the publication titles and the search queries to lowercase characters only. This ensures that publication title quries that have case mismatches will still yield search results. For more normalization details, see `MakesInteractor.NormalizeStr(queryStr)` in `makesInteractor.js`
+Before indexing the attributes, we also want to normalize the attributes to improve search results. For example, we can improve publication title search accuracy by normalizing both the publication titles and the search queries to lowercase characters only. This ensures that publication title queries that have case mismatches will still yield search results. For more normalization details, see `MakesInteractor.NormalizeStr(queryStr)` in `makesInteractor.js`
 
 To enable fuzzy search or keyword search, we may also transform the attributes before indexing the attributes. For example, we enable abstract keywords search by transforming the abstract of a publication `Abstract.OriginalName` into `Abstract.Words` such that unique words from the abstract can be indexed.
 
 ## Design a search grammar
 
-Now that we have the appropriate data fields in our index, we will design a grammar tailored to process natural language search queries. In this tutorial, we will use the [sample grammar](samplePrivateLibraryData.linked.search.grammar.xml) to illustrate how to support **direct attribute search**, **multiple attribute search**, **partial attribute search**, **semantic search**, and **drop terms with penalties**.
+Now that we have the appropriate data fields in our index, we will design a grammar tailored to process natural language search queries. In this tutorial, we will use the [sample grammar](samplePrivateLibraryData.linked.search.grammar.xml) to illustrate how to support **single attribute queries**, **multiple attribute queries**, **keyword based queries**, **composite entity attribute queries**, and **dropping query terms when they can't be matched**.
 
-### Support direct attribute search
+### Support single attribute queries
 
-Direct attribute search is used for processing queries that only contain a single publication attribute. For example, a user may want to look up a publication by its title, doi, or full text url. These are basically lookup queries using attributes that can be identifiers of the entities themselves. To craft a grammar for direct attribute search, we can use the `<attrref>` element:
+Single attribute queries are queries that only contain a single publication attribute. For example, a user may want to look up a publication by its title, doi, or full text url. These are basically lookup queries using attributes that can be identifiers of the entities themselves. To craft a grammar for single attribute queries, we can use the `<attrref>` element:
 
 :::code language="xml" source="samplePrivateLibraryData.linked.search.grammar.xml" id="snippet_direct_attribute_search":::
 
@@ -70,9 +67,9 @@ We also need to return the corresponding KES query expression once the attribute
 
 :::code language="xml" source="samplePrivateLibraryData.linked.search.grammar.xml" id="snippet_create_return_query":::
 
-### Support multiple attribute search
+### Support multiple attribute queries
 
-Multiple attribute search is used for processing exploratory search queries that contain multiple attribute terms. For example, a user may want to search for publications given a few fields of study and affiliations.
+Multiple attribute queries are queries that contain multiple attribute terms. For example, a user may want to search for publications given a few fields of study and affiliations.
 
 We use the repeat item `<item repeat="1-INF" repeat-logprob="-1">` element to process queries that contains multiple attributes by continously matching remaining query terms using different search grammars.
 
@@ -80,9 +77,9 @@ We use the repeat item `<item repeat="1-INF" repeat-logprob="-1">` element to pr
 
 This allows us to process queries such as "papers from microsoft about machine learning"
 
-### Support partial attribute search
+### Support keyword based queries
 
-Partial attribute search is used for processing keyword based search queries. For example, a user may search for a paper using terms from the paper's title or abstract.
+Keyword based queries are queries that contain keywords from entities. For example, a user may search for a paper using terms from the paper's title or abstract.
 
 We use a `<item repeat="1-INF">` element to process keyword based queries using abstract and title words.
 
@@ -94,9 +91,9 @@ In addition to heavier penalties, we also set a minimum word match count require
 
 :::code language="xml" source="samplePrivateLibraryData.linked.search.grammar.xml" id="snippet_partial_attribute_search_constraints":::
 
-### Support drop terms with penalties
+### Support dropping query terms when they can't be matched
 
-We can improve multiple attribute and partial attribute search by allowing drop/garbage terms in the query. For example, a user may want to search for the publication "A Review of Microsoft Academic Services for Science of Science Studies" by using the parts of the title the user recalls and enters the query "Microsoft Academic Services". Having drop terms support allows this type of queries to be searchable by partial title search.
+We can make attribute matching less strict by allowing query terms to be dropped/ignored. For example, a user may want to search for the publication "A Review of Microsoft Academic Services for Science of Science Studies" by using the parts of the title the user recalls and enters the query "Microsoft Academic Services". Allowing query terms to be ignored enables this type of query to be matched via keyword attributes.
 
 :::code language="xml" source="samplePrivateLibraryData.linked.search.grammar.xml" id="snippet_allow_drop_terms_in_quries":::
 
@@ -106,15 +103,15 @@ We also want to ensure that the grammar cannot drop all terms in a query. To ach
 
 :::code language="xml" source="samplePrivateLibraryData.linked.search.grammar.xml" id="snippet_drop_term_constraints":::
 
-### Support composite entity attribute search
+### Support composite entity attribute queries
 
-We can improve search accuratcy by creating a grammar that supports can parse out the specification for a specific set of composite entity attributes from the entity attributes. For example, a user may want to search for publications from an author while the author was affiliated with a certain institution. We create a special grammar to handle search queries like "papers by iheng chen while at national sun yat sen university".
+We can improve search accuracy by creating a grammar that consider search intents. A search query containing an author name and an affiliation name may have multiple intents. An intent can be "search for papers based on an author and an institution that the author has collaborated with", or "search for papers based on an author who is affiliated with an institution", etc. In the sample grammar, we create a special rule to recognize the intent, "search for papers based on an author who is affiliated with an institution". This enables the grammar to recognize the intent for queries like "papers by iheng chen while at national sun yat sen university" and return results with more accuracy.
 
-Craft a search grammar to handle the natural language search query format 
+The search grammar below handles the natural language search query format for extracting the intent.
 
 :::code language="xml" source="samplePrivateLibraryData.linked.search.grammar.xml" id="snippet_composite_entity_attribute_search":::
 
-Ensure the query returned from the search grammar yields results by calling the `Resolve` semantic function and validate the result by calling `HasResult` and `AssertRequals` semantic function. 
+Ensure the query returned from the search grammar yields results by calling the `Resolve` semantic function and validate the result by calling `HasResult` and `AssertRequals` semantic function.
 
 :::code language="xml" source="samplePrivateLibraryData.linked.search.grammar.xml" id="snippet_ensure_query_has_results":::
 
@@ -372,7 +369,6 @@ The remainder of this tutorial details how the library browser application uses 
 - `<Makes_Instance_Url>/examples/privateLibraryExample/searchResults.js`
 - `<Makes_Instance_Url>/examples/privateLibraryExample/privateLibraryExample.css`
 
-
 Once downloaded, modify the `hostUrl` variable in `makesInteractor.js` and point it to your MAKES instance with the custom index you have built from this tutorial. You can then run the application in your browser by opening the `index.html` file (you can just drag and drop the file into a new browser window).
 
 ### Search via Interpret API
@@ -386,7 +382,3 @@ We can control the depth of the search by changing the `searchInterpretationsCou
 Similar to how we leverage a KES query expression to retrieve top publications from ["Build a library browser with contextual filters"](tutorial-schema-design.md) tutorial, we will retrieve top publication entities by calling Evaluate API.
 
 Instead of calling Evaluate API once, we call Evaluate API for each interpretation and merge sort the publications by dynamic rank. We calculate the dynamic rank for a entity by extracting the grammar path log probability as the dynamic rank from the interpretation. To learn more, see `MakesInteractor.GetPublicationsByDynamicRank(searchResults)` in `makesInteractor.js` for more details.
-
-<!--
-Next steps: build amazing applications.
--->

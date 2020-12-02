@@ -446,4 +446,4 @@ For more details see `PrivateLibraryExample.appendFilter(attributeName, attribut
 Advance to the next section to learn how to add search capability to the library browser application.
 
 > [!div class="nextstepaction"]
-> [Add search to the library browser](tutorial-grammar-design.md)
+> [Build browser applications with search](tutorial-grammar-design.md)
