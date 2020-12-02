@@ -154,7 +154,7 @@ Column # | Name | Type | Note
 Column # | Name | Type | Note
 --- | --- | --- | ---
 1 | FieldOfStudyId | long | FOREIGN KEY REFERENCES FieldsOfStudy.FieldOfStudyId
-2 | AttributeType | int | 1: UMLSId <br> 2: SourceUrl
+2 | AttributeType | int | 1: AUI: Atom Unique Identifier defined in [Unified Medical Language System (UMLS)](https://www.nlm.nih.gov/research/umls/new_users/glossary.html), version [2018AA](https://www.nlm.nih.gov/research/umls/licensedcontent/umlsarchives04.html#2018AA). <br> 2: SourceUrl
 3 | AttributeValue | string |
 
 ## Fields of Study
