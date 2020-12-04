@@ -11,7 +11,7 @@ This tutorial illustrates how to build a library search using the linked publica
 
 - Design a MAKES schema tailored for publication search
 - Design a MAKES grammar to process search queries
-- Build, compile and deploy a MAKES instance with custom index and grammar
+- Build, compile, and deploy a MAKES instance with custom index and grammar
 - Create a frontend client for publication search using MAKES APIs.
 
 ![Library search application](media/privateLibraryExampleApp-search-homepage.png)
@@ -19,12 +19,12 @@ This tutorial illustrates how to build a library search using the linked publica
 ## Prerequisites
 
 - [Microsoft Academic Knowledge Exploration Service (MAKES) subscription](get-started-setup-provisioning.md) (release version after 2020-11-23)
-- Completion of [Link private publication records with MAKES entities tutorial](tutorial-entity-linking.md)
-- Completion of [Build a library browser with contextual filters tutorial](tutorial-schema-design.md)
-- Read through [Define index schema how-to guide](how-to-index-schema.md)
-- Read through [Define grammar how-to guide](how-to-grammar.md)
-- Download the [Sample search schema for linked private library publications](samplePrivateLibraryData.linked.search.schema.json)
-- Download the [Sample search grammar for linked private library publications](samplePrivateLibraryData.linked.search.grammar.xml)
+- Completion of [link private publication records with MAKES entities tutorial](tutorial-entity-linking.md)
+- Completion of [build a library browser with contextual filters tutorial](tutorial-schema-design.md)
+- Read through the [define index schema how-to guide](how-to-index-schema.md)
+- Read through the [define grammar how-to guide](how-to-grammar.md)
+- Download the [sample search schema for linked private library publications](samplePrivateLibraryData.linked.search.schema.json)
+- Download the [sample search grammar for linked private library publications](samplePrivateLibraryData.linked.search.grammar.xml)
 
 ## Design a schema for search
 
@@ -35,7 +35,7 @@ When designing a new schema for search, it's important to evaluate the following
 
 ### Publication search schema design goal
 
-To determine what attributes that need to be indexed, we need to drill into the types of search queries we will process. We can brainstorm the query types by going through the search scenario that we want to support:
+To determine what attributes that need to be indexed, we need to drill into the types of search queries we will process. We can map out what search queries need to be by supported by going through the search scenarios. For this tutorial, we want to enable users to
 
 - Search by categorical attributes, such as fields of study, author and affiliation.
 - Search by keywords extracted from abstact and title
@@ -57,13 +57,13 @@ The design goal above guides us to create the [sample search schema for linked p
 
 Attributes that we plan to use for processing search queries need to be indexed, similar to filter attributes in the ["Build a library browser with contextual filters"](tutorial-schema-design.md) tutorial. For example, to enable our application to process search queries like "papers from microsoft about machine learning" we need to enable the `equals` index operation on the `FieldsOfStudy.Text` and `AuthorAffiliations.AffiliationName` attributes.
 
-Before indexing the attributes, we also want to normalize the attributes to improve search results. For example, we can improve publication title search accuracy by normalizing both the publication titles and the search queries to lowercase characters only. This ensures that publication title queries that have case mismatches will still yield search results. For more normalization details, see `MakesInteractor.NormalizeStr(queryStr)` in `makesInteractor.js`
+Before indexing the attributes, we also want to normalize the attributes to improve search results. For example, we can improve publication title search accuracy by normalizing both the publication titles and the search queries to lowercase characters only. This ensures that publication title queries that have case mismatches will still yield search results. For more normalization details, see `MakesInteractor.NormalizeStr(queryStr)` in `makesInteractor.js`.
 
 To enable fuzzy search or keywords search, we may also transform the attributes before indexing the them. For example, we enable abstract keywords search by transforming the attribute `Abstract.Text` into `Abstract.Words` such that unique words from abstracts can be indexed.
 
 ## Design a search grammar
 
-Now that we have the appropriate data fields in our index, we will design a grammar tailored to process natural language search queries. In this tutorial, we will use the [sample grammar](samplePrivateLibraryData.linked.search.grammar.xml) to illustrate how to support **single attribute queries**, **multiple attribute queries**, **keyword based queries**, **composite entity attribute queries**, and **dropping query terms when they can't be matched**.
+Now that we have the appropriate data fields in our index, we will design a grammar tailored to process natural language search queries. In this tutorial, we will use the [sample grammar](samplePrivateLibraryData.linked.search.grammar.xml) to illustrate how to support [single attribute queries](#support-single-attribute-queries), [multiple attribute queries](#support-multiple-attribute-queries), [keyword based queries](#support-keyword-based-queries), [composite entity attribute queries](#support-composite-entity-attribute-queries), and [dropping query terms when they can't be matched](#support-dropping-query-terms-when-they-can't-be-matched)
 
 ### Support single attribute queries
 
