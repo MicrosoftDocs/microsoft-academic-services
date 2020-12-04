@@ -65,8 +65,8 @@ function Merge-MagEntity {
     {
         $fieldsOfStudy += 
         @{ 
-            OriginalName = $fos.DFN;
-            Name = $fos.FN;
+            OriginalText = $fos.DFN;
+            Text = $fos.FN;
         }
     }
     $privateLibraryPaper | Add-Member -MemberType NoteProperty -Name 'FieldsOfStudy' -Value  $fieldsOfStudy
@@ -109,7 +109,7 @@ function Merge-MagEntity {
             }
         }
         $abstract = @{
-            OriginalName = [string]::Join(" ", $abstractWords);
+            OriginalText = [string]::Join(" ", $abstractWords);
         }
         
         $privateLibraryPaper | Add-Member -MemberType NoteProperty -Name 'Abstract' -Value  $abstract
@@ -150,16 +150,16 @@ function Edit-AddSearchAttribues
     $titleWords = ConvertTo-DistinctWordsArray $normalizedTitle
     $titleComposite = @{
         Name = $normalizedTitle;
-        OriginalName = $libraryPaper.OriginalTitle;
+        OriginalText = $libraryPaper.OriginalTitle;
         Words = $titleWords;
     };
     $libraryPaper | Add-Member -MemberType NoteProperty -Name 'Title' -Value  $titleComposite
 
 
     # add normalized abstract words for partial abstract search
-    if ($null -ne $libraryPaper.Abstract -and $null -ne $libraryPaper.Abstract.OriginalName)
+    if ($null -ne $libraryPaper.Abstract -and $null -ne $libraryPaper.Abstract.OriginalText)
     {
-        $normalizedAbstract = ConvertTo-NormalizedStr $libraryPaper.Abstract.OriginalName
+        $normalizedAbstract = ConvertTo-NormalizedStr $libraryPaper.Abstract.OriginalText
         $abstractWords = ConvertTo-DistinctWordsArray $normalizedAbstract
         $libraryPaper.Abstract.Words = $abstractWords;
     }
@@ -169,7 +169,7 @@ function Edit-AddSearchAttribues
     {
         $normalizedDOI = ConvertTo-NormalizedStr $libraryPaper.DOI
         $libraryPaper.DOI = @{
-            OriginalName = $libraryPaper.DOI;
+            OriginalText = $libraryPaper.DOI;
             Name = $normalizedDOI;
         };
     }
@@ -179,7 +179,7 @@ function Edit-AddSearchAttribues
     {
         $normalizedFullTextUrl = ConvertTo-NormalizedStr $libraryPaper.FullTextUrl
         $libraryPaper.FullTextUrl = @{
-            OriginalName = $libraryPaper.FullTextUrl;
+            OriginalText = $libraryPaper.FullTextUrl;
             Name = $normalizedFullTextUrl;
         };
     }
