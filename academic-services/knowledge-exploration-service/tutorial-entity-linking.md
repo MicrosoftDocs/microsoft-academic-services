@@ -12,9 +12,9 @@ This tutorial illustrates how to link private publication records with their cor
 ## Prerequisites
 
 - [Microsoft Academic Knowledge Service (MAKES) subscription](get-started-setup-provisioning.md)
-- [Powershell 7](https://docs.microsoft.com/powershell/scripting/install/installing-powershell-core-on-windows?view=powershell-7&preserve-view=true)
+- [PowerShell 7](https://docs.microsoft.com/powershell/scripting/install/installing-powershell-core-on-windows?view=powershell-7&preserve-view=true)
 - [Sample private library publication records](samplePrivateLibraryData.json)
-- [Sample entity linking Powershell script](linkPrivateLibraryData.ps1)
+- [Sample entity linking PowerShell script](linkPrivateLibraryData.ps1)
 
 ## Download samples and setup working directory
 
@@ -55,7 +55,7 @@ year: | Match paper publication year | year: 2015
 
 You can experiment with these different scopes and pick the one that makes the most sense for your data/scenario using the Interpret test page. MAKES also supports custom grammars, allowing you to craft a grammar explicitly designed for the data being using to link entities. See [How to define a custom grammar](how-to-grammar.md) for more details.
 
-## Set appropriate confidence score for linked entities
+## Set appropriate confidence score threshold for entity linking
 
 > [!Important]
 > This section assumes understanding of the following MAKES concepts:

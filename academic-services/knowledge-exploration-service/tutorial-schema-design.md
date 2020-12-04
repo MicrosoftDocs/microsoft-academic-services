@@ -7,15 +7,13 @@ ms.date: 11/16/2020
 
 # Build a library browser with contextual filters
 
-This tutorial is a continuation of the ["Link private publication records with MAKES entities"](tutorial-entity-linking.md) tutorial.
-
-This tutorial illustrates how to
-
-- Design a MAKES schema tailored for enabling contextual filters for library publication entities
-- Build and deploy a custom index for those entities
-- Build a library browser w/contextual filters application (as shown below) using MAKES APIs
-
 ![Library browser application](media/privateLibraryExampleApp-homepage.png)
+
+This tutorial illustrates how to build a library browser application using the linked publication records from ["link private publication records with MAKES entities"](tutorial-entity-linking.md) tutorial. You will learn how to:
+
+- Design a MAKES schema tailored for serving publication entities using contextual filters.
+- Build and deploy a MAKES instance with custom index.
+- Create a frontend client for navigating publication entities with contextual filters using MAKES APIs.
 
 ## Prerequisites
 
@@ -148,7 +146,7 @@ For example, to enable our library application to filter publications by publica
 
 ![Fields of study filter section snapshot](media/privateLibraryExampleApp-fieldsOfStudyFilterSection.png)
 
-The year and field of study attributes are a good illustration of attributes whose values cleanly segment entities into categories that users would likely leverage for navigation.
+The `Year` and `FieldsOfStudy.Name` attributes are a good illustration of attributes whose values cleanly segment entities into categories that users would likely leverage for navigation.
 
 For more information on schema file syntax, data types and index operations, see [Index Schema Files](how-to-index-schema.md).
 
@@ -156,7 +154,7 @@ For more information on schema file syntax, data types and index operations, see
 
 Once you're ready with your schema, the next step is to build a MAKES index using the linked library publications.
 
-A best practice when designing new schemas/indexes is to first do a local build using a subset of the data you plan to index. This allows you to validate that the schema works and that you can query results as expected. In this case the data size is perfectly suited for a local build.
+A best practice when designing new schemas/indexes is to first do a local build using a subset of the data you plan to index. This allows you to validate that the schema works and that you can query results as expected. For the tutorial, the data size is perfectly suited for a local build.
 
 In addition to this best practice guidance, local builds have a concrete limit of a maximum of 10,000 entities, so most mid-large index builds will need to be done using a cloud build. To learn more, follow [How to create index from MAG](how-to-create-index-from-mag.md)
 
@@ -173,13 +171,13 @@ In addition to this best practice guidance, local builds have a concrete limit o
     > [!IMPORTANT]
     > The `BuildIndexLocal` command is only available on win-x64 version of kesm. If you are using other platforms you will need to execute a cloud build.
 
-1. Run Evaluate command to verify the stored entity attributes are correct:
+1. Verify the stored entity attributes are correct by running the Evaluate command to retrieve top entities:
 
     ```cmd
     kesm Evaluate --IndexFilePaths samplePrivateLibraryData.linked.kes --KesQueryExpression="All()" --Count 1 --Attributes *
     ```
 
-    The output should mirror the following JSON:
+    The command should retreieve top publication entities from the index. The output should mirror the following JSON:
 
     ```json
     {
@@ -232,13 +230,13 @@ In addition to this best practice guidance, local builds have a concrete limit o
     }
     ```
 
-1. Run Evaluate command using the built index to verify index operations are working as expected:
+1. Verify index operations are working as expected by running the Evaluate command to retrieve specific entities:
 
     ```cmd
     kesm Evaluate --IndexFilePaths samplePrivateLibraryData.linked.kes --KesQueryExpression="Year=2020" --Attributes "Year"
     ```
 
-    The output should be
+    The command should retreieve publication entities with `Year` attibute being `2020` from the index. The output should mirror the following JSON:
 
     ```cmd
     {
@@ -336,9 +334,9 @@ The remainder of this tutorial details how the library browser application uses 
 
 Once downloaded, modify the `hostUrl` variable in `makesInteractor.js` and point it to your MAKES instance with custom index. You can then run the application in your browser by opening the `privateLibraryExample.html` file (you can just drag and drop the file into a new browser window).
 
-### Crafting KES query expressions to retrieve publications
+### Craft a KES query expression to represent publications
 
-We start building our frontend client by crafting a KES query expression to represent the publication list shown on the UI. Since the initial list of publications we want to see is "all publication", we initialize the KES query expression representing the publication list to be `All()`.
+We start building our frontend client by crafting a **publication list expression**, a KES query expression to represent the publications our user is browsing. We will use this expression to fetch publication entities and generate filters in the next steps. When filters are applied, we will modify this expression to represent the filtered entities. Since the initial list of publications the user should see is "all publication", we initialize the **publication list expression** be `All()`.
 
 This corresponds to the following code in `index.js`
 
@@ -347,8 +345,6 @@ app = new PrivateLibraryExample();
 app.setOriginalPublicationListExpression("All()");
 mount(document.body, app);
 ```
-
-We will use the **publication list expression** to fetch publication entities in the next step. When filters are applied, we will modify this expression to get the corresponding entities.
 
 For more information on KES Query Expressions, see [Structured query expressions](concepts-query-expressions.md)
 

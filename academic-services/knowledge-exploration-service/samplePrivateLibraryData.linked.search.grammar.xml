@@ -178,7 +178,7 @@
         <!-- Words/terms that cannot be matched using the above search behaviors, aka "garbage/dropped" terms. -->
         <item logprob="-25">
           <!-- Make any terms as "garbage" terms -->
-          <ruleref uri="#DropWord"/>
+          <ruleref uri="#DroppedWord"/>
         </item>
         <!-- </snippet_allow_drop_terms_in_quries> -->
 
@@ -235,21 +235,19 @@
     <!-- <snippet_ensure_query_has_results> -->
     <!-- Ensure all grammar paths resulted in a query that can be used to retrieve non-empty entity results.-->
     <tag>
-      <!-- Resolve the query by executing it and retriving top results-->
-      entities = Resolve(query);
       <!-- Check if the execution was able to fetch any results-->
-      hasResults = HasResults(entities);
+      hasResults = HasResults(query);
       <!-- Ensure only the grammar path is only valid if the return query can retrieve non-empty entity results -->
       AssertEquals(hasResults, true);
       <!-- Set the output the query execution result-->
-      out = entities;
+      out = query;
     </tag>
     <!-- </snippet_ensure_query_has_results> -->
     
   </rule>
 
   <!-- treat any terms as "garbage" terms -->
-  <rule id="DropWord" return="void">
+  <rule id="DroppedWord" return="void">
       <regex pattern='\b\w+' name="garbage" />
   </rule>
 </grammar>

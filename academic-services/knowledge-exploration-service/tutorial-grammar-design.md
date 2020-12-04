@@ -1,21 +1,19 @@
 ---
-title: Build browser applications with search
+title: Build a library search application
 description: Step by step tutorial to design MAKES grammar for custom data
 ms.topic: tutorial
 ms.date: 11/16/2020
 ---
-# Build browser applications with search
-
-This tutorial is a continuation of the ["Build a library browser with contextual filters"](tutorial-entity-linking.md) tutorial.
-
-This tutorial illustrates how to
-
-- Create a MAKES Index tailored for library publication entities search
-- Design a MAKES grammar to process natural language search queries
-- Build, compile and deploy a MAKES instance with custom index and grammar
-- Extend the library browser with search capability using MAKES APIs
+# Build a library search
 
 ![Library search application](media/privateLibraryExampleApp-search-homepage.png)
+
+This tutorial illustrates how to build a library search using the linked publication records from ["link private publication records with MAKES entities"](tutorial-entity-linking.md) tutorial and concepts from [library browser with contextual filters](tutorial-entity-linking.md) tutorial. You will learn how to:
+
+- Design a MAKES schema tailored for publication search
+- Design a MAKES grammar to process search queries
+- Build, compile and deploy a MAKES instance with custom index and grammar
+- Create a frontend client for publication search using MAKES APIs.
 
 ## Prerequisites
 
@@ -27,13 +25,24 @@ This tutorial illustrates how to
 - Download the [sample search schema for linked private library publications](samplePrivateLibraryData.linked.search.schema.json)
 - Download the [sample search grammar for linked private library publications](samplePrivateLibraryData.linked.search.grammar.xml)
 
-## Create a searchable index
+## Design a schema for search
 
-In order to search the index, we will have modify the schema from ["Build a library browser with contextual filters"](tutorial-entity-linking.md) tutorial and add index operations on more attributes.
+When designing a new schema for search, it's important to evaluate the following:
 
-### Modify schema to support search
+- What entity attributes will appear in search queries?
+- How will the entity attributes appear in search queries?
 
-To make the index searchable, we extend the schema from the ["Build a library browser with contextual filters"](tutorial-schema-design.md) tutorial and add the following attributes and index operations.
+### Publication search schema design goal
+
+We want to support users entering search queries with the following intention:
+
+- Search by categorical attributes, such as fields of study, author and affiliation.
+- Search by keywords extracted from abstact and title
+- Search by identifiable attributes, such as the publication's title, DOI, and the full text url from the original records.
+
+### Modify library browser schema to support search
+
+The design goal above guides us to create []() by modifying the schema from ["Build a library browser with contextual filters"](tutorial-entity-linking.md) tutorial. The following attributes and index operations were added.
 
 | Attribute Name | Description| Index Data Type | Index Operations |
 | ---- | ---- | ---- | ---- |
