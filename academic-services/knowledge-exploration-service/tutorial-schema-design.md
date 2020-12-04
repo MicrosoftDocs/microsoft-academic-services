@@ -18,9 +18,9 @@ This tutorial illustrates how to build a library browser application using the l
 ## Prerequisites
 
 - [Microsoft Academic Knowledge Exploration Service (MAKES) subscription](get-started-setup-provisioning.md) (release version after 2020-11-30)
-- Completion of ["Link private publication records with MAKES entities"](tutorial-entity-linking.md) tutorial
-- Read through ["How to define index schema"](how-to-index-schema.md) how-to guide
-- Download the [sample schema for linked private library publications](samplePrivateLibraryData.linked.schema.json)
+- Completion of [Link private publication records with MAKES entities tutorial](tutorial-entity-linking.md)
+- Read through [Define index schema how-to guide](how-to-index-schema.md)
+- Download the [Sample schema for linked private library publications](samplePrivateLibraryData.linked.schema.json)
 
 ## Design a schema for linked private library publications
 

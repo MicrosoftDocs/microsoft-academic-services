@@ -19,12 +19,12 @@ This tutorial illustrates how to build a library search using the linked publica
 ## Prerequisites
 
 - [Microsoft Academic Knowledge Exploration Service (MAKES) subscription](get-started-setup-provisioning.md) (release version after 2020-11-23)
-- Completion of ["Link private publication records with MAKES entities"](tutorial-entity-linking.md) tutorial
-- Completion of ["Build a library browser with contextual filters"](tutorial-schema-design.md) tutorial
-- Read through ["How to define index schema"](how-to-index-schema.md) how-to guide
-- Read through ["How to define grammar"](how-to-grammar.md) how-to guide
-- Download the [sample search schema for linked private library publications](samplePrivateLibraryData.linked.search.schema.json)
-- Download the [sample search grammar for linked private library publications](samplePrivateLibraryData.linked.search.grammar.xml)
+- Completion of [Link private publication records with MAKES entities tutorial](tutorial-entity-linking.md)
+- Completion of [Build a library browser with contextual filters tutorial](tutorial-schema-design.md)
+- Read through [Define index schema how-to guide](how-to-index-schema.md)
+- Read through [Define grammar how-to guide](how-to-grammar.md)
+- Download the [Sample search schema for linked private library publications](samplePrivateLibraryData.linked.search.schema.json)
+- Download the [Sample search grammar for linked private library publications](samplePrivateLibraryData.linked.search.grammar.xml)
 
 ## Design a schema for search
 
