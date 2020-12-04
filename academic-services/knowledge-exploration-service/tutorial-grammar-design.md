@@ -7,7 +7,7 @@ ms.date: 11/16/2020
 
 # Build a library search
 
-This tutorial illustrates how to build a library search using the linked publication records from ["link private publication records with MAKES entities"](tutorial-entity-linking.md) tutorial and concepts from [library browser with contextual filters](tutorial-entity-linking.md) tutorial. You will learn how to:
+This tutorial illustrates how to build a library search using the linked publication records from [link private publication records with MAKES entities](tutorial-entity-linking.md) tutorial and concepts from [library browser with contextual filters](tutorial-entity-linking.md) tutorial. You will learn how to:
 
 - Design a MAKES schema tailored for publication search
 - Design a MAKES grammar to process search queries
