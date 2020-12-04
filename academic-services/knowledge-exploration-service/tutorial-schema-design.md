@@ -32,19 +32,19 @@ When designing a new MAKES schema, it's important to evaluate the following:
 
 ### Evaluating input data
 
-Using the entities generated from the ["Link private publication records with MAKES entities"](tutorial-entity-linking.md) tutorial, we want to evaluate each different entity attribute to see if it's applicable for the library browser application we're building. You should have a file named **samplePrivateLibraryData.linked.json** in your working directory from the previous tutorial, which should contain entities like the following:
+Using the entities generated from the [link private publication records with MAKES entities tutorial](tutorial-entity-linking.md) tutorial, we want to evaluate each different entity attribute to see if it's applicable for the library browser application we're building. You should have a file named **samplePrivateLibraryData.linked.json** in your working directory from the previous tutorial, which should contain entities like the following:
 
 ```json
 {
     "OriginalTitle": "Microsoft Academic Graph: When experts are not enough",
     "FullTextUrl": {
-        "OriginalName": "http://localhost/example-full-text-link-1",
+        "OriginalText": "http://localhost/example-full-text-link-1",
         "Name": "http localhost example full text link 1"
     },
     "Id": 3002924435,
     "logprob": -19.625,
     "DOI": {
-        "OriginalName": "10.1162/QSS_A_00021",
+        "OriginalText": "10.1162/QSS_A_00021",
         "Name": "10 1162 qss_a_00021"
     },
     "Year": 2020,
@@ -53,11 +53,11 @@ Using the entities generated from the ["Link private publication records with MA
     "EstimatedCitationCount": 16,
     "FieldsOfStudy": [
         {
-            "OriginalName": "World Wide Web",
+            "OriginalText": "World Wide Web",
             "Name": "world wide web"
         },
         {
-            "OriginalName": "Knowledge graph",
+            "OriginalText": "Knowledge graph",
             "Name": "knowledge graph"
         },
         ...
@@ -80,10 +80,10 @@ Using the entities generated from the ["Link private publication records with MA
         ...
     ],
     "Abstract": {
-        "OriginalName": "An ongoing project explores the extent to which artificial intelligence (AI), specifically in the areas of natural language processing and semantic reasoning, can be exploited to facilitate the stu...",
+        "OriginalText": "An ongoing project explores the extent to which artificial intelligence (AI), specifically in the areas of natural language processing and semantic reasoning, can be exploited to facilitate the stu...",
         "Words": ["an", "ongoing", "project", "explores", "the", "extent", "to", "which", "artificial", "intelligence", "ai", "specifically", "in", "areas", "of", "natural", "language", "processing", "and", "semantic", "reasoning", "can", "be", "exploited", "facilitate", "stu"] },
     "Title": {
-        "OriginalName": "Microsoft Academic Graph: When experts are not enough",
+        "OriginalText": "Microsoft Academic Graph: When experts are not enough",
         "Name": "microsoft academic graph when experts are not enough",
         "Words": ["microsoft", "academic", "graph", "when", "experts", "are", "not", "enough"]
     }
@@ -116,25 +116,25 @@ The design goals above guide us to define a [schema for the linked sample librar
 | `VenueFullName` | Display only attribute, used in Publication List Item | `blob?` | - |
 | `Year` | Filter and display attribute, used in Publication List Item and Filter Item | `int?` | `["equals"]` |
 | `Abstract` | Indicates that "Abstract" attribute is a object composed of multiple attributes | `Composite?` | - |
-| `Abstract.OriginalName` | Display only attribute, used in Publication List Item | `blob?` | - |
+| `Abstract.OriginalText` | Display only attribute, used in Publication List Item | `blob?` | - |
 | `DOI` | Indicates that "DOI" attribute is a object composed of multiple attributes | `Composite?` | - |
-| `DOI.OriginalName` | Display only attribute, used in Publication List Item | `blob?` | - |
+| `DOI.OriginalText` | Display only attribute, used in Publication List Item | `blob?` | - |
 | `Title` | Indicates that "Title" attribute is an object composed of multiple attributes | `Composite?` | - |
-| `Title.OriginalName` | Display only attribute, used in Publication List Item | `blob?` | - |
+| `Title.OriginalText` | Display only attribute, used in Publication List Item | `blob?` | - |
 | `FullTextUrl` | Indicates that "FullTextUrl" attribute is an object composed of multiple attributes | `Composite?` | - |
-| `FullTextUrl.OriginalName` | Display only attribute, used in Publication List Item | `blob?` | - |
+| `FullTextUrl.OriginalText` | Display only attribute, used in Publication List Item | `blob?` | - |
 | `AuthorAffiliations` | Indicates that "AuthorAffiliations" attribute is an array of objects that are composed of multiple attributes | `Composite*` | - |
 | `AuthorAffiliations.AffiliationName` | Filter and display attribute, used in Publication List Item and Filter Item | `string?` | `["equals"]` |
 | `AuthorAffiliations.AuthorName` | Filter and display attribute, used in Publication List Item and Filter Item | `string?` | `["equals"]` |
 | `AuthorAffiliations.OriginalAuthorName` | Display only attribute, used in Publication List Item | `string?` | `["equals"]` |
 | `AuthorAffiliations.Sequence` | Display only attribute, used in Publication List Item | `blob?` | - |
 | `FieldsOfStudy` | Indicates that "FieldsOfStudy" attribute is an array of object composed of multiple attributes | `Composite*` | - |
-| `FieldsOfStudy.OriginalName` | Display only attribute, used in Publication List Item | `blob?` | - |
+| `FieldsOfStudy.OriginalText` | Display only attribute, used in Publication List Item | `blob?` | - |
 | `FieldsOfStudy.Name` | Filter and display attribute, used in Publication List Item and Filter Item | `string?` | `["equals"]` |
 
 #### Display only attributes
 
-The "display only attributes" referenced above are attributes that are only included for display purposes in the application, such as `Title.OriginalName` and `AuthorAffiliations.OriginalAuthorName`. Because we only display the data and don't filter by it, we don't need to index it. KES provides a `blob` data type for these type of attributes that allows for optimized storage and retrieval.
+The "display only attributes" referenced above are attributes that are only included for display purposes in the application, such as `Title.OriginalText` and `AuthorAffiliations.OriginalAuthorName`. Because we only display the data and don't filter by it, we don't need to index it. KES provides a `blob` data type for these type of attributes that allows for optimized storage and retrieval.
 
 #### Filter attributes
 
@@ -190,13 +190,13 @@ In addition to this best practice guidance, local builds have a concrete limit o
         "VenueFullName": "The Web Conference",
         "Year": 2015,
         "Abstract": {
-            "OriginalName": "In this paper we describe a new release of a Web scale entity graph that serves as the backbone of Microsoft Academic Service (MAS), a major production effort with a broadened scope to the namesake vertical search engine that has been publicly available since 2008 as a research prototype. At the core of MAS is a heterogeneous entity graph comprised of six types of entities that model the scholarly activities: field of study, author, institution, paper, venue, and event. In addition to obtaining these entities from the publisher feeds as in the previous effort, we in this version include data mining results from the Web index and an in-house knowledge base from Bing, a major commercial search engine. As a result of the Bing integration, the new MAS graph sees significant increase in size, with fresh information streaming in automatically following their discoveries by the search engine. In addition, the rich entity relations included in the knowledge base provide additional signals to disambiguate and enrich the entities within and beyond the academic domain. The number of papers indexed by MAS, for instance, has grown from low tens of millions to 83 million while maintaining an above 95% accuracy based on test data sets derived from academic activities at Microsoft Research. Based on the data set, we demonstrate two scenarios in this work: a knowledge driven, highly interactive dialog that seamlessly combines reactive search and proactive suggestion experience, and a proactive heterogeneous entity recommendation."
+            "OriginalText": "In this paper we describe a new release of a Web scale entity graph that serves as the backbone of Microsoft Academic Service (MAS), a major production effort with a broadened scope to the namesake vertical search engine that has been publicly available since 2008 as a research prototype. At the core of MAS is a heterogeneous entity graph comprised of six types of entities that model the scholarly activities: field of study, author, institution, paper, venue, and event. In addition to obtaining these entities from the publisher feeds as in the previous effort, we in this version include data mining results from the Web index and an in-house knowledge base from Bing, a major commercial search engine. As a result of the Bing integration, the new MAS graph sees significant increase in size, with fresh information streaming in automatically following their discoveries by the search engine. In addition, the rich entity relations included in the knowledge base provide additional signals to disambiguate and enrich the entities within and beyond the academic domain. The number of papers indexed by MAS, for instance, has grown from low tens of millions to 83 million while maintaining an above 95% accuracy based on test data sets derived from academic activities at Microsoft Research. Based on the data set, we demonstrate two scenarios in this work: a knowledge driven, highly interactive dialog that seamlessly combines reactive search and proactive suggestion experience, and a proactive heterogeneous entity recommendation."
         },
         "Title": {
-            "OriginalName": "An Overview of Microsoft Academic Service (MAS) and Applications"
+            "OriginalText": "An Overview of Microsoft Academic Service (MAS) and Applications"
         },
         "FullTextUrl": {
-            "OriginalName": "http://localhost/example-full-text-link-2"
+            "OriginalText": "http://localhost/example-full-text-link-2"
         },
         "AuthorAffiliations": [
             {
@@ -215,11 +215,11 @@ In addition to this best practice guidance, local builds have a concrete limit o
         ],
         "FieldsOfStudy": [
             {
-            "OriginalName": "World Wide Web",
+            "OriginalText": "World Wide Web",
             "Name": "world wide web"
             },
             {
-            "OriginalName": "Vertical search",
+            "OriginalText": "Vertical search",
             "Name": "vertical search"
             },
             ...
