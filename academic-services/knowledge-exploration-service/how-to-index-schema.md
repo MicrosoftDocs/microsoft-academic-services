@@ -22,15 +22,14 @@ They play a critical part in the design of a [MAKES API](reference-makes-api.md)
     "attributes": [
         {
             "name": "name_of_attribute",
-            "type": "string | int32 | int64 | double | date | guid | blob | composite",
-            "operations": ["operation1", "operation2", ... ],
-            "synonyms": "synonym_file"
+            "type": "type_definition",
+            "operations": ["index_operation", "index_operation", ... ],
+            "synonyms": "path_to_synonym_file"
         },
         ...
     ]
 }
 ```
-
 ## Attribute name
 
 Attribute names must be composed of alphanumeric characters (a-z, A-Z,  0-9) or underscores, with the first character required to be an alpha character or underscore.
@@ -53,18 +52,31 @@ In addition names can also contain a [composite group](#composite-attributes) na
 * Valid: composite_group_name.subAttributeName
 * Invalid: composite-group-name.5thAttribute
 
-## Attribute types
+## Type definitions
+
+A attribute type definition specifies the attribute type and the expected value existance for entities 
+using a string format of `<AttributeType><AttributeValueExistance>`. For example, you can use `guid!` to specify an ID attribute that all entity should have.
+
+### Attribute types
 
 Name | Description | Supported operations | Example
 --- | --- | --- | ---
-blob | Internally compressed non-indexed data, useful for storing large amounts of data | | "It was the best of times, it was the worst of times ... It is a far, far better thing that I do, than I have ever done; it is a far, far better rest that I go to than I have ever known."
-composite | Composition of one or more non-composite attributes | | See [composite attribute](#composite-attributes) section
-date | Date value in YYYY-MM-DD format with supported range of 1400-01-01 to 9999-12-31 | equals, is_between | "2015-05-18"
-double | Double-precision floating-point value | equals, starts_with, is_between | 2.71828182846
-guid | Globally unique identifier value in XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX format | equals | "3d119f86-dcf0-4e35-9c01-b84832d851e9"
-int32 | Signed 32-bit integer | equals, starts_with, is_between | -1, 0, 2015
-int64 | Signed 64-bit integer | equals, starts_with, is_between | -1, 0, 8589934592
-string | String of up to 1024 characters | equals, starts_with | "an overview of microsoft academic service mas and applications"
+`blob` | Internally compressed non-indexed data, useful for storing large amounts of data | | "It was the best of times, it was the worst of times ... It is a far, far better thing that I do, than I have ever done; it is a far, far better rest that I go to than I have ever known."
+`composite` | Composition of one or more non-composite attributes | | See [composite attribute](#composite-attributes) section
+`date` | Date value in YYYY-MM-DD format with supported range of 1400-01-01 to 9999-12-31 | equals, is_between | "2015-05-18"
+`double` | Double-precision floating-point value | equals, starts_with, is_between | 2.71828182846
+`guid`| Globally unique identifier value in XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX format | equals | "3d119f86-dcf0-4e35-9c01-b84832d851e9"
+`int32` | Signed 32-bit integer | equals, starts_with, is_between | -1, 0, 2015
+`int64` | Signed 64-bit integer | equals, starts_with, is_between | -1, 0, 8589934592
+`string` | String of up to 1024 characters | equals, starts_with | "an overview of microsoft academic service mas and applications"
+
+### Attribute value existance
+
+Name | Description |
+--- | --- |
+`!` | All entities must contain a value for the attribute |
+`?` | The entities may contain a value for the attribute |
+`*` | The entities may contain a value or an array of values for the attribute |
 
 ## Composite attributes
 
