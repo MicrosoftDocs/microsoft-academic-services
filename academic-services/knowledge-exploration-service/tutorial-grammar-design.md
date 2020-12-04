@@ -4,9 +4,8 @@ description: Step by step tutorial to design MAKES grammar for custom data
 ms.topic: tutorial
 ms.date: 11/16/2020
 ---
-# Build a library search
 
-![Library search application](media/privateLibraryExampleApp-search-homepage.png)
+# Build a library search
 
 This tutorial illustrates how to build a library search using the linked publication records from ["link private publication records with MAKES entities"](tutorial-entity-linking.md) tutorial and concepts from [library browser with contextual filters](tutorial-entity-linking.md) tutorial. You will learn how to:
 
@@ -14,6 +13,8 @@ This tutorial illustrates how to build a library search using the linked publica
 - Design a MAKES grammar to process search queries
 - Build, compile and deploy a MAKES instance with custom index and grammar
 - Create a frontend client for publication search using MAKES APIs.
+
+![Library search application](media/privateLibraryExampleApp-search-homepage.png)
 
 ## Prerequisites
 
@@ -29,12 +30,12 @@ This tutorial illustrates how to build a library search using the linked publica
 
 When designing a new schema for search, it's important to evaluate the following:
 
-- What entity attributes will appear in search queries?
+- What entity attributes can appear in search queries?
 - How will the entity attributes appear in search queries?
 
 ### Publication search schema design goal
 
-We want to support users entering search queries with the following intention:
+To determine what attributes that need to be indexed, we need to drill into the types of search queries we will process. We can brainstorm the query types by going through the search scenario that we want to support:
 
 - Search by categorical attributes, such as fields of study, author and affiliation.
 - Search by keywords extracted from abstact and title
@@ -42,23 +43,23 @@ We want to support users entering search queries with the following intention:
 
 ### Modify library browser schema to support search
 
-The design goal above guides us to create []() by modifying the schema from ["Build a library browser with contextual filters"](tutorial-entity-linking.md) tutorial. The following attributes and index operations were added.
+The design goal above guides us to create the [sample search schema for linked private library publications](samplePrivateLibraryData.linked.search.schema.json) by modifying the schema from ["Build a library browser with contextual filters"](tutorial-entity-linking.md) tutorial. The following attributes and index operations were added:
 
 | Attribute Name | Description| Index Data Type | Index Operations |
 | ---- | ---- | ---- | ---- |
-| `Abstract.Words` | A words array containing all distinct words from the publication's abstract. Used for supporting abstract keyword search. | `string*` | `["equals"]` |
-| `DOI.Name` | Used for providing attribute match in DOI search. | `string?` | `["equals"]` |
-| `Title.Name` | Used for providing attribute match in title search. | `blob?` | - |
-| `Title.Words` | A words array containing all distinct words from the publication's title. Used for supporting title keyword search. | `string*` | `["equals"]` |
-| `FullTextUrl.Name` | Used for providing attribute match in FullTextUrl search| `string?` | `["equals"]` |
+| `Abstract.Words` | A words array containing all distinct words from the publication's abstract. Used for supporting abstract keywords search. | `string*` | `["equals"]` |
+| `DOI.Text` | Used for providing attribute match in DOI search. | `string?` | `["equals"]` |
+| `Title.Text` | Used for providing attribute match in title search. | `blob?` | - |
+| `Title.Words` | A words array containing all distinct words from the publication's title. Used for supporting title keywords search. | `string*` | `["equals"]` |
+| `FullTextUrl.Text` | Used for providing attribute match in FullTextUrl search| `string?` | `["equals"]` |
 
 #### Search attributes
 
-Attributes that we plan to use for processing search queries need to be indexed, similar to filter attributes in the ["Build a library browser with contextual filters"](tutorial-schema-design.md) tutorial. For example, to enable our application to process search queries like "papers from microsoft about machine learning" we need to enable the `equals` index operation on the `FieldsOfStudy.Name` and `AuthorAffiliations.AffiliationName` attributes.
+Attributes that we plan to use for processing search queries need to be indexed, similar to filter attributes in the ["Build a library browser with contextual filters"](tutorial-schema-design.md) tutorial. For example, to enable our application to process search queries like "papers from microsoft about machine learning" we need to enable the `equals` index operation on the `FieldsOfStudy.Text` and `AuthorAffiliations.AffiliationName` attributes.
 
 Before indexing the attributes, we also want to normalize the attributes to improve search results. For example, we can improve publication title search accuracy by normalizing both the publication titles and the search queries to lowercase characters only. This ensures that publication title queries that have case mismatches will still yield search results. For more normalization details, see `MakesInteractor.NormalizeStr(queryStr)` in `makesInteractor.js`
 
-To enable fuzzy search or keyword search, we may also transform the attributes before indexing the attributes. For example, we enable abstract keywords search by transforming the abstract of a publication `Abstract.OriginalName` into `Abstract.Words` such that unique words from the abstract can be indexed.
+To enable fuzzy search or keywords search, we may also transform the attributes before indexing the them. For example, we enable abstract keywords search by transforming the attribute `Abstract.Text` into `Abstract.Words` such that unique words from abstracts can be indexed.
 
 ## Design a search grammar
 
@@ -72,7 +73,7 @@ Single attribute queries are queries that only contain a single publication attr
 
 This allows us to process queries such as "paper titled An Overview of Microsoft Academic Service (MAS) and Applications" or "paper with doi 10.1145/2740908.2742839"
 
-We also need to return the corresponding KES query expression once the attribute is matched. The `<attrref uri="libraryPapers#Title.Name" name="q"/>` element will store the matched paper title in a variable called "q". We can then craft our return query by using the following:
+We also need to return the corresponding KES query expression once the attribute is matched. The `<attrref uri="libraryPapers#Title.Text" name="q"/>` element will store the matched paper title in a variable called "q". We can then craft our return query by using the following:
 
 :::code language="xml" source="samplePrivateLibraryData.linked.search.grammar.xml" id="snippet_create_return_query":::
 
@@ -162,20 +163,20 @@ We are now ready to set up a MAKES API instance by building a searchable index, 
         "VenueFullName": "The Web Conference",
         "Year": 2015,
         "Abstract": {
-          "OriginalName": "In this paper we describe a new release of a Web scale entity graph that serves as the backbone of Microsoft Academic Service (MAS), a major production effort with a broadened scope to the namesake vertical search engine that has been publicly available since 2008 as a research prototype. At the core of MAS is a heterogeneous entity graph comprised of six types of entities that model the scholarly activities: field of study, author, institution, paper, venue, and event. In addition to obtaining these entities from the publisher feeds as in the previous effort, we in this version include data mining results from the Web index and an in-house knowledge base from Bing, a major commercial search engine. As a result of the Bing integration, the new MAS graph sees significant increase in size, with fresh information streaming in automatically following their discoveries by the search engine. In addition, the rich entity relations included in the knowledge base provide additional signals to disambiguate and enrich the entities within and beyond the academic domain. The number of papers indexed by MAS, for instance, has grown from low tens of millions to 83 million while maintaining an above 95% accuracy based on test data sets derived from academic activities at Microsoft Research. Based on the data set, we demonstrate two scenarios in this work: a knowledge driven, highly interactive dialog that seamlessly combines reactive search and proactive suggestion experience, and a proactive heterogeneous entity recommendation.",
+          "OriginalText": "In this paper we describe a new release of a Web scale entity graph that serves as the backbone of Microsoft Academic Service (MAS), a major production effort with a broadened scope to the namesake vertical search engine that has been publicly available since 2008 as a research prototype. At the core of MAS is a heterogeneous entity graph comprised of six types of entities that model the scholarly activities: field of study, author, institution, paper, venue, and event. In addition to obtaining these entities from the publisher feeds as in the previous effort, we in this version include data mining results from the Web index and an in-house knowledge base from Bing, a major commercial search engine. As a result of the Bing integration, the new MAS graph sees significant increase in size, with fresh information streaming in automatically following their discoveries by the search engine. In addition, the rich entity relations included in the knowledge base provide additional signals to disambiguate and enrich the entities within and beyond the academic domain. The number of papers indexed by MAS, for instance, has grown from low tens of millions to 83 million while maintaining an above 95% accuracy based on test data sets derived from academic activities at Microsoft Research. Based on the data set, we demonstrate two scenarios in this work: a knowledge driven, highly interactive dialog that seamlessly combines reactive search and proactive suggestion experience, and a proactive heterogeneous entity recommendation.",
           "Words": ["in","this","paper","we","describe","a","new","release","of","web","scale","entity","graph","that","serves","as","the","backbone","microsoft","academic","service","mas","major","production","effort","with","broadened","scope","to","namesake","vertical","search","engine","has","been","publicly","available","since","2008","research","prototype","at","core","is","heterogeneous","comprised","six","types","entities","model","scholarly","activities","field","study","author","institution","venue","and","event","addition","obtaining","these","from","publisher","feeds","previous","version","include","data","mining","results","index","an","house","knowledge","base","bing","commercial","result","integration","sees","significant","increase","size","fresh","information","streaming","automatically","following","their","discoveries","by","rich","relations","included","provide","additional","signals","disambiguate","enrich","within","beyond","domain","number","papers","indexed","for","instance","grown","low","tens","millions","83","million","while","maintaining","above","95","accuracy","based","on","test","sets","derived","set","demonstrate","two","scenarios","work","driven","highly","interactive","dialog","seamlessly","combines","reactive","proactive","suggestion","experience","recommendation"]
         },
         "DOI": {
-          "OriginalName": "10.1145/2740908.2742839",
-          "Name": "10 1145 2740908 2742839"
+          "OriginalText": "10.1145/2740908.2742839",
+          "Text": "10 1145 2740908 2742839"
         },
         "FullTextUrl": {
-          "OriginalName": "http://localhost/example-full-text-link-2",
-          "Name": "http localhost example full text link 2"
+          "OriginalText": "http://localhost/example-full-text-link-2",
+          "Text": "http localhost example full text link 2"
         },
         "Title": {
-          "OriginalName": "An Overview of Microsoft Academic Service (MAS) and Applications",
-          "Name": "an overview of microsoft academic service mas and applications",
+          "OriginalText": "An Overview of Microsoft Academic Service (MAS) and Applications",
+          "Text": "an overview of microsoft academic service mas and applications",
           "Words": ["an","overview","of","microsoft","academic","service","mas","and","applications"]
         },
         "AuthorAffiliations": [
@@ -195,12 +196,12 @@ We are now ready to set up a MAKES API instance by building a searchable index, 
         ],
         "FieldsOfStudy": [
           {
-            "OriginalName": "World Wide Web",
-            "Name": "world wide web"
+            "OriginalText": "World Wide Web",
+            "Text": "world wide web"
           },
           {
-            "OriginalName": "Vertical search",
-            "Name": "vertical search"
+            "OriginalText": "Vertical search",
+            "Text": "vertical search"
           },
           ...
         ]
@@ -283,13 +284,13 @@ you should see the following response:
 "interpretations": [
   {
     "logprob": -20.529,
-    "parse": "<rule name=\"#SearchPapers\">papers from <attr name=\"libraryPapers#AuthorAffiliations.AffiliationName\">microsoft</attr> about <attr name=\"libraryPapers#FieldsOfStudy.Name\">machine learning</attr><end/></rule>",
+    "parse": "<rule name=\"#SearchPapers\">papers from <attr name=\"libraryPapers#AuthorAffiliations.AffiliationName\">microsoft</attr> about <attr name=\"libraryPapers#FieldsOfStudy.Text\">machine learning</attr><end/></rule>",
     "rules": [
       {
         "name": "#SearchPapers",
         "output": {
           "type": "query",
-          "value": "And(Composite(AuthorAffiliations.AffiliationName='microsoft'),Composite(FieldsOfStudy.Name='machine learning'))",
+          "value": "And(Composite(AuthorAffiliations.AffiliationName='microsoft'),Composite(FieldsOfStudy.Text='machine learning'))",
           "entities": []
         }
       }
@@ -297,25 +298,25 @@ you should see the following response:
   },
   {
     "logprob": -71.529,
-    "parse": "<rule name=\"#SearchPapers\">papers<rule name=\"#DropWord\"> from</rule><rule name=\"#DropWord\"> microsoft</rule> about <attr name=\"libraryPapers#FieldsOfStudy.Name\">machine learning</attr><end/></rule>",
+    "parse": "<rule name=\"#SearchPapers\">papers<rule name=\"#DroppedWord\"> from</rule><rule name=\"#DroppedWord\"> microsoft</rule> about <attr name=\"libraryPapers#FieldsOfStudy.Text\">machine learning</attr><end/></rule>",
     "rules": [
       {
         "name": "#SearchPapers",
         "output": {
           "type": "query",
-          "value": "Composite(FieldsOfStudy.Name='machine learning')",
+          "value": "Composite(FieldsOfStudy.Text='machine learning')",
           "entities": []
         }
       },
       {
-        "name": "#DropWord",
+        "name": "#DroppedWord",
         "output": {
           "type": "string",
           "value": "microsoft"
         }
       },
       {
-        "name": "#DropWord",
+        "name": "#DroppedWord",
         "output": {
           "type": "string",
           "value": "from"
@@ -339,14 +340,14 @@ Below is a table of example test queries to validate the search grammar we desig
 
 | Search Scenario | Test Query | Expected Top Interpretation Grammar Parse
 |---|---|---|
-| attribute search | `paper titled an overview of microsoft academic service mas and applications` | `<rule name=\"#SearchPapers\">paper titled <attr name=\"libraryPapers#Title.Name\">an overview of microsoft academic service mas and applications</attr><end/></rule>`
+| attribute search | `paper titled an overview of microsoft academic service mas and applications` | `<rule name=\"#SearchPapers\">paper titled <attr name=\"libraryPapers#Title.Text\">an overview of microsoft academic service mas and applications</attr><end/></rule>`
 | composite attribute search | `papers by iheng chen while at national sun yat sen university` | `<rule name="#SearchPapers">papers by <attr name="libraryPapers#AuthorAffiliations.AuthorName">iheng chen</attr> while at <attr name="libraryPapers#AuthorAffiliations.AffiliationName">national sun yat sen university</attr><end/></rule>` |
-| multiple composite attribute search |`papers from national sun yat sen university and from national kaohsiung normal university` | `<rule name="#SearchPapers">papers from <attr name="libraryPapers#AuthorAffiliations.AffiliationName">national sun yat sen university</attr><rule name="#DropWord"> and</rule> from <attr name="libraryPapers#AuthorAffiliations.AffiliationName">national kaohsiung normal university</attr><end/></rule>` |
-| multiple attribute search | `papers from microsoft about machine learning` | `<rule name=\"#SearchPapers\">papers from <attr name=\"libraryPapers#AuthorAffiliations.AffiliationName\">microsoft</attr> about <attr name=\"libraryPapers#FieldsOfStudy.Name\">machine learning</attr><end/></rule>` |
-| multiple attribute search without scope terms |  `microsoft machine learning` | `<rule name="#SearchPapers"><attr name="libraryPapers#AuthorAffiliations.AffiliationName">microsoft</attr><attr name="libraryPapers#FieldsOfStudy.Name">machine learning</attr><end/></rule>` |
+| multiple composite attribute search |`papers from national sun yat sen university and from national kaohsiung normal university` | `<rule name="#SearchPapers">papers from <attr name="libraryPapers#AuthorAffiliations.AffiliationName">national sun yat sen university</attr><rule name="#DroppedWord"> and</rule> from <attr name="libraryPapers#AuthorAffiliations.AffiliationName">national kaohsiung normal university</attr><end/></rule>` |
+| multiple attribute search | `papers from microsoft about machine learning` | `<rule name=\"#SearchPapers\">papers from <attr name=\"libraryPapers#AuthorAffiliations.AffiliationName\">microsoft</attr> about <attr name=\"libraryPapers#FieldsOfStudy.Text\">machine learning</attr><end/></rule>` |
+| multiple attribute search without scope terms |  `microsoft machine learning` | `<rule name="#SearchPapers"><attr name="libraryPapers#AuthorAffiliations.AffiliationName">microsoft</attr><attr name="libraryPapers#FieldsOfStudy.Text">machine learning</attr><end/></rule>` |
 | partial attribute search | `microsoft academic applications` | `<rule name=\"#SearchPapers\"><attr name=\"libraryPapers#Title.Words\">microsoft</attr> <attr name=\"libraryPapers#Title.Words\">academic</attr> <attr name=\"libraryPapers#Title.Words\">applications</attr><end/></rule>` |
-| partial attribute search + drop terms | `microsoft garbageterm garbageterm academic garbageterm applications`| `<rule name=\"#SearchPapers\"><attr name=\"libraryPapers#Title.Words\">microsoft</attr><rule name=\"#DropWord\"> garbageterm</rule><rule name=\"#DropWord\"> garbageterm</rule> <attr name=\"libraryPapers#Title.Words\">academic</attr><rule name=\"#DropWord\"> garbageterm</rule> <attr name=\"libraryPapers#Title.Words\">applications</attr><end/></rule>` |
-| multiple attribute search + drop terms | `microsoft garbageterm machine learning garbageterm`| `<rule name=\"#SearchPapers\"><attr name=\"libraryPapers#AuthorAffiliations.AffiliationName\">microsoft</attr><rule name=\"#DropWord\"> garbageterm</rule> <attr name=\"libraryPapers#FieldsOfStudy.Name\">machine learning</attr> garbageterm<end/></rule>` |
+| partial attribute search + drop terms | `microsoft garbageterm garbageterm academic garbageterm applications`| `<rule name=\"#SearchPapers\"><attr name=\"libraryPapers#Title.Words\">microsoft</attr><rule name=\"#DroppedWord\"> garbageterm</rule><rule name=\"#DroppedWord\"> garbageterm</rule> <attr name=\"libraryPapers#Title.Words\">academic</attr><rule name=\"#DroppedWord\"> garbageterm</rule> <attr name=\"libraryPapers#Title.Words\">applications</attr><end/></rule>` |
+| multiple attribute search + drop terms | `microsoft garbageterm machine learning garbageterm`| `<rule name=\"#SearchPapers\"><attr name=\"libraryPapers#AuthorAffiliations.AffiliationName\">microsoft</attr><rule name=\"#DroppedWord\"> garbageterm</rule> <attr name=\"libraryPapers#FieldsOfStudy.Text\">machine learning</attr> garbageterm<end/></rule>` |
 
 ## Create a client application that uses the MAKES API instance
 

@@ -6,20 +6,20 @@
     {"name": "Year","type": "int32?","operations": [ "equals" ]},
         
     {"name": "Abstract", "type": "Composite?"},
-    {"name": "Abstract.OriginalName","type": "blob?"},
+    {"name": "Abstract.OriginalText","type": "blob?"},
     {"name": "Abstract.Words","type": "string*", "operations": [ "equals"]},
 
     {"name": "DOI","type": "Composite?"},
-    {"name": "DOI.OriginalName","type": "blob?"},
-    {"name": "DOI.Name","type": "string?","operations": [ "equals", "starts_with"]},
+    {"name": "DOI.OriginalText","type": "blob?"},
+    {"name": "DOI.Text","type": "string?","operations": [ "equals", "starts_with"]},
 
     {"name": "FullTextUrl","type": "Composite?"},
-    {"name": "FullTextUrl.OriginalName","type": "blob?"},
-    {"name": "FullTextUrl.Name","type": "string?", "operations": [ "equals"]},
+    {"name": "FullTextUrl.OriginalText","type": "blob?"},
+    {"name": "FullTextUrl.Text","type": "string?", "operations": [ "equals"]},
 
     {"name": "Title","type": "Composite?"},
-    {"name": "Title.OriginalName","type": "blob?"},
-    {"name": "Title.Name","type": "string?", "operations": [ "equals", "starts_with"]},
+    {"name": "Title.OriginalText","type": "blob?"},
+    {"name": "Title.Text","type": "string?", "operations": [ "equals", "starts_with"]},
     {"name": "Title.Words","type": "string*","operations": [ "equals"]},
       
     {"name": "AuthorAffiliations","type": "Composite*"},
@@ -29,7 +29,7 @@
     {"name": "AuthorAffiliations.Sequence","type": "blob?"},
     
     {"name": "FieldsOfStudy","type": "Composite*"},
-    {"name": "FieldsOfStudy.OriginalName","type": "blob?"},
-    {"name": "FieldsOfStudy.Name","type": "string?","operations": [ "equals"]}
+    {"name": "FieldsOfStudy.OriginalText","type": "blob?"},
+    {"name": "FieldsOfStudy.Text","type": "string?","operations": [ "equals"]}
   ]
 }

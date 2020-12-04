@@ -6,16 +6,16 @@
     {"name": "Year","type": "int32?","operations": [ "equals" ]},
 
     {"name": "Abstract", "type": "Composite?"},
-    {"name": "Abstract.OriginalName","type": "blob?"},
+    {"name": "Abstract.OriginalText","type": "blob?"},
 
     {"name": "DOI","type": "Composite?"},
-    {"name": "DOI.OriginalName","type": "blob?"},
+    {"name": "DOI.OriginalText","type": "blob?"},
     
     {"name": "Title","type": "Composite?"},
-    {"name": "Title.OriginalName","type": "blob?"},
+    {"name": "Title.OriginalText","type": "blob?"},
 
     {"name": "FullTextUrl","type": "Composite?"},
-    {"name": "FullTextUrl.OriginalName","type": "blob?"},
+    {"name": "FullTextUrl.OriginalText","type": "blob?"},
 
     {"name": "AuthorAffiliations","type": "Composite*"},
     {"name": "AuthorAffiliations.AffiliationName","type": "string?","operations": [ "equals"]},
@@ -24,7 +24,7 @@
     {"name": "AuthorAffiliations.Sequence","type": "blob?"},
     
     {"name": "FieldsOfStudy","type": "Composite*"},
-    {"name": "FieldsOfStudy.OriginalName","type": "blob?"},
-    {"name": "FieldsOfStudy.Name","type": "string?","operations": [ "equals"]}
+    {"name": "FieldsOfStudy.OriginalText","type": "blob?"},
+    {"name": "FieldsOfStudy.Text","type": "string?","operations": [ "equals"]}
   ]
 }

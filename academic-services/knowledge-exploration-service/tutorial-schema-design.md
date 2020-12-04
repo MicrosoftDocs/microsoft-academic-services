@@ -7,13 +7,13 @@ ms.date: 11/16/2020
 
 # Build a library browser with contextual filters
 
-![Library browser application](media/privateLibraryExampleApp-homepage.png)
-
 This tutorial illustrates how to build a library browser application using the linked publication records from ["link private publication records with MAKES entities"](tutorial-entity-linking.md) tutorial. You will learn how to:
 
 - Design a MAKES schema tailored for serving publication entities using contextual filters.
 - Build and deploy a MAKES instance with custom index.
 - Create a frontend client for navigating publication entities with contextual filters using MAKES APIs.
+
+![Library browser application](media/privateLibraryExampleApp-homepage.png)
 
 ## Prerequisites
 
