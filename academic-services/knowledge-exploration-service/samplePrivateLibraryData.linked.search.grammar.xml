@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <grammar root="SearchPapers">
-  <import schema="samplePrivateLibraryData.linked.search.schema.json" name="libraryPapers"/>
+  <import schema="samplePrivateLibraryData.linked.search.schema.json" name="publication"/>
 
   <rule id="SearchPapers">
 
@@ -13,7 +13,7 @@
       abstractTitleWordCount = 0;
     </tag>
     
-    <!-- Paper search queries can start with "papers..." or "paper..." -->
+    <!-- Publication search queries can start with "paper(s)..." -->
     <one-of>
       <item logprob="-10"></item>
       <item>papers</item>
@@ -39,7 +39,25 @@
                 <!-- Match year -->
                 <item>
                   <item repeat="0-1">published in</item>
-                  <attrref uri="libraryPapers#Year" name="q"/>
+                  <attrref uri="publication#Year" name="q"/>
+                </item>
+
+                <!-- Match digitial object identifier -->
+                <item>
+                  <item repeat="0-1">with doi</item>
+                  <attrref uri="publication#NormalizedDOI" name="q"/>
+                </item>
+                
+                <!-- Match full title -->
+                <item>
+                  <item repeat="0-1">titled</item>
+                  <attrref uri="publication#NormalizedTitle" name="q"/>
+                </item>
+
+                <!-- Match full text url -->
+                <item>
+                  <item repeat="0-1">with full text url</item>
+                  <attrref uri="publication#NormalizedFullTextUrl" name="q"/>
                 </item>
               </one-of>
 
@@ -50,44 +68,23 @@
 
             <!-- Composite attribute search -->
             <item logprob="-2">
-              <one-of>
-                <!-- <snippet_direct_attribute_search> -->
-                <!-- Match digitial object identifier -->
-                <item>
-                  <item repeat="0-1">with doi</item>
-                  <attrref uri="libraryPapers#DOI.Name" name="q"/>
-                </item>
-                
-    <!-- </snippet_multiple_attribute_search_loop> -->
-                <!-- Match full title -->
-                <item>
-                  <item repeat="0-1">titled</item>
-                  <attrref uri="libraryPapers#Title.Name" name="q"/>
-                </item>
-                
-                <!-- Match full text url -->
-                <item>
-                  <item repeat="0-1">with full text url</item>
-                  <attrref uri="libraryPapers#FullTextUrl.Name" name="q"/>
-                </item>
-                <!-- </snippet_direct_attribute_search> -->
-                
+              <one-of>                
                 <!-- Match field of study -->
                 <item logprob="-1">
                   <item repeat="0-1">about</item>
-                  <attrref uri="libraryPapers#FieldsOfStudy.Name" name="q"/>
+                  <attrref uri="publication#FieldsOfStudy.NormalizedName" name="q"/>
                 </item>
                 
                 <!-- Match author -->
                 <item logprob="-1">
                   <item repeat="0-1">by</item>
-                  <attrref uri="libraryPapers#AuthorAffiliations.AuthorName" name="q"/>
+                  <attrref uri="publication#AuthorAffiliations.NormalizedAuthorName" name="q"/>
                 </item>
 
                 <!-- Match affiliation -->
                 <item logprob="-1">
                   <item repeat="0-1">from</item>
-                  <attrref uri="libraryPapers#AuthorAffiliations.AffiliationName" name="q"/>
+                  <attrref uri="publication#AuthorAffiliations.NormalizedAffiliationName" name="q"/>
                 </item>
               </one-of>
               <!-- <snippet_create_return_query> -->
@@ -98,7 +95,7 @@
               <!-- </snippet_create_return_query> -->
             </item>
 
-            <!-- Partial title search -->
+            <!-- Title keywords search -->
             <item logprob="-3">
               <item repeat="1-INF">
                 <!-- Assert that we never search for terms beyond the end of the query -->
@@ -109,10 +106,9 @@
                 <one-of>
                   <!-- Match title word -->
                   <item logprob="-1">
-                    <attrref uri="libraryPapers#Title.Words" name="q"/>
+                    <attrref uri="publication#NormalizedTitleWords" name="q"/>
                     <tag>
                       abstractTitleWordCount = Increment(abstractTitleWordCount);
-                      q = Composite(q);
                       query = And(query, q);
                     </tag>
                   </item>
@@ -121,7 +117,7 @@
             </item>
 
             <!-- <snippet_partial_attribute_search> -->
-            <!-- Partial abstract search -->
+            <!-- Abstract keywords search -->
             <item logprob="-4">
               <item repeat="1-INF">
                 <!-- Assert that we never search for terms beyond the end of the query -->
@@ -132,10 +128,9 @@
                 <one-of>
                   <!-- Match abstract word -->
                   <item logprob="-3">
-                    <attrref uri="libraryPapers#Abstract.Words" name="q" />
+                    <attrref uri="publication#NormalizedAbstractWords" name="q" />
                     <tag>
                       abstractTitleWordCount = Increment(abstractTitleWordCount);
-                      q = Composite(q);
                       query = And(query, q);
                     </tag>
                   </item>
@@ -150,13 +145,13 @@
               <!-- Match author -->
               <item>
                 by
-                <attrref uri="libraryPapers#AuthorAffiliations.AuthorName" name="qAuthorName"/>
+                <attrref uri="publication#AuthorAffiliations.NormalizedAuthorName" name="qAuthorName"/>
               </item>
 
               <!-- Match affiliation -->
               <item>
                 while at
-                <attrref uri="libraryPapers#AuthorAffiliations.AffiliationName" name="qAffiliationName"/>
+                <attrref uri="publication#AuthorAffiliations.NormalizedAffiliationName" name="qAffiliationName"/>
               </item>
 
               <tag>
@@ -178,7 +173,7 @@
         <!-- Words/terms that cannot be matched using the above search behaviors, aka "garbage/dropped" terms. -->
         <item logprob="-25">
           <!-- Make any terms as "garbage" terms -->
-          <ruleref uri="#DropWord"/>
+          <ruleref uri="#DroppedWord"/>
         </item>
         <!-- </snippet_allow_drop_terms_in_quries> -->
 
@@ -235,21 +230,19 @@
     <!-- <snippet_ensure_query_has_results> -->
     <!-- Ensure all grammar paths resulted in a query that can be used to retrieve non-empty entity results.-->
     <tag>
-      <!-- Resolve the query by executing it and retriving top results-->
-      entities = Resolve(query);
       <!-- Check if the execution was able to fetch any results-->
-      hasResults = HasResults(entities);
+      hasResults = HasResults(query);
       <!-- Ensure only the grammar path is only valid if the return query can retrieve non-empty entity results -->
       AssertEquals(hasResults, true);
       <!-- Set the output the query execution result-->
-      out = entities;
+      out = query;
     </tag>
     <!-- </snippet_ensure_query_has_results> -->
     
   </rule>
 
   <!-- treat any terms as "garbage" terms -->
-  <rule id="DropWord" return="void">
-      <regex pattern='\b\w+' name="garbage" />
+  <rule id="DroppedWord" return="void">
+      <regex pattern='\w+' name="garbage" />
   </rule>
 </grammar>
