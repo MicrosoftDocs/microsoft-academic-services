@@ -63,7 +63,7 @@ To enable keywords search, we may also transform the attributes before indexing 
 
 ## Design a search grammar
 
-Now that we have the appropriate data fields in our index, we will design a grammar tailored to process natural language search queries. In this tutorial, we will use the [sample grammar](samplePrivateLibraryData.linked.search.grammar.xml) to illustrate how to support [single attribute queries](#support-single-attribute-queries), [multiple attribute queries](#support-multiple-attribute-queries), [keyword based queries](#support-keyword-based-queries), [composite entity attribute queries](#support-composite-entity-attribute-queries), and [dropping query terms when they can't be matched](#support-dropping-query-terms-when-they-can't-be-matched).
+Now that we have the appropriate data fields in our index, we will design a grammar tailored to process natural language search queries. In this tutorial, we will use the [sample grammar](samplePrivateLibraryData.linked.search.grammar.xml) to illustrate how to support [single attribute queries](#support-single-attribute-queries), [multiple attribute queries](#support-multiple-attribute-queries), [keyword based queries](#support-keyword-based-queries), [composite entity attribute queries](#support-composite-entity-attribute-queries), and [dropping query terms when they can't be matched](#support-dropping-query-terms-when-they-cant-be-matched).
 
 ### Support single attribute queries
 
@@ -85,7 +85,7 @@ We use a repeat item `<item repeat="1-INF" repeat-logprob="-1">` element to proc
 
 We ensure that query terms are more favorable of being matched against a single attribute search grammar instead of a combination of two by assigning "-1" to the repeat log probability and penalize the additional loop attempt.
 
-The repeat item can lead to an infinite loop. When there are no more query terms to left to process, we want to break out of the loop. We achieve this by marking all interpretations after reaching the end of the input query as invalid using the [`AssertTrue`](reference-semantic-functions.md#assertequals-function) and [`GetVariable`](reference-semantic-functions#getvariable-function) semantic functions.
+The repeat item can lead to an infinite loop. When there are no more query terms to left to process, we want to break out of the loop. We achieve this by marking all interpretations after reaching the end of the input query as invalid using the [`AssertTrue`](reference-semantic-functions.md#assertequals-function) and [`GetVariable`](reference-semantic-functions.md#getvariable-function) semantic functions.
 
 We use the `query` attribute as our return query. When we have no knowledge of user intentions, we intialize the `query` attribute to [`All()`](reference-semantic-functions.md#all-function). When we are able to match term(s) from the query against our attribute search rules, we modify the return query to reflect the parsed constraint intentions.
 
@@ -106,7 +106,7 @@ And(
 )
 ```
 
-we will use the following to specifiy stronger query constraint. See [Composite function](reference-semantic-functions#composite-function) query for more details.
+we will use the following to specifiy stronger query constraint. See [Composite function](reference-semantic-functions.md#composite-function) query for more details.
 
 ```cmd
 Composite(
@@ -115,7 +115,7 @@ Composite(
 )
 ```
 
-Lastly, we want to ensure the recognized intent is a valid intent. We achieve this by calling [`HasResult`](reference-semantic-functions#hasresult-function) using the output query and mark all the interpretations that can't retrieve query results as invalid using the [`AssertEquals`](reference-semantic-functions#assertequals-function) semantic function.
+Lastly, we want to ensure the recognized intent is a valid intent. We achieve this by calling [`HasResult`](reference-semantic-functions.md#hasresult-function) using the output query and mark all the interpretations that can't retrieve query results as invalid using the [`AssertEquals`](reference-semantic-functions.md#assertequals-function) semantic function.
 
 :::code language="xml" source="samplePrivateLibraryData.linked.search.grammar.xml" id="snippet_ensure_query_has_results":::
 
