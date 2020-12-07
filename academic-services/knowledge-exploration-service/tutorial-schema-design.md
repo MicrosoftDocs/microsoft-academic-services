@@ -397,7 +397,7 @@ The `-17.514` log probability comes from the two publications published in 2015.
   }
   ```
 
- The histogram log probability of `-17.514` for the top `Year` attribute comes from adding the two entity log probabilities, `-17.514` and `-24.52` together. `LN(EXP(-17.514) + EXP(-24.52)) = -17.514`
+The histogram log probability of `-17.514` for the top `Year` attribute comes from adding the two entity log probabilities, `-17.514` and `-24.52` together. `LN(EXP(-17.514) + EXP(-24.52)) = -17.514`
 
 In the context of this tutorial, we can leverage the Histogram API response as **contextual filter suggestions**. To learn more about how to generate contextual filter suggestions using Histogram API, see `MakesInteractor.GetFilters(publicationExpression)` method in `makesInteractor.js`.
 
