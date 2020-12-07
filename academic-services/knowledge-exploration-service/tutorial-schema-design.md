@@ -129,7 +129,7 @@ For example, to enable our library application to filter publications by publica
 
 ![Fields of study filter section snapshot](media/privateLibraryExampleApp-fieldsOfStudyFilterSection.png)
 
-The `Year` and `FieldsOfStudy.Name` attributes are a good illustration of attributes whose values cleanly segment entities into categories that users would likely leverage for navigation.
+The `Year` and `FieldsOfStudy.NormalizedName` attributes are a good illustration of attributes whose values cleanly segment entities into categories that users would likely leverage for navigation.
 
 For more information on schema file syntax, data types and index operations, see [Index Schema Files](how-to-index-schema.md).
 
