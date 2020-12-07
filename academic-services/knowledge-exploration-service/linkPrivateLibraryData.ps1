@@ -149,7 +149,7 @@ function Edit-AddSearchAttribues
     # add normlized title words for partial title search
     $titleWords = ConvertTo-DistinctWordsArray $normalizedTitle
     $titleComposite = @{
-        Name = $normalizedTitle;
+        Text = $normalizedTitle;
         OriginalText = $libraryPaper.OriginalTitle;
         Words = $titleWords;
     };
@@ -170,7 +170,7 @@ function Edit-AddSearchAttribues
         $normalizedDOI = ConvertTo-NormalizedStr $libraryPaper.DOI
         $libraryPaper.DOI = @{
             OriginalText = $libraryPaper.DOI;
-            Name = $normalizedDOI;
+            Text = $normalizedDOI;
         };
     }
 
@@ -180,7 +180,7 @@ function Edit-AddSearchAttribues
         $normalizedFullTextUrl = ConvertTo-NormalizedStr $libraryPaper.FullTextUrl
         $libraryPaper.FullTextUrl = @{
             OriginalText = $libraryPaper.FullTextUrl;
-            Name = $normalizedFullTextUrl;
+            Text = $normalizedFullTextUrl;
         };
     }
 }

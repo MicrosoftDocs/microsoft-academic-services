@@ -55,27 +55,27 @@
                 <!-- Match digitial object identifier -->
                 <item>
                   <item repeat="0-1">with doi</item>
-                  <attrref uri="libraryPapers#DOI.Name" name="q"/>
+                  <attrref uri="libraryPapers#DOI.Text" name="q"/>
                 </item>
                 
     <!-- </snippet_multiple_attribute_search_loop> -->
                 <!-- Match full title -->
                 <item>
                   <item repeat="0-1">titled</item>
-                  <attrref uri="libraryPapers#Title.Name" name="q"/>
+                  <attrref uri="libraryPapers#Title.Text" name="q"/>
                 </item>
                 
                 <!-- Match full text url -->
                 <item>
                   <item repeat="0-1">with full text url</item>
-                  <attrref uri="libraryPapers#FullTextUrl.Name" name="q"/>
+                  <attrref uri="libraryPapers#FullTextUrl.Text" name="q"/>
                 </item>
                 <!-- </snippet_direct_attribute_search> -->
                 
                 <!-- Match field of study -->
                 <item logprob="-1">
                   <item repeat="0-1">about</item>
-                  <attrref uri="libraryPapers#FieldsOfStudy.Name" name="q"/>
+                  <attrref uri="libraryPapers#FieldsOfStudy.Text" name="q"/>
                 </item>
                 
                 <!-- Match author -->
@@ -248,6 +248,6 @@
 
   <!-- treat any terms as "garbage" terms -->
   <rule id="DroppedWord" return="void">
-      <regex pattern='\b\w+' name="garbage" />
+      <regex pattern='\w+' name="garbage" />
   </rule>
 </grammar>
