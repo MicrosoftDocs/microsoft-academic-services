@@ -18,6 +18,7 @@ In the context of the SRGS, MAKES Interpret API act as a *speech recognizer* spe
 A *rule* is defined as one or more of the following:
 
 * [Text nodes](https://www.w3.org/TR/REC-DOM-Level-1/level-one-core.html#ID-1312295772) (the text inside of an element), or "tokens" are text that must be exactly matched in the natural language query for further expansion
+* [Regex rule](reference-grammar-syntax.md#regex-element) (```<regex>```) use a regular expression to processed the natural language query.
 * [Indexed attribute references](reference-grammar-syntax.md#attrref-element) (```<attrref>```) allow natural language query terms to be matched with [indexed data](how-to-index-schema.md)
 * [Rule references](reference-grammar-syntax.md#ruleref-element) (```<ruleref>```) expand rules defined using the [```rule```](reference-grammar-syntax.md#rule-element) element
 * [Tags](reference-grammar-syntax.md#tag-element) (```<tag>```) modifies the context/interpretation of a grammar path using [semantic functions](reference-semantic-functions.md)

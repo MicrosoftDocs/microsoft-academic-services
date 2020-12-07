@@ -1,0 +1,30 @@
+{
+  "attributes": [
+    {"name": "EstimatedCitationCount","type": "blob?"},
+    {"name": "VenueFullName","type": "blob?"},
+    {"name": "Year","type": "int32?","operations": [ "equals" ]},
+        
+    {"name": "Abstract", "type": "blob?"},    
+    {"name": "NormalizedAbstractWords","type": "string*", "operations": [ "equals"]},
+
+    {"name": "DOI","type": "blob?"},
+    {"name": "NormalizedDOI","type": "string?","operations": [ "equals", "starts_with"]},
+
+    {"name": "FullTextUrl","type": "blob?"},
+    {"name": "NormalizedFullTextUrl","type": "string?", "operations": [ "equals"]},
+
+    {"name": "Title","type": "blob?"},
+    {"name": "NormalizedTitle","type": "string?", "operations": [ "equals", "starts_with"]},
+    {"name": "NormalizedTitleWords","type": "string*","operations": [ "equals"]},
+      
+    {"name": "AuthorAffiliations","type": "Composite*"},
+    {"name": "AuthorAffiliations.NormalizedAffiliationName","type": "string?","operations": [ "equals" , "starts_with"]},
+    {"name": "AuthorAffiliations.NormalizedAuthorName","type": "string?","operations": [ "equals", "starts_with"]},
+    {"name": "AuthorAffiliations.AuthorName","type": "blob?"},
+    {"name": "AuthorAffiliations.Sequence","type": "blob?"},
+    
+    {"name": "FieldsOfStudy","type": "Composite*"},
+    {"name": "FieldsOfStudy.Name","type": "blob?"},
+    {"name": "FieldsOfStudy.NormalizedName","type": "string?","operations": [ "equals"]}
+  ]
+}

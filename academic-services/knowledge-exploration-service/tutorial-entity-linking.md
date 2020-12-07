@@ -12,9 +12,9 @@ This tutorial illustrates how to link private publication records with their cor
 ## Prerequisites
 
 - [Microsoft Academic Knowledge Service (MAKES) subscription](get-started-setup-provisioning.md)
-- [Powershell 7](https://docs.microsoft.com/powershell/scripting/install/installing-powershell-core-on-windows?view=powershell-7&preserve-view=true)
-- [Sample private library publication records](samplePrivateLibraryData.json)
-- [Sample entity linking Powershell script](linkPrivateLibraryData.ps1)
+- Install [PowerShell 7](https://docs.microsoft.com/powershell/scripting/install/installing-powershell-core-on-windows?view=powershell-7&preserve-view=true)
+- Download the [sample private library publication records](samplePrivateLibraryData.json)
+- Download the [sample entity linking PowerShell script](linkPrivateLibraryData.ps1)
 
 ## Download samples and setup working directory
 
@@ -55,7 +55,7 @@ year: | Match paper publication year | year: 2015
 
 You can experiment with these different scopes and pick the one that makes the most sense for your data/scenario using the Interpret test page. MAKES also supports custom grammars, allowing you to craft a grammar explicitly designed for the data being using to link entities. See [How to define a custom grammar](how-to-grammar.md) for more details.
 
-## Set appropriate confidence score for linked entities
+## Set appropriate confidence score threshold for entity linking
 
 > [!Important]
 > This section assumes understanding of the following MAKES concepts:
@@ -68,11 +68,11 @@ The next step in entity linking is determining an appropriate confidence score t
 The interpretation log probability value actually represents the sum of two *different* log probabilities which we need to disentangle. The first log probability, grammar path log probability, is associated with the different attributes matched in the natural language grammar that the Interpret API uses, and is used to represent how likely an interpretation is to be correct based on rules defined in the grammar. The second log probability, [entity log probability](how-to-index-data.md#entity-log-probability), is associated with the top matching entity for the interpretation.
 
 > [!Note]
-> The default MAKES grammar assigns *log probability penalties* for different types of attribute matches to either encourage or discourage their use. For example, the grammar *favors* complete publication title matching by not assigning a penalty when it is fully matched. However, when only *part of a title* is matched, i.e. individual words, each word is assigned a log probability penalty of -1. Similarly, when individual words from a papers abstract are matched, a heavier penalty of -3 is applied. The heaviest penalty, -25, is applied when a query term cannot be matched against any known paper attributes.
+> The default MAKES grammar assigns *log probability penalties* for different types of attribute matches to either encourage or discourage their use. For example, the default grammar *favors* complete publication title matching by not assigning a penalty when it is fully matched. However, when only *part of a title* is matched, i.e. individual words, each word is assigned a log probability penalty of -1. Similarly, when individual words from a papers abstract are matched, a heavier penalty of -3 is applied. The heaviest penalty, -25, is applied when a query term cannot be matched against any known paper attributes.
 >
 > See the entity linking example at the bottom of the page for a clearer illustration of this
 
-For entity linking, we want to isolate the grammar path log probability from the interpretation log probability (represented by `interpretations[0].logprob`), as it best reflects the *quality* of the match. Because the interpretation log probability is the sum of the two different log probabilities, we calculate the grammar path log probability by simply subtracting the top matching entity's log probability (represented by `interpretations[0].rules[0].output.entities[0].logprob`) from the interpretation log probability. 
+For entity linking, we want to isolate the grammar path log probability from the interpretation log probability (represented by `interpretations[0].logprob`), as it best reflects the *quality* of the match. Because the interpretation log probability is the sum of the two different log probabilities, we calculate the grammar path log probability by simply subtracting the top matching entity's log probability (represented by `interpretations[0].rules[0].output.entities[0].logprob`) from the interpretation log probability.
 
 Using one of the sample library publication titles as an example:
 
@@ -144,7 +144,7 @@ If we're able to find an interpretation that meets our confidence cut off score,
 
 The sample entity linking script output should look like the following:
 
-```
+```cmd
 Linked | Confidence Score | Original Title | MAG Title
 ---- | ---- |---- |----
 True | 0 | Microsoft Academic Graph: When experts are not enough | Microsoft Academic Graph: When experts are not enough
