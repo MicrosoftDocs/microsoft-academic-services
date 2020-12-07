@@ -63,7 +63,7 @@ The `one-of` element specifies alternative expansions among one of the child `it
 The `regex` element specifies valid expansions via matching text tokens against a regular expression through the required `pattern` attribute . Normally, the pattern will only be used to match against a single text token at a time. If a match is found, the text token will be stored as the output in the variable specified by the `name` attribute. If the pattern is `.*`, all remaining text tokens will be matched and stored as output.
 
 ```xml
-<regex pattern="[0-9].+" name="matchedToken" />
+<regex pattern="\d+" name="matchedDigits" />
 ```
 
 ### ruleref element
