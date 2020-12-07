@@ -1,30 +1,21 @@
 {
   "attributes": [    
-    {"name": "Date", "type": "date?", "operations": [ "equals" ]},
+    {"name": "Abstract", "type": "blob?"},
+    {"name": "DOI","type": "blob?"},
     {"name": "EstimatedCitationCount","type": "blob?"},
+    {"name": "FullTextUrl","type": "blob?"},
+    {"name": "Title","type": "blob?"},
     {"name": "VenueFullName","type": "blob?"},
     {"name": "Year","type": "int32?","operations": [ "equals" ]},
 
-    {"name": "Abstract", "type": "Composite?"},
-    {"name": "Abstract.OriginalText","type": "blob?"},
-
-    {"name": "DOI","type": "Composite?"},
-    {"name": "DOI.OriginalText","type": "blob?"},
-    
-    {"name": "Title","type": "Composite?"},
-    {"name": "Title.OriginalText","type": "blob?"},
-
-    {"name": "FullTextUrl","type": "Composite?"},
-    {"name": "FullTextUrl.OriginalText","type": "blob?"},
-
     {"name": "AuthorAffiliations","type": "Composite*"},
-    {"name": "AuthorAffiliations.AffiliationName","type": "string?","operations": [ "equals"]},
-    {"name": "AuthorAffiliations.AuthorName","type": "string?","operations": [ "equals"]},
-    {"name": "AuthorAffiliations.OriginalAuthorName","type": "blob?"},
+    {"name": "AuthorAffiliations.NormalizedAffiliationName","type": "string?","operations": [ "equals" ]},
+    {"name": "AuthorAffiliations.NormalizedAuthorName","type": "string?","operations": [ "equals" ]},
+    {"name": "AuthorAffiliations.AuthorName","type": "blob?"},
     {"name": "AuthorAffiliations.Sequence","type": "blob?"},
     
     {"name": "FieldsOfStudy","type": "Composite*"},
-    {"name": "FieldsOfStudy.OriginalText","type": "blob?"},
-    {"name": "FieldsOfStudy.Text","type": "string?","operations": [ "equals"]}
+    {"name": "FieldsOfStudy.Name","type": "blob?"},
+    {"name": "FieldsOfStudy.NormalizedName","type": "string?","operations": [ "equals" ]}
   ]
 }
