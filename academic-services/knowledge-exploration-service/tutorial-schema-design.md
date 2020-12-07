@@ -7,7 +7,7 @@ ms.date: 11/16/2020
 
 # Build a library browser with contextual filters
 
-This tutorial illustrates how to build a library browser application using the linked publication records from ["link private publication records with MAKES entities"](tutorial-entity-linking.md) tutorial. You will learn how to:
+This tutorial illustrates how to build a library browser application, using the publication records from [link private publication records with MAKES entities tutorial](tutorial-entity-linking.md). You will learn how to:
 
 - Design a MAKES schema tailored for serving publication entities using contextual filters.
 - Build and deploy a MAKES instance with custom index.
@@ -17,7 +17,7 @@ This tutorial illustrates how to build a library browser application using the l
 
 ## Prerequisites
 
-- [Microsoft Academic Knowledge Exploration Service (MAKES) subscription](get-started-setup-provisioning.md) (release version after 2020-11-30)
+- [Microsoft Academic Knowledge Exploration Service (MAKES) subscription](get-started-setup-provisioning.md) (release version after 2020-11-23)
 - Completion of [link private publication records with MAKES entities tutorial](tutorial-entity-linking.md)
 - Read through the [define index schema how-to guide](how-to-index-schema.md)
 - Download the [sample schema for linked private library publications](samplePrivateLibraryData.linked.schema.json)
@@ -32,61 +32,49 @@ When designing a new MAKES schema, it's important to evaluate the following:
 
 ### Evaluating input data
 
-Using the entities generated from the [link private publication records with MAKES entities tutorial](tutorial-entity-linking.md) tutorial, we want to evaluate each different entity attribute to see if it's applicable for the library browser application we're building. You should have a file named **samplePrivateLibraryData.linked.json** in your working directory from the previous tutorial, which should contain entities like the following:
+Using the entities generated from the [link private publication records with MAKES entities tutorial](tutorial-entity-linking.md), we want to evaluate each different entity attribute to see if it's applicable for the library browser application we're building. You should have a file named **samplePrivateLibraryData.linked.json** in your working directory from completing the previous tutorial, which should contain entities like the following:
 
 ```json
 {
-    "OriginalTitle": "Microsoft Academic Graph: When experts are not enough",
-    "FullTextUrl": {
-        "OriginalText": "http://localhost/example-full-text-link-1",
-        "Name": "http localhost example full text link 1"
+  "logprob": -19.55,
+  "EstimatedCitationCount": "19",
+  "VenueFullName": "Quantitative Science Studies",
+  "Year": 2020,
+  "Abstract": "An ongoing project explores the extent to which artificial intelligence (AI), specifically in the areas of natural language processing and semantic reasoning, can be exploited to facilitate the stu...",
+  "NormalizedAbstractWords": ["an","ongoing","project","explores","the","extent","to","which","artificial","intelligence","ai","specifically","in","areas","of","natural","language","processing","and","semantic","reasoning","can","be","exploited","facilitate","stu"],
+  "DOI": "10.1162/QSS_A_00021",
+  "NormalizedDOI": "10 1162 qss_a_00021",
+  "FullTextUrl": "http://localhost/example-full-text-link-1",
+  "NormalizedFullTextUrl": "http localhost example full text link 1",
+  "Title": "Microsoft Academic Graph: When experts are not enough",
+  "NormalizedTitle": "microsoft academic graph when experts are not enough",
+  "NormalizedTitleWords": ["microsoft","academic","graph","when","experts","are","not","enough"],
+  "AuthorAffiliations": [
+    {
+      "NormalizedAffiliationName": "microsoft",
+      "NormalizedAuthorName": "kuansan wang",
+      "AuthorName": "Kuansan Wang",
+      "Sequence": "1"
     },
-    "Id": 3002924435,
-    "logprob": -19.625,
-    "DOI": {
-        "OriginalText": "10.1162/QSS_A_00021",
-        "Name": "10 1162 qss_a_00021"
+    {
+      "NormalizedAffiliationName": "microsoft",
+      "NormalizedAuthorName": "zhihong shen",
+      "AuthorName": "Zhihong Shen",
+      "Sequence": "2"
     },
-    "Year": 2020,
-    "VenueFullName": "Quantitative Science Studies",
-    "CitationCount": 16,
-    "EstimatedCitationCount": 16,
-    "FieldsOfStudy": [
-        {
-            "OriginalText": "World Wide Web",
-            "Name": "world wide web"
-        },
-        {
-            "OriginalText": "Knowledge graph",
-            "Name": "knowledge graph"
-        },
-        ...
-    ],
-    "AuthorAffiliations": [
-        {
-            "OriginalAffiliationName": "Microsoft Research, Redmond, WA, 98052, USA",
-            "AffiliationName": "microsoft",
-            "Sequence": 1,
-            "AuthorName": "kuansan wang",
-            "OriginalAuthorName": "Kuansan Wang"
-        },
-        {
-            "OriginalAffiliationName": "Microsoft Research, Redmond, WA, 98052, USA",
-            "AffiliationName": "microsoft",
-            "Sequence": 2,
-            "AuthorName": "zhihong shen",
-            "OriginalAuthorName": "Zhihong Shen"
-        },
-        ...
-    ],
-    "Abstract": {
-        "OriginalText": "An ongoing project explores the extent to which artificial intelligence (AI), specifically in the areas of natural language processing and semantic reasoning, can be exploited to facilitate the stu...",
-        "Words": ["an", "ongoing", "project", "explores", "the", "extent", "to", "which", "artificial", "intelligence", "ai", "specifically", "in", "areas", "of", "natural", "language", "processing", "and", "semantic", "reasoning", "can", "be", "exploited", "facilitate", "stu"] },
-    "Title": {
-        "OriginalText": "Microsoft Academic Graph: When experts are not enough",
-        "Name": "microsoft academic graph when experts are not enough",
-        "Words": ["microsoft", "academic", "graph", "when", "experts", "are", "not", "enough"]
-    }
+    ...
+  ],
+  "FieldsOfStudy": [
+    {
+      "Name": "World Wide Web",
+      "NormalizedName": "world wide web"
+    },
+    {
+      "Name": "Knowledge graph",
+      "NormalizedName": "knowledge graph"
+    },
+    ...
+  ]
 }
 ```
 
@@ -111,30 +99,25 @@ The design goals above guide us to define a [schema for the linked sample librar
 
 | Attribute Name | Description| Index Data Type | Index Operations |
 | ---- | ---- | ---- | ---- |
-| `Date` | Filter and display attribute, used in Publication List Item and Filter Item | `date?` | `["equals"]` |
 | `EstimatedCitationCount` | Display only attribute, used in Publication List Item | `blob?` | - |
 | `VenueFullName` | Display only attribute, used in Publication List Item | `blob?` | - |
 | `Year` | Filter and display attribute, used in Publication List Item and Filter Item | `int?` | `["equals"]` |
-| `Abstract` | Indicates that "Abstract" attribute is a object composed of multiple attributes | `Composite?` | - |
-| `Abstract.OriginalText` | Display only attribute, used in Publication List Item | `blob?` | - |
-| `DOI` | Indicates that "DOI" attribute is a object composed of multiple attributes | `Composite?` | - |
-| `DOI.OriginalText` | Display only attribute, used in Publication List Item | `blob?` | - |
-| `Title` | Indicates that "Title" attribute is an object composed of multiple attributes | `Composite?` | - |
-| `Title.OriginalText` | Display only attribute, used in Publication List Item | `blob?` | - |
-| `FullTextUrl` | Indicates that "FullTextUrl" attribute is an object composed of multiple attributes | `Composite?` | - |
-| `FullTextUrl.OriginalText` | Display only attribute, used in Publication List Item | `blob?` | - |
+| `Abstract` | Display only attribute, used in Publication List Item | `blob?` | - |
+| `DOI` | Display only attribute, used in Publication List Item | `blob?` | - |
+| `Title` | Display only attribute, used in Publication List Item | `blob?` | - |
+| `FullTextUrl` | Display only attribute, used in Publication List Item | `blob?` | - |
 | `AuthorAffiliations` | Indicates that "AuthorAffiliations" attribute is an array of objects that are composed of multiple attributes | `Composite*` | - |
-| `AuthorAffiliations.AffiliationName` | Filter and display attribute, used in Publication List Item and Filter Item | `string?` | `["equals"]` |
-| `AuthorAffiliations.AuthorName` | Filter and display attribute, used in Publication List Item and Filter Item | `string?` | `["equals"]` |
-| `AuthorAffiliations.OriginalAuthorName` | Display only attribute, used in Publication List Item | `string?` | `["equals"]` |
+| `AuthorAffiliations.NormalizedAffiliationName` | Filter and display attribute, used in Publication List Item and Filter Item | `string?` | `["equals"]` |
+| `AuthorAffiliations.NormalizedAuthorName` | Filter and display attribute, used in Publication List Item and Filter Item | `string?` | `["equals"]` |
+| `AuthorAffiliations.AuthorName` | Display only attribute, used in Publication List Item | `string?` | `["equals"]` |
 | `AuthorAffiliations.Sequence` | Display only attribute, used in Publication List Item | `blob?` | - |
 | `FieldsOfStudy` | Indicates that "FieldsOfStudy" attribute is an array of object composed of multiple attributes | `Composite*` | - |
-| `FieldsOfStudy.OriginalText` | Display only attribute, used in Publication List Item | `blob?` | - |
-| `FieldsOfStudy.Name` | Filter and display attribute, used in Publication List Item and Filter Item | `string?` | `["equals"]` |
+| `FieldsOfStudy.Name` | Display only attribute, used in Publication List Item | `blob?` | - |
+| `FieldsOfStudy.NormalizedName` | Filter and display attribute, used in Publication List Item and Filter Item | `string?` | `["equals"]` |
 
 #### Display only attributes
 
-The "display only attributes" referenced above are attributes that are only included for display purposes in the application, such as `Title.OriginalText` and `AuthorAffiliations.OriginalAuthorName`. Because we only display the data and don't filter by it, we don't need to index it. KES provides a `blob` data type for these type of attributes that allows for optimized storage and retrieval.
+The "display only attributes" referenced above are attributes that are only included for display purposes in the application, such as `Title` and `AuthorAffiliations.AuthorName`. Because we only display the data and don't filter by it, we don't need to index it. KES provides a `blob` data type for these type of attributes that allows for optimized storage and retrieval.
 
 #### Filter attributes
 
@@ -183,48 +166,41 @@ In addition to this best practice guidance, local builds have a concrete limit o
     {
     "expr": "All()",
     "entities": [
-        {
-        "logprob": -17.514,
-        "prob": 2.4760901E-08,
-        "EstimatedCitationCount": "393",
+      {
+        "logprob": -17.478,
+        "prob": 2.56685328E-08,
+        "EstimatedCitationCount": "418",
         "VenueFullName": "The Web Conference",
         "Year": 2015,
-        "Abstract": {
-            "OriginalText": "In this paper we describe a new release of a Web scale entity graph that serves as the backbone of Microsoft Academic Service (MAS), a major production effort with a broadened scope to the namesake vertical search engine that has been publicly available since 2008 as a research prototype. At the core of MAS is a heterogeneous entity graph comprised of six types of entities that model the scholarly activities: field of study, author, institution, paper, venue, and event. In addition to obtaining these entities from the publisher feeds as in the previous effort, we in this version include data mining results from the Web index and an in-house knowledge base from Bing, a major commercial search engine. As a result of the Bing integration, the new MAS graph sees significant increase in size, with fresh information streaming in automatically following their discoveries by the search engine. In addition, the rich entity relations included in the knowledge base provide additional signals to disambiguate and enrich the entities within and beyond the academic domain. The number of papers indexed by MAS, for instance, has grown from low tens of millions to 83 million while maintaining an above 95% accuracy based on test data sets derived from academic activities at Microsoft Research. Based on the data set, we demonstrate two scenarios in this work: a knowledge driven, highly interactive dialog that seamlessly combines reactive search and proactive suggestion experience, and a proactive heterogeneous entity recommendation."
-        },
-        "Title": {
-            "OriginalText": "An Overview of Microsoft Academic Service (MAS) and Applications"
-        },
-        "FullTextUrl": {
-            "OriginalText": "http://localhost/example-full-text-link-2"
-        },
+        "Abstract": "In this paper we describe a new release of a Web scale entity graph that serves as the backbone of Microsoft Academic Service (MAS), a major production effort with a broadened scope to the namesake vertical search engine that has been publicly available since 2008 as a research prototype. At the core of MAS is a heterogeneous entity graph comprised of six types of entities that model the scholarly activities: field of study, author, institution, paper, venue, and event. In addition to obtaining these entities from the publisher feeds as in the previous effort, we in this version include data mining results from the Web index and an in-house knowledge base from Bing, a major commercial search engine. As a result of the Bing integration, the new MAS graph sees significant increase in size, with fresh information streaming in automatically following their discoveries by the search engine. In addition, the rich entity relations included in the knowledge base provide additional signals to disambiguate and enrich the entities within and beyond the academic domain. The number of papers indexed by MAS, for instance, has grown from low tens of millions to 83 million while maintaining an above 95% accuracy based on test data sets derived from academic activities at Microsoft Research. Based on the data set, we demonstrate two scenarios in this work: a knowledge driven, highly interactive dialog that seamlessly combines reactive search and proactive suggestion experience, and a proactive heterogeneous entity recommendation.",
+        "DOI": "10.1145/2740908.2742839",
+        "FullTextUrl": "http://localhost/example-full-text-link-2",
+        "Title": "An Overview of Microsoft Academic Service (MAS) and Applications",
         "AuthorAffiliations": [
-            {
-            "AffiliationName": "microsoft",
-            "AuthorName": "arnab sinha",
-            "OriginalAuthorName": "Arnab Sinha",
+          {
+            "NormalizedAffiliationName": "microsoft",
+            "NormalizedAuthorName": "arnab sinha",
+            "AuthorName": "Arnab Sinha",
             "Sequence": "1"
-            },
-            {
-            "AffiliationName": "microsoft",
-            "AuthorName": "zhihong shen",
-            "OriginalAuthorName": "Zhihong Shen",
+          },
+          {
+            "NormalizedAffiliationName": "microsoft",
+            "NormalizedAuthorName": "zhihong shen",
+            "AuthorName": "Zhihong Shen",
             "Sequence": "2"
-            },
-            ...
-        ],
+          },
+          ...],
         "FieldsOfStudy": [
-            {
-            "OriginalText": "World Wide Web",
-            "Name": "world wide web"
-            },
-            {
-            "OriginalText": "Vertical search",
-            "Name": "vertical search"
-            },
-            ...
-        ]
-        }
+          {
+            "Name": "World Wide Web",
+            "NormalizedName": "world wide web"
+          },
+          {
+            "Name": "Vertical search",
+            "NormalizedName": "vertical search"
+          },
+          ...]
+      }
     ],
     "timed_out": false
     }
@@ -433,7 +409,7 @@ We can apply filters by modifying the publication list expression. To apply a fi
 
 The publication list expression is initially set to `All()`, showing all publications. To constrain the publications returned to those published in 2019, we apply a publication year filter, with the filter expression being `Year=2019`. The publication list expression will then become `And(All(),Year=2019)`.
 
-If we want to further constrain the publications returned to computer science related only, we apply a fields of study filter, with the filter expression being `Composite(FieldsOfStudy.Name='computer science')`. The publication list expression will then become `And(All(),Year=2019,Composite(FieldsOfStudy.Name='computer science'))`.
+If we want to further constrain the publications returned to computer science related only, we apply a fields of study filter, with the filter expression being `Composite(FieldsOfStudy.NormalizedName='computer science')`. The publication list expression will then become `And(All(),Year=2019,Composite(FieldsOfStudy.NormalizedName='computer science'))`.
 
 For more details see `PrivateLibraryExample.appendFilter(attributeName, attributeValue)` and `PrivateLibraryExample.updatePublicationList()` method in `filterablePublicationList.js`.
 

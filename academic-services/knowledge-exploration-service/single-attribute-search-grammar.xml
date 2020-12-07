@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <grammar root="SearchPapers">
-  <import schema="samplePrivateLibraryData.linked.search.schema.json" name="libraryPapers"/>
+  <import schema="samplePrivateLibraryData.linked.search.schema.json" name="publications"/>
   <rule id="SearchPapers">
     paper titled
-    <attrref uri="libraryPapers#Title.Text" name="q"/>
+    <attrref uri="publications#NormalizedTitle" name="q"/>
     <tag>
         out = Composite(q);
     </tag>

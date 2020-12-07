@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <grammar root="SearchPapers">
-  <import schema="samplePrivateLibraryData.linked.search.schema.json" name="libraryPapers"/>  
+  <import schema="samplePrivateLibraryData.linked.search.schema.json" name="publications"/>  
   <rule id="SearchPapers">
     <!-- Initialize the output query to `All()`. We will modify it as we match more search query terms.-->
     <tag>
@@ -18,17 +18,17 @@
         <!-- Match field of study -->
         <item logprob="-1">
           <item repeat="0-1">about</item>
-          <attrref uri="libraryPapers#FieldsOfStudy.Text" name="q"/>
+          <attrref uri="publications#FieldsOfStudy.NormalizedName" name="q"/>
         </item>
         <!-- Match author -->
         <item logprob="-1">
           <item repeat="0-1">by</item>
-          <attrref uri="libraryPapers#AuthorAffiliations.AuthorName" name="q"/>
+          <attrref uri="publications#AuthorAffiliations.NormalizedAuthorName" name="q"/>
         </item>
         <!-- Match affiliation -->
         <item logprob="-1">
           <item repeat="0-1">from</item>
-          <attrref uri="libraryPapers#AuthorAffiliations.AffiliationName" name="q"/>
+          <attrref uri="publications#AuthorAffiliations.NormalizedAffiliationName" name="q"/>
         </item>
       </one-of>
       <!-- Modify the output query to add new query constraints reflecting the attribute match.-->
