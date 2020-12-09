@@ -2,7 +2,7 @@
 title: Entity linking
 description: Step by step tutorial to link private paper data with MAKES paper entities
 ms.topic: tutorial
-ms.date: 10/15/2020
+ms.date: 12/09/2020
 ---
 
 # Link private publication records with MAKES entities
@@ -14,7 +14,6 @@ This tutorial illustrates how to link private publication records with their cor
 - [Microsoft Academic Knowledge Service (MAKES) subscription](get-started-setup-provisioning.md)
 - Install [PowerShell 7](https://docs.microsoft.com/powershell/scripting/install/installing-powershell-core-on-windows?view=powershell-7&preserve-view=true)
 - Download the [sample private library publication records](samplePrivateLibraryData.json)
-- Download the [sample entity linking PowerShell script](linkPrivateLibraryData.ps1)
 
 ## Download samples and setup working directory
 
@@ -53,7 +52,7 @@ title: | Match term or quoted value from the paper title | title: an overview of
 fieldsofstudy: | Match paper field of study (topic) | fieldsofstudy: knowledge base
 year: | Match paper publication year | year: 2015
 
-You can experiment with these different scopes and pick the one that makes the most sense for your data/scenario using the Interpret test page. MAKES also supports custom grammars, allowing you to craft a grammar explicitly designed for the data being using to link entities. See [How to define a custom grammar](how-to-grammar.md) for more details.
+You can experiment with these different scopes and pick the one that makes the most sense for your data/scenario using the [Interpret API test page](reference-makes-api-test-page.md). MAKES also supports custom grammars, allowing you to craft a grammar explicitly designed for the data being using to link entities. See [How to define a custom grammar](how-to-grammar.md) for more details.
 
 ## Set appropriate confidence score threshold for entity linking
 
@@ -63,9 +62,9 @@ You can experiment with these different scopes and pick the one that makes the m
 >- [How MAKES generates semantic interpretations of natural language queries](concepts-queries.md)
 >- [Entity log probability](how-to-index-data.md#entity-log-probability)
 
-The next step in entity linking is determining an appropriate confidence score threshold, which allows us to determine when entity linking has successfully linked a library record's title with a corresponding MAG paper. The [Interpret API](reference-get-interpret.md) returns a [log probability associated with each interpretation](reference-grammar-syntax.md#interpretation-probability), which we leverage as a "confidence score" for the given interpretation. Since the probability for an interpretation can range from 0 to 1, the interpretation log probability can be anywhere from zero to negative infinity.
+The next step in entity linking is determining an appropriate confidence score threshold, which allows us to determine when entity linking has successfully linked a library record's title with a corresponding MAG paper. The [Interpret API](reference-get-interpret.md) returns a [log probability associated with each interpretation](reference-grammar-syntax.md#interpretation-probability), which we leverage as a "confidence score" for the given interpretation.
 
-The interpretation log probability value actually represents the sum of two *different* log probabilities which we need to disentangle. The first log probability, grammar path log probability, is associated with the different attributes matched in the natural language grammar that the Interpret API uses, and is used to represent how likely an interpretation is to be correct based on rules defined in the grammar. The second log probability, [entity log probability](how-to-index-data.md#entity-log-probability), is associated with the top matching entity for the interpretation.
+The interpretation log probability value actually represents the sum of two *different* log probabilities which we need to disentangle. The first is the log probability associated with penalties applied in the grammar, normally attached to [attribute matching rules](reference-grammar-syntax.md#item-element) in the natural language grammar used by the Interpret API. The second is the [entity log probability](how-to-index-data.md#entity-log-probability) associated with the top matching entity for the interpretation.
 
 > [!Note]
 > The default MAKES grammar assigns *log probability penalties* for different types of attribute matches to either encourage or discourage their use. For example, the default grammar *favors* complete publication title matching by not assigning a penalty when it is fully matched. However, when only *part of a title* is matched, i.e. individual words, each word is assigned a log probability penalty of -1. Similarly, when individual words from a papers abstract are matched, a heavier penalty of -3 is applied. The heaviest penalty, -25, is applied when a query term cannot be matched against any known paper attributes.
@@ -142,7 +141,7 @@ If we're able to find an interpretation that meets our confidence cut off score,
 - Save the script as "linkPrivateLibraryData.ps1" to your working directory
 - Open up a powershell console and run the sample entity linking script. Make sure the sample library data and linking script are under the same directory.
 
-The sample entity linking script output should look like the following:
+The sample entity linking script output should look similar to the following (confidence scores may change with newer data releases):
 
 ```cmd
 Linked | Confidence Score | Original Title | MAG Title

@@ -2,7 +2,7 @@
 title: Build a library browser with contextual filters
 description: Step by step tutorial to design MAKES schema for custom data
 ms.topic: tutorial
-ms.date: 11/16/2020
+ms.date: 12/09/2020
 ---
 
 # Build a library browser with contextual filters
@@ -17,7 +17,7 @@ This tutorial illustrates how to build a library browser application, using the 
 
 ## Prerequisites
 
-- [Microsoft Academic Knowledge Exploration Service (MAKES) subscription](get-started-setup-provisioning.md) (release version after 2020-11-23)
+- [Microsoft Academic Knowledge Exploration Service (MAKES) subscription](get-started-setup-provisioning.md) (release version of at least 2020-11-23)
 - Completion of [link private publication records with MAKES entities tutorial](tutorial-entity-linking.md)
 - Read through the [define index schema how-to guide](how-to-index-schema.md)
 - Download the [sample schema for linked private library publications](samplePrivateLibraryData.linked.schema.json)
@@ -99,25 +99,25 @@ The design goals above guide us to define a [schema for the linked sample librar
 
 | Attribute Name | Description| Index Data Type | Index Operations |
 | ---- | ---- | ---- | ---- |
-| `EstimatedCitationCount` | Display only attribute, used in Publication List Item | `blob?` | - |
-| `VenueFullName` | Display only attribute, used in Publication List Item | `blob?` | - |
-| `Year` | Filter and display attribute, used in Publication List Item and Filter Item | `int?` | `["equals"]` |
-| `Abstract` | Display only attribute, used in Publication List Item | `blob?` | - |
-| `DOI` | Display only attribute, used in Publication List Item | `blob?` | - |
-| `Title` | Display only attribute, used in Publication List Item | `blob?` | - |
-| `FullTextUrl` | Display only attribute, used in Publication List Item | `blob?` | - |
-| `AuthorAffiliations` | Indicates that "AuthorAffiliations" attribute is an array of objects that are composed of multiple attributes | `Composite*` | - |
-| `AuthorAffiliations.NormalizedAffiliationName` | Filter and display attribute, used in Publication List Item and Filter Item | `string?` | `["equals"]` |
-| `AuthorAffiliations.NormalizedAuthorName` | Filter and display attribute, used in Publication List Item and Filter Item | `string?` | `["equals"]` |
-| `AuthorAffiliations.AuthorName` | Display only attribute, used in Publication List Item | `string?` | `["equals"]` |
-| `AuthorAffiliations.Sequence` | Display only attribute, used in Publication List Item | `blob?` | - |
+| `EstimatedCitationCount` | Used for displaying citation count in publication cards. | `blob?` | - |
+| `VenueFullName` | Used for displaying published venue in publication cards. | `blob?` | - |
+| `Year` | Used for filtering publication cards by publishing year. Also used for displaying the year of publication in publication cards. | `int?` | `["equals"]` |
+| `Abstract` | Used for displaying abtract in publication cards.  | `blob?` | - |
+| `DOI` | Used for displaying DOI in publication cards. | `blob?` | - |
+| `Title` | Used for displaying title in publication cards. | `blob?` | - |
+| `FullTextUrl` | Used for displaying the full text url link in publication cards. | `blob?` | - |
+| `AuthorAffiliations` | Indicates that "AuthorAffiliations" attribute is an array of objects that are composed of multiple attributes. | `Composite*` | - |
+| `AuthorAffiliations.NormalizedAffiliationName` | Used for filtering publication cards by affiliated institutions. Also used for displaying the affiliated institutions in publication cards. | `string?` | `["equals"]` |
+| `AuthorAffiliations.NormalizedAuthorName` | Used for filtering publication cards by authors. | `string?` | `["equals"]` |
+| `AuthorAffiliations.AuthorName` | Used for displaying the authors in publication cards.| `string?` | `["equals"]` |
+| `AuthorAffiliations.Sequence` | Used for displaying order of the authors in publication cards| `blob?` | - |
 | `FieldsOfStudy` | Indicates that "FieldsOfStudy" attribute is an array of object composed of multiple attributes | `Composite*` | - |
-| `FieldsOfStudy.Name` | Display only attribute, used in Publication List Item | `blob?` | - |
-| `FieldsOfStudy.NormalizedName` | Filter and display attribute, used in Publication List Item and Filter Item | `string?` | `["equals"]` |
+| `FieldsOfStudy.Name` | Used for filtering publication cards by related fields of study. | `blob?` | - |
+| `FieldsOfStudy.NormalizedName` | Used for displaying the related fields of study in publication cards. | `string?` | `["equals"]` |
 
 #### Display only attributes
 
-The "display only attributes" referenced above are attributes that are only included for display purposes in the application, such as `Title` and `AuthorAffiliations.AuthorName`. Because we only display the data and don't filter by it, we don't need to index it. KES provides a `blob` data type for these type of attributes that allows for optimized storage and retrieval.
+The "display only attributes" above are attributes that are only included for display purposes in the application, such as `Title` and `AuthorAffiliations.AuthorName`. Because we only display the data and don't filter by it, we don't need to index it. KES provides a `blob` data type for these type of attributes that allows for optimized storage and retrieval.
 
 #### Filter attributes
 
@@ -143,9 +143,13 @@ In addition to this best practice guidance, local builds have a concrete limit o
 
 ### Validate schema using local index build
 
+1. Download the latest MAKES command line tool `{YYYY-MM-DD}/tools/kesm.zip` from your MAKES storage account. 
+
+1. Unzip kesm.zip
+
 1. Copy the win-x64 version of kesm.exe to your working directory or include it in your command line PATH variable.
 
-1. Open up a commandline console, change your current directory to your working directory, and build the index with the following command:
+1. Open up a command line console, change your current directory to your working directory, and build the index with the following command:
 
     ```cmd
     kesm.exe BuildIndexLocal --SchemaFilePath samplePrivateLibraryData.linked.schema.json --EntitiesFilePath samplePrivateLibraryData.linked.json --OutputIndexFilePath samplePrivateLibraryData.linked.kes --IndexDescription "Linked Private Library Publications"
@@ -160,7 +164,7 @@ In addition to this best practice guidance, local builds have a concrete limit o
     kesm Evaluate --IndexFilePaths samplePrivateLibraryData.linked.kes --KesQueryExpression="All()" --Count 1 --Attributes *
     ```
 
-    The command should retreieve top publication entities from the index. The output should mirror the following JSON:
+    The command should retreieve top publication entities from the index. The output should look similar to the following JSON:
 
     ```json
     {
@@ -212,7 +216,7 @@ In addition to this best practice guidance, local builds have a concrete limit o
     kesm Evaluate --IndexFilePaths samplePrivateLibraryData.linked.kes --KesQueryExpression="Year=2020" --Attributes "Year"
     ```
 
-    The command should retreieve publication entities with `Year` attibute being `2020` from the index. The output should mirror the following JSON:
+    The command retreieves publication entities with `Year` attibute being `2020` from the index. The output should look similar to the following JSON:
 
     ```cmd
     {
@@ -247,10 +251,6 @@ In addition to this best practice guidance, local builds have a concrete limit o
       "timed_out": false
     }
     ```
-
-### Submitting cloud builds for larger indexes
-
-As discussed earlier, we use a local build for this tutorial because the amount of data to be indexed is very small. For larger and more complex indexes, cloud build must be used. One advantage of cloud builds is that they can leverage high performance virtual machines in Azure that can dramatically improve build performance. To learn more, follow [How to create index from MAG](how-to-create-index-from-mag.md)
 
 ## Deploy a MAKES API with a custom index
 
@@ -312,7 +312,7 @@ Once downloaded, modify the `hostUrl` variable in `makesInteractor.js` and point
 
 ### Craft a KES query expression to represent publications
 
-We start building our frontend client by crafting a **publication list expression**, a KES query expression to represent the publications our user is browsing. We will use this expression to fetch publication entities and generate filters in the next steps. When filters are applied, we will modify this expression to represent the filtered entities. Since the initial list of publications the user should see is "all publication", we initialize the **publication list expression** be `All()`.
+We start building our frontend client by crafting a **publication list expression**, a KES query expression to represent the publications our user is browsing. We will use this expression to fetch publication entities and generate filters in the next steps. When filters are applied, we will modify this expression to represent the filtered entities. Since the initial list of publications the user should see is "all publications", we initialize the **publication list expression** to `All()`.
 
 This corresponds to the following code in `index.js`
 
@@ -397,7 +397,7 @@ The `-17.514` log probability comes from the two publications published in 2015.
   }
   ```
 
-The histogram log probability of `-17.514` for the top `Year` attribute comes from adding the two entity log probabilities, `-17.514` and `-24.52` together. `LN(EXP(-17.514) + EXP(-24.52)) = -17.514`
+The histogram log probability of `-17.514` for the top `Year` attribute comes from adding the two entity probabilities. To accomplish this we first need to convert the entities log probabilities into normal probability scores, add them and then generate a new log of their sum. `LN(EXP(-17.514) + EXP(-24.52)) = -17.514`
 
 In the context of this tutorial, we can leverage the Histogram API response as **contextual filter suggestions**. To learn more about how to generate contextual filter suggestions using Histogram API, see `MakesInteractor.GetFilters(publicationExpression)` method in `makesInteractor.js`.
 

@@ -65,6 +65,8 @@
   - name: MAKES REST API
     expanded: false
     items:
+      - name: Test page
+        href: reference-makes-api-test-page.md
       - name: GET Histogram
         href: reference-get-histogram.md
       - name: GET Evaluate

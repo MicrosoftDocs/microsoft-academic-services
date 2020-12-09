@@ -2,7 +2,7 @@
 title: Grammar format
 description: Defines the file format and structure for MAKES grammars
 ms.topic: tutorial
-ms.date: 9/1/2020
+ms.date: 12/09/2020
 ---
 
 # How to define a custom grammar

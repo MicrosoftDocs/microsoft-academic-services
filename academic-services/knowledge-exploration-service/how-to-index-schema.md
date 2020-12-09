@@ -2,7 +2,7 @@
 title: Index schema
 description: Defines the file format and structure for MAKES index schema
 ms.topic: how-to
-ms.date: 9/1/2020
+ms.date: 12/09/2020
 ---
 
 # Index schema files

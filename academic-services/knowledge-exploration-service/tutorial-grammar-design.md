@@ -2,12 +2,12 @@
 title: Build a library search application
 description: Step by step tutorial to design MAKES grammar for custom data
 ms.topic: tutorial
-ms.date: 11/16/2020
+ms.date: 12/09/2020
 ---
 
-# Build a library search
+# Build a library search application
 
-This tutorial illustrates how to build a library search using the linked publication records from [link private publication records with MAKES entities tutorial](tutorial-entity-linking.md) and concepts from [library browser with contextual filters tutorial](tutorial-entity-linking.md). You will learn how to:
+This tutorial illustrates how to build a library search application using the linked publication records from [link private publication records with MAKES entities tutorial](tutorial-entity-linking.md) and concepts from [library browser with contextual filters tutorial](tutorial-entity-linking.md). You will learn how to:
 
 - Design a MAKES schema tailored for publication search
 - Design a MAKES grammar to process search queries
@@ -18,7 +18,7 @@ This tutorial illustrates how to build a library search using the linked publica
 
 ## Prerequisites
 
-- [Microsoft Academic Knowledge Exploration Service (MAKES) subscription](get-started-setup-provisioning.md) (release version after 2020-11-23)
+- [Microsoft Academic Knowledge Exploration Service (MAKES) subscription](get-started-setup-provisioning.md) (release version of at least 2020-11-23)
 - Completion of [link private publication records with MAKES entities tutorial](tutorial-entity-linking.md)
 - Completion of [build a library browser with contextual filters tutorial](tutorial-schema-design.md)
 - Read through the [define index schema how-to guide](how-to-index-schema.md)
@@ -37,9 +37,8 @@ When designing a new schema for search, it's important to evaluate the following
 
 To determine what attributes that need to be indexed, we need to drill into the types of search queries we will process. We can map out what search queries need to be by supported by going through the search scenarios. For this tutorial, we want to enable users to
 
-- Search by categorical attributes, such as fields of study, author and affiliation.
+- Search by semantic attributes, such as fields of study, author and affiliation.
 - Search by keywords extracted from abstact and title
-- Search by identifiable attributes, such as the publication's title, DOI, and the full text url from the original records.
 
 ### Modify library browser schema to support search
 
@@ -57,7 +56,7 @@ The design goal above guides us to create the [sample search schema for linked p
 
 Attributes that we plan to use for processing search queries need to be indexed, similar to filter attributes in the [build a library browser with contextual filters tutorial](tutorial-schema-design.md). For example, to enable our application to process search queries like "papers from microsoft about machine learning" we need to enable the `equals` index operation on the `FieldsOfStudy.NormalizedName` and `AuthorAffiliations.NormalizedAffiliationName` attributes.
 
-Before indexing the attributes, we want to apply [text normalization](https://en.wikipedia.org/wiki/Text_normalization). This helps improve search recall by slightly reducing percision. For example, we can improve publication title search accuracy by normalizing both the publication titles and the search queries to lowercase characters only. This ensures that publication title queries that have case mismatches will still yield search results. For more normalization details, see `MakesInteractor.NormalizeStr(queryStr)` in `makesInteractor.js`.
+Before indexing the attributes, we want to apply [text normalization](https://academic.microsoft.com/topic/2776524288). This helps improve search recall by slightly reducing percision. For example, we can improve publication title search accuracy by normalizing both the publication titles and the search queries to lowercase characters only. This ensures that publication title queries that have case mismatches will still yield search results. For more normalization details, see `MakesInteractor.NormalizeStr(queryStr)` in `makesInteractor.js`.
 
 To enable keywords search, we may also transform the attributes before indexing them. For example, we enable abstract keywords search by transforming the attribute `Abstract` into `NormalizedAbstractWords` such that unique words from abstracts can be indexed as keywords.
 
@@ -127,7 +126,7 @@ We use a `<item repeat="1-INF">` element to process keyword based queries using 
 
 :::code language="xml" source="samplePrivateLibraryData.linked.search.grammar.xml" id="snippet_partial_attribute_search":::
 
-Notice that we have heavier penalties (-3 and -4) associated with title and abstract keyword search compared to other grammar rules in the sample grammar (i.e. author and affiliation searches have a penalty of -2). This is designed to penalize title/abstract keyword searches if semantic attribute searches yield results.
+Notice that we have heavier penalties (-3 and -4) associated with title and abstract keyword search compared to other grammar rules in the sample grammar (i.e. author and affiliation searches have a penalty of -2). This is designed to penalize title/abstract keyword searches if semantic attribute searches yield results. We do this so that semantic attribute matches will be favored over keyword matches when interpreting the user query.
 
 In addition to heavier penalties, we also set a minimum word match count requirement for title and abstract keywords search. Title and abstract words may cover lots of common terms that can be matched against terms in a query. We introduce this requirement to create a higher quality bar for title and abstract words search results. The following code ensures that the title and abstract words search is only valid if there are 3 or more words in the query that can be matched against the title/abstract words.
 
@@ -221,39 +220,39 @@ We are now ready to set up a MAKES API instance by building a searchable index, 
 1. Run Evaluate command using the built index to verify index operations are working as expected:
 
     ```cmd
-    kesm Evaluate --IndexFilePaths samplePrivateLibraryData.linked.search.kes --KesQueryExpression="Year=2020" --Attributes "Year"
+    kesm Evaluate --IndexFilePaths samplePrivateLibraryData.linked.search.kes --KesQueryExpression "NormalizedTitleWords='microsoft'" --Attributes "Title"
     ```
 
-    The output should be
+    The output should look similar to:
 
     ```cmd
     {
-      "expr": "Year=2020",
+      "expr": "NormalizedTitleWords='microsoft'",
       "entities": [
         {
-          "logprob": -18.255,
-          "prob": 1.18019626E-08,
-          "Year": 2020
+          "logprob": -17.478,
+          "prob": 2.56685328E-08,
+          "Title": "An Overview of Microsoft Academic Service (MAS) and Applications"
         },
         {
-          "logprob": -19.386,
-          "prob": 3.8086159E-09,
-          "Year": 2020
+          "logprob": -18.703,
+          "prob": 7.5403292E-09,
+          "Title": "An Overview of Microsoft Web N-gram Corpus and Applications"
         },
         {
-          "logprob": -19.625,
-          "prob": 2.9989608E-09,
-          "Year": 2020
+          "logprob": -19.55,
+          "prob": 3.2325323E-09,
+          "Title": "Microsoft Academic Graph: When experts are not enough"
         },
         {
-          "logprob": -19.853,
-          "prob": 2.3875455E-09,
-          "Year": 2020
+          "logprob": -19.846,
+          "prob": 2.4043169E-09,
+          "Title": "A Review of Microsoft Academic Services for Science of Science Studies"
         },
         {
-          "logprob": -20.154,
-          "prob": 1.7669693E-09,
-          "Year": 2020
+          "logprob": -20.442,
+          "prob": 1.3248057E-09,
+          "Title": "A Scalable Hybrid Research Paper Recommender System for Microsoft Academic"
         }
       ],
       "timed_out": false
