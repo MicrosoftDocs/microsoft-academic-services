@@ -68,6 +68,8 @@ landingContent:
             url: tutorial-entity-linking.md
           - text: Build a library browser with contextual filters
             url: tutorial-schema-design.md
+          - text: Build browser applications with search
+            url: tutorial-grammar-design.md
 
   - title: Manage instances
     linkLists:

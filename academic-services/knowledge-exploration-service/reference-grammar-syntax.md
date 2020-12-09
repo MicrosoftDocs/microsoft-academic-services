@@ -2,7 +2,7 @@
 title: Grammar syntax
 description: Reference documentation for the syntactic elements supported by the MAKES grammar
 ms.topic: reference
-ms.date: 9/1/2020
+ms.date: 12/09/2020
 ---
 
 # Grammar syntax
@@ -58,10 +58,18 @@ The `one-of` element specifies alternative expansions among one of the child `it
   </one-of>
 ```
 
+### regex element
+
+The `regex` element specifies valid expansions via matching text tokens against a regular expression through the required `pattern` attribute . Normally, the pattern will only be used to match against a single text token at a time. If a match is found, the text token will be stored as the output in the variable specified by the `name` attribute. If the pattern is `.*`, all remaining text tokens will be matched and stored as output.
+
+```xml
+<regex pattern="\d+" name="matchedDigits" />
+```
+
 ### ruleref element
 
 The `ruleref` element specifies valid expansions via references to another `rule` element.  Through the use of `ruleref` elements, more complex expressions can be built from simpler rules.  The required `uri` attribute indicates the name of the referenced `rule` using the syntax "#*rulename*".  To capture the semantic output of the referenced rule, use the optional `name` attribute to specify the name of a variable to which the semantic output is assigned.
- 
+
 ```xml
 <ruleref uri="#paperYear" name="matchedAttribute" />
 ```

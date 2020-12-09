@@ -2,7 +2,7 @@
 title: Semantic functions
 description: Reference documentation for the semantic functions supported by the MAKES grammar
 ms.topic: reference
-ms.date: 9/1/2020
+ms.date: 12/09/2020
 ---
 
 # Semantic functions
@@ -53,7 +53,7 @@ Returns a query that includes all data objects.
 
 In the following example, we use the All() function to iteratively build up a query based on the intersection of 1 or more keywords.
 
-```
+```xml
 <tag>query = All();</tag>
 <item repeat="1-">
   <attrref uri="paperEntity#W" name="titleWord">
@@ -69,7 +69,7 @@ Returns a query that includes no data objects.
 
 In the following example, we use the None() function to iteratively build up a query based on the union of 1 or more keywords.
 
-```
+```xml
 <tag>query = None();</tag>
 <item repeat="1-">
   <attrref uri="paperEntity#W" name="titleWord">
@@ -79,7 +79,7 @@ In the following example, we use the None() function to iteratively build up a q
 
 ## Query Function
 
-```
+```xml
 query = Query(attrName, value)
 query = Query(attrName, value, op)
 ```
@@ -104,7 +104,8 @@ written in the 90s
 Returns a query that encapsulates an *innerQuery* composed of matches against sub-attributes of a common composite attribute *attr*.  The encapsulation requires the composite attribute *attr* of any matching data object to have at least one value that individually satisfies the *innerQuery*.  Note that a query on sub-attributes of a composite attribute has to be encapsulated using the Composite() function before it can be combined with other queries.
 
 For example, the following query returns academic publications by "harry shum" while he was at "microsoft":
-```
+
+```xml
 Composite(
   And(
     Query("paperEntity#AA.AuN", "harry shum"),
@@ -114,7 +115,7 @@ Composite(
 
 On the other hand, the following example returns the academic publications written by "harry shum at microsoft" with other collaborators authors from "carnegie mellon university".
 
-```
+```xml
 And(
     Composite(
         And(
@@ -163,3 +164,9 @@ If *value1* and *value2* are equivalent, the function succeeds and has no side e
 `AssertNotEquals(value1, value2);`
 
 If *value1* and *value2* are not equivalent, the function succeeds and has no side effects.  Otherwise, the function fails and rejects the interpretation.
+
+## HasResult Function
+
+`value = HasResult(query);`
+
+returns true if the query can retrieve at least one result, otherwise, false.

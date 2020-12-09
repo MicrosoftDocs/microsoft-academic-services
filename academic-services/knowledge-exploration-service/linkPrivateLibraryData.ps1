@@ -65,8 +65,8 @@ function Merge-MagEntity {
     {
         $fieldsOfStudy += 
         @{ 
-            OriginalName = $fos.DFN;
-            Name = $fos.FN;
+            Name = $fos.DFN;
+            NormalizedName = $fos.FN;
         }
     }
     $privateLibraryPaper | Add-Member -MemberType NoteProperty -Name 'FieldsOfStudy' -Value  $fieldsOfStudy
@@ -76,23 +76,23 @@ function Merge-MagEntity {
     foreach ($authorAffiliation in $magEntity.AA)
     {
         $temp = @{
-            OriginalAuthorName = $authorAffiliation.DAuN;
-            AuthorName = $authorAffiliation.AuN;
+            AuthorName = $authorAffiliation.DAuN;
+            NormalizedAuthorName = $authorAffiliation.AuN;
         }
 
         if ($null -ne $authorAffiliation.DAfN)
         {
-            $temp.OriginalAffiliationName = $authorAffiliation.DAfN;
+            $temp.AffiliationName = $authorAffiliation.DAfN
         }
         if ($null -ne $authorAffiliation.AfN)
         {
-            $temp.AffiliationName = $authorAffiliation.AfN;
+            $temp.NormalizedAffiliationName = $authorAffiliation.AfN
         }
         if ($null -ne $authorAffiliation.S)
         {
-            $temp.Sequence = $authorAffiliation.S;
+            $temp.Sequence = $authorAffiliation.S
         }
-        $authorAffiliations += $temp;
+        $authorAffiliations += $temp
     }
     $privateLibraryPaper | Add-Member -MemberType NoteProperty -Name 'AuthorAffiliations' -Value  $authorAffiliations
 
@@ -108,8 +108,9 @@ function Merge-MagEntity {
                 $abstractWords[$index] = $abstractWord
             }
         }
+
         $abstract = [string]::Join(" ", $abstractWords)
-        $privateLibraryPaper | Add-Member -MemberType NoteProperty -Name 'OriginalAbstract' -Value  $abstract
+        $privateLibraryPaper | Add-Member -MemberType NoteProperty -Name 'Abstract' -Value  $abstract
     }
 }
 # </snippet_merge_entities> 
@@ -141,20 +142,37 @@ function Edit-AddSearchAttribues
 {
     param($libraryPaper)
 
+    # use the publication's original title from sample private data as the linked entity's title
+    $libraryPaper | Add-Member -MemberType NoteProperty -Name 'Title' -Value  $libraryPaper.OriginalTitle
+
     # add normalized title attribute for title search
     $normalizedTitle = ConvertTo-NormalizedStr $libraryPaper.OriginalTitle
-    $libraryPaper | Add-Member -MemberType NoteProperty -Name 'Title' -Value  $normalizedTitle
+    $libraryPaper | Add-Member -MemberType NoteProperty -Name 'NormalizedTitle' -Value  $normalizedTitle
 
-    # add normlized title words for partial title search
+    # add normlized title words for title keyword search
     $titleWords = ConvertTo-DistinctWordsArray $normalizedTitle
-    $libraryPaper | Add-Member -MemberType NoteProperty -Name 'TitleWords' -Value  $titleWords
+    $libraryPaper | Add-Member -MemberType NoteProperty -Name 'NormalizedTitleWords' -Value  $titleWords
 
-    # add normalized abstract words for partial abstract search
-    if ($null -ne $libraryPaper.OriginalAbstract)
+    # add normalized abstract words for abstract keyword search
+    if ($null -ne $libraryPaper.Abstract -and $null -ne $libraryPaper.Abstract)
     {
-        $normalizedAbstract = ConvertTo-NormalizedStr $libraryPaper.OriginalAbstract
+        $normalizedAbstract = ConvertTo-NormalizedStr $libraryPaper.Abstract
         $abstractWords = ConvertTo-DistinctWordsArray $normalizedAbstract
-        $libraryPaper | Add-Member -MemberType NoteProperty -Name 'AbstractWords' -Value  $abstractWords
+        $libraryPaper | Add-Member -MemberType NoteProperty -Name 'NormalizedAbstractWords' -Value  $abstractWords
+    }
+
+    # add normalized doi for attribute search
+    if ($null -ne $libraryPaper.DOI)
+    {
+        $normalizedDOI = ConvertTo-NormalizedStr $libraryPaper.DOI
+        $libraryPaper | Add-Member -MemberType NoteProperty -Name 'NormalizedDOI' -Value  $normalizedDOI
+    }
+
+    # add normalized full text url for attribute search
+    if ($null -ne $libraryPaper.FullTextUrl)
+    {
+        $normalizedFullTextUrl = ConvertTo-NormalizedStr $libraryPaper.FullTextUrl
+        $libraryPaper | Add-Member -MemberType NoteProperty -Name 'NormalizedFullTextUrl' -Value  $normalizedFullTextUrl
     }
 }
 
