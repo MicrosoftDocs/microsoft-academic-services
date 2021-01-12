@@ -2,7 +2,7 @@
 title: Microsoft Academic Graph data schema
 description: Documents the complete, most recent Microsoft Academic Graph entity data schema, including the name and type of each attribute
 ms.topic: reference
-ms.date: 12/01/2020
+ms.date: 1/12/2020
 ---
 # Microsoft Academic Graph data schema
 
@@ -154,7 +154,7 @@ Column # | Name | Type | Note
 Column # | Name | Type | Note
 --- | --- | --- | ---
 1 | FieldOfStudyId | long | FOREIGN KEY REFERENCES FieldsOfStudy.FieldOfStudyId
-2 | AttributeType | int | 1: AUI: Atom Unique Identifier defined in [Unified Medical Language System (UMLS)](https://www.nlm.nih.gov/research/umls/new_users/glossary.html), version [2018AA](https://www.nlm.nih.gov/research/umls/licensedcontent/umlsarchives04.html#2018AA). <br> 2: SourceUrl
+2 | AttributeType | int | 1: AUI: Atom Unique Identifier defined in [Unified Medical Language System (UMLS)](https://www.nlm.nih.gov/research/umls/new_users/glossary.html#a), version [2018AA](https://www.nlm.nih.gov/research/umls/licensedcontent/umlsarchives04.html#2018AA). <br> 2: SourceUrl <br> 3: CUI: Concept Unique Identifier defined in [Unified Medical Language System (UMLS)](https://www.nlm.nih.gov/research/umls/new_users/glossary.html#c), version [2020AB](https://www.nlm.nih.gov/research/umls/licensedcontent/umlsknowledgesources.html).
 3 | AttributeValue | string |
 
 ## Fields of Study
