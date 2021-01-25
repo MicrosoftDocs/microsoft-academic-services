@@ -52,7 +52,6 @@ CitCon | Citation contexts</br></br>List of referenced paper ID's and the corres
 D | Date published in YYYY-MM-DD format | Date | Equals, IsBetween
 DN | Original paper title | String | None
 DOI | Digital Object Identifier</br></br>**IMPORTANT**: The DOI is normalized to uppercase letters, so if querying the field via evaluate/histogram ensure that the DOI value is using all uppercase letters | String | Equals, StartsWith
-E | Extended metadata</br></br>**IMPORTANT**: This attribute has been deprecated and is only supported for legacy applications. Requesting this attribute individually (i.e. attributes=Id,Ti,E) will result in all extended metadata attributes being returned in a *serialized JSON string*</br></br>All attributes contained in the extended metadata are now available as a top-level attribute and can be requested as such (i.e. attributes=Id,Ti,DOI,IA) | [Extended](#paper-entity-extended) | None
 ECC | Estimated citation count | Int32 | None
 F.DFN | Original field of study name | String | None
 F.FId | Field of study ID | Int64 | Equals
@@ -74,31 +73,6 @@ VFN | Full name of the Journal or Conference venue | String | None
 VSN | Short name of the Journal or Conference venue | String | None
 W | Unique words in title, excluding  [stop words](#stop-words) | String[] | Equals
 Y | Year published | Int32 | Equals, IsBetween
-
-### Paper Entity Extended
-
-> [!IMPORTANT]
-> This attribute has been deprecated and is only supported for legacy applications. Requesting this attribute individually (i.e. attributes=Id,Ti,E) will result in all extended metadata attributes being returned in a *serialized JSON string*</br></br>All attributes contained in the extended metadata are now available as a top-level attribute and can be requested as such (i.e. attributes=Id,Ti,DOI,IA)
-
-> [!IMPORTANT]
-> Support for requesting individual extended attributes by using the "E." scope, i.e. "E.DN" is being deprecated. While this is still technically supported, requesting individual extended attributes using the "E." scope will result in the attribute value being returned in two places in the JSON response, as part of the "E" object and as a top level attribute.
-
-Name | Description | Type | Operations
---- | --- | --- | ---
-BT | BibTex document type ('a':Journal article, 'b':Book, 'c':Book chapter, 'p':Conference paper) | String | None
-BV | BibTex venue name | String | None
-CC | Citation contexts</br></br>List of referenced paper ID's and the corresponding context in the paper (e.g. [{123:["brown foxes are known for jumping as referenced in paper 123", "the lazy dogs are a historical misnomer as shown in paper 123"]}) | Custom | None
-DN | Original paper title | String | None
-DOI | Digital Object Identifier | String | None
-FP | First page of paper in publication | String | None
-I | Publication issue | String | None
-IA | Inverted Abstract | [InvertedAbstract](#invertedabstract) | None
-LP | Last page of paper in publication | String | None
-PB | Publisher | String | None
-S | List of source URLs of the paper, sorted by relevance | [Source](#source)[] | None
-V | Publication volume | String | None
-VFN | Full name of the Journal or Conference venue | String | None
-VSN | Short name of the Journal or Conference venue | String | None
 
 ### InvertedAbstract
 
@@ -131,22 +105,7 @@ Id        | Entity ID                                |Int64        |Equals
 AuN        | Author normalized name                    |String        |Equals
 CC        | Author total citation count            |Int32        |None  
 DAuN    | Author display name                    |String        |None
-E | Extended metadata</br></br>**IMPORTANT**: This attribute has been deprecated and is only supported for legacy applications. Requesting this attribute individually (i.e. attributes=Id,Ti,E) will result in all extended metadata attributes being returned in a *serialized JSON string*</br></br>All attributes contained in the extended metadata are now available as a top-level attribute and can be requested as such (i.e. attributes=Id,Ti,DOI,IA) | [Extended](#author-entity-extended) | None
 ECC        | Author total estimated citation count    |Int32        |None
-LKA.AfId | Entity ID of the last known affiliation found for the author | Int64 | None
-LKA.AfN | Normalized name of the last known affiliation found for the author | String | None
-PC | Author total publication count | Int32 | None
-
-### Author Entity Extended
-
-> [!IMPORTANT]
-> This attribute has been deprecated and is only supported for legacy applications. Requesting this attribute individually (i.e. attributes=Id,Ti,E) will result in all extended metadata attributes being returned in a *serialized JSON string*</br></br>All attributes contained in the extended metadata are now available as a top-level attribute and can be requested as such (i.e. attributes=Id,Ti,DOI,IA)
-
-> [!IMPORTANT]
-> Support for requesting individual extended attributes by using the "E." scope, i.e. "E.DN" is being deprecated. While this is still technically supported, requesting individual extended attributes using the "E." scope will result in the attribute value being returned in two places in the JSON response, as part of the "E" object and as a top level attribute.
-
-Name | Description | Type | Operations
---- | --- | --- | ---
 LKA.AfId | Entity ID of the last known affiliation found for the author | Int64 | None
 LKA.AfN | Normalized name of the last known affiliation found for the author | String | None
 PC | Author total publication count | Int32 | None
@@ -200,7 +159,6 @@ CINDD    |Notification date of the conference instance     |Date        |Equals,
 CISD    |Start date of the conference instance     |Date        |Equals, IsBetween
 CISDD    |Submission due date of the conference instance     |Date        |Equals, IsBetween
 DCN        |Conference instance display name  |String        |None
-E | Extended metadata</br></br>**IMPORTANT**: This attribute has been deprecated and is only supported for legacy applications. Requesting this attribute individually (i.e. attributes=Id,Ti,E) will result in all extended metadata attributes being returned in a *serialized JSON string*</br></br>All attributes contained in the extended metadata are now available as a top-level attribute and can be requested as such (i.e. attributes=Id,Ti,DOI,IA) | [Extended](#conference-instance-extended) | None
 ECC        |Conference instance total estimated citation count    |Int32        |None
 FN | Conference instance full name | String | None
 Id        |Entity ID                                |Int64        |Equals
@@ -208,18 +166,6 @@ PC | Conference instance total publication count | Int32 | None
 PCS.CN    |Parent conference series name of the instance |String     |Equals
 PCS.CId    |Parent conference series ID of the instance |Int64     |Equals
 
-### Conference Instance Extended
-
-> [!IMPORTANT]
-> This attribute has been deprecated and is only supported for legacy applications. Requesting this attribute individually (i.e. attributes=Id,Ti,E) will result in all extended metadata attributes being returned in a *serialized JSON string*</br></br>All attributes contained in the extended metadata are now available as a top-level attribute and can be requested as such (i.e. attributes=Id,Ti,DOI,IA)
-
-> [!IMPORTANT]
-> Support for requesting individual extended attributes by using the "E." scope, i.e. "E.DN" is being deprecated. While this is still technically supported, requesting individual extended attributes using the "E." scope will result in the attribute value being returned in two places in the JSON response, as part of the "E" object and as a top level attribute.
-
-Name | Description | Type | Operations
---- | --- | --- | ---
-FN | Conference instance full name | String | None
-PC | Conference instance total publication count | Int32 | None
 
 ## Affiliation Entity
 
@@ -231,21 +177,8 @@ Name | Description | Type | Operations
 AfN | Affiliation normalized name |String |Equals
 CC | Affiliation total citation count |Int32        |none  
 DAfN | Affiliation display name |String |none
-E | Extended metadata</br></br>**IMPORTANT**: This attribute has been deprecated and is only supported for legacy applications. Requesting this attribute individually (i.e. attributes=Id,Ti,E) will result in all extended metadata attributes being returned in a *serialized JSON string*</br></br>All attributes contained in the extended metadata are now available as a top-level attribute and can be requested as such (i.e. attributes=Id,Ti,DOI,IA) | [Extended](#affiliation-entity-extended) | None
 ECC | Affiliation total estimated citation count |Int32 |none
 Id | Entity ID |Int64 |Equals
-PC | Total number of publications written in affiliation with this entity | Int32 | None
-
-### Affiliation Entity Extended
-
-> [!IMPORTANT]
-> This attribute has been deprecated and is only supported for legacy applications. Requesting this attribute individually (i.e. attributes=Id,Ti,E) will result in all extended metadata attributes being returned in a *serialized JSON string*</br></br>All attributes contained in the extended metadata are now available as a top-level attribute and can be requested as such (i.e. attributes=Id,Ti,DOI,IA)
-
-> [!IMPORTANT]
-> Support for requesting individual extended attributes by using the "E." scope, i.e. "E.DN" is being deprecated. While this is still technically supported, requesting individual extended attributes using the "E." scope will result in the attribute value being returned in two places in the JSON response, as part of the "E" object and as a top level attribute.
-
-Name | Description | Type | Operations
---- | --- | --- | ---
 PC | Total number of publications written in affiliation with this entity | Int32 | None
 
 ## Field Of Study Entity
