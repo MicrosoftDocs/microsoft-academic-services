@@ -13,7 +13,7 @@ Illustrates how to perform analytics for Microsoft Academic Graph using PySpark 
 ## Sample projects
 
 * [Affiliation and Partner Affiliations Analysis](https://github.com/Azure-Samples/microsoft-academic-graph-pyspark-samples/blob/master/src/AffiliationSample.ipynb)
-* [Repository Publication Analysis](https://github.com/Azure-Samples/microsoft-academic-graph-pyspark-samples/blob/master/src/RepositorySample.ipynb)
+* [Repository Publications Analysis](https://github.com/Azure-Samples/microsoft-academic-graph-pyspark-samples/blob/master/src/RepositorySample.ipynb)
 
 ## Prerequisites
 
@@ -50,7 +50,7 @@ In this section, you will import and run sample notebooks.
 1. Import one of the notebooks below to Azure Databricks workspace. Import the notebooks under the same folder as `MagClass` notebook.
 
    * [Affiliation and Partner Affiliations Analysis](https://github.com/Azure-Samples/microsoft-academic-graph-pyspark-samples/blob/master/src/AffiliationSample.ipynb)
-   * [Repository Publication Analysis](https://github.com/Azure-Samples/microsoft-academic-graph-pyspark-samples/blob/master/src/RepositorySample.ipynb)
+   * [Repository Publications Analysis](https://github.com/Azure-Samples/microsoft-academic-graph-pyspark-samples/blob/master/src/RepositorySample.ipynb)
 
 1. Attach a cluster to the notebook.
 
