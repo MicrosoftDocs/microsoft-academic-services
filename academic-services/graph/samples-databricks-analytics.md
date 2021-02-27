@@ -47,10 +47,12 @@ Follow instructions in [Import MagClass Notebook](import-MagClass.md).
 
 In this section, you will import and run sample notebooks.
 
-1. Import one of the notebooks below to Azure Databricks workspace. Import the notebooks under the same folder as `MagClass` notebook.
+1. Download one of the notebooks below to your local drive.
 
    * [Affiliation and Partner Affiliations Analysis](https://github.com/Azure-Samples/microsoft-academic-graph-pyspark-samples/blob/master/src/AffiliationSample.ipynb)
    * [Repository Publications Analysis](https://github.com/Azure-Samples/microsoft-academic-graph-pyspark-samples/blob/master/src/RepositorySample.ipynb)
+
+1. Import the notebooks to Azure Databricks workspace under the same folder as `MagClass` notebook.
 
 1. Attach a cluster to the notebook.
 
