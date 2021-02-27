@@ -56,7 +56,7 @@ In this section, you will import and run sample notebooks.
 
 1. Press the **Run All** icon to run the notebook. Please note that some notebooks take more than 10 minutes to complete.
 
-## View results with Microsoft Azure Storage Explorer
+## Access results with Microsoft Azure Storage Explorer
 
 You could access the output files using [Microsoft Azure Storage Explorer](https://docs.microsoft.com/azure/vs-azure-tools-storage-manage-with-storage-explorer).
 
