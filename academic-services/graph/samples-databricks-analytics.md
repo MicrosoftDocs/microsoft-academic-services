@@ -52,7 +52,7 @@ In this section, you will import and run sample notebooks.
    * [Affiliation and Partner Affiliations Analysis](https://github.com/Azure-Samples/microsoft-academic-graph-pyspark-samples/blob/master/src/AffiliationSample.ipynb)
    * [Repository Publications Analysis](https://github.com/Azure-Samples/microsoft-academic-graph-pyspark-samples/blob/master/src/RepositorySample.ipynb)
 
-1. Import the notebooks to Azure Databricks workspace under the same folder as `MagClass` notebook.
+1. Import the notebooks to Azure Databricks workspace under the same folder as the `MagClass` notebook.
 
 1. Attach a cluster to the notebook.
 
@@ -60,7 +60,7 @@ In this section, you will import and run sample notebooks.
 
 ## Access results with Microsoft Azure Storage Explorer
 
-You could access the output files using [Microsoft Azure Storage Explorer](https://docs.microsoft.com/azure/vs-azure-tools-storage-manage-with-storage-explorer).
+You can access the output files using [Microsoft Azure Storage Explorer](https://docs.microsoft.com/azure/vs-azure-tools-storage-manage-with-storage-explorer).
 
 ![View result with Microsoft Azure Storage Explorer](media/samples-view-pyspark-script-results.png "View result with Microsoft Azure Storage Explorer")
 
