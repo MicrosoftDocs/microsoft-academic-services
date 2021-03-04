@@ -4,7 +4,7 @@ description: Perform analytics for Microsoft Academic Graph using PySpark on Azu
 services: microsoft-academic-services
 ms.topic: tutorial
 ms.service: microsoft-academic-services
-ms.date: 9/23/2020
+ms.date: 2/26/2021
 ---
 # PySpark analytics samples for Microsoft Academic Graph
 
@@ -12,13 +12,8 @@ Illustrates how to perform analytics for Microsoft Academic Graph using PySpark 
 
 ## Sample projects
 
-* [Extract affiliation ID for an affiliation](https://github.com/Azure-Samples/microsoft-academic-graph-pyspark-samples/blob/master/src/Lab1_ExtractAffiliation.py)
-* [Join conferences and journals as venues](https://github.com/Azure-Samples/microsoft-academic-graph-pyspark-samples/blob/master/src/Lab2_UnionVenues.py)
-* [Get publications from an affiliation](https://github.com/Azure-Samples/microsoft-academic-graph-pyspark-samples/blob/master/src/Lab3_JoinPaperAuthorAffiliation.py)
-* [Get authors from an affiliation and the publication details](https://github.com/Azure-Samples/microsoft-academic-graph-pyspark-samples/blob/master/src/Lab4_CreateTable_Extract.py)
-* [Get fields of studiy for an affiliation](https://github.com/Azure-Samples/microsoft-academic-graph-pyspark-samples/blob/master/src/Lab5_CreateTableByTvf.py)
-* [Get collaborated affiliations of an affiliation using its publications](https://github.com/Azure-Samples/microsoft-academic-graph-pyspark-samples/blob/master/src/Lab6_GetPartnerData.py)
-* [Get publication and citation counts by year](https://github.com/Azure-Samples/microsoft-academic-graph-pyspark-samples/blob/master/src/Lab7_GroupByYear.py)
+* [Affiliation and Partner Affiliations Analysis](https://github.com/Azure-Samples/microsoft-academic-graph-pyspark-samples/blob/master/src/AffiliationSample.ipynb)
+* [Repository Publications Analysis](https://github.com/Azure-Samples/microsoft-academic-graph-pyspark-samples/blob/master/src/RepositorySample.ipynb)
 
 ## Prerequisites
 
@@ -44,84 +39,28 @@ Before you begin, you should have these items of information:
 
 ## Import MagClass notebook
 
-In this section, you will import the MagClass.py notebook to Azure Databricks workspace. You will run this utility notebook from other notebooks later.
+In this section, you will import the `MagClass` notebook to Azure Databricks workspace. You will run this utility notebook from other notebooks later.
 
 Follow instructions in [Import MagClass Notebook](import-MagClass.md).
 
-## Create a new notebook
+## Import and run sample notebooks
 
-In this section, you create a new notebook in the Azure Databricks workspace.
+In this section, you will import and run sample notebooks.
 
-1. On the left, select **Workspace**. From the **Workspace** drop-down, select **Create** > **Notebook**. Optionally, you could create this notebook in **Users** level.
+1. Download one of the notebooks below to your local drive.
 
-    ![Create a notebook in Databricks](media/databricks/databricks-create-notebook.png "Create notebook in Databricks")
+   * [Affiliation and Partner Affiliations Analysis](https://github.com/Azure-Samples/microsoft-academic-graph-pyspark-samples/blob/master/src/AffiliationSample.ipynb)
+   * [Repository Publications Analysis](https://github.com/Azure-Samples/microsoft-academic-graph-pyspark-samples/blob/master/src/RepositorySample.ipynb)
 
-1. In the **Create Notebook** dialog box, enter a name for the notebook. Select **Python** as the language.
+1. Import the notebooks to Azure Databricks workspace under the same folder as the `MagClass` notebook.
 
-    ![Provide details for a notebook in Databricks](media/databricks/create-notebook.png "Provide details for a notebook in Databricks")
+1. Attach a cluster to the notebook.
 
-1. Select **Create**.
+1. Press the **Run All** icon to run the notebook. Please note that some notebooks take more than 10 minutes to complete.
 
-## Create first notebook cell
+## Access results with Microsoft Azure Storage Explorer
 
-In this section, you create the first notebook cell to run the MagClass notebook.
-
-1. Copy and paste following code block into the first cell.
-
-   ```python
-   %run "./MagClass"
-   ```
-
-1. Press the **SHIFT + ENTER** keys to run the code in this block. It defines MicrosoftAcademicGraph class.
-
-## Define configration variables
-
-In this section, you add a new notebook cell and define configration variables.
-
-1. Copy and paste following code block into the first cell.
-
-   ```python
-   # Define configration variables
-   AzureStorageAccount = '<AzureStorageAccount>'     # Azure Storage (AS) account containing MAG dataset
-   AzureStorageAccessKey = '<AzureStorageAccessKey>' # Access Key of the Azure Storage (AS) account
-   MagContainer = '<MagContainer>'                   # The container name in Azure Storage (AS) account containing MAG dataset, usually in forms of mag-yyyy-mm-dd
-   OutputContainer = '<OutputContainer>'             # The container name in Azure Storage (AS) account where the output goes to
-   ```
-
-1. In this code block, replace `<AzureStorageAccount>`, `<AzureStorageAccessKey>`, and `<MagContainer>` placeholder values with the values that you collected while completing the prerequisites of this sample.
-
-   |Value  |Description  |
-   |---------|---------|
-   |**`<AzureStorageAccount>`** | The name of your Azure Storage account. |
-   |**`<AzureStorageAccessKey>`** | The access key of your Azure Storage account. |
-   |**`<MagContainer>`** | The container name in Azure Storage account containing MAG dataset, usually in the form of **mag-yyyy-mm-dd**. |
-   |**`<OutputContainer>`** | The container name in Azure Storage (AS) account where the output goes to |
-
-1. Press the **SHIFT + ENTER** keys to run the code in this block.
-
-## Create MicrosoftAcademicGraph and AzureStorageUtil instances
-
-In this section, you create a MicrosoftAcademicGraph instance to access MAG dataset, and an AzureStorageUtil instance to access other Azure Storage files.
-
-1. Copy and paste the following code block in a new cell.
-
-   ```python
-   # Create a MicrosoftAcademicGraph instance to access MAG dataset
-   mag = MicrosoftAcademicGraph(container=MagContainer, account=AzureStorageAccount, key=AzureStorageAccessKey)
-
-   # Create a AzureStorageUtil instance to access other Azure Storage files
-   asu = AzureStorageUtil(container=OutputContainer, account=AzureStorageAccount, key=AzureStorageAccessKey)
-   ```
-
-1. Press the **SHIFT + ENTER** keys to run the code in this block.
-
-## Run scripts in the repository
-
-1. Copy content in a script and paste into a new cell.
-
-1. Press the **SHIFT + ENTER** keys to run the code in this cell. Please note that some scripts take more than 10 minutes to complete.
-
-## View results with Microsoft Azure Storage Explorer
+You can access the output files using [Microsoft Azure Storage Explorer](https://docs.microsoft.com/azure/vs-azure-tools-storage-manage-with-storage-explorer).
 
 ![View result with Microsoft Azure Storage Explorer](media/samples-view-pyspark-script-results.png "View result with Microsoft Azure Storage Explorer")
 
