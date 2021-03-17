@@ -19,6 +19,7 @@ https://api.labs.cognitive.microsoft.com/academic/v1.0/calchistogram?
 
 Name | Value | Required? | Description
 --- | --- | --- | ---
+**subscription-key** | String | Yes | Valid [Project Academic Knowledge subscription key](https://msr-apis.portal.azure-api.net/products/project-academic-knowledge)
 **expr** | Text string | Yes | A query expression that specifies the entities over which to calculate histograms.
 **model** | Text string | No | Select the name of the model that you wish to query. Currently, the value defaults to *latest*.
 **attributes** | Text string | No<br>default: | A comma-delimited list that specifies the attribute values that are included in the response. Attribute names are case-sensitive.
@@ -45,13 +46,13 @@ Name | Description
 ### Example
 
 ``` HTTP
-https://api.labs.cognitive.microsoft.com/academic/v1.0/calchistogram?expr=And(Composite(AA.AuN=='jaime teevan'),Y>2012)&attributes=Y,F.FN&count=4
+https://api.labs.cognitive.microsoft.com/academic/v1.0/calchistogram?expr=And(Composite(AA.AuN=='jaime teevan'),Y>2012)&attributes=Y,F.FN&count=4&subscription-key=<subscription_key>
 ```
 
 In this example, in order to generate a histogram of the count of publications by year for a particular author since 2010, we can first generate the query expression using the **interpret** API with query string: *papers by jaime teevan after 2012*.
 
 ``` HTTP
-https://api.labs.cognitive.microsoft.com/academic/v1.0/interpret?query=papers by jaime teevan after 2012
+https://api.labs.cognitive.microsoft.com/academic/v1.0/interpret?query=papers by jaime teevan after 2012&subscription-key=<subscription_key>
 ```
 
 The expression in the first interpretation that is returned from the interpret API is *And(Composite(AA.AuN=='jaime teevan'),Y>2012)*.\
@@ -59,7 +60,7 @@ The expression in the first interpretation that is returned from the interpret A
 This expression value is then passed in to the **calchistogram** API. The *attributes=Y,F.FN* parameter indicates that the distributions of paper counts should be by Year and Field of Study, e.g.:
 
 ``` HTTP
-https://api.labs.cognitive.microsoft.com/academic/v1.0/calchistogram?expr=And(Composite(AA.AuN=='jaime teevan'),Y>2012)&attributes=Y,F.FN&count=4
+https://api.labs.cognitive.microsoft.com/academic/v1.0/calchistogram?expr=And(Composite(AA.AuN=='jaime teevan'),Y>2012)&attributes=Y,F.FN&count=4&subscription-key=<subscription_key>
 ```
 
 The response to this request first indicates that there are 37 papers that match the query expression. For the *Year* attribute, there are 3 distinct values, one for each year after 2012 (i.e. 2013, 2014, and 2015) as specified in the query. The total paper count over the 3 distinct values is 37. For each *Year*, the histogram shows the value, total natural log probability, and count of matching entities.
