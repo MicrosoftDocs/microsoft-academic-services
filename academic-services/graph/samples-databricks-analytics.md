@@ -4,7 +4,7 @@ description: Perform analytics for Microsoft Academic Graph using PySpark on Azu
 services: microsoft-academic-services
 ms.topic: tutorial
 ms.service: microsoft-academic-services
-ms.date: 3/15/2021
+ms.date: 3/16/2021
 ---
 # PySpark analytics samples for Microsoft Academic Graph
 
