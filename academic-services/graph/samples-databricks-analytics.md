@@ -4,7 +4,7 @@ description: Perform analytics for Microsoft Academic Graph using PySpark on Azu
 services: microsoft-academic-services
 ms.topic: tutorial
 ms.service: microsoft-academic-services
-ms.date: 2/26/2021
+ms.date: 3/15/2021
 ---
 # PySpark analytics samples for Microsoft Academic Graph
 
@@ -51,6 +51,7 @@ In this section, you will import and run sample notebooks.
 
    * [Affiliation and Partner Affiliations Analysis](https://github.com/Azure-Samples/microsoft-academic-graph-pyspark-samples/blob/master/src/AffiliationSample.ipynb)
    * [Repository Publications Analysis](https://github.com/Azure-Samples/microsoft-academic-graph-pyspark-samples/blob/master/src/RepositorySample.ipynb)
+   * [MAG Stanford AI Index](https://github.com/Azure-Samples/microsoft-academic-graph-pyspark-samples/blob/master/src/AIIndex.ipynb)
 
 1. Import the notebooks to Azure Databricks workspace under the same folder as the `MagClass` notebook.
 
