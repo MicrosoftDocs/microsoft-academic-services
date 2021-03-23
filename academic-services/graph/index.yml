@@ -4,12 +4,12 @@ title: Microsoft Academic Graph (MAG) documentation
 summary: Learn about Microsoft Academic Graph (MAG), including getting started guide, data schema reference, sample analytics.
 
 metadata:
-  title: Project Academic Knowledge (PAK) documentation
+  title: Microsoft Academic Graph (MAG) documentation
   description: Learn about Microsoft Academic Graph (MAG), including getting started guides, data schema reference, sample analytics
   ms.topic: landing-page
   author: DarrinEide
   ms.author: darrine
-  ms.date: 7/31/2020
+  ms.date: 3/23/2021
 
 landingContent:
   - title: About MAG
