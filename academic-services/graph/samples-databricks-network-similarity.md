@@ -75,6 +75,7 @@ Replace values for following variables.
   | EntityId1 | 1290206253 | Entity id of Microsoft. Replace with other entity id if needed. |
   | EntityId2 | 201448701 | Entity id of University of Washington. Replace with other entity id if needed. |
   <br>
+  
   - If the MAG dataset is from Azure Data Share, set **MagContainer** to the container you created, and **MagVersion** to `'mag/yyyy-mm-dd'`.
   - Otherwise, set **MagContainer** to `'mag-yyyy-mm-dd'`, and **MagVersion** to `''`.
 
