@@ -64,8 +64,8 @@ In this section, you will import the NetworkSimilaritySample.py as a notebook in
 
 Replace values for following variables.
 
-  | Variable  | Value | Description  |
-  | --------- | --------- | --------- |
+  | Variable | Value | Description |
+  | - | - | - |
   | AzureStorageAccount | Replace **`<AzureStorageAccount>`** | This is the Azure Storage account containing MAG dataset. |
   | AzureStorageAccessKey | Replace **`<AzureStorageAccessKey>`** | This is the Access Key of the Azure Storage account. |
   | MagContainer | Replace **`<MagContainer>`** | This is the container name in Azure Storage account containing MAG dataset. See below. |
@@ -74,6 +74,7 @@ Replace values for following variables.
   | Sense | 'metapath' | See [documentation](network-similarity.md#available-senses) for available senses. Replace with other sense if needed. |
   | EntityId1 | 1290206253 | Entity id of Microsoft. Replace with other entity id if needed. |
   | EntityId2 | 201448701 | Entity id of University of Washington. Replace with other entity id if needed. |
+
   <br>
   
   - If the MAG dataset is from Azure Data Share, set **MagContainer** to the container you created, and **MagVersion** to `'mag/yyyy-mm-dd'`.

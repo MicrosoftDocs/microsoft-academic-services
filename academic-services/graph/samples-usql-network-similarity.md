@@ -55,11 +55,12 @@ In this section, you submit an ADLA job to define network similarity functions.
 
 1. Replace `<AzureStorageAccount>`, and `<MagContainer>` placeholder values with the values that you collected while completing the prerequisites of this sample.
 
-   |Value  |Description  |
-   |---------|---------|
-   |**`<AzureStorageAccount>`** | The name of your Azure Storage (AS) account containing MAG dataset. |
+   | Value | Description |
+   |-|-|
+   | **`<AzureStorageAccount>`** | The name of your Azure Storage (AS) account containing MAG dataset. |
    | **`<MagContainer>`** | This is the container name in Azure Storage account containing MAG dataset. See below. |
    | **`<MagVersion>`** | This is the path to a MAG dataset in MagContainer.  See below. |
+
    <br>
 
    * If the MAG dataset is from Azure Data Share, set **MagContainer** to the container you created, and **MagVersion** to `'mag/yyyy-mm-dd'`.

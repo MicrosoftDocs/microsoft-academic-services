@@ -61,11 +61,12 @@ Follow instructions in [Define MAG functions](define-mag-function.md).
 1. For each tutorial there should be: A U-SQL script(.usql), a Power BI report (.pbix), a Power BI template (.pbit) and a README explaining the tutorial.
 1. In the U-SQL script, replace `<AzureStorageAccount>`, and `<MagContainer>` placeholder values with the values that you collected while completing the prerequisites of this sample.
 
-   |Value  |Description  |
-   |---------|---------|
+   | Value | Description |
+   | - | - |
    |**`<AzureStorageAccount>`** | The name of your Azure Storage (AS) account containing MAG dataset. |
    | **`<MagContainer>`** | This is the container name in Azure Storage account containing MAG dataset. See below. |
    | **`<MagVersion>`** | This is the path to a MAG dataset in MagContainer.  See below. |
+
    <br>
 
    * If the MAG dataset is from Azure Data Share, set **MagContainer** to the container you created, and **MagVersion** to `'mag/yyyy-mm-dd'`.
