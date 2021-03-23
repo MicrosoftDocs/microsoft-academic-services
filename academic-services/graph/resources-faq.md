@@ -2,7 +2,7 @@
 title: FAQ about Microsoft Academic Graph
 description: Answers some of the most frequently asked questions about the Microsoft Academic Graph
 ms.topic: reference
-ms.date: 8/27/2020
+ms.date: 3/23/2021
 ---
 # Frequently Asked Questions about Microsoft Academic Graph
 
@@ -76,3 +76,11 @@ For papers not having a FamilyId, the FamilyRank is null.
 PaperCount is the number of papers associated with the entity.
 
 PaperFamilyCount is the number of primary family papers associated with the entity.
+
+## Why changing to Azure Data Share
+
+We now utilize Azure Data Share to distribution datasets. Here are some benefits for using Azure Data Share.
+
+- You control for getting one-time snapshot of latest dataset or recurring releases when new datasets are available.
+- Better security. No need for customers to share the storage key with Microsoft Academic.
+

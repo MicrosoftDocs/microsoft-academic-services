@@ -4,7 +4,7 @@ description: Compute author h-index for Microsoft Academic Graph using Azure Dat
 services: microsoft-academic-services
 ms.topic: tutorial
 ms.service: microsoft-academic-services
-ms.date: 9/23/2020
+ms.date: 3/23/2021
 ---
 # Tutorial: Compute author h-index using Azure Data Lake Analytics (U-SQL)
 
@@ -21,13 +21,15 @@ Complete these tasks before beginning this tutorial:
 
    Before you begin, you should have these items of information:
 
-   :heavy_check_mark:  The name of your Azure Storage (AS) account containing MAG dataset from [Get Microsoft Academic Graph on Azure storage](get-started-setup-provisioning.md#note-azure-storage-account-name-and-primary-key).
+   :heavy_check_mark:  The name of your Azure Storage (AS) account containing MAG dataset from [Get Microsoft Academic Graph on Azure storage](get-started-setup-provisioning.md#note-azure-storage-account-name).
 
    :heavy_check_mark:  The name of your Azure Data Lake Analytics (ADLA) service from [Set up Azure Data Lake Analytics](get-started-setup-azure-data-lake-analytics.md#create-azure-data-lake-analytics-account).
 
    :heavy_check_mark:  The name of your Azure Data Lake Storage (ADLS) from [Set up Azure Data Lake Analytics](get-started-setup-azure-data-lake-analytics.md#create-azure-data-lake-analytics-account).
 
    :heavy_check_mark:  The name of the container in your Azure Storage (AS) account containing MAG dataset.
+
+   :heavy_check_mark:  The path to a MAG dataset in the container.
 
 ## Define functions to extract MAG data
 
@@ -46,11 +48,19 @@ In this section, you submit an ADLA job to compute author h-index and save outpu
 1. Copy and paste the following code block in the script window.
    
    ```U-SQL
-   DECLARE @dataVersion string = "<MagContainer>";
    DECLARE @blobAccount string = "<AzureStorageAccount>";
+   DECLARE @blobContainer string = "<MagContainer>";
+   DECLARE @magVersion  string = "<MagVersion>";
    DECLARE @uriPrefix   string = "wasb://" + @dataVersion + "@" + @blobAccount + "/";
    DECLARE @outAuthorHindex string = "/Output/AuthorHIndex.tsv";
    
+   // The Windows Azure Blob Storage (WASB) URI of the Microsoft Academic Graph data to be used by this script
+   IF @magVersion == "" THEN
+      DECLARE @uriPrefix string = "wasb://" + @blobContainer + "@" + @blobAccount + "/";
+   ELSE 
+      DECLARE @uriPrefix string = "wasb://" + @blobContainer + "@" + @blobAccount + "/" + @magVersion + "/";
+   END;
+
    @Affiliations = Affiliations(@uriPrefix);
    @Authors = Authors(@uriPrefix);
    @Papers = Papers(@uriPrefix);

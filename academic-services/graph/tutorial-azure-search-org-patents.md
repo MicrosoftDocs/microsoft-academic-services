@@ -4,7 +4,7 @@ description: Set up Azure Search service to do organizational patent search usin
 services: microsoft-academic-services
 ms.topic: tutorial
 ms.service: microsoft-academic-services
-ms.date: 9/23/2020
+ms.date: 3/23/2021
 ---
 
 # Tutorial: Set up organizational patent search with Azure Search
@@ -29,13 +29,15 @@ Complete these tasks before beginning this tutorial:
 
    Before you begin, you should have these items of information:
 
-   :heavy_check_mark:  The name of your Azure Storage (AS) account containing MAG dataset from [Get Microsoft Academic Graph on Azure storage](get-started-setup-provisioning.md#note-azure-storage-account-name-and-primary-key).
+   :heavy_check_mark:  The name of your Azure Storage (AS) account containing MAG dataset from [Get Microsoft Academic Graph on Azure storage](get-started-setup-provisioning.md#note-azure-storage-account-name).
 
    :heavy_check_mark:  The name of your Azure Data Lake Analytics (ADLA) service from [Set up Azure Data Lake Analytics](get-started-setup-azure-data-lake-analytics.md#create-azure-data-lake-analytics-account).
 
    :heavy_check_mark:  The name of your Azure Data Lake Storage (ADLS) from [Set up Azure Data Lake Analytics](get-started-setup-azure-data-lake-analytics.md#create-azure-data-lake-analytics-account).
 
    :heavy_check_mark:  The name of the container in your Azure Storage (AS) account containing MAG dataset.
+
+   :heavy_check_mark:  The path to a MAG dataset in the container.
 
 ## Define functions to extract MAG data
 
@@ -63,12 +65,19 @@ In this section, you submit an ADLA job to generate text files containing academ
     // The Azure blob storage container name that contains the Microsoft Academic Graph data to be used by this script
     DECLARE @inputBlobContainer string = "<MagContainer>";
     
+    // The path to a MAG dataset in the container
+    DECLARE @magVersion string = "<MagVersion>";
+    
     // The Windows Azure Blob Storage (WASB) URI of the Microsoft Academic Graph data to be used by this script
-    DECLARE @inputUri string = "wasb://" + @inputBlobContainer + "@" + @inputBlobAccount + "/";
+    IF @magVersion == "" THEN
+    	DECLARE @inputUri   string = "wasb://" + @blobContainer + "@" + @blobAccount + "/";
+    ELSE 
+	    DECLARE @inputUri   string = "wasb://" + @blobContainer + "@" + @blobAccount + "/" + @magVersion + "/";
+    END;
     
     // The Azure blob storage account name that output files will be generated in
     DECLARE @outputBlobAccount string = "<OutputAzureStorageAccount>";
-    
+
     // The Azure blob storage container name that output files will be generated in
     // ***IMPORTANT: This container must exist before running this script otherwise the script will fail
     DECLARE @outputBlobContainer string = "<OutputContainer>";

@@ -4,7 +4,7 @@ description: Network Similarity Sample (U-SQL)
 services: microsoft-academic-services
 ms.topic: tutorial
 ms.service: microsoft-academic-services
-ms.date: 10/20/2020
+ms.date: 3/23/2021
 ---
 # Network Similarity Sample (U-SQL)
 
@@ -21,7 +21,7 @@ Complete these tasks before beginning this tutorial:
 
    Before you begin, you should have these items of information:
 
-   :heavy_check_mark:  The name of your Azure Storage (AS) account containing MAG dataset from [Get Microsoft Academic Graph on Azure storage](get-started-setup-provisioning.md#note-azure-storage-account-name-and-primary-key).
+   :heavy_check_mark:  The name of your Azure Storage (AS) account containing MAG dataset from [Get Microsoft Academic Graph on Azure storage](get-started-setup-provisioning.md#note-azure-storage-account-name).
 
    :heavy_check_mark:  The name of your Azure Data Lake Analytics (ADLA) service from [Set up Azure Data Lake Analytics](get-started-setup-azure-data-lake-analytics.md#create-azure-data-lake-analytics-account).
 
@@ -58,7 +58,11 @@ In this section, you submit an ADLA job to define network similarity functions.
    |Value  |Description  |
    |---------|---------|
    |**`<AzureStorageAccount>`** | The name of your Azure Storage (AS) account containing MAG dataset. |
-   |**`<MagContainer>`** | The container name in Azure Storage (AS) account containing MAG dataset, usually in the form of **mag-yyyy-mm-dd**. |
+   | **`<MagContainer>`** | This is the container name in Azure Storage account containing MAG dataset. See below. |
+   | **`<MagVersion>`** | This is the path to a MAG dataset in MagContainer.  See below. |
+  
+   * If the MAG dataset is from Azure Data Share, set **MagContainer** to the container you created, and **MagVersion** to `'mag/yyyy-mm-dd'`.
+   * Otherwise, set **MagContainer** to `'mag-yyyy-mm-dd'`, and **MagVersion** to `''`.
 
 1. Select **Submit**.
 

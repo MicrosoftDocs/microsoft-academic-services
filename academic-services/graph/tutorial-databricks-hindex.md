@@ -4,7 +4,7 @@ description: Compute author h-index for Microsoft Academic Graph using Azure Dat
 services: microsoft-academic-services
 ms.topic: tutorial
 ms.service: microsoft-academic-services
-ms.date: 10/20/2020
+ms.date: 3/23/2021
 ---
 # Tutorial: Compute author h-index using Azure Databricks
 
@@ -22,11 +22,13 @@ Complete these tasks before you begin this tutorial:
 
    Before you begin, you should have these items of information:
 
-   :heavy_check_mark:  The name of your Azure Storage (AS) account containing MAG dataset from [Get Microsoft Academic Graph on Azure storage](get-started-setup-provisioning.md#note-azure-storage-account-name-and-primary-key).
+   :heavy_check_mark:  The name of your Azure Storage (AS) account containing MAG dataset from [Get Microsoft Academic Graph on Azure storage](get-started-setup-provisioning.md#note-azure-storage-account-name).
 
-   :heavy_check_mark:  The access key of your Azure Storage (AS) account from [Get Microsoft Academic Graph on Azure storage](get-started-setup-provisioning.md#note-azure-storage-account-name-and-primary-key).
+   :heavy_check_mark:  The access key of your Azure Storage (AS) account from [Get Microsoft Academic Graph on Azure storage](get-started-setup-provisioning.md#note-azure-storage-account-name).
 
    :heavy_check_mark:  The name of the container in your Azure Storage (AS) account containing MAG dataset.
+
+   :heavy_check_mark:  The path to a MAG dataset in the container.
 
 ## Import MagClass notebook
 
@@ -58,13 +60,18 @@ Replace values for following variables.
   | --------- | --------- | --------- |
   | AzureStorageAccount | Replace **`<AzureStorageAccount>`** | This is the Azure Storage account containing MAG dataset. |
   | AzureStorageAccessKey | Replace **`<AzureStorageAccessKey>`** | This is the Access Key of the Azure Storage account. |
-  | MagContainer | Replace **`<MagContainer>`** | This is the container name in Azure Storage account containing MAG dataset, usually in the form of mag-yyyy-mm-dd. |
+  | MagContainer | Replace **`<MagContainer>`** | This is the container name in Azure Storage account containing MAG dataset. See below. |
+  | MagVersion | Replace **`<MagVersion>`** | This is the path to a MAG dataset in MagContainer.  See below. |
   | OutputContainer | Replace **`<OutputContainer>`** | This is the container name in Azure Storage account where the output goes to. |
+  <br>
+  - If the MAG dataset is from Azure Data Share, set **MagContainer** to the container you created, and **MagVersion** to `'mag/yyyy-mm-dd'`.
+  - Otherwise, set **MagContainer** to `'mag-yyyy-mm-dd'`, and **MagVersion** to `''`.
 
    ```python
    AzureStorageAccount = '<AzureStorageAccount>'
    AzureStorageAccessKey = '<AzureStorageAccessKey>'
    MagContainer = '<MagContainer>'
+   MagVersion = '<MagVersion>'
    OutputContainer = '<OutputContainer>'
    ```
 
@@ -83,10 +90,10 @@ Run the MagClass notebook to define MicrosoftAcademicGraph class.
    ```
 
 #### Create a MicrosoftAcademicGraph instance to access MAG dataset
-Use account=AzureStorageAccount, key=AzureStorageAccessKey, container=MagContainer.
+Use account=AzureStorageAccount, key=AzureStorageAccessKey, container=MagContainer, version=MagVersion
 
    ```python
-   MAG = MicrosoftAcademicGraph(account=AzureStorageAccount, key=AzureStorageAccessKey, container=MagContainer
+   MAG = MicrosoftAcademicGraph(account=AzureStorageAccount, key=AzureStorageAccessKey, container=MagContainer, version=MagVersion)
    ```
 
 #### Import python libraries
