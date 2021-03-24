@@ -50,8 +50,7 @@ In this section, you submit an ADLA job to compute author h-index and save outpu
    ```U-SQL
    DECLARE @blobAccount string = "<AzureStorageAccount>";
    DECLARE @blobContainer string = "<MagContainer>";
-   DECLARE @magVersion  string = "<MagVersion>";
-   DECLARE @uriPrefix   string = "wasb://" + @dataVersion + "@" + @blobAccount + "/";
+   DECLARE @magVersion string = "<MagVersion>";
    DECLARE @outAuthorHindex string = "/Output/AuthorHIndex.tsv";
    
    // The Windows Azure Blob Storage (WASB) URI of the Microsoft Academic Graph data to be used by this script
@@ -160,7 +159,13 @@ In this section, you submit an ADLA job to compute author h-index and save outpu
    |Value  |Description  |
    |---------|---------|
    |**`<AzureStorageAccount>`** | The name of your Azure Storage (AS) account containing MAG dataset. |
-   |**`<MagContainer>`** | The container name in Azure Storage (AS) account containing MAG dataset, usually in the form of **mag-yyyy-mm-dd**. |
+   | **`<MagContainer>`** | This is the container name in Azure Storage account containing MAG dataset. See below. |
+   | **`<MagVersion>`** | This is the path to a MAG dataset in MagContainer.  See below. |
+
+   <br>
+
+   - If the MAG dataset is from Azure Data Share, set **MagContainer** to the container you created, and **MagVersion** to `'mag/yyyy-mm-dd'`.
+   - Otherwise, set **MagContainer** to `'mag-yyyy-mm-dd'`, and **MagVersion** to `''`.
 
 1. Provide a **Job name**, change **AUs** to 5, and select **Submit**.
 

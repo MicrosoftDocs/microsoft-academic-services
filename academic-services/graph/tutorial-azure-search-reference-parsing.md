@@ -81,9 +81,9 @@ In this section, you submit an ADLA job to generate text files containing academ
     
     // The Windows Azure Blob Storage (WASB) URI of the Microsoft Academic Graph data to be used by this script
     IF @magVersion == "" THEN
-    	DECLARE @inputUri   string = "wasb://" + @blobContainer + "@" + @blobAccount + "/";
-    ELSE 
-	    DECLARE @inputUri   string = "wasb://" + @blobContainer + "@" + @blobAccount + "/" + @magVersion + "/";
+      DECLARE @inputUri string = "wasb://" + @inputBlobContainer + "@" + @inputBlobAccount + "/";
+    ELSE
+      DECLARE @inputUri string = "wasb://" + @inputBlobContainer + "@" + @inputBlobAccount + "/" + @magVersion + "/";
     END;
     
     // The Azure blob storage account name that output files will be generated in
