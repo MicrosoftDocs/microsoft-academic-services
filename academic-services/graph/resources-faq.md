@@ -77,7 +77,7 @@ PaperCount is the number of papers associated with the entity.
 
 PaperFamilyCount is the number of primary family papers associated with the entity.
 
-## Why changing to Azure Data Share
+## Why distributing Microsoft Academic Graph using Azure Data Share
 
 We now utilize Azure Data Share to distribution datasets. Here are some benefits for using Azure Data Share.
 
