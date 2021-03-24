@@ -18,6 +18,9 @@ When using Microsoft Academic data (MAG, MAKES, etc.) in a product or service, o
 >
 > - K. Wang et al., “A Review of Microsoft Academic Services for Science of Science Studies”, Frontiers in Big Data, 2019, doi: 10.3389/fdata.2019.00045
 
+> [!NOTE]
+> MAG is currently in a free preview period, so there are no charges associated with the provisioning or use of the data/service itself. However Azure requires you to cover all costs associated with standard resource creation, usage, etc. For cost estimates associated with MAG please see the [Pricing](resources-pricing.md) page. <br/><br/>Most research institutions have an "Enterprise Account" with Microsoft including Azure subscription. The pricing for Enterprise Accounts differ from the individual account shown in Azure's price calculator. <br/><br/>If you have an Enterprise Account, please check with your individual institution's Information Technology/Computer Center resource on the process of setting up Azure to get MAG. You might need to obtain a "Master Agreement #" and involve MLSP (Microsoft Licensed Solution Provider) for help.
+
 ## Setup data share and storage account to receive MAG graph releases
 
 ### Create an Azure Subscription
@@ -40,7 +43,7 @@ Sign in to the [Azure portal](https://portal.azure.com/).
     |---------|---------|
     |**Subscription** | From the drop-down, select your Azure subscription. |
     |**Resource group** | Specify whether you want to create a new resource group or use an existing one. A resource group is a container that holds related resources for an Azure solution. For more information, see [Azure Resource Group overview](https://docs.microsoft.com/azure/azure-resource-manager/resource-group-overview). |
-    |**Location**    | Select one of the locations below which is most appropriate for your existing Azure resources. <br> - East Asia <br> - West Europe <br> - UK South <br> - US East <br> - US West |
+    |**Location**    | Select one of the locations below which is most appropriate for you. <br> - `East Asia` <br> - `UK South` <br> - `US East` <br> - `US West` <br> - `West Europe` |
     |**Name** | Provide a name for your Data Share service. |
 
     <br>
@@ -119,9 +122,6 @@ To sign up for MAG on AS distribution preview, send the following information **
 ## Receiving MAG Datasets
 
 After reviewing the application, Microsoft Academic will send an invitation through Azure Data Share for receiving MAG datasets. Follow the instructions in [Receive data using Azure Data Share](get-started-receive-data.md) to complete the set up.
-
-> [!NOTE]
-> MAG is currently in a free preview period, so there are no charges associated with the provisioning or use of the data/service itself. However Azure requires you to cover all costs associated with standard resource creation, usage, etc. For cost estimates associated with MAG please see the [Pricing](resources-pricing.md) page. <br/><br/>Most research institutions have an "Enterprise Account" with Microsoft including Azure subscription. The pricing for Enterprise Accounts differ from the individual account shown in Azure's price calculator. <br/><br/>If you have an Enterprise Account, please check with your individual institution's Information Technology/Computer Center resource on the process of setting up Azure to get MAG. You might need to obtain a "Master Agreement #" and involve MLSP (Microsoft Licensed Solution Provider) for help.
 
 ## Next steps
 

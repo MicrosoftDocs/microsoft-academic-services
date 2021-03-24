@@ -81,6 +81,25 @@ PaperFamilyCount is the number of primary family papers associated with the enti
 
 We now utilize Azure Data Share to distribution datasets. Here are some benefits for using Azure Data Share.
 
-- You control for getting one-time snapshot of latest dataset or recurring releases when new datasets are available.
-- Better security. No need for customers to share the storage key with Microsoft Academic.
+- Better security: no need to share the Azure Storage account key with Microsoft Academic.
+- You have the full control of getting one-time snapshot of latest dataset or recurring releases when new datasets are available.
 
+## How to get the latest dataset
+
+  You can get the latest MAG dataset using your Data Share service.
+
+  Azure Portal Home -> Your Data Share service -> Received Shares -> "Microsoft-Academic-\<Location\>" -> Trigger snapshot -> Full Copy
+
+  ![Trigger snapshot](./media/receive-data/trigger-snapshot.png "Trigger snapshot") 
+
+## How to start recurring provisioning of datasets
+
+  To receive regular updates to the data, you enable snapshot schedule by selecting the **Snapshot Schedule** tab. Check the box next to the snapshot schedule and select **Enable**.
+
+  ![Enable snapshot schedule](./media/receive-data/enable-snapshot-schedule.png "Enable snapshot schedule")
+
+## How to stop recurring provisioning of datasets
+
+  To stop receiving regular updates to the data, you disable snapshot schedule by selecting the **Snapshot Schedule** tab. Check the box next to the snapshot schedule and select **Disable**.
+
+  ![Disable snapshot schedule](./media/receive-data/disable-snapshot-schedule.png "Disable snapshot schedule")
