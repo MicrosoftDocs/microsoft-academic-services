@@ -154,7 +154,7 @@ In this section, you submit an ADLA job to compute author h-index and save outpu
    USING Outputters.Tsv(quoting : false);
    ```
 
-1. In this code block, replace `<AzureStorageAccount>`, and `<MagContainer>` placeholder values with the values that you collected while completing the prerequisites of this sample.
+1. In this code block, replace `<AzureStorageAccount>`, `<MagContainer>`, and `<MagVersion>` placeholder values with the values that you collected while completing the prerequisites of this sample.
 
    |Value  |Description  |
    |---------|---------|
@@ -164,7 +164,7 @@ In this section, you submit an ADLA job to compute author h-index and save outpu
 
    <br>
 
-   - If the MAG dataset is from Azure Data Share, set **MagContainer** to the container you created, and **MagVersion** to `'mag/yyyy-mm-dd'`.
+   - If the MAG dataset is from Azure Data Share, set **MagContainer** to the container mapped when accepting Data Share invitation, and **MagVersion** to `'mag/yyyy-mm-dd'`.
    - Otherwise, set **MagContainer** to `'mag-yyyy-mm-dd'`, and **MagVersion** to `''`.
 
 1. Provide a **Job name**, change **AUs** to 5, and select **Submit**.
