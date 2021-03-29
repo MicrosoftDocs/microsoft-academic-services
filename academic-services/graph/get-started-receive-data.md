@@ -29,9 +29,9 @@ Before you begin, you should have these items of information:
 
 Sign in to the [Azure portal](https://portal.azure.com/).
 
-## Open invitation
+## Open your invitation
 
-1. You can open invitation from email or directly from Azure portal. 
+1. You can open the invitation from your email client or directly from the Azure portal. 
 
    * To open invitation from email, check your inbox for an invitation from your data provider. The invitation is from Microsoft Azure, titled **Azure Data Share invitation from <yourdataprovider@domain.com>**. Click on **View invitation** to see your invitation in Azure. 
 
@@ -41,7 +41,7 @@ Sign in to the [Azure portal](https://portal.azure.com/).
 
    ![List of Invitations](./media/receive-data/invitations.png "List of invitations") 
 
-## Accept invitation
+## Accept the invitation
 
 1. Make sure all fields are reviewed, including the **Terms of Use**. If you agree to the terms of use, you'll be required to check the box to indicate you agree. 
 
@@ -65,7 +65,7 @@ Sign in to the [Azure portal](https://portal.azure.com/).
 
 Follow the steps below to configure where you want to receive data.
 
-1. Select **Datasets** tab. Check the box next to the dataset you'd like to assign a destination to. Select **+ Map to target** to choose a target data store. Check both `mag` and `makes` to receive MAG and MAKES data. Or check one dataset to receive only MAG data or only MAKES data.
+1. Select the **Datasets** tab. Check the box next to the dataset you'd like to assign a destination to. Select **+ Map to target** to choose a target data store. Check both `mag` and `makes` to receive MAG and MAKES data. Or check one dataset to receive only MAG data or only MAKES data.
 
    ![Map to target](./media/receive-data/dataset-map-target.png "Map to target") 
 
@@ -75,8 +75,8 @@ Follow the steps below to configure where you want to receive data.
     |---------|---------|
     |**Target data type** | Azure Blob Storage |
     |**Subscription** | From the drop-down, select your Azure subscription. |
-    |**Resource group** | Specify whether you want to create a new resource group or use an existing one. A resource group is a container that holds related resources for an Azure solution. For more information, see [Azure Resource Group overview](https://docs.microsoft.com/azure/azure-resource-manager/resource-group-overview). You can use the same resource group as the Data Share service.|
-    |**Storage account name** | Provide a name for your storage account, e.g. `mag<org_name>`. |
+    |**Resource group** | Specify whether you want to create a new resource group or use an existing one. A resource group is a container that holds related resources within an Azure subscription. For more information, see [Azure Resource Group overview](https://docs.microsoft.com/azure/azure-resource-manager/resource-group-overview). You can use the same resource group as the Data Share service.|
+    |**Storage account name** | Select the Azure storage account created in [Get Microsoft Academic Graph on Azure storage](get-started-setup-provisioning.md#create-an-azure-storage-account), e.g. `mag<org_name>`. |
     |**Path**    | Select the blob storage container created in . e.g. `ma-datashare`. |
 
     <br>
@@ -89,7 +89,7 @@ Follow the steps below to configure where you want to receive data.
 
    ![Trigger snapshot](./media/receive-data/trigger-snapshot.png "Trigger snapshot") 
 
-1. When the last run status is *successful*, go to target data store to view the received data. Select **Datasets**, and click on the link in the Target Path. 
+1. When the last run status is *successful*, go to the target data store to view the received data. Select **Datasets**, and click on the link in the Target Path. 
 
    ![Consumer datasets](./media/receive-data/consumer-datasets.png "Consumer dataset mapping") 
 
@@ -97,15 +97,15 @@ Follow the steps below to configure where you want to receive data.
 
 ## Enable snapshot schedule (Optional)
 
-1. To receive one-time data only, you skip this step.
+1. If you do not want to automatically receive updated versions of MAG or MAKES when they are available, you may skip this step.
 
-1. To receive regular update to the data, you enable snapshot schedule by selecting the **Snapshot Schedule** tab. Check the box next to the snapshot schedule and select **+ Enable**.
+1. To receive regular updates to the data, enable a snapshot schedule by selecting the **Snapshot Schedule** tab. Check the box next to the snapshot schedule and select **+ Enable**.
 
    ![Enable snapshot schedule](./media/receive-data/enable-snapshot-schedule.png "Enable snapshot schedule")
 
 ## Next steps
 
-Advance to next sections to learn about entity data schema and using Azure Data Lake Analytics or Databricks for Microsoft Academic Graph.
+Continue through the next sections to learn about the entity data schema and using Azure Data Lake Analytics or Databricks to evaluate the Microsoft Academic Graph.
 
 > [!div class="nextstepaction"]
 >[Microsoft Academic Graph data schema](reference-data-schema.md)

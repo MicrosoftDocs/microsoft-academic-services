@@ -77,12 +77,12 @@ PaperCount is the number of papers associated with the entity.
 
 PaperFamilyCount is the number of primary family papers associated with the entity.
 
-## Why distributing Microsoft Academic Graph using Azure Data Share
+## Why are we distributing the Microsoft Academic Graph using Azure Data Share?
 
 We now utilize Azure Data Share to distribution datasets. Here are some benefits for using Azure Data Share.
 
 - Better security: no need to share the Azure Storage account key with Microsoft Academic.
-- You have the full control of getting one-time snapshot of latest dataset or recurring releases when new datasets are available.
+- Users now have full control of their data snapshot requests. Users may select a one-time snapshot of latest dataset or recurring releases when new datasets are available.  Users are also able to cancel recurring releases when no longer needed. 
 
 ## How to get the latest dataset
 
@@ -94,12 +94,12 @@ We now utilize Azure Data Share to distribution datasets. Here are some benefits
 
 ## How to start recurring provisioning of datasets
 
-  To receive regular updates to the data, you enable snapshot schedule by selecting the **Snapshot Schedule** tab. Check the box next to the snapshot schedule and select **Enable**.
+  To enable a snapshot schedule, you select the **Snapshot Schedule** tab. Check the box next to the snapshot schedule and select **Enable**.
 
   ![Enable snapshot schedule](./media/receive-data/enable-snapshot-schedule.png "Enable snapshot schedule")
 
 ## How to stop recurring provisioning of datasets
 
-  To stop receiving regular updates to the data, you disable snapshot schedule by selecting the **Snapshot Schedule** tab. Check the box next to the snapshot schedule and select **Disable**.
+  To disable a snapshot schedule, you select the **Snapshot Schedule** tab. Check the box next to the snapshot schedule and select **Disable**.
 
   ![Disable snapshot schedule](./media/receive-data/disable-snapshot-schedule.png "Disable snapshot schedule")
