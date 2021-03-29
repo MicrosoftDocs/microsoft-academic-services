@@ -4,7 +4,7 @@ description: Using Network Similarity Package
 services: microsoft-academic-services
 ms.topic: extra
 ms.service: microsoft-academic-services
-ms.date: 10/06/2020
+ms.date: 3/23/2021
 ---
 # Network Similarity Package
 
@@ -22,11 +22,6 @@ The functions/classes perform the following tasks.
 Before running these examples, you need to complete the following setups:
 
 * Set up provisioning of Microsoft Academic Graph to an Azure blob storage account. See [Get Microsoft Academic Graph on Azure storage](get-started-setup-provisioning.md).
-
-* Request Network Similarity Package when requesting MAG.
-
-  > [!NOTE]
-  > Network Similarity Package is not included in basic MAG distribution. Please ask for Network Similarity Package when requesting MAG. Otherwise it will not be included in your distribution.
 
 ## Available senses
 

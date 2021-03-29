@@ -47,112 +47,129 @@ In this section, you submit an ADLA job to compute author h-index and save outpu
 
 1. Copy and paste the following code block in the script window.
    
-   ```U-SQL
-   DECLARE @blobAccount string = "<AzureStorageAccount>";
-   DECLARE @blobContainer string = "<MagContainer>";
-   DECLARE @magVersion string = "<MagVersion>";
-   DECLARE @outAuthorHindex string = "/Output/AuthorHIndex.tsv";
-   
-   // The Windows Azure Blob Storage (WASB) URI of the Microsoft Academic Graph data to be used by this script
-   IF @magVersion == "" THEN
-      DECLARE @uriPrefix string = "wasb://" + @blobContainer + "@" + @blobAccount + "/";
-   ELSE 
-      DECLARE @uriPrefix string = "wasb://" + @blobContainer + "@" + @blobAccount + "/" + @magVersion + "/";
-   END;
+    ```U-SQL
+    DECLARE @blobAccount string = "<AzureStorageAccount>";
+    DECLARE @blobContainer string = "<MagContainer>";
+    DECLARE @magVersion string = "<MagVersion>";
+    DECLARE @outAuthorHIndex string = "/output/AuthorHIndex.tsv";
 
-   @Affiliations = Affiliations(@uriPrefix);
-   @Authors = Authors(@uriPrefix);
-   @Papers = Papers(@uriPrefix);
-   @PaperAuthorAffiliations = PaperAuthorAffiliations(@uriPrefix);
-   
-   // Get Affiliations
-   @Affiliations =
-       SELECT
-           (long?)AffiliationId AS AffiliationId, // Change datatype join with PaperAuthorAffiliations later
-           DisplayName
-       FROM @Affiliations;
-   
-   // Get Authors
-   @Authors =
-       SELECT
-           AuthorId,
-           DisplayName,
-           LastKnownAffiliationId,
-           PaperCount
-       FROM @Authors;
-   
-   // Get (Author, Paper) pairs
-   @AuthorPaper =
-       SELECT DISTINCT
-           AuthorId,
-           PaperId
-       FROM @PaperAuthorAffiliations;
+    // The Windows Azure Blob Storage (WASB) URI of the Microsoft Academic Graph data to be used by this script
+    IF @magVersion == "" THEN
+    DECLARE @uriPrefix string = "wasb://" + @blobContainer + "@" + @blobAccount + "/";
+    ELSE 
+    DECLARE @uriPrefix string = "wasb://" + @blobContainer + "@" + @blobAccount + "/" + @magVersion + "/";
+    END;
 
-   // Get (Paper, EstimatedCitation).
-   // Treat papers with same FamilyId as a single paper and sum the EstimatedCitation
-   @PaperCitation =
-       SELECT
-           (long)(FamilyId == null ? PaperId : FamilyId) AS PaperId,
-           EstimatedCitation
-       FROM @Papers
-       WHERE EstimatedCitation > 0;
+    //
+    // Load Academic Graph data
+    //
+    @authors = Authors(@uriPrefix);
+    @affiliations = Affiliations(@uriPrefix);
+    @papers = Papers(@uriPrefix);
+    @paperAuthorAffiliations = PaperAuthorAffiliations(@uriPrefix);
 
-   @PaperCitation =
-       SELECT
-           PaperId,
-           SUM(EstimatedCitation) AS EstimatedCitation
-       FROM @PaperCitation
-       GROUP BY PaperId;
+    //
+    // Get Affiliations
+    //
+    @affiliations =
+        SELECT
+            (long?)AffiliationId AS AffiliationId, // Change datatype join with PaperAuthorAffiliations later
+            DisplayName
+        FROM @affiliations;
 
-   // Generate author, paper, citation view
-   @AuthorPaperCitation =
-       SELECT
-           A.AuthorId,
-           A.PaperId,
-           P.EstimatedCitation
-       FROM @AuthorPaper AS A
-       INNER JOIN @PaperCitation AS P
-           ON A.PaperId == P.PaperId;
-   
-   // Order author, paper by citation
-   @AuthorPaperOrderByCitation =
-       SELECT
-           AuthorId,
-           PaperId,
-           EstimatedCitation,
-           ROW_NUMBER() OVER(PARTITION BY AuthorId ORDER BY EstimatedCitation DESC) AS Rank
-       FROM @AuthorPaperCitation;
-   
-   // Generate author hindex
-   @AuthorHIndexTemp =
-       SELECT
-           AuthorId,
-           SUM(EstimatedCitation) AS TotalEstimatedCitation,
-           MAX(CASE WHEN EstimatedCitation >= Rank THEN Rank ELSE 0 END) AS HIndex
-       FROM @AuthorPaperOrderByCitation 
-       GROUP BY AuthorId;
-   
-   // Get author detail information
-   @AuthorHIndex =
-       SELECT
-           I.AuthorId,
-           A.DisplayName,
-           F.DisplayName AS AffiliationDisplayName,
-           A.PaperCount,
-           I.TotalEstimatedCitation,
-           I.HIndex
-       FROM @AuthorHIndexTemp AS I
-       INNER JOIN @Authors AS A
-           ON A.AuthorId == I.AuthorId
-       LEFT OUTER JOIN @Affiliations AS F
-           ON A.LastKnownAffiliationId == F.AffiliationId;
-   
-   OUTPUT @AuthorHIndex
-   TO @outAuthorHindex
-   ORDER BY HIndex DESC, AuthorId
-   FETCH 100 ROWS
-   USING Outputters.Tsv(quoting : false);
-   ```
+    //
+    // Get Authors
+    //
+    @authors =
+        SELECT
+            AuthorId,
+            DisplayName,
+            LastKnownAffiliationId,
+            PaperCount
+        FROM @authors;
+
+    //
+    // Get (author, paper) pairs
+    //
+    @authorPaper =
+        SELECT DISTINCT
+            AuthorId,
+            PaperId
+        FROM @paperAuthorAffiliations;
+
+    //
+    // Get EstimatedCitation from Papers table
+    // Treat papers with same FamilyId as a single paper and sum the EstimatedCitation
+    //
+    @paperCitation =
+        SELECT
+            (long)(FamilyId == null ? PaperId : FamilyId) AS PaperId,
+            EstimatedCitation
+        FROM @papers
+        WHERE EstimatedCitation > 0;
+
+    @paperCitation =
+        SELECT
+            PaperId,
+            SUM(EstimatedCitation) AS EstimatedCitation
+        FROM @paperCitation
+        GROUP BY PaperId;
+
+    //
+    // Generate author, paper, citation view
+    //
+    @authorPaperCitation =
+        SELECT
+            @authorPaper.AuthorId,
+            @authorPaper.PaperId,
+            @paperCitation.EstimatedCitation
+        FROM @authorPaper
+        INNER JOIN @paperCitation
+            ON @authorPaper.PaperId == @paperCitation.PaperId;
+
+    //
+    // Compute Paper Rank using EstimatedCitation
+    //
+    @authorPaperRankByCitation =
+        SELECT
+            AuthorId,
+            PaperId,
+            EstimatedCitation,
+            ROW_NUMBER() OVER(PARTITION BY AuthorId ORDER BY EstimatedCitation DESC) AS PaperRank
+        FROM @authorPaperCitation;
+
+    //
+    // Compute HIndex and total citation count
+    //
+    @authorHIndex =
+        SELECT
+            AuthorId,
+            SUM(EstimatedCitation) AS CitationCount,
+            MAX((EstimatedCitation >= PaperRank) ? PaperRank : 0) AS HIndex
+        FROM @authorPaperRankByCitation 
+        GROUP BY AuthorId;
+
+    // Get author detail information
+    @authorHIndex =
+        SELECT
+            @authors.AuthorId,
+            @authors.DisplayName AS AuthorName,
+            @affiliations.DisplayName AS AffiliationDisplayName,
+            @authors.PaperCount,
+            @authorHIndex.CitationCount,
+            @authorHIndex.HIndex
+        FROM @authorHIndex
+        INNER JOIN @authors
+            ON @authorHIndex.AuthorId == @authors.AuthorId
+        LEFT OUTER JOIN @affiliations
+            ON @authors.LastKnownAffiliationId == @affiliations.AffiliationId;
+
+    OUTPUT @authorHIndex
+    TO @outAuthorHIndex
+    ORDER BY HIndex DESC, AuthorName ASC
+    FETCH 100 ROWS
+    USING Outputters.Tsv(quoting : false);
+    ```
 
 1. In this code block, replace `<AzureStorageAccount>`, `<MagContainer>`, and `<MagVersion>` placeholder values with the values that you collected while completing the prerequisites of this sample.
 
