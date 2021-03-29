@@ -337,7 +337,7 @@ Once the indexer has completed, you can immediately begin querying the service b
 
 ### Example: Patents about face recognition and AI created before 2000
 
-![Load search explorer](media/tutorial-search-example-face-recognition.png)
+![Sarch explorer](media/tutorial-search-example-face-recognition.png)
 
 > [!NOTE]
 > This example makes use of filter expressions to restrict which content is considered before looking for the search terms. See the [Azure Search filter expression](https://docs.microsoft.com/azure/search/search-explorer#filter-expressions-greater-than-less-than-equal-to) documentation for more details.

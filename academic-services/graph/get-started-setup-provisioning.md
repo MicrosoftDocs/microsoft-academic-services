@@ -48,7 +48,7 @@ Sign in to the [Azure portal](https://portal.azure.com/).
 
     <br>
 
-    ![Create new Azure Data Share service](media/create-storage-account/create-data-share-basics.png "Create new Azure Data Share service")
+    ![Create new Azure Data Share service Basics](media/create-storage-account/create-data-share-basics.png "Create new Azure Data Share service Basics")
 
 1. Verify that the information you entered is correct and select **Create**.
 
