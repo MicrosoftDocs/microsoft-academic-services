@@ -3,7 +3,6 @@
     "content": [
       {
         "files": [
-          "breadcrumb/toc.yml",
           "**/*.md",
           "**/*.yml"
         ],
@@ -19,25 +18,6 @@
           "ThirdPartyNotices"
         ],
         "group": "shared"
-      },
-      {
-        "files": [
-          "breadcrumb/toc.yml",
-          "**/*.md",
-          "**/*.yml"
-        ],
-        "exclude": [
-          "**/obj/**",
-          "**/includes/**",
-          "_themes/**",
-          "_themes.pdf/**",
-          "README.md",
-          "LICENSE",
-          "LICENSE-CODE",
-          "ThirdPartyNotices"
-        ],
-        "src": "versioned",
-        "group": "versioned"
       }
     ],
     "resource": [
@@ -73,7 +53,7 @@
     },
     "fileMetadata": {},
     "template": [],
-    //"dest": "academic-services",
+    "dest": "academic-services",
     "groups": {
       "shared": {
         "dest": "academic-services-3.1",
