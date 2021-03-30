@@ -9,8 +9,6 @@
           "**/*.md",
           "**/*.yml"
         ],
-        "src": "azadps-2.0.0.52-src",
-        "version": "azadps-2.0.0.52",
         "exclude": [
           "**/obj/**",
           "**/includes/**",
