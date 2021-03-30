@@ -1,0 +1,14 @@
+{
+    "netcore-3.1": {
+        "conceptualToc": "knowledge-exploration-service/TOC.yml",
+        "packageRoot": "mas-1.0",
+        "conceptualTocUrl": "/academic-services/knowledge-exploration-service/TOC.yml",
+        "referenceTocUrl": "/academic-services/knowledge-exploration-service/TOC.yml"
+    },
+    "netcore-5.0": {
+        "conceptualToc": "knowledge-exploration-service/TOC.yml",
+        "packageRoot": "mas-2.0",
+        "conceptualTocUrl": "/academic-services/knowledge-exploration-service/TOC.yml",
+        "referenceTocUrl": "/academic-services/knowledge-exploration-service/TOC.yml"
+    }
+}

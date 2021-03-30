@@ -74,11 +74,11 @@
     "dest": "academic-services",
     "groups": {
       "shared": {
-        "dest": "academic-services-3.1",
+        "dest": "mas-1.0",
         "moniker_range": "= netcore-3.1"
       },
       "versioned": {
-        "dest": "academic-services-5.0",
+        "dest": "mas-2.0",
         "moniker_range": "= netcore-5.0"
       }
     },
