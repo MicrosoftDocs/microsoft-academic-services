@@ -2,10 +2,8 @@
   "build": {
     "content": [
       {
-        "files": [ "breadcrumb/toc.yml" ]
-      },
-      {
         "files": [
+          "breadcrumb/toc.yml",
           "**/*.md",
           "**/*.yml"
         ],
@@ -18,7 +16,26 @@
           "LICENSE",
           "LICENSE-CODE",
           "ThirdPartyNotices"
-        ]
+        ],
+        "group": "group1"
+      },
+      {
+        "files": [
+          "breadcrumb/toc.yml",
+          "**/*.md",
+          "**/*.yml"
+        ],
+        "exclude": [
+          "**/obj/**",
+          "**/includes/**",
+          "_themes/**",
+          "_themes.pdf/**",
+          "README.md",
+          "LICENSE",
+          "LICENSE-CODE",
+          "ThirdPartyNotices"
+        ],
+        "group": "group2"
       }
     ],
     "resource": [
@@ -36,7 +53,25 @@
           "**/includes/**",
           "_themes/**",
           "_themes.pdf/**"
-        ]
+        ],
+        "group": "group1"
+      },
+      {
+        "files": [
+          "**/*.png",
+          "**/*.jpg",
+          "**/*.svg",
+          "**/*.json",
+          "**/*.xml",
+          "**/*.ps1"
+        ],
+        "exclude": [
+          "**/obj/**",
+          "**/includes/**",
+          "_themes/**",
+          "_themes.pdf/**"
+        ],
+        "group": "group2"
       }
     ],
     "overwrite": [],
@@ -55,6 +90,16 @@
     "fileMetadata": {},
     "template": [],
     "dest": "academic-services",
+    "groups": {
+      "group1": {
+        "dest": "group1-dest",
+        "moniker_range": "> netcore-1.0"
+      },
+      "group2": {
+        "dest": "group2-dest",
+        "moniker_range": "< netframework-5.0"
+      }
+    },
     "markdownEngineName": "markdig",
     "versions": {
       "azadps-2.0.0.52": {

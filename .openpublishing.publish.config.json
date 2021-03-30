@@ -5,8 +5,8 @@
       "build_source_folder": "academic-services",
       "build_output_subfolder": "academic-services",
       "locale": "en-us",
-      "monikers": [],
-      "moniker_ranges": [],
+      //"monikers": [ "netcore-1.0", "netcore-1.1", "netcore-3.1", "netcore-5.0" ],
+      "moniker_ranges": [ "> netcore-1.0", "< netcore-5.0"],
       "open_to_public_contributors": true,
       "type_mapping": {
         "Conceptual": "Content",
