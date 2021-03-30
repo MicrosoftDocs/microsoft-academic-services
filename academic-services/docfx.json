@@ -2,10 +2,8 @@
   "build": {
     "content": [
       {
-        "files": ["breadcrumb/toc.yml"]
-      },
-      {
         "files": [
+          "breadcrumb/toc.yml",
           "**/*.md",
           "**/*.yml"
         ],
@@ -18,7 +16,8 @@
           "LICENSE",
           "LICENSE-CODE",
           "ThirdPartyNotices"
-        ]
+        ],
+        "group": "root"
       }
     ],
     "resource": [
@@ -50,11 +49,17 @@
       "services": "microsoft-academic-services",
       "ms.service": "microsoft-academic-services",
       "ms.author": "darrine",
-      "searchScope": ["Microsoft Academic Services"]
+      "searchScope": [ "Microsoft Academic Services" ]
     },
     "fileMetadata": {},
     "template": [],
     "dest": "academic-services",
-    "markdownEngineName": "markdig"
+    "groups": {
+      "group1": {
+        "dest": "group1-dest",
+        "moniker_range": "netcore-3.1"
+      }
+    },
+      "markdownEngineName": "markdig"
+    }
   }
-}
