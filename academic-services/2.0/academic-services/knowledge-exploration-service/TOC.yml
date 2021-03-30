@@ -1,0 +1,99 @@
+- name: Microsoft Academic Knowledge Exploration Service documentation
+  href: index.yml
+- name: Overview
+  expanded: true
+  items:
+  - name: About Microsoft Academic Knowledge Exploration Service
+    href: introduction.md
+- name: Get started
+  expanded: true
+  items:
+  - name: Sign up for MAKES
+    href: get-started-setup-provisioning.md
+  - name: Deploy new MAKES instance
+    href: get-started-create-api-instances.md
+- name: How to
+  expanded: false
+  items:
+  - name: Update existing instance with new release
+    href: how-to-deploy-new-indexes-to-makes.md
+  - name: Delete a MAKES deployment 
+    href: how-to-delete-api-instances.md
+  - name: Develop MAKES index locally
+    expanded: false
+    items:
+    - name: Define schema
+      href: how-to-index-schema.md
+    - name: Define synonyms
+      href: how-to-index-synonym.md
+    - name: Define data
+      href: how-to-index-data.md
+    - name: Build and test index
+      href: how-to-index-build.md
+  - name: Develop MAKES grammar locally
+    expanded: false
+    items:
+    - name: Define grammar
+      href: how-to-grammar.md
+    - name: Compile and test grammar
+      href: how-to-grammar-build.md
+- name: Tutorials
+  expanded: false
+  items:
+  - name: Create custom index(es) from MAG
+    href: how-to-create-index-from-mag.md
+  - name: Link publications with MAKES entities
+    href: tutorial-entity-linking.md
+  - name: Build browser applications with contextual filters
+    href: tutorial-schema-design.md
+  - name: Build browser applications with search
+    href: tutorial-grammar-design.md
+- name: Concepts
+  expanded: false
+  items:
+  - name: Structured query expressions
+    href: concepts-query-expressions.md
+  - name: Natural language queries
+    href: concepts-queries.md
+- name: Reference
+  expanded: false
+  items:
+  - name: KESM command line tool
+    href: reference-makes-command-line-tool.md
+  - name: MAKES entity schema
+    href: reference-makes-api-entity-schema.md   
+  - name: MAKES REST API
+    expanded: false
+    items:
+      - name: Test page
+        href: reference-makes-api-test-page.md
+      - name: GET Histogram
+        href: reference-get-histogram.md
+      - name: GET Evaluate
+        href: reference-get-evaluate.md
+      - name: GET Interpret
+        href: reference-get-interpret.md
+      - name: POST Histogram
+        href: reference-post-histogram.md
+      - name: POST Evaluate
+        href: reference-post-evaluate.md
+      - name: POST Interpret
+        href: reference-post-interpret.md
+  - name: MAKES grammar
+    expanded: false
+    items:
+      - name: Syntax
+        href: reference-grammar-syntax.md
+      - name: Semantic functions
+        href: reference-semantic-functions.md
+- name: Resources
+  expanded: false
+  items:
+  - name: FAQ
+    href: resources-faq.md
+  - name: Pricing
+    href: resources-pricing.md
+  - name: Troubleshooting guide
+    href: resources-troubleshoot-guide.md
+  - name: Stack Overflow
+    href: http://stackoverflow.com/questions/tagged/microsoft-academic-knowledge-exploration-service
