@@ -36,6 +36,7 @@
           "LICENSE-CODE",
           "ThirdPartyNotices"
         ],
+        "src": "2.0",
         "group": "5.0"
       }
     ],
