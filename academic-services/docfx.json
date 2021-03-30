@@ -73,14 +73,14 @@
     },
     "fileMetadata": {},
     "template": [],
-    "dest": "academic-services",
+    //"dest": "academic-services",
     "groups": {
       "shared": {
-        "dest": "root",
+        "dest": "academic-services-3.1",
         "moniker_range": "= netcore-3.1"
       },
       "5.0": {
-        "dest": "root5",
+        "dest": "academic-services-5.0",
         "moniker_range": "= netcore-5.0"
       }
     },
