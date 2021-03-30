@@ -8,6 +8,7 @@
           "**/*.yml"
         ],
         "exclude": [
+          "**/2.0/**",
           "**/obj/**",
           "**/includes/**",
           "_themes/**",
@@ -17,7 +18,25 @@
           "LICENSE-CODE",
           "ThirdPartyNotices"
         ],
-        "group": "root"
+        "group": "shared"
+      },
+      {
+        "files": [
+          "breadcrumb/toc.yml",
+          "**/*.md",
+          "**/*.yml"
+        ],
+        "exclude": [
+          "**/obj/**",
+          "**/includes/**",
+          "_themes/**",
+          "_themes.pdf/**",
+          "README.md",
+          "LICENSE",
+          "LICENSE-CODE",
+          "ThirdPartyNotices"
+        ],
+        "group": "5.0"
       }
     ],
     "resource": [
@@ -55,8 +74,13 @@
     "template": [],
     "dest": "academic-services",
     "groups": {
-      "root": {
-        "dest": "group1-dest"
+      "shared": {
+        "dest": "root",
+        "moniker_range": "netcore-3.1"
+      },
+      "5.0": {
+        "dest": "root5",
+        "moniker_range": "netcore-5.0"
       }
     },
       "markdownEngineName": "markdig"
