@@ -2,7 +2,7 @@
 title: Get Microsoft Academic Graph on Azure storage
 description: Step-by-step instructions for setting up one-time or automatic provisioning of Microsoft Academic Graph to an Azure blob storage account
 ms.topic: get-started-article
-ms.date: 9/23/2020
+ms.date: 3/23/2021
 ---
 # Get Microsoft Academic Graph on Azure storage
 
@@ -18,74 +18,117 @@ When using Microsoft Academic data (MAG, MAKES, etc.) in a product or service, o
 >
 > - K. Wang et al., “A Review of Microsoft Academic Services for Science of Science Studies”, Frontiers in Big Data, 2019, doi: 10.3389/fdata.2019.00045
 
-## Setup storage account to receive MAG graph releases
+> [!NOTE]
+> MAG is currently in a free preview period, so there are no charges associated with the provisioning or use of the data/service itself. However Azure requires you to cover all costs associated with standard resource creation, usage, etc. For cost estimates associated with MAG please see the [Pricing](resources-pricing.md) page. <br/><br/>Most research institutions have an "Enterprise Account" with Microsoft including Azure subscription. The pricing for Enterprise Accounts differ from the individual account shown in Azure's price calculator. <br/><br/>If you have an Enterprise Account, please check with your individual institution's Information Technology/Computer Center resource on the process of setting up Azure to get MAG. You might need to obtain a "Master Agreement #" and involve MLSP (Microsoft Licensed Solution Provider) for help.
 
-### [Create an Azure Subscription](https://azure.microsoft.com/get-started)
+## Setup data share and storage account to receive MAG graph releases
 
-Please create a new Azure subscription for the distribution previews. If your organization already using Azure, this could be a separate subscription under the same tenant id. If you start from scratch, for example “create Azure free account”, the subscription will be created under a new tenant id.
+### Create an Azure Subscription
 
-### [Create an Azure Storage Account](https://docs.microsoft.com/azure/storage/common/storage-quickstart-create-account?tabs=portal)
+Please [create a new Azure subscription](https://azure.microsoft.com/get-started) for the distribution previews. If your organization already using Azure, this could be a separate subscription under the same tenant id. If you start from scratch, for example “create Azure free account”, the subscription will be created under a new tenant id.
 
-1. Home > Create a resource > Storage > Storage account
+### Sign in to the Azure portal
 
-    ![Create new storage account resource](media/create-storage-account/select.png "Create new storage account resource")
+Sign in to the [Azure portal](https://portal.azure.com/).
 
-1.  Provide following values to create an Azure Storage account. Then click the "Review + create" button.
+### [Create an Azure Data Share Service](https://azure.microsoft.com/services/data-share/)
+
+1. Home > Create a resource > Data Share > Create.
+
+    ![Create new Azure Data Share service](media/create-storage-account/create-data-share.png "Create new Azure Data Share service")
+
+1. Provide following values to create a Data Share service. Then select **Review + create**. 
 
     |Property  |Description  |
     |---------|---------|
     |**Subscription** | From the drop-down, select your Azure subscription. |
-    |**Resource group** | Specify whether you want to create a new resource group or use an existing one. A resource group is a container that holds related resources for an Azure solution. For more information, see [Azure Resource Group overview](https://docs.microsoft.com/azure/azure-resource-manager/resource-group-overview). |
-    |**Storage account name** | Provide a name for your Databricks workspace, e.g. **magas<org_name>**. You don’t need to use your organization name after the "magas", however the account name must be unique among all Azure Storage Accounts. |
-    |**Location**    | Select whatever location (region) that is most appropriate for your existing Azure resources |
+    |**Resource group** | Specify whether you want to create a new resource group or use an existing one. A resource group is a container that holds related resources within an Azure subscription. For more information, see [Azure Resource Group overview](https://docs.microsoft.com/azure/azure-resource-manager/resource-group-overview). |
+    |**Location**    | Select one of the locations below which is most appropriate for you. <br> - `East Asia` <br> - `UK South` <br> - `US East` <br> - `US West` <br> - `West Europe` |
+    |**Name** | Provide a name for your Data Share service. |
+
+    <br>
+
+    ![Create new Azure Data Share service Basics](media/create-storage-account/create-data-share-basics.png "Create new Azure Data Share service Basics")
+
+1. Verify that the information you entered is correct and select **Create**.
+
+    ![Submit new Data Share service for creation](media/create-storage-account/create-data-share-submit.png "Submit new Data Share service for creation")
+
+### [Create an Azure Storage Account](https://docs.microsoft.com/azure/storage/common/storage-quickstart-create-account)
+
+1. Home > Create a resource > Storage > Storage account > Create
+
+    ![Create new storage account resource](media/create-storage-account/select.png "Create new storage account resource")
+
+1. Provide following values to create an Azure Storage account. Then select **Review + create**.
+
+    |Property  |Description  |
+    |---------|---------|
+    |**Subscription** | From the drop-down, select your Azure subscription. |
+    |**Resource group** | Specify whether you want to create a new resource group or use an existing one. A resource group is a container that holds related resources for an Azure solution. For more information, see [Azure Resource Group overview](https://docs.microsoft.com/azure/azure-resource-manager/resource-group-overview). You can use the same resource group as the Data Share service.|
+    |**Storage account name** | Provide a name for your storage account (**mag<org_name>**), e.g. `magconsoto`. You don’t need to use your organization name after the "mag", however the account name must be unique among all Azure Storage accounts. |
+    |**Location**    | Select the same location as the Data Share service. |
     |**Performance** | Standard |
     |**Account kind**| StorageV2 (general purpose v2) |
-    |**Replication** | LRS |
-    |**Access tier** | Cool |
+    |**Replication** | Select the desired replication mode |
+
+    <br>
 
     ![Enter details for new storage account resource](media/create-storage-account/details.png "Enter details for new storage account resource")
 
-1. Verify that the information you entered is correct and click the "create" button
+1. Verify that the information you entered is correct and select **Create**.
 
     ![Submit new storage account resource for creation](media/create-storage-account/submit.png "Submit new storage account resource for creation")
 
-### Note Azure storage account name and primary key
+### Note Azure storage account name
 
-1. Once notified that the storage account has been created, click “go to resource”
+1. Once notified that the storage account has been created, click “Go to resource”
 
     ![Navigate to the new storage account resource](media/create-storage-account/go-to-resource.png "Navigate to the new storage account resource")
 
-1. Go to “access keys” and take note of the “storage account name” and the “primary key”
+1. Go to “access keys” and take note of the “storage account name”
 
     ![Save new storage account resource name and access keys for later](media/create-storage-account/access-keys.png "Save new storage account resource name and access keys for later")
 
-1. Make sure that you have these items of information:
+## Create a Blob Container
 
-   :heavy_check_mark:  The name of your Azure Storage (AS) account.
+1. Follow [the instructions here](https://docs.microsoft.com/azure/storage/blobs/storage-quickstart-blobs-portal#create-a-container) to create a blob container.
 
-   :heavy_check_mark:  The access key of Azure Storage (AS) account.
+1. Name the blob container (i.e. `ma-datashare`).
+
+## Make sure that you have these items of information
+
+   :heavy_check_mark:  The email address you used to log on to Azure portal.
+
+   :heavy_check_mark:  The location of your Azure Storage (AS) account (i.e. `East US`).
+
+   :heavy_check_mark:  The name of your Azure Storage (AS) account (i.e. `magconsoto`).
+
+   :heavy_check_mark:  The name of your Azure Storage blob container (i.e. `ma-datashare`). This infomation is needed in [Accept and receive data using Azure Data Share](get-started-receive-data.md).
 
 ## Sign up for MAG provisioning
 
-To sign up for MAG on AS distribution preview, send the following information using your school or company email account to <a href="mailto:academicapi@microsoft.com?subject=Access request to Microsoft Academic Graph (MAG) on Azure Storage (AS) distribution preview">academicapi@microsoft.com</a> with the subject "Access request to Microsoft Academic Graph (MAG) on Azure Storage (AS) distribution preview":
+To sign up for MAG on AS distribution preview, send the following information **using your school or company email account** to <a href="mailto:academicapi@microsoft.com?subject=Access request to Microsoft Academic Graph (MAG) on Azure Storage (AS) distribution preview">academicapi@microsoft.com</a> with the subject "Access request to Microsoft Academic Graph (MAG) on Azure Storage (AS) distribution preview":
 
 - Are you affiliated with a company or university?
   - If company, please provide the company’s name, your department/group and your role
   - If university, please provide the university’s name, department, group/advisor, and your role (undergraduate student, grad student, professor, etc.)
 - Brief description of the project you will be using MAG for
 - Name of your Microsoft sales representative, if you have one
-- Azure Storage (AS) account name
-- Azure Storage (AS) account primary access key
-- Which type of provisioning model you want:
-  1. One-time provisioning of the most recent MAG release
-  1. Automatic provisioning of each new MAG release (~every 1-2 weeks)
+- The email address you used to log on to Azure portal
+- The location of your Azure Storage (AS) account
+- The name of your Azure Storage (AS) account
 
-> [!NOTE]
-> MAG is currently in a free preview period, so there are no charges associated with the provisioning or use of the data/service itself. However Azure requires you to cover all costs associated with standard resource creation, usage, etc. For cost estimates associated with MAG please see the [Pricing](resources-pricing.md) page. <br/><br/>Most research institutions have an "Enterprise Account" with Microsoft including Azure subscription. The pricing for Enterprise Accounts differ from the individual account shown in Azure's price calculator. <br/><br/>If you have an Enterprise Account, please check with your individual institution's Information Technology/Computer Center resource on the process of setting up Azure to get MAG. You might need to obtain a "Master Agreement #" and involve MLSP (Microsoft Licensed Solution Provider) for help.
+## Receiving MAG Datasets
+
+After reviewing the application, Microsoft Academic will send an invitation through Azure Data Share for receiving MAG datasets. Follow the instructions in [Receive data using Azure Data Share](get-started-receive-data.md) to complete the set up.
 
 ## Next steps
 
 Advance to next sections to learn about entity data schema and using Azure Data Lake Analytics or Databricks for Microsoft Academic Graph.
+
+> [!div class="nextstepaction"]
+>[Receive data using Azure Data Share](get-started-receive-data.md)
 
 > [!div class="nextstepaction"]
 >[Microsoft Academic Graph data schema](reference-data-schema.md)
@@ -95,3 +138,7 @@ Advance to next sections to learn about entity data schema and using Azure Data 
 
 > [!div class="nextstepaction"]
 >[Set up Azure Databricks for Microsoft Academic Graph](get-started-setup-databricks.md)
+
+## Resources
+
+* [Azure Data Share](https://azure.microsoft.com/services/data-share/)

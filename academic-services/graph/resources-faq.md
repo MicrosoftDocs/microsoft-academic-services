@@ -2,7 +2,7 @@
 title: FAQ about Microsoft Academic Graph
 description: Answers some of the most frequently asked questions about the Microsoft Academic Graph
 ms.topic: reference
-ms.date: 8/27/2020
+ms.date: 3/23/2021
 ---
 # Frequently Asked Questions about Microsoft Academic Graph
 
@@ -76,3 +76,30 @@ For papers not having a FamilyId, the FamilyRank is null.
 PaperCount is the number of papers associated with the entity.
 
 PaperFamilyCount is the number of primary family papers associated with the entity.
+
+## Why are we distributing the Microsoft Academic Graph using Azure Data Share?
+
+We now utilize Azure Data Share to distribution datasets. Here are some benefits for using Azure Data Share.
+
+- Better security: no need to share the Azure Storage account key with Microsoft Academic.
+- Users now have full control of their data snapshot requests. Users may select a one-time snapshot of latest dataset or recurring releases when new datasets are available.  Users are also able to cancel recurring releases when no longer needed. 
+
+## How to get the latest dataset
+
+  You can get the latest MAG dataset using your Data Share service.
+
+  Azure Portal Home -> Your Data Share service -> Received Shares -> "Microsoft-Academic-\<Location\>" -> Trigger snapshot -> Full Copy
+
+  ![Trigger snapshot](./media/receive-data/trigger-snapshot.png "Trigger snapshot") 
+
+## How to start recurring provisioning of datasets
+
+  To enable a snapshot schedule, you select the **Snapshot Schedule** tab. Check the box next to the snapshot schedule and select **Enable**.
+
+  ![Enable snapshot schedule](./media/receive-data/enable-snapshot-schedule.png "Enable snapshot schedule")
+
+## How to stop recurring provisioning of datasets
+
+  To disable a snapshot schedule, you select the **Snapshot Schedule** tab. Check the box next to the snapshot schedule and select **Disable**.
+
+  ![Disable snapshot schedule](./media/receive-data/disable-snapshot-schedule.png "Disable snapshot schedule")

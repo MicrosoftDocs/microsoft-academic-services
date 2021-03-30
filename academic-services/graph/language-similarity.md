@@ -4,7 +4,7 @@ description: Using Language Similarity Package
 services: microsoft-academic-services
 ms.topic: extra
 ms.service: microsoft-academic-services
-ms.date: 11/27/2019
+ms.date: 3/23/2021
 ---
 # Language Similarity Package
 
@@ -18,11 +18,6 @@ The Microsoft Academic Language Similarity Package provides supplementary proces
 Before running these examples, you need to complete the following setups:
 
 * Set up provisioning of Microsoft Academic Graph to an Azure blob storage account. See [Get Microsoft Academic Graph on Azure storage](get-started-setup-provisioning.md).
-
-* Request Language Similarity Package when requesting MAG.
-
-  > [!NOTE]
-  > Language Similarity Package is not part of the basic MAG distribution. Please ask for Language Similarity Package when requesting MAG. Otherwise it will not be included in your distribution.
 
 ## System Requirements
 
