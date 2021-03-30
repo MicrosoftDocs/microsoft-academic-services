@@ -57,7 +57,7 @@
     "groups": {
       "root": {
         "dest": "group1-dest",
-        "moniker_range": "netcore-3.1"
+        "moniker_range": ">= netcore-3.1"
       }
     },
       "markdownEngineName": "markdig"
