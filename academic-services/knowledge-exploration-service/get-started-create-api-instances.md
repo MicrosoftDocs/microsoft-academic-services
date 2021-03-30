@@ -14,6 +14,8 @@ ms.date: 10/16/2020
 - Microsoft Academic Knowledge Exploration Service (MAKES) subscription. See [Get started with Microsoft Academic Knowledge Exploration Service](get-started-setup-provisioning.md) to obtain one.
 - Azure Subscription. The Azure Subscription must be able to create virtual machine with "Standard_DS4_v2" SKU. See [Azure Subscription quota limit reached](resources-troubleshoot-guide.md#azure-subscription-quota-limit-reached) for more information.
 
+::: moniker range="netcore-5.0"
+
 ## Verify the folders and content of the current release
 
 When new versions of MAKES are released, a new folder will be created in the "makes" blob container of your Azure Storage Account.  This folder contains all the elements required to self-host an instance of MAKES.  To get started, let's verify that MAKES has been published to your subscription successfully.
@@ -40,6 +42,14 @@ When new versions of MAKES are released, a new folder will be created in the "ma
     - **webhost** - This folder holds the files required to create the VM instance of MAKES.
     - **License.docx** - Microsoft Word file with the license to use this data and software.
     ![Verify tools folder](media/get-started-tools-folder.png)
+
+::: moniker-end
+
+::: moniker range="netcore-3.1"
+
+other shit
+
+::: moniker-end
 
 ## Download the command line tool (kesm.exe) from your Azure Storage Account
 
