@@ -36,8 +36,8 @@
           "LICENSE-CODE",
           "ThirdPartyNotices"
         ],
-        "src": "2.0",
-        "group": "5.0"
+        "src": "versioned",
+        "group": "versioned"
       }
     ],
     "resource": [
@@ -79,7 +79,7 @@
         "dest": "academic-services-3.1",
         "moniker_range": "= netcore-3.1"
       },
-      "5.0": {
+      "versioned": {
         "dest": "academic-services-5.0",
         "moniker_range": "= netcore-5.0"
       }

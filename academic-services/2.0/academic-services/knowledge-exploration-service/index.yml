@@ -1,0 +1,85 @@
+### YamlMime:Landing
+
+title: MAKES documentation
+summary: Microsoft Academic Knowledge Exploration Service (MAKES) offers a fast and effective way to add interactive academic search and refinement to applications. Learn about Microsoft Academic Knowledge Exploration Service, including technology overviews, API references, how-to guides, tutorials and more.
+
+metadata:
+  title: Microsoft Academic Knowledge Exploration Service
+  description: Learn about Microsoft Academic Knowledge Exploration Service, including technology overviews, API references, how-to guides, tutorials and more.
+  ms.topic: landing-page
+  author: DarrinEide
+  ms.author: darrine
+  ms.date: 10/30/2020
+
+landingContent:
+  - title: About MAKES
+    linkLists:
+      - linkListType: overview
+        links:
+          - text: What is MAKES?
+            url: introduction.md
+      - linkListType: concept
+        links:
+          - text: How MAKES understands natural language queries
+            url: concepts-queries.md
+
+  - title: Top tasks
+    linkLists:
+      - linkListType: get-started
+        links:
+          - text: Sign up for MAKES
+            url: get-started-setup-provisioning.md
+      - linkListType: how-to-guide
+        links:
+          - text: Deploy new MAKES instance
+            url: get-started-create-api-instances.md
+      - linkListType: reference
+        links:
+          - text: MAKES API
+            url: reference-makes-api.md
+          - text: Entity schema
+            url: reference-makes-api-entity-schema.md
+      - linkListType: concept
+        links:
+          - text: Structured query expressions
+            url: concepts-query-expressions.md
+            
+  - title: Customize MAKES
+    linkLists:
+      - linkListType: how-to-guide
+        links:
+          - text: Define schema
+            url: how-to-index-schema.md
+          - text: Define synonyms
+            url: how-to-index-synonym.md
+          - text: Define data
+            url: how-to-index-data.md
+          - text: Build and test index
+            url: how-to-index-build.md
+          - text: Define grammar
+            url: how-to-grammar.md
+          - text: Compile and test grammar
+            url: how-to-grammar-build.md
+      - linkListType: tutorial
+        links:
+          - text: Create a custom index from MAG
+            url: how-to-create-index-from-mag.md
+          - text: Link private publication records with MAKES entities
+            url: tutorial-entity-linking.md
+          - text: Build a library browser with contextual filters
+            url: tutorial-schema-design.md
+          - text: Build browser applications with search
+            url: tutorial-grammar-design.md
+
+  - title: Manage instances
+    linkLists:
+      - linkListType: how-to-guide
+        links:
+          - text: Update existing instance with new release
+            url: how-to-deploy-new-indexes-to-makes.md
+          - text: Delete instance
+            url: how-to-delete-api-instances.md
+      - linkListType: reference
+        links:
+          - text: Command line tool
+            url: reference-makes-command-line-tool.md
