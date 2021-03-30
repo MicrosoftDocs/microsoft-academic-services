@@ -2,13 +2,15 @@
   "build": {
     "content": [
       {
-        "files": ["breadcrumb/toc.yml"]
+        "files": [ "breadcrumb/toc.yml" ]
       },
       {
         "files": [
           "**/*.md",
           "**/*.yml"
         ],
+        "src": "azadps-2.0.0.52-src",
+        "version": "azadps-2.0.0.52",
         "exclude": [
           "**/obj/**",
           "**/includes/**",
@@ -50,11 +52,19 @@
       "services": "microsoft-academic-services",
       "ms.service": "microsoft-academic-services",
       "ms.author": "darrine",
-      "searchScope": ["Microsoft Academic Services"]
+      "searchScope": [ "Microsoft Academic Services" ]
     },
     "fileMetadata": {},
     "template": [],
     "dest": "academic-services",
-    "markdownEngineName": "markdig"
+    "markdownEngineName": "markdig",
+    "versions": {
+      "azadps-2.0.0.52": {
+        "dest": "azadps-2.0.0.52-dest"
+      },
+      "azipps-1.3.155.2": {
+        "dest": "azipps-1.3.155.2-dest"
+      }
+    }
   }
 }
