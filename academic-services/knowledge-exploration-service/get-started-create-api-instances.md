@@ -5,10 +5,6 @@ ms.topic: tutorial
 ms.date: 10/16/2020
 ---
 
-- monikers
-  - azadps-2.0.0.52
-  - azipps-1.3.155.2
-
 # Deploying a basic MAKES instance to Azure from your Subscription
 
  Step-by-step guide for deploying a Microsoft Academic Knowledge Exploration Service (MAKES) instance from a MAKES release. For more information on obtaining a MAKES release, visit [Sign up for MAKES](get-started-setup-provisioning.md)
