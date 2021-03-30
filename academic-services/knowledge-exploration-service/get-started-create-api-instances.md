@@ -7,4 +7,4 @@ ms.date: 10/16/2020
 
 # Deploying a basic MAKES instance to Azure from your Subscription
 
-This is for 3.1
+This is for 3.1  
