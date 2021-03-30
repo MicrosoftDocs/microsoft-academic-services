@@ -55,7 +55,7 @@
     "template": [],
     "dest": "academic-services",
     "groups": {
-      "group1": {
+      "root": {
         "dest": "group1-dest",
         "moniker_range": "netcore-3.1"
       }
