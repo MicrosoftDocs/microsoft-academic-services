@@ -18,6 +18,24 @@
           "ThirdPartyNotices"
         ],
         "group": "shared"
+      },
+      {
+        "files": [
+          "**/*.md",
+          "**/*.yml"
+        ],
+        "exclude": [
+          "**/obj/**",
+          "**/includes/**",
+          "_themes/**",
+          "_themes.pdf/**",
+          "README.md",
+          "LICENSE",
+          "LICENSE-CODE",
+          "ThirdPartyNotices"
+        ],
+        "src": "2.0",
+        "group": "versioned"
       }
     ],
     "resource": [
