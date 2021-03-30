@@ -8,3 +8,4 @@ ms.date: 10/16/2020
 # Deploying a basic MAKES instance to Azure from your Subscription
 
  This is for 5.0
+beat it
