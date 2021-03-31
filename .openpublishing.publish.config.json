@@ -5,9 +5,6 @@
       "build_source_folder": "academic-services",
       "build_output_subfolder": "academic-services",
       "locale": "en-us",
-      "monikerPath": [
-        "monikerMapping.json"
-      ],
       "monikers": [],
       "moniker_ranges": [ ">= netcore-5.0" ],
       "open_to_public_contributors": true,
