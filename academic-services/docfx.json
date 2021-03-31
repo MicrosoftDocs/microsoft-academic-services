@@ -66,6 +66,7 @@
       "author": "DarrinEide",
       "services": "microsoft-academic-services",
       "ms.service": "microsoft-academic-services",
+      "ms.prod": "netcore",
       "ms.author": "darrine",
       "searchScope": [ "Microsoft Academic Services" ]
     },
