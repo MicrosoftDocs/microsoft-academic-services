@@ -7,7 +7,6 @@
           "**/*.yml"
         ],
         "exclude": [
-          "**/knowledge-exploration-service/**",
           "**/obj/**",
           "**/includes/**",
           "_themes/**",
@@ -41,26 +40,26 @@
     "overwrite": [],
     "externalReference": [],
     "globalMetadata": {
-      "breadcrumb_path": "/academic-services/breadcrumb/toc.json",
+      "breadcrumb_path": "../academic-services/breadcrumb/toc.json",
       "titleSuffix": "Microsoft Academic Services",
       "layout": "Conceptual",
       "feedback_system": "None",
       "author": "DarrinEide",
       "services": "microsoft-academic-services",
       "ms.service": "microsoft-academic-services",
-      "ms.prod": "netcore",
+      "ms.prod": "makes",
       "ms.author": "darrine",
       "searchScope": [ "Microsoft Academic Services" ]
     },
     "fileMetadata": {},
     "template": [],
-    "dest": "academic-services",
+    "dest": "academic-services/knowledge-exploration-service",
     "groups": {
       "shared": {
         "dest": "mas-1.0",
-        "moniker_range": "= mag-1.0"
+        "moniker_range": "= makes-1.0"
       }
     },
-      "markdownEngineName": "markdig"
-    }
+    "markdownEngineName": "markdig"
   }
+}
