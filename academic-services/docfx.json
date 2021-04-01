@@ -16,7 +16,7 @@
           "LICENSE-CODE",
           "ThirdPartyNotices"
         ],
-        "group": "shared"
+        "group": "shared",
         "dest": "academic-service/1.0"
       },
       {
