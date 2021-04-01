@@ -54,10 +54,10 @@
     },
     "fileMetadata": {},
     "template": [],
-    "dest": "academic-services",
+    //"dest": "academic-services",
     "groups": {
       "shared": {
-        "dest": "mas-1.0",
+        "dest": "academic-services/1.0/",
         "moniker_range": "= mag-1.0"
       }
     },
