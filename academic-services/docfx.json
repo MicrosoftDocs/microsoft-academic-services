@@ -7,7 +7,6 @@
           "**/*.yml"
         ],
         "exclude": [
-          "**/knowledge-exploration-service/**",
           "**/obj/**",
           "**/includes/**",
           "_themes/**",
@@ -18,6 +17,25 @@
           "ThirdPartyNotices"
         ],
         "group": "shared"
+        "dest": "academic-service/1.0"
+      },
+      {
+        "files": [
+          "**/*.md",
+          "**/*.yml"
+        ],
+        "exclude": [
+          "**/obj/**",
+          "**/includes/**",
+          "_themes/**",
+          "_themes.pdf/**",
+          "README.md",
+          "LICENSE",
+          "LICENSE-CODE",
+          "ThirdPartyNotices"
+        ],
+        "group": "versioned",
+        "dest": "academic-service/2.0"
       }
     ],
     "resource": [
@@ -48,17 +66,17 @@
       "author": "DarrinEide",
       "services": "microsoft-academic-services",
       "ms.service": "microsoft-academic-services",
-      "ms.prod": "netcore",
       "ms.author": "darrine",
       "searchScope": [ "Microsoft Academic Services" ]
     },
     "fileMetadata": {},
     "template": [],
-    //"dest": "academic-services",
     "groups": {
       "shared": {
-        "dest": "academic-services/1.0/",
         "moniker_range": "= mag-1.0"
+      },
+      "versioned": {
+        "moniker_range": "= makes-1.0"
       }
     },
       "markdownEngineName": "markdig"
