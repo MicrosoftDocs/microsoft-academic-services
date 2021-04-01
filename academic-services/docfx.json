@@ -80,7 +80,7 @@
       },
       "versioned": {
         "dest": "mas-2.0",
-        "moniker_range": "= aspnetcore-5.0"
+        "moniker_range": "= aspnetcore-3.1"
       }
     },
       "markdownEngineName": "markdig"
