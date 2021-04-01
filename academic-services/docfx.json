@@ -80,7 +80,7 @@
       },
       "versioned": {
         "dest": "mas-2.0",
-        "moniker_range": "= makes-3.0"
+        "moniker_range": "= makes-1.0"
       }
     },
       "markdownEngineName": "markdig"
