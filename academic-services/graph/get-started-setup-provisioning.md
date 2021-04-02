@@ -5,6 +5,8 @@ ms.topic: get-started-article
 ms.date: 3/23/2021
 ---
 
+# Get Microsoft Academic Graph on Azure storage
+
 [!INCLUDE [ma-subscription-signup](../includes/ma-subscription-signup.md)]
 
 ## Receiving MAG Datasets

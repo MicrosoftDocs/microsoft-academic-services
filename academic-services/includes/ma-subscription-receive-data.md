@@ -1,5 +1,3 @@
-# Receive Microsoft Academic data using Azure Data Share
-
 Details step-by-step instructions for receiving Microsoft Academic data using Azure Data Share.
 
 ## Prerequisites

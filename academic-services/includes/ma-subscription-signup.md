@@ -1,6 +1,4 @@
-# Get Microsoft Academic Data on Azure storage
-
-Details step-by-step instructions for setting up one-time or automatic provisioning of Microsoft Academic Data to an Azure blob storage account.
+Details step-by-step instructions for setting up one-time or automatic provisioning of Microsoft Academic Data (MAKES/MAG) to an Azure blob storage account.
 
 ## Open Data License: [ODC-BY](https://opendatacommons.org/licenses/by/1.0/)
 

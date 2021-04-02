@@ -5,9 +5,9 @@ ms.topic: get-started-article
 ms.date: 2020-02-10
 ---
 
-::: moniker range="makes-1.0"
+# Get Microsoft Academic Knowledge Exploration Service on Azure storage
 
-# Get started with Microsoft Academic Knowledge Exploration Service
+::: moniker range="makes-1.0"
 
 Details step-by-step instructions for setting up one-time or automatic provisioning of Microsoft Academic Knowledge Exploration Service APIs to an Azure blob storage account.
 
