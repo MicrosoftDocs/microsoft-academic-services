@@ -43,11 +43,11 @@
           "**/*.yml"
         ],
         "exclude": [
-          //"**/graph/*.md",
-          //"**/graph/*.yml",
-          //"**/knowledge-exploration-service/*.md",
-          //"**/knowledge-exploration-service/*.yml",
-          //"**/breadcrumb/*.yml",
+          "**/graph/*.md",
+          "**/graph/*.yml",
+          "**/knowledge-exploration-service/*.md",
+          "**/knowledge-exploration-service/*.yml",
+          "**/breadcrumb/*.yml",
           "**/obj/**",
           "**/includes/**",
           "_themes/**",
@@ -57,7 +57,7 @@
           "LICENSE-CODE",
           "ThirdPartyNotices"
         ],
-        //"group": "shared",
+        "group": "shared",
         "dest": "" 
       }
     ],
@@ -95,16 +95,18 @@
     },
     "fileMetadata": {},
     "template": [],
-    //"groups": {
-    //  "shared": {
-    //    "moniker_range": "makes-3.0",
-    //    "dest": "makes-3.0"
-    //  },
-    //  "makes-versioned": {
-    //    "moniker_range": "makes-1.0",
-    //    "dest": "makes-1.0"
-    //  }
-    //},
+    "groups": {
+      "shared": {
+        "moniker_range": ">= makes-1.0"
+          //,
+        //"dest": "makes-3.0"
+      }
+      //,
+      //"makes-versioned": {
+      //  "moniker_range": "makes-1.0",
+      //  "dest": "makes-1.0"
+      //}
+    },
     "markdownEngineName": "markdig"
   }
   }

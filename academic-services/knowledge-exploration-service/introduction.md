@@ -13,19 +13,18 @@ Once signed up for MAKES, new versions of the service and indexes will be delive
 
 ## Why use MAKES?
 
-::: moniker range="makes-1.0"
+::: moniker range="= makes-1.0"
 
 because it's the first try..
 
 ::: moniker-end
 
-::: moniker range="makes-3.0"
+::: moniker range="= makes-3.0"
 
 because it's more secure
 
 ::: moniker-end
 
-Some more shared content here...
 
 Here are some key features of the Microsoft Academic Knowledge Exploration Service (MAKES):
 
