@@ -11,7 +11,7 @@
         ],
         "src": "graph",
         "group": "shared",
-        "dest": "mag"
+        "dest": "graph"
       },
       {
         "files": [
@@ -23,7 +23,7 @@
         ],
         "src": "knowledge-exploration-service",
         "group": "shared",
-        "dest": "makes"
+        "dest": "knowledge-exploration-service"
       },
       {
         "files": [
@@ -35,7 +35,7 @@
         ],
         "src": "knowledge-exploration-service",
         "group": "makes-versioned",
-        "dest": "makes"
+        "dest": "knowledge-exploration-service"
       },
       {
         "files": [
@@ -97,10 +97,12 @@
     "template": [],
     "groups": {
       "shared": {
-        "moniker_range": "makes-3.0"
+        "moniker_range": "makes-3.0",
+        "dest": "makes-3.0"
       },
       "makes-versioned": {
-        "moniker_range": "makes-1.0"
+        "moniker_range": "makes-1.0",
+        "dest": "makes-1.0"
       }
     },
     "markdownEngineName": "markdig"
