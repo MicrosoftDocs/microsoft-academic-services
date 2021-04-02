@@ -43,11 +43,11 @@
           "**/*.yml"
         ],
         "exclude": [
-          "**/graph/*.md",
-          "**/graph/*.yml",
-          "**/knowledge-exploration-service/*.md",
-          "**/knowledge-exploration-service/*.yml",
-          "**/breadcrumb/*.yml",
+          //"**/graph/*.md",
+          //"**/graph/*.yml",
+          //"**/knowledge-exploration-service/*.md",
+          //"**/knowledge-exploration-service/*.yml",
+          //"**/breadcrumb/*.yml",
           "**/obj/**",
           "**/includes/**",
           "_themes/**",
@@ -97,7 +97,7 @@
     "template": [],
     "groups": {
       "shared": {
-        "moniker_ranges": [ "makes-1.0", "makes-3.0" ]
+        "moniker_range": ">= makes-1.0"
           //,
         //"dest": "makes-3.0"
       }
