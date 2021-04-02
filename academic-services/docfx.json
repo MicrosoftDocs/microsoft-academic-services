@@ -1,53 +1,53 @@
 {
   "build": {
     "content": [
-      {
-        "files": [
-          "**/*.md",
-          "**/*.yml",
-          "../breadcrumb/*.yml"
-        ],
-        "exclude": [
-        ],
-        "src": "graph",
-        "group": "shared",
-        "dest": "graph"
-      },
-      {
-        "files": [
-          "**/*.md",
-          "**/*.yml",
-          "../breadcrumb/*.yml"
-        ],
-        "exclude": [
-        ],
-        "src": "knowledge-exploration-service",
-        "group": "shared",
-        "dest": "knowledge-exploration-service"
-      },
-      {
-        "files": [
-          "**/*.md",
-          "**/*.yml",
-          "../breadcrumb/*.yml"
-        ],
-        "exclude": [
-        ],
-        "src": "knowledge-exploration-service",
-        "group": "makes-versioned",
-        "dest": "knowledge-exploration-service"
-      },
+      //{
+      //  "files": [
+      //    "**/*.md",
+      //    "**/*.yml",
+      //    "../breadcrumb/*.yml"
+      //  ],
+      //  "exclude": [
+      //  ],
+      //  "src": "graph",
+      //  "group": "shared",
+      //  "dest": "graph"
+      //},
+      //{
+      //  "files": [
+      //    "**/*.md",
+      //    "**/*.yml",
+      //    "../breadcrumb/*.yml"
+      //  ],
+      //  "exclude": [
+      //  ],
+      //  "src": "knowledge-exploration-service",
+      //  "group": "shared",
+      //  "dest": "knowledge-exploration-service"
+      //},
+      //{
+      //  "files": [
+      //    "**/*.md",
+      //    "**/*.yml",
+      //    "../breadcrumb/*.yml"
+      //  ],
+      //  "exclude": [
+      //  ],
+      //  "src": "knowledge-exploration-service",
+      //  "group": "makes-versioned",
+      //  "dest": "knowledge-exploration-service"
+      //},
       {
         "files": [
           "**/*.md",
           "**/*.yml"
         ],
         "exclude": [
-          "**/graph/*.md",
-          "**/graph/*.yml",
-          "**/knowledge-exploration-service/*.md",
-          "**/knowledge-exploration-service/*.yml",
-          "**/breadcrumb/*.yml",
+          //"**/graph/*.md",
+          //"**/graph/*.yml",
+          //"**/knowledge-exploration-service/*.md",
+          //"**/knowledge-exploration-service/*.yml",
+          //"**/breadcrumb/*.yml",
           "**/obj/**",
           "**/includes/**",
           "_themes/**",

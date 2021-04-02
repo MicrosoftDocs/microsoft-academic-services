@@ -12,6 +12,20 @@ Once signed up for MAKES, new versions of the service and indexes will be delive
 
 ## Why use MAKES?
 
+::: moniker range="makes-1.0"
+
+because it's the first try..
+
+::: moniker-end
+
+::: moniker range="makes-3.0"
+
+because it's more secure
+
+::: moniker-end
+
+Some more shared content here...
+
 Here are some key features of the Microsoft Academic Knowledge Exploration Service (MAKES):
 
 - **Self-hosting Project Academic Knowledge** - Many organizations have found great value in our [Project Academic Knowledge API](https://www.microsoft.com/research/project/academic-knowledge/) (formerly known as the Cognitive Service Academic Knowledge API), but have been limited by the throughput allowed.  MAKES is a turn-key solution to self-host this set of APIs without limits.
