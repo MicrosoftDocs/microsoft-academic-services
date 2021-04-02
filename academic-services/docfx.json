@@ -3,33 +3,37 @@
     "content": [
       {
         "files": [
-          "**/graph/*.md",
-          "**/graph/*.yml",
-          "**/breadcrumb/*.yml"
+          "**/*.md",
+          "**/*.yml",
+          "../breadcrumb/*.yml"
         ],
         "exclude": [
         ],
+        "src": "graph",
         "group": "shared",
         "dest": "mag"
       },
       {
         "files": [
-          "**/knowledge-exploration-service/*.md",
-          "**/knowledge-exploration-service/*.yml",
-          "**/breadcrumb/*.yml"
+          "**/*.md",
+          "**/*.yml",
+          "../breadcrumb/*.yml"
         ],
         "exclude": [
         ],
-        "group": "shared"
+        "src": "knowledge-exploration-service",
+        "group": "shared",
+        "dest": "makes"
       },
       {
         "files": [
-          "**/knowledge-exploration-service/*.md",
-          "**/knowledge-exploration-service/*.yml",
-          "**/breadcrumb/*.yml"
+          "**/*.md",
+          "**/*.yml",
+          "../breadcrumb/*.yml"
         ],
         "exclude": [
         ],
+        "src": "knowledge-exploration-service",
         "group": "makes-versioned",
         "dest": "makes"
       },
@@ -39,6 +43,11 @@
           "**/*.yml"
         ],
         "exclude": [
+          "**/graph/*.md",
+          "**/graph/*.yml",
+          "**/knowledge-exploration-service/*.md",
+          "**/knowledge-exploration-service/*.yml",
+          "**/breadcrumb/*.yml",
           "**/obj/**",
           "**/includes/**",
           "_themes/**",
@@ -48,8 +57,8 @@
           "LICENSE-CODE",
           "ThirdPartyNotices"
         ],
-        "group": "versioned",
-        "dest": "makes-1.0"
+        "group": "shared",
+        "dest": ""
       }
     ],
     "resource": [
