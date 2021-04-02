@@ -9,7 +9,7 @@ ms.date: 3/23/2021
 
 [!INCLUDE [ma-subscription-receive-data](../includes/ma-subscription-receive-data.md)]
 
-## MAKES releases
+## Verify MAKES releases
 
 MAKES release are deployed approximately once a week to the Azure storage account that were used to signed up for the distribution preview.
 
