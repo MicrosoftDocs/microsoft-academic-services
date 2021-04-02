@@ -3,24 +3,39 @@
     "content": [
       {
         "files": [
-          "**/*.md",
-          "**/*.yml"
+          "**/graph/*.md",
+          "**/graph/*.yml",
+          "**/breadcrumb/*.yml"
         ],
         "exclude": [
-          "**/obj/**",
-          "**/includes/**",
-          "_themes/**",
-          "_themes.pdf/**",
-          "README.md",
-          "LICENSE",
-          "LICENSE-CODE",
-          "ThirdPartyNotices"
         ],
         "group": "shared",
         "dest": "mag-1.0"
       },
       {
-        "files": [ 
+        "files": [
+          "**/knowledge-exploration-service/*.md",
+          "**/knowledge-exploration-service/*.yml",
+          "**/breadcrumb/*.yml"
+        ],
+        "exclude": [
+        ],
+        "group": "shared",
+        "dest": "makes-3.0"
+      },
+      {
+        "files": [
+          "**/knowledge-exploration-service/*.md",
+          "**/knowledge-exploration-service/*.yml",
+          "**/breadcrumb/*.yml"
+        ],
+        "exclude": [
+        ],
+        "group": "versioned",
+        "dest": "makes-1.0"
+      },
+      {
+        "files": [
           "**/*.md",
           "**/*.yml"
         ],
@@ -74,7 +89,7 @@
     "template": [],
     "groups": {
       "shared": {
-        "moniker_range": "mag-1.0"
+        "moniker_range": "makes-3.0"
       },
       "versioned": {
         "moniker_range": "makes-1.0"
