@@ -10,7 +10,7 @@
         "exclude": [
         ],
         "group": "shared",
-        "dest": "mag-1.0"
+        "dest": "mag"
       },
       {
         "files": [
@@ -20,8 +20,7 @@
         ],
         "exclude": [
         ],
-        "group": "shared",
-        "dest": "makes-3.0"
+        "group": "shared"
       },
       {
         "files": [
@@ -31,8 +30,8 @@
         ],
         "exclude": [
         ],
-        "group": "versioned",
-        "dest": "makes-1.0"
+        "group": "makes-versioned",
+        "dest": "makes"
       },
       {
         "files": [
@@ -91,7 +90,7 @@
       "shared": {
         "moniker_range": "makes-3.0"
       },
-      "versioned": {
+      "makes-versioned": {
         "moniker_range": "makes-1.0"
       }
     },
