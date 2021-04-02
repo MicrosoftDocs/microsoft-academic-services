@@ -5,7 +5,7 @@ ms.topic: get-started-article
 ms.date: 3/23/2021
 ---
 
-[!INCLUDE [ma-subscription-recieve-data](../include/ma-subscription-receive-data.md)]
+[!INCLUDE [ma-subscription-receive-data](../includes/ma-subscription-receive-data.md)]
 
 ## Next steps
 
