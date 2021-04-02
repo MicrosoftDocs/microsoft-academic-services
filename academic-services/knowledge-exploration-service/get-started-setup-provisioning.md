@@ -4,6 +4,9 @@ description: Step-by-step instructions for setting up one-time or automatic prov
 ms.topic: get-started-article
 ms.date: 2020-02-10
 ---
+
+::: moniker range="makes-1.0"
+
 # Get started with Microsoft Academic Knowledge Exploration Service
 
 Details step-by-step instructions for setting up one-time or automatic provisioning of Microsoft Academic Knowledge Exploration Service APIs to an Azure blob storage account.
@@ -91,3 +94,11 @@ makes(storage account container)
 Example:
 
 ![API release location in blob storage](media/api-release-location.png "API release location in blob storage")
+
+::: moniker-end
+
+::: moniker range="makes-3.0"
+
+[!INCLUDE [ma-subscription-signup](../includes/ma-subscription-signup.md)]
+
+::: moniker-end

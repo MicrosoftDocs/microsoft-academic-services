@@ -1,10 +1,10 @@
-# Get Microsoft Academic Graph on Azure storage
+# Get Microsoft Academic Data on Azure storage
 
-Details step-by-step instructions for setting up one-time or automatic provisioning of Microsoft Academic Graph to an Azure blob storage account.
+Details step-by-step instructions for setting up one-time or automatic provisioning of Microsoft Academic Data to an Azure blob storage account.
 
 ## Open Data License: [ODC-BY](https://opendatacommons.org/licenses/by/1.0/)
 
-When using Microsoft Academic data (MAG, MAKES, etc.) in a product or service, or including data in a redistribution, please acknowledge Microsoft Academic using the URI https://aka.ms/msracad. For publications and reports, please cite following articles:
+When using Microsoft Academic Data (MAG, MAKES, etc.) in a product or service, or including data in a redistribution, please acknowledge Microsoft Academic using the URI https://aka.ms/msracad. For publications and reports, please cite following articles:
 
 > [!NOTE]
 >
@@ -15,7 +15,7 @@ When using Microsoft Academic data (MAG, MAKES, etc.) in a product or service, o
 > [!NOTE]
 > MAG is currently in a free preview period, so there are no charges associated with the provisioning or use of the data/service itself. However Azure requires you to cover all costs associated with standard resource creation, usage, etc. For cost estimates associated with MAG please see the [Pricing](resources-pricing.md) page. <br/><br/>Most research institutions have an "Enterprise Account" with Microsoft including Azure subscription. The pricing for Enterprise Accounts differ from the individual account shown in Azure's price calculator. <br/><br/>If you have an Enterprise Account, please check with your individual institution's Information Technology/Computer Center resource on the process of setting up Azure to get MAG. You might need to obtain a "Master Agreement #" and involve MLSP (Microsoft Licensed Solution Provider) for help.
 
-## Setup data share and storage account to receive MAG graph releases
+## Setup data share and storage account to receive Microsoft Academic Data releases
 
 ### Create an Azure Subscription
 
@@ -100,14 +100,14 @@ Sign in to the [Azure portal](https://portal.azure.com/).
 
    :heavy_check_mark:  The name of your Azure Storage blob container (i.e. `ma-datashare`). This infomation is needed in [Accept and receive data using Azure Data Share](get-started-receive-data.md).
 
-## Sign up for MAG provisioning
+## Sign up for Microsoft Academic Data provisioning
 
-To sign up for MAG on AS distribution preview, send the following information **using your school or company email account** to <a href="mailto:academicapi@microsoft.com?subject=Access request to Microsoft Academic Graph (MAG) on Azure Storage (AS) distribution preview">academicapi@microsoft.com</a> with the subject "Access request to Microsoft Academic Graph (MAG) on Azure Storage (AS) distribution preview":
+To sign up for Microsoft Academic Data on AS distribution preview, send the following information **using your school or company email account** to <a href="mailto:academicapi@microsoft.com?subject=Access request to Microsoft Academic Data on Azure Storage (AS) distribution preview">academicapi@microsoft.com</a> with the subject "Access request to Microsoft Academic Data on Azure Storage (AS) distribution preview":
 
 - Are you affiliated with a company or university?
   - If company, please provide the company’s name, your department/group and your role
   - If university, please provide the university’s name, department, group/advisor, and your role (undergraduate student, grad student, professor, etc.)
-- Brief description of the project you will be using MAG for
+- Brief description of the project you will be using Microsoft Academic Data for
 - Name of your Microsoft sales representative, if you have one
 - The email address you used to log on to Azure portal
 - The location of your Azure Storage (AS) account
