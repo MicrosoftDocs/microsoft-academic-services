@@ -17,7 +17,7 @@
           "ThirdPartyNotices"
         ],
         "group": "shared",
-        "dest": "academic-service/1.0"
+        "dest": "mag-1.0"
       },
       {
         "files": [
@@ -35,7 +35,7 @@
           "ThirdPartyNotices"
         ],
         "group": "versioned",
-        "dest": "academic-service/2.0"
+        "dest": "makes-1.0"
       }
     ],
     "resource": [
@@ -56,6 +56,7 @@
         ]
       }
     ],
+    "dest": "academic-service",
     "overwrite": [],
     "externalReference": [],
     "globalMetadata": {
@@ -73,12 +74,12 @@
     "template": [],
     "groups": {
       "shared": {
-        "moniker_range": "= mag-1.0"
+        "moniker_range": "mag-1.0"
       },
       "versioned": {
-        "moniker_range": "= makes-1.0"
+        "moniker_range": "makes-1.0"
       }
     },
-      "markdownEngineName": "markdig"
-    }
+    "markdownEngineName": "markdig"
+  }
   }
