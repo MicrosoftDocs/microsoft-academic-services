@@ -3,7 +3,7 @@ title: About Microsoft Academic Knowledge Exploration Service
 description: Microsoft Academic Knowledge Exploration Service enables self-hosted interactive search of entities in the Microsoft Academic Graph
 ms.topic: overview
 ms.date: 2020-02-10
-monikerRange: '>= makes-1.0'
+monikerRanges: 'makes-1.0' 'makes-3.0'
 ---
 # About Microsoft Academic Knowledge Exploration Service
 
@@ -13,13 +13,13 @@ Once signed up for MAKES, new versions of the service and indexes will be delive
 
 ## Why use MAKES?
 
-::: moniker range="= makes-1.0"
+::: moniker range="makes-1.0"
 
 because it's the first try..
 
 ::: moniker-end
 
-::: moniker range="= makes-3.0"
+::: moniker range="makes-3.0"
 
 because it's more secure
 

@@ -97,7 +97,7 @@
     "template": [],
     "groups": {
       "shared": {
-        "moniker_range": ">= makes-1.0"
+        "moniker_ranges": [ "makes-1.0", "makes-3.0" ]
           //,
         //"dest": "makes-3.0"
       }
