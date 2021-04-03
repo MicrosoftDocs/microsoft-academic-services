@@ -13,9 +13,9 @@ Before you can accept Azure Data Share invitation to receive Microsoft Academic 
 
 Before you begin, you should have these items of information:
 
-   :heavy_check_mark:  The name of your Azure Storage (AS) account from [Get Microsoft Academic Graph on Azure storage](get-started-setup-provisioning.md#note-azure-storage-account-name).
+   :heavy_check_mark:  The name of your Azure Storage (AS) account from [Get Microsoft Academic Graph on Azure storage](./get-started-setup-provisioning#note-azure-storage-account-name).
 
-   :heavy_check_mark:  The name of the container in your Azure Storage account from [Get Microsoft Academic Graph on Azure storage](get-started-setup-provisioning.md#create-a-blob-container).
+   :heavy_check_mark:  The name of the container in your Azure Storage account from [Get Microsoft Academic Graph on Azure storage](./get-started-setup-provisioning#create-a-blob-container).
 
 ## Sign in to the Azure portal
 
@@ -68,7 +68,7 @@ Follow the steps below to configure where you want to receive data.
     |**Target data type** | Azure Blob Storage |
     |**Subscription** | From the drop-down, select your Azure subscription. |
     |**Resource group** | Specify whether you want to create a new resource group or use an existing one. A resource group is a container that holds related resources within an Azure subscription. For more information, see [Azure Resource Group overview](https://docs.microsoft.com/azure/azure-resource-manager/resource-group-overview). You can use the same resource group as the Data Share service.|
-    |**Storage account name** | Select the Azure storage account created in [Get Microsoft Academic Graph on Azure storage](get-started-setup-provisioning.md#create-an-azure-storage-account), e.g. `mag<org_name>`. |
+    |**Storage account name** | Select the Azure storage account created in [Get Microsoft Academic Graph on Azure storage](./get-started-setup-provisioning#create-an-azure-storage-account), e.g. `mag<org_name>`. |
     |**Path**    | Select the blob storage container created in . e.g. `ma-datashare`. |
 
     <br>
