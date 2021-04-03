@@ -4,7 +4,7 @@ Details step-by-step instructions for receiving Microsoft Academic data using Az
 
 Before you can accept Azure Data Share invitation to receive Microsoft Academic data, you must provision a number of Azure resources below. Ensure that all pre-requisites are complete before accepting a data share invitation.
 
-* Set up provisioning of Microsoft Academic Graph to an Azure blob storage account. See [Get Microsoft Academic Graph on Azure storage](./get-started-setup-provisioning.md).
+* Set up provisioning of Microsoft Academic Graph to an Azure blob storage account. See [Get Microsoft Academic Graph on Azure storage](get-started-setup-provisioning).
 * A Data Share invitation: An invitation from Microsoft Azure with a subject titled "Azure Data Share invitation from **<yourdataprovider@domain.com>**.
 * Register the [Microsoft.DataShare resource provider](https://docs.microsoft.com/azure/data-share/concepts-roles-permissions#resource-provider-registration) in the Azure subscription where you will create a Data Share resource and the Azure subscription where your target Azure data stores are located.
 * Permission to write and add role assignment to the storage account. These permissions exist in the Owner role.
