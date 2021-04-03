@@ -10,6 +10,8 @@
   items:
   - name: Sign up for MAKES
     href: get-started-setup-provisioning.md
+  - name: Receive MAKES Release
+    href: get-started-receive-data.md
   - name: Deploy new MAKES instance
     href: get-started-create-api-instances.md
 - name: How to

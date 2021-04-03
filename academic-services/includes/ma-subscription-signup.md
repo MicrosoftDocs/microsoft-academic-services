@@ -96,7 +96,7 @@ Sign in to the [Azure portal](https://portal.azure.com/).
 
    :heavy_check_mark:  The name of your Azure Storage (AS) account (i.e. `magconsoto`).
 
-   :heavy_check_mark:  The name of your Azure Storage blob container (i.e. `ma-datashare`). This infomation is needed in [Accept and receive data using Azure Data Share](./get-started-receive-data.md).
+   :heavy_check_mark:  The name of your Azure Storage blob container (i.e. `ma-datashare`). This infomation is needed in [Accept and receive data using Azure Data Share](./get-started-receive-data).
 
 ## Sign up for Microsoft Academic Data provisioning
 
