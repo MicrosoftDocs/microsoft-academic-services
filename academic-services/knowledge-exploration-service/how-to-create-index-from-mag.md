@@ -60,30 +60,30 @@ To create MAKES index, you will need to format your data into MAKES entity files
    ![Azure Data Lake Analytics - New job](../graph/media/samples-azure-data-lake-hindex/new-job.png "Azure Data Lake Analytics - New job")
    ![New job - Open CreateFunctions.usql](../graph/media/samples-azure-data-lake-hindex/create-functions-open.png "New job - Open CreateFunctions.usql")
 
+::: moniker range="makes-1.0"
 1. Replace placeholder values in the script using the table below
-
    | Value |Description | Example |
    |---------|---------|------|
-::: moniker range="makes-1.0"
    |**`@In_MagBlobAccount`** | The name of your Azure Storage account containing the Microsoft Academic Graph data set. | **mymagstore**
    |**`@In_MagBlobContainer`** | The container name in your Azure Storage account containing the Microsoft Academic graph data set, usually in the form of **mag-YYYY-MM-DD**. | **mag-2020-02-07**
-::: moniker-end
-::: moniker range="makes-3.0"
-   |**`@In_MagWasbUri`** | The MAG data uri pointing to a specific MAG release in WASB format. | **wasb&#58;//<MAS_CONTAINER>@<MAS_STORAGE_ACCOUNT>/mag/<YYYY-MM-DD>/**
-::: moniker-end
    |**`@Out_OutputPath string`** | The entity output storage path to where you'd like the formatted entities documents to go. The container for the azure output storage location must exist before running the script.| **wasb&#58;//dev@<MAS_STORAGE_ACCOUNT>/makes/<YYYY-MM-DD>/microsoft/entities**  |
    |**`@Param_UseSubgraphForInstitution`** | Generates a subgraph containing data related to the specified institution. | **microsoft**|
+::: moniker-end
+::: moniker range="makes-3.0"
+1. Replace placeholder values in the script using the table below
+   | Value |Description | Example |
+   |---------|---------|------|
+   |**`@In_MagWasbUri`** | The MAG data uri pointing to a specific MAG release in WASB format. | **wasb&#58;//<MAS_CONTAINER>@<MAS_STORAGE_ACCOUNT>/mag/<YYYY-MM-DD>/**
+   |**`@Out_OutputPath string`** | The entity output storage path to where you'd like the formatted entities documents to go. The container for the azure output storage location must exist before running the script.| **wasb&#58;//dev@<MAS_STORAGE_ACCOUNT>/makes/<YYYY-MM-DD>/microsoft/entities**  |
+   |**`@Param_UseSubgraphForInstitution`** | Generates a subgraph containing data related to the specified institution. | **microsoft**|
+::: moniker-end
+   > [!IMPORTANT]
+   > If you use the example output path, make sure to create the **dev** container in your storage account before running this script. Follow [Create a container](https://docs.microsoft.com/azure/storage/blobs/storage-quickstart-blobs-portal#create-a-container) guide for more info.
 
-    > [!IMPORTANT]
-    > If you use the example output path, make sure to create the **dev** container in your storage account before running this script. Follow [Create a container](https://docs.microsoft.com/azure/storage/blobs/storage-quickstart-blobs-portal#create-a-container) guide for more info.
-    >
-
-    > [!TIP]
-    > This tutorial uses Microsoft as an organization by default. You can target any organization by finding its NormalizedName in the Microsoft Academic Graph and then changing the value of the affiliationNormalizedNameFilter variable to said name.
-    >
-    > You can also modify the script to create different subgraphs. See script comments in the **Subgraph Creation** section.
-    >
-    > Please note that doing this may impact time estimates for script execution and index generation later on in this tutorial.
+   > [!TIP]
+   > This tutorial uses Microsoft as an organization by default. You can target any organization by finding its NormalizedName in the Microsoft Academic Graph and then changing the value of the affiliationNormalizedNameFilter variable to said name.
+   > You can also modify the script to create different subgraphs. See script comments in the **Subgraph Creation** section.
+   > Please note that doing this may impact time estimates for script execution and index generation later on in this tutorial.
 
 1. Provide a **Job name**, change **AUs** to 20, and select **Submit**
 
@@ -105,16 +105,21 @@ If you have not done so already, download the Kesm.exe tool from your MAKES subs
 
 1. Replace the command parameters with the values from the table below:
 
+::: moniker range="makes-1.0"
     | Values | Description | Example |
     |---------|---------|------|
     |**`<IndexResourceName>`** | The name of the indexing resources. This step will create a Resource Group, Azure Batch account, and an Azure Storage Account using this name. | **makesindexres** |
-    ::: moniker range="makes-1.0"
     |**`<MakesPackageLocation>`** | The base URL to a MAKES release. The indexer, preprocessor, and jobManager packages inside the release will be used to set up the Azure Batch account|  **https&#58;//<MAS_STORAGE_ACCOUNT>.blob.core.windows.net/makes/<YYYY-MM-DD>/** |
-    ::: moniker-end
-    ::: moniker range="makes-3.0"
-    |**`<MakesPackageLocation>`** | The base URL to a MAKES release. The indexer, preprocessor, and jobManager packages inside the release will be used to set up the Azure Batch account|  **https&#58;//<MAS_STORAGE_ACCOUNT>.blob.core.windows.net/<MAS_CONTAINER>/makes/<YYYY-MM-DD>/** |
-    ::: moniker-end
     |**`<MakesIndexResourceConfigFilePath>`** | The local output file for saving the indexing resource configuration information to build your index. | **makesIndexResConfig.json** |
+::: moniker-end
+::: moniker range="makes-3.0"
+    | Values | Description | Example |
+    |---------|---------|------|
+    |**`<IndexResourceName>`** | The name of the indexing resources. This step will create a Resource Group, Azure Batch account, and an Azure Storage Account using this name. | **makesindexres** |
+    |**`<MakesPackageLocation>`** | The base URL to a MAKES release. The indexer, preprocessor, and jobManager packages inside the release will be used to set up the Azure Batch account|  **https&#58;//<MAS_STORAGE_ACCOUNT>.blob.core.windows.net/<MAS_CONTAINER>/makes/<YYYY-MM-DD>/** |
+    |**`<MakesIndexResourceConfigFilePath>`** | The local output file for saving the indexing resource configuration information to build your index. | **makesIndexResConfig.json** |
+::: moniker-end
+    
 
 1. Run the command
     > [!NOTE]
