@@ -7,7 +7,7 @@ ms.date: 10/16/2020
 
 # Create custom MAKES index from a MAG release
 
- Step-by-step guide for generating MAKES indexes from a Microsoft Academic Graph (MAG) release. For more information on obtaining a MAG release, visit [Get Microsoft Academic Graph on Azure storage](../graph/get-started-setup-provisioning.md).  In this example we will be building a custom index of all Microsoft publications and associated entities.
+ Step-by-step guide for generating MAKES indexes from a Microsoft Academic Graph (MAG) release. In this example we will be building a custom index that contains only Microsoft publications and their associated entities.
 
 ## Prerequisites
 

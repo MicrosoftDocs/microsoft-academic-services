@@ -127,7 +127,7 @@ At this point you are ready to deploy an instance of MAKES to your Azure account
 
 > [!TIP]
 > To ensure you're using a valid **--MakesPacakge** URI, you can use storage explorer navigate to a specific MAKES release and select the URI string from license file property.
-> ![MAKES package uri from storage explorer](makes-version-from-license-file.png)
+> ![MAKES package uri from storage explorer](/media/makes-version-from-license-file.png)
 
 > [!NOTE]
 > If your account is connected to multiple Azure Directories or Azure Subscriptions, you'll also have to specify the **--AzureActiveDirectoryDomainName** and/or **--AzureSubscriptionId** parameters. See [Command Line Tool Reference](reference-makes-command-line-tool.md#common-azure-authentication-parameters) for more details.
