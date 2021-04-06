@@ -27,7 +27,6 @@ To create MAKES index, you will need to format your data into MAKES entity files
 
    ![Download CreateFunctions.usql](../graph/media/samples-azure-data-lake-hindex/create-functions-download.png "Download CreateFunctions.usql")
 ::: moniker-end
-
 ::: moniker range="makes-3.0"
 1. Download `samples/CreateFunctions.usql` from your MAG release to your local drive. <br> From [Azure portal](https://portal.azure.com), go to your MAG Azure Storage account and download **/<MAG_CONTAINER>/<MAG>/<YYYY-MM-DD>/samples/usql/CreateFunctions.usql**.
 
