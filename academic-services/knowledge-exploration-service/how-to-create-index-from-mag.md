@@ -22,9 +22,17 @@ To create MAKES index, you will need to format your data into MAKES entity files
 
 ### Define functions to extract MAG data
 
+::: moniker range="makes-1.0"
 1. Download `samples/CreateFunctions.usql` from your MAG release to your local drive. <br> From [Azure portal](https://portal.azure.com), go to your MAG Azure Storage account > **Containers > [mag-yyyy-mm-dd] > samples > CreateFunctions.usql > Download**.
 
    ![Download CreateFunctions.usql](../graph/media/samples-azure-data-lake-hindex/create-functions-download.png "Download CreateFunctions.usql")
+::: moniker-end
+
+::: moniker range="makes-3.0"
+1. Download `samples/CreateFunctions.usql` from your MAG release to your local drive. <br> From [Azure portal](https://portal.azure.com), go to your MAG Azure Storage account and download **/<MAG_CONTAINER>/<MAG>/<YYYY-MM-DD>/samples/usql/CreateFunctions.usql**.
+
+   ![Download CreateFunctions.usql](../graph/media/samples-azure-data-lake-hindex/create-functions-download.png "Download CreateFunctions.usql")
+::: moniker-end
 
 1. In the [Azure Management Portal](https://portal.azure.com), go to the Azure Data Lake Analytics (ADLA) service that you created, and select **Overview > New job > Open file**. Select `CreateFunctions.usql` in your local drive.
    ![Azure Data Lake Analytics - New job](../graph/media/samples-azure-data-lake-hindex/new-job.png "Azure Data Lake Analytics - New job")
@@ -41,7 +49,12 @@ To create MAKES index, you will need to format your data into MAKES entity files
 
 ### Run MAG to MAKES transformation U-SQL script
 
+::: moniker range="makes-3.0"
 1. Download the U-SQL script [MagDataToMakesJson.usql](./MagDataToMakesJson.usql) to your local drive.
+::: moniker-end
+::: moniker range="makes-1.0"
+1. Download the U-SQL script [MagDataToMakesJson.usql](./MagDataToMakesJson-1.0.usql) to your local drive.
+::: moniker-end
 
 1. In the [Azure Management Portal](https://portal.azure.com), go to the Azure Data Lake Analytics (ADLA) service that you created, and select **Overview > New Job > Open file**. Select `MagDataToMakesJson.usql` from your local drive.
 
@@ -50,15 +63,20 @@ To create MAKES index, you will need to format your data into MAKES entity files
 
 1. Replace placeholder values in the script using the table below
 
-   |Value  |Description  | Example |
+   | Value |Description | Example |
    |---------|---------|------|
+::: moniker range="makes-1.0"
    |**`@In_MagBlobAccount`** | The name of your Azure Storage account containing the Microsoft Academic Graph data set. | **mymagstore**
    |**`@In_MagBlobContainer`** | The container name in your Azure Storage account containing the Microsoft Academic graph data set, usually in the form of **mag-YYYY-MM-DD**. | **mag-2020-02-07**
-   |**`@Out_OutputPath string`** | The entity output storage path to where you'd like the formatted entities documents to go. The container for the azure output storage location must exist before running the script.| **wasb&#58;//makessubgraph@mymakesstore/2020-02-07/microsoft/entities**  |
+::: moniker-end
+::: moniker range="makes-3.0"
+   |**`@In_MagWasbUri`** | The MAG data uri pointing to a specific MAG release in WASB format. | **wasb&#58;//<MAS_CONTAINER>@<MAS_STORAGE_ACCOUNT>/mag/<YYYY-MM-DD>/**
+::: moniker-end
+   |**`@Out_OutputPath string`** | The entity output storage path to where you'd like the formatted entities documents to go. The container for the azure output storage location must exist before running the script.| **wasb&#58;//dev@<MAS_STORAGE_ACCOUNT>/makes/<YYYY-MM-DD>/microsoft/entities**  |
    |**`@Param_UseSubgraphForInstitution`** | Generates a subgraph containing data related to the specified institution. | **microsoft**|
 
     > [!IMPORTANT]
-    > If you use the example output path, make sure to create the **makessubgraph** container before running this script. Follow [Create a container](https://docs.microsoft.com/azure/storage/blobs/storage-quickstart-blobs-portal#create-a-container) guide for how to do this.
+    > If you use the example output path, make sure to create the **dev** container in your storage account before running this script. Follow [Create a container](https://docs.microsoft.com/azure/storage/blobs/storage-quickstart-blobs-portal#create-a-container) guide for more info.
     >
 
     > [!TIP]
@@ -91,7 +109,12 @@ If you have not done so already, download the Kesm.exe tool from your MAKES subs
     | Values | Description | Example |
     |---------|---------|------|
     |**`<IndexResourceName>`** | The name of the indexing resources. This step will create a Resource Group, Azure Batch account, and an Azure Storage Account using this name. | **makesindexres** |
-    |**`<MakesPackageLocation>`** | The base URL to a MAKES release. The indexer, preprocessor, and jobManager packages inside the release will be used to set up the Azure Batch account|  **https&#58;//mymakesstore.blob.core.windows.net/makes/2020-02-07/** |
+::: moniker range="makes-1.0"
+    |**`<MakesPackageLocation>`** | The base URL to a MAKES release. The indexer, preprocessor, and jobManager packages inside the release will be used to set up the Azure Batch account|  **https&#58;//<MAS_STORAGE_ACCOUNT>.blob.core.windows.net/makes/<YYYY-MM-DD>/** |
+::: moniker-end
+::: moniker range="makes-3.0"
+    |**`<MakesPackageLocation>`** | The base URL to a MAKES release. The indexer, preprocessor, and jobManager packages inside the release will be used to set up the Azure Batch account|  **https&#58;//<MAS_STORAGE_ACCOUNT>.blob.core.windows.net/<MAS_CONTAINER>/makes/<YYYY-MM-DD>/** |
+::: moniker-end
     |**`<MakesIndexResourceConfigFilePath>`** | The local output file for saving the indexing resource configuration information to build your index. | **makesIndexResConfig.json** |
 
 1. Run the command
@@ -116,8 +139,8 @@ The next step is generating MAKES index file from MAKES entity file. You'll subm
 
     | Values | Description | Example |
     |---------|---------|-------|
-    |**`<InputEntitiesUrl>`** | The input URL to the MAKES entities generated from running the U-SQL script above. If the Url ends with ".../\<**FolderName**\>/" all files under \<**FolderName**\> will be used. If the urls ends with ".../\<**FolderName**\>/\<**FilePrefix**\>" all files under \<**FolderName**\> with file prefix \<**FilePrefix**\> will be used.| **https://mymakesstore.blob.core.windows.net/makessubgraph/2020-02-07/microsoft/index/**| **https://mymakesstore.blob.core.windows.net/makessubgraph/2020-02-07/microsoft/entities/** |
-    |**`<OutputUrlPrefix>`** | The output base URL for writing the built MAKES index. If the Url ends with ".../\<**FolderName**\>/" all files will be written under \<**FolderName**\>. If the urls ends with ".../\<**FolderName**\>/\<**FilePrefix**\>" all files will be written under \<**FolderName**\> with file prefix \<**FilePrefix**\>| **https://mymakesstore.blob.core.windows.net/makessubgraph/2020-02-07/microsoft/index/**
+    |**`<InputEntitiesUrl>`** | The input URL to the MAKES entities generated from running the U-SQL script above. If the Url ends with ".../\<**FolderName**\>/" all files under \<**FolderName**\> will be used. If the urls ends with ".../\<**FolderName**\>/\<**FilePrefix**\>" all files under \<**FolderName**\> with file prefix \<**FilePrefix**\> will be used.| **https://<MAS_STORAGE_ACCOUNT>.blob.core.windows.net/dev/makes/<YYYY-MM-DD>/microsoft/entities/** |
+    |**`<OutputUrlPrefix>`** | The output base URL for writing the built MAKES index. If the Url ends with ".../\<**FolderName**\>/" all files will be written under \<**FolderName**\>. If the urls ends with ".../\<**FolderName**\>/\<**FilePrefix**\>" all files will be written under \<**FolderName**\> with file prefix \<**FilePrefix**\>| **https://<MAS_STORAGE_ACCOUNT>.blob.core.windows.net/dev/makes/<YYYY-MM-DD>/microsoft/index/**
     |**`<MakesIndexResourceConfigFilePath>`** | The configuration file generated from running CreateIndexResources above. | **makesIndexResConfig.json** |
 
 1. Run the command
