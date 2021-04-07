@@ -24,8 +24,9 @@ To create MAKES index, you will need to format your data into MAKES entity files
 
 ::: moniker range="makes-1.0"
 
-1. Download `samples/CreateFunctions.usql` from your MAG release to your local drive. <br\> From [Azure portal](https://portal.azure.com), go to your MAG Azure Storage account > **Containers > [mag-yyyy-mm-dd] > samples > CreateFunctions.usql > Download**.
+1. Download `samples/CreateFunctions.usql` from your MAG release to your local drive. 
 
+    From [Azure portal](https://portal.azure.com), go to your MAG Azure Storage account > **Containers > [mag-yyyy-mm-dd] > samples > CreateFunctions.usql > Download**.
     ![Download CreateFunctions.usql](../graph/media/samples-azure-data-lake-hindex/create-functions-download.png "Download CreateFunctions.usql")
 
 1. In the [Azure Management Portal](https://portal.azure.com), go to the Azure Data Lake Analytics (ADLA) service that you created, and select **Overview > New job > Open file**. Select `CreateFunctions.usql` in your local drive.
@@ -44,8 +45,9 @@ To create MAKES index, you will need to format your data into MAKES entity files
 ::: moniker-end
 ::: moniker range="makes-3.0"
 
-1. Download `samples/CreateFunctions.usql` from your MAG release to your local drive. <br\> From [Azure portal](https://portal.azure.com), go to your MAG Azure Storage account and download **/\<MAG_CONTAINER\>/\<MAG\>/\<YYYY-MM-DD\>/samples/usql/CreateFunctions.usql**.
-
+1. Download `samples/CreateFunctions.usql` from your MAG release to your local drive. 
+    
+    From [Azure portal](https://portal.azure.com), go to your MAG Azure Storage account and download **/\<MAG_CONTAINER\>/\<MAG\>/\<YYYY-MM-DD\>/samples/usql/CreateFunctions.usql**.
     ![Download CreateFunctions.usql](../graph/media/samples-azure-data-lake-hindex/create-functions-download.png "Download CreateFunctions.usql")
 
 1. In the [Azure Management Portal](https://portal.azure.com), go to the Azure Data Lake Analytics (ADLA) service that you created, and select **Overview > New job > Open file**. Select `CreateFunctions.usql` in your local drive.
