@@ -143,11 +143,7 @@ In addition to this best practice guidance, local builds have a concrete limit o
 
 ### Validate schema using local index build
 
-1. Download the latest MAKES command line tool `{YYYY-MM-DD}/tools/kesm.zip` from your MAKES storage account. 
-
-1. Unzip kesm.zip
-
-1. Copy the win-x64 version of kesm.exe to your working directory or include it in your command line PATH variable.
+If you have not done so already, download the Kesm.exe tool from your MAKES subscription. See the [Create an API Instance](get-started-create-api-instances.md#download-the-command-line-tool-kesmexe-from-your-azure-storage-account) for instructions on downloading the tool.
 
 1. Open up a command line console, change your current directory to your working directory, and build the index with the following command:
 

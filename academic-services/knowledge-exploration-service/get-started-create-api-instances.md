@@ -58,14 +58,19 @@ Save this file to a local folder.
 
 ## Unzip the kesm.zip package to access the command line tool (kesm.exe)
 
-![kesm location](media/kesm-exe-location.png)
 Once the file has been downloaded you will need to extract the contents. 
+
     1. Right click on the **kesm.zip** file. 
+
         If you are using the Windows operating system select **Extract All** from the context menu.  
         If you are using a Mac, double-click the zip file and it will decompress into the same folder.
+
     1. You will now see two folders, one for each environment we support. 
+        
+        ![kesm location](media/kesm-exe-location.png)
         Select **win-x86** if you are using a Windows operating system
         Select **osx-x64** if you are using a Mac
+
     1. In this folder there is another folder, **Kesm**. Open this folder, it should contain the executable  **kesm.exe** that we will be using to deploy MAKES.
 
 ## Create MAKES hosting resources

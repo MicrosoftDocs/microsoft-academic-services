@@ -200,6 +200,8 @@ The next step is generating MAKES index file from MAKES entity file. You'll subm
 
 1. The command should return a build index job ID for you monitor the job progress
 
+    ![index job submission sucess](media/kesm-index-job-submission-sucess.png)
+
 > [!IMPORTANT]
 > Generating indexes will cost Azure credits and time to create an index can be up to 3 hours.
 >
