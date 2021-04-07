@@ -237,7 +237,7 @@ Kesm.exe DeployHost --HostName "<makes_instance_host_name>" --MakesPackage "http
 ::: moniker range="makes-3.0"
 
 ```cmd
-Kesm.exe DeployHost --HostName "<makes_instance_host_name>" --MakesPackage "https://<MAS_STORAGE_ACCOUNT>.blob.core.windows.net/<MAS_CONTAINER>makes/<YYYY-MM-DD>/"  --MakesHostImageId "<id_from_create_host_resources_command>" --MakesIndex "https://<MAS_STORAGEACCOUNT>.blob.core.windows.net/dev/makes/<YYYY-MM-DD>/microsoft/index/"
+Kesm.exe DeployHost --HostName "<makes_instance_host_name>" --MakesPackage "https://<MAS_STORAGE_ACCOUNT>.blob.core.windows.net/<MAS_CONTAINER>/makes/<YYYY-MM-DD>/"  --MakesHostImageId "<id_from_create_host_resources_command>" --MakesIndex "https://<MAS_STORAGEACCOUNT>.blob.core.windows.net/dev/makes/<YYYY-MM-DD>/microsoft/index/"
 ````
 
 ::: moniker-end
