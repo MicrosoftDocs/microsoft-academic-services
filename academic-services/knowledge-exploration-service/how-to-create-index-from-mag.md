@@ -23,51 +23,70 @@ To create MAKES index, you will need to format your data into MAKES entity files
 ### Define functions to extract MAG data
 
 ::: moniker range="makes-1.0"
-1. Download `samples/CreateFunctions.usql` from your MAG release to your local drive. <br> From [Azure portal](https://portal.azure.com), go to your MAG Azure Storage account > **Containers > [mag-yyyy-mm-dd] > samples > CreateFunctions.usql > Download**.
 
-   ![Download CreateFunctions.usql](../graph/media/samples-azure-data-lake-hindex/create-functions-download.png "Download CreateFunctions.usql")
-::: moniker-end
-::: moniker range="makes-3.0"
-1. Download `samples/CreateFunctions.usql` from your MAG release to your local drive. <br> From [Azure portal](https://portal.azure.com), go to your MAG Azure Storage account and download **/<MAG_CONTAINER>/<MAG>/<YYYY-MM-DD>/samples/usql/CreateFunctions.usql**.
+1. Download `samples/CreateFunctions.usql` from your MAG release to your local drive. <br\> From [Azure portal](https://portal.azure.com), go to your MAG Azure Storage account > **Containers > [mag-yyyy-mm-dd] > samples > CreateFunctions.usql > Download**.
 
-   ![Download CreateFunctions.usql](../graph/media/samples-azure-data-lake-hindex/create-functions-download.png "Download CreateFunctions.usql")
-::: moniker-end
+    ![Download CreateFunctions.usql](../graph/media/samples-azure-data-lake-hindex/create-functions-download.png "Download CreateFunctions.usql")
 
 1. In the [Azure Management Portal](https://portal.azure.com), go to the Azure Data Lake Analytics (ADLA) service that you created, and select **Overview > New job > Open file**. Select `CreateFunctions.usql` in your local drive.
-    
+
     ![Azure Data Lake Analytics - New job](../graph/media/samples-azure-data-lake-hindex/new-job.png "Azure Data Lake Analytics - New job")
     ![New job - Open CreateFunctions.usql](../graph/media/samples-azure-data-lake-hindex/create-functions-open.png "New job - Open CreateFunctions.usql")
 
 1. Select **Submit**.
 
-   ![Submit CreateFunctions job](../graph/media/samples-azure-data-lake-hindex/create-functions-submit.png "Submit CreateFunctions job")
+    ![Submit CreateFunctions job](../graph/media/samples-azure-data-lake-hindex/create-functions-submit.png "Submit CreateFunctions job")
 
 1. The job should finish successfully.
 
-   ![CreateFunctions job status](../graph/media/samples-azure-data-lake-hindex/create-functions-status.png "CreateFunctions job status")
+    ![CreateFunctions job status](../graph/media/samples-azure-data-lake-hindex/create-functions-status.png "CreateFunctions job status")
+
+::: moniker-end
+::: moniker range="makes-3.0"
+
+1. Download `samples/CreateFunctions.usql` from your MAG release to your local drive. <br\> From [Azure portal](https://portal.azure.com), go to your MAG Azure Storage account and download **/\<MAG_CONTAINER\>/\<MAG\>/\<YYYY-MM-DD\>/samples/usql/CreateFunctions.usql**.
+
+    ![Download CreateFunctions.usql](../graph/media/samples-azure-data-lake-hindex/create-functions-download.png "Download CreateFunctions.usql")
+
+1. In the [Azure Management Portal](https://portal.azure.com), go to the Azure Data Lake Analytics (ADLA) service that you created, and select **Overview > New job > Open file**. Select `CreateFunctions.usql` in your local drive.
+
+    ![Azure Data Lake Analytics - New job](../graph/media/samples-azure-data-lake-hindex/new-job.png "Azure Data Lake Analytics - New job")
+    ![New job - Open CreateFunctions.usql](../graph/media/samples-azure-data-lake-hindex/create-functions-open.png "New job - Open CreateFunctions.usql")
+
+1. Select **Submit**.
+
+    ![Submit CreateFunctions job](../graph/media/samples-azure-data-lake-hindex/create-functions-submit.png "Submit CreateFunctions job")
+
+1. The job should finish successfully.
+
+    ![CreateFunctions job status](../graph/media/samples-azure-data-lake-hindex/create-functions-status.png "CreateFunctions job status")
+
+::: moniker-end
 
 ### Run MAG to MAKES transformation U-SQL script
 
 ::: moniker range="makes-3.0"
+
 1. Download the U-SQL script [MagDataToMakesJson.usql](./MagDataToMakesJson.usql) to your local drive.
 
 1. In the [Azure Management Portal](https://portal.azure.com), go to the Azure Data Lake Analytics (ADLA) service that you created, and select **Overview > New Job > Open file**. Select `MagDataToMakesJson.usql` from your local drive.
 
-   ![Azure Data Lake Analytics - New job](../graph/media/samples-azure-data-lake-hindex/new-job.png "Azure Data Lake Analytics - New job")
-   ![New job - Open CreateFunctions.usql](../graph/media/samples-azure-data-lake-hindex/create-functions-open.png "New job - Open CreateFunctions.usql")
+    ![Azure Data Lake Analytics - New job](../graph/media/samples-azure-data-lake-hindex/new-job.png "Azure Data Lake Analytics - New job")
+    ![New job - Open CreateFunctions.usql](../graph/media/samples-azure-data-lake-hindex/create-functions-open.png "New job - Open CreateFunctions.usql")
 
 1. Replace placeholder values in the script using the table below
 
-   | Value |Description | Example |
-   |---------|---------|------|
-   |**`@In_MagWasbUri`** | The MAG data uri pointing to a specific MAG release in WASB format. | **wasb&#58;//<MAS_CONTAINER>@<MAS_STORAGE_ACCOUNT>/mag/<YYYY-MM-DD>/**
-   |**`@Out_OutputPath string`** | The entity output storage path to where you'd like the formatted entities documents to go. The container for the azure output storage location must exist before running the script.| **wasb&#58;//dev@<MAS_STORAGE_ACCOUNT>/makes/<YYYY-MM-DD>/microsoft/entities**  |
-   |**`@Param_UseSubgraphForInstitution`** | Generates a subgraph containing data related to the specified institution. | **microsoft**|
+    | Value |Description | Example |
+    |---------|---------|------|
+    |**`@In_MagWasbUri`** | The MAG data uri pointing to a specific MAG release in WASB format. | **wasb&#58;//<MAS_CONTAINER>@<MAS_STORAGE_ACCOUNT>/mag/\<YYYY-MM-DD\>/**
+    |**`@Out_OutputPath string`** | The entity output storage path to where you'd like the formatted entities documents to go. The container for the azure output storage location must exist before running the script.| **wasb&#58;//dev@<MAS_STORAGE_ACCOUNT>/makes/\<YYYY-MM-DD\>/microsoft/entities**  |
+    |**`@Param_UseSubgraphForInstitution`** | Generates a subgraph containing data related to the specified institution. | **microsoft**|
 
 1. Provide a **Job name**, change **AUs** to 20, and select **Submit**
 
 ::: moniker-end
 ::: moniker range="makes-1.0"
+
 1. Download the U-SQL script [MagDataToMakesJson.usql](./MagDataToMakesJson-1.0.usql) to your local drive.
 
 1. In the [Azure Management Portal](https://portal.azure.com), go to the Azure Data Lake Analytics (ADLA) service that you created, and select **Overview > New Job > Open file**. Select `MagDataToMakesJson.usql` from your local drive.
@@ -81,7 +100,7 @@ To create MAKES index, you will need to format your data into MAKES entity files
    |---------|---------|------|
    |**`@In_MagBlobAccount`** | The name of your Azure Storage account containing the Microsoft Academic Graph data set. | **mymagstore**
    |**`@In_MagBlobContainer`** | The container name in your Azure Storage account containing the Microsoft Academic graph data set, usually in the form of **mag-YYYY-MM-DD**. | **mag-2020-02-07**
-   |**`@Out_OutputPath string`** | The entity output storage path to where you'd like the formatted entities documents to go. The container for the azure output storage location must exist before running the script.| **wasb&#58;//dev@<MAS_STORAGE_ACCOUNT>/makes/<YYYY-MM-DD>/microsoft/entities**  |
+   |**`@Out_OutputPath string`** | The entity output storage path to where you'd like the formatted entities documents to go. The container for the azure output storage location must exist before running the script.| **wasb&#58;//dev@<MAS_STORAGE_ACCOUNT>/makes/\<YYYY-MM-DD\>/microsoft/entities**  |
    |**`@Param_UseSubgraphForInstitution`** | Generates a subgraph containing data related to the specified institution. | **microsoft**|
 
 1. Provide a **Job name**, change **AUs** to 20, and select **Submit**
@@ -104,6 +123,8 @@ We will now use Kesm.exe to create the necessary resources in Azure that will be
 
 If you have not done so already, download the Kesm.exe tool from your MAKES subscription. See the [Create an API Instance](get-started-create-api-instances.md) for instructions on downloading the tool.
 
+::: moniker range="makes-1.0"
+
 1. Open a command prompt or terminal window and navigate to the folder where you have extracted the Kesm.exe tool.
 
 1. Copy the following command to your command / terminal window:
@@ -114,33 +135,43 @@ If you have not done so already, download the Kesm.exe tool from your MAKES subs
 
 1. Replace the command parameters with the values from the table below:
 
-::: moniker range="makes-1.0"
-
    | Values | Description | Example |
    |---------|---------|------|
    |**`<IndexResourceName>`** | The name of the indexing resources. This step will create a Resource Group, Azure Batch account, and an Azure Storage Account using this name. | **makesindexres** |
-   |**`<MakesPackageLocation>`** | The base URL to a MAKES release. The indexer, preprocessor, and jobManager packages inside the release will be used to set up the Azure Batch account|  **https&#58;//<MAS_STORAGE_ACCOUNT>.blob.core.windows.net/makes/<YYYY-MM-DD>/** |
+   |**`<MakesPackageLocation>`** | The base URL to a MAKES release. The indexer, preprocessor, and jobManager packages inside the release will be used to set up the Azure Batch account|  **https&#58;//\<MAS_STORAGE_ACCOUNT\>.blob.core.windows.net/makes/\<YYYY-MM-DD\>/** |
    |**`<MakesIndexResourceConfigFilePath>`** | The local output file for saving the indexing resource configuration information to build your index. | **makesIndexResConfig.json** |
+
+1. Run the command
 
 ::: moniker-end
 ::: moniker range="makes-3.0"
 
+1. Open a command prompt or terminal window and navigate to the folder where you have extracted the Kesm.exe tool.
+
+1. Copy the following command to your command / terminal window:
+
+    ```cmd
+    kesm CreateIndexResources --IndexResourceName "<IndexResourceName>" --MakesPackage "<MakesPackageLocation>" --MakesIndexResourceConfigFilePath "<MakesIndexResourceConfigFilePath>"
+    ```
+
+1. Replace the command parameters with the values from the table below:
+
    | Values | Description | Example |
    |---------|---------|------|
    |**`<IndexResourceName>`** | The name of the indexing resources. This step will create a Resource Group, Azure Batch account, and an Azure Storage Account using this name. | **makesindexres** |
-   |**`<MakesPackageLocation>`** | The base URL to a MAKES release. The indexer, preprocessor, and jobManager packages inside the release will be used to set up the Azure Batch account|  **https&#58;//<MAS_STORAGE_ACCOUNT>.blob.core.windows.net/<MAS_CONTAINER>/makes/<YYYY-MM-DD>/** |
+   |**`<MakesPackageLocation>`** | The base URL to a MAKES release. The indexer, preprocessor, and jobManager packages inside the release will be used to set up the Azure Batch account|  **https&#58;//\<MAS_STORAGE_ACCOUNT\>.blob.core.windows.net/\<MAS_CONTAINER\>/makes/\<YYYY-MM-DD\>/** |
    |**`<MakesIndexResourceConfigFilePath>`** | The local output file for saving the indexing resource configuration information to build your index. | **makesIndexResConfig.json** |
 
-::: moniker-end
-    
-
 1. Run the command
-    > [!NOTE]
-    > If have multiple Azure Subscriptions and/or Tenants, you'll specify additional parameters.
-    > See [Azure login failure due to multiple subscriptions or multiple tenants being tied to a single Azure account](resources-troubleshoot-guide.md#azure-login-failure-due-to-multiple-subscriptions-or-multiple-tenants-being-tied-to-a-single-azure-account) for more details.
-    >
-    > If your Azure Subscription hasn't been registered for Azure Batch service, you'll need to do so.
-    See [Azure Batch service not registered](resources-troubleshoot-guide.md#azure-batch-service-not-registered) for more details.
+
+::: moniker-end
+
+> [!NOTE]
+> If have multiple Azure Subscriptions and/or Tenants, you'll specify additional parameters.
+> See [Azure login failure due to multiple subscriptions or multiple tenants being tied to a single Azure account](resources-troubleshoot-guide.md#azure-login-failure-due-to-multiple-subscriptions-or-multiple-tenants-being-tied-to-a-single-azure-account) for more details.
+>
+> If your Azure Subscription hasn't been registered for Azure Batch service, you'll need to do so.
+See [Azure Batch service not registered](resources-troubleshoot-guide.md#azure-batch-service-not-registered) for more details.
 
 ## Generate MAKES index files from MAKES entity files
 
@@ -156,8 +187,8 @@ The next step is generating MAKES index file from MAKES entity file. You'll subm
 
     | Values | Description | Example |
     |---------|---------|-------|
-    |**`<InputEntitiesUrl>`** | The input URL to the MAKES entities generated from running the U-SQL script above. If the Url ends with ".../\<**FolderName**\>/" all files under \<**FolderName**\> will be used. If the urls ends with ".../\<**FolderName**\>/\<**FilePrefix**\>" all files under \<**FolderName**\> with file prefix \<**FilePrefix**\> will be used.| **https://<MAS_STORAGE_ACCOUNT>.blob.core.windows.net/dev/makes/<YYYY-MM-DD>/microsoft/entities/** |
-    |**`<OutputUrlPrefix>`** | The output base URL for writing the built MAKES index. If the Url ends with ".../\<**FolderName**\>/" all files will be written under \<**FolderName**\>. If the urls ends with ".../\<**FolderName**\>/\<**FilePrefix**\>" all files will be written under \<**FolderName**\> with file prefix \<**FilePrefix**\>| **https://<MAS_STORAGE_ACCOUNT>.blob.core.windows.net/dev/makes/<YYYY-MM-DD>/microsoft/index/**
+    |**`<InputEntitiesUrl>`** | The input URL to the MAKES entities generated from running the U-SQL script above. If the Url ends with ".../\<**FolderName**\>/" all files under \<**FolderName**\> will be used. If the urls ends with ".../\<**FolderName**\>/\<**FilePrefix**\>" all files under \<**FolderName**\> with file prefix \<**FilePrefix**\> will be used.| **https://\<MAS_STORAGE_ACCOUNT\>.blob.core.windows.net/dev/makes/\<YYYY-MM-DD\>/microsoft/entities/** |
+    |**`<OutputUrlPrefix>`** | The output base URL for writing the built MAKES index. If the Url ends with ".../\<**FolderName**\>/" all files will be written under \<**FolderName**\>. If the urls ends with ".../\<**FolderName**\>/\<**FilePrefix**\>" all files will be written under \<**FolderName**\> with file prefix \<**FilePrefix**\>| **https://\<MAS_STORAGE_ACCOUNT\>.blob.core.windows.net/dev/makes/\<YYYY-MM-DD\>/microsoft/index/**
     |**`<MakesIndexResourceConfigFilePath>`** | The configuration file generated from running CreateIndexResources above. | **makesIndexResConfig.json** |
 
 1. Run the command
