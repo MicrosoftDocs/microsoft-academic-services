@@ -199,9 +199,7 @@ The next step is generating MAKES index file from MAKES entity file. You'll subm
 1. The command should return a build index job ID for you monitor the job progress
 
 > [!IMPORTANT]
-> Generating indexes can cost money.
->
-> Time to create an index can be up to 3 hours.
+> Generating indexes will cost Azure credits and time to create an index can be up to 3 hours.
 >
 > Due to regional restrictions, new Azure Batch Accounts in many region will have 0 vCore limit. This will cause index jobs to get stuck.
 > See [Azure Subscription quota limit reached](resources-troubleshoot-guide.md#azure-subscription-quota-limit-reached) for more details.
@@ -225,8 +223,19 @@ You can check the build index job progress using Azure Management Portal. Each j
 
 Now that the custom MAKES index files has been generated. You can follow the same procedures as deploying an index from your MAKES subscription, but replacing the **--MakesIndex** parameter with the path to the output of this example.
 
+::: moniker range="makes-1.0"
+
 ```cmd
-Kesm.exe DeployHost --HostName "<makes_instance_host_name>" --MakesPackage "https://<makes_storage_account_name>.blob.core.windows.net/makes/<makes_release_version>/"  --MakesHostImageId "<id_from_create_host_resources_command>" --MakesIndex "https://mymakesstore.blob.core.windows.net/makessubgraph/2020-02-07/subgraph/microsoft/index/"
+Kesm.exe DeployHost --HostName "<makes_instance_host_name>" --MakesPackage "https://<MAS_STORAGE_ACCOUNT>.blob.core.windows.net/makes/<YYYY-MM-DD>/"  --MakesHostImageId "<id_from_create_host_resources_command>" --MakesIndex "https://<MAS_STORAGEACCOUNT>.blob.core.windows.net/dev/makes/<YYYY-MM-DD>/microsoft/index/"
 ````
+
+::: moniker-end
+::: moniker range="makes-3.0"
+
+```cmd
+Kesm.exe DeployHost --HostName "<makes_instance_host_name>" --MakesPackage "https://<MAS_STORAGE_ACCOUNT>.blob.core.windows.net/<MAS_CONTAINER>makes/<YYYY-MM-DD>/"  --MakesHostImageId "<id_from_create_host_resources_command>" --MakesIndex "https://<MAS_STORAGEACCOUNT>.blob.core.windows.net/dev/makes/<YYYY-MM-DD>/microsoft/index/"
+````
+
+::: moniker-end
 
 See [Create an API instance](get-started-create-api-instances.md) for more information.
