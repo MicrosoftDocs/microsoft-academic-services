@@ -2,7 +2,7 @@
 title: Build a library browser with contextual filters
 description: Step by step tutorial to design MAKES schema for custom data
 ms.topic: tutorial
-ms.date: 12/09/2020
+ms.date: 04/08/2021
 ---
 
 # Build a library browser with contextual filters

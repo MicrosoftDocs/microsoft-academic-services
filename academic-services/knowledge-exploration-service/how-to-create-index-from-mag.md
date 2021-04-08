@@ -2,7 +2,7 @@
 title: Create Microsoft Academic Knowlege Exploration Service (MAKES) index from Microsoft Academic Graph (MAG)
 description: Step-by-step guide for generating MAKES indexes from a MAG release.
 ms.topic: tutorial
-ms.date: 10/16/2020
+ms.date: 04/08/2021
 ---
 
 # Create custom MAKES index from a MAG release
@@ -24,9 +24,9 @@ To create MAKES index, you will need to format your data into MAKES entity files
 
 ::: moniker range="makes-1.0"
 
-1. Download `samples/CreateFunctions.usql` from your MAG release to your local drive. 
+1. Download `CreateFunctions.usql` from your MAG release to your local drive. 
 
-    From [Azure portal](https://portal.azure.com), go to your MAG Azure Storage account > **Containers > [mag-yyyy-mm-dd] > samples > CreateFunctions.usql > Download**.
+    From [Azure portal](https://portal.azure.com), go to your MAG Azure Storage account and download **/\<MAG_CONTAINER\>/\<MAG\>/\<YYYY-MM-DD\>/samples/usql/CreateFunctions.usql**.
     ![Download CreateFunctions.usql](../graph/media/samples-azure-data-lake-hindex/create-functions-download.png "Download CreateFunctions.usql")
 
 1. In the [Azure Management Portal](https://portal.azure.com), go to the Azure Data Lake Analytics (ADLA) service that you created, and select **Overview > New job > Open file**. Select `CreateFunctions.usql` in your local drive.
@@ -45,7 +45,7 @@ To create MAKES index, you will need to format your data into MAKES entity files
 ::: moniker-end
 ::: moniker range="makes-3.0"
 
-1. Download `samples/CreateFunctions.usql` from your MAG release to your local drive. 
+1. Download `CreateFunctions.usql` from your MAG release to your local drive. 
     
     From [Azure portal](https://portal.azure.com), go to your MAG Azure Storage account and download **/\<MAG_CONTAINER\>/\<MAG\>/\<YYYY-MM-DD\>/samples/usql/CreateFunctions.usql**.
     ![Download CreateFunctions.usql](../graph/media/samples-azure-data-lake-hindex/create-functions-download.png "Download CreateFunctions.usql")
@@ -230,14 +230,14 @@ Now that the custom MAKES index files has been generated. You can follow the sam
 ::: moniker range="makes-1.0"
 
 ```cmd
-Kesm.exe DeployHost --HostName "<makes_instance_host_name>" --MakesPackage "https://<MAS_STORAGE_ACCOUNT>.blob.core.windows.net/makes/<YYYY-MM-DD>/"  --MakesHostImageId "<id_from_create_host_resources_command>" --MakesIndex "https://<MAS_STORAGEACCOUNT>.blob.core.windows.net/dev/makes/<YYYY-MM-DD>/microsoft/index/"
+Kesm.exe DeployHost --HostName "<makes_instance_host_name>" --MakesPackage "https://<MAS_STORAGE_ACCOUNT>.blob.core.windows.net/makes/<YYYY-MM-DD>/"  --MakesHostImageId "<id_from_create_host_resources_command>" --MakesIndex "https://<MAS_STORAGE_ACCOUNT>.blob.core.windows.net/dev/makes/<YYYY-MM-DD>/microsoft/index/"
 ````
 
 ::: moniker-end
 ::: moniker range="makes-3.0"
 
 ```cmd
-Kesm.exe DeployHost --HostName "<makes_instance_host_name>" --MakesPackage "https://<MAS_STORAGE_ACCOUNT>.blob.core.windows.net/<MAS_CONTAINER>/makes/<YYYY-MM-DD>/"  --MakesHostImageId "<id_from_create_host_resources_command>" --MakesIndex "https://<MAS_STORAGEACCOUNT>.blob.core.windows.net/dev/makes/<YYYY-MM-DD>/microsoft/index/"
+Kesm.exe DeployHost --HostName "<makes_instance_host_name>" --MakesPackage "https://<MAS_STORAGE_ACCOUNT>.blob.core.windows.net/<MAS_CONTAINER>/makes/<YYYY-MM-DD>/"  --MakesHostImageId "<id_from_create_host_resources_command>" --MakesIndex "https://<MAS_STORAGE_ACCOUNT>.blob.core.windows.net/dev/makes/<YYYY-MM-DD>/microsoft/index/"
 ````
 
 ::: moniker-end

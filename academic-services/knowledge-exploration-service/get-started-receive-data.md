@@ -2,7 +2,7 @@
 title: Receive Microsoft Academic Knowledge Exploration Service
 description: Step-by-step instructions for receiving Microsoft Academic Knowledge Exploration Service using Azure Data Share
 ms.topic: get-started-article
-ms.date: 3/23/2021
+ms.date: 04/08/2021
 ---
 
 # Receive MAKES releases using Azure Data Share

@@ -2,7 +2,7 @@
 title: Receive Microsoft Academic Graph
 description: Step-by-step instructions for receiving Microsoft Academic Graph using Azure Data Share
 ms.topic: get-started-article
-ms.date: 3/23/2021
+ms.date: 04/08/2021
 ---
 
 # Receive Microsoft Academic Graph releases using Azure Data Share
