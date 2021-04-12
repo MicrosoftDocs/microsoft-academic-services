@@ -4,7 +4,7 @@ description: Perform analytics for Microsoft Academic Graph using PySpark on Azu
 services: microsoft-academic-services
 ms.topic: tutorial
 ms.service: microsoft-academic-services
-ms.date: 3/15/2021
+ms.date: 3/23/2021
 ---
 # PySpark analytics samples for Microsoft Academic Graph
 
@@ -14,6 +14,7 @@ Illustrates how to perform analytics for Microsoft Academic Graph using PySpark 
 
 * [Affiliation and Partner Affiliations Analysis](https://github.com/Azure-Samples/microsoft-academic-graph-pyspark-samples/blob/master/src/AffiliationSample.ipynb)
 * [Repository Publications Analysis](https://github.com/Azure-Samples/microsoft-academic-graph-pyspark-samples/blob/master/src/RepositorySample.ipynb)
+* [MAG Stanford AI Index](https://github.com/Azure-Samples/microsoft-academic-graph-pyspark-samples/blob/master/src/AIIndex.ipynb)
 
 ## Prerequisites
 
@@ -29,13 +30,15 @@ Before running these examples, you need to complete the following setups:
 
 Before you begin, you should have these items of information:
 
-   :heavy_check_mark:  The name of your Azure Storage (AS) account containing MAG dataset from [Get Microsoft Academic Graph on Azure storage](get-started-setup-provisioning.md#note-azure-storage-account-name-and-primary-key).
+   :heavy_check_mark:  The name of your Azure Storage (AS) account containing MAG dataset from [Get Microsoft Academic Graph on Azure storage](get-started-setup-provisioning.md#note-azure-storage-account-name).
 
-   :heavy_check_mark:  The access key of your Azure Storage (AS) account from [Get Microsoft Academic Graph on Azure storage](get-started-setup-provisioning.md#note-azure-storage-account-name-and-primary-key).
+   :heavy_check_mark:  The access key of your Azure Storage (AS) account from [Get Microsoft Academic Graph on Azure storage](get-started-setup-provisioning.md#note-azure-storage-account-name).
 
    :heavy_check_mark:  The name of the container in your Azure Storage (AS) account containing MAG dataset.
 
    :heavy_check_mark:  The name of the output container in your Azure Storage (AS) account.
+
+   :heavy_check_mark:  The path to a MAG dataset in the container.
 
 ## Import MagClass notebook
 

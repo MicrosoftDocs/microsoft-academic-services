@@ -4,7 +4,7 @@ description: Perform analytics and visualization for Microsoft Academic Graph us
 services: microsoft-academic-services
 ms.topic: tutorial
 ms.service: microsoft-academic-services
-ms.date: 9/23/2020
+ms.date: 3/23/2021
 ---
 # Analytics and visualization samples for Microsoft Academic Graph
 
@@ -23,13 +23,15 @@ Complete these tasks before beginning this tutorial:
 
    Before you begin, you should have these items of information:
 
-   :heavy_check_mark:  The name of your Azure Storage (AS) account containing MAG dataset from [Get Microsoft Academic Graph on Azure storage](get-started-setup-provisioning.md#note-azure-storage-account-name-and-primary-key).
+   :heavy_check_mark:  The name of your Azure Storage (AS) account containing MAG dataset from [Get Microsoft Academic Graph on Azure storage](get-started-setup-provisioning.md#note-azure-storage-account-name).
 
    :heavy_check_mark:  The name of your Azure Data Lake Analytics (ADLA) service from [Set up Azure Data Lake Analytics](get-started-setup-azure-data-lake-analytics.md#create-azure-data-lake-analytics-account).
 
    :heavy_check_mark:  The name of your Azure Data Lake Storage (ADLS) from [Set up Azure Data Lake Analytics](get-started-setup-azure-data-lake-analytics.md#create-azure-data-lake-analytics-account).
 
    :heavy_check_mark:  The name of the container in your Azure Storage (AS) account containing MAG dataset.
+
+   :heavy_check_mark:  The path to a MAG dataset in the container.
 
 ## Define functions to extract MAG data
 
@@ -59,10 +61,16 @@ Follow instructions in [Define MAG functions](define-mag-function.md).
 1. For each tutorial there should be: A U-SQL script(.usql), a Power BI report (.pbix), a Power BI template (.pbit) and a README explaining the tutorial.
 1. In the U-SQL script, replace `<AzureStorageAccount>`, and `<MagContainer>` placeholder values with the values that you collected while completing the prerequisites of this sample.
 
-   |Value  |Description  |
-   |---------|---------|
+   | Value | Description |
+   | - | - |
    |**`<AzureStorageAccount>`** | The name of your Azure Storage (AS) account containing MAG dataset. |
-   |**`<MagContainer>`** | The container name in Azure Storage (AS) account containing MAG dataset, usually in the form of **mag-yyyy-mm-dd**. |
+   | **`<MagContainer>`** | This is the container name in Azure Storage account containing MAG dataset. See below. |
+   | **`<MagVersion>`** | This is the path to a MAG dataset in MagContainer.  See below. |
+
+   <br>
+
+   * If the MAG dataset is from Azure Data Share, set **MagContainer** to the container mapped when accepting Data Share invitation, and **MagVersion** to `'mag/yyyy-mm-dd'`.
+   * Otherwise, set **MagContainer** to `'mag-yyyy-mm-dd'`, and **MagVersion** to `''`.
 
 1. Although each tutorial is different, running the U-SQL script as is and filling out the Power BI template using the same U-SQL parameters should give you a Power BI report with visualizations that match the Power BI report example included in the tutorial. Since the Microsoft Academic graph is contently improving, different graph versions may give you slightly different results.
 

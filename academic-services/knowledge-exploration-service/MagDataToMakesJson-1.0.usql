@@ -17,12 +17,15 @@ SET @@FeaturePreviews = "DataPartitionedOutput:on";
 // See: https://docs.microsoft.com/en-us/u-sql/variables/declare-variables for details
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 
-// The wasb path to a MAG release on Azure storage.
-DECLARE EXTERNAL @In_MagRootUri string = ""; //Example: "wasb://<MAS_CONTAINER>@<MAS_STORAGE_ACCOUNT>/mag/<YYYY-MM-DD>/"
+// The Azure blob storage account name that contains the Microsoft Academic Graph data to be used by this script
+DECLARE EXTERNAL @In_MagBlobAccount string = "";    // Example: "mymagstore"
+
+// The Azure blob storage container name that contains the Microsoft Academic Graph data to be used by this script
+DECLARE EXTERNAL @In_MagBlobContainer string = "";  // Example: "mag-2020-02-07"
 
 // The storage output path where the JSON files will be created
 // The if the output destination type is Azure storage (output path starts with "wasb"), the container for the output location needs to be created before running the script
-DECLARE EXTERNAL @Out_OutputPath string = "";  // Example: "wasb://dev@<MAS_STORAGE_ACCOUNT>/makes/<YYYY-MM-DD>/microsoft/entities"
+DECLARE EXTERNAL @Out_OutputPath string = "";  // Example: "wasb://makessubgraph@mymakesstore/2020-02-07/microsoft/entities"
 
 //The name of the institution to create subgraph for. The full graph is used by default.
 DECLARE EXTERNAL @Param_UseSubgraphForInstitution string = "microsoft"; // Example: "microsoft"
@@ -72,6 +75,9 @@ DECLARE EXTERNAL @Param_PartitionCount int = 16;
 
 // Full output path w/file name pattern reflecting the PartitionNumber column in the table that gets output
 DECLARE @outputFilePattern string = @Out_OutputPath + "/{PartitionNumber}.json";
+
+// The input Uri for the Microsoft Academic Graph data to be used by this script
+DECLARE @inputUri string = "wasb://" + @In_MagBlobContainer + "@" + @In_MagBlobAccount + "/";
 
 // A unique string used as seperator for joining multiple columns/data into a single string
 DECLARE @DEFAULT_SEPERATOR = @"@?@al@?@";
@@ -250,37 +256,37 @@ DECLARE @GetLogProbabilityFromRank Func<uint?, double?> =
 @affiliations =
 	Affiliations
 	(
-		@In_MagRootUri
+		@inputUri
 	);
 @authors =
 	Authors
 	(
-		@In_MagRootUri
+		@inputUri
 	);
 @conferenceInstances =
 	ConferenceInstances
 	(
-		@In_MagRootUri
+		@inputUri
 	);
 @conferenceSeries =
 	ConferenceSeries
 	(
-		@In_MagRootUri
+		@inputUri
 	);
 @fieldOfStudyChildren =
 	FieldOfStudyChildren
 	(
-		@In_MagRootUri
+		@inputUri
 	);
 @fieldsOfStudy =
 	FieldsOfStudy
 	(
-		@In_MagRootUri
+		@inputUri
 	);
 @journals =
 	Journals
 	(
-		@In_MagRootUri
+		@inputUri
 	);
 @paperAbstractsInvertedIndex =
 	SELECT *,
@@ -288,37 +294,37 @@ DECLARE @GetLogProbabilityFromRank Func<uint?, double?> =
 	FROM
 	PaperAbstractsInvertedIndex
 	(
-		@In_MagRootUri
+		@inputUri
 	);
 @paperAuthorAffiliations =
 	PaperAuthorAffiliations
 	(
-		@In_MagRootUri
+		@inputUri
 	);
 @paperCitationContexts =
 	PaperCitationContexts
 	(
-		@In_MagRootUri
+		@inputUri
 	);
 @paperFieldsOfStudy =
 	PaperFieldsOfStudy
 	(
-		@In_MagRootUri
+		@inputUri
 	);
 @paperReferences =
 	PaperReferences
 	(
-		@In_MagRootUri
+		@inputUri
 	);
 @paperUrls =
 	PaperUrls
 	(
-		@In_MagRootUri
+		@inputUri
 	);
 @papers =
 	Papers
 	(
-		@In_MagRootUri
+		@inputUri
 	);
 
 // Generate additional non-nullable columns for specific columns in the default MAG databases.

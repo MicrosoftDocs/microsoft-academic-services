@@ -4,7 +4,7 @@ description: Set up Azure Search service to enable reference parsing using the M
 services: microsoft-academic-services
 ms.topic: tutorial
 ms.service: microsoft-academic-services
-ms.date: 9/23/2020
+ms.date: 3/23/2021
 ---
 
 # Tutorial: Set up academic reference parsing with Azure Search
@@ -38,13 +38,15 @@ Complete these tasks before beginning this tutorial:
 
    Before you begin, you should have these items of information:
 
-   :heavy_check_mark:  The name of your Azure Storage (AS) account containing MAG dataset from [Get Microsoft Academic Graph on Azure storage](get-started-setup-provisioning.md#note-azure-storage-account-name-and-primary-key).
+   :heavy_check_mark:  The name of your Azure Storage (AS) account containing MAG dataset from [Get Microsoft Academic Graph on Azure storage](get-started-setup-provisioning.md#note-azure-storage-account-name).
 
    :heavy_check_mark:  The name of your Azure Data Lake Analytics (ADLA) service from [Set up Azure Data Lake Analytics](get-started-setup-azure-data-lake-analytics.md#create-azure-data-lake-analytics-account).
 
    :heavy_check_mark:  The name of your Azure Data Lake Storage (ADLS) from [Set up Azure Data Lake Analytics](get-started-setup-azure-data-lake-analytics.md#create-azure-data-lake-analytics-account).
 
    :heavy_check_mark:  The name of the container in your Azure Storage (AS) account containing MAG dataset.
+
+   :heavy_check_mark:  The path to a MAG dataset in the container.
 
    :heavy_check_mark:  The connection string of your Azure Storage account containing the MAG data set. It should look similar to ```DefaultEndpointsProtocol=https;AccountName=<AzureStorageAccountName>;AccountKey=<AzureStorageAccountKey>;EndpointSuffix=core.windows.net```
 
@@ -74,8 +76,15 @@ In this section, you submit an ADLA job to generate text files containing academ
     // The Azure blob storage container name that contains the Microsoft Academic Graph data to be used by this script
     DECLARE @inputBlobContainer string = "<MagContainer>";
     
+    // The path to a MAG dataset in the container
+    DECLARE @magVersion string = "<MagVersion>";
+    
     // The Windows Azure Blob Storage (WASB) URI of the Microsoft Academic Graph data to be used by this script
-    DECLARE @inputUri string = "wasb://" + @inputBlobContainer + "@" + @inputBlobAccount + "/";
+    IF @magVersion == "" THEN
+      DECLARE @inputUri string = "wasb://" + @inputBlobContainer + "@" + @inputBlobAccount + "/";
+    ELSE
+      DECLARE @inputUri string = "wasb://" + @inputBlobContainer + "@" + @inputBlobAccount + "/" + @magVersion + "/";
+    END;
     
     // The Azure blob storage account name that output files will be generated in
     DECLARE @outputBlobAccount string = "<OutputAzureStorageAccount>";

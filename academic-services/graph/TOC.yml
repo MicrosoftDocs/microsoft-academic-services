@@ -14,6 +14,8 @@
   items:
   - name: Get Microsoft Academic Graph on Azure Storage
     href: get-started-setup-provisioning.md
+  - name: Receive Microsoft Academic Graph Data
+    href: get-started-receive-data.md
 - name: Tutorials
   expanded: true
   items:

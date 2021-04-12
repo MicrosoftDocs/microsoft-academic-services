@@ -2,7 +2,7 @@
 title: Build a library browser with contextual filters
 description: Step by step tutorial to design MAKES schema for custom data
 ms.topic: tutorial
-ms.date: 12/09/2020
+ms.date: 04/08/2021
 ---
 
 # Build a library browser with contextual filters
@@ -143,11 +143,7 @@ In addition to this best practice guidance, local builds have a concrete limit o
 
 ### Validate schema using local index build
 
-1. Download the latest MAKES command line tool `{YYYY-MM-DD}/tools/kesm.zip` from your MAKES storage account. 
-
-1. Unzip kesm.zip
-
-1. Copy the win-x64 version of kesm.exe to your working directory or include it in your command line PATH variable.
+If you have not done so already, download the Kesm.exe tool from your MAKES subscription. See the [Create an API Instance](get-started-create-api-instances.md#download-the-command-line-tool-kesmexe-from-your-azure-storage-account) for instructions on downloading the tool.
 
 1. Open up a command line console, change your current directory to your working directory, and build the index with the following command:
 
@@ -256,6 +252,8 @@ In addition to this best practice guidance, local builds have a concrete limit o
 
 Now that the custom index has been built, we can deploy it with a MAKES API instance:
 
+::: moniker range="makes-1.0"
+
 1. Upload the custom index build to your MAKES storage account. You can do so by using following [Blob Upload from Azure Portal](https://docs.microsoft.com/azure/storage/blobs/storage-quickstart-blobs-portal). If you use cloud index build, you may skip this step.
 
 1. Run CreateHostResources to create a MAKES hosting virtual machine image
@@ -275,6 +273,31 @@ Now that the custom index has been built, we can deploy it with a MAKES API inst
 
     > [!NOTE]
     > Since the index we're hosting is relatively small, you can reduce Azure consumption for the tutorial MAKES host instance by using the "--HostMachineSku" parameter and set the SKU to "Standard_D2_V2".
+
+::: moniker-end
+::: moniker range="makes-3.0"
+
+1. Upload the custom index build to your MAKES storage account. You can do so by using following [Blob Upload from Azure Portal](https://docs.microsoft.com/azure/storage/blobs/storage-quickstart-blobs-portal). If you use cloud index build, you may skip this step.
+
+1. Run CreateHostResources to create a MAKES hosting virtual machine image
+
+    ```cmd
+    kesm.exe CreateHostResources --MakesPackage "https://<MAS_STORAGE_ACCOUNT>.blob.core.windows.net/<MAS_Container>/makes/<YYYY-MM-DD>" --HostResourceName <Makes_Host_Resource_Name>
+    ```
+
+    > [!NOTE]
+    > If your account is connected to multiple Azure Directories or Azure Subscriptions, you'll also have to specify the **--AzureActiveDirectoryDomainName** and/or **--AzureSubscriptionId** parameters. See [Command Line Tool Reference](reference-makes-command-line-tool.md#common-azure-authentication-parameters) for more details.
+
+1. Run DeployHost command and use the "--MakesIndex" parameter to specify the custom index build
+
+    ```cmd
+     kesm.exe DeployHost --HostName "<Makes_Host_Instance_Name>" --MakesPackage "https://<MAS_STORAGE_ACCOUNT>.blob.core.windows.net/<MAS_Container>/makes/<YYYY-MM-DD>"  --MakesHostImageId "<Id_From_Previous_Command_Output>" --MakesIndex "<Custom_Index_Url>" --HostMachineSku "Standard_D2_V2"
+    ```
+
+    > [!NOTE]
+    > Since the index we're hosting is relatively small, you can reduce Azure consumption for the tutorial MAKES host instance by using the "--HostMachineSku" parameter and set the SKU to "Standard_D2_V2".
+
+::: moniker-end
 
 For more detailed deployment instructions, See [Create API Instances](get-started-create-api-instances.md#create-makes-hosting-resources).
 
