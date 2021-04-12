@@ -2,7 +2,7 @@
 title: Get started with create MAKES API instances
 description: Step-by-step guide for deploying Microsoft Academic Knowledge Exploration Service(MAKES) APIs using MAKES management tool.
 ms.topic: tutorial
-ms.date: 10/16/2020
+ms.date: 04/08/2021
 ---
 
 # Deploying a basic MAKES instance to Azure from your Subscription
@@ -11,11 +11,17 @@ ms.date: 10/16/2020
 
 ## Prerequisites
 
+::: moniker range="makes-1.0"
 - Microsoft Academic Knowledge Exploration Service (MAKES) subscription. See [Get started with Microsoft Academic Knowledge Exploration Service](get-started-setup-provisioning.md) to obtain one.
+::: moniker-end
+::: moniker range="makes-3.0"
+- Microsoft Academic Knowledge Exploration Service (MAKES) subscription. See [Get started with Microsoft Academic Knowledge Exploration Service](get-started-setup-provisioning.md) to obtain one.
+- A release of Microsoft Academic Knowledge Exploration Service. See [Receive MAKES releases using Azure Data Share](get-started-receive-data.md) for more info.
+::: moniker-end
 - Azure Subscription. The Azure Subscription must be able to create virtual machine with "Standard_DS4_v2" SKU. See [Azure Subscription quota limit reached](resources-troubleshoot-guide.md#azure-subscription-quota-limit-reached) for more information.
 
+::: moniker range="makes-1.0"
 ## Verify the folders and content of the current release
-
 When new versions of MAKES are released, a new folder will be created in the "makes" blob container of your Azure Storage Account.  This folder contains all the elements required to self-host an instance of MAKES.  To get started, let's verify that MAKES has been published to your subscription successfully.
 
 1. Open the [Azure Management Portal](https://portal.azure.com) and navigate to **Storage Accounts**.
@@ -40,10 +46,11 @@ When new versions of MAKES are released, a new folder will be created in the "ma
     - **webhost** - This folder holds the files required to create the VM instance of MAKES.
     - **License.docx** - Microsoft Word file with the license to use this data and software.
     ![Verify tools folder](media/get-started-tools-folder.png)
+::: moniker-end
 
 ## Download the command line tool (kesm.exe) from your Azure Storage Account
 
-Each MAKES deployment includes a command line tool (kesm.exe) required to provision an instance of MAKES in Azure.  To download the command line tool, open the **tools** folder. Select the **kesm.zip** file. Then, select **Download** from the top ribbon:
+Each MAKES deployment includes a command line tool (kesm.exe) required to provision an instance of MAKES in Azure. To download the command line tool, open the **/makes/YYYY-MM-DD/tools** folder. Select the **kesm.zip** file. Then, select **Download** from the top ribbon:
 
 ![Download kesm.zip](media/get-started-download-kesm.png)
 
@@ -51,7 +58,20 @@ Save this file to a local folder.
 
 ## Unzip the kesm.zip package to access the command line tool (kesm.exe)
 
-Once the file has been downloaded you will need to extract the contents.  Right click on the **kesm.zip** file.  If you are using the Windows operating system select **Extract All** from the context menu.  If you are using a Mac, double-click the zip file and it will decompress into the same folder. You will now see two folders, one for each environment we support.  Select **win-x86** if you are using a Windows machine or **osx-x64** if you will be running the command on a Mac and open the folder.  In this folder there is another folder, **Kesm**.  Open this folder. In this folder there are two files: **kesm.exe** and **kesm.pdb**.  The **kesm.exe** file is the executable that we will be running to deploy MAKES.
+Once the file has been downloaded you will need to extract the contents. 
+
+1. Right click on the **kesm.zip** file. 
+
+    If you are using the Windows operating system select **Extract All** from the context menu.  
+    If you are using a Mac, double-click the zip file and it will decompress into the same folder.
+
+1. You will now see two folders, one for each environment we support. 
+        
+    ![kesm location](media/kesm-exe-location.png)
+    Select **win-x86** if you are using a Windows operating system
+    Select **osx-x64** if you are using a Mac
+
+1. In this folder there is another folder, **Kesm**. Open this folder, it should contain the executable  **kesm.exe** that we will be using to deploy MAKES.
 
 ## Create MAKES hosting resources
 
@@ -62,6 +82,8 @@ Once the file has been downloaded you will need to extract the contents.  Right 
 At this point you are ready to deploy an instance of MAKES to your Azure account. We will start by creating an Azure VM Image that MAKES can use to deploy MAKES hosts. Kesm.exe will create the VM Image by spinning up a virtual machine with "Standard_DS4_v2" SKU. This image contains the necessary environment resources and configuration for MAKES to run inside Azure Machine Scale Sets and can be reused to generate more instances of MAKES.
 
 1. Open a command prompt (Windows) or terminal window (Mac) and navigate to the folder that you extracted the **kesm.exe** file to.
+
+::: moniker range="makes-1.0"
 
 1. Execute the following command to create your hosting resources:
 
@@ -80,6 +102,37 @@ At this point you are ready to deploy an instance of MAKES to your Azure account
     | <makes_release_version> | The MAKES release you would like to deploy. |
 
     The command will then prompt you to go to a secure website to authenticate.
+
+::: moniker-end
+
+
+::: moniker range="makes-3.0"
+
+1. Execute the following command to create your hosting resources:
+
+    ```cmd
+    kesm.exe CreateHostResources --HostResourceName <makes_host_resource_group_name> --MakesPackage "https://<makes_storage_account_name>.blob.core.windows.net/<makes_container>/makes/<makes_release_version>/"
+    ```
+
+    Example: **kesm.exe CreateHostResources --HostResourceName "contosorgmakesone" --MakesPackage "https://makesascontoso.blob.core.windows.net/makes/2020-01-30/"**
+
+    Replace the following tokens in the command above with the appropriate value:
+
+    | Token to relpace | Value |
+    | --------| ----- |
+    | <makes_host_resource_group_name> | The name of the Resource Group that will be created for this deployment. |
+    | <makes_storage_account_name> | The name of the storage account containing MAKES releases. |
+    | <makes_container> | The name of the storage container containing MAKES data releases. |
+    | <makes_release_version> | The MAKES release version you would like to deploy. |
+    
+
+    The command will then prompt you to go to a secure website to authenticate.
+
+::: moniker-end
+
+> [!TIP]
+> To ensure you're using a valid **--MakesPacakge** URI, you can use storage explorer navigate to a specific MAKES release and select the URI string from license file property.
+> ![MAKES package uri from storage explorer](/media/makes-version-from-license-file.png)
 
 > [!NOTE]
 > If your account is connected to multiple Azure Directories or Azure Subscriptions, you'll also have to specify the **--AzureActiveDirectoryDomainName** and/or **--AzureSubscriptionId** parameters. See [Command Line Tool Reference](reference-makes-command-line-tool.md#common-azure-authentication-parameters) for more details.
@@ -107,6 +160,7 @@ Now that the MAKES hosting Virtual Machine Image is created, you are ready to us
 
     ![Copy the Host Image Id](media/get-started-copy-makes-image-id.png)
 
+::: moniker range="makes-1.0"
 1. Copy the following command to your command / terminal window to deploy your hosting resources:
 
     ```cmd
@@ -117,8 +171,8 @@ Now that the MAKES hosting Virtual Machine Image is created, you are ready to us
 
     | Token to relpace | Value |
     | --------| ----- |
-    | <makes_instance_host_name> | The host name for your service. An Azure Resource Group, Virtual Machine Scale Set, and other related Azure resources will be created using the hostname. The hostname will also be the host name of the server where your MAKES deployment will be hosted.  Ex: If you used 'contosomakes', your MAKES API will be hosted at http://contosomakes.westus.cloudapp.azure.net. |
-    | <makes_storage_account_name> | The name of the storage account you downloaded the scripts from above. |
+    | <makes_instance_host_name> | The host name for your service. An Azure Resource Group, Virtual Machine Scale Set, and other related Azure resources will be created using the hostname. The hostname will also be the host name of the server where your MAKES deployment will be hosted.  Ex: If you used 'contosomakes', your MAKES API will be hosted at http://contosomakes.westus.cloudapp.azure.net. |    
+    | <makes_storage_account_name> | The name of the storage account containing MAKES releases. |
     | <makes_release_version> | The MAKES release you would like to deploy. |
     | <id_from_previous_command_output> | The id you copied from the output of the previous command. |
 
@@ -127,21 +181,50 @@ Now that the MAKES hosting Virtual Machine Image is created, you are ready to us
     ```cmd
     kesm.exe DeployHost --HostName contosomakes --MakesPackage "https://makesascontoso.blob.core.windows.net/makes/2020-01-30/" --MakesHostImageId "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/contosorgmakesone/profiders/Microsoft.Compute/Images/contosoImageName"
     ```
+::: moniker-end
+
+::: moniker range="makes-3.0"
+1. Copy the following command to your command / terminal window to deploy your hosting resources:
+
+    ```cmd
+    kesm.exe DeployHost --HostName "<makes_instance_host_name>" --MakesPackage "https://<makes_storage_account_name>.blob.core.windows.net/<makes_container>/makes/<makes_release_version>/"  --MakesHostImageId "<id_from_previous_command_output>"
+    ```
+
+    Replace the tokens in the command above with the appropriate value:
+
+    | Token to relpace | Value |
+    | --------| ----- |
+    | <makes_instance_host_name> | The host name for your service. An Azure Resource Group, Virtual Machine Scale Set, and other related Azure resources will be created using the hostname. The hostname will also be the host name of the server where your MAKES deployment will be hosted.  Ex: If you used 'contosomakes', your MAKES API will be hosted at http://contosomakes.westus.cloudapp.azure.net. |
+    | <makes_storage_account_name> | The name of the storage account you downloaded the scripts from above. |
+    | <makes_container> | The name of the storage container containing MAKES data releases. |
+    | <makes_release_version> | The MAKES release you would like to deploy. |
+    | <id_from_previous_command_output> | The id you copied from the output of the previous command. |
+
+    Example:
+
+    ```cmd
+    kesm.exe DeployHost --HostName contosomakes --MakesPackage "https://makesascontoso.blob.core.windows.net/makes/2020-01-30/" --MakesHostImageId "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/contosorgmakesone/profiders/Microsoft.Compute/Images/contosoImageName"
+    ```
+::: moniker-end
 
 If necessary, authenticate the command in the same way as you did above for the first command.
 
->[!IMPORTANT]
->While this script is running, the admin name and password will be shown on the screen for the VM being created.  Make note of this for logging into the VM at a later time for any reason or if logging the output of this command, be sure to remove this information.
-
->[!NOTE]
->This command will take approximately 45 mins to complete if the VM image created by the first command is co-located (in the same Azure region) as your Azure storage account and you are using the standard ds14_v2 VM (this is the default).
-
 At this point the tool will take care of creating all of the required resources and deploying MAKES.  As stated above, you can re-use the MAKES hosting image created from the CreateHostResources command for subsequent deployments to reduce the start-up time.  See the [Command line Reference](reference-makes-command-line-tool.md) for more details.  
 
-> [!NOTE]
-> To achieve the fastest instance start times, ensure that all resources (storage account, virtual machine scale set, etc.) are located in the same region. The "--Region" parameter controls which region new resources are created in. Visit the [Command line Reference](reference-makes-command-line-tool.md) section for full details on this and other parameters.
+> [!IMPORTANT]
+>While this script is running, the admin name and password will be shown on the screen for the VM being created.  Make note of this for logging into the VM at a later time for any reason or if logging the output of this command, be sure to remove this information.
 
-Depending on the region your storage account is in and the region you are deploying to, deployment may take longer as the default indexes are quite large and need to be copied.  By default, the tool deploys to the WestUS region of Azure.  For a reference of all the available commands type:
+> [!NOTE]
+> This command will take approximately 45 mins to complete assuming the following
+    1. All resources (MAKES Host VM Image, MAKES Host Instance, and MAKES storage account) are all co-located within the same Azure region.
+    1. The deployed instance is using a VM SKU of "Standard_DS_14_V2" (this is the default) or above.
+
+> [!TIP]
+> To achieve the fastest instance start times, ensure that all resources are located in the same region. The "--Region" parameter controls which region new resources are created in. Visit the [Command line Reference](reference-makes-command-line-tool.md) section for full details on this and other parameters.
+
+Depending on the region your storage account is in and the region you are deploying to, deployment may take longer as the default indexes are quite large and need to be copied. By default, the tool deploys to the WestUS region of Azure. 
+
+For a reference of all the available commands type:
 
 ```cmd
 kesm.exe --help

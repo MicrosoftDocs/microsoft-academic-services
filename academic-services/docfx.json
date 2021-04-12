@@ -2,12 +2,30 @@
   "build": {
     "content": [
       {
-        "files": ["breadcrumb/toc.yml"]
+        "files": [ "breadcrumb/toc.yml" ]
       },
       {
         "files": [
           "**/*.md",
           "**/*.yml"
+        ],
+        "exclude": [
+          "**/obj/**",
+          "**/includes/**",
+          "**/knowledge-exploration-service/*.md",
+          "**/knowledge-exploration-service/*.yml",
+          "_themes/**",
+          "_themes.pdf/**",
+          "README.md",
+          "LICENSE",
+          "LICENSE-CODE",
+          "ThirdPartyNotices"
+        ]
+      },
+      {
+        "files": [
+          "**/knowledge-exploration-service/*.md",
+          "**/knowledge-exploration-service/*.yml"
         ],
         "exclude": [
           "**/obj/**",
@@ -18,7 +36,8 @@
           "LICENSE",
           "LICENSE-CODE",
           "ThirdPartyNotices"
-        ]
+        ],
+        "group": "versioned"
       }
     ],
     "resource": [
@@ -27,6 +46,7 @@
           "**/*.png",
           "**/*.jpg",
           "**/*.svg",
+          "**/*.usql",
           "**/*.json",
           "**/*.xml",
           "**/*.ps1"
@@ -55,6 +75,11 @@
     "fileMetadata": {},
     "template": [],
     "dest": "academic-services",
+    "groups": {
+      "versioned" : {
+        "moniker_range":  ">=makes-1.0"
+      }
+    },
     "markdownEngineName": "markdig"
   }
 }
