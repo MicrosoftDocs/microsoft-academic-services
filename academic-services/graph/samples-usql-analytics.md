@@ -4,7 +4,7 @@ description: Perform analytics and visualization for Microsoft Academic Graph us
 services: microsoft-academic-services
 ms.topic: tutorial
 ms.service: microsoft-academic-services
-ms.date: 3/23/2021
+ms.date: 4/14/2021
 ---
 # Analytics and visualization samples for Microsoft Academic Graph
 
@@ -35,9 +35,7 @@ Complete these tasks before beginning this tutorial:
 
 ## Define functions to extract MAG data
 
-In prerequisite [Set up an Azure Data Lake Analytics](get-started-setup-azure-data-lake-analytics.md), you added the Azure Storage (AS) created for MAG provision as a data source for the Azure Data Lake Analytics service (ADLA). In this section, you submit an ADLA job to create functions extracting MAG data from Azure Storage (AS).
-
-Follow instructions in [Define MAG functions](define-mag-function.md).
+[!INCLUDE [define-mag-function](../includes/define-mag-function.md)]
 
 ## Sample projects
 
