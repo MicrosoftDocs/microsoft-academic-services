@@ -31,11 +31,11 @@ Sign in to the [Azure portal](https://portal.azure.com/).
 
 1. Provide following values to create a Data Share service. Then select **Review + create**. 
 
-    |Property  |Description  |
-    |---------|---------|
+    |Property|Description|
+    |-|-|
     |**Subscription** | From the drop-down, select your Azure subscription. |
     |**Resource group** | Specify whether you want to create a new resource group or use an existing one. A resource group is a container that holds related resources within an Azure subscription. For more information, see [Azure Resource Group overview](https://docs.microsoft.com/azure/azure-resource-manager/resource-group-overview). |
-    |**Location**    | Select the same location as the Data Share service. <br> **- `East Asia`** <br> **- `East US`** (not `East US 2`) <br> **- `UK South`** <br> **- `West Europe`** <br> **- `West US`** (not `West US 2`) |
+    |**Location** | Select one of the locations below which is most appropriate for you. <br> **- `East Asia`** <br> **- `East US`** (not `East US 2`) <br> **- `UK South`** <br> **- `West Europe`** <br> **- `West US`** (not `West US 2`) |
     |**Name** | Provide a name for your Data Share service. |
 
     <br>
@@ -54,8 +54,8 @@ Sign in to the [Azure portal](https://portal.azure.com/).
 
 1. Provide following values to create an Azure Storage account. Then select **Review + create**.
 
-    |Property  |Description  |
-    |---------|---------|
+    |Property|Description|
+    |-|-|
     |**Subscription** | From the drop-down, select your Azure subscription. |
     |**Resource group** | Specify whether you want to create a new resource group or use an existing one. A resource group is a container that holds related resources for an Azure solution. For more information, see [Azure Resource Group overview](https://docs.microsoft.com/azure/azure-resource-manager/resource-group-overview). You can use the same resource group as the Data Share service.|
     |**Storage account name** | Provide a name for your storage account (**mag<org_name>**), e.g. `magconsoto`. You don't need to use your organization name after the "mag", however the account name must be unique among all Azure Storage accounts. |
