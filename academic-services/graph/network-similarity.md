@@ -4,7 +4,7 @@ description: Using Network Similarity Package
 services: microsoft-academic-services
 ms.topic: extra
 ms.service: microsoft-academic-services
-ms.date: 3/23/2021
+ms.date: 4/16/2021
 ---
 # Network Similarity Package
 
