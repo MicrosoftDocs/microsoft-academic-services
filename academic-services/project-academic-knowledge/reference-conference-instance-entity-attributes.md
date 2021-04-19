@@ -2,7 +2,7 @@
 title: Conference Instance entity attributes
 description: Learn the attributes you can use with conference instance entities in the Project Academic Knowledge API.
 ms.topic: reference
-ms.date: 2020-02-24
+ms.date: 04/19/2021
 ---
 
 # Conference Instance Entity

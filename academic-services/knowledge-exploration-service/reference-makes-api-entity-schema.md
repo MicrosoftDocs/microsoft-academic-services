@@ -2,7 +2,7 @@
 title: MAKES API entity schema
 description: Learn about the entity schema that MAKES API/Index contains.
 ms.topic: conceptual
-ms.date: 2020-06-04
+ms.date: 04/19/2021
 ---
 
 # Entity schema
