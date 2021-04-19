@@ -2,7 +2,7 @@
 title: MAKES API entity schema
 description: Learn about the entity schema that MAKES API/Index contains.
 ms.topic: conceptual
-ms.date: 2020-06-04
+ms.date: 04/19/2021
 ---
 
 # Entity schema
@@ -135,8 +135,6 @@ CC        |Conference series total citation count            |Int32        |None
 CN        |Conference series normalized name        |String        |Equals
 DCN        |Conference series display name         |String        |None
 ECC        |Conference series total estimated citation count    |Int32        |None
-F.FId    |Field of study entity ID associated with the conference series |Int64     | Equals
-F.FN    |Field of study name associated with the conference series     | Equals,<br/>StartsWith
 Id        |Entity ID                                |Int64        |Equals
 PC    |Conference series total publication count |Int32 | None
 
