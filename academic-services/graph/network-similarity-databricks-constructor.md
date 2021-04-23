@@ -4,14 +4,16 @@ description: NetworkSimilarity Constructor
 services: microsoft-academic-services
 ms.topic: extra
 ms.service: microsoft-academic-services
-ms.date: 4/16/2021
+ms.date: 4/23/2021
 ---
 # NetworkSimilarity Constructor (PySpark)
 
-## Initializes a new instance of the NetworkSimilarity class.
+Initializes a new instance of the NetworkSimilarity class.
+
+## NetworkSimilarity(MicrosoftAcademicGraph, string, string)
 
   ```Python
-  class NetworkSimilarity(mag, entitytype, sense);
+  class NetworkSimilarity(MicrosoftAcademicGraph mag, string entitytype, string sense);
   ```
 
 ### Parameters

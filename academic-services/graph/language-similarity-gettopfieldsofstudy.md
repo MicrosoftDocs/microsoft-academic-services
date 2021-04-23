@@ -4,7 +4,7 @@ description: LanguageSimilarity.GetTopFieldsOfStudy Method
 services: microsoft-academic-services
 ms.topic: extra
 ms.service: microsoft-academic-services
-ms.date: 11/27/2019
+ms.date: 4/23/2021
 ---
 # LanguageSimilarity.GetTopFieldsOfStudy Method
 
@@ -12,13 +12,15 @@ Namespace: Microsoft.Academic
 
 Assemblies: Microsoft.Academic.LanguageSimilarity.dll
 
-### Takes in a string and labels it with fields of study available in MAG. Returns a list of tuples of type (long, float), where the first value in the tuple being the labeled field of study id and the second value being the similarity score.
+Takes in a string and labels it with fields of study available in MAG. Returns a list of tuples of type (long, float), where the first value in the tuple being the labeled field of study id and the second value being the similarity score.
+
+## IEnumerable<Tuple<long,float>> GetTopFieldsOfStudy(string, int, int)
 
   ```C#
   public IEnumerable<Tuple<long,float>> GetTopFieldsOfStudy(string text, int maxCount=100, int minScore=0);
   ```
 
-**Parameters**
+### Parameters
 
 Parameter | Data Type | Description
 --- | --- | ---
@@ -26,11 +28,11 @@ text | string | The string to label with fields of study.
 maxCount | int | Default 100. The maximum number of fields of study to return.
 minScore | float | Default 0. A minimum similarity score threshold. Fields of study with similarity scores less than `minScore` will not be in the returned list.
 
-**Return value**
+### Return value
 
 Returns a IEnumerable of `Tuple<long,float>`. The first item is a field of study id defined in MAG. The second item is the similarity score between the input string and the field of study.
 
-**Examples**
+### Examples
 
   ```C#
   using System;
@@ -55,7 +57,7 @@ Returns a IEnumerable of `Tuple<long,float>`. The first item is a field of study
   }
   ```
 
-**Output**
+### Output
 
   ```
   137293760       0.6154

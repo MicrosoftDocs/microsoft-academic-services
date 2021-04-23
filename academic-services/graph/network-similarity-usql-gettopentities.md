@@ -4,17 +4,19 @@ description: NetworkSimilarity.GetTopEntities Function
 services: microsoft-academic-services
 ms.topic: extra
 ms.service: microsoft-academic-services
-ms.date: 4/16/2021
+ms.date: 4/23/2021
 ---
 # NetworkSimilarity.GetTopEntities Function
 
 Namespace: AcademicGraph.NetworkSimilarity
 
-### Returns entities with top similarity scores related to an entity.
-
-## GetTopEntities(BaseDir, EntityType, Sense, EntityId, MaxCount, MinScore)
-
 Given an EntityId and the EntityType, returns entities with top similarity scores based on a particular sense.
+
+## GetTopEntities(string, string, string, long, int, float)
+
+  ```U-SQL
+  GetTopEntities(string BaseDir, string EntityType, string Sense, long EntityId, int MaxCount, float MinScore)
+  ```
 
 ### Parameters
 

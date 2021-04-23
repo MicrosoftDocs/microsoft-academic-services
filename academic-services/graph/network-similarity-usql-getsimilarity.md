@@ -4,19 +4,21 @@ description: NetworkSimilarity.GetSimilarity Function
 services: microsoft-academic-services
 ms.topic: extra
 ms.service: microsoft-academic-services
-ms.date: 4/16/2021
+ms.date: 4/23/2021
 ---
 # NetworkSimilarity.GetSimilarity Function
 
 Namespace: AcademicGraph.NetworkSimilarity
 
-### Compute the similarity score between two entities.
-
-## GetSimilarity(BaseDir, EntityType, Sense, EntityId1, EntityId2)
-
 Returns a stream with a single row containing the similarity score between two entities using a network similarity resource.
 Score returned is between [-1, 1], with larger number representing higher similarity.
 If either of the entity IDs are not in the resource file, the return stream will be empty.
+
+## GetSimilarity(string, string, string, long, long)
+
+  ```U-SQL
+  GetSimilarity(string BaseDir, string EntityType, string Sense, long EntityId1, long EntityId2)
+  ```
 
 ### Parameters
 

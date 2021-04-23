@@ -4,13 +4,17 @@ description: NetworkSimilarity.getTopEntities Function
 services: microsoft-academic-services
 ms.topic: extra
 ms.service: microsoft-academic-services
-ms.date: 4/16/2021
+ms.date: 4/23/2021
 ---
 # NetworkSimilarity.getTopEntities Function
 
-## getTopEntities(entityId, targetType, maxCount, minScore)
-
 Returns a dataframe containing entities with the highest similarity scores in relation to the passed in entity id.
+
+## DataFrame getTopEntities(long, int, float)
+
+  ```Python
+  DataFrame getTopEntities(long entityId, int maxCount=20, float minScore=0)
+  ```
 
 ### Parameters
 

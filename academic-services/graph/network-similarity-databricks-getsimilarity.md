@@ -4,15 +4,17 @@ description: NetworkSimilarity.getSimilarity Function
 services: microsoft-academic-services
 ms.topic: extra
 ms.service: microsoft-academic-services
-ms.date: 4/16/2021
+ms.date: 4/23/2021
 ---
 # NetworkSimilarity.getSimilarity Function
 
-## Compute the similarity score between two entities.
+Compute the similarity score between two entities.
 
-## float getSimilarity(entityId1, entityId2)
+## float getSimilarity(long, long)
 
-Returns the similarity score between two entities.
+  ```Python
+  float getSimilarity(long entityId1, long entityId2)
+  ```
 
 ### Parameters
 
