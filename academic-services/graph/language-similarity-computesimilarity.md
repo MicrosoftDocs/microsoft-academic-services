@@ -17,12 +17,12 @@ Compute the similarity score between 2 strings or between a string and a concept
 ## Overloads
 
 ---
-[ComputeSimilarity(String, String)](#float-computesimilaritystring-string) Returns a similarity score between two strings.
+[ComputeSimilarity(string, string)](#float-computesimilaritystring-string) Returns a similarity score between two strings.
 
 ---
-[ComputeSimilarity(String, long)](#float-computesimilaritystring-long) Returns a similarity score between a string and a field of study id.
+[ComputeSimilarity(string, long)](#float-computesimilaritystring-long) Returns a similarity score between a string and a field of study id.
 
-## float ComputeSimilarity(String, String)
+## float ComputeSimilarity(string, string)
 
 Returns a similarity score between two strings. Score returned is between [-1, 1], with larger number representing higher similarity.
 
@@ -64,7 +64,7 @@ text2 | string |
 
   > 0.7053913
 
-## float ComputeSimilarity(String, long)
+## float ComputeSimilarity(string, long)
 
 Returns a similarity score between a string and a field of study id. Score returned is between [-1, 1], with larger number representing higher similarity.
 
