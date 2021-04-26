@@ -4,7 +4,7 @@ description: LanguageSimilarity.ComputeSimilarity Method
 services: microsoft-academic-services
 ms.topic: extra
 ms.service: microsoft-academic-services
-ms.date: 09/23/2020
+ms.date: 4/23/2021
 ---
 # LanguageSimilarity.ComputeSimilarity Method
 
@@ -12,18 +12,17 @@ Namespace: Microsoft.Academic
 
 Assemblies: Microsoft.Academic.LanguageSimilarity.dll
 
-### Compute the similarity score between 2 strings or between a string and a concept.
+Compute the similarity score between 2 strings or between a string and a concept.
 
 ## Overloads
 
 ---
-[ComputeSimilarity(String, String)](#computesimilaritystring-string) Returns a similarity score between two strings.
-
+[ComputeSimilarity(string, string)](#float-computesimilaritystring-string) Returns a similarity score between two strings.
 
 ---
-[ComputeSimilarity(String, long)](#computesimilaritystring-long) Returns a similarity score between a string and a field of study id.
+[ComputeSimilarity(string, long)](#float-computesimilaritystring-long) Returns a similarity score between a string and a field of study id.
 
-## ComputeSimilarity(String, String)
+## float ComputeSimilarity(string, string)
 
 Returns a similarity score between two strings. Score returned is between [-1, 1], with larger number representing higher similarity.
 
@@ -31,14 +30,14 @@ Returns a similarity score between two strings. Score returned is between [-1, 1
   public float ComputeSimilarity(string text1, string text2);
   ```
 
-**Parameters**
+### Parameters
 
 Name | Data Type | Description
 --- | --- | ---
 text1 | string | 
 text2 | string | 
 
-**Examples**
+### Examples
 
   ```C#
   using System;
@@ -61,11 +60,11 @@ text2 | string |
   }
   ```
 
-**Output**
+### Output
 
   > 0.7053913
 
-## ComputeSimilarity(String, long)
+## float ComputeSimilarity(string, long)
 
 Returns a similarity score between a string and a field of study id. Score returned is between [-1, 1], with larger number representing higher similarity.
 
@@ -73,14 +72,14 @@ Returns a similarity score between a string and a field of study id. Score retur
    public float ComputeSimilarity(string text, long fieldOfStudyId);
    ```
 
-**Parameters**
+### Parameters
 
 Name | Data Type | Description
 --- | --- | ---
 text | string |
 fieldOfStudyId | long | A field of study id defined in MAG
 
-**Examples**
+### Examples
 
   ```C#
   using System;
@@ -103,6 +102,6 @@ fieldOfStudyId | long | A field of study id defined in MAG
   }
   ```
 
-**Output**
+### Output
 
   > 0.615355

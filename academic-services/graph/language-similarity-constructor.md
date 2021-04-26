@@ -4,7 +4,7 @@ description: LanguageSimilarity Constructor
 services: microsoft-academic-services
 ms.topic: extra
 ms.service: microsoft-academic-services
-ms.date: 11/27/2019
+ms.date: 4/23/2021
 ---
 # LanguageSimilarity(string) Constructor
 
@@ -12,19 +12,21 @@ Namespace: Microsoft.Academic
 
 Assemblies: Microsoft.Academic.LanguageSimilarity.dll
 
-### Initializes a new instance of the LanguageSimilarity class.
+Initializes a new instance of the LanguageSimilarity class.
+
+## LanguageSimilarity(string)
 
   ```C#
   public LanguageSimilarity(string resourceDir);
   ```
 
-**Parameters**
+### Parameters
 
 Parameter | Data Type | Description
 --- | --- | ---
 resourceDir | string | A string specifying the path of the resource directory.
 
-**Examples**
+### Examples
 
   ```C#
   using System;

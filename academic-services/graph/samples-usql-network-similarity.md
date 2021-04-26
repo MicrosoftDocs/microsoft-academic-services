@@ -72,36 +72,48 @@ In this section, you submit an ADLA job to define network similarity functions.
 
 ### Getting similarity score between two entities
 
-- Following script calls GetSimilarity method to get similarity score between two entities
+* Following script calls GetSimilarity method to get similarity score between two entities
 
    ```U-SQL
    @score = AcademicGraph.NetworkSimilarity.GetSimilarity(@uriPrefix, @entityType, @sense, @entityId1, @entityId2);
    ```
 
-- You will see output in `/Output/NetworkSimilarity/GetSimilarity.tsv` as follows
+* You will see output in `/Output/NetworkSimilarity/GetSimilarity.tsv` as follows
 
    ```
-   EntityId   | SimilarEntityId | SimilarEntityType | Score
-   -----------+-----------------+-------------------+------------
-   1290206253 | 201448701       | af                | 0.766698062
+   EntityId   | SimilarEntityId | Score
+   -----------+-----------------+------------
+   1290206253 | 201448701       | 0.766698062
    ```
-
 
 ### Getting top related entities
 
-- Following script calls getTopEntities method to get top related entities
+* Following script calls getTopEntities method to get top related entities
 
    ```U-SQL
    @topEntities = AcademicGraph.NetworkSimilarity.GetTopEntities(@uriPrefix, @entityType, @sense, @entityId1, 10, (float)0);
    ```
 
-- You will see output in `/Output/NetworkSimilarity/GetTopEntities.tsv` as follows
+* You will see output in `/Output/NetworkSimilarity/GetTopEntities.tsv` as follows
 
-    ![GetTopEntities output](media/network-similarity/usql-get-top-entities.png "GetTopEntities output")
+   ```
+   0          | 1          | 2
+   -----------+------------+------------
+   1290206253 | 1291425158 | 0.971670866
+   1290206253 | 2252078561 | 0.961334944
+   1290206253 |   28200790 | 0.936774
+   1290206253 | 1297971548 | 0.929326236
+   1290206253 | 1334257032 | 0.9288712
+   1290206253 |  184760556 | 0.927445233
+   1290206253 |   74973139 | 0.9256075
+   1290206253 | 1306409833 | 0.9209746
+   1290206253 | 2250653659 | 0.9205189
+   1290206253 |  184597095 | 0.9195346
+   ```
 
 ### Getting entity details
 
-- Following script joins top entities with affiliation table to get entity details
+* Following script joins top entities with affiliation table to get entity details
 
    ```U-SQL
    @affiliations = Affiliations(@uriPrefix);
@@ -116,9 +128,22 @@ In this section, you submit an ADLA job to define network similarity functions.
        ON @topEntities.SimilarEntityId == @affiliations.AffiliationId;
    ```
 
-- You will see output in `/Output/NetworkSimilarity/TopEntityDetails.tsv` as follows
+* You will see output in `/Output/NetworkSimilarity/TopEntityDetails.tsv` as follows
 
-    ![Top entities detail](media/network-similarity/usql-top-entities-detail.png "Top entities detail")
+   ```
+   0          | 1                            | 2
+   -----------+------------------------------+------------
+   1290206253 | Google                       | 0.971670866
+   1290206253 | Facebook                     | 0.961334944
+   1290206253 | Qatar Computing Research ... | 0.936774
+   1290206253 | International Computer Sc... | 0.929326236
+   1290206253 | AT&T Labs                    | 0.9288712
+   1290206253 | Information Sciences Inst... | 0.927445233
+   1290206253 | Carnegie Mellon University   | 0.9256075
+   1290206253 | Adobe Systems                | 0.9209746
+   1290206253 | Tencent                      | 0.9205189
+   1290206253 | National Institute of Inf... | 0.9195346
+   ```
 
 ## Resources
 
