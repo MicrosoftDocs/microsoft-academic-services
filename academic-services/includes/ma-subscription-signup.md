@@ -35,7 +35,7 @@ Sign in to the [Azure portal](https://portal.azure.com/).
     |-|-|
     |**Subscription** | From the drop-down, select your Azure subscription. |
     |**Resource group** | Specify whether you want to create a new resource group or use an existing one. A resource group is a container that holds related resources within an Azure subscription. For more information, see [Azure Resource Group overview](https://docs.microsoft.com/azure/azure-resource-manager/resource-group-overview). |
-    |**Location** | Select one of the locations below which is most appropriate for you. <br> **- East Asia** <br> **- East US** <br> **- UK South** <br> **- West Europe** <br> **- West US** <br> <br> **DO NOT** select `East US 2` or `West US 2`.|
+    |**Location** | Select one of the locations below. Reference [Azure network round-trip latency statistics](https://docs.microsoft.com/azure/networking/azure-network-latency) to choose an Azure region which is most appropriate for your application. <br> **- East Asia** <br> **- East US** <br> **- UK South** <br> **- West Europe** <br> **- West US** <br> <br> **DO NOT** select `East US 2` or `West US 2`.|
     |**Name** | Provide a name for your Data Share service. |
 
     <br>
@@ -59,7 +59,7 @@ Sign in to the [Azure portal](https://portal.azure.com/).
     |**Subscription** | From the drop-down, select your Azure subscription. |
     |**Resource group** | Specify whether you want to create a new resource group or use an existing one. A resource group is a container that holds related resources for an Azure solution. For more information, see [Azure Resource Group overview](https://docs.microsoft.com/azure/azure-resource-manager/resource-group-overview). You can use the same resource group as the Data Share service.|
     |**Storage account name** | Provide a name for your storage account (**mag<org_name>**), e.g. `magconsoto`. You don't need to use your organization name after the "mag", however the account name must be unique among all Azure Storage accounts. |
-    |**Location**    | Select the same location as the Data Share service. |
+    |**Location** | Select one of the locations below, same as the Data Share service. Reference [Azure network round-trip latency statistics](https://docs.microsoft.com/azure/networking/azure-network-latency) to choose an Azure region which is most appropriate for your application. <br> **- East Asia** <br> **- East US** <br> **- UK South** <br> **- West Europe** <br> **- West US** <br> <br> **DO NOT** select `East US 2` or `West US 2`.|
     |**Performance** | Standard |
     |**Account kind**| StorageV2 (general purpose v2) |
     |**Replication** | Select the desired replication mode |
