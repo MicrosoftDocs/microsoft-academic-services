@@ -25,7 +25,7 @@ Sign in to the [Azure portal](https://portal.azure.com/).
 
 1. You can open the invitation from your email client or directly from the Azure portal. 
 
-   * To open invitation from email, sent to the email address you used to log on to Azure portal, check your inbox for an invitation from your data provider. The invitation is from Microsoft Azure, titled **Azure Data Share invitation from <yourdataprovider@domain.com>**. Click on **View invitation** to see your invitation in Azure. 
+   * To open invitation from email, check your inbox (of the email address you used to log on to Azure portal) for an invitation from your data provider. The invitation is from Microsoft Azure, titled **Azure Data Share invitation from <yourdataprovider@domain.com>**. Click on **View invitation** to see your invitation in Azure. 
 
    * To open invitation from Azure portal directly, search for **Data Share Invitations** in Azure portal. This action takes you to the list of Data Share invitations.
 
