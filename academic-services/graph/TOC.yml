@@ -99,7 +99,7 @@
   expanded: true
   items:
   - name: FAQ
-    href: resources-faq.md
+    href: resources-faq.yml
   - name: Pricing
     href: resources-pricing.md
   - name: Stack Overflow

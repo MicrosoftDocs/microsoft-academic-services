@@ -31,14 +31,14 @@ When using Microsoft Academic data (MAG, MAKES, etc.) in a product or service, o
 Column # | Name | Type | Note
 --- | --- | --- | ---
 1 | AffiliationId | long | PRIMARY KEY
-2 | Rank | uint | See [FAQ](resources-faq.md#what-is-the-rank-value-on-entities)
+2 | Rank | uint | See [FAQ](/academic-services/graph/resources-faq#what-is-the-rank-value-on-entities)
 3 | NormalizedName | string |
 4 | DisplayName | string |
 5 | GridId | string |
 6 | OfficialPage | string |
 7 | WikiPage | string |
 8 | PaperCount | long |
-9 | PaperFamilyCount | long | See [FAQ](resources-faq.md#papercount-vs-paperfamilycount)
+9 | PaperFamilyCount | long | See [FAQ](/academic-services/graph/resources-faq#papercount-vs-paperfamilycount)
 10 | CitationCount | long |
 11 | Iso3166Code | string | Two-letter codes (alpha-2) defined in [ISO_3166 Code (ISO.org)](https://www.iso.org/iso-3166-country-codes.html) and [ISO 3166-2 (Wiki)](https://en.wikipedia.org/wiki/ISO_3166-2). Example: US
 12 | Latitude | float? | 
@@ -66,12 +66,12 @@ Column # | Name | Type | Note
 Column # | Name | Type | Note
 --- | --- | --- | ---
 1 | AuthorId | long | PRIMARY KEY
-2 | Rank | uint | See [FAQ](resources-faq.md#what-is-the-rank-value-on-entities)
+2 | Rank | uint | See [FAQ](/academic-services/graph/resources-faq#what-is-the-rank-value-on-entities)
 3 | NormalizedName | string |
 4 | DisplayName | string |
 5 | LastKnownAffiliationId | long? |
 6 | PaperCount | long |
-7 | PaperFamilyCount | long | See [FAQ](resources-faq.md#papercount-vs-paperfamilycount)
+7 | PaperFamilyCount | long | See [FAQ](/academic-services/graph/resources-faq#papercount-vs-paperfamilycount)
 8 | CitationCount | long |
 9 | CreatedDate | DateTime |
 
@@ -96,7 +96,7 @@ Column # | Name | Type | Note
 11 | NotificationDueDate | DateTime? |
 12 | FinalVersionDueDate | DateTime? |
 13 | PaperCount | long |
-14 | PaperFamilyCount | long | See [FAQ](resources-faq.md#papercount-vs-paperfamilycount)
+14 | PaperFamilyCount | long | See [FAQ](/academic-services/graph/resources-faq#papercount-vs-paperfamilycount)
 15 | CitationCount | long |
 16 | Latitude | float? |
 17 | Longitude | float? |
@@ -111,11 +111,11 @@ Column # | Name | Type | Note
 Column # | Name | Type | Note
 --- | --- | --- | ---
 1 | ConferenceSeriesId | long | PRIMARY KEY
-2 | Rank | uint | See [FAQ](resources-faq.md#what-is-the-rank-value-on-entities)
+2 | Rank | uint | See [FAQ](/academic-services/graph/resources-faq#what-is-the-rank-value-on-entities)
 3 | NormalizedName | string |
 4 | DisplayName | string |
 5 | PaperCount | long |
-6 | PaperFamilyCount | long | See [FAQ](resources-faq.md#papercount-vs-paperfamilycount)
+6 | PaperFamilyCount | long | See [FAQ](/academic-services/graph/resources-faq#papercount-vs-paperfamilycount)
 7 | CitationCount | long |
 8 | CreatedDate | DateTime |
 
@@ -166,13 +166,13 @@ Column # | Name | Type | Note
 Column # | Name | Type | Note
 --- | --- | --- | ---
 1 | FieldOfStudyId | long | PRIMARY KEY
-2 | Rank | uint | See [FAQ](resources-faq.md#what-is-the-rank-value-on-entities)
+2 | Rank | uint | See [FAQ](/academic-services/graph/resources-faq#what-is-the-rank-value-on-entities)
 3 | NormalizedName | string |
 4 | DisplayName | string |
 5 | MainType | string |
 6 | Level | Int | 0 - 5
 7 | PaperCount | long |
-8 | PaperFamilyCount | long | See [FAQ](resources-faq.md#papercount-vs-paperfamilycount)
+8 | PaperFamilyCount | long | See [FAQ](/academic-services/graph/resources-faq#papercount-vs-paperfamilycount)
 9 | CitationCount | long |
 10 | CreatedDate | DateTime |
 
@@ -185,14 +185,14 @@ Column # | Name | Type | Note
 Column # | Name | Type | Note
 --- | --- | --- | ---
 1 | JournalId| long | PRIMARY KEY
-2 | Rank | uint | See [FAQ](resources-faq.md#what-is-the-rank-value-on-entities)
+2 | Rank | uint | See [FAQ](/academic-services/graph/resources-faq#what-is-the-rank-value-on-entities)
 3 | NormalizedName | string |
 4 | DisplayName | string |
 5 | Issn | string |
 6 | Publisher | string |
 7 | Webpage | string |
 8 | PaperCount | long |
-9 | PaperFamilyCount | long | See [FAQ](resources-faq.md#papercount-vs-paperfamilycount)
+9 | PaperFamilyCount | long | See [FAQ](/academic-services/graph/resources-faq#papercount-vs-paperfamilycount)
 10 | CitationCount | long |
 11 | CreatedDate | DateTime |
 
@@ -205,7 +205,7 @@ Column # | Name | Type | Note
 Column # | Name | Type | Note
 --- | --- | --- | ---
 1 | PaperId | long | PRIMARY KEY <br> FOREIGN KEY REFERENCES Papers.PaperId
-2 | IndexedAbstract | string | See [FAQ](resources-faq.md#what-format-are-paper-abstracts-published-in) for format
+2 | IndexedAbstract | string | See [FAQ](/academic-services/graph/resources-faq#what-format-are-paper-abstracts-published-in) for format
 
 > [!NOTE]
 > Paper Abstracts Inverted Index is split to multiple files. Use `nlp/PaperAbstractsInvertedIndex.txt.{*}` as the path for the combined file.
@@ -340,7 +340,7 @@ Column # | Name | Type | Note
 Column # | Name | Type | Note
 --- | --- | --- | ---
 1 | PaperId | long | PRIMARY KEY
-2 | Rank | uint | See [FAQ](resources-faq.md#what-is-the-rank-value-on-entities)
+2 | Rank | uint | See [FAQ](/academic-services/graph/resources-faq#what-is-the-rank-value-on-entities)
 3 | Doi | string | Doi values are upper-cased per [DOI standard](https://www.doi.org/doi_handbook/2_Numbering.html#2.4)
 4 | DocType | string | Book, BookChapter, Conference, Dataset, Journal, Patent, Repository, Thesis, NULL : unknown
 5 | PaperTitle | string |
@@ -361,8 +361,8 @@ Column # | Name | Type | Note
 20 | CitationCount | long |
 21 | EstimatedCitation | long |
 22 | OriginalVenue | string |
-23 | FamilyId | long? | See [FAQ](resources-faq.md#what-is-familyid-in-papers)
-24 | FamilyRank | uint? | See [FAQ](resources-faq.md#rank-vs-familyrank-in-papers)
+23 | FamilyId | long? | See [FAQ](/academic-services/graph/resources-faq#what-is-familyid-in-papers)
+24 | FamilyRank | uint? | See [FAQ](/academic-services/graph/resources-faq#rank-vs-familyrank-in-papers)
 25 | CreatedDate | DateTime |
 
 ## Related Field of Study
