@@ -2,7 +2,7 @@
 title: Microsoft Academic Graph data schema
 description: Documents the complete, most recent Microsoft Academic Graph entity data schema, including the name and type of each attribute
 ms.topic: reference
-ms.date: 1/12/2021
+ms.date: 5/28/2021
 ---
 # Microsoft Academic Graph data schema
 
@@ -363,7 +363,8 @@ Column # | Name | Type | Note
 22 | OriginalVenue | string |
 23 | FamilyId | long? | See [FAQ](resources-faq.md#what-is-familyid-in-papers)
 24 | FamilyRank | uint? | See [FAQ](resources-faq.md#rank-vs-familyrank-in-papers)
-25 | CreatedDate | DateTime |
+25 | DocSubTypes | string | "Retracted Publication", "Retraction Notice"
+26 | CreatedDate | DateTime |
 
 ## Related Field of Study
 
