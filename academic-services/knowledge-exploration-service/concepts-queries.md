@@ -1,8 +1,8 @@
 ---
 title: Natural Language Queries
-description: 
+description: "This article describes how MAKES generates semantic interpretations of a natural language query that enable entities to be retrieved."
 ms.topic: reference
-ms.date: 2020-02-10
+ms.date: 02/10/2020
 ---
 
 # How MAKES generates semantic interpretations of natural language queries

@@ -2,7 +2,7 @@
 title: Continuous MAKES deployments
 description: Step-by-step guide for deploying new releases of MAKES from your MAKES subscription.
 ms.topic: tutorial
-ms.date: 2020-02-10
+ms.date: 02/10/2020
 ---
 
 # Deploying a MAKES release for uninterrupted service
