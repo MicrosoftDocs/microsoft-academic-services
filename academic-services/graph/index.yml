@@ -25,7 +25,7 @@ landingContent:
       - linkListType: reference
         links:
           - text: FAQ
-            url: resources-faq.md
+            url: resources-faq.yml
 
   - title: Get started with MAG
     linkLists:

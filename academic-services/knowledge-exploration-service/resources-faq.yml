@@ -1,0 +1,23 @@
+### YamlMime:FAQ
+metadata:
+  title: FAQ for Microsoft Academic Knowledge Exploration Service
+  description: Answers to the most frequently asked questions about Microsoft Academic Knowledge Exploration Service
+  ms.topic: reference
+  ms.date: 2020-02-10
+    
+title: Frequently Asked Questions about Microsoft Academic Knowledge Exploration Service
+summary: Answers to the most frequently asked questions about Microsoft Academic Knowledge Exploration Service
+
+
+sections:
+  - name: Ignored
+    questions:
+      - question: |
+          How frequently are new APIs released
+        answer: |
+          New Microsoft Academic Knowledge Exploration Service APIs are released alongside new Microsoft Academic Graph releases, which occur every 1-2 weeks.
+
+      - question: |
+          How to know when a new API is available
+        answer: |
+          New MAG/MAKES releases are announced on the [Microsoft Academic Twitter feed](https://twitter.com/MSFTAcademic).

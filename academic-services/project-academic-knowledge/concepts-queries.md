@@ -2,7 +2,7 @@
 title: Natural Language Queries
 description: Describes how the Interpret method generates semantic interpretations of a natural language query
 ms.topic: reference
-ms.date: 2020-03-19
+ms.date: 03/19/2020
 ---
 
 # How Interpret generates semantic interpretations of natural language queries
