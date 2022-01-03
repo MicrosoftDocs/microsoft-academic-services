@@ -4,6 +4,7 @@ description: Defines how to build and test an index from schema, data and synony
 ms.topic: how-to
 ms.date: 9/1/2020
 ---
+[!INCLUDE [ma-retirement](../includes/ma-retirement.md)]
 
 # How to build and test a custom index
 

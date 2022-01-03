@@ -4,6 +4,7 @@ description: Step-by-step guide for generating MAKES indexes from a MAG release.
 ms.topic: tutorial
 ms.date: 04/08/2021
 ---
+[!INCLUDE [ma-retirement](../includes/ma-retirement.md)]
 
 # Create custom MAKES index from a MAG release
 

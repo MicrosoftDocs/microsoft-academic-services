@@ -4,6 +4,7 @@ description: Information about the deprecation of the Extended Entity Attribute 
 ms.topic: reference
 ms.date: 07/30/2020
 ---
+[!INCLUDE [ma-retirement](../includes/ma-retirement.md)]
 
 # Deprecation of Entity Extended Attribute
 

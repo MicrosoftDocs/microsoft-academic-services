@@ -6,6 +6,8 @@ ms.topic: tutorial
 ms.service: microsoft-academic-services
 ms.date: 10/20/2020
 ---
+[!INCLUDE [ma-retirement](../includes/ma-retirement.md)]
+
 # Import MagClass (PySpark)
 
 ## Import MagClass.py notebook

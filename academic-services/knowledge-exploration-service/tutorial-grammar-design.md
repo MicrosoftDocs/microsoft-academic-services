@@ -4,6 +4,7 @@ description: Step by step tutorial to design MAKES grammar for custom data
 ms.topic: tutorial
 ms.date: 12/09/2020
 ---
+[!INCLUDE [ma-retirement](../includes/ma-retirement.md)]
 
 # Build a library search application
 

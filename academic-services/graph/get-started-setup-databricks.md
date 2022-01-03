@@ -6,6 +6,8 @@ ms.topic: get-started-article
 ms.service: microsoft-academic-services
 ms.date: 9/23/2019
 ---
+[!INCLUDE [ma-retirement](../includes/ma-retirement.md)]
+
 # Set up Azure Databricks for Microsoft Academic Graph
 
 You could set up an Azure Databricks to run Analytics script on Microsoft Academic Graph. Here are the step-by-step instructions

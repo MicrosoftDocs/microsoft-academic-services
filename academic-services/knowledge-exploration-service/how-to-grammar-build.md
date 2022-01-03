@@ -4,6 +4,7 @@ description: Defines how to build and test a grammar from schema, grammar XML in
 ms.topic: how-to
 ms.date: 9/1/2020
 ---
+[!INCLUDE [ma-retirement](../includes/ma-retirement.md)]
 
 # How to compile and test a custom grammar
 

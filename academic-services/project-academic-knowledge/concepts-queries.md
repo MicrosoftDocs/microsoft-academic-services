@@ -4,6 +4,7 @@ description: Describes how the Interpret method generates semantic interpretatio
 ms.topic: reference
 ms.date: 2020-03-19
 ---
+[!INCLUDE [ma-retirement](../includes/ma-retirement.md)]
 
 # How Interpret generates semantic interpretations of natural language queries
 

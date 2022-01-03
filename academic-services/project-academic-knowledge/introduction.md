@@ -4,6 +4,7 @@ description: Learn about a free REST API for interacting with entities in the Mi
 ms.topic: reference
 ms.date: 2020-02-24
 ---
+[!INCLUDE [ma-retirement](../includes/ma-retirement.md)]
 
 # Project Academic Knowledge
 

@@ -4,6 +4,7 @@ description: Defines the file format and structure for MAKES grammars
 ms.topic: tutorial
 ms.date: 12/09/2020
 ---
+[!INCLUDE [ma-retirement](../includes/ma-retirement.md)]
 
 # How to define a custom grammar
 

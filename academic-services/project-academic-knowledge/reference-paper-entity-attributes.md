@@ -4,6 +4,7 @@ description: Learn the attributes you can use with paper entities in the Project
 ms.topic: reference
 ms.date: 2020-04-10
 ---
+[!INCLUDE [ma-retirement](../includes/ma-retirement.md)]
 
 # Paper Entity
 

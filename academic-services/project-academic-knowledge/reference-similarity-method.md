@@ -4,6 +4,7 @@ description: Calculate the cosine similarity of two strings
 ms.topic: reference
 ms.date: 2020-02-24
 ---
+[!INCLUDE [ma-retirement](../includes/ma-retirement.md)]
 
 # Similarity Method
 
@@ -19,7 +20,7 @@ https://api.labs.cognitive.microsoft.com/academic/v1.0/similarity?
 
 Parameter | Data Type | Required | Description
 --- | --- | --- | ---
-**subscription-key** | String | Yes | Valid [Project Academic Knowledge subscription key](https://msr-apis.portal.azure-api.net/products/project-academic-knowledge)
+**subscription-key** | String | Yes | Valid Project Academic Knowledge subscription key
 **s1** | String | Yes | String* to be compared
 **s2** | String | Yes | String* to be compared
 

@@ -4,6 +4,7 @@ description: Reference documentation for the MAKES Interpret API.
 ms.topic: reference
 ms.date: 2020-02-10
 ---
+[!INCLUDE [ma-retirement](../includes/ma-retirement.md)]
 
 # Interpret
 

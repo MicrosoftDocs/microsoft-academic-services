@@ -4,6 +4,7 @@ description: Learn the attributes you can use with field of study entities in th
 ms.topic: reference
 ms.date: 2020-02-24
 ---
+[!INCLUDE [ma-retirement](../includes/ma-retirement.md)]
 
 # Field Of Study Entity
 

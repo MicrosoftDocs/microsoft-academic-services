@@ -4,6 +4,7 @@ description: Learn the attributes you can use with conference instance entities 
 ms.topic: reference
 ms.date: 04/19/2021
 ---
+[!INCLUDE [ma-retirement](../includes/ma-retirement.md)]
 
 # Conference Instance Entity
 

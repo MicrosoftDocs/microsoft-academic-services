@@ -4,6 +4,7 @@ description: Describes the format for defining entity data to be indexed
 ms.topic: how-to
 ms.date: 9/1/2020
 ---
+[!INCLUDE [ma-retirement](../includes/ma-retirement.md)]
 
 # Entity data files
 

@@ -4,6 +4,7 @@ description: Addresses common problems found with MAKES
 ms.topic: reference
 ms.date: 2020-06-12
 ---
+[!INCLUDE [ma-retirement](../includes/ma-retirement.md)]
 
 # Troubleshoot Common MAKES Command Line Tool Issues
 
