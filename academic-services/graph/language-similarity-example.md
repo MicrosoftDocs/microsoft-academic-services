@@ -8,7 +8,7 @@ ms.date: 11/28/2019
 ---
 [!INCLUDE [ma-retirement](../includes/ma-retirement.md)]
 
- Language Similarity Sample (C#)
+# Language Similarity Sample (C#)
 
 Language Similarity Package includes a C# demo project in LanguageSimilarityExample folder.
 It contains sample.txt as a input for the demo project, where each line contains the parameter(s) for an API call.

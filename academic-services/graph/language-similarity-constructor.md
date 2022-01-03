@@ -8,7 +8,7 @@ ms.date: 4/23/2021
 ---
 [!INCLUDE [ma-retirement](../includes/ma-retirement.md)]
 
- LanguageSimilarity(string) Constructor
+# LanguageSimilarity(string) Constructor
 
 Namespace: Microsoft.Academic
 
