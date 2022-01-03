@@ -1,0 +1,50 @@
+- name: Project Academic Knowledge documentation
+  href: index.yml
+- name: Overview
+  expanded: true
+  items:
+  - name: Learn about Project Academic Knowledge
+    href: introduction.md
+- name: Concepts
+  expanded: true
+  items:
+  - name: Natural language queries
+    href: concepts-queries.md
+- name: Reference
+  expanded: true
+  items:
+  - name: Query expression syntax
+    href: reference-query-expression-syntax.md
+  - name: Entity attributes
+    href: reference-entity-attributes.md
+    items: 
+      - name: Affiliation
+        href: reference-affiliation-entity-attributes.md
+      - name: Author
+        href: reference-author-entity-attributes.md
+      - name: Conference instance
+        href: reference-conference-instance-entity-attributes.md
+      - name: Conference series
+        href: reference-conference-series-entity-attributes.md
+      - name: Field of study
+        href: reference-field-of-study-entity-attributes.md
+      - name: Journal
+        href: reference-journal-entity-attributes.md
+      - name: Paper
+        href: reference-paper-entity-attributes.md
+  - name: REST API
+    expanded: false
+    items:
+      - name: CalcHistogram
+        href: reference-calchistogram-method.md
+      - name: Evaluate
+        href: reference-evaluate-method.md
+      - name: Interpret
+        href: reference-interpret-method.md
+      - name: Similarity
+        href: reference-similarity-method.md
+- name: Resources
+  expanded: true
+  items:
+  - name: Stack Overflow
+    href: http://stackoverflow.com/questions/tagged/project-academic-knowledge
