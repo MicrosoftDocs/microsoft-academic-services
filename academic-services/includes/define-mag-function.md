@@ -1,2 +1,6 @@
 > [!IMPORTANT]
-> All Microsoft Academic Services have been [officially retired](https://www.microsoft.com/en-us/research/project/academic/articles/microsoft-academic-to-expand-horizons-with-community-driven-approach/) as of December 31st, 2021. We are currently retaining original documentation as-is for educational use, however all information about signing up for services is no longer valid, and support links will not function.
+> Define MAG functions before running U-SQL scripts accessing MAG data.
+
+In prerequisite [Set up Azure Data Lake Analytics](./get-started-setup-azure-data-lake-analytics), you added the Azure Storage (AS) created for MAG provision as a data source for the Azure Data Lake Analytics service (ADLA). In this section, you submit an ADLA job to create functions extracting MAG data from Azure Storage (AS).
+
+Follow instructions in [Define MAG functions](./define-mag-function).
