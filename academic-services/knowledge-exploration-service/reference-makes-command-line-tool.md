@@ -5,6 +5,7 @@ ms.topic: reference
 ms.date: 08/04/2020
 ms.author: alch
 ---
+[!INCLUDE [ma-retirement](../includes/ma-retirement.md)]
 
 # MAKES command line tool (KESM)
 

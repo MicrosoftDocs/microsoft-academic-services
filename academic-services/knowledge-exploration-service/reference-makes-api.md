@@ -4,6 +4,7 @@ description: Reference documentation for the MAKES API
 ms.topic: reference
 ms.date: 2020-09-29
 ---
+[!INCLUDE [ma-retirement](../includes/ma-retirement.md)]
 
 # MAKES API REFERENCE
 

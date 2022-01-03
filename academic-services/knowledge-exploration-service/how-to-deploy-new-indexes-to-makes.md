@@ -4,6 +4,7 @@ description: Step-by-step guide for deploying new releases of MAKES from your MA
 ms.topic: tutorial
 ms.date: 2020-02-10
 ---
+[!INCLUDE [ma-retirement](../includes/ma-retirement.md)]
 
 # Deploying a MAKES release for uninterrupted service
 

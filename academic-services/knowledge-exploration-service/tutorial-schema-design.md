@@ -4,6 +4,7 @@ description: Step by step tutorial to design MAKES schema for custom data
 ms.topic: tutorial
 ms.date: 04/08/2021
 ---
+[!INCLUDE [ma-retirement](../includes/ma-retirement.md)]
 
 # Build a library browser with contextual filters
 

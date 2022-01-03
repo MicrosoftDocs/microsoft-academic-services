@@ -4,6 +4,7 @@ description: Learn about the entity schema that MAKES API/Index contains.
 ms.topic: conceptual
 ms.date: 04/19/2021
 ---
+[!INCLUDE [ma-retirement](../includes/ma-retirement.md)]
 
 # Entity schema
 

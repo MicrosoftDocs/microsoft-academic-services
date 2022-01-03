@@ -6,6 +6,8 @@ ms.topic: tutorial
 ms.service: microsoft-academic-services
 ms.date: 3/23/2021
 ---
+[!INCLUDE [ma-retirement](../includes/ma-retirement.md)]
+
 # PySpark analytics samples for Microsoft Academic Graph
 
 Illustrates how to perform analytics for Microsoft Academic Graph using PySpark on Azure Databricks.

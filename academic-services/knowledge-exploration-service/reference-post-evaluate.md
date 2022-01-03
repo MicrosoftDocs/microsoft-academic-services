@@ -4,6 +4,7 @@ description: Returns entities that match constraints specified in a structured q
 ms.topic: reference
 ms.date: 2020-02-10
 ---
+[!INCLUDE [ma-retirement](../includes/ma-retirement.md)]
 
 # Evaluate REST API
 

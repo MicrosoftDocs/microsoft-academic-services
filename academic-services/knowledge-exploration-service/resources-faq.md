@@ -4,6 +4,8 @@ description: Answers to the most frequently asked questions about Microsoft Acad
 ms.topic: reference
 ms.date: 2020-02-10
 ---
+[!INCLUDE [ma-retirement](../includes/ma-retirement.md)]
+
 # Frequently Asked Questions about Microsoft Academic Knowledge Exploration Service
 
 Answers to the most frequently asked questions about Microsoft Academic Knowledge Exploration Service

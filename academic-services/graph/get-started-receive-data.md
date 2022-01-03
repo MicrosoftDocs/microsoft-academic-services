@@ -4,6 +4,7 @@ description: Step-by-step instructions for receiving Microsoft Academic Graph us
 ms.topic: get-started-article
 ms.date: 04/08/2021
 ---
+[!INCLUDE [ma-retirement](../includes/ma-retirement.md)]
 
 # Receive Microsoft Academic Graph releases using Azure Data Share
 

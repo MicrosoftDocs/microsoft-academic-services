@@ -4,6 +4,8 @@ description: Answers some of the most frequently asked questions about the Micro
 ms.topic: reference
 ms.date: 3/23/2021
 ---
+[!INCLUDE [ma-retirement](../includes/ma-retirement.md)]
+
 # Frequently Asked Questions about Microsoft Academic Graph
 
 Answers some of the most frequently asked questions about the Microsoft Academic Graph

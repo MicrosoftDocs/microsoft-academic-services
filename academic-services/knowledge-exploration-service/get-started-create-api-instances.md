@@ -4,6 +4,7 @@ description: Step-by-step guide for deploying Microsoft Academic Knowledge Explo
 ms.topic: tutorial
 ms.date: 04/08/2021
 ---
+[!INCLUDE [ma-retirement](../includes/ma-retirement.md)]
 
 # Deploying a basic MAKES instance to Azure from your Subscription
 

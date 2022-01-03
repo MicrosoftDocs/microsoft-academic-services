@@ -6,6 +6,7 @@ ms.topic: extra
 ms.service: microsoft-academic-services
 ms.date: 4/16/2021
 ---
+[!INCLUDE [ma-retirement](../includes/ma-retirement.md)]
 
 # Network Similarity Package
 

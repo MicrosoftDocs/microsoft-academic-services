@@ -4,6 +4,7 @@ description: Step-by-step instructions for setting up one-time or automatic prov
 ms.topic: get-started-article
 ms.date: 04/08/2021
 ---
+[!INCLUDE [ma-retirement](../includes/ma-retirement.md)]
 
 # Get Microsoft Academic Knowledge Exploration Service on Azure storage
 

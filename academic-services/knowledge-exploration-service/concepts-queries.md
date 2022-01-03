@@ -4,6 +4,7 @@ description:
 ms.topic: reference
 ms.date: 2020-02-10
 ---
+[!INCLUDE [ma-retirement](../includes/ma-retirement.md)]
 
 # How MAKES generates semantic interpretations of natural language queries
 

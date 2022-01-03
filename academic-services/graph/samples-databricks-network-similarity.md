@@ -6,6 +6,8 @@ ms.topic: extra
 ms.service: microsoft-academic-services
 ms.date: 3/23/2021
 ---
+[!INCLUDE [ma-retirement](../includes/ma-retirement.md)]
+
 # Network Similarity Sample (PySpark)
 
 In this sample, you will compute the network similarity score and top related entities using Azure Databricks.
