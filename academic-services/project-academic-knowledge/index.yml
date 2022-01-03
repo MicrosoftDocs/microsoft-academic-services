@@ -25,10 +25,6 @@ landingContent:
 
   - title: Get started
     linkLists:
-      - linkListType: get-started
-        links:
-          - text: Sign up for PAK
-            url: https://msr-apis.portal.azure-api.net/signin?ReturnUrl=%2Fproducts%2Fproject-academic-knowledge%2Fsubscribe
       - linkListType: reference
         links:
           - text: CalcHistogram API

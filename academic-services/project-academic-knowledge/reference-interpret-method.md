@@ -4,6 +4,7 @@ description: Generates semantic interpretations of a natural language query
 ms.topic: reference
 ms.date: 03/25/2020
 ---
+[!INCLUDE [ma-retirement](../includes/ma-retirement.md)]
 
 # Interpret Method
 
@@ -23,7 +24,7 @@ https://api.labs.cognitive.microsoft.com/academic/v1.0/interpret?
 
 Name     | Value | Required?  | Description
 ---------|---------|---------|---------
-**subscription-key** | String | Yes | Valid [Project Academic Knowledge subscription key](https://msr-apis.portal.azure-api.net/products/project-academic-knowledge)
+**subscription-key** | String | Yes | Valid Project Academic Knowledge subscription key
 **query**    | String | Yes | Query entered by user.  If complete is set to 1, query will be interpreted as a prefix for generating query auto-completion suggestions.
 **model**    | String | No  | Name of the model that you wish to query.  Currently, the value defaults to *latest*.
 **complete** | 0 or 1 | No<br>default:0  | 1 means that auto-completion suggestions are generated based on the grammar and graph data.

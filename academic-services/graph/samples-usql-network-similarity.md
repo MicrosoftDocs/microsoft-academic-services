@@ -6,6 +6,8 @@ ms.topic: tutorial
 ms.service: microsoft-academic-services
 ms.date: 4/14/2021
 ---
+[!INCLUDE [ma-retirement](../includes/ma-retirement.md)]
+
 # Network Similarity Sample (U-SQL)
 
 In this sample, you will compute the network similarity score and top related affiliations in Microsoft Academic Graph (MAG) using Azure Data Analytics (U-SQL).

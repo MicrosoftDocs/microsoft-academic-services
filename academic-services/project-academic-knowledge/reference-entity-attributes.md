@@ -4,6 +4,7 @@ description: Learn the common attributes you can use with all entities in the Pr
 ms.topic: reference
 ms.date: 2020-02-24
 ---
+[!INCLUDE [ma-retirement](../includes/ma-retirement.md)]
 
 # Entity Attributes
 

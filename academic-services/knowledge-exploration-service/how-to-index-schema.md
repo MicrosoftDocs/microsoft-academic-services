@@ -4,6 +4,7 @@ description: Defines the file format and structure for MAKES index schema
 ms.topic: how-to
 ms.date: 12/09/2020
 ---
+[!INCLUDE [ma-retirement](../includes/ma-retirement.md)]
 
 # Index schema files
 

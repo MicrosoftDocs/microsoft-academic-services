@@ -79,6 +79,91 @@
             "source_path": "academic-services/knowledge-exploration-service/reference-semantic-interpretation-engine",
             "redirect_url": "introduction",
             "redirect_document_id": false
+        },
+        {
+            "source_path": "academic-services/project-academic-knowledge",
+            "redirect_url": "https://www.microsoft.com/en-us/research/project/academic/articles/microsoft-academic-to-expand-horizons-with-community-driven-approach/",
+            "redirect_document_id": false
+        },
+        {
+            "source_path": "academic-services/project-academic-knowledge/",
+            "redirect_url": "https://www.microsoft.com/en-us/research/project/academic/articles/microsoft-academic-to-expand-horizons-with-community-driven-approach/",
+            "redirect_document_id": false
+        },
+        {
+            "source_path": "academic-services/project-academic-knowledge/introduction",
+            "redirect_url": "https://www.microsoft.com/en-us/research/project/academic/articles/microsoft-academic-to-expand-horizons-with-community-driven-approach/",
+            "redirect_document_id": false
+        },
+        {
+            "source_path": "academic-services/project-academic-knowledge/concepts-queries",
+            "redirect_url": "https://www.microsoft.com/en-us/research/project/academic/articles/microsoft-academic-to-expand-horizons-with-community-driven-approach/",
+            "redirect_document_id": false
+        },
+        {
+            "source_path": "academic-services/project-academic-knowledge/reference-query-expression-syntax",
+            "redirect_url": "https://www.microsoft.com/en-us/research/project/academic/articles/microsoft-academic-to-expand-horizons-with-community-driven-approach/",
+            "redirect_document_id": false
+        },
+        {
+            "source_path": "academic-services/project-academic-knowledge/reference-entity-attributes",
+            "redirect_url": "https://www.microsoft.com/en-us/research/project/academic/articles/microsoft-academic-to-expand-horizons-with-community-driven-approach/",
+            "redirect_document_id": false
+        },
+        {
+            "source_path": "academic-services/project-academic-knowledge/reference-affiliation-entity-attributes",
+            "redirect_url": "https://www.microsoft.com/en-us/research/project/academic/articles/microsoft-academic-to-expand-horizons-with-community-driven-approach/",
+            "redirect_document_id": false
+        },
+        {
+            "source_path": "academic-services/project-academic-knowledge/reference-author-entity-attributes",
+            "redirect_url": "https://www.microsoft.com/en-us/research/project/academic/articles/microsoft-academic-to-expand-horizons-with-community-driven-approach/",
+            "redirect_document_id": false
+        },
+        {
+            "source_path": "academic-services/project-academic-knowledge/reference-conference-instance-entity-attributes",
+            "redirect_url": "https://www.microsoft.com/en-us/research/project/academic/articles/microsoft-academic-to-expand-horizons-with-community-driven-approach/",
+            "redirect_document_id": false
+        },
+        {
+            "source_path": "academic-services/project-academic-knowledge/reference-conference-series-entity-attributes",
+            "redirect_url": "https://www.microsoft.com/en-us/research/project/academic/articles/microsoft-academic-to-expand-horizons-with-community-driven-approach/",
+            "redirect_document_id": false
+        },
+        {
+            "source_path": "academic-services/project-academic-knowledge/reference-field-of-study-entity-attributes",
+            "redirect_url": "https://www.microsoft.com/en-us/research/project/academic/articles/microsoft-academic-to-expand-horizons-with-community-driven-approach/",
+            "redirect_document_id": false
+        },
+        {
+            "source_path": "academic-services/project-academic-knowledge/reference-journal-entity-attributes",
+            "redirect_url": "https://www.microsoft.com/en-us/research/project/academic/articles/microsoft-academic-to-expand-horizons-with-community-driven-approach/",
+            "redirect_document_id": false
+        },
+        {
+            "source_path": "academic-services/project-academic-knowledge/reference-paper-entity-attributes",
+            "redirect_url": "https://www.microsoft.com/en-us/research/project/academic/articles/microsoft-academic-to-expand-horizons-with-community-driven-approach/",
+            "redirect_document_id": false
+        },
+        {
+            "source_path": "academic-services/project-academic-knowledge/reference-calchistogram-method",
+            "redirect_url": "https://www.microsoft.com/en-us/research/project/academic/articles/microsoft-academic-to-expand-horizons-with-community-driven-approach/",
+            "redirect_document_id": false
+        },
+        {
+            "source_path": "academic-services/project-academic-knowledge/reference-evaluate-method",
+            "redirect_url": "https://www.microsoft.com/en-us/research/project/academic/articles/microsoft-academic-to-expand-horizons-with-community-driven-approach/",
+            "redirect_document_id": false
+        },
+        {
+            "source_path": "academic-services/project-academic-knowledge/reference-interpret-method",
+            "redirect_url": "https://www.microsoft.com/en-us/research/project/academic/articles/microsoft-academic-to-expand-horizons-with-community-driven-approach/",
+            "redirect_document_id": false
+        },
+        {
+            "source_path": "academic-services/project-academic-knowledge/reference-similarity-method",
+            "redirect_url": "https://www.microsoft.com/en-us/research/project/academic/articles/microsoft-academic-to-expand-horizons-with-community-driven-approach/",
+            "redirect_document_id": false
         }
     ]
 }

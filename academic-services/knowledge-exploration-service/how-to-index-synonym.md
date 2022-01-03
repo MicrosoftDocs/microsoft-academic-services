@@ -4,6 +4,7 @@ description: Defines the file format and structure for synonym data in MAKES
 ms.topic: how-to
 ms.date: 9/1/2020
 ---
+[!INCLUDE [ma-retirement](../includes/ma-retirement.md)]
 
 # Synonym files
 

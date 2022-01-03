@@ -4,6 +4,7 @@ description: Returns entities that match constraints specified in a structured q
 ms.topic: reference
 ms.date: 2020-02-24
 ---
+[!INCLUDE [ma-retirement](../includes/ma-retirement.md)]
 
 # Evaluate Method
 
@@ -19,7 +20,7 @@ https://api.labs.cognitive.microsoft.com/academic/v1.0/evaluate?
 
 Name | Value | Required? | Description
 --- | --- | --- | ---
-**subscription-key** | String | Yes | Valid [Project Academic Knowledge subscription key](https://msr-apis.portal.azure-api.net/products/project-academic-knowledge)
+**subscription-key** | String | Yes | Valid Project Academic Knowledge subscription key
 **expr** | Text string | Yes | A query expression that specifies which entities should be returned.
 **model** | Text string | No | Name of the model that you wish to query.  Currently, the value defaults to *latest*.
 **attributes** | Text string | No<br>default: Id | A comma-delimited list that specifies the attribute values that are included in the response. Attribute names are case-sensitive.

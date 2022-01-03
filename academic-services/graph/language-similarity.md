@@ -6,6 +6,8 @@ ms.topic: extra
 ms.service: microsoft-academic-services
 ms.date: 3/23/2021
 ---
+[!INCLUDE [ma-retirement](../includes/ma-retirement.md)]
+
 # Language Similarity Package
 
 The Microsoft Academic Language Similarity Package provides supplementary processing functionality for use with the Microsoft Academic Graph (MAG). This package includes Language Similarity API and required resources. This API provides functionality for:

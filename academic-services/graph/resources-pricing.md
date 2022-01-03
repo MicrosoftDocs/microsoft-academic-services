@@ -4,6 +4,8 @@ description: Provides Azure cost estimator links to model the cost of using Micr
 ms.topic: reference
 ms.date: 3/23/2021
 ---
+[!INCLUDE [ma-retirement](../includes/ma-retirement.md)]
+
 # Microsoft Academic Graph pricing
 
 Provides Azure cost estimator links to model the cost of using Microsoft Academic Graph

@@ -5,6 +5,8 @@ ms.topic: get-started-article
 ms.date: 04/08/2021
 ---
 
+[!INCLUDE [ma-retirement](../includes/ma-retirement.md)]
+
 # Get Microsoft Academic Graph on Azure storage
 
 [!INCLUDE [ma-subscription-signup](../includes/ma-subscription-signup.md)]

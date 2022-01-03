@@ -6,6 +6,7 @@ ms.topic: tutorial
 ms.service: microsoft-academic-services
 ms.date: 4/14/2021
 ---
+[!INCLUDE [ma-retirement](../includes/ma-retirement.md)]
 
 # Tutorial: Set up academic reference parsing with Azure Search
 

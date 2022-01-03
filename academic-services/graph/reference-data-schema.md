@@ -4,6 +4,8 @@ description: Documents the complete, most recent Microsoft Academic Graph entity
 ms.topic: reference
 ms.date: 5/28/2021
 ---
+[!INCLUDE [ma-retirement](../includes/ma-retirement.md)]
+
 # Microsoft Academic Graph data schema
 
 Documents the complete, most recent Microsoft Academic Graph entity data schema, including the name and type of each attribute.

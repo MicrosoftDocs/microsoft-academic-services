@@ -37,4 +37,4 @@ productDirectory:
       imageSrc: ./media/project-academic-knowledge-banner.svg
       links:
         - url: /academic-services/project-academic-knowledge/
-          text: Learn all about Project Academic Knowledge, including how to access it, entity schema and API method documentation.
+          text: Learn all about Project Academic Knowledge, including how to access it, entity schema and API method documentation.          

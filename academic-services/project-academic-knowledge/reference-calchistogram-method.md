@@ -4,6 +4,7 @@ description: Computes attribute value distribution for a structured query expres
 ms.topic: reference
 ms.date: 2020-02-24
 ---
+[!INCLUDE [ma-retirement](../includes/ma-retirement.md)]
 
 # CalcHistogram Method
 
@@ -19,7 +20,7 @@ https://api.labs.cognitive.microsoft.com/academic/v1.0/calchistogram?
 
 Name | Value | Required? | Description
 --- | --- | --- | ---
-**subscription-key** | String | Yes | Valid [Project Academic Knowledge subscription key](https://msr-apis.portal.azure-api.net/products/project-academic-knowledge)
+**subscription-key** | String | Yes | Valid Project Academic Knowledge subscription key
 **expr** | Text string | Yes | A query expression that specifies the entities over which to calculate histograms.
 **model** | Text string | No | Select the name of the model that you wish to query. Currently, the value defaults to *latest*.
 **attributes** | Text string | No<br>default: | A comma-delimited list that specifies the attribute values that are included in the response. Attribute names are case-sensitive.

@@ -4,6 +4,7 @@ description: Generates semantic interpretations of a natural language query
 ms.topic: reference
 ms.date: 03/25/2020
 ---
+[!INCLUDE [ma-retirement](../includes/ma-retirement.md)]
 
 # Interpret REST API
 

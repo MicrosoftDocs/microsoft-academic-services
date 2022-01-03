@@ -6,6 +6,8 @@ ms.topic: extra
 ms.service: microsoft-academic-services
 ms.date: 4/23/2021
 ---
+[!INCLUDE [ma-retirement](../includes/ma-retirement.md)]
+
 # NetworkSimilarity Constructor (PySpark)
 
 Initializes a new instance of the NetworkSimilarity class.

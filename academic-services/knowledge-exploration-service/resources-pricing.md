@@ -4,6 +4,8 @@ description: Provides Azure cost estimator links to model the cost of using Micr
 ms.topic: reference
 ms.date: 2020-06-12
 ---
+[!INCLUDE [ma-retirement](../includes/ma-retirement.md)]
+
 # Microsoft Academic Knowledge Exploration Service Pricing
 
 MAKES can be hosted on any virtual machine SKU that runs Windows OS. Below are suggested hardware SKU's for various MAKES usage scenarios. These are only *suggested configurations*; you should experiment and determine the most appropriate configuration that best fits your needs.

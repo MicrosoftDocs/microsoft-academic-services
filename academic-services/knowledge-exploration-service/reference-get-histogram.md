@@ -4,6 +4,7 @@ description: Computes attribute value distribution for a structured query expres
 ms.topic: reference
 ms.date: 09/21/2020
 ---
+[!INCLUDE [ma-retirement](../includes/ma-retirement.md)]
 
 # Histogram REST API
 

@@ -4,6 +4,7 @@ description: Learn how to use KES structured query expressions
 ms.topic: reference
 ms.date: 09/21/2020
 ---
+[!INCLUDE [ma-retirement](../includes/ma-retirement.md)]
 
 # Structured query expressions
 

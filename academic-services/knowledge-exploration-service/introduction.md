@@ -4,6 +4,8 @@ description: Microsoft Academic Knowledge Exploration Service enables self-hoste
 ms.topic: overview
 ms.date: 2020-02-10
 ---
+[!INCLUDE [ma-retirement](../includes/ma-retirement.md)]
+
 # About Microsoft Academic Knowledge Exploration Service
 
 Microsoft Academic Knowledge Exploration Service (MAKES) was created to unlock the power of the [Microsoft Academic Graph (MAG)](../graph/index.yml) for realtime applications.  It enables users to build interactive solutions for knowledge based applications that can scale and deliver high quality results.  MAKES is a turn-key solution; running a single script will provision in Azure private instances of an interactive academic search API, powered by [Knowledge Exploration Service (KES)](#knowledge-exploration-service) APIs.  For an example of what can be built using MAKES, see the [Microsoft Academic Website](https://academic.microsoft.com/).

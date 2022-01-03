@@ -4,6 +4,7 @@ description: Step-by-step guide for deleting a Microsoft Academic Knowledge Expl
 ms.topic: tutorial
 ms.date: 2020-02-10
 ---
+[!INCLUDE [ma-retirement](../includes/ma-retirement.md)]
 
 # How to delete a MAKES deployment
 

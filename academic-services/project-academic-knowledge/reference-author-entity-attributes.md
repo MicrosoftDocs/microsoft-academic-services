@@ -4,6 +4,7 @@ description: Learn the attributes you can use with author entities in the Projec
 ms.topic: reference
 ms.date: 2020-02-24
 ---
+[!INCLUDE [ma-retirement](../includes/ma-retirement.md)]
 
 # Author Entity
 

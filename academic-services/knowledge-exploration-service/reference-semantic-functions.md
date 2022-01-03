@@ -4,6 +4,7 @@ description: Reference documentation for the semantic functions supported by the
 ms.topic: reference
 ms.date: 12/09/2020
 ---
+[!INCLUDE [ma-retirement](../includes/ma-retirement.md)]
 
 # Semantic functions
 

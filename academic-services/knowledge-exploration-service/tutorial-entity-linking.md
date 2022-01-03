@@ -4,6 +4,7 @@ description: Step by step tutorial to link private paper data with MAKES paper e
 ms.topic: tutorial
 ms.date: 12/09/2020
 ---
+[!INCLUDE [ma-retirement](../includes/ma-retirement.md)]
 
 # Link private publication records with MAKES entities
 
