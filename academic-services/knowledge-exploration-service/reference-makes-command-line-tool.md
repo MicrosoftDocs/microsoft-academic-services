@@ -499,7 +499,7 @@ The path to the azure credential file to use for authentication. If you're using
 
 You can generate this file using [Azure CLI 2.0](https://github.com/Azure/azure-cli) through the following command. Make sure you selected your subscription by `az account set --subscription <name or id>` and you have the privileges to create service principals.
 
-```bash
+```azurecli
 az ad sp create-for-rbac --role Contributor --sdk-auth > my.azureauth
 ```
 
