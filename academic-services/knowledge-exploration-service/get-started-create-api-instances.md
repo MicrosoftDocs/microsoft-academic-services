@@ -6,7 +6,7 @@ ms.date: 04/08/2021
 ---
 [!INCLUDE [ma-retirement](../includes/ma-retirement.md)]
 
-# Deploying a basic MAKES instance to Azure from your Subscription
+## Deploying a basic MAKES instance to Azure from your Subscription
 
  Step-by-step guide for deploying a Microsoft Academic Knowledge Exploration Service (MAKES) instance from a MAKES release. For more information on obtaining a MAKES release, visit [Sign up for MAKES](get-started-setup-provisioning.md)
 
