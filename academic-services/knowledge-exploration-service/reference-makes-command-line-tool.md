@@ -228,7 +228,7 @@ The number of virtual machines(workers) used to build the index. If you're build
 
 `--WorkerSku`
 
-The virtual machine(worker) SKU. Check [Azure Virtual Machine Sizes](https://docs.microsoft.com/azure/virtual-machines/windows/sizes) to get the avaliable options. Defaults to "Standard_D8_v3"
+The virtual machine(worker) SKU. Check [Azure Virtual Machine Sizes](/azure/virtual-machines/windows/sizes) to get the avaliable options. Defaults to "Standard_D8_v3"
 
 ## BuildIndexLocal command
 
@@ -503,7 +503,7 @@ You can generate this file using [Azure CLI 2.0](https://github.com/Azure/azure-
 az ad sp create-for-rbac --role Contributor --scopes /subscriptions/<subscription-id> --sdk-auth > my.azureauth
 ```
 
-If you don't have Azure CLI installed, you can also do this in the [cloud shell](https://docs.microsoft.com/azure/cloud-shell/quickstart).
+If you don't have Azure CLI installed, you can also do this in the [cloud shell](/azure/cloud-shell/quickstart).
 
 ### Common Azure Resource Group parameter
 
