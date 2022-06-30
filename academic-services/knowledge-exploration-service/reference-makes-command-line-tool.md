@@ -113,7 +113,7 @@ The application settings used by the web host represented as a list of \"<Applic
 
 `--WebHostOverrideUrl`
 
-The host web app package file url reference for overriding default MAKES web host. E.g. https://mymakesstore.blob.core.windows.net/makes/2019-12-26/webhost/my-custom-makes-web-service-host.zip
+The host web app package file url reference for overriding default MAKES web host. E.g. `https://mymakesstore.blob.core.windows.net/makes/2019-12-26/webhost/my-custom-makes-web-service-host.zip`
 
 `--ApplicationInsightsInstrumentationKey`
 
