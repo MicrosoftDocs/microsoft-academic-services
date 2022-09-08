@@ -6,7 +6,7 @@ Before you can accept Azure Data Share invitation to receive Microsoft Academic 
 
 * Set up provisioning of Microsoft Academic Graph to an Azure blob storage account. See [Get Microsoft Academic Graph on Azure storage](./get-started-setup-provisioning).
 * A Data Share invitation: An email invitation from Microsoft Azure with a subject titled "Azure Data Share invitation from Microsoft Academic Pipeline".
-* Register the [Microsoft.DataShare resource provider](https://docs.microsoft.com/azure/data-share/concepts-roles-permissions#resource-provider-registration) in the Azure subscription where you will create a Data Share resource and the Azure subscription where your target Azure data stores are located.
+* Register the [Microsoft.DataShare resource provider](/azure/data-share/concepts-roles-permissions#resource-provider-registration) in the Azure subscription where you will create a Data Share resource and the Azure subscription where your target Azure data stores are located.
 * Permission to write and add role assignments to the storage account. These permissions exist in the Owner role.
 
 ## Gather the information that you need
@@ -67,7 +67,7 @@ Follow the steps below to configure where you want to receive data.
     |---------|---------|
     |**Target data type** | Azure Blob Storage |
     |**Subscription** | From the drop-down, select your Azure subscription. |
-    |**Resource group** | Specify whether you want to create a new resource group or use an existing one. A resource group is a container that holds related resources within an Azure subscription. For more information, see [Azure Resource Group overview](https://docs.microsoft.com/azure/azure-resource-manager/resource-group-overview). You can use the same resource group as the Data Share service.|
+    |**Resource group** | Specify whether you want to create a new resource group or use an existing one. A resource group is a container that holds related resources within an Azure subscription. For more information, see [Azure Resource Group overview](/azure/azure-resource-manager/resource-group-overview). You can use the same resource group as the Data Share service.|
     |**Storage account name** | Select the Azure storage account created in [Get Microsoft Academic Graph on Azure storage](./get-started-setup-provisioning#create-an-azure-storage-account), e.g. `mag<org_name>`. |
     |**Path**    | Select the blob storage container created in . e.g. `ma-datashare`. |
 

@@ -98,7 +98,7 @@ The region where the MAKES API host should be deployed to. Defaults to "westus"
 
 `--HostMachineSku`
 
-The SKU for MAKES API host machines. Check [Azure Virtual Machine Sizes](https://docs.microsoft.com/azure/virtual-machines/windows/sizes) to get the avaliable options. Defaults to "Standard_D14_v2".
+The SKU for MAKES API host machines. Check [Azure Virtual Machine Sizes](/azure/virtual-machines/windows/sizes) to get the avaliable options. Defaults to "Standard_D14_v2".
 
 `--HostMachineDataDiskSizeInGb`
 
