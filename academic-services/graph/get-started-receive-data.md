@@ -27,4 +27,4 @@ Continue through the next sections to learn about the entity data schema and usi
 
 * [Azure Data Share](https://azure.microsoft.com/services/data-share/)
 
-* [Tutorial: Accept and receive data using Azure Data Share](https://docs.microsoft.com/azure/data-share/subscribe-to-data-share)
+* [Tutorial: Accept and receive data using Azure Data Share](/azure/data-share/subscribe-to-data-share)

@@ -25,7 +25,7 @@ After completing this tutorial, you should be able to:
 >
 > Because of the large scope of the data in the Microsoft Academic Graph, the Azure Search service requires a significant amount of time and resources to both setup and keep online.
 >
-> Please take the time to familiarize yourself with the costs associated with Azure Search in the [capacity planning](https://docs.microsoft.com/azure/search/search-sku-tier) documentation.
+> Please take the time to familiarize yourself with the costs associated with Azure Search in the [capacity planning](/azure/search/search-sku-tier) documentation.
 
 ## Prerequisites
 
@@ -220,7 +220,7 @@ In this section, you submit an ADLA job to generate text files containing academ
 > [!WARNING]
 > Because of the large scope of the data in the Microsoft Academic Graph, the Azure Search service requires a significant amount of time and resources to both setup and keep online.
 >
-> Please take the time to familiarize yourself with the costs associated with Azure Search in the [capacity planning](https://docs.microsoft.com/azure/search/search-sku-tier) documentation.
+> Please take the time to familiarize yourself with the costs associated with Azure Search in the [capacity planning](/azure/search/search-sku-tier) documentation.
 
 1. Go to the Azure Management Portal and create a new Azure Search service
 
@@ -631,11 +631,11 @@ The response should look similar to the following:
 This response includes a lot of useful details about why a document was matched, including the individual fields that were matched including the specific lexical terms (denoted by the ```<q>``` tags).
 
 > [!TIP]
-> To learn more about searching documents with the Azure Search REST API, see the [Search Documents (Azure Search Service REST API)](https://docs.microsoft.com/rest/api/searchservice/search-documents) documentation.
+> To learn more about searching documents with the Azure Search REST API, see the [Search Documents (Azure Search Service REST API)](/rest/api/searchservice/search-documents) documentation.
 
 ## Resources
 
-* [Get started with Azure Data Lake Analytics using Azure portal](https://docs.microsoft.com/azure/data-lake-analytics/data-lake-analytics-get-started-portal)
+* [Get started with Azure Data Lake Analytics using Azure portal](/azure/data-lake-analytics/data-lake-analytics-get-started-portal)
 * [Data Lake Analytics](https://azure.microsoft.com/services/data-lake-analytics/)
-* [U-SQL Language Reference](https://docs.microsoft.com/u-sql/)
-* [Azure Search](https://docs.microsoft.com/azure/search/)
+* [U-SQL Language Reference](/u-sql/)
+* [Azure Search](/azure/search/)

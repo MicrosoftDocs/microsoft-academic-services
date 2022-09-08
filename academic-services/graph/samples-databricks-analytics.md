@@ -66,7 +66,7 @@ In this section, you will import and run sample notebooks.
 
 ## Access results with Microsoft Azure Storage Explorer
 
-You can access the output files using [Microsoft Azure Storage Explorer](https://docs.microsoft.com/azure/vs-azure-tools-storage-manage-with-storage-explorer).
+You can access the output files using [Microsoft Azure Storage Explorer](/azure/vs-azure-tools-storage-manage-with-storage-explorer).
 
 ![View result with Microsoft Azure Storage Explorer](media/samples-view-pyspark-script-results.png "View result with Microsoft Azure Storage Explorer")
 
@@ -75,4 +75,4 @@ You can access the output files using [Microsoft Azure Storage Explorer](https:/
 * [Create an Azure Databricks service](https://azure.microsoft.com/services/databricks/)
 * [Create a cluster for the Azure Databricks service](https://docs.azuredatabricks.net/user-guide/clusters/create.html)
 * [Import a Databrick notebook](https://docs.databricks.com/user-guide/notebooks/notebook-manage.html#import-a-notebook)
-* [Get started with Storage Explorer](https://docs.microsoft.com/azure/vs-azure-tools-storage-manage-with-storage-explorer)
+* [Get started with Storage Explorer](/azure/vs-azure-tools-storage-manage-with-storage-explorer)

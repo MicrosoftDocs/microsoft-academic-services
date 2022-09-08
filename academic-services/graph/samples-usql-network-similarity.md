@@ -149,6 +149,6 @@ In this section, you submit an ADLA job to define network similarity functions.
 
 ## Resources
 
-* [Get started with Azure Data Lake Analytics using Azure portal](https://docs.microsoft.com/azure/data-lake-analytics/data-lake-analytics-get-started-portal)
+* [Get started with Azure Data Lake Analytics using Azure portal](/azure/data-lake-analytics/data-lake-analytics-get-started-portal)
 * [Data Lake Analytics](https://azure.microsoft.com/services/data-lake-analytics/)
-* [U-SQL Language Reference](https://docs.microsoft.com/u-sql/)
+* [U-SQL Language Reference](/u-sql/)
