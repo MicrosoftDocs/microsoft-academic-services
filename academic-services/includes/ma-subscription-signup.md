@@ -34,8 +34,8 @@ Sign in to the [Azure portal](https://portal.azure.com/).
     |Property|Description|
     |-|-|
     |**Subscription** | From the drop-down, select your Azure subscription. |
-    |**Resource group** | Specify whether you want to create a new resource group or use an existing one. A resource group is a container that holds related resources within an Azure subscription. For more information, see [Azure Resource Group overview](https://docs.microsoft.com/azure/azure-resource-manager/resource-group-overview). |
-    |**Location** | Select one of the locations below. Reference [Azure network round-trip latency statistics](https://docs.microsoft.com/azure/networking/azure-network-latency) to choose an Azure region which is most appropriate for your application. <br> **- East Asia** <br> **- East US** <br> **- UK South** <br> **- West Europe** <br> **- West US** <br> <br> **DO NOT** select `East US 2` or `West US 2`.|
+    |**Resource group** | Specify whether you want to create a new resource group or use an existing one. A resource group is a container that holds related resources within an Azure subscription. For more information, see [Azure Resource Group overview](/azure/azure-resource-manager/resource-group-overview). |
+    |**Location** | Select one of the locations below. Reference [Azure network round-trip latency statistics](/azure/networking/azure-network-latency) to choose an Azure region which is most appropriate for your application. <br> **- East Asia** <br> **- East US** <br> **- UK South** <br> **- West Europe** <br> **- West US** <br> <br> **DO NOT** select `East US 2` or `West US 2`.|
     |**Name** | Provide a name for your Data Share service. |
 
     <br>
@@ -46,7 +46,7 @@ Sign in to the [Azure portal](https://portal.azure.com/).
 
     ![Submit new Data Share service for creation](../media/create-storage-account/create-data-share-submit.png "Submit new Data Share service for creation")
 
-### [Create an Azure Storage Account](https://docs.microsoft.com/azure/storage/common/storage-quickstart-create-account)
+### [Create an Azure Storage Account](/azure/storage/common/storage-quickstart-create-account)
 
 1. Home > Create a resource > Storage > Storage account > Create
 
@@ -57,9 +57,9 @@ Sign in to the [Azure portal](https://portal.azure.com/).
     |Property|Description|
     |-|-|
     |**Subscription** | From the drop-down, select your Azure subscription. |
-    |**Resource group** | Specify whether you want to create a new resource group or use an existing one. A resource group is a container that holds related resources for an Azure solution. For more information, see [Azure Resource Group overview](https://docs.microsoft.com/azure/azure-resource-manager/resource-group-overview). You can use the same resource group as the Data Share service.|
+    |**Resource group** | Specify whether you want to create a new resource group or use an existing one. A resource group is a container that holds related resources for an Azure solution. For more information, see [Azure Resource Group overview](/azure/azure-resource-manager/resource-group-overview). You can use the same resource group as the Data Share service.|
     |**Storage account name** | Provide a name for your storage account (**mag<org_name>**), e.g. `magconsoto`. You don't need to use your organization name after the "mag", however the account name must be unique among all Azure Storage accounts. |
-    |**Location** | Select one of the locations below, same as the Data Share service. Reference [Azure network round-trip latency statistics](https://docs.microsoft.com/azure/networking/azure-network-latency) to choose an Azure region which is most appropriate for your application. <br> **- East Asia** <br> **- East US** <br> **- UK South** <br> **- West Europe** <br> **- West US** <br> <br> **DO NOT** select `East US 2` or `West US 2`.|
+    |**Location** | Select one of the locations below, same as the Data Share service. Reference [Azure network round-trip latency statistics](/azure/networking/azure-network-latency) to choose an Azure region which is most appropriate for your application. <br> **- East Asia** <br> **- East US** <br> **- UK South** <br> **- West Europe** <br> **- West US** <br> <br> **DO NOT** select `East US 2` or `West US 2`.|
     |**Performance** | Standard |
     |**Account kind**| StorageV2 (general purpose v2) |
     |**Replication** | Select the desired replication mode |
@@ -84,7 +84,7 @@ Sign in to the [Azure portal](https://portal.azure.com/).
 
 ## Create a Blob Container
 
-1. Follow [the instructions here](https://docs.microsoft.com/azure/storage/blobs/storage-quickstart-blobs-portal#create-a-container) to create a blob container.
+1. Follow the instructions in [Create a container](/azure/storage/blobs/storage-quickstart-blobs-portal#create-a-container) to create a blob container.
 
 1. Name the blob container (i.e. `ma-datashare`).
 

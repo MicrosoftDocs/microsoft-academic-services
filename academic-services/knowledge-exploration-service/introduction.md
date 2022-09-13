@@ -40,7 +40,7 @@ The components shipped to a MAKES subscription include:
 
 ## MAKES Architecture
 
-The MAKES API is designed to be hosted in an Azure Virtual Machine Scale Set to provide extensibility, scalability, and reliability.  [Azure Virtual Machine Scale Sets](https://docs.microsoft.com/azure/virtual-machine-scale-sets/overview) allow users to easily configure:
+The MAKES API is designed to be hosted in an Azure Virtual Machine Scale Set to provide extensibility, scalability, and reliability. [Azure Virtual Machine Scale Sets](/azure/virtual-machine-scale-sets/overview) allow users to easily configure:
 
 - Auto scaling (not set up by default)
 
@@ -89,4 +89,4 @@ This scenario can be taken further as well.  Users are able to modify the gramma
 
 Knowledge Exploration Service (KES) offers a fast and effective way to add interactive search and refinement to applications. With KES, you can build a compressed index from structured data, author a grammar that interprets natural language queries, and provide interactive query formulation with auto-completion suggestions.
 
-KES is available as a completely stand-alone project. For details and documentation please see [this website](https://docs.microsoft.com/azure/cognitive-services/KES/overview).
+KES is available as a completely stand-alone project. For details and documentation please see [this website](/azure/cognitive-services/KES/overview).

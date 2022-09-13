@@ -1,4 +1,4 @@
-﻿---
+---
 title: Build a library browser with contextual filters
 description: Step by step tutorial to design MAKES schema for custom data
 ms.topic: tutorial
@@ -255,7 +255,7 @@ Now that the custom index has been built, we can deploy it with a MAKES API inst
 
 ::: moniker range="makes-1.0"
 
-1. Upload the custom index build to your MAKES storage account. You can do so by using following [Blob Upload from Azure Portal](https://docs.microsoft.com/azure/storage/blobs/storage-quickstart-blobs-portal). If you use cloud index build, you may skip this step.
+1. Upload the custom index build to your MAKES storage account. You can do so by following [Blob Upload from Azure Portal](/azure/storage/blobs/storage-quickstart-blobs-portal). If you use cloud index build, you may skip this step.
 
 1. Run CreateHostResources to create a MAKES hosting virtual machine image
 
@@ -278,7 +278,7 @@ Now that the custom index has been built, we can deploy it with a MAKES API inst
 ::: moniker-end
 ::: moniker range="makes-3.0"
 
-1. Upload the custom index build to your MAKES storage account. You can do so by using following [Blob Upload from Azure Portal](https://docs.microsoft.com/azure/storage/blobs/storage-quickstart-blobs-portal). If you use cloud index build, you may skip this step.
+1. Upload the custom index build to your MAKES storage account. You can do so by following [Blob Upload from Azure Portal](/azure/storage/blobs/storage-quickstart-blobs-portal). If you use cloud index build, you may skip this step.
 
 1. Run CreateHostResources to create a MAKES hosting virtual machine image
 

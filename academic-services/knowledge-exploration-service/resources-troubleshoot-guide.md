@@ -34,7 +34,7 @@ When running **BuildIndex** command:
 
     You can use the default Virtual Machine SKU **Standard_D8_v3** for most Microsoft Academic sub-graph index builds. If you're able to sucessfully deploy MAKES indexes, you can try changing the WorkerSku configuration use the same configuration as your host machine SKU. As long as you have enough vCPU quota, you should be able to build.
 
-You can contact Azure support to increase Subscription limits by submitting a request on Azure Management Portal. For more information, see [How to Create Azure Support Request](https://docs.microsoft.com/azure/azure-portal/supportability/how-to-create-azure-support-request)
+You can contact Azure support to increase Subscription limits by submitting a request on Azure Management Portal. For more information, see [How to Create Azure Support Request](/azure/azure-portal/supportability/how-to-create-azure-support-request)
 
 ## Azure Batch service not registered
 

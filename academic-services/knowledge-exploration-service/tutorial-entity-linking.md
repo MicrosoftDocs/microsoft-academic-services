@@ -13,7 +13,7 @@ This tutorial illustrates how to link private publication records with their cor
 ## Prerequisites
 
 - [Microsoft Academic Knowledge Service (MAKES) subscription](get-started-setup-provisioning.md)
-- Install [PowerShell 7](https://docs.microsoft.com/powershell/scripting/install/installing-powershell-core-on-windows?view=powershell-7&preserve-view=true)
+- Install [PowerShell 7](/powershell/scripting/install/installing-powershell-core-on-windows?view=powershell-7&preserve-view=true)
 - Download the [sample private library publication records](samplePrivateLibraryData.json)
 
 ## Download samples and setup working directory
