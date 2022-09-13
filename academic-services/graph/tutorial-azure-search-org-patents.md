@@ -339,7 +339,7 @@ Once the indexer has completed, you can immediately begin querying the service b
 ![Sarch explorer](media/tutorial-search-example-face-recognition.png)
 
 > [!NOTE]
-> This example makes use of filter expressions to restrict which content is considered before looking for the search terms. See the [Azure Search filter expression](https://docs.microsoft.com/azure/search/search-explorer#filter-expressions-greater-than-less-than-equal-to) documentation for more details.
+> This example makes use of filter expressions to restrict which content is considered before looking for the search terms. See the [Azure Search filter expression](/azure/search/search-explorer#filter-expressions-greater-than-less-than-equal-to) documentation for more details.
 
 ## Next steps
 
@@ -350,7 +350,7 @@ If you're interested in creating a more comprehensive Azure Search service using
 
 ## Resources
 
-* [Get started with Azure Data Lake Analytics using Azure portal](https://docs.microsoft.com/azure/data-lake-analytics/data-lake-analytics-get-started-portal)
+* [Get started with Azure Data Lake Analytics using Azure portal](/azure/data-lake-analytics/data-lake-analytics-get-started-portal)
 * [Data Lake Analytics](https://azure.microsoft.com/services/data-lake-analytics/)
-* [U-SQL Language Reference](https://docs.microsoft.com/u-sql/)
-* [Azure Search](https://docs.microsoft.com/azure/search/)
+* [U-SQL Language Reference](/u-sql/)
+* [Azure Search](/azure/search/)
