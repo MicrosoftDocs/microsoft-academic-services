@@ -479,7 +479,7 @@ Once the indexers have completed, you can optionally scale the service back down
 > It's important to note that you should not reduce the number of partitions below the number required to hold the indexed data. Doing so would result in documents being removed from the index, which would in turn reduce the accuracy of search operations.
 
 > [!TIP]
-> The performance of individual search queries can be improved by increasing the number of partitions, and likewise the number of concurrent search requests (throughput) can be improved by increasing the number of replicas. For more details about Azure Search performance, please see [Scale partitions and replicas for query and indexing workloads](https://docs.microsoft.com/azure/search/search-capacity-planning)
+> The performance of individual search queries can be improved by increasing the number of partitions, and likewise the number of concurrent search requests (throughput) can be improved by increasing the number of replicas. For more details about Azure Search performance, please see [Scale partitions and replicas for query and indexing workloads](/azure/search/search-capacity-planning)
 
 ## Reference parsing with search explorer
 
@@ -540,7 +540,7 @@ The search explorer response only provides basic details about each matching pap
 * All of the retrievable index fields in each matching result
 
 > [!TIP]
-> To better understand how Azure Search service (and full text search in general) handles scoring, check out the [full text search scoring](https://docs.microsoft.com/azure/search/search-lucene-query-architecture#stage-4-scoring) documentation.
+> To better understand how Azure Search service (and full text search in general) handles scoring, check out the [full text search scoring](/azure/search/search-lucene-query-architecture#stage-4-scoring) documentation.
 
 To better leverage everything Azure Search service provides check out the next section, which directly queries the index using the REST API.
 
