@@ -2,7 +2,7 @@
 title: Network Similarity Package
 description: Using Network Similarity Package
 services: microsoft-academic-services
-ms.topic: extra
+ms.topic: conceptual
 ms.service: microsoft-academic-services
 ms.date: 4/16/2021
 ---
