@@ -113,7 +113,7 @@ To create MAKES index, you will need to format your data into MAKES entity files
 The job should take approximately 50 minutes to run and cost $4. This estimation assumes the Azure Data Lake Analytics, MAG storage, and MAKES storage accounts are in the same region.
 
 > [!IMPORTANT]
-> If you use the example output path, make sure to create the **dev** container in your storage account before running this script. Follow [Create a container](https://docs.microsoft.com/azure/storage/blobs/storage-quickstart-blobs-portal#create-a-container) guide for more info.
+> If you use the example output path, make sure to create the **dev** container in your storage account before running this script. Follow [Create a container](/azure/storage/blobs/storage-quickstart-blobs-portal#create-a-container) guide for more info.
 
 > [!TIP]
 > This tutorial uses Microsoft as an organization by default. You can target any organization by finding its NormalizedName in the Microsoft Academic Graph and then changing the value of the affiliationNormalizedNameFilter variable to said name.

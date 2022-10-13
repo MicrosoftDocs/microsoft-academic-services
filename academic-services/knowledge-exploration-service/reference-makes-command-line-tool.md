@@ -98,7 +98,7 @@ The region where the MAKES API host should be deployed to. Defaults to "westus"
 
 `--HostMachineSku`
 
-The SKU for MAKES API host machines. Check [Azure Virtual Machine Sizes](https://docs.microsoft.com/azure/virtual-machines/windows/sizes) to get the avaliable options. Defaults to "Standard_D14_v2".
+The SKU for MAKES API host machines. Check [Azure Virtual Machine Sizes](/azure/virtual-machines/windows/sizes) to get the avaliable options. Defaults to "Standard_D14_v2".
 
 `--HostMachineDataDiskSizeInGb`
 
@@ -113,7 +113,7 @@ The application settings used by the web host represented as a list of \"<Applic
 
 `--WebHostOverrideUrl`
 
-The host web app package file url reference for overriding default MAKES web host. E.g. https://mymakesstore.blob.core.windows.net/makes/2019-12-26/webhost/my-custom-makes-web-service-host.zip
+The host web app package file url reference for overriding default MAKES web host. E.g. `https://mymakesstore.blob.core.windows.net/makes/2019-12-26/webhost/my-custom-makes-web-service-host.zip`
 
 `--ApplicationInsightsInstrumentationKey`
 
@@ -228,7 +228,7 @@ The number of virtual machines(workers) used to build the index. If you're build
 
 `--WorkerSku`
 
-The virtual machine(worker) SKU. Check [Azure Virtual Machine Sizes](https://docs.microsoft.com/azure/virtual-machines/windows/sizes) to get the avaliable options. Defaults to "Standard_D8_v3"
+The virtual machine(worker) SKU. Check [Azure Virtual Machine Sizes](/azure/virtual-machines/windows/sizes) to get the avaliable options. Defaults to "Standard_D8_v3"
 
 ## BuildIndexLocal command
 
@@ -499,11 +499,11 @@ The path to the azure credential file to use for authentication. If you're using
 
 You can generate this file using [Azure CLI 2.0](https://github.com/Azure/azure-cli) through the following command. Make sure you selected your subscription by `az account set --subscription <name or id>` and you have the privileges to create service principals.
 
-```bash
-az ad sp create-for-rbac --role Contributor --sdk-auth > my.azureauth
+```azurecli
+az ad sp create-for-rbac --role Contributor --scopes /subscriptions/<subscription-id> --sdk-auth > my.azureauth
 ```
 
-If you don't have Azure CLI installed, you can also do this in the [cloud shell](https://docs.microsoft.com/azure/cloud-shell/quickstart).
+If you don't have Azure CLI installed, you can also do this in the [cloud shell](/azure/cloud-shell/quickstart).
 
 ### Common Azure Resource Group parameter
 

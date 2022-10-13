@@ -25,7 +25,7 @@ After completing this tutorial, you should be able to:
 >
 > Because of the large scope of the data in the Microsoft Academic Graph, the Azure Search service requires a significant amount of time and resources to both setup and keep online.
 >
-> Please take the time to familiarize yourself with the costs associated with Azure Search in the [capacity planning](https://docs.microsoft.com/azure/search/search-sku-tier) documentation.
+> Please take the time to familiarize yourself with the costs associated with Azure Search in the [capacity planning](/azure/search/search-sku-tier) documentation.
 
 ## Prerequisites
 
@@ -220,7 +220,7 @@ In this section, you submit an ADLA job to generate text files containing academ
 > [!WARNING]
 > Because of the large scope of the data in the Microsoft Academic Graph, the Azure Search service requires a significant amount of time and resources to both setup and keep online.
 >
-> Please take the time to familiarize yourself with the costs associated with Azure Search in the [capacity planning](https://docs.microsoft.com/azure/search/search-sku-tier) documentation.
+> Please take the time to familiarize yourself with the costs associated with Azure Search in the [capacity planning](/azure/search/search-sku-tier) documentation.
 
 1. Go to the Azure Management Portal and create a new Azure Search service
 
@@ -479,7 +479,7 @@ Once the indexers have completed, you can optionally scale the service back down
 > It's important to note that you should not reduce the number of partitions below the number required to hold the indexed data. Doing so would result in documents being removed from the index, which would in turn reduce the accuracy of search operations.
 
 > [!TIP]
-> The performance of individual search queries can be improved by increasing the number of partitions, and likewise the number of concurrent search requests (throughput) can be improved by increasing the number of replicas. For more details about Azure Search performance, please see [Scale partitions and replicas for query and indexing workloads](https://docs.microsoft.com/azure/search/search-capacity-planning)
+> The performance of individual search queries can be improved by increasing the number of partitions, and likewise the number of concurrent search requests (throughput) can be improved by increasing the number of replicas. For more details about Azure Search performance, please see [Scale partitions and replicas for query and indexing workloads](/azure/search/search-capacity-planning)
 
 ## Reference parsing with search explorer
 
@@ -540,7 +540,7 @@ The search explorer response only provides basic details about each matching pap
 * All of the retrievable index fields in each matching result
 
 > [!TIP]
-> To better understand how Azure Search service (and full text search in general) handles scoring, check out the [full text search scoring](https://docs.microsoft.com/azure/search/search-lucene-query-architecture#stage-4-scoring) documentation.
+> To better understand how Azure Search service (and full text search in general) handles scoring, check out the [full text search scoring](/azure/search/search-lucene-query-architecture#stage-4-scoring) documentation.
 
 To better leverage everything Azure Search service provides check out the next section, which directly queries the index using the REST API.
 
@@ -631,11 +631,11 @@ The response should look similar to the following:
 This response includes a lot of useful details about why a document was matched, including the individual fields that were matched including the specific lexical terms (denoted by the ```<q>``` tags).
 
 > [!TIP]
-> To learn more about searching documents with the Azure Search REST API, see the [Search Documents (Azure Search Service REST API)](https://docs.microsoft.com/rest/api/searchservice/search-documents) documentation.
+> To learn more about searching documents with the Azure Search REST API, see the [Search Documents (Azure Search Service REST API)](/rest/api/searchservice/search-documents) documentation.
 
 ## Resources
 
-* [Get started with Azure Data Lake Analytics using Azure portal](https://docs.microsoft.com/azure/data-lake-analytics/data-lake-analytics-get-started-portal)
+* [Get started with Azure Data Lake Analytics using Azure portal](/azure/data-lake-analytics/data-lake-analytics-get-started-portal)
 * [Data Lake Analytics](https://azure.microsoft.com/services/data-lake-analytics/)
-* [U-SQL Language Reference](https://docs.microsoft.com/u-sql/)
-* [Azure Search](https://docs.microsoft.com/azure/search/)
+* [U-SQL Language Reference](/u-sql/)
+* [Azure Search](/azure/search/)
