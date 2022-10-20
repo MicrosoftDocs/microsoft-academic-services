@@ -2,7 +2,7 @@
 title: NetworkSimilarity.GetSimilarity Function
 description: NetworkSimilarity.GetSimilarity Function
 services: microsoft-academic-services
-ms.topic: extra
+ms.topic: reference
 ms.service: microsoft-academic-services
 ms.date: 4/23/2021
 ---
