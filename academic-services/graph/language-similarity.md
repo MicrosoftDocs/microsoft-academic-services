@@ -2,7 +2,7 @@
 title: Language Similarity Package
 description: Using Language Similarity Package
 services: microsoft-academic-services
-ms.topic: extra
+ms.topic: conceptual
 ms.service: microsoft-academic-services
 ms.date: 3/23/2021
 ---

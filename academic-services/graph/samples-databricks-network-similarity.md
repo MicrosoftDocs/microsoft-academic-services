@@ -2,7 +2,7 @@
 title: Network Similarity Sample (PySpark)
 description: Network Similarity Sample (PySpark)
 services: microsoft-academic-services
-ms.topic: extra
+ms.topic: sample
 ms.service: microsoft-academic-services
 ms.date: 3/23/2021
 ---

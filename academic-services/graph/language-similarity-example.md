@@ -2,7 +2,7 @@
 title: Language Similarity Sample
 description: Language Similarity Sample (C#)
 services: microsoft-academic-services
-ms.topic: extra
+ms.topic: sample
 ms.service: microsoft-academic-services
 ms.date: 11/28/2019
 ---
